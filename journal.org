@@ -1,0 +1,7 @@
+* [2018-5-23 Wed] ng is created with cordova
+Following [[https://www.becompany.ch/en/blog/2016/10/19/creating-apache-cordova-app-with-angular2][this article]], we can make an angular with cordova.
+#+begin_src: sh
+ng new cordova-ng-test
+cd cordova-ng-test
+cordova create cordova
+#+end_src
