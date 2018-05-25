@@ -5,6 +5,11 @@
 /tmp
 /out-tsc
 
+#cordova part
+/cordova/www
+/cordova/platforms
+/cordova/node_modules
+
 # dependencies
 /node_modules
 

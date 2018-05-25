@@ -1,6 +1,15 @@
+* [2018-5-25 Fri] Yes, it can work for Windows 10 & Browser
+The command for angular build should be
+#+begin_src sh
+ng build --prod --output-path cordova/www/ --base-href /www/
+#+end_src
+Now, I'm facing two problems.
+1. how to debug it since it has been uglify?
+2. how to use ~app~ which is ~WinJS.Application~ as the role of the class of ~App.xaml.cs~?
+
 * [2018-5-23 Wed] ng is created with cordova
 Following [[https://www.becompany.ch/en/blog/2016/10/19/creating-apache-cordova-app-with-angular2][this article]], we can make an angular with cordova.
-#+begin_src: sh
+#+begin_src sh
 ng new cordova-ng-test
 cd cordova-ng-test
 cordova create cordova
