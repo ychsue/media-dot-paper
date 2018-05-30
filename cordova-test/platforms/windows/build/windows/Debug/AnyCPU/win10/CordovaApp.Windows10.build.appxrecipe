@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-JM1L8H4</Machine>
+    <WindowsUser>ychsue</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>a33e15a0-6401-11e8-882b-411269b9c1fb</PackageIdentityName>
+    <PackageIdentityPublisher>CN=%24username%24</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\</IntermediateOutputPath>
+    <RemoteDeploymentType></RemoteDeploymentType>
+    <PackageRegistrationPath></PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
+    <WindowsSdkPath></WindowsSdkPath>
+    <LayoutDir>C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\AnyCPU\win10\AppX</LayoutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\AnyCPU\win10\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\SplashScreen.scale-100.png">
+      <PackagePath>images\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square150x150Logo.scale-100.png">
+      <PackagePath>images\Square150x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square30x30Logo.scale-100.png">
+      <PackagePath>images\Square30x30Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square310x310Logo.scale-100.png">
+      <PackagePath>images\Square310x310Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square44x44Logo.scale-100.png">
+      <PackagePath>images\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square70x70Logo.scale-100.png">
+      <PackagePath>images\Square70x70Logo.scale-100.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Square71x71Logo.scale-100.png">
+      <PackagePath>images\Square71x71Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\StoreLogo.scale-100.png">
+      <PackagePath>images\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\images\Wide310x150Logo.scale-100.png">
+      <PackagePath>images\Wide310x150Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.css">
+      <PackagePath>src\app\app.component.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\styles.css">
+      <PackagePath>src\styles.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\css\splashscreen.css">
+      <PackagePath>www\css\splashscreen.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.html">
+      <PackagePath>src\app\app.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\index.html">
+      <PackagePath>src\index.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\index.html">
+      <PackagePath>www\index.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.spec.ts">
+      <PackagePath>src\app\app.component.spec.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.ts">
+      <PackagePath>src\app\app.component.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.module.ts">
+      <PackagePath>src\app\app.module.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\environments\environment.prod.ts">
+      <PackagePath>src\environments\environment.prod.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\environments\environment.ts">
+      <PackagePath>src\environments\environment.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\main.ts">
+      <PackagePath>src\main.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\polyfills.ts">
+      <PackagePath>src\polyfills.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\test.ts">
+      <PackagePath>src\test.ts</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\assets\.gitkeep">
+      <PackagePath>src\assets\.gitkeep</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\browserslist">
+      <PackagePath>src\browserslist</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\favicon.ico">
+      <PackagePath>src\favicon.ico</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\favicon.ico">
+      <PackagePath>www\favicon.ico</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\karma.conf.js">
+      <PackagePath>src\karma.conf.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\confighelper.js">
+      <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\exec.js">
+      <PackagePath>www\cordova-js-src\exec.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\platform.js">
+      <PackagePath>www\cordova-js-src\platform.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\splashscreen.js">
+      <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova.js">
+      <PackagePath>www\cordova.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova_plugins.js">
+      <PackagePath>www\cordova_plugins.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js">
+      <PackagePath>www\main.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js">
+      <PackagePath>www\polyfills.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\runtime.js">
+      <PackagePath>www\runtime.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\styles.js">
+      <PackagePath>www\styles.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\vendor.js">
+      <PackagePath>www\vendor.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\WinJS\js\base.js">
+      <PackagePath>www\WinJS\js\base.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\tsconfig.app.json">
+      <PackagePath>src\tsconfig.app.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\tsconfig.spec.json">
+      <PackagePath>src\tsconfig.spec.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\tslint.json">
+      <PackagePath>src\tslint.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\3rdpartylicenses.txt">
+      <PackagePath>www\3rdpartylicenses.txt</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js.map">
+      <PackagePath>www\main.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js.map">
+      <PackagePath>www\polyfills.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\runtime.js.map">
+      <PackagePath>www\runtime.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\styles.js.map">
+      <PackagePath>www\styles.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\vendor.js.map">
+      <PackagePath>www\vendor.js.map</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\config.xml">
+      <PackagePath>config.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\AnyCPU\win10\ReverseMap\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9</SharedGUID>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
+    <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
+    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\favicon.ico" />
+    <Content Include="$(MSBuildThisFileDirectory)src\index.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\karma.conf.js" />
+    <Content Include="$(MSBuildThisFileDirectory)src\main.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\polyfills.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\styles.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\test.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.app.json" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.spec.json" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tslint.json" />
+    <Content Include="$(MSBuildThisFileDirectory)www\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)config.xml" />
+  </ItemGroup>
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
+</Project>

@@ -9,6 +9,8 @@
 #/cordova/www
 #/cordova/platforms
 /cordova/node_modules
+/cordova-test/node_modules
+/cordova-test/platforms/windows/src
 
 # dependencies
 /node_modules
