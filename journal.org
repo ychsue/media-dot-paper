@@ -1,3 +1,37 @@
+* [2018-6-1 Fri] Now, how to debug this code?
+1. ~ng serve~ + ~DEBUG: Launch Chrome~ in VS Code.
+    - By this way, you can set break point in VS Code and to see what's happened in this code.
+    - The web page will be renewed once you save the file.
+2. ~cd cordova-test && cordova build windows~ and then run it in VS2017.
+    - Once I need to check how does it work and debug it in a windows App, I need to do so.
+
+* [2018-5-31 Thu] Make it can be debugged in Visual Studio 2017
+1. Add in ~<script src="cordova.js"></script>~ into ~index.html~ by the command shown below and you need to add an anchor in ~index.js~ as ~<!-- EntryOfCordovaJS -->~; otherwise, it still can work in VS2017 out of cordova's functions.
+
+2. Use 
+#+begin_src sh
+ng build --output-path cordova/www/ --base-href /www/ && sed -i "s/.*EntryOfCordovaJS.*/  <script src='cordova.js'><\/script>" cordova-test/www/index.html
+#+end_src
+so that its output js files will be with their sourcemaps, which means that it can be debugged in VS 2017.
+However, for ~prepareAngular6App.js~, I need to write it as
+#+begin_src sh
+"ng build --output-path cordova-test/www/ --base-href /www/   && sed -i \"s/.*EntryOfCordovaJS.*/  <script src='cordova.js'><\\/script> /\" cordova-test/www/index.html"
+#+end_src
+Note that, the ~"~ after ~sed~ cannot be ~'~; otherwise, it'll not work.
+
+3. Use
+#+begin_src 
+    mklink /j cordova-test[2018-6-1 Fri]\platforms\windows\src src
+#+end_src
+to make a junction (just as soft link) to src so that it can be debugged in VS2017.
+
+4. To avoid to do unnecessary Typescript compilation, you can add 
+#+begin_src xml
+    <PropertyGroup>
+        <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+    </PropertyGroup>
+#+end_src
+into your ~CordovaApp.Windows10.jsproj~ file to turn the compilation from VS2017 off since I'll compile it through angular 6.
 * [2018-5-25 Fri] Yes, it can work for Windows 10 & Browser
 The command for angular build should be
 #+begin_src sh

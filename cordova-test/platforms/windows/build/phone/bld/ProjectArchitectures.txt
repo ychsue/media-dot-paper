@@ -1,0 +1,1 @@
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\CordovaApp.Phone.jsproj;neutral

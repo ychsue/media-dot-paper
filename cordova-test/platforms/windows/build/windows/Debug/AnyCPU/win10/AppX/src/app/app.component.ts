@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService, MessageTypes } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = window['cordova'].platformId;
+
+  nUnReadMsg = 0;
+
+  constructor(public msgService: MessageService) {
+    msgService.remindMsgIn.subscribe((n) => {this.nUnReadMsg = n; });
+    msgService.pushMessage({type: MessageTypes.Error, message: 'Test 1' });
+    msgService.pushMessage({type: MessageTypes.Warn, message: 'Test 2' });
+    msgService.pushMessage({type: MessageTypes.Info, message: 'Test 321' });
+  }
 }

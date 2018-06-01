@@ -13,6 +13,12 @@ src\app\app.component.html
 src\app\app.component.spec.ts
 src\app\app.component.ts
 src\app\app.module.ts
+src\app\message\message.component.css
+src\app\message\message.component.html
+src\app\message\message.component.spec.ts
+src\app\message\message.component.ts
+src\app\services\message.service.spec.ts
+src\app\services\message.service.ts
 src\assets\.gitkeep
 src\browserslist
 src\environments\environment.prod.ts

@@ -11,6 +11,12 @@
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
     <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
     <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
