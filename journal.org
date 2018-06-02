@@ -1,3 +1,11 @@
+* [2018-6-2 Sat] How to use mat-icon?
+Well, as mentioned in [[https://material.angular.io/guide/getting-started][this article]], I need to add 
+#+begin_src html
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+#+end_src
+into ~index.html~ file.
+This way is still work in Windows APP.
+
 * [2018-6-1 Fri] Now, how to debug this code?
 1. ~ng serve~ + ~DEBUG: Launch Chrome~ in VS Code.
     - By this way, you can set break point in VS Code and to see what's happened in this code.

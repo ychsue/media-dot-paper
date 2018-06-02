@@ -18,7 +18,8 @@ export class MessageService {
 
   readMessages() {
     this._nRead = this._messages.length;
-    return this._messages;
+    this.remindMsgIn.next(0);
+    return this._messages.reverse();
   }
 
   constructor() { }
