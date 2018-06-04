@@ -6,11 +6,13 @@ import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule} from '@angular/material';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessageComponent
+    MessageComponent,
+    NavbarComponent
   ],
   entryComponents: [MessageComponent],
   imports: [

@@ -13,13 +13,17 @@ export class MessageService {
 
   pushMessage(msg: OneMessage) {
     this._messages.push(msg);
-    this.remindMsgIn.next(this._messages.length - this._nRead);
+    this.remindMsgIn.next(this.getNUnRead());
   }
 
   readMessages() {
     this._nRead = this._messages.length;
     this.remindMsgIn.next(0);
     return this._messages.reverse();
+  }
+
+  getNUnRead() {
+    return this._messages.length - this._nRead;
   }
 
   constructor() { }
