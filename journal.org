@@ -1,3 +1,6 @@
+* [2018-6-4 Mon] Try to use display:grid in css file.
+Well, ~route-outlet~ itself is an empty one. If you want to control its size by grid, you need to contain it into a ~div~ and set the grid control on that container ~div~.
+
 * [2018-6-4 Mon] A navbar has been added.
 I'm reading [[https://css-tricks.com/snippets/css/a-guide-to-flexbox/][this article about flex]] to know how to settle a better layout.
 I'll apply it in next commit with the route.

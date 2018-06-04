@@ -2,3 +2,6 @@
 @import url("~@angular/material/prebuilt-themes/deeppurple-amber.css");
 /* @import url("~material-design-icons/iconfont/material-icons.css"); */
 /* @import "~material-design-icons/iconfont/material-icons.css" */
+body{
+    margin: 0;
+}
