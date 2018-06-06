@@ -4,4 +4,5 @@
 /* @import "~material-design-icons/iconfont/material-icons.css" */
 body{
     margin: 0;
+    -ms-content-zooming: none;
 }

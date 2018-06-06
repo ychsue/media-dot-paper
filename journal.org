@@ -1,3 +1,13 @@
+* [2018-6-6 Wed] Try to disable the zoom in/out behavior in windows UWP
+Once I added in 
+#+begin_src css
+body{
+    margin: 0;
+    -ms-content-zooming: none;
+}
+#+end_src
+the zooming behavior is disabled in Windows UWP.
+
 * [2018-6-4 Mon] Try to use display:grid in css file.
 Well, ~route-outlet~ itself is an empty one. If you want to control its size by grid, you need to contain it into a ~div~ and set the grid control on that container ~div~.
 
