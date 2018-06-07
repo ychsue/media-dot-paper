@@ -22,6 +22,12 @@ src\app\message\message.component.css
 src\app\message\message.component.html
 src\app\message\message.component.spec.ts
 src\app\message\message.component.ts
+src\app\navbar\navbar.component.css
+src\app\navbar\navbar.component.html
+src\app\pages\home\home.component.css
+src\app\pages\home\home.component.html
+src\app\pages\test\test.component.css
+src\app\pages\test\test.component.html
 src\app\services\message.service.spec.ts
 src\app\services\message.service.ts
 src\assets\.gitkeep

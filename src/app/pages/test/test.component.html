@@ -1,0 +1,3 @@
+<input #selFile type="file" multiple (change)="onSelFileChange(selFile.files)">
+<video #audioFromFile autoplay controls [src]="audioSrc|safe">
+</video>

@@ -1,3 +1,11 @@
+* [2018-6-7 Thu] Load local file and play it by File API.
+At this moment, I still not use cordova's plugin. I still use ~File API~ to achieve my goal.
+1. I can get ~FileList~ from ~input~ with type of ~file~.
+2. Then I use ~window.URL.createObjectURL(file)~ to get a temporary URL.
+3. If I feed it directly to ~[src]~ of the UIElement audio, it will say that it is unsafe; therefore, I create a new pipe to tell Angular 6 to accept this URL as mentioned in [[https://stackoverflow.com/questions/41319324/angular-2-http-request-audio-src-not-play][this stackOverflow's Q&A]].
+4. Even I take out the ~type~ of the ~HtmlMediaElement~, it still can work. However, it cannot play the ~WMV~ movie.
+    But, the ~WMV~ can be played in Windows UWP!!! Great! That's enough.
+
 * [2018-6-6 Wed] Try to disable the zoom in/out behavior in windows UWP
 Once I added in 
 #+begin_src css

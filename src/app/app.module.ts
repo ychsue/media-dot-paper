@@ -9,13 +9,17 @@ import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule} fr
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
+import { TestComponent } from './pages/test/test.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessageComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    TestComponent,
+    SafePipe
   ],
   entryComponents: [MessageComponent],
   imports: [

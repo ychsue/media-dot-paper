@@ -15,6 +15,12 @@
     <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
@@ -35,6 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
   </ItemGroup>
   <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
   <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />

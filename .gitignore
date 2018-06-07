@@ -11,6 +11,7 @@
 /cordova/node_modules
 /cordova-test/node_modules
 /cordova-test/platforms/windows/src
+/cordova-test/www
 
 # dependencies
 /node_modules
