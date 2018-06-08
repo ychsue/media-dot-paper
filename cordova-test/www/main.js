@@ -452,7 +452,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n"
+module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>"
 
 /***/ }),
 
@@ -487,6 +487,8 @@ var TestComponent = /** @class */ (function () {
         this.sanitizer = sanitizer;
     }
     TestComponent.prototype.ngOnInit = function () {
+        this.isCordovaSupport = !!window['cordova'];
+        this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
     };
     TestComponent.prototype.onSelFileChange = function (files) {
         this.audioFile = files[0];

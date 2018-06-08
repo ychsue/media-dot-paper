@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "module": "es2015",
-    "types": []
+    "types": [
+      "cordova",
+      "cordova-plugin-file/types"
+    ]
   },
   "exclude": [
     "src/test.ts",

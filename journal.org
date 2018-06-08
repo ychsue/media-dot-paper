@@ -1,3 +1,26 @@
+* [2018-6-8 Fri] Using cordova and its file plugin in Angular 6.
+1. In ~tsconfig.json~ file, I added in ~"cordova-test/plugins"~ in its ~"typeRoots"~ so that angular can use the typescript's declarations inside.
+2. In ~/src/tsconfig.app.json~ file, I added in
+#+begin_src json
+    "types": [
+      "cordova",
+      "cordova-plugin-file/types"
+    ]
+#+end_src
+in its property ~compilerOptions~ so that I can use "cordova" and "cordova.file" in this code.
+3. Oh, remember that, you need to run
+#+begin_src sh
+npm i --save-dev @types/cordova
+#+end_src
+to let angular can recognize the object ~cordova~.
+However, if you want to check whether it is supported,
+~!!cordova~ will throw an error. You'd better to use ~!!window.cordova~ to check whether it is supported.
+
+By the way, because ~ng build~ will remove the target folder at first, it will cause ~cordova~ think that it is not a cordova project if the building is fail.
+How to solve this problem?
+
+WELL, ADD AN EMPTY ~www~ FOLDER INSIDE CAN MAKE IT WORK.
+
 * [2018-6-7 Thu] Load local file and play it by File API.
 At this moment, I still not use cordova's plugin. I still use ~File API~ to achieve my goal.
 1. I can get ~FileList~ from ~input~ with type of ~file~.

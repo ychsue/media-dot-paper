@@ -1,3 +1,8 @@
 <input #selFile type="file" multiple (change)="onSelFileChange(selFile.files)">
 <video #audioFromFile autoplay controls [src]="audioSrc|safe">
 </video>
+<hr>
+<div>
+    <div>Is cordova support? {{(isCordovaSupport)?"Yes":"No"}}</div>
+    <div>Is cordova.file support? {{(isFilePluginSupport)?"Yes":"No"}}</div>
+</div>
