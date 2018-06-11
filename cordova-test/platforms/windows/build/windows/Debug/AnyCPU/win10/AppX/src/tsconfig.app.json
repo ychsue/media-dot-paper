@@ -5,6 +5,8 @@
     "module": "es2015",
     "types": [
       "cordova",
+      "winjs",
+      "winrt",
       "cordova-plugin-file/types"
     ]
   },

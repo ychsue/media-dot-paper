@@ -1,3 +1,12 @@
+* [2018-6-11 Mon] Let angular can compile the stuffs for Windows
+1. ~npm install --save-dev @types/winrt~ to let Angular can recognize ~Windows.Storage~ namespace.
+2. Since ~documentsLibrary~ cannot be declared in ~appxmanifest~ file, I changed to use ~videosLibrary~ and it works.
+3. Three roles: a.~video Element~, b.~File(Blob)~ and c.~StorageFile(Windows)~.
+    b,c -> a: ~url=window.URL.createObjectURL(b)~. However, this method is not suitable for the ~File(plugin)~, it should be gotten from ~fileEntry.toURL()~.
+    a -> b,c: ??? Fortunately, I don't need it at this moment.
+    b -> c:   ~input=b.msDetachStrem();~, ~output= await c.openAsync();~ and copy ~b~ to ~c~ by ~Windows.Storage.RandomAccessStream.copyAndCloseAsync(input,output)~.
+    c -> b:   ??? Hm. I still don't need it.
+
 * [2018-6-8 Fri] Using cordova and its file plugin in Angular 6.
 1. In ~tsconfig.json~ file, I added in ~"cordova-test/plugins"~ in its ~"typeRoots"~ so that angular can use the typescript's declarations inside.
 2. In ~/src/tsconfig.app.json~ file, I added in

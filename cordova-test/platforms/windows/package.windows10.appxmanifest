@@ -18,7 +18,8 @@
         <Application Id="io.cordova.hellocordova" StartPage="ms-appx-web://io.cordova.hellocordova/www/index.html">
             <uap:VisualElements BackgroundColor="#464646" Description="A sample Apache Cordova application that responds to the deviceready event." DisplayName="HelloCordova" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
                 <uap:SplashScreen Image="images\splashscreen.png" />
-                <uap:DefaultTile ShortName="HelloCordova" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png" />
+                <uap:DefaultTile ShortName="HelloCordova" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png">
+                </uap:DefaultTile>
                 <uap:InitialRotationPreference>
                     <uap:Rotation Preference="portrait" />
                     <uap:Rotation Preference="landscape" />
@@ -32,5 +33,6 @@
     </Applications>
     <Capabilities>
         <Capability Name="internetClient" />
+        <uap:Capability Name="videosLibrary" />
     </Capabilities>
 </Package>
