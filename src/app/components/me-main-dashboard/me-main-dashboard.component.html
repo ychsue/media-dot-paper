@@ -1,0 +1,8 @@
+<div class='container'>
+  <button mat-icon-button (click)="onPlay()" *ngIf="action!==pAction.play">
+      <mat-icon class="mat-18">play_arrow</mat-icon>
+  </button>
+  <button mat-icon-button (click)="onPause()" *ngIf="action!==pAction.pause">
+    <mat-icon class="mat-18">pause</mat-icon>
+  </button>
+</div>

@@ -11,6 +11,12 @@ import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { TestComponent } from './pages/test/test.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { MediaEditComponent } from './pages/media-edit/media-edit.component';
+import { MeMainDashboardComponent } from './components/me-main-dashboard/me-main-dashboard.component';
+import { MeSectionDashboardComponent } from './components/me-section-dashboard/me-section-dashboard.component';
+import { MeManiPlateComponent } from './components/me-mani-plate/me-mani-plate.component';
+import { PlayerComponent } from './components/player/player.component';
+import { MediaEditService } from './services/media-edit.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +25,12 @@ import { SafePipe } from './pipes/safe.pipe';
     NavbarComponent,
     HomeComponent,
     TestComponent,
-    SafePipe
+    SafePipe,
+    MediaEditComponent,
+    MeMainDashboardComponent,
+    MeSectionDashboardComponent,
+    MeManiPlateComponent,
+    PlayerComponent
   ],
   entryComponents: [MessageComponent],
   imports: [
@@ -31,7 +42,7 @@ import { SafePipe } from './pipes/safe.pipe';
     MatBottomSheetModule,
     AppRoutingModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, MediaEditService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

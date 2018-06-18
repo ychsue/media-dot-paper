@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  testUrl = encodeURIComponent('https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3');
   constructor() { }
 
   ngOnInit() {

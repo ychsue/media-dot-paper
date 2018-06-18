@@ -1,3 +1,11 @@
+* [2018-6-18 Mon] MediaEditService as the data center for all elements of MediaEditComponent
+I put all ~subject~s (the event emitter & listener) and datas into ~MediaEditService~ so that all the members of ~MediaEditComponent~ will use ~MediaEditService~ as the data center.
+It works.
+
+* [2018-6-12 Tue] Fail to run this App in Android device and emulator
+Once I set the ~Debug mode = true~ on my Android Laptop, I can run this App on that device; however, nothing is shown up.
+Besides, I cannot find ~adb~ in ~Android SDK~'s folder. Because of that, I cannot choose the one provided by Visual Studio which is running under Hyper-V whose performance is quite nice.
+
 * [2018-6-11 Mon] Let angular can compile the stuffs for Windows
 1. ~npm install --save-dev @types/winrt~ to let Angular can recognize ~Windows.Storage~ namespace.
 2. Since ~documentsLibrary~ cannot be declared in ~appxmanifest~ file, I changed to use ~videosLibrary~ and it works.
