@@ -17,6 +17,7 @@ import { MeSectionDashboardComponent } from './components/me-section-dashboard/m
 import { MeManiPlateComponent } from './components/me-mani-plate/me-mani-plate.component';
 import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
+import { YoutubeService } from './services/youtube.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { MediaEditService } from './services/media-edit.service';
     MatBottomSheetModule,
     AppRoutingModule
   ],
-  providers: [MessageService, MediaEditService],
+  providers: [MessageService, MediaEditService, YoutubeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

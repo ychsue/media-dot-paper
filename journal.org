@@ -1,3 +1,16 @@
+* [2018-6-21 Thu] Now it can play Youtube on Angular and Windows App
+1. In ~tsconfig.app.json~, I added ~youtube~ into the list of ~types~.
+2. Generate a Service ~youtubeService~ to serve the job with Youtube and embedded youtube Api in ~ngOnInit~.
+3. In [[https://stackoverflow.com/questions/38008334/angular-rxjs-when-should-i-unsubscribe-from-subscription][this StackOverflow's Q&A]] you can see how to unsubscribe the subscriptions from ~subject~s by one ~Subject~ that me named it ~unsubscribed~.
+In that answer, you can find that he use ~takeUntil~ to unsubscribe all the subscriptions which call this function.
+How to enlive this ~takeUntil~? Use ~unsubscribed.next(); unsubscribed.complete();~ to trigger it.
+So I put this code in ~ngOnDestory~ so that it will unsubscribe all subscriptions when you want to leave that ~component~.
+
+
+* [2018-6-19 Tue] Try to embed Youtube into this App.
+Follow the tutorial from [[https://stackoverflow.com/questions/36467532/][this stackOverflow's Q&A]], I want to make it work in this App.
+
+
 * [2018-6-18 Mon] MediaEditService as the data center for all elements of MediaEditComponent
 I put all ~subject~s (the event emitter & listener) and datas into ~MediaEditService~ so that all the members of ~MediaEditComponent~ will use ~MediaEditService~ as the data center.
 It works.

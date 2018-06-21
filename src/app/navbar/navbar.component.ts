@@ -11,11 +11,16 @@ import { MessageComponent } from '../message/message.component';
 export class NavbarComponent implements OnInit {
 
   nUnReadMsg = 0;
-  constructor(private bottomSheet: MatBottomSheet , public msgService: MessageService) {
+  constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone, public msgService: MessageService) {
+    const self = this;
     this.nUnReadMsg = msgService.getNUnRead();
     msgService.remindMsgIn.subscribe(
       (n) => {
-          this.nUnReadMsg = n;
+        const isInZone = NgZone.isInAngularZone();
+        const action = () => { self.nUnReadMsg = n; };
+        if (isInZone === false) {
+          ngZone.run(action);
+        } else {action(); }
       });
   }
 

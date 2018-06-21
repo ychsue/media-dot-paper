@@ -22,7 +22,7 @@ export class MediaEditService {
   }
 
   title = '';
-  url = '';
+  urlOrId = '';
   blob: Blob;
   currentTime = 0;
   constructor() {
@@ -31,22 +31,31 @@ export class MediaEditService {
     this.state = MEState.initialized;
   }
 
-  initMe(data: Blob|string) {
+  initMe(data: Blob|string, pType: playerType = playerType.auto) {
     this.state = MEState.parsing;
-    if ((typeof data) === 'string') {
-      this.pType = playerType.url;
-      this.title = data as string;
-      this.url = this.title;
-    } else if (!!(data as Blob)) {
+    // * [2018-06-20 11:00] Check the type of service is
+    if (pType !== playerType.auto) {
+      this.pType = pType;
+    } else {
+      if ((typeof data) === 'string') {
+        this.pType = playerType.url;
+      } else if (!!(data as Blob)) {
+        this.pType = playerType.file;
+      } else {
+        this.state = MEState.parseFailed;
+        return;
+      }
+    }
+
+    if ((this.pType === playerType.url) || (this.pType === playerType.youtubeID)) {
+      this.urlOrId = data as string;
+      this.title = this.urlOrId;
+    } else if (this.pType === playerType.file) {
       this.blob = data as Blob;
-      this.pType = playerType.file;
-      this.url = window.URL.createObjectURL(this.blob);
+      this.urlOrId = window.URL.createObjectURL(this.blob);
       if (!!(data as File)) {
         this.title = (data as File).name;
       }
-    } else {
-      this.state = MEState.parseFailed;
-      return;
     }
     this.state = MEState.readyForPlayer;
   }
@@ -75,7 +84,8 @@ export enum MEState {
 
 export enum playerType {
   none,
+  auto,
   file,
   url,
-  youtube
+  youtubeID
 }
