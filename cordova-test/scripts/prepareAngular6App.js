@@ -7,7 +7,7 @@ module.exports = function (context) {
     const baseWWW = basePath+'/www';
 
     console.log(execSync(
-        "ng build --output-path cordova-test/www/ --base-href /www/   && sed -i \"s/.*EntryOfCordovaJS.*/  <script src='cordova.js'><\\/script> /\" cordova-test/www/index.html",{
+        "ng build --output-path cordova-test/www/ --base-href ./   && sed -i \"s/.*EntryOfCordovaJS.*/  <script src='cordova.js'><\\/script> /\" cordova-test/www/index.html",{
             maxBuffer: 1024*1024,
             cwd: basePath+'/..'
         }).toString('utf8'));

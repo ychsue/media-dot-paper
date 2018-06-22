@@ -49,8 +49,7 @@ www\cordova-js-src\splashscreen.js
 www\css\splashscreen.css
 www\favicon.ico
 www\index.html
-www\main.js
-www\main.js.map
+www\main.dd2704fde8dded9f019f.js
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js
@@ -72,12 +71,7 @@ www\plugins\cordova-plugin-file\www\Metadata.js
 www\plugins\cordova-plugin-file\www\ProgressEvent.js
 www\plugins\cordova-plugin-file\www\requestFileSystem.js
 www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js
-www\polyfills.js
-www\polyfills.js.map
-www\runtime.js
-www\runtime.js.map
-www\styles.js
-www\styles.js.map
-www\vendor.js
-www\vendor.js.map
+www\polyfills.303adbd4e96a51843cfd.js
+www\runtime.a66f828dca56eeb90e02.js
+www\styles.c16540e7e1a2a0e35f96.css
 www\WinJS\js\base.js

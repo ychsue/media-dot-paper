@@ -1,3 +1,19 @@
+* [2018-6-22 Fri] Let it can run on Android and on older version.
+In order to run in on Android platform, I need to
+1. Install the Visual Studio hyper-V android emulator.
+    a. Find the emulator. You can find it by searching ~Visual Studio Hyper-V Android Emulator~.
+    b. If you have installed ~Android Studio~, the ~adb~ might be at ~\~/AppData/Local/Android/Sdk/platform-tools/~.
+    c. Follow the instruction shown in [[https://stackoverflow.com/questions/32088648/visual-studio-emulator-for-android-devices-are-not-listed-in-the-android-devic][in this StackOverflow's Q&A]], you can let adb can find your running emulator.
+    d. Another important thing is about how to debug your ~js~ code. The answer is shown in [[https://stackoverflow.com/questions/21332853/is-there-a-real-solution-to-debug-cordova-apps][this StackOverflow's Q&A]].
+       You just need to run ~chrome://inspect~ in Chrome and it will show your devices with running Apps. You can debug it as a web site.
+       For iOS, you can use safari to do this job. (iOS)Safari, Web inspector on ==> (iMac) Safari, Develop, your device.
+2. Run ~ng~ with ~--base-href ./~ or ~--base-href /android_asset/www/~ for android platform.
+   Hm... at this moment I set ~--base-href ./~ for all platforms.
+3. The OS of android emulators are too old, I need to do some extra works.
+    a. As [[https://stackoverflow.com/questions/45300670/uncaught-typeerror-usevalue-usefactory-data-is-not-iterable-angular-4-cli-proj][this StackOverflow's Q&A]] mentioned, I need to modify ~polyfills.ts~ as it said. However, I'll encounter a problem in which it said that ~__zone_symbol__then~ is not a function. [[https://github.com/angular/zone.js/issues/1078][Soultion?]], no use.
+    Then I need to declare ~es6_shim~ in ~index.html~.
+    b. Although it can work, the ~back~ key's function is wrong, and if you want to play the Youtube video, it will collapse the whole App on the emulator (can work on my device). 
+
 * [2018-6-21 Thu] Now it can play Youtube on Angular and Windows App
 1. In ~tsconfig.app.json~, I added ~youtube~ into the list of ~types~.
 2. Generate a Service ~youtubeService~ to serve the job with Youtube and embedded youtube Api in ~ngOnInit~.
