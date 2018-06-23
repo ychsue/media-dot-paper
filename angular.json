@@ -89,7 +89,9 @@
               "src/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**"
+              "**/node_modules/**",
+              "cordova/**",
+              "cordova-test/**"
             ]
           }
         }

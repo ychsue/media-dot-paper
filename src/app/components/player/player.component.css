@@ -1,4 +1,13 @@
-.container, video, iframe{
-    width: 100%;
+video{
     height: 100%;
+    width: auto;
+    max-width: 100%;
+    background: transparent no-repeat url('/assets/i18n.svg');
+    background-size: contain;
+    background-position: center;
+}
+
+.container, .youtube {
+    width: 100%;
+    height: 100%
 }

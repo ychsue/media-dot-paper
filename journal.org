@@ -1,3 +1,20 @@
+* [2018-6-23 Sat] Change the ~poster~ of ~video~ tag
+Originally, I tried to change the ~poster~ to be an image; however, setting ~height: 100%;~ is useless.
+Finally, I tried the method described in [[https://stackoverflow.com/questions/10826784/make-html5-video-poster-be-same-size-as-video-itself/][this StackOverflow's Q&A]] to solve this problem.
+1. Set the ~video~ element's ~poster~ attribute as ~data:image/gif,AAAA~ which is a DataURI of an unloadable image to clean up the poster.
+2. Set the size of ~video~ by
+#+begin_src css
+video{
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    background: transparent no-repeat url('/assets/i18n.svg');
+    background-size: contain;
+    background-position: center;
+}
+#+end_src
+so that it can be fit into the grid correctly.
+
 * [2018-6-22 Fri] Let it can run on Android and on older version.
 In order to run in on Android platform, I need to
 1. Install the Visual Studio hyper-V android emulator.
