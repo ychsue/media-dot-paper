@@ -1,3 +1,15 @@
+* [2018-6-24 Sun] Cross platform's problem
+The problem of ~base~.
+1. For ~ng serve~: its base is /
+2. For ~windows~, its base is ~/www/~
+3. For ~android~, its base is ~/android_asset/www/~
+
+that why I use ~<base href='./'>~ in ~index.html~ file. 
+By the way, it may not be a good idea to use ~route~ since it will work wierd in Android system.
+
+In html file, you can use related path; however, you must use absolute path in css.
+So I use ~[style.CSS]~ in html file to solve this problem.
+
 * [2018-6-23 Sat] Change the ~poster~ of ~video~ tag
 Originally, I tried to change the ~poster~ to be an image; however, setting ~height: 100%;~ is useless.
 Finally, I tried the method described in [[https://stackoverflow.com/questions/10826784/make-html5-video-poster-be-same-size-as-video-itself/][this StackOverflow's Q&A]] to solve this problem.

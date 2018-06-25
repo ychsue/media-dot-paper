@@ -412,7 +412,7 @@ var MeSectionDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container, video, iframe{\r\n    width: 100%;\r\n    height: 100%;\r\n}"
+module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-width: 100%;\r\n    background: transparent no-repeat;\r\n    /* For windows, it should be '/www/...' and for android is '/android_asset/www/...' */\r\n    background-size: contain;\r\n    background-position: center;\r\n}\r\n\r\n.container, #youtube {\r\n    width: 100%;\r\n    height: 100%\r\n}"
 
 /***/ }),
 
@@ -423,7 +423,7 @@ module.exports = ".container, video, iframe{\r\n    width: 100%;\r\n    height: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.pType===pType.url)?'inline':'none'\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.pType===pType.youtubeID)?'inline':'none'\"></iframe>\n</div>"
+module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.pType===pType.url)?'block':'none'\"\n    poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/i18n.svg\\')'\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.pType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
 
 /***/ }),
 
