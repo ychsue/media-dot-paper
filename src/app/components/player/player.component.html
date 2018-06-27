@@ -1,5 +1,6 @@
 <div class="container">
-  <video #video [style.display]="(dataService.pType===pType.url)?'block':'none'"
-    poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/i18n.svg\')'"></video>
+  <video #video [style.display]="(dataService.pType===pType.url||dataService.pType===pType.file)?'block':'none'"
+  poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/MusicNotes.svg\')'"
+  [src]="videoSrc|safe"></video>
   <iframe #youtube id="youtube" [style.display]="(dataService.pType===pType.youtubeID)?'block':'none'"></iframe>
 </div>

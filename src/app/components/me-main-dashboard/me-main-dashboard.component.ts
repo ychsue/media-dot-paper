@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MediaEditService, playerAction } from 'src/app/services/media-edit.service';
+import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 
 @Component({
   selector: 'app-me-main-dashboard',
@@ -8,6 +8,7 @@ import { MediaEditService, playerAction } from 'src/app/services/media-edit.serv
 })
 export class MeMainDashboardComponent implements OnInit {
 
+  mEState = MEState;
   pAction = playerAction;
   private _action = playerAction.none;
   public get action(): playerAction {

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -18,6 +18,7 @@ import { MeManiPlateComponent } from './components/me-mani-plate/me-mani-plate.c
 import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
 import { YoutubeService } from './services/youtube.service';
+import { GvService } from 'src/app/services/gv.service';
 
 @NgModule({
   declarations: [
@@ -40,10 +41,11 @@ import { YoutubeService } from './services/youtube.service';
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,
-    MatBottomSheetModule,
-    AppRoutingModule
+    MatInputModule,
+    MatFormFieldModule,
+    MatBottomSheetModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

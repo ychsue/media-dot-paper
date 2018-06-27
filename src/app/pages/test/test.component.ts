@@ -23,10 +23,12 @@ export class TestComponent implements OnInit {
     this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
   }
 
-  async onSelFileChange(files: FileList) {
+  async onSelFileChange(files: FileList, obj: object) {
+    console.log(`obj= ${obj}`);
     this.audioFile = files[0];
     const fName = this.audioFile.name;
-    if (!!window.cordova && cordova.platformId === 'windows') {
+    let newFile: any;
+    if (!!window.cordova && (cordova.platformId === 'windows')) {
       try {
         const outputFile = await Windows.Storage.KnownFolders.videosLibrary.createFileAsync(this.audioFile.name);
         const outStream = await outputFile.openAsync(Windows.Storage.FileAccessMode.readWrite);
@@ -35,14 +37,17 @@ export class TestComponent implements OnInit {
         await outStream.flushAsync();
         inStream.close();
         outStream.close();
-      } catch (error) {
+
+        newFile = await Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName);
+  } catch (error) {
         this.msgService.pushMessage({type: MessageTypes.Error, message: error});
       }
+    } else {
+        newFile = this.audioFile;
     }
     // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl('https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3');
     // this.audioSrc = 'https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3';
     // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.audioFile));
-    const newFile = await Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName);
     this.audioSrc = window.URL.createObjectURL(newFile);
     this.msgService.pushMessage({type : MessageTypes.Info, message: `audioSrc: ${JSON.stringify(this.audioSrc)}`});
   }

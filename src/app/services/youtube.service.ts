@@ -40,7 +40,10 @@ export class YoutubeService {
   }
 
   constructor(private msgService: MessageService) {
-  }
+    this.onReady = new Subject<YT.PlayerEvent>();
+    this.onStateChange = new Subject<YT.OnStateChangeEvent>();
+    this.onError = new Subject<YT.OnErrorEvent>();
+}
 
   embedApiScript() {
     // * [2018-06-19 11:36] For Youtube, gotten from
@@ -53,9 +56,6 @@ export class YoutubeService {
     const doc = window.document;
     (<any>window).onYouTubeIframeAPIReady = () => {
       this.isApiReady = true;
-      this.onReady = new Subject<YT.PlayerEvent>();
-      this.onStateChange = new Subject<YT.OnStateChangeEvent>();
-      this.onError = new Subject<YT.OnErrorEvent>();
       this.msgService.pushMessage({type: MessageTypes.Info, message: 'Youtube Api is initialized'});
     };
     const apiScript = doc.createElement('script');

@@ -1,4 +1,4 @@
-<input #selFile type="file" multiple (change)="onSelFileChange(selFile.files)">
+<input #selFile type="file" multiple (change)="onSelFileChange(selFile.files,$event.target === audioFile)">
 <video #audioFromFile autoplay controls [src]="audioSrc|safe">
 </video>
 <hr>

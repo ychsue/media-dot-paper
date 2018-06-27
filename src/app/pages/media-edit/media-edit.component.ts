@@ -9,21 +9,22 @@ import { MediaEditService } from 'src/app/services/media-edit.service';
 })
 export class MediaEditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, public dataService: MediaEditService) {
+  constructor(/*private route: ActivatedRoute, */
+    public dataService: MediaEditService) {
   }
 
   ngOnInit() {
-    const self = this;
-    this.route.paramMap.subscribe( (paraM) => {
-      const para = decodeURIComponent(paraM.get('inUrl'));
-      let inData: Blob|string;
-      if (para !== '0') {
-        inData = para;
-      } else {
-        inData = this.dataService.blob;
-      }
-      self.dataService.initMe(inData);
-    });
+    // const self = this;
+    // this.route.paramMap.subscribe( (paraM) => {
+    //   const para = decodeURIComponent(paraM.get('inUrl'));
+    //   let inData: Blob|string;
+    //   if (para !== '0') {
+    //     inData = para;
+    //   } else {
+    //     inData = this.dataService.blob;
+    //   }
+    //   self.dataService.initMe(inData);
+    // });
   }
 
 }

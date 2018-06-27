@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MediaEditService {
 
-  onStateChanged: Subject<MEState>;
+  _onStateChanged: Subject<MEState>; // Just for subscribe, if you want to trigger it, set ~self.state~.
+  public get onStateChanged(): Observable<MEState> {
+    return this._onStateChanged;
+  }
+
   onPlayerAction: Subject<playerAction>;
+
   pType: playerType;
 
   private _state: MEState;
@@ -15,8 +20,8 @@ export class MediaEditService {
     return this._state;
   }
   public set state(v: MEState) {
-    if (this._state !== v && !!this.onStateChanged) {
-      this.onStateChanged.next(v);
+    if (this._state !== v && !!this._onStateChanged) {
+      this._onStateChanged.next(v);
     }
     this._state = v;
   }
@@ -26,7 +31,7 @@ export class MediaEditService {
   blob: Blob;
   currentTime = 0;
   constructor() {
-    this.onStateChanged  = new Subject<MEState>();
+    this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
   }

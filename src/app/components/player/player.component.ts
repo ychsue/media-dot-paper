@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
 import { MediaEditService, MEState, playerType, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SafePipe } from 'src/app/pipes/safe.pipe';
+import { MessageService, MessageTypes } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-player',
@@ -13,6 +15,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   pType = playerType;
   unSubscribed = new Subject<boolean>();
+
+  videoSrc: string;
 
   private _ytVId: string;
   public get ytVId(): string {
@@ -32,7 +36,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   youtubeEle: HTMLIFrameElement;
   isInited = false;
 
-  constructor(public dataService: MediaEditService, private YTservice: YoutubeService) {
+  constructor(public dataService: MediaEditService, private YTservice: YoutubeService,
+    private msgService: MessageService, private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -54,6 +59,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   eventListeners() {
     const self = this;
+    // * For readyForPlayer
     this.dataService.onStateChanged
     .pipe(takeUntil(self.unSubscribed))
     .subscribe((t) => {
@@ -62,34 +68,60 @@ export class PlayerComponent implements OnInit, OnDestroy {
         self.initMe();
       }
     });
+    // * For playerAction
     this.dataService.onPlayerAction
     .pipe(takeUntil(self.unSubscribed))
     .subscribe((t) => {
-      switch (t) {
-        case playerAction.play:
-          if (self.dataService.pType === self.pType.url) {
-            self.videoEle.play();
-          } else if (self.dataService.pType === self.pType.youtubeID) {
-            self.YTservice.ytPlayer.playVideo();
-          }
+      if (self.dataService.pType === self.pType.url || self.dataService.pType === self.pType.file) {
+        switch (t) {
+          case playerAction.play:
+          self.videoEle.play();
           break;
           case playerAction.pause:
-          if (self.dataService.pType === self.pType.url) {
-            self.videoEle.pause();
-          } else if (self.dataService.pType === self.pType.youtubeID) {
-            self.YTservice.ytPlayer.pauseVideo();
-          }
+          self.videoEle.pause();
           break;
           case playerAction.seek:
-          if (self.dataService.pType === self.pType.url) {
-            self.videoEle.currentTime = self.dataService.currentTime;
-          } else if (self.dataService.pType === self.pType.youtubeID) {
-            self.YTservice.ytPlayer.seekTo(self.dataService.currentTime, true);
-          }
+          self.videoEle.currentTime = self.dataService.currentTime;
           break;
-        default:
+          default:
           break;
+        }
+      } else if (self.dataService.pType === self.pType.youtubeID) {
+        switch (t) {
+          case playerAction.play:
+          self.YTservice.ytPlayer.playVideo();
+          break;
+          case playerAction.pause:
+          self.YTservice.ytPlayer.pauseVideo();
+          break;
+          case playerAction.seek:
+          self.YTservice.ytPlayer.seekTo(self.dataService.currentTime, true);
+          break;
+          default:
+          break;
+        }
       }
+    });
+    // * [2018-06-26 15:53] For Youtube stateChange
+    self.YTservice.onStateChange
+    .pipe(takeUntil(this.unSubscribed))
+    .subscribe( (ev) => {
+        switch (ev.data) {
+          case YT.PlayerState.PLAYING:
+            self.dataService.state = MEState.playing;
+            break;
+          case YT.PlayerState.PAUSED:
+            self.dataService.state = MEState.paused;
+            break;
+          default:
+            break;
+        }
+    });
+    // * [2018-06-26 16:50] For Youtube Ready
+    self.YTservice.onReady
+    .pipe(takeUntil(this.unSubscribed))
+    .subscribe( (ev) => {
+      self.dataService.state = MEState.canPlay;
     });
   }
 
@@ -97,42 +129,42 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const self = this;
     // * [2018-06-18 11:11] for MEState.canPlay
     this.videoEle.oncanplay = (ev) => {
-      self.dataService.onStateChanged.next(MEState.canPlay);
+      self.dataService.state = MEState.canPlay;
     };
     // * [2018-06-18 11:11] for MEState.error
     this.videoEle.onerror = (ev) => {
-      self.dataService.onStateChanged.next(MEState.error);
+      self.dataService.state = MEState.error;
     };
     // * [2018-06-18 11:11] for MEState.waiting
     this.videoEle.onwaiting = (ev) => {
-      self.dataService.onStateChanged.next(MEState.waiting);
+      self.dataService.state = MEState.waiting;
     };
     // * [2018-06-18 11:11] for MEState.playing
     this.videoEle.onplay = (ev) => {
-      self.dataService.onStateChanged.next(MEState.playing);
+      self.dataService.state = MEState.playing;
     };
     this.videoEle.onplaying = (ev) => {
-      self.dataService.onStateChanged.next(MEState.playing);
+      self.dataService.state = MEState.playing;
     };
     // * [2018-06-18 11:11] for MEState.paused
     this.videoEle.onpause = (ev) => {
-      self.dataService.onStateChanged.next(MEState.paused);
+      self.dataService.state = MEState.paused;
     };
     // * [2018-06-18 11:11] for MEState.stopped
     this.videoEle.onended = (ev) => {
-      self.dataService.onStateChanged.next(MEState.stopped);
+      self.dataService.state = MEState.stopped;
     };
     // ************************* TODO *****************************
   }
 
   initMe() {
-// ******* TODO *******
+    // ******* TODO *******
     if (this.dataService.pType ===  playerType.url) {
       if (YoutubeService.isYoutubeURL(this.dataService.urlOrId)) {
         this.dataService.pType = playerType.youtubeID;
         this.ytVId = YoutubeService.getYTId(this.dataService.urlOrId);
       } else {
-        this.videoEle.src = this.dataService.urlOrId;
+        this.videoSrc = this.dataService.urlOrId;
       }
     } else if (this.dataService.pType === playerType.youtubeID) {
       if (YoutubeService.isYoutubeURL(this.dataService.urlOrId)) {
@@ -140,6 +172,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
       } else {
         this.ytVId = this.dataService.urlOrId;
       }
+    } else if (this.dataService.pType === playerType.file) {
+      this.videoSrc = this.dataService.urlOrId;
     }
   }
 }

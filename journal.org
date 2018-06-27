@@ -1,3 +1,22 @@
+* [2018-6-27 Wed] Dealing with grid and some other problems
+1. As [[https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items][this StackOverflow's Answer]] said, I can disable the automation of ~min-width~ and ~min-height~ by decalring ~overflow: none;~.
+By this way, the height of the grid's content never exceed the desired height.
+
+2. Since I trigger ~onStateChanged~ when the user want to set the value of ~state~, I want its type is ~Observable<MEState>~ instead of ~Subject<MEState>~ when the caller want to use it. Well, I can use 
+#+begin_src javascript
+_onStateChanged: Subject<MEState>; // Just for subscribe, if you want to trigger it, set ~self.state~.
+  public get onStateChanged(): Observable<MEState> {
+    return this._onStateChanged;
+  }
+#+end_src
+to achieve this goal.
+
+3. Now I use ~pageType~ with ~[style.display]=...~ to toggle the display of pages instead of using ~router~.
+
+
+* [2018-6-25 Mon] I want to get data from ~share~ of other applications.
+[[https://stackoverflow.com/questions/16908224/share-something-to-a-phonegap-app][this StackOverflow's Q&A]] provide some ideas that I can try later.
+
 * [2018-6-24 Sun] Cross platform's problem
 The problem of ~base~.
 1. For ~ng serve~: its base is /
