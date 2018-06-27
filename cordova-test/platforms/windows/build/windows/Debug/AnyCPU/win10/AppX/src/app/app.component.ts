@@ -3,6 +3,7 @@ import { MessageService, MessageTypes } from './services/message.service';
 import { MatBottomSheet } from '@angular/material';
 import { MessageComponent } from 'src/app/message/message.component';
 import { YoutubeService } from 'src/app/services/youtube.service';
+import { GvService, PageType } from 'src/app/services/gv.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,9 @@ import { YoutubeService } from 'src/app/services/youtube.service';
 export class AppComponent implements AfterViewInit {
   // title = window['cordova'].platformId;
   title = 'Angular';
+  pageType = PageType;
 
-  constructor(public msgService: MessageService, private ytService: YoutubeService) {
+  constructor(public msgService: MessageService, public gv: GvService , private ytService: YoutubeService) {
     msgService.pushMessage({type: MessageTypes.Error, message: document.location.toString() });
     msgService.pushMessage({type: MessageTypes.Warn, message: 'Test 2' });
     msgService.pushMessage({type: MessageTypes.Info, message: 'Test 321' });

@@ -77,7 +77,7 @@
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\tsconfig.spec.json" "src\tsconfig.spec.json"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\tslint.json" "src\tslint.json"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\3rdpartylicenses.txt" "www\3rdpartylicenses.txt"
-"C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n.svg" "www\assets\i18n.svg"
+"C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\MusicNotes.svg" "www\assets\MusicNotes.svg"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js.map" "www\main.js.map"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js.map" "www\polyfills.js.map"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\runtime.js.map" "www\runtime.js.map"

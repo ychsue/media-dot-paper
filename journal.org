@@ -1,3 +1,6 @@
+* [2018-6-27 Wed] Testing on windows, Android device and emulators
+It works fine in ~ng serve~, ~Windows 10 App~, ~Asus P027~; however, the YouTube part will crash and the result of ~grid~ is wierd in ~Win10 Android Emulators~.
+
 * [2018-6-27 Wed] Dealing with grid and some other problems
 1. As [[https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items][this StackOverflow's Answer]] said, I can disable the automation of ~min-width~ and ~min-height~ by decalring ~overflow: none;~.
 By this way, the height of the grid's content never exceed the desired height.

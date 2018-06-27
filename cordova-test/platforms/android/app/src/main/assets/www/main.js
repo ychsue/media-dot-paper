@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n    height: 100vh;\r\n        grid-template-areas: \"navbar\" \"content\";\r\n}\r\n\r\napp-navbar{\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: navbar;\r\n    color: white;\r\n}\r\n\r\n.content{\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: content;\r\n    overflow-y: auto;\r\n}"
+module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n    height: 100vh;\r\n        grid-template-areas: \"navbar\" \"content\";\r\n}\r\n\r\napp-navbar{\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: navbar;\r\n    color: white;\r\n}\r\n\r\n.content{\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: content;\r\n    overflow-y: auto;\r\n}\r\n\r\n.page{\r\n    width: 100%;\r\n    height: 100%;\r\n}"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <app-navbar class=\"mat-elevation-z6\"></app-navbar>\n  <div class=\"content\">\n    <router-outlet></router-outlet>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <app-navbar class=\"mat-elevation-z6\"></app-navbar>\n  <div class=\"content\">\n    <!-- <router-outlet></router-outlet> -->\n    <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home>\n    <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n    <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -58,6 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/youtube.service */ "./src/app/services/youtube.service.ts");
+/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -70,12 +71,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(msgService, ytService) {
+    function AppComponent(msgService, gv, ytService) {
         this.msgService = msgService;
+        this.gv = gv;
         this.ytService = ytService;
         // title = window['cordova'].platformId;
         this.title = 'Angular';
+        this.pageType = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__["PageType"];
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Error, message: document.location.toString() });
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Warn, message: 'Test 2' });
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Info, message: 'Test 321' });
@@ -89,7 +93,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"]])
+        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__["GvService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -116,17 +120,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
-/* harmony import */ var _modules_app_routing_app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/app-routing/app-routing.module */ "./src/app/modules/app-routing/app-routing.module.ts");
-/* harmony import */ var _pages_home_home_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/home/home.component */ "./src/app/pages/home/home.component.ts");
-/* harmony import */ var _pages_test_test_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/test/test.component */ "./src/app/pages/test/test.component.ts");
-/* harmony import */ var _pipes_safe_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pipes/safe.pipe */ "./src/app/pipes/safe.pipe.ts");
-/* harmony import */ var _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/media-edit/media-edit.component */ "./src/app/pages/media-edit/media-edit.component.ts");
-/* harmony import */ var _components_me_main_dashboard_me_main_dashboard_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/me-main-dashboard/me-main-dashboard.component */ "./src/app/components/me-main-dashboard/me-main-dashboard.component.ts");
-/* harmony import */ var _components_me_section_dashboard_me_section_dashboard_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/me-section-dashboard/me-section-dashboard.component */ "./src/app/components/me-section-dashboard/me-section-dashboard.component.ts");
-/* harmony import */ var _components_me_mani_plate_me_mani_plate_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/me-mani-plate/me-mani-plate.component */ "./src/app/components/me-mani-plate/me-mani-plate.component.ts");
-/* harmony import */ var _components_player_player_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/player/player.component */ "./src/app/components/player/player.component.ts");
-/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/media-edit.service */ "./src/app/services/media-edit.service.ts");
-/* harmony import */ var _services_youtube_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/youtube.service */ "./src/app/services/youtube.service.ts");
+/* harmony import */ var _pages_home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/home/home.component */ "./src/app/pages/home/home.component.ts");
+/* harmony import */ var _pages_test_test_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/test/test.component */ "./src/app/pages/test/test.component.ts");
+/* harmony import */ var _pipes_safe_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pipes/safe.pipe */ "./src/app/pipes/safe.pipe.ts");
+/* harmony import */ var _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/media-edit/media-edit.component */ "./src/app/pages/media-edit/media-edit.component.ts");
+/* harmony import */ var _components_me_main_dashboard_me_main_dashboard_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/me-main-dashboard/me-main-dashboard.component */ "./src/app/components/me-main-dashboard/me-main-dashboard.component.ts");
+/* harmony import */ var _components_me_section_dashboard_me_section_dashboard_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/me-section-dashboard/me-section-dashboard.component */ "./src/app/components/me-section-dashboard/me-section-dashboard.component.ts");
+/* harmony import */ var _components_me_mani_plate_me_mani_plate_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/me-mani-plate/me-mani-plate.component */ "./src/app/components/me-mani-plate/me-mani-plate.component.ts");
+/* harmony import */ var _components_player_player_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/player/player.component */ "./src/app/components/player/player.component.ts");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/youtube.service */ "./src/app/services/youtube.service.ts");
+/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -161,14 +165,14 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
                 _message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"],
                 _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_7__["NavbarComponent"],
-                _pages_home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"],
-                _pages_test_test_component__WEBPACK_IMPORTED_MODULE_10__["TestComponent"],
-                _pipes_safe_pipe__WEBPACK_IMPORTED_MODULE_11__["SafePipe"],
-                _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_12__["MediaEditComponent"],
-                _components_me_main_dashboard_me_main_dashboard_component__WEBPACK_IMPORTED_MODULE_13__["MeMainDashboardComponent"],
-                _components_me_section_dashboard_me_section_dashboard_component__WEBPACK_IMPORTED_MODULE_14__["MeSectionDashboardComponent"],
-                _components_me_mani_plate_me_mani_plate_component__WEBPACK_IMPORTED_MODULE_15__["MeManiPlateComponent"],
-                _components_player_player_component__WEBPACK_IMPORTED_MODULE_16__["PlayerComponent"]
+                _pages_home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"],
+                _pages_test_test_component__WEBPACK_IMPORTED_MODULE_9__["TestComponent"],
+                _pipes_safe_pipe__WEBPACK_IMPORTED_MODULE_10__["SafePipe"],
+                _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_11__["MediaEditComponent"],
+                _components_me_main_dashboard_me_main_dashboard_component__WEBPACK_IMPORTED_MODULE_12__["MeMainDashboardComponent"],
+                _components_me_section_dashboard_me_section_dashboard_component__WEBPACK_IMPORTED_MODULE_13__["MeSectionDashboardComponent"],
+                _components_me_mani_plate_me_mani_plate_component__WEBPACK_IMPORTED_MODULE_14__["MeManiPlateComponent"],
+                _components_player_player_component__WEBPACK_IMPORTED_MODULE_15__["PlayerComponent"]
             ],
             entryComponents: [_message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"]],
             imports: [
@@ -177,10 +181,11 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBadgeModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatIconModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBottomSheetModule"],
-                _modules_app_routing_app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBottomSheetModule"]
             ],
-            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_17__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_18__["YoutubeService"]],
+            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
@@ -209,7 +214,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container'>\n  <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"action!==pAction.play\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onPause()\" *ngIf=\"action!==pAction.pause\">\n    <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button>\n</div>"
+module.exports = "<div class='container'>\n  <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"dataService.state !== mEState.playing\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onPause()\" *ngIf=\"dataService.state===mEState.playing\">\n    <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button>\n</div>"
 
 /***/ }),
 
@@ -239,6 +244,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var MeMainDashboardComponent = /** @class */ (function () {
     function MeMainDashboardComponent(dataService) {
         this.dataService = dataService;
+        this.mEState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"];
         this.pAction = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"];
         this._action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].none;
     }
@@ -412,7 +418,7 @@ var MeSectionDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-width: 100%;\r\n    background: transparent no-repeat;\r\n    /* For windows, it should be '/www/...' and for android is '/android_asset/www/...' */\r\n    background-size: contain;\r\n    background-position: center;\r\n}\r\n\r\n.container, #youtube {\r\n    width: 100%;\r\n    height: 100%\r\n}"
+module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-width: 100%;\r\n    background: transparent no-repeat;\r\n    /* For windows, it should be '/www/...' and for android is '/android_asset/www/...' */\r\n    /* Now I declare it in html file */\r\n    background-size: contain;\r\n    background-position: center;\r\n}\r\n\r\n.container, #youtube {\r\n    width: 100%;\r\n    height: 100%\r\n}"
 
 /***/ }),
 
@@ -423,7 +429,7 @@ module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-wid
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.pType===pType.url)?'block':'none'\"\n    poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/i18n.svg\\')'\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.pType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
+module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.pType===pType.url||dataService.pType===pType.file)?'block':'none'\"\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.pType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
 
 /***/ }),
 
@@ -442,6 +448,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/youtube.service */ "./src/app/services/youtube.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -456,10 +463,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var PlayerComponent = /** @class */ (function () {
-    function PlayerComponent(dataService, YTservice) {
+    function PlayerComponent(dataService, YTservice, msgService, ngZone) {
         this.dataService = dataService;
         this.YTservice = YTservice;
+        this.msgService = msgService;
+        this.ngZone = ngZone;
         this.pType = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"];
         this.unSubscribed = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.isInited = false;
@@ -492,6 +502,7 @@ var PlayerComponent = /** @class */ (function () {
     };
     PlayerComponent.prototype.eventListeners = function () {
         var self = this;
+        // * For readyForPlayer
         this.dataService.onStateChanged
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
             .subscribe(function (t) {
@@ -502,67 +513,91 @@ var PlayerComponent = /** @class */ (function () {
                 self.initMe();
             }
         });
+        // * For playerAction
         this.dataService.onPlayerAction
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
             .subscribe(function (t) {
-            switch (t) {
-                case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play:
-                    if (self.dataService.pType === self.pType.url) {
+            if (self.dataService.pType === self.pType.url || self.dataService.pType === self.pType.file) {
+                switch (t) {
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play:
                         self.videoEle.play();
-                    }
-                    else if (self.dataService.pType === self.pType.youtubeID) {
-                        self.YTservice.ytPlayer.playVideo();
-                    }
-                    break;
-                case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause:
-                    if (self.dataService.pType === self.pType.url) {
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause:
                         self.videoEle.pause();
-                    }
-                    else if (self.dataService.pType === self.pType.youtubeID) {
-                        self.YTservice.ytPlayer.pauseVideo();
-                    }
-                    break;
-                case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].seek:
-                    if (self.dataService.pType === self.pType.url) {
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].seek:
                         self.videoEle.currentTime = self.dataService.currentTime;
-                    }
-                    else if (self.dataService.pType === self.pType.youtubeID) {
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (self.dataService.pType === self.pType.youtubeID) {
+                switch (t) {
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play:
+                        self.YTservice.ytPlayer.playVideo();
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause:
+                        self.YTservice.ytPlayer.pauseVideo();
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].seek:
                         self.YTservice.ytPlayer.seekTo(self.dataService.currentTime, true);
-                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+        // * [2018-06-26 15:53] For Youtube stateChange
+        self.YTservice.onStateChange
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(this.unSubscribed))
+            .subscribe(function (ev) {
+            switch (ev.data) {
+                case YT.PlayerState.PLAYING:
+                    self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
+                    break;
+                case YT.PlayerState.PAUSED:
+                    self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused;
                     break;
                 default:
                     break;
             }
+        });
+        // * [2018-06-26 16:50] For Youtube Ready
+        self.YTservice.onReady
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(this.unSubscribed))
+            .subscribe(function (ev) {
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay;
         });
     };
     PlayerComponent.prototype.eventTriggers = function () {
         var self = this;
         // * [2018-06-18 11:11] for MEState.canPlay
         this.videoEle.oncanplay = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay;
         };
         // * [2018-06-18 11:11] for MEState.error
         this.videoEle.onerror = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].error);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].error;
         };
         // * [2018-06-18 11:11] for MEState.waiting
         this.videoEle.onwaiting = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].waiting);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].waiting;
         };
         // * [2018-06-18 11:11] for MEState.playing
         this.videoEle.onplay = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
         };
         this.videoEle.onplaying = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
         };
         // * [2018-06-18 11:11] for MEState.paused
         this.videoEle.onpause = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused;
         };
         // * [2018-06-18 11:11] for MEState.stopped
         this.videoEle.onended = function (ev) {
-            self.dataService.onStateChanged.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].stopped);
+            self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].stopped;
         };
         // ************************* TODO *****************************
     };
@@ -574,7 +609,7 @@ var PlayerComponent = /** @class */ (function () {
                 this.ytVId = src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].getYTId(this.dataService.urlOrId);
             }
             else {
-                this.videoEle.src = this.dataService.urlOrId;
+                this.videoSrc = this.dataService.urlOrId;
             }
         }
         else if (this.dataService.pType === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].youtubeID) {
@@ -584,6 +619,9 @@ var PlayerComponent = /** @class */ (function () {
             else {
                 this.ytVId = this.dataService.urlOrId;
             }
+        }
+        else if (this.dataService.pType === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].file) {
+            this.videoSrc = this.dataService.urlOrId;
         }
     };
     __decorate([
@@ -600,7 +638,8 @@ var PlayerComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./player.component.html */ "./src/app/components/player/player.component.html"),
             styles: [__webpack_require__(/*! ./player.component.css */ "./src/app/components/player/player.component.css")]
         }),
-        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"]])
+        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"],
+            src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]])
     ], PlayerComponent);
     return PlayerComponent;
 }());
@@ -678,59 +717,6 @@ var MessageComponent = /** @class */ (function () {
             _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], MessageComponent);
     return MessageComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/modules/app-routing/app-routing.module.ts":
-/*!***********************************************************!*\
-  !*** ./src/app/modules/app-routing/app-routing.module.ts ***!
-  \***********************************************************/
-/*! exports provided: AppRoutingModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _pages_home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../pages/home/home.component */ "./src/app/pages/home/home.component.ts");
-/* harmony import */ var _pages_test_test_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../pages/test/test.component */ "./src/app/pages/test/test.component.ts");
-/* harmony import */ var _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pages/media-edit/media-edit.component */ "./src/app/pages/media-edit/media-edit.component.ts");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-
-
-var routes = [
-    { path: '', component: _pages_home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
-    { path: 'test', component: _pages_test_test_component__WEBPACK_IMPORTED_MODULE_3__["TestComponent"] },
-    { path: 'media-edit/:inUrl', component: _pages_media_edit_media_edit_component__WEBPACK_IMPORTED_MODULE_4__["MediaEditComponent"] }
-];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
-    }
-    AppRoutingModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            exports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]
-            ],
-            imports: [
-                // RouterModule.forRoot(routes, {useHash: true})
-                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)
-            ],
-            declarations: []
-        })
-    ], AppRoutingModule);
-    return AppRoutingModule;
 }());
 
 
@@ -844,7 +830,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <a routerLink=\"/test\">Test</a>\r\n</div>\r\n<div>\r\n    <a [routerLink]=\"'/media-edit/'+testUrl\">media-edit from texts</a>\r\n</div>\r\n<div>\r\n    <a [routerLink]=\"'/media-edit/'+testYoutubeUrl\">media-edit from Youtube</a>\r\n</div>\r\n<div>\r\n    <a [routerLink]=\"'/media-edit/0'\">media-edit from blob</a>\r\n</div>"
+module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onNormalAudio()\">media-edit from texts</button>\r\n</div>\r\n<div>\r\n    <mat-form-field>\r\n        <input matInput #iURL [value]=\"testYoutubeUrl\">\r\n    </mat-form-field>\r\n    <button mat-icon-button (click)=\"onInputURL(iURL.value)\">\r\n            <mat-icon class=\"mat-18\">play_arrow</mat-icon>\r\n        </button>\r\n</div>\r\n<div>\r\n    <input #selFile type=\"file\" accept=\"video/*, audio/*\" (change)=\"onFileSelect(selFile.files)\">\r\n    <!-- <a [routerLink]=\"'/media-edit/0'\">media-edit from blob</a> -->\r\n</div>"
 
 /***/ }),
 
@@ -859,6 +845,8 @@ module.exports = "<div>\r\n    <a routerLink=\"/test\">Test</a>\r\n</div>\r\n<di
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
+/* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -869,12 +857,32 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
-        this.testUrl = encodeURIComponent('https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3');
-        this.testYoutubeUrl = encodeURIComponent('https://youtu.be/f1SZ5GaAp3g');
+    function HomeComponent(gv, meService) {
+        this.gv = gv;
+        this.meService = meService;
+        this.testUrl = 'https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3';
+        this.testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
+        this.pageType = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"];
     }
     HomeComponent.prototype.ngOnInit = function () {
+    };
+    HomeComponent.prototype.onNormalAudio = function () {
+        this.meService.initMe(this.testUrl);
+        this.gv.shownPage = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+    };
+    HomeComponent.prototype.onInputURL = function (inURL) {
+        this.meService.initMe(inURL);
+        this.gv.shownPage = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+    };
+    HomeComponent.prototype.onFileSelect = function (files) {
+        if (files !== null && files.length > 0) {
+            var file = files[0];
+            this.meService.initMe(file);
+            this.gv.shownPage = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+        }
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -882,7 +890,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/pages/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/pages/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -898,7 +906,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr auto auto;\r\n        grid-template-rows: auto 1fr auto auto;\r\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\nheader {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: header;\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    width:100%;\r\n    height:100%;\r\n}\r\n\r\n.dashboardSection {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: cSection;\r\n}\r\n\r\n.dashboardMain {\r\n    -ms-grid-row: 4;\r\n    -ms-grid-column: 1;\r\n    grid-area: cMain;\r\n}"
+module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr auto auto;\r\n        grid-template-rows: auto 1fr auto auto;\r\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\nheader {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: header;\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    overflow: hidden;\r\n    width:100%;\r\n}\r\n\r\n.dashboardSection {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: cSection;\r\n}\r\n\r\n.dashboardMain {\r\n    -ms-grid-row: 4;\r\n    -ms-grid-column: 1;\r\n    grid-area: cMain;\r\n}"
 
 /***/ }),
 
@@ -909,7 +917,7 @@ module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <header>{{this.dataService.title}}</header>\n  <!-- <main> -->\n    <!-- <video #videoElement class=\"main\"></video> -->\n    <app-player class=\"main\"></app-player>\n    <app-me-mani-plate class=\"main\"></app-me-mani-plate>\n  <!-- </main> -->\n  <aside></aside>\n  <footer class=\"dashboardSection\">\n    <app-me-section-dashboard></app-me-section-dashboard>\n  </footer>\n  <footer class=\"dashboardMain\">\n    <app-me-main-dashboard></app-me-main-dashboard>\n  </footer>\n</div>\n"
+module.exports = "<div class=\"container\">\r\n  <header>{{this.dataService.title}}</header>\r\n  <!-- <main> -->\r\n    <!-- <video #videoElement class=\"main\"></video> -->\r\n    <app-player class=\"main\"></app-player>\r\n    <app-me-mani-plate class=\"main\"></app-me-mani-plate>\r\n  <!-- </main> -->\r\n  <aside></aside>\r\n  <footer class=\"dashboardSection\">\r\n    <app-me-section-dashboard></app-me-section-dashboard>\r\n  </footer>\r\n  <footer class=\"dashboardMain\">\r\n    <app-me-main-dashboard></app-me-main-dashboard>\r\n  </footer>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -924,8 +932,7 @@ module.exports = "<div class=\"container\">\n  <header>{{this.dataService.title}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MediaEditComponent", function() { return MediaEditComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -937,26 +944,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
 var MediaEditComponent = /** @class */ (function () {
-    function MediaEditComponent(route, dataService) {
-        this.route = route;
+    function MediaEditComponent(/*private route: ActivatedRoute, */ dataService) {
         this.dataService = dataService;
     }
     MediaEditComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        var self = this;
-        this.route.paramMap.subscribe(function (paraM) {
-            var para = decodeURIComponent(paraM.get('inUrl'));
-            var inData;
-            if (para !== '0') {
-                inData = para;
-            }
-            else {
-                inData = _this.dataService.blob;
-            }
-            self.dataService.initMe(inData);
-        });
+        // const self = this;
+        // this.route.paramMap.subscribe( (paraM) => {
+        //   const para = decodeURIComponent(paraM.get('inUrl'));
+        //   let inData: Blob|string;
+        //   if (para !== '0') {
+        //     inData = para;
+        //   } else {
+        //     inData = this.dataService.blob;
+        //   }
+        //   self.dataService.initMe(inData);
+        // });
     };
     MediaEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -964,7 +967,7 @@ var MediaEditComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./media-edit.component.html */ "./src/app/pages/media-edit/media-edit.component.html"),
             styles: [__webpack_require__(/*! ./media-edit.component.css */ "./src/app/pages/media-edit/media-edit.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"]])
+        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
     ], MediaEditComponent);
     return MediaEditComponent;
 }());
@@ -991,7 +994,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>"
+module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>"
 
 /***/ }),
 
@@ -1064,18 +1067,19 @@ var TestComponent = /** @class */ (function () {
         this.isCordovaSupport = !!window.cordova;
         this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
     };
-    TestComponent.prototype.onSelFileChange = function (files) {
+    TestComponent.prototype.onSelFileChange = function (files, obj) {
         return __awaiter(this, void 0, void 0, function () {
-            var fName, outputFile, outStream, inStream, error_1, newFile;
+            var fName, newFile, outputFile, outStream, inStream, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log("obj= " + obj);
                         this.audioFile = files[0];
                         fName = this.audioFile.name;
-                        if (!(!!window.cordova && cordova.platformId === 'windows')) return [3 /*break*/, 7];
+                        if (!(!!window.cordova && (cordova.platformId === 'windows'))) return [3 /*break*/, 9];
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 6, , 7]);
+                        _a.trys.push([1, 7, , 8]);
                         return [4 /*yield*/, Windows.Storage.KnownFolders.videosLibrary.createFileAsync(this.audioFile.name)];
                     case 2:
                         outputFile = _a.sent();
@@ -1091,14 +1095,22 @@ var TestComponent = /** @class */ (function () {
                         _a.sent();
                         inStream.close();
                         outStream.close();
-                        return [3 /*break*/, 7];
+                        return [4 /*yield*/, Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName)];
                     case 6:
+                        newFile = _a.sent();
+                        return [3 /*break*/, 8];
+                    case 7:
                         error_1 = _a.sent();
                         this.msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Error, message: error_1 });
-                        return [3 /*break*/, 7];
-                    case 7: return [4 /*yield*/, Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName)];
-                    case 8:
-                        newFile = _a.sent();
+                        return [3 /*break*/, 8];
+                    case 8: return [3 /*break*/, 10];
+                    case 9:
+                        newFile = this.audioFile;
+                        _a.label = 10;
+                    case 10:
+                        // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl('https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3');
+                        // this.audioSrc = 'https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3';
+                        // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.audioFile));
                         this.audioSrc = window.URL.createObjectURL(newFile);
                         this.msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Info, message: "audioSrc: " + JSON.stringify(this.audioSrc) });
                         return [2 /*return*/];
@@ -1185,6 +1197,51 @@ var SafePipe = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/gv.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/services/gv.service.ts ***!
+  \****************************************/
+/*! exports provided: GvService, PageType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GvService", function() { return GvService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageType", function() { return PageType; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var GvService = /** @class */ (function () {
+    function GvService() {
+        this.shownPage = PageType.Home;
+    }
+    GvService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], GvService);
+    return GvService;
+}());
+
+var PageType;
+(function (PageType) {
+    PageType[PageType["Home"] = 0] = "Home";
+    PageType[PageType["MediaEdit"] = 1] = "MediaEdit";
+    PageType[PageType["Test"] = 2] = "Test";
+})(PageType || (PageType = {}));
+
+
+/***/ }),
+
 /***/ "./src/app/services/media-edit.service.ts":
 /*!************************************************!*\
   !*** ./src/app/services/media-edit.service.ts ***!
@@ -1216,17 +1273,24 @@ var MediaEditService = /** @class */ (function () {
         this.title = '';
         this.urlOrId = '';
         this.currentTime = 0;
-        this.onStateChanged = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this._onStateChanged = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.onPlayerAction = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.state = MEState.initialized;
     }
+    Object.defineProperty(MediaEditService.prototype, "onStateChanged", {
+        get: function () {
+            return this._onStateChanged;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(MediaEditService.prototype, "state", {
         get: function () {
             return this._state;
         },
         set: function (v) {
-            if (this._state !== v && !!this.onStateChanged) {
-                this.onStateChanged.next(v);
+            if (this._state !== v && !!this._onStateChanged) {
+                this._onStateChanged.next(v);
             }
             this._state = v;
         },
@@ -1409,6 +1473,9 @@ var YoutubeService = /** @class */ (function () {
         this.isScriptEmbedded = false;
         this._isApiReady = false;
         this.onApiReday = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.onReady = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.onStateChange = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.onError = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
     }
     Object.defineProperty(YoutubeService.prototype, "isApiReady", {
         get: function () {
@@ -1443,9 +1510,6 @@ var YoutubeService = /** @class */ (function () {
         var doc = window.document;
         window.onYouTubeIframeAPIReady = function () {
             _this.isApiReady = true;
-            _this.onReady = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-            _this.onStateChange = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-            _this.onError = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
             _this.msgService.pushMessage({ type: src_app_services_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: 'Youtube Api is initialized' });
         };
         var apiScript = doc.createElement('script');

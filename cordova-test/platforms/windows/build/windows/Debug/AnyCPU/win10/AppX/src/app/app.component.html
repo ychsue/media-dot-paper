@@ -1,6 +1,9 @@
 <div class="container">
   <app-navbar class="mat-elevation-z6"></app-navbar>
   <div class="content">
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
+    <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home>
+    <app-media-edit class="page" [style.display]="(gv.shownPage===pageType.MediaEdit)?'block':'none'"></app-media-edit>
+    <app-test class="page" [style.display]="(gv.shownPage===pageType.Test)?'block':'none'"></app-test>
   </div>
 </div>

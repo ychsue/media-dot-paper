@@ -263,8 +263,8 @@
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\3rdpartylicenses.txt">
       <PackagePath>www\3rdpartylicenses.txt</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n.svg">
-      <PackagePath>www\assets\i18n.svg</PackagePath>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\MusicNotes.svg">
+      <PackagePath>www\assets\MusicNotes.svg</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js.map">
       <PackagePath>www\main.js.map</PackagePath>

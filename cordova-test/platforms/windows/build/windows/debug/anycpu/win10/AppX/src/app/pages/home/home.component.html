@@ -1,12 +1,18 @@
 <div>
-    <a routerLink="/test">Test</a>
+    <button mat-raised-button (click)="gv.shownPage = pageType.Test">Test</button>
 </div>
 <div>
-    <a [routerLink]="'/media-edit/'+testUrl">media-edit from texts</a>
+    <button mat-raised-button (click)="onNormalAudio()">media-edit from texts</button>
 </div>
 <div>
-    <a [routerLink]="'/media-edit/'+testYoutubeUrl">media-edit from Youtube</a>
+    <mat-form-field>
+        <input matInput #iURL [value]="testYoutubeUrl">
+    </mat-form-field>
+    <button mat-icon-button (click)="onInputURL(iURL.value)">
+            <mat-icon class="mat-18">play_arrow</mat-icon>
+        </button>
 </div>
 <div>
-    <a [routerLink]="'/media-edit/0'">media-edit from blob</a>
+    <input #selFile type="file" accept="video/*, audio/*" (change)="onFileSelect(selFile.files)">
+    <!-- <a [routerLink]="'/media-edit/0'">media-edit from blob</a> -->
 </div>
