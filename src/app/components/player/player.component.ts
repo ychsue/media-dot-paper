@@ -113,6 +113,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
           case YT.PlayerState.PAUSED:
             self.dataService.state = MEState.paused;
             break;
+          case YT.PlayerState.ENDED:
+            self.dataService.state = MEState.stopped;
+            break;
           default:
             break;
         }

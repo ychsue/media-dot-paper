@@ -2,17 +2,27 @@
     <button mat-raised-button (click)="gv.shownPage = pageType.Test">Test</button>
 </div>
 <div>
-    <button mat-raised-button (click)="onNormalAudio()">media-edit from texts</button>
+    <h3>
+        讀入新的媒體：
+    </h3>
+    <mat-list dense>
+        <mat-list-item>
+            <button mat-raised-button (click)="onLoadFromURL();">
+                網址
+            </button>
+            <button mat-icon-button class="question">
+                ?
+            </button>
+        </mat-list-item>
+        <mat-list-item>
+            <button mat-raised-button (click)="selFile.click()" >
+                <input #selFile name="selFile" id="selFile"
+                type="file" accept="video/*, audio/*" (change)="onFileSelect(selFile.files)">
+                檔案
+            </button>
+        </mat-list-item>
+    </mat-list>
 </div>
 <div>
-    <mat-form-field>
-        <input matInput #iURL [value]="testYoutubeUrl">
-    </mat-form-field>
-    <button mat-icon-button (click)="onInputURL(iURL.value)">
-            <mat-icon class="mat-18">play_arrow</mat-icon>
-        </button>
-</div>
-<div>
-    <input #selFile type="file" accept="video/*, audio/*" (change)="onFileSelect(selFile.files)">
-    <!-- <a [routerLink]="'/media-edit/0'">media-edit from blob</a> -->
+    <h3>讀入已備份的媒體：</h3>
 </div>

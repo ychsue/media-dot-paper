@@ -1,3 +1,7 @@
+* [2018-7-4 Wed] I created a dialog component and a story service. Next, I need to know how to use indexedDB.
+I have learned:
+1. Using ~FILEINPUT.click()~ to trigger the click event of a file input named ~#FILEINPUT~.
+
 * [2018-6-27 Wed] Testing on windows, Android device and emulators
 It works fine in ~ng serve~, ~Windows 10 App~, ~Asus P027~; however, the YouTube part will crash and the result of ~grid~ is wierd in ~Win10 Android Emulators~.
 

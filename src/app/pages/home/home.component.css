@@ -1,0 +1,16 @@
+input[type='file'] {
+    display: none;
+}
+
+.full-width {
+    width: 100%;
+    display: block;
+}
+
+.question {
+    background-color: red;
+    color: yellow;
+    font-weight: bolder;
+    min-width: 0px;
+    box-shadow: 4px;
+}

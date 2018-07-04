@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
+  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -19,6 +20,9 @@ import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
 import { YoutubeService } from './services/youtube.service';
 import { GvService } from 'src/app/services/gv.service';
+import { StoryService } from 'src/app/services/story.service';
+import { DialogComponent } from './dialog/dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,20 +36,24 @@ import { GvService } from 'src/app/services/gv.service';
     MeMainDashboardComponent,
     MeSectionDashboardComponent,
     MeManiPlateComponent,
-    PlayerComponent
+    PlayerComponent,
+    DialogComponent
   ],
-  entryComponents: [MessageComponent],
+  entryComponents: [MessageComponent, DialogComponent],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatListModule,
+    MatDialogModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService, GvService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService, StoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
