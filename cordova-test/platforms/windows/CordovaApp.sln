@@ -11,11 +11,17 @@ EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Phone", "CordovaApp.Phone.jsproj", "{31B67A35-9503-4213-857E-F44EB42AE549}"
 EndProject
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CordovaApp.Windows10", "CordovaApp.Windows10.jsproj", "{F9B0AE20-C91C-42B9-9C6E-D3BC28B4509E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76E68196-B7DC-4393-A070-D32FC33BC489} = {76E68196-B7DC-4393-A070-D32FC33BC489}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite3.UWP", "..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj", "{76E68196-B7DC-4393-A070-D32FC33BC489}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CordovaApp.projitems*{31b67a35-9503-4213-857e-f44eb42ae549}*SharedItemsImports = 5
 		CordovaApp.projitems*{58950fb6-2f93-4963-b9cd-637f83f3efbf}*SharedItemsImports = 5
+		..\..\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.Shared.vcxitems*{76e68196-b7dc-4393-a070-d32fc33bc489}*SharedItemsImports = 4
 		CordovaApp.projitems*{9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9}*SharedItemsImports = 13
 		CordovaApp.projitems*{f9b0ae20-c91c-42b9-9c6e-d3bc28b4509e}*SharedItemsImports = 5
 	EndGlobalSection
@@ -110,6 +116,20 @@ Global
 		{F9B0AE20-C91C-42B9-9C6E-D3BC28B4509E}.Release|x86.ActiveCfg = Release|x86
 		{F9B0AE20-C91C-42B9-9C6E-D3BC28B4509E}.Release|x86.Build.0 = Release|x86
 		{F9B0AE20-C91C-42B9-9C6E-D3BC28B4509E}.Release|x86.Deploy.0 = Release|x86
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|ARM.ActiveCfg = Debug|ARM
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|ARM.Build.0 = Debug|ARM
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|x64.ActiveCfg = Debug|x64
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|x64.Build.0 = Debug|x64
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|x86.ActiveCfg = Debug|Win32
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Debug|x86.Build.0 = Debug|Win32
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|Any CPU.ActiveCfg = Release|Win32
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|ARM.ActiveCfg = Release|ARM
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|ARM.Build.0 = Release|ARM
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|x64.ActiveCfg = Release|x64
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|x64.Build.0 = Release|x64
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|x86.ActiveCfg = Release|Win32
+		{76E68196-B7DC-4393-A070-D32FC33BC489}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

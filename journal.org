@@ -1,3 +1,12 @@
+* [2018-7-9 Mon] I tried to use nanoSQL and it works.
+For installing nanoSQL, I need to install following packages at first.
+1. I need to ~npm i nano-sql~ in this angular project.
+2. I need to ~cordova plugin add cordova-plugin-nano-sqlite~ in folder ~cordova-test~.
+3. Generate a class ~sticky-observable~ for some events like ~deviceReady~.
+4. Using ~db.service~ to handle ~nSQL~'s job because I'm not sure whether it will be changed in the future.
+
+For intellisense, I need to ~exclude: ['cordova','cordova-test']~ in ~tsconfig.json~.
+
 * [2018-7-4 Wed] I created a dialog component and a story service. Next, I need to know how to use indexedDB.
 I have learned:
 1. Using ~FILEINPUT.click()~ to trigger the click event of a file input named ~#FILEINPUT~.

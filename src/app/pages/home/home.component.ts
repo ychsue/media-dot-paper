@@ -3,6 +3,7 @@ import { GvService, PageType } from 'src/app/services/gv.service';
 import { MediaEditService } from 'src/app/services/media-edit.service';
 import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType } from 'src/app/dialog/dialog.component';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog,
-    private meService: MediaEditService) { }
+    private meService: MediaEditService, private db: DbService) { }
 
   ngOnInit() {
   }

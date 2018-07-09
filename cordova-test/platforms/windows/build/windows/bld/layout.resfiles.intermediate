@@ -13,6 +13,16 @@ src\app\app.component.html
 src\app\app.component.spec.ts
 src\app\app.component.ts
 src\app\app.module.ts
+src\app\components\me-main-dashboard\me-main-dashboard.component.css
+src\app\components\me-main-dashboard\me-main-dashboard.component.html
+src\app\components\me-mani-plate\me-mani-plate.component.css
+src\app\components\me-mani-plate\me-mani-plate.component.html
+src\app\components\me-section-dashboard\me-section-dashboard.component.css
+src\app\components\me-section-dashboard\me-section-dashboard.component.html
+src\app\components\player\player.component.css
+src\app\components\player\player.component.html
+src\app\dialog\dialog.component.css
+src\app\dialog\dialog.component.html
 src\app\message\message.component.css
 src\app\message\message.component.html
 src\app\message\message.component.spec.ts
@@ -73,6 +83,10 @@ www\plugins\cordova-plugin-file\www\Metadata.js
 www\plugins\cordova-plugin-file\www\ProgressEvent.js
 www\plugins\cordova-plugin-file\www\requestFileSystem.js
 www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js
+www\plugins\cordova-plugin-nano-sqlite\plugin.js
+www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js
+www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js
+www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js
 www\polyfills.js
 www\polyfills.js.map
 www\runtime.js

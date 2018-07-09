@@ -8,6 +8,9 @@ export class StoryService {
   name: string;
   title: string;
 
+  makeTime: number;
+  modifyTime: number;
+
   urlOrID: string;
   meType = playerType.none;
 

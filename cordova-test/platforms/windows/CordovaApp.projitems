@@ -1,59 +1,88 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-        <HasSharedItems>true</HasSharedItems>
-        <SharedGUID>9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9</SharedGUID>
-    </PropertyGroup>
-    <ItemGroup>
-        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
-        <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
-        <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\favicon.ico" />
-        <Content Include="$(MSBuildThisFileDirectory)src\index.html" />
-        <Content Include="$(MSBuildThisFileDirectory)src\karma.conf.js" />
-        <Content Include="$(MSBuildThisFileDirectory)src\main.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\polyfills.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\styles.css" />
-        <Content Include="$(MSBuildThisFileDirectory)src\test.ts" />
-        <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.app.json" />
-        <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.spec.json" />
-        <Content Include="$(MSBuildThisFileDirectory)src\tslint.json" />
-        <Content Include="$(MSBuildThisFileDirectory)www\**" />
-    </ItemGroup>
-    <ItemGroup>
-        <Content Include="$(MSBuildThisFileDirectory)config.xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
-        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
-    </ItemGroup>
-    <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
-    <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9</SharedGUID>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
+    <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
+    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\favicon.ico" />
+    <Content Include="$(MSBuildThisFileDirectory)src\index.html" />
+    <Content Include="$(MSBuildThisFileDirectory)src\karma.conf.js" />
+    <Content Include="$(MSBuildThisFileDirectory)src\main.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\polyfills.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\styles.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\test.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.app.json" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.spec.json" />
+    <Content Include="$(MSBuildThisFileDirectory)src\tslint.json" />
+    <Content Include="$(MSBuildThisFileDirectory)www\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\cordova.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\db.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\gv.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\media-edit.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\story.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\youtube.service.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)src\%40types\" />
+  </ItemGroup>
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
+  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
 </Project>

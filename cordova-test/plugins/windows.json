@@ -12,7 +12,14 @@
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "HelloCordova"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "HelloCordova"
+    }
+  }
 }

@@ -78,6 +78,21 @@
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.css">
       <PackagePath>src\app\app.component.css</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-main-dashboard\me-main-dashboard.component.css">
+      <PackagePath>src\app\components\me-main-dashboard\me-main-dashboard.component.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-mani-plate\me-mani-plate.component.css">
+      <PackagePath>src\app\components\me-mani-plate\me-mani-plate.component.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-section-dashboard\me-section-dashboard.component.css">
+      <PackagePath>src\app\components\me-section-dashboard\me-section-dashboard.component.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\player\player.component.css">
+      <PackagePath>src\app\components\player\player.component.css</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\dialog\dialog.component.css">
+      <PackagePath>src\app\dialog\dialog.component.css</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\message\message.component.css">
       <PackagePath>src\app\message\message.component.css</PackagePath>
     </AppxPackagedFile>
@@ -98,6 +113,21 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.html">
       <PackagePath>src\app\app.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-main-dashboard\me-main-dashboard.component.html">
+      <PackagePath>src\app\components\me-main-dashboard\me-main-dashboard.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-mani-plate\me-mani-plate.component.html">
+      <PackagePath>src\app\components\me-mani-plate\me-mani-plate.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-section-dashboard\me-section-dashboard.component.html">
+      <PackagePath>src\app\components\me-section-dashboard\me-section-dashboard.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\player\player.component.html">
+      <PackagePath>src\app\components\player\player.component.html</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\dialog\dialog.component.html">
+      <PackagePath>src\app\dialog\dialog.component.html</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\message\message.component.html">
       <PackagePath>src\app\message\message.component.html</PackagePath>
@@ -251,6 +281,18 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-nano-sqlite\plugin.js">
+      <PackagePath>www\plugins\cordova-plugin-nano-sqlite\plugin.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
+      <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js">
       <PackagePath>www\polyfills.js</PackagePath>
