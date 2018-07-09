@@ -1,3 +1,11 @@
+* [2018-7-9 Mon] Dealing with ~sticky-observable~
+Well, I tried to handle its ~TeardownLogic~ so that the subscribers can be unsubscribed from its ~_subject~.
+Besides, I also try to let all observers subscribe ~self._subject~ instead of ~sticky-observable~ itself,
+i.e. you need to store the 1st observer for this subscription.
+
+Then, the question is that how to trigger the original subscription function?
+Well, I can get the ~observer~ of ~self._subject~ through ~self.subscribe(self._subject)~ and run ~return fn(observer);~ so that the function of subscription will work on this ~self._subject~ so that it can alert all its subscribers.
+
 * [2018-7-9 Mon] I tried to use nanoSQL and it works.
 For installing nanoSQL, I need to install following packages at first.
 1. I need to ~npm i nano-sql~ in this angular project.

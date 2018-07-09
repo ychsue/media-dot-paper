@@ -9,16 +9,16 @@ import { playerType } from './media-edit.service';
   providedIn: 'root'
 })
 export class DbService {
-  
+
   static storyTableName = 'stories';
-  
+
   private _isInitialized = false;
   public get isInitialized(): boolean {
     return this._isInitialized;
   }
-  
+
   nStories = 0;
-  
+
   constructor(private cService: CordovaService, private msgService: MessageService) {
     const self = this;
     if (cService.isCordova) {
@@ -27,7 +27,7 @@ export class DbService {
       this.iniNanoSQL();
     }
   }
-  
+
   async iniNanoSQL() {
     const buf = await nSQL(DbService.storyTableName)
     .model([
