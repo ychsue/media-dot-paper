@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 
 @Component({
@@ -19,16 +19,20 @@ export class MeMainDashboardComponent implements OnInit {
     this._action = v;
   }
 
-  constructor(public dataService: MediaEditService) { }
+  constructor(public dataService: MediaEditService, private nZone: NgZone) { }
 
   ngOnInit() {
   }
 
   onPlay() {
-    this.action = playerAction.play;
+    this.nZone.run( () => {
+      this.action = playerAction.play;
+    });
   }
 
   onPause() {
-    this.action = playerAction.pause;
+    this.nZone.run( () => {
+      this.action = playerAction.pause;
+    });
   }
 }

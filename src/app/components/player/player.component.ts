@@ -106,6 +106,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     self.YTservice.onStateChange
     .pipe(takeUntil(this.unSubscribed))
     .subscribe( (ev) => {
+      self.ngZone.run(() => {
         switch (ev.data) {
           case YT.PlayerState.PLAYING:
             self.dataService.state = MEState.playing;
@@ -119,6 +120,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           default:
             break;
         }
+      });
     });
     // * [2018-06-26 16:50] For Youtube Ready
     self.YTservice.onReady

@@ -4,6 +4,10 @@ import { CordovaService } from './cordova.service';
 import { GvService } from './gv.service';
 import { MessageService, MessageTypes } from './message.service';
 import { playerType } from './media-edit.service';
+import { StickyObservable } from '../extends/sticky-observable';
+import { Subscriber } from 'rxjs';
+import { first } from '../../../node_modules/rxjs/operators';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +21,23 @@ export class DbService {
     return this._isInitialized;
   }
 
+  onDBReady: StickyObservable<boolean>;
+
   nStories = 0;
 
   constructor(private cService: CordovaService, private msgService: MessageService) {
     const self = this;
-    if (cService.isCordova) {
-      cService.onDeviceReady.subscribe(this.iniNanoSQL.bind(self));
-    } else {
-      this.iniNanoSQL();
-    }
+    this.onDBReady = StickyObservable.createWithInit<boolean>(observer => {
+      const action = async () => {
+        if (cService.isCordova) {await cService.onDeviceReady.toPromise(); }
+        await self.iniNanoSQL.bind(self)(observer);
+      };
+      action();
+    return () => {};
+    });
   }
 
-  async iniNanoSQL() {
+  async iniNanoSQL(ob: Subscriber<boolean>) {
     const buf = await nSQL(DbService.storyTableName)
     .model([
       {key: 'id', type: 'int', props: ['ai', 'pk']},
@@ -45,6 +54,8 @@ export class DbService {
     })
     .connect();
     this._isInitialized = true;
+    ob.next(true);
+
     this.msgService.pushMessage({type: MessageTypes.Info, message: buf.toString() });
 
     let rows = await nSQL(DbService.storyTableName).query('select', ['COUNT(*) AS count']).exec();

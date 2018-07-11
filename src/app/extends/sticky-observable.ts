@@ -39,6 +39,13 @@ export class StickyObservable<T> extends Observable<T> {
         });
     }
 
+    static createWithInit<T>(fn: (subscriber: Subscriber<T>) => TeardownLogic) {
+        const result = new StickyObservable(fn);
+
+        result.subscribe();
+        return result;
+    }
+
     static dressObservable<T>(ob: Observable<T>): StickyObservable<T> {
         const me = new StickyObservable<T>((observer) => {
             const sub = ob.subscribe(observer);

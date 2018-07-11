@@ -63,6 +63,7 @@
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.spec.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\extends\sticky-observable.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />

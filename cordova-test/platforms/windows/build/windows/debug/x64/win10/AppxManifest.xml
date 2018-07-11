@@ -17,7 +17,7 @@
   </Properties>
   <Dependencies>
     <TargetDeviceFamily MaxVersionTested="10.0.17134.0" MinVersion="10.0.10240.0" Name="Windows.Universal" />
-    <PackageDependency Name="Microsoft.VCLibs.140.00.Debug" MinVersion="14.0.26608.1" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00.Debug" MinVersion="14.0.26629.1" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
   <Resources>
     <Resource Language="EN-US" />
@@ -59,7 +59,7 @@
     <build:Item Name="VisualStudio" Version="15.0" />
     <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2017" />
     <build:Item Name="OperatingSystem" Version="10.0.17134.1 (WinBuild.160101.0800)" />
-    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.27703.2018" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.27906.1" />
     <build:Item Name="ProjectGUID" Value="f9b0ae20-c91c-42b9-9c6e-d3bc28b4509e" />
     <build:Item Name="OptimizingToolset" Value="None" />
     <build:Item Name="TargetRuntime" Value="AppHost" />

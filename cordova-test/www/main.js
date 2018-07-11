@@ -256,8 +256,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var MeMainDashboardComponent = /** @class */ (function () {
-    function MeMainDashboardComponent(dataService) {
+    function MeMainDashboardComponent(dataService, nZone) {
         this.dataService = dataService;
+        this.nZone = nZone;
         this.mEState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"];
         this.pAction = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"];
         this._action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].none;
@@ -276,10 +277,16 @@ var MeMainDashboardComponent = /** @class */ (function () {
     MeMainDashboardComponent.prototype.ngOnInit = function () {
     };
     MeMainDashboardComponent.prototype.onPlay = function () {
-        this.action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play;
+        var _this = this;
+        this.nZone.run(function () {
+            _this.action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play;
+        });
     };
     MeMainDashboardComponent.prototype.onPause = function () {
-        this.action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause;
+        var _this = this;
+        this.nZone.run(function () {
+            _this.action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause;
+        });
     };
     MeMainDashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -287,7 +294,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./me-main-dashboard.component.html */ "./src/app/components/me-main-dashboard/me-main-dashboard.component.html"),
             styles: [__webpack_require__(/*! ./me-main-dashboard.component.css */ "./src/app/components/me-main-dashboard/me-main-dashboard.component.css")]
         }),
-        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
+        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]])
     ], MeMainDashboardComponent);
     return MeMainDashboardComponent;
 }());
@@ -566,19 +573,21 @@ var PlayerComponent = /** @class */ (function () {
         self.YTservice.onStateChange
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(this.unSubscribed))
             .subscribe(function (ev) {
-            switch (ev.data) {
-                case YT.PlayerState.PLAYING:
-                    self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
-                    break;
-                case YT.PlayerState.PAUSED:
-                    self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused;
-                    break;
-                case YT.PlayerState.ENDED:
-                    self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].stopped;
-                    break;
-                default:
-                    break;
-            }
+            self.ngZone.run(function () {
+                switch (ev.data) {
+                    case YT.PlayerState.PLAYING:
+                        self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
+                        break;
+                    case YT.PlayerState.PAUSED:
+                        self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused;
+                        break;
+                    case YT.PlayerState.ENDED:
+                        self.dataService.state = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].stopped;
+                        break;
+                    default:
+                        break;
+                }
+            });
         });
         // * [2018-06-26 16:50] For Youtube Ready
         self.YTservice.onReady
@@ -741,6 +750,100 @@ var DialogType;
 (function (DialogType) {
     DialogType[DialogType["inputUrl"] = 0] = "inputUrl";
 })(DialogType || (DialogType = {}));
+
+
+/***/ }),
+
+/***/ "./src/app/extends/sticky-observable.ts":
+/*!**********************************************!*\
+  !*** ./src/app/extends/sticky-observable.ts ***!
+  \**********************************************/
+/*! exports provided: StickyObservable, stickyObservableState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StickyObservable", function() { return StickyObservable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stickyObservableState", function() { return stickyObservableState; });
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+var StickyObservable = /** @class */ (function (_super) {
+    __extends(StickyObservable, _super);
+    function StickyObservable(fn) {
+        var _this = _super.call(this, function (observer) {
+            var self = _this;
+            var sub;
+            if (_this.state === stickyObservableState.fired) {
+                observer.next(null);
+                sub = _this._subject.subscribe(observer);
+            }
+            else if (_this.state === stickyObservableState.noneFired) {
+                sub = _this._subject.subscribe(observer);
+            }
+            else if (_this.state === stickyObservableState.none) {
+                if (!!self._1stOb === false) {
+                    self._1stOb = observer;
+                    sub = self.subscribe(self._subject);
+                    _this._state = stickyObservableState.noneFired;
+                }
+                else {
+                    sub = self._subject.subscribe(self._1stOb);
+                    var buf_1 = self._subject.subscribe(function () {
+                        self._state = stickyObservableState.fired;
+                        buf_1.unsubscribe();
+                    });
+                    return fn(observer); // well, once you unsubscribe the 1st one, it will execute the original TeardownLogic.
+                    // therefore, if you create this observable from ~dressObservable~, it will unsubscribe it from original observable.
+                }
+            }
+            return function () {
+                sub.unsubscribe();
+            };
+        }) || this;
+        _this._state = stickyObservableState.none;
+        _this._subject = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
+        return _this;
+    }
+    Object.defineProperty(StickyObservable.prototype, "state", {
+        get: function () {
+            return this._state;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    StickyObservable.createWithInit = function (fn) {
+        var result = new StickyObservable(fn);
+        result.subscribe();
+        return result;
+    };
+    StickyObservable.dressObservable = function (ob) {
+        var me = new StickyObservable(function (observer) {
+            var sub = ob.subscribe(observer);
+            return function () {
+                sub.unsubscribe();
+            };
+        });
+        return me;
+    };
+    return StickyObservable;
+}(rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"]));
+
+var stickyObservableState;
+(function (stickyObservableState) {
+    stickyObservableState[stickyObservableState["none"] = 0] = "none";
+    stickyObservableState[stickyObservableState["noneFired"] = 1] = "noneFired";
+    stickyObservableState[stickyObservableState["fired"] = 2] = "fired";
+})(stickyObservableState || (stickyObservableState = {}));
 
 
 /***/ }),
@@ -1322,6 +1425,7 @@ var SafePipe = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CordovaService", function() { return CordovaService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1332,12 +1436,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var CordovaService = /** @class */ (function () {
     function CordovaService() {
+        var _this = this;
         this.isCordova = !!window.cordova;
+        var self = this;
         if (this.isCordova) {
             this.channel = cordova.require('cordova/channel');
-            this.onDeviceReady = this.channel.onDeviceReady;
+            this.onDeviceReady = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (ob) {
+                _this.channel.onDeviceReady.subscribe(function () {
+                    ob.next(); // For subscribe
+                    ob.complete(); // For toPromise and auto-unsubscribe
+                });
+            });
         }
     }
     CordovaService = __decorate([
@@ -1368,6 +1480,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var nano_sql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nano_sql__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _cordova_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cordova.service */ "./src/app/services/cordova.service.ts");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _media_edit_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _extends_sticky_observable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../extends/sticky-observable */ "./src/app/extends/sticky-observable.ts");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/add/operator/toPromise */ "./node_modules/rxjs-compat/_esm5/add/operator/toPromise.js");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1416,18 +1532,37 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
+
 var DbService = /** @class */ (function () {
     function DbService(cService, msgService) {
+        var _this = this;
         this.cService = cService;
         this.msgService = msgService;
         this._isInitialized = false;
+        this.nStories = 0;
         var self = this;
-        if (cService.isCordova) {
-            cService.onDeviceReady.subscribe(this.iniNanoSQL.bind(self));
-        }
-        else {
-            this.iniNanoSQL();
-        }
+        this.onDBReady = _extends_sticky_observable__WEBPACK_IMPORTED_MODULE_5__["StickyObservable"].createWithInit(function (observer) {
+            var action = function () { return __awaiter(_this, void 0, void 0, function () {
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            if (!cService.isCordova) return [3 /*break*/, 2];
+                            return [4 /*yield*/, cService.onDeviceReady.toPromise()];
+                        case 1:
+                            _a.sent();
+                            _a.label = 2;
+                        case 2: return [4 /*yield*/, self.iniNanoSQL.bind(self)(observer)];
+                        case 3:
+                            _a.sent();
+                            return [2 /*return*/];
+                    }
+                });
+            }); };
+            action();
+            return function () { };
+        });
     }
     DbService_1 = DbService;
     Object.defineProperty(DbService.prototype, "isInitialized", {
@@ -1437,12 +1572,12 @@ var DbService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    DbService.prototype.iniNanoSQL = function () {
+    DbService.prototype.iniNanoSQL = function (ob) {
         return __awaiter(this, void 0, void 0, function () {
-            var buf;
+            var buf, rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1._storyTableName)
+                    case 0: return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
                             .model([
                             { key: 'id', type: 'int', props: ['ai', 'pk'] },
                             { key: 'name', type: 'string' },
@@ -1460,13 +1595,29 @@ var DbService = /** @class */ (function () {
                     case 1:
                         buf = _a.sent();
                         this._isInitialized = true;
+                        ob.next(true);
                         this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: buf.toString() });
+                        return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName).query('select', ['COUNT(*) AS count']).exec()];
+                    case 2:
+                        rows = _a.sent();
+                        if (!(!!rows[0].count && rows[0].count > 0)) return [3 /*break*/, 3];
+                        return [3 /*break*/, 5];
+                    case 3: return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName).query('upsert', { name: 'test',
+                            makeTime: Date.now(),
+                            modifyTime: Date.now(),
+                            urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
+                            meType: _media_edit_service__WEBPACK_IMPORTED_MODULE_4__["playerType"].url }).exec()];
+                    case 4:
+                        rows = _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: JSON.stringify(rows) });
                         return [2 /*return*/];
                 }
             });
         });
     };
-    DbService._storyTableName = 'stories';
+    DbService.storyTableName = 'stories';
     DbService = DbService_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'

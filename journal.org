@@ -1,3 +1,10 @@
+* [2018-7-11 Wed] Try to use the sticky-observable to dealing with the initialzing of nanoSQL and try to correct the bug about the state of Youtube.
+1. The original ~cordova.require('cordova/channel').onDeviceReady~ does not have some methods such as ~pipe~ so I use a new observable to subscribe it and send ~observer.complete()~ when the deviceReady event is triggered. 
+Then, I can use ~await ....toPromise();~ to await it and don't need to unsubscribe it.
+
+2. Well, I enclosed the subscription of Youtube's ~onStateChanged~ observable and it seems works fine.
+Originally, I might need to click twice to make the action of ~play~ and ~pause~ work.
+
 * [2018-7-9 Mon] Dealing with ~sticky-observable~
 Well, I tried to handle its ~TeardownLogic~ so that the subscribers can be unsubscribed from its ~_subject~.
 Besides, I also try to let all observers subscribe ~self._subject~ instead of ~sticky-observable~ itself,
