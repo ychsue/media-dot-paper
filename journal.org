@@ -1,3 +1,8 @@
+* [2018-7-13 Fri] Select, Upsert and Delete are embedded in DbService.
+However, once I modify the model, it will create a new database.
+Therefore, oneday if I want to update the ~model~, I need to delcare both the old one and new one to switch them.
+I still don't wanna coding this part.
+
 * [2018-7-11 Wed] Try to use the sticky-observable to dealing with the initialzing of nanoSQL and try to correct the bug about the state of Youtube.
 1. The original ~cordova.require('cordova/channel').onDeviceReady~ does not have some methods such as ~pipe~ so I use a new observable to subscribe it and send ~observer.complete()~ when the deviceReady event is triggered. 
 Then, I can use ~await ....toPromise();~ to await it and don't need to unsubscribe it.

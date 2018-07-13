@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, MessageTypes, OneMessage } from '../../services/message.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DbService } from '../../services/db.service';
 
 @Component({
   selector: 'app-test',
@@ -16,7 +17,9 @@ export class TestComponent implements OnInit {
   isFilePluginSupport: boolean;
   newFolderName: string;
 
-  constructor(private msgService: MessageService, private sanitizer: DomSanitizer) { }
+  constructor(private msgService: MessageService, private sanitizer: DomSanitizer,
+    private DBService: DbService
+  ) { }
 
   ngOnInit() {
     this.isCordovaSupport = !!window.cordova;
@@ -60,5 +63,18 @@ export class TestComponent implements OnInit {
         this.newFolderName = newFolder.path;
       }
     }
+  }
+
+  async onSelectFromNSQL() {
+    const result = await this.DBService.searchAsync();
+    this.msgService.pushMessage({type: 0, message: JSON.stringify(result)});
+  }
+
+  async ondeleteFromNSQL() {
+    await this.DBService.deleteAsync();
+  }
+
+  async onUpsertFromNSQL() {
+    await this.DBService.upsertAsync();
   }
 }

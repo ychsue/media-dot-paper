@@ -19,7 +19,10 @@ export class MessageService {
   readMessages() {
     this._nRead = this._messages.length;
     this.remindMsgIn.next(0);
-    return this._messages.reverse();
+    const origin = this._messages.slice(0);
+    const result = this._messages.reverse();
+    this._messages = origin;
+    return result;
   }
 
   getNUnRead() {
