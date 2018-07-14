@@ -16,6 +16,17 @@ import { _NanoSQLQuery } from '../../../node_modules/nano-sql/lib/query/std-quer
 export class DbService {
 
   static storyTableName = 'stories';
+  static storyModel = [
+    {key: 'id', type: 'uuid', props: [ 'pk']},
+    {key: 'name', type: 'string'},
+    {key: 'title', type: 'string', props: ['trie']},
+    {key: 'makeTime', type: 'int'},
+    {key: 'modifyTime', type: 'int'},
+    {key: 'viewTime', type: 'int'},
+    {key: 'urlOrID', type: 'string', default: ''},
+    {key: 'meType', type: 'int', default: 0},
+    {key: 'frames', type: 'map', default: {}}
+  ];
 
   private _isInitialized = false;
   public get isInitialized(): boolean {
@@ -54,20 +65,11 @@ export class DbService {
   }
 
   async iniNanoSQL(ob: Subscriber<boolean>) {
+    const mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
     const buf = await nSQL(DbService.storyTableName)
-    .model([
-      {key: 'id', type: 'int', props: ['ai', 'pk']},
-      {key: 'name', type: 'string'},
-      {key: 'title', type: 'string', props: ['trie']},
-      {key: 'makeTime', type: 'int'},
-      {key: 'modifyTime', type: 'int'},
-      {key: 'viewTime', type: 'int'},
-      {key: 'urlOrID', type: 'string'},
-      {key: 'meType', type: 'int'},
-      {key: 'frames', type: 'map'}
-    ])
+    .model(DbService.storyModel)
     .config({
-      mode: (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM'
+      mode: mode
     })
     .connect();
     this._isInitialized = true;
@@ -78,8 +80,7 @@ export class DbService {
     let rows = await nSQL(DbService.storyTableName).query('select', ['COUNT(*) AS count']).exec();
     if (!!rows[0].count && rows[0].count > 0) {
     } else {
-      const item = this.getSampleItem();
-      rows = await nSQL(DbService.storyTableName).query('upsert', item).exec();
+      rows = await this.upsertAsync();
     }
     this.msgService.pushMessage({type: MessageTypes.Info, message: JSON.stringify(rows) });
 
@@ -102,12 +103,19 @@ export class DbService {
     return select.exec();
   }
 
-  async deleteAsync(tName: string = DbService.storyTableName, where?: any) {
+  async deleteAsync(tName: string = DbService.storyTableName, where: any = ['viewTime', '>', 0]) {
     await this.onDBReady.toPromise();
-    let result = nSQL(tName).query('delete');
-    if (!!where) {result = result.where(where); }
+    let q = nSQL(tName).query('delete');
+    if (!!where) {q = q.where(where); }
 
-    return result.exec();
+    let result: any;
+    try {
+      result = await q.exec();
+    } catch (error) {
+      result = {};
+      this.msgService.pushMessage({type: MessageTypes.Error, message: error});
+    }
+    return result;
   }
 
   async upsertAsync(tName: string = DbService.storyTableName, item?: any, where?: any) {
@@ -115,7 +123,14 @@ export class DbService {
     if (!!item === false) {item = this.getSampleItem(); }
     let q = nSQL(tName).query('upsert', item);
     if (!!where) { q = q.where(where); }
-
-    return q.exec();
+    let result: any;
+    try {
+      result = await q.exec();
+    } catch (error) {
+      result = {};
+      this.msgService.pushMessage({type: MessageTypes.Error, message: error});
+    }
+    this.msgService.pushMessage({type: MessageTypes.Info, message: JSON.stringify(result)});
+    return result;
   }
 }

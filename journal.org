@@ -1,3 +1,10 @@
+* [2018-7-14 Sat] Some problems about nSQL
+1. Always provide ~where~ condition for query ~delete~. 
+    It is serious for windows platform. If out of ~where~, it will clear the whole table instead of just rows and windows system will prevent your query for ~upsert~ and it demands that you need to provide a primary key even it will be automatically generated.
+2. Always just ~connect~ nSQL once, because each extra ~connect~s will create a new database and the query for ~upsert~ will apply on that new database as updating the deleted rows.
+    By the way, the action of ~disconnect()~ is useless.
+3. Anyway, now it works fine on browser, windows and android.
+
 * [2018-7-13 Fri] Select, Upsert and Delete are embedded in DbService.
 However, once I modify the model, it will create a new database.
 Therefore, oneday if I want to update the ~model~, I need to delcare both the old one and new one to switch them.

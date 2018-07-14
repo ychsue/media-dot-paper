@@ -754,100 +754,6 @@ var DialogType;
 
 /***/ }),
 
-/***/ "./src/app/extends/sticky-observable.ts":
-/*!**********************************************!*\
-  !*** ./src/app/extends/sticky-observable.ts ***!
-  \**********************************************/
-/*! exports provided: StickyObservable, stickyObservableState */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StickyObservable", function() { return StickyObservable; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stickyObservableState", function() { return stickyObservableState; });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var StickyObservable = /** @class */ (function (_super) {
-    __extends(StickyObservable, _super);
-    function StickyObservable(fn) {
-        var _this = _super.call(this, function (observer) {
-            var self = _this;
-            var sub;
-            if (_this.state === stickyObservableState.fired) {
-                observer.next(null);
-                sub = _this._subject.subscribe(observer);
-            }
-            else if (_this.state === stickyObservableState.noneFired) {
-                sub = _this._subject.subscribe(observer);
-            }
-            else if (_this.state === stickyObservableState.none) {
-                if (!!self._1stOb === false) {
-                    self._1stOb = observer;
-                    sub = self.subscribe(self._subject);
-                    _this._state = stickyObservableState.noneFired;
-                }
-                else {
-                    sub = self._subject.subscribe(self._1stOb);
-                    var buf_1 = self._subject.subscribe(function () {
-                        self._state = stickyObservableState.fired;
-                        buf_1.unsubscribe();
-                    });
-                    return fn(observer); // well, once you unsubscribe the 1st one, it will execute the original TeardownLogic.
-                    // therefore, if you create this observable from ~dressObservable~, it will unsubscribe it from original observable.
-                }
-            }
-            return function () {
-                sub.unsubscribe();
-            };
-        }) || this;
-        _this._state = stickyObservableState.none;
-        _this._subject = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
-        return _this;
-    }
-    Object.defineProperty(StickyObservable.prototype, "state", {
-        get: function () {
-            return this._state;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    StickyObservable.createWithInit = function (fn) {
-        var result = new StickyObservable(fn);
-        result.subscribe();
-        return result;
-    };
-    StickyObservable.dressObservable = function (ob) {
-        var me = new StickyObservable(function (observer) {
-            var sub = ob.subscribe(observer);
-            return function () {
-                sub.unsubscribe();
-            };
-        });
-        return me;
-    };
-    return StickyObservable;
-}(rxjs__WEBPACK_IMPORTED_MODULE_0__["Observable"]));
-
-var stickyObservableState;
-(function (stickyObservableState) {
-    stickyObservableState[stickyObservableState["none"] = 0] = "none";
-    stickyObservableState[stickyObservableState["noneFired"] = 1] = "noneFired";
-    stickyObservableState[stickyObservableState["fired"] = 2] = "fired";
-})(stickyObservableState || (stickyObservableState = {}));
-
-
-/***/ }),
-
 /***/ "./src/app/message/message.component.css":
 /*!***********************************************!*\
   !*** ./src/app/message/message.component.css ***!
@@ -1211,7 +1117,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>"
+module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onSelectFromNSQL()\">select nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"ondeleteFromNSQL()\">delete nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onUpsertFromNSQL()\">upsert nanoSQL</button>\r\n</div>"
 
 /***/ }),
 
@@ -1228,6 +1134,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/services/db.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1275,10 +1182,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var TestComponent = /** @class */ (function () {
-    function TestComponent(msgService, sanitizer) {
+    function TestComponent(msgService, sanitizer, DBService) {
         this.msgService = msgService;
         this.sanitizer = sanitizer;
+        this.DBService = DBService;
     }
     TestComponent.prototype.ngOnInit = function () {
         this.isCordovaSupport = !!window.cordova;
@@ -1355,13 +1264,52 @@ var TestComponent = /** @class */ (function () {
             });
         });
     };
+    TestComponent.prototype.onSelectFromNSQL = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.DBService.searchAsync()];
+                    case 1:
+                        result = _a.sent();
+                        this.msgService.pushMessage({ type: 0, message: JSON.stringify(result) });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TestComponent.prototype.ondeleteFromNSQL = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.DBService.deleteAsync()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TestComponent.prototype.onUpsertFromNSQL = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.DBService.upsertAsync()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-test',
             template: __webpack_require__(/*! ./test.component.html */ "./src/app/pages/test/test.component.html"),
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/pages/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"]])
+        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"],
+            _services_db_service__WEBPACK_IMPORTED_MODULE_3__["DbService"]])
     ], TestComponent);
     return TestComponent;
 }());
@@ -1481,9 +1429,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cordova_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cordova.service */ "./src/app/services/cordova.service.ts");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _media_edit_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./media-edit.service */ "./src/app/services/media-edit.service.ts");
-/* harmony import */ var _extends_sticky_observable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../extends/sticky-observable */ "./src/app/extends/sticky-observable.ts");
-/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/add/operator/toPromise */ "./node_modules/rxjs-compat/_esm5/add/operator/toPromise.js");
-/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/add/operator/toPromise */ "./node_modules/rxjs-compat/_esm5/add/operator/toPromise.js");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1535,6 +1484,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var DbService = /** @class */ (function () {
     function DbService(cService, msgService) {
         var _this = this;
@@ -1543,7 +1493,7 @@ var DbService = /** @class */ (function () {
         this._isInitialized = false;
         this.nStories = 0;
         var self = this;
-        this.onDBReady = _extends_sticky_observable__WEBPACK_IMPORTED_MODULE_5__["StickyObservable"].createWithInit(function (observer) {
+        var subscriber = function (observer) {
             var action = function () { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -1562,7 +1512,10 @@ var DbService = /** @class */ (function () {
             }); };
             action();
             return function () { };
-        });
+        };
+        // this.onDBReady = StickyObservable.createWithInit<boolean>(subscriber); //original one
+        this.onDBReady = (new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](subscriber)).pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["shareReplay"])(1), Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])());
+        this.onDBReady.subscribe(); // initialize it!!!
     }
     DbService_1 = DbService;
     Object.defineProperty(DbService.prototype, "isInitialized", {
@@ -1572,26 +1525,29 @@ var DbService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    DbService.prototype.getSampleItem = function () {
+        var now = Date.now();
+        var result = { name: 'test',
+            makeTime: now,
+            modifyTime: now,
+            viewTime: now,
+            urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
+            meType: _media_edit_service__WEBPACK_IMPORTED_MODULE_4__["playerType"].url };
+        return result;
+    };
     DbService.prototype.iniNanoSQL = function (ob) {
         return __awaiter(this, void 0, void 0, function () {
-            var buf, rows;
+            var mode, buf, rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
-                            .model([
-                            { key: 'id', type: 'int', props: ['ai', 'pk'] },
-                            { key: 'name', type: 'string' },
-                            { key: 'title', type: 'string' },
-                            { key: 'makeTime', type: 'int' },
-                            { key: 'modifyTime', type: 'int' },
-                            { key: 'urlOrID', type: 'string' },
-                            { key: 'meType', type: 'int' },
-                            { key: 'frames', type: 'map' }
-                        ])
-                            .config({
-                            mode: (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM'
-                        })
-                            .connect()];
+                    case 0:
+                        mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
+                        return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
+                                .model(DbService_1.storyModel)
+                                .config({
+                                mode: mode
+                            })
+                                .connect()];
                     case 1:
                         buf = _a.sent();
                         this._isInitialized = true;
@@ -1602,11 +1558,7 @@ var DbService = /** @class */ (function () {
                         rows = _a.sent();
                         if (!(!!rows[0].count && rows[0].count > 0)) return [3 /*break*/, 3];
                         return [3 /*break*/, 5];
-                    case 3: return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName).query('upsert', { name: 'test',
-                            makeTime: Date.now(),
-                            modifyTime: Date.now(),
-                            urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
-                            meType: _media_edit_service__WEBPACK_IMPORTED_MODULE_4__["playerType"].url }).exec()];
+                    case 3: return [4 /*yield*/, this.upsertAsync()];
                     case 4:
                         rows = _a.sent();
                         _a.label = 5;
@@ -1617,7 +1569,116 @@ var DbService = /** @class */ (function () {
             });
         });
     };
+    DbService.prototype.searchAsync = function (tName, selOptions, where, orderBy, offset, limit) {
+        if (tName === void 0) { tName = DbService_1.storyTableName; }
+        return __awaiter(this, void 0, void 0, function () {
+            var select;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
+                    case 1:
+                        _a.sent(); // make sure it is finished
+                        if (!!selOptions) {
+                            select = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(tName).query('select', selOptions);
+                        }
+                        else {
+                            select = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(tName).query('select');
+                        }
+                        if (!!where) {
+                            select = select.where(where);
+                        }
+                        if (!!orderBy) {
+                            select = select.orderBy(orderBy);
+                        }
+                        if (!!offset) {
+                            select = select.offset(offset);
+                        }
+                        if (!!limit) {
+                            select = select.limit(limit);
+                        }
+                        return [2 /*return*/, select.exec()];
+                }
+            });
+        });
+    };
+    DbService.prototype.deleteAsync = function (tName, where) {
+        if (tName === void 0) { tName = DbService_1.storyTableName; }
+        if (where === void 0) { where = ['viewTime', '>', 0]; }
+        return __awaiter(this, void 0, void 0, function () {
+            var q, result, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
+                    case 1:
+                        _a.sent();
+                        q = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(tName).query('delete');
+                        if (!!where) {
+                            q = q.where(where);
+                        }
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, q.exec()];
+                    case 3:
+                        result = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _a.sent();
+                        result = {};
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_1 });
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/, result];
+                }
+            });
+        });
+    };
+    DbService.prototype.upsertAsync = function (tName, item, where) {
+        if (tName === void 0) { tName = DbService_1.storyTableName; }
+        return __awaiter(this, void 0, void 0, function () {
+            var q, result, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
+                    case 1:
+                        _a.sent();
+                        if (!!item === false) {
+                            item = this.getSampleItem();
+                        }
+                        q = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(tName).query('upsert', item);
+                        if (!!where) {
+                            q = q.where(where);
+                        }
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, q.exec()];
+                    case 3:
+                        result = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_2 = _a.sent();
+                        result = {};
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_2 });
+                        return [3 /*break*/, 5];
+                    case 5:
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: JSON.stringify(result) });
+                        return [2 /*return*/, result];
+                }
+            });
+        });
+    };
     DbService.storyTableName = 'stories';
+    DbService.storyModel = [
+        { key: 'id', type: 'uuid', props: ['pk'] },
+        { key: 'name', type: 'string' },
+        { key: 'title', type: 'string', props: ['trie'] },
+        { key: 'makeTime', type: 'int' },
+        { key: 'modifyTime', type: 'int' },
+        { key: 'viewTime', type: 'int' },
+        { key: 'urlOrID', type: 'string', default: '' },
+        { key: 'meType', type: 'int', default: 0 },
+        { key: 'frames', type: 'map', default: {} }
+    ];
     DbService = DbService_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -1844,7 +1905,10 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.readMessages = function () {
         this._nRead = this._messages.length;
         this.remindMsgIn.next(0);
-        return this._messages.reverse();
+        var origin = this._messages.slice(0);
+        var result = this._messages.reverse();
+        this._messages = origin;
+        return result;
     };
     MessageService.prototype.getNUnRead = function () {
         return this._messages.length - this._nRead;
