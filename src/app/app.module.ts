@@ -6,7 +6,7 @@ import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule} from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule, MatSidenavModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -49,6 +49,7 @@ import { CordovaService } from './services/cordova.service';
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,
+    MatSidenavModule,
     MatInputModule,
     MatFormFieldModule,
     MatBottomSheetModule,

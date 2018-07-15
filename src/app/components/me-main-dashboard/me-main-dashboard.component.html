@@ -1,8 +1,10 @@
 <div class='container'>
-  <button mat-icon-button (click)="onPlay()" *ngIf="dataService.state !== mEState.playing">
+  <!-- <button mat-icon-button (click)="onPlay()" *ngIf="dataService.state !== mEState.playing"> -->
+  <button mat-icon-button (click)="onPlay()">
       <mat-icon class="mat-18">play_arrow</mat-icon>
   </button>
-  <button mat-icon-button (click)="onPause()" *ngIf="dataService.state===mEState.playing">
-    <mat-icon class="mat-18">pause</mat-icon>
+  <!-- <button mat-icon-button (click)="onPause()" *ngIf="dataService.state===mEState.playing"> -->
+  <button mat-icon-button (click)="onPause()">
+      <mat-icon class="mat-18">pause</mat-icon>
   </button>
 </div>

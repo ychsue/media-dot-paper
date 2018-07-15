@@ -1,9 +1,14 @@
 <div class="container">
-  <app-navbar class="mat-elevation-z6"></app-navbar>
-  <div class="content">
-    <!-- <router-outlet></router-outlet> -->
-    <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home>
-    <app-media-edit class="page" [style.display]="(gv.shownPage===pageType.MediaEdit)?'block':'none'"></app-media-edit>
-    <app-test class="page" [style.display]="(gv.shownPage===pageType.Test)?'block':'none'"></app-test>
-  </div>
+  <app-navbar #navbar class="mat-elevation-z6"></app-navbar>
+  <mat-sidenav-container  class="content">
+      <mat-sidenav mode="side" align="start" [opened]="navbar.sideType===navbar._sideNavType.home" >
+        <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
+        <app-home class="page"></app-home>
+      </mat-sidenav>
+      <div class="page">
+        <!-- <router-outlet></router-outlet> -->
+        <app-media-edit class="page" [style.display]="(gv.shownPage===pageType.MediaEdit)?'block':'none'"></app-media-edit>
+        <app-test class="page" [style.display]="(gv.shownPage===pageType.Test)?'block':'none'"></app-test>
+      </div>
+      </mat-sidenav-container>
 </div>

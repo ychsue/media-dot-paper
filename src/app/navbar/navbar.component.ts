@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Output } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MatBottomSheet } from '@angular/material';
 import { MessageComponent } from '../message/message.component';
@@ -9,6 +9,9 @@ import { MessageComponent } from '../message/message.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  @Output() sideType: sideNavType = sideNavType.home;
+  @Output() _sideNavType = sideNavType;
 
   nUnReadMsg = 0;
   constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone, public msgService: MessageService) {
@@ -31,4 +34,9 @@ export class NavbarComponent implements OnInit {
     const ref = this.bottomSheet.open(MessageComponent);
     ref.instance.showMsgs();
   }
+}
+
+export enum sideNavType {
+  none,
+  home
 }

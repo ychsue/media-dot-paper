@@ -1,3 +1,8 @@
+* [2018-7-15 Sun] Using mat-side-nave and find a problem about Youtube API
+Hm... the ~onStateChange~ event of Youtube Player will not work after you run ~loadVideoById(...)~, a completed observable problem?
+Well, someone suggests that it can be solved by ~setTimeInterval~ just like "123, wooden men" did.
+However, I don't like this way. I do not solve this problem at this moment.
+
 * [2018-7-14 Sat] Some problems about nSQL
 1. Always provide ~where~ condition for query ~delete~. 
     It is serious for windows platform. If out of ~where~, it will clear the whole table instead of just rows and windows system will prevent your query for ~upsert~ and it demands that you need to provide a primary key even it will be automatically generated.
