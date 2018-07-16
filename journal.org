@@ -1,3 +1,7 @@
+* [2018-7-16 Mon] Angular 6 cannot build in inline source map.
+Hm... Setting in ~tsconfig.json~ cannot make it work.
+Well, I try to install augury and see what I can do for the debugging of Angular 6 as described in [[https://coryrylan.com/blog/angular-debugging-tips-and-tricks][by this site]].
+
 * [2018-7-15 Sun] Using mat-side-nave and find a problem about Youtube API
 Hm... the ~onStateChange~ event of Youtube Player will not work after you run ~loadVideoById(...)~, a completed observable problem?
 Well, someone suggests that it can be solved by ~setTimeInterval~ just like "123, wooden men" did.
@@ -219,7 +223,7 @@ Note that, the ~"~ after ~sed~ cannot be ~'~; otherwise, it'll not work.
 
 3. Use
 #+begin_src 
-    mklink /j cordova-test[2018-6-1 Fri]\platforms\windows\src src
+    mklink /j cordova-test\platforms\windows\src src
 #+end_src
 to make a junction (just as soft link) to src so that it can be debugged in VS2017.
 

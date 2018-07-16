@@ -1,5 +1,7 @@
 <nav class="docs-navbar-header">
-  <span>abc</span>
+  <button mat-icon-button (click)="sideType=(sideType===_sideNavType.none)?_sideNavType.home:_sideNavType.none">
+      <mat-icon class="mat-18">menu</mat-icon>
+  </button>
   <div class="flex-spacer"></div>
   <button mat-icon-button [matBadge]="nUnReadMsg" (click)="showMsgsAtBottom()" *ngIf="nUnReadMsg!=0">
     <mat-icon class="mat-18">event_note</mat-icon>

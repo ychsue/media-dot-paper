@@ -41,7 +41,7 @@ module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <app-navbar class=\"mat-elevation-z6\"></app-navbar>\n  <div class=\"content\">\n    <!-- <router-outlet></router-outlet> -->\n    <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home>\n    <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n    <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <app-navbar #navbar class=\"mat-elevation-z6\"></app-navbar>\n  <mat-sidenav-container  class=\"content\">\n      <mat-sidenav mode=\"side\" align=\"start\" [opened]=\"navbar.sideType===navbar._sideNavType.home\" >\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\n        <app-home class=\"page\"></app-home>\n      </mat-sidenav>\n      <div class=\"page\">\n        <!-- <router-outlet></router-outlet> -->\n        <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n        <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n      </div>\n      </mat-sidenav-container>\n</div>\n"
 
 /***/ }),
 
@@ -193,6 +193,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBadgeModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatSidenavModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBottomSheetModule"],
@@ -228,7 +229,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container'>\n  <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"dataService.state !== mEState.playing\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onPause()\" *ngIf=\"dataService.state===mEState.playing\">\n    <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button>\n</div>"
+module.exports = "<div class='container'>\n  <!-- <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"dataService.state !== mEState.playing\"> -->\n  <button mat-icon-button (click)=\"onPlay()\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button>\n  <!-- <button mat-icon-button (click)=\"onPause()\" *ngIf=\"dataService.state===mEState.playing\"> -->\n  <button mat-icon-button (click)=\"onPause()\">\n      <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button>\n</div>"
 
 /***/ }),
 
@@ -847,7 +848,7 @@ module.exports = "nav{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    alig
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"docs-navbar-header\">\n  <span>abc</span>\n  <div class=\"flex-spacer\"></div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n</nav>"
+module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button (click)=\"sideType=(sideType===_sideNavType.none)?_sideNavType.home:_sideNavType.none\">\n      <mat-icon class=\"mat-18\">menu</mat-icon>\n  </button>\n  <div class=\"flex-spacer\"></div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n</nav>"
 
 /***/ }),
 
@@ -855,12 +856,13 @@ module.exports = "<nav class=\"docs-navbar-header\">\n  <span>abc</span>\n  <div
 /*!********************************************!*\
   !*** ./src/app/navbar/navbar.component.ts ***!
   \********************************************/
-/*! exports provided: NavbarComponent */
+/*! exports provided: NavbarComponent, sideNavType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sideNavType", function() { return sideNavType; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
@@ -883,6 +885,8 @@ var NavbarComponent = /** @class */ (function () {
         this.bottomSheet = bottomSheet;
         this.ngZone = ngZone;
         this.msgService = msgService;
+        this.sideType = sideNavType.home;
+        this._sideNavType = sideNavType;
         this.nUnReadMsg = 0;
         var self = this;
         this.nUnReadMsg = msgService.getNUnRead();
@@ -903,6 +907,14 @@ var NavbarComponent = /** @class */ (function () {
         var ref = this.bottomSheet.open(_message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"]);
         ref.instance.showMsgs();
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Number)
+    ], NavbarComponent.prototype, "sideType", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], NavbarComponent.prototype, "_sideNavType", void 0);
     NavbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-navbar',
@@ -914,6 +926,11 @@ var NavbarComponent = /** @class */ (function () {
     return NavbarComponent;
 }());
 
+var sideNavType;
+(function (sideNavType) {
+    sideNavType[sideNavType["none"] = 0] = "none";
+    sideNavType[sideNavType["home"] = 1] = "home";
+})(sideNavType || (sideNavType = {}));
 
 
 /***/ }),
