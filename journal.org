@@ -1,3 +1,13 @@
+* [2018-7-18 Wed] About flex
+As described in [[https://stackoverflow.com/questions/36182635/making-a-flex-item-float-right/36182782][the answeer of this StackOverflow]], setting ~margin-left: auto;~ will push the HtmlElement to the right if its parent's display is ~flex~.
+By the way, changing its ~order~ can make it as a floating element, i.e. does not affect others' order.
+
+* [2018-7-18 Wed] Handling Pointer events
+1. Although ~pointer events~ are not supported by ~safari~, it might be solved by [[https://github.com/jquery/PEP][jQuery PEP]] or follow the solution shown in [[https://www.sitepoint.com/unifying-touch-and-mouse-with-pointer-events/][this page]]. Not yet test it.
+2. Maybe ~hammer.js~ is another solution, it provides a lot of gesture events. Not yet read [[https://blog.angularindepth.com/gestures-in-an-angular-application-dde71804c0d0][this blog]].
+3. IMPORTANT. As described in [[https://stackoverflow.com/questions/48124372/pointermove-event-not-working-with-touch-why-not][the Answer of this StackOverflow]], some of the ~pointer~'s actions might be canceled by ~browser~'s ~touch-action~ such as ~pointerup~ and ~pointermove~.
+The solution is to set ~touch-action: none;~ to the style of the manipulated HtmlElement.
+
 * [2018-7-16 Mon] Angular 6 cannot build in inline source map.
 Hm... Setting in ~tsconfig.json~ cannot make it work.
 Well, I try to install augury and see what I can do for the debugging of Angular 6 as described in [[https://coryrylan.com/blog/angular-debugging-tips-and-tricks][by this site]].

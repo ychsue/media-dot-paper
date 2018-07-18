@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 // import 'rxjs/add/operator/first';
-import { MessageService, MessageTypes } from 'src/app/services/message.service';
+import { MessageService, MessageTypes } from './message.service';
 
 @Injectable({
   providedIn: 'root'

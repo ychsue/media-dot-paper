@@ -19,12 +19,13 @@ import { MeManiPlateComponent } from './components/me-mani-plate/me-mani-plate.c
 import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
 import { YoutubeService } from './services/youtube.service';
-import { GvService } from 'src/app/services/gv.service';
-import { StoryService } from 'src/app/services/story.service';
+import { GvService } from './services/gv.service';
+import { StoryService } from './services/story.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
-import { DbService } from 'src/app/services/db.service';
-import { CordovaService } from './services/cordova.service';
+import { DbService } from './services/db.service';
+import { DeviceService } from './services/device.service';
+import { DraglistComponent } from './components/draglist/draglist.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CordovaService } from './services/cordova.service';
     MeSectionDashboardComponent,
     MeManiPlateComponent,
     PlayerComponent,
-    DialogComponent
+    DialogComponent,
+    DraglistComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
@@ -56,7 +58,7 @@ import { CordovaService } from './services/cordova.service';
     MatListModule,
     MatDialogModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService, GvService, StoryService, DbService, CordovaService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService, StoryService, DbService, DeviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

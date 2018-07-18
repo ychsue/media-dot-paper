@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MediaEditService } from 'src/app/services/media-edit.service';
+import { MediaEditService } from '../../services/media-edit.service';
 
 @Component({
   selector: 'app-media-edit',

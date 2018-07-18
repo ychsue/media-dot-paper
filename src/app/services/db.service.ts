@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { nSQL, NanoSQLInstance } from 'nano-sql';
-import { CordovaService } from './cordova.service';
+import { DeviceService } from './device.service';
 import { GvService } from './gv.service';
 import { MessageService, MessageTypes } from './message.service';
 import { playerType } from './media-edit.service';
 import { StickyObservable } from '../extends/sticky-observable';
-import { Subscriber, Observable } from 'rxjs';
-import { first, shareReplay } from '../../../node_modules/rxjs/operators';
+import { Subscriber, Observable, Subject } from 'rxjs';
+import { first, shareReplay } from 'rxjs/operators';
 import 'rxjs/add/operator/toPromise';
-import { _NanoSQLQuery } from '../../../node_modules/nano-sql/lib/query/std-query';
+import { _NanoSQLQuery } from 'nano-sql/lib/query/std-query';
+import { IStory } from './story.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class DbService {
     {key: 'viewTime', type: 'int'},
     {key: 'urlOrID', type: 'string', default: ''},
     {key: 'meType', type: 'int', default: 0},
-    {key: 'frames', type: 'map', default: {}}
+    {key: 'frames', type: 'map', default: []}
   ];
 
   private _isInitialized = false;
@@ -35,9 +36,14 @@ export class DbService {
 
   onDBReady: Observable<boolean>;
 
+  private _onDataChanged = new Subject<any>();
+  public get onDataChanged(): Observable<any> {
+    return this._onDataChanged;
+  }
+
   nStories = 0;
 
-  constructor(private cService: CordovaService, private msgService: MessageService) {
+  constructor(private cService: DeviceService, private msgService: MessageService) {
     const self = this;
     const subscriber = observer => {
       const action = async () => {
@@ -54,12 +60,13 @@ export class DbService {
 
   getSampleItem() {
     const now = Date.now();
-    const result = {name: 'test',
+    const result: IStory = {name: 'test',
     makeTime: now,
     modifyTime: now,
     viewTime: now,
     urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
-    meType: playerType.url};
+    meType: playerType.url,
+    frames: []};
 
     return result;
   }
@@ -100,7 +107,15 @@ export class DbService {
     if (!!offset) {select = select.offset(offset); }
     if (!!limit) {select = select.limit(limit); }
 
-    return select.exec();
+    let result: any;
+    try {
+      result = await select.exec();
+      this.msgService.pushMessage({type: MessageTypes.Info, message: JSON.stringify(result)});
+    } catch (error) {
+      result = {};
+      this.msgService.pushMessage({type: MessageTypes.Error, message: error});
+    }
+    return result;
   }
 
   async deleteAsync(tName: string = DbService.storyTableName, where: any = ['viewTime', '>', 0]) {
@@ -111,6 +126,7 @@ export class DbService {
     let result: any;
     try {
       result = await q.exec();
+      this._onDataChanged.next(result);
     } catch (error) {
       result = {};
       this.msgService.pushMessage({type: MessageTypes.Error, message: error});
@@ -126,6 +142,7 @@ export class DbService {
     let result: any;
     try {
       result = await q.exec();
+      this._onDataChanged.next(result);
     } catch (error) {
       result = {};
       this.msgService.pushMessage({type: MessageTypes.Error, message: error});

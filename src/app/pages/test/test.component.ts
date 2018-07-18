@@ -67,7 +67,6 @@ export class TestComponent implements OnInit {
 
   async onSelectFromNSQL() {
     const result = await this.DBService.searchAsync();
-    this.msgService.pushMessage({type: 0, message: JSON.stringify(result)});
   }
 
   async ondeleteFromNSQL() {

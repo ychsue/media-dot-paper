@@ -4,12 +4,12 @@ import { playerType } from './media-edit.service';
 @Injectable({
   providedIn: 'root'
 })
-export class StoryService {
+export class StoryService implements IStory {
   name: string;
-  title: string;
 
   makeTime: number;
   modifyTime: number;
+  viewTime: number;
 
   urlOrID: string;
   meType = playerType.none;
@@ -17,6 +17,19 @@ export class StoryService {
   frames: AFrame[];
 
   constructor() { }
+}
+
+export interface IStory {
+  name: string;
+
+  makeTime: number;
+  modifyTime: number;
+  viewTime: number;
+
+  urlOrID: string;
+  meType: playerType;
+
+  frames: AFrame[];
 }
 
 export class AFrame {

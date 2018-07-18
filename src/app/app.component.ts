@@ -1,9 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { MessageService, MessageTypes } from './services/message.service';
 import { MatBottomSheet } from '@angular/material';
-import { MessageComponent } from 'src/app/message/message.component';
-import { YoutubeService } from 'src/app/services/youtube.service';
-import { GvService, PageType } from 'src/app/services/gv.service';
+import { MessageComponent } from './message/message.component';
+import { YoutubeService } from './services/youtube.service';
+import { GvService, PageType } from './services/gv.service';
 
 @Component({
   selector: 'app-root',

@@ -14,3 +14,7 @@ input[type='file'] {
     min-width: 0px;
     box-shadow: 4px;
 }
+
+app-draglist {
+    width:100%;
+}
