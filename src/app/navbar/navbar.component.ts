@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone, Output } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MatBottomSheet } from '@angular/material';
 import { MessageComponent } from '../message/message.component';
+import { DbService } from '../services/db.service';
+import { MediaEditService, SideClickType } from '../services/media-edit.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,11 @@ export class NavbarComponent implements OnInit {
   @Output() _sideNavType = sideNavType;
 
   nUnReadMsg = 0;
-  constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone, public msgService: MessageService) {
+  sideClickType_ = SideClickType;
+
+  constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone,
+    private db: DbService, public meService: MediaEditService,
+    public msgService: MessageService) {
     const self = this;
     this.nUnReadMsg = msgService.getNUnRead();
     msgService.remindMsgIn.subscribe(
@@ -33,6 +39,17 @@ export class NavbarComponent implements OnInit {
   showMsgsAtBottom() {
     const ref = this.bottomSheet.open(MessageComponent);
     ref.instance.showMsgs();
+  }
+
+  async onSaveStory() {
+    const story = this.meService.story;
+    delete story['id'];
+    await this.db.upsertAsync(DbService.storyTableName, story);
+  }
+
+  async onUpdateStory() {
+    const story = this.meService.story;
+    await this.db.upsertAsync(DbService.storyTableName, story);
   }
 }
 

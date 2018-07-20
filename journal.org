@@ -1,3 +1,8 @@
+* [2018-7-20 Fri] Make the action of opening an existing story or creating a new story of ~HomeComponent~ work
+Ok, now from ~HomeComponent~ to ~MediaEditComponent~ and ~NavbarComponent~ through setting ~MediaEditService~ is done.
+
+It's time to set each section.
+
 * [2018-7-18 Wed] About flex
 As described in [[https://stackoverflow.com/questions/36182635/making-a-flex-item-float-right/36182782][the answeer of this StackOverflow]], setting ~margin-left: auto;~ will push the HtmlElement to the right if its parent's display is ~flex~.
 By the way, changing its ~order~ can make it as a floating element, i.e. does not affect others' order.

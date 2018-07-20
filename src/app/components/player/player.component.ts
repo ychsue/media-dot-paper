@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
-import { MediaEditService, MEState, playerType, playerAction } from 'src/app/services/media-edit.service';
+import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
+import { PlayerType } from '../../vm/player-type.enum';
 
 @Component({
   selector: 'app-player',
@@ -13,7 +14,7 @@ import { MessageService, MessageTypes } from 'src/app/services/message.service';
 })
 export class PlayerComponent implements OnInit, OnDestroy {
 
-  pType = playerType;
+  pType = PlayerType;
   unSubscribed = new Subject<boolean>();
 
   videoSrc: string;
@@ -72,7 +73,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.dataService.onPlayerAction
     .pipe(takeUntil(self.unSubscribed))
     .subscribe((t) => {
-      if (self.dataService.pType === self.pType.url || self.dataService.pType === self.pType.file) {
+      const meType = self.dataService.story.meType;
+      if (meType === self.pType.url || meType === self.pType.file) {
         switch (t) {
           case playerAction.play:
           self.videoEle.play();
@@ -86,7 +88,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           default:
           break;
         }
-      } else if (self.dataService.pType === self.pType.youtubeID) {
+      } else if (meType === self.pType.youtubeID) {
         switch (t) {
           case playerAction.play:
           self.YTservice.ytPlayer.playVideo();
@@ -164,21 +166,23 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   initMe() {
     // ******* TODO *******
-    if (this.dataService.pType ===  playerType.url) {
-      if (YoutubeService.isYoutubeURL(this.dataService.urlOrId)) {
-        this.dataService.pType = playerType.youtubeID;
-        this.ytVId = YoutubeService.getYTId(this.dataService.urlOrId);
+    const meType = this.dataService.story.meType;
+    const urlOrId = this.dataService.story.urlOrID;
+    if (meType ===  PlayerType.url) {
+      if (YoutubeService.isYoutubeURL(urlOrId)) {
+        this.dataService.story.meType = PlayerType.youtubeID;
+        this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
-        this.videoSrc = this.dataService.urlOrId;
+        this.videoSrc = urlOrId;
       }
-    } else if (this.dataService.pType === playerType.youtubeID) {
-      if (YoutubeService.isYoutubeURL(this.dataService.urlOrId)) {
-        this.ytVId = YoutubeService.getYTId(this.dataService.urlOrId);
+    } else if (meType === PlayerType.youtubeID) {
+      if (YoutubeService.isYoutubeURL(urlOrId)) {
+        this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
-        this.ytVId = this.dataService.urlOrId;
+        this.ytVId = urlOrId;
       }
-    } else if (this.dataService.pType === playerType.file) {
-      this.videoSrc = this.dataService.urlOrId;
+    } else if (meType === PlayerType.file) {
+      this.videoSrc = urlOrId;
     }
   }
 }

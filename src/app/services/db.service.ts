@@ -3,13 +3,13 @@ import { nSQL, NanoSQLInstance } from 'nano-sql';
 import { DeviceService } from './device.service';
 import { GvService } from './gv.service';
 import { MessageService, MessageTypes } from './message.service';
-import { playerType } from './media-edit.service';
 import { StickyObservable } from '../extends/sticky-observable';
 import { Subscriber, Observable, Subject } from 'rxjs';
 import { first, shareReplay } from 'rxjs/operators';
 import 'rxjs/add/operator/toPromise';
 import { _NanoSQLQuery } from 'nano-sql/lib/query/std-query';
-import { IStory } from './story.service';
+import { IStory, Story } from './story.service';
+import { PlayerType } from '../vm/player-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class DbService {
     {key: 'viewTime', type: 'int'},
     {key: 'urlOrID', type: 'string', default: ''},
     {key: 'meType', type: 'int', default: 0},
-    {key: 'frames', type: 'map', default: []}
+    {key: 'frames', type: 'map[]', default: []}
   ];
 
   private _isInitialized = false;
@@ -59,15 +59,7 @@ export class DbService {
   }
 
   getSampleItem() {
-    const now = Date.now();
-    const result: IStory = {name: 'test',
-    makeTime: now,
-    modifyTime: now,
-    viewTime: now,
-    urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
-    meType: playerType.url,
-    frames: []};
-
+    const result = new Story();
     return result;
   }
 

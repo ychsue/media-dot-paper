@@ -20,7 +20,6 @@ import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
 import { YoutubeService } from './services/youtube.service';
 import { GvService } from './services/gv.service';
-import { StoryService } from './services/story.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
 import { DbService } from './services/db.service';
@@ -58,7 +57,7 @@ import { DraglistComponent } from './components/draglist/draglist.component';
     MatListModule,
     MatDialogModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService, GvService, StoryService, DbService, DeviceService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

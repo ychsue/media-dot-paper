@@ -10,6 +10,21 @@ app-navbar{
     color: white;
 }
 
+mat-sidenav {
+    width: 200px;
+    display: flex;
+    overflow-x: hidden;
+}
+
+app-home {
+    flex: 1;
+}
+
+.vSeparate {
+    width: 1px;
+    height: 100%;
+    background-color: black;
+}
 .content{
     grid-area: content;
     overflow-y: auto;

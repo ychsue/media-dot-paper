@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
+import { IStory, Story } from './story.service';
+import { PlayerType } from '../vm/player-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +15,6 @@ export class MediaEditService {
 
   onPlayerAction: Subject<playerAction>;
 
-  pType: playerType;
-
   private _state: MEState;
   public get state(): MEState {
     return this._state;
@@ -26,40 +26,51 @@ export class MediaEditService {
     this._state = v;
   }
 
-  title = '';
-  urlOrId = '';
+  story = new Story();
   blob: Blob;
   currentTime = 0;
+
+  sideClickType = SideClickType.none;
+
   constructor() {
     this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
   }
 
-  initMe(data: Blob|string, pType: playerType = playerType.auto) {
+  initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
+    // * [2018-07-19 17:58] pause previous action
+    this.onPlayerAction.next(playerAction.pause);
+    // * [2018-07-19 17:59] Start to initialize it.
     this.state = MEState.parsing;
     // * [2018-06-20 11:00] Check the type of service is
-    if (pType !== playerType.auto) {
-      this.pType = pType;
+    if (pType !== PlayerType.auto) {
+      this.story.meType = pType;
     } else {
       if ((typeof data) === 'string') {
-        this.pType = playerType.url;
+        this.story = new Story();
+        this.story.meType = PlayerType.url;
+      } else if (!!data['viewTime']) {
+        this.story = data as IStory;
       } else if (!!(data as Blob)) {
-        this.pType = playerType.file;
+        this.story = new Story();
+        this.story.meType = PlayerType.file;
       } else {
         this.state = MEState.parseFailed;
         return;
       }
     }
 
-    if ((this.pType === playerType.url) || (this.pType === playerType.youtubeID)) {
-      this.urlOrId = data as string;
-      this.title = this.urlOrId;
-    } else if (this.pType === playerType.file) {
+    if (!!data['viewTime']) {
+      // * [2018-07-19 13:41] If input is a story
+    } else if ((this.story.meType === PlayerType.url) || (this.story.meType === PlayerType.youtubeID)) {
+      this.story.urlOrID = data as string;
+      this.story.title = this.story.urlOrID;
+    } else if (this.story.meType === PlayerType.file) {
       this.blob = data as Blob;
-      this.urlOrId = window.URL.createObjectURL(this.blob);
+      this.story.urlOrID = window.URL.createObjectURL(this.blob);
       if (!!(data as File)) {
-        this.title = (data as File).name;
+        this.story.title = (data as File).name;
       }
     }
     this.state = MEState.readyForPlayer;
@@ -87,10 +98,8 @@ export enum MEState {
   disposed
 }
 
-export enum playerType {
+export enum SideClickType {
   none,
-  auto,
-  file,
-  url,
-  youtubeID
+  new,
+  select
 }

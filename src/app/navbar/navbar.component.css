@@ -8,4 +8,6 @@ nav{
 
 .flex-spacer{
     flex-grow: 1;
+    text-align: center;
+    overflow-x: auto;
 }
