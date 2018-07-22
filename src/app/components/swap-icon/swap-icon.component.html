@@ -1,0 +1,13 @@
+<span class="container">
+  <button mat-icon-button class="delBK">
+    <mat-icon class="mat-18">delete</mat-icon>
+  </button>
+  <button mat-icon-button mat-raised-button
+  class="eachButton"
+  [style.transform]="'translateY('+deltaY+'px)'"
+  [style.background-color]="'rgba('+bR+','+bG+','+bB+','+bA+')'"
+  (pointerdown)="onContentPointerdown($event)"
+  (click)="onBtnClick($event)">
+  <span>{{index}}</span>
+</button>
+</span>

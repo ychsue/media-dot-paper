@@ -1,3 +1,19 @@
-<p>
-  me-section-dashboard works!
-</p>
+<div class="container">
+  <button id="allBtn" mat-icon-button mat-raised-button (click)="onClick">
+    <mat-icon class="mat-18">all_inclusive</mat-icon>
+  </button>
+  <button id="plusBtn" mat-icon-button mat-raised-button (click)="onAddFrame()">
+    <span class="large">+</span>
+  </button>
+
+  <div class="listContainer">
+    <app-swap-icon
+    *ngFor="let aFrame of meService.story.frames; let i = index;" 
+    [index]="i"
+    [bR]="aFrame.colorR"
+    [bG]="aFrame.colorG"
+    [bB]="aFrame.colorB"
+    (delete)="onRemoveFrame(i)">
+    </app-swap-icon>
+  </div>
+</div>

@@ -1,3 +1,7 @@
+* [2018-7-22 Sun] Add swap-icons into me-section-dashboard
+Now, the icons will get their color randomly.
+By the way, I use observable ~interval~ to check the current time of player.
+
 * [2018-7-20 Fri] Make the action of opening an existing story or creating a new story of ~HomeComponent~ work
 Ok, now from ~HomeComponent~ to ~MediaEditComponent~ and ~NavbarComponent~ through setting ~MediaEditService~ is done.
 

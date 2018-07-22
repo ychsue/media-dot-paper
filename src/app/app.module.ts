@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { DbService } from './services/db.service';
 import { DeviceService } from './services/device.service';
 import { DraglistComponent } from './components/draglist/draglist.component';
+import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DraglistComponent } from './components/draglist/draglist.component';
     MeManiPlateComponent,
     PlayerComponent,
     DialogComponent,
-    DraglistComponent
+    DraglistComponent,
+    SwapIconComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [

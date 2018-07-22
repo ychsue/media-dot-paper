@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlayerType } from '../vm/player-type.enum';
+import { AFrame } from '../vm/a-frame';
 
 @Injectable({
   providedIn: 'root'
@@ -42,23 +43,4 @@ export interface IStory {
   meType: PlayerType;
 
   frames: AFrame[];
-}
-
-export class AFrame {
-  name: string;
-  pseudopath = '/';
-
-  genTime: number;
-  colorR: number;
-  colorG: number;
-  colorB: number;
-  top = 0.5; // 0 ~ ${1-height}
-  height = 0.3;
-
-  start = 0;
-  end = 0;
-
-  rate = 1;
-
-  subtitle = '';
 }

@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, interval } from 'rxjs';
+import { takeUntil, map, distinctUntilChanged } from 'rxjs/operators';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
+import { equalSegments } from '../../../../node_modules/@angular/router/src/url_tree';
 
 @Component({
   selector: 'app-player',
@@ -58,6 +59,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.unSubscribed.complete();
   }
 
+  getCurrentTime(): number {
+    const self = this;
+    const meType = self.dataService.story.meType;
+    if (meType === self.pType.youtubeID) {
+      if (self.YTservice.isApiReady && !!self.YTservice.ytPlayer.getCurrentTime) {
+        return self.YTservice.ytPlayer.getCurrentTime();
+      } else {
+        return -1;
+      }
+    } else {
+      return self.videoEle.currentTime;
+    }
+  }
+
   eventListeners() {
     const self = this;
     // * For readyForPlayer
@@ -69,6 +84,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
         self.initMe();
       }
     });
+    // * [2018-07-21 19:44] For CurrentTime
+    interval(200).pipe(
+      map(_ => self.getCurrentTime()),
+      distinctUntilChanged()
+    )
+    .pipe(takeUntil(self.unSubscribed))
+    .subscribe(t => {
+      self.dataService.currentTime = t;
+      // console.log(t);
+    });
+
     // * For playerAction
     this.dataService.onPlayerAction
     .pipe(takeUntil(self.unSubscribed))
@@ -83,7 +109,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           self.videoEle.pause();
           break;
           case playerAction.seek:
-          self.videoEle.currentTime = self.dataService.currentTime;
+          self.videoEle.currentTime = self.dataService.seekTime;
           break;
           default:
           break;
@@ -97,7 +123,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
           self.YTservice.ytPlayer.pauseVideo();
           break;
           case playerAction.seek:
-          self.YTservice.ytPlayer.seekTo(self.dataService.currentTime, true);
+          self.YTservice.ytPlayer.seekTo(self.dataService.seekTime, true);
           break;
           default:
           break;

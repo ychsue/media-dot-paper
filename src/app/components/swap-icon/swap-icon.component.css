@@ -1,0 +1,18 @@
+
+.container {
+    display: inline-grid;
+}
+
+button {
+    touch-action: none;
+}
+
+.eachButton, .delBK {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.delBK {
+    background-color: red;
+    color: white;
+}

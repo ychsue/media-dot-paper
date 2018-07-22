@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   async onStoryDelete(story: IStory) {
     this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
     // * [2018-07-19 21:28] Tell navbar that you delete a story
-    this.meService.sideClickType = SideClickType.none;
+    // this.meService.sideClickType = SideClickType.none;
   }
 
   onStoryOpen(story: IStory) {

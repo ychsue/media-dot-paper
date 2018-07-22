@@ -28,7 +28,9 @@ export class MediaEditService {
 
   story = new Story();
   blob: Blob;
+
   currentTime = 0;
+  seekTime = 0;
 
   sideClickType = SideClickType.none;
 
