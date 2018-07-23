@@ -26,6 +26,7 @@ import { DbService } from './services/db.service';
 import { DeviceService } from './services/device.service';
 import { DraglistComponent } from './components/draglist/draglist.component';
 import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
+import { CommonModule } from '../../node_modules/@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
     MatFormFieldModule,
     MatBottomSheetModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService],
   bootstrap: [AppComponent]

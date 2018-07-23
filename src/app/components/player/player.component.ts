@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
-import { Subject, interval } from 'rxjs';
-import { takeUntil, map, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, interval, from, fromEvent } from 'rxjs';
+import { takeUntil, map, distinctUntilChanged, merge } from 'rxjs/operators';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
@@ -95,6 +95,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
       // console.log(t);
     });
 
+    // * [2018-07-22 22:16] Update Duration
+    fromEvent(self.videoEle, 'durationchange')
+    // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
+    .pipe( takeUntil(self.unSubscribed))
+    .subscribe(_ => {
+      self.dataService.duration = self.videoEle.duration;
+    });
+    self.YTservice.onReady
+    .pipe( takeUntil(self.unSubscribed))
+    .subscribe(_ => self.dataService.duration = self.YTservice.ytPlayer.getDuration());
+
     // * For playerAction
     this.dataService.onPlayerAction
     .pipe(takeUntil(self.unSubscribed))
@@ -111,19 +122,28 @@ export class PlayerComponent implements OnInit, OnDestroy {
           case playerAction.seek:
           self.videoEle.currentTime = self.dataService.seekTime;
           break;
+          case playerAction.getDuration:
+          self.dataService.duration = self.videoEle.duration;
+          break;
           default:
           break;
         }
       } else if (meType === self.pType.youtubeID) {
+        const ytPlayer = self.YTservice.ytPlayer;
         switch (t) {
           case playerAction.play:
-          self.YTservice.ytPlayer.playVideo();
+          ytPlayer.playVideo();
           break;
           case playerAction.pause:
-          self.YTservice.ytPlayer.pauseVideo();
+          ytPlayer.pauseVideo();
           break;
           case playerAction.seek:
-          self.YTservice.ytPlayer.seekTo(self.dataService.seekTime, true);
+          ytPlayer.seekTo(self.dataService.seekTime, true);
+          break;
+          case playerAction.getDuration:
+          if (!!ytPlayer && !!ytPlayer.getDuration) {
+            self.dataService.duration = self.YTservice.ytPlayer.getDuration();
+          }
           break;
           default:
           break;

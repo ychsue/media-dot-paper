@@ -26,11 +26,22 @@ export class MediaEditService {
     this._state = v;
   }
 
+  public duration = 0;
+
   story = new Story();
   blob: Blob;
 
   currentTime = 0;
-  seekTime = 0;
+  iFrame = -1;
+
+  private _seekTime = 0;
+  public set seekTime(v: number) {
+    this._seekTime = v;
+    this.onPlayerAction.next(playerAction.seek);
+  }
+  public get seekTime(): number {
+    return this._seekTime;
+  }
 
   sideClickType = SideClickType.none;
 
@@ -75,6 +86,11 @@ export class MediaEditService {
         this.story.title = (data as File).name;
       }
     }
+
+    // * [2018-07-23 10:16] Update the duration
+    if (this.story.meType !== PlayerType.youtubeID) {
+      this.onPlayerAction.next(playerAction.getDuration);
+    }
     this.state = MEState.readyForPlayer;
   }
 }
@@ -83,7 +99,8 @@ export enum playerAction {
   none,
   play,
   pause,
-  seek
+  seek,
+  getDuration
 }
 
 export enum MEState {

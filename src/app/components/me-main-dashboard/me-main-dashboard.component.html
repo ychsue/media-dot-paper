@@ -1,10 +1,19 @@
 <div class='container'>
-  <!-- <button mat-icon-button (click)="onPlay()" *ngIf="dataService.state !== mEState.playing"> -->
-  <button mat-icon-button (click)="onPlay()">
+  <!-- <button mat-icon-button (click)="onPlay()" *ngIf="meService.state !== mEState.playing"> -->
+  <!-- <button mat-icon-button (click)="onPlay()">
       <mat-icon class="mat-18">play_arrow</mat-icon>
-  </button>
-  <!-- <button mat-icon-button (click)="onPause()" *ngIf="dataService.state===mEState.playing"> -->
-  <button mat-icon-button (click)="onPause()">
+  </button> -->
+  <!-- <button mat-icon-button (click)="onPause()" *ngIf="meService.state===mEState.playing"> -->
+  <!-- <button mat-icon-button (click)="onPause()">
       <mat-icon class="mat-18">pause</mat-icon>
-  </button>
+  </button> -->
+  <div class="slideContainer">
+    0.0
+    <div #slidePart class="slidePart" (click)="onChangeCurrentTime($event)" >
+      <div class="hLine"></div>
+      <div class="ioTime" [style.left]="meService.currentTime/meService.duration*slidePart.clientWidth+'px'"></div>
+      {{slidePart.width}}
+    </div>
+    {{meService.duration| number: '1.1-1'}}
+  </div>
 </div>

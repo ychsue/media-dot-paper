@@ -15,11 +15,11 @@ export class MeMainDashboardComponent implements OnInit {
     return this._action;
   }
   public set action(v: playerAction) {
-    this.dataService.onPlayerAction.next(v);
+    this.meService.onPlayerAction.next(v);
     this._action = v;
   }
 
-  constructor(public dataService: MediaEditService, private nZone: NgZone) { }
+  constructor(public meService: MediaEditService, private nZone: NgZone) { }
 
   ngOnInit() {
   }
@@ -34,5 +34,14 @@ export class MeMainDashboardComponent implements OnInit {
     this.nZone.run( () => {
       this.action = playerAction.pause;
     });
+  }
+
+  onChangeCurrentTime(ev: MouseEvent) {
+    // * [2018-07-23 11:35] since the support of ev.layerX for mobile is unknown, I tried to get them
+    const target = ev.target as Element;
+    const rect = target.getBoundingClientRect();
+    const layerX = ev.clientX - rect.left;
+    // * [2018-07-23 11:36] Set the seekTime
+    this.meService.seekTime = layerX / rect.width * this.meService.duration;
   }
 }

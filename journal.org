@@ -1,3 +1,9 @@
+* [2018-7-23 Mon] It can set current time from main dashboard now.
+Achieve this goal by ~seekTo~.
+
+In [[https://angular.io/api/common]], you can find a useful pipe named ~DecimalPipe~.
+Before you use it, you need to ~import~ ~CommonModule~ into your AppModule.
+
 * [2018-7-22 Sun] Add swap-icons into me-section-dashboard
 Now, the icons will get their color randomly.
 By the way, I use observable ~interval~ to check the current time of player.

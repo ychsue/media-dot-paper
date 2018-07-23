@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    align-self: center;
+    height: 40px;
+    display:grid;
+}
+
+.slideContainer {
+    align-items: center;
+    display: flex;
+}
+
+.slidePart {
+    display: flex;
+    position: relative;
+    width: 100%;
+    align-items: center;
+}
+
+.hLine {
+    height: 1px;
+    width: 100%;
+    background-color: black;
+}
+
+.ioTime {
+    position: absolute;
+    height: 32px;
+    width: 2px;
+    background-color: blue;
+    order: 2;
+}

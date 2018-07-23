@@ -1,5 +1,5 @@
 <div class="container">
-  <button id="allBtn" mat-icon-button mat-raised-button (click)="onClick">
+  <button id="allBtn" mat-icon-button mat-raised-button (click)="onWhichFrame(-1)">
     <mat-icon class="mat-18">all_inclusive</mat-icon>
   </button>
   <button id="plusBtn" mat-icon-button mat-raised-button (click)="onAddFrame()">
@@ -13,6 +13,7 @@
     [bR]="aFrame.colorR"
     [bG]="aFrame.colorG"
     [bB]="aFrame.colorB"
+    (contentClick)="onWhichFrame(i)"
     (delete)="onRemoveFrame(i)">
     </app-swap-icon>
   </div>
