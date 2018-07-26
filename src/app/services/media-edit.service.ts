@@ -26,13 +26,22 @@ export class MediaEditService {
     this._state = v;
   }
 
-  public duration = 0;
+  onCurrentTimeChanged: Observable<number>;
+
+  private _duration = 100;
+  public set duration(v: number) {
+    this._duration = v;
+  }
+  public get duration(): number {
+    return (!!this._duration) ? this._duration : 100;
+  }
 
   story = new Story();
   blob: Blob;
 
   currentTime = 0;
   iFrame = -1;
+  isRepeat = true;
 
   private _seekTime = 0;
   public set seekTime(v: number) {

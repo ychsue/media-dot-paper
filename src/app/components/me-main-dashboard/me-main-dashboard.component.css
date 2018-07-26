@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    position: relative;
     align-self: center;
     height: 40px;
     display:grid;
@@ -7,26 +8,39 @@
 
 .slideContainer {
     align-items: center;
-    display: flex;
+    /* display: flex; */
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: "start center end";
+}
+
+.slideStart {
+    grid-area: start
 }
 
 .slidePart {
-    display: flex;
+    display: grid;
     position: relative;
-    width: 100%;
+    height: 100%;
     align-items: center;
+    grid-area: center;
+    overflow: hidden;
+    min-width: 0;
 }
 
-.hLine {
-    height: 1px;
+.slideEnd {
+    grid-area: end
+}
+
+.slideCanvas {
+    order: 0;
+    z-index: 0;
+    grid-column: 1;
+    grid-row: 1;
+    object-fit: fill;
     width: 100%;
-    background-color: black;
-}
-
-.ioTime {
-    position: absolute;
-    height: 32px;
-    width: 2px;
-    background-color: blue;
-    order: 2;
+    height: 100%;
+    position: relative;
+    transform-origin: left;
 }

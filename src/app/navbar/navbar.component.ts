@@ -44,7 +44,10 @@ export class NavbarComponent implements OnInit {
   async onSaveStory() {
     const story = this.meService.story;
     delete story['id'];
-    await this.db.upsertAsync(DbService.storyTableName, story);
+    const insert = await this.db.upsertAsync(DbService.storyTableName, story);
+    // * [2018-07-25 19:04] Change its state to 'Update'
+    story['id'] = insert[0].affectedRows[0].id;
+    this.meService.sideClickType = SideClickType.select;
   }
 
   async onUpdateStory() {

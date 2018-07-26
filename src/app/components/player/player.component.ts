@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@an
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { Subject, interval, from, fromEvent } from 'rxjs';
-import { takeUntil, map, distinctUntilChanged, merge } from 'rxjs/operators';
+import { takeUntil, map, distinctUntilChanged, merge, share } from 'rxjs/operators';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
@@ -85,14 +85,44 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     });
     // * [2018-07-21 19:44] For CurrentTime
-    interval(200).pipe(
+    self.dataService.onCurrentTimeChanged = interval(200)
+    .pipe(
       map(_ => self.getCurrentTime()),
-      distinctUntilChanged()
-    )
+      distinctUntilChanged(),
+      share()
+    );
+    self.dataService.onCurrentTimeChanged
     .pipe(takeUntil(self.unSubscribed))
     .subscribe(t => {
       self.dataService.currentTime = t;
       // console.log(t);
+    });
+    // * [2018-07-24 13:48] For repeating each frame
+    self.dataService.onCurrentTimeChanged
+    .pipe(takeUntil(self.unSubscribed))
+    .subscribe(t => {
+      try {
+        let start = 0;
+        let end = self.dataService.duration - 0.1;
+        const iFrame = self.dataService.iFrame;
+        if (iFrame >= 0) {
+          const frame = self.dataService.story.frames[iFrame];
+          if (!!frame) {
+            start = frame.start;
+            end = frame.end;
+          }
+        }
+        if (t < start) {
+          self.dataService.seekTime = start;
+        } else if (t > end) {
+          self.dataService.seekTime = start;
+          if (self.dataService.isRepeat === false) {
+            self.dataService.onPlayerAction.next(playerAction.pause);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
     });
 
     // * [2018-07-22 22:16] Update Duration
@@ -130,6 +160,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
         }
       } else if (meType === self.pType.youtubeID) {
         const ytPlayer = self.YTservice.ytPlayer;
+        if (!!ytPlayer === false) {return; }
         switch (t) {
           case playerAction.play:
           ytPlayer.playVideo();
@@ -138,7 +169,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
           ytPlayer.pauseVideo();
           break;
           case playerAction.seek:
-          ytPlayer.seekTo(self.dataService.seekTime, true);
+          if (!!ytPlayer.seekTo) {
+            ytPlayer.seekTo(self.dataService.seekTime, true);
+          }
           break;
           case playerAction.getDuration:
           if (!!ytPlayer && !!ytPlayer.getDuration) {
@@ -229,6 +262,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     } else if (meType === PlayerType.file) {
       this.videoSrc = urlOrId;
+    }
+  }
+
+  onVideoPlayOrPause(ev: MouseEvent) {
+    const state = this.dataService.state;
+    if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
+      this.dataService.onPlayerAction.next(playerAction.play);
+    } else {
+      this.dataService.onPlayerAction.next(playerAction.pause);
     }
   }
 }

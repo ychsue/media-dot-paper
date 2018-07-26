@@ -36,12 +36,14 @@ export class MeMainDashboardComponent implements OnInit {
     });
   }
 
-  onChangeCurrentTime(ev: MouseEvent) {
+  onChangeCurrentTime(ev: MouseEvent, evOf: Element) {
     // * [2018-07-23 11:35] since the support of ev.layerX for mobile is unknown, I tried to get them
-    const target = ev.target as Element;
+    // const target = ev.target as Element;
+    const target = evOf;
     const rect = target.getBoundingClientRect();
     const layerX = ev.clientX - rect.left;
     // * [2018-07-23 11:36] Set the seekTime
     this.meService.seekTime = layerX / rect.width * this.meService.duration;
+    this.meService.iFrame = -1;
   }
 }

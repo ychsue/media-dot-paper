@@ -18,6 +18,8 @@ export class MeSectionDashboardComponent implements OnInit {
     const frame = new AFrame();
     frame.start = this.meService.currentTime;
     frame.end = frame.start + 10;
+    frame.height = 0.6;
+    frame.top = Math.random() * 0.4;
     this.meService.story.frames.push(frame);
   }
 
@@ -28,6 +30,9 @@ export class MeSectionDashboardComponent implements OnInit {
 
   onWhichFrame(i: number) {
     this.meService.iFrame = i;
+    if (i >= 0) {
+      this.meService.seekTime = this.meService.story.frames[i].start;
+    }
     console.log(`${i}/ **************************** TODO **************************/`);
   }
 }

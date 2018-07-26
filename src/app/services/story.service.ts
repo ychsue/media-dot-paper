@@ -18,7 +18,7 @@ export class Story implements IStory {
   modifyTime: number;
   viewTime: number;
 
-  urlOrID = 'https://youtu.be/f1SZ5GaAp3g';
+  urlOrID = 'https://youtu.be/rpvsEBdP4c8';
   meType = PlayerType.url;
 
   frames: AFrame[];
