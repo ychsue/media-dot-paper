@@ -1,1 +1,12 @@
-<p>For me-mani-plate</p>
+<div class="container" [@changeFrame]="meService.story.iFrame">
+    <div class="main"></div>
+    <div class="slider">
+        <span class="slider-start">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>
+            <mat-slider #frameSlider [min]="meService.story.frames[meService.story.iFrame].start"
+                [max]="meService.story.frames[meService.story.iFrame].end"
+                [value]="meService.currentTime"
+                (change)="meService.seekTime=frameSlider.value"
+            ></mat-slider>
+        <span class="slider-end">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>
+    </div>
+</div>

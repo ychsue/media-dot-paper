@@ -14,6 +14,15 @@ header {
     grid-area: main;
     overflow: hidden;
     width:100%;
+    height: 100%;
+}
+
+app-player {
+    z-index: 0;
+}
+
+app-me-mani-plate {
+    z-index: 1;
 }
 
 .dashboardSection {

@@ -22,6 +22,7 @@ export class Story implements IStory {
   meType = PlayerType.url;
 
   frames: AFrame[];
+  iFrame = -1;
 
   constructor() {
     const time = Date.now();
@@ -43,4 +44,5 @@ export interface IStory {
   meType: PlayerType;
 
   frames: AFrame[];
+  iFrame: number;
 }

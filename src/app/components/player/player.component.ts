@@ -104,7 +104,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       try {
         let start = 0;
         let end = self.dataService.duration - 0.1;
-        const iFrame = self.dataService.iFrame;
+        const iFrame = self.dataService.story.iFrame;
         if (iFrame >= 0) {
           const frame = self.dataService.story.frames[iFrame];
           if (!!frame) {
@@ -266,6 +266,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   onVideoPlayOrPause(ev: MouseEvent) {
+    ev.preventDefault();
     const state = this.dataService.state;
     if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
       this.dataService.onPlayerAction.next(playerAction.play);

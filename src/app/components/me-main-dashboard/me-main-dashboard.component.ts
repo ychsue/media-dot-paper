@@ -44,6 +44,6 @@ export class MeMainDashboardComponent implements OnInit {
     const layerX = ev.clientX - rect.left;
     // * [2018-07-23 11:36] Set the seekTime
     this.meService.seekTime = layerX / rect.width * this.meService.duration;
-    this.meService.iFrame = -1;
+    this.meService.story.iFrame = -1;
   }
 }

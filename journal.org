@@ -1,3 +1,7 @@
+* [2018-7-27 Fri] Setting up basic animations for ~me-mani-plate.component~
+In [[https://github.com/ableplayer/ableplayer]], it has the possibility to get the captions' information with timeline;
+however, it is not a short program. I want to deal with it later.
+
 * [2018-7-25 Wed] Use ~svg:rect~ to denote each frame (section)
 1. If you want your ~svg~ to fit the size of a grid, you can declare a suitable ~viewBox~ as its original size and ~[attr.preserveAspectRatio]="'none'"~ because the default is that the ratio of width/height is fixed.
 Well, reading [[https://stackoverflow.com/questions/19484707/how-can-i-make-an-svg-scale-with-its-parent-container][this StackOverflow's Q&A]] to get some ideas. 

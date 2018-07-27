@@ -40,7 +40,6 @@ export class MediaEditService {
   blob: Blob;
 
   currentTime = 0;
-  iFrame = -1;
   isRepeat = true;
 
   private _seekTime = 0;

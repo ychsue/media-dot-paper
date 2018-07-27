@@ -6,7 +6,7 @@ import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule, MatSidenavModule} from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule, MatSidenavModule, MatSliderModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -59,7 +59,8 @@ import { CommonModule } from '../../node_modules/@angular/common';
     MatBottomSheetModule,
     MatListModule,
     MatDialogModule,
-    CommonModule
+    CommonModule,
+    MatSliderModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService],
   bootstrap: [AppComponent]

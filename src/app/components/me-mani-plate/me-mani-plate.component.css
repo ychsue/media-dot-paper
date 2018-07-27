@@ -1,0 +1,28 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas: "main" "slider";
+}
+
+.main {
+    grid-area: main;
+}
+
+.slider {
+    grid-area: slider;
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    align-items: center;
+}
+
+mat-slider {
+    flex-grow: 1;
+}
+
+.slider-start, .slider-end {
+    margin: 4px;
+}
