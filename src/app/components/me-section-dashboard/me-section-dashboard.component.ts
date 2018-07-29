@@ -26,11 +26,11 @@ export class MeSectionDashboardComponent implements OnInit {
   onRemoveFrame(i: number) {
     const frames = this.meService.story.frames;
     frames.splice(i, 1);
-    this.meService.story.iFrame = -1;
+    this.meService.setiFrame(-1);
   }
 
   onWhichFrame(i: number) {
-    this.meService.story.iFrame = i;
+    this.meService.setiFrame(i);
     if (i >= 0) {
       this.meService.seekTime = this.meService.story.frames[i].start;
     }

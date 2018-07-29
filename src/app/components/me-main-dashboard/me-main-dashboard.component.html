@@ -20,7 +20,7 @@
         ></rect>
 
         <!-- horizontal line -->
-        <rect [style.fill]="'black'" [attr.height]="2/container.clientHeight" [attr.width]="meService.duration" x="0" y="50%"></rect>
+        <rect [style.fill]="'black'" [attr.height]="(!!container.clientHeight)?2/container.clientHeight:2" [attr.width]="meService.duration" x="0" y="50%"></rect>
         <!-- pointer -->
         <rect [style.fill]="'blue'" [attr.x]="((meService.currentTime>0)?meService.currentTime:0)" y="0" [attr.width]="(!!container.clientWidth)?2*meService.duration/container.clientWidth:1" height="100%"></rect>
       </svg>

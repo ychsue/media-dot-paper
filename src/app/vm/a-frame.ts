@@ -14,6 +14,7 @@ export class AFrame {
     end = 0;
 
     rate = 1;
+    volume = 1;
 
     subtitle = '';
 

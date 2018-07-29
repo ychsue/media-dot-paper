@@ -125,16 +125,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     });
 
-    // * [2018-07-22 22:16] Update Duration
+    // * [2018-07-22 22:16] Update Duration & availablePlaybackRates
     fromEvent(self.videoEle, 'durationchange')
     // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
     .pipe( takeUntil(self.unSubscribed))
     .subscribe(_ => {
       self.dataService.duration = self.videoEle.duration;
+      self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
     });
     self.YTservice.onReady
     .pipe( takeUntil(self.unSubscribed))
-    .subscribe(_ => self.dataService.duration = self.YTservice.ytPlayer.getDuration());
+    .subscribe(_ => {
+      self.dataService.duration = self.YTservice.ytPlayer.getDuration();
+      self.dataService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
+    });
 
     // * For playerAction
     this.dataService.onPlayerAction
@@ -154,6 +158,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
           break;
           case playerAction.getDuration:
           self.dataService.duration = self.videoEle.duration;
+          break;
+          case playerAction.getVolume:
+          self.dataService._volume = self.videoEle.volume;
+          break;
+          case playerAction.setVolume:
+          self.videoEle.volume = self.dataService.volume;
+          break;
+          case playerAction.getPlaybackRate:
+          self.dataService._playbackRate = self.videoEle.playbackRate;
+          break;
+          case playerAction.setPlaybackRate:
+          self.videoEle.playbackRate = self.dataService.playbackRate;
+          break;
+          case playerAction.getAllowedPlaybackRate:
+          self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
           break;
           default:
           break;
@@ -175,8 +194,23 @@ export class PlayerComponent implements OnInit, OnDestroy {
           break;
           case playerAction.getDuration:
           if (!!ytPlayer && !!ytPlayer.getDuration) {
-            self.dataService.duration = self.YTservice.ytPlayer.getDuration();
+            self.dataService.duration = ytPlayer.getDuration();
           }
+          break;
+          case playerAction.getVolume:
+          self.dataService._volume = ytPlayer.getVolume() / 100;
+          break;
+          case playerAction.setVolume:
+          ytPlayer.setVolume(self.dataService.volume * 100);
+          break;
+          case playerAction.getPlaybackRate:
+          self.dataService._playbackRate = ytPlayer.getPlaybackRate();
+          break;
+          case playerAction.setPlaybackRate:
+          ytPlayer.setPlaybackRate(self.dataService.playbackRate);
+          break;
+          case playerAction.getAllowedPlaybackRate:
+          self.dataService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
           break;
           default:
           break;

@@ -1,3 +1,10 @@
+* [2018-7-29 Sun] Do something when I change the frame and deal with playbackRate and volume.
+1. Write a method named ~setiFrame(i: number)~ instead of setting iFrame directly so that I can do something when I want to change frame.
+2. Let ~me-mani-plate.component~ can set ~volume~, ~playbackRate~, etc.
+    However, the more I write it, the more I feel that the ~player.component~ should be a server. If it is a client, I just can talk to it by ~Subject~ or ~event~ and cannot access its methods and properties directly.
+3. By the way, the ~playbackRate~ of Youtube is limited, I need to get it every time I get a Youtube video.
+    Hm... Let me think about making ~player.component~ a server seriously.
+
 * [2018-7-27 Fri] Setting up basic animations for ~me-mani-plate.component~
 In [[https://github.com/ableplayer/ableplayer]], it has the possibility to get the captions' information with timeline;
 however, it is not a short program. I want to deal with it later.
