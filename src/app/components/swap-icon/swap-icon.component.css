@@ -1,6 +1,9 @@
 
 .container {
     display: inline-grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'center';
 }
 
 button {
@@ -8,8 +11,9 @@ button {
 }
 
 .eachButton, .delBK {
-    grid-column: 1;
-    grid-row: 1;
+    grid-area: center;
+    /* grid-column: 1;
+    grid-row: 1; */
 }
 
 .delBK {

@@ -6,7 +6,8 @@ import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule, MatSidenavModule, MatSliderModule} from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
+  MatSidenavModule, MatSliderModule, MatTabsModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -27,6 +28,7 @@ import { DeviceService } from './services/device.service';
 import { DraglistComponent } from './components/draglist/draglist.component';
 import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
 import { CommonModule } from '../../node_modules/@angular/common';
+import { StoryComponent } from './pages/story/story.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { CommonModule } from '../../node_modules/@angular/common';
     PlayerComponent,
     DialogComponent,
     DraglistComponent,
-    SwapIconComponent
+    SwapIconComponent,
+    StoryComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
@@ -60,7 +63,8 @@ import { CommonModule } from '../../node_modules/@angular/common';
     MatListModule,
     MatDialogModule,
     CommonModule,
-    MatSliderModule
+    MatSliderModule,
+    MatTabsModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService],
   bootstrap: [AppComponent]

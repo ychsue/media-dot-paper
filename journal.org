@@ -1,3 +1,21 @@
+* [2018-7-30 Mon] For dynamic css class, you can use ::ng-deep to rewrite its rule
+As mentioned in [[https://stackoverflow.com/questions/44386840/angular-2-material-md-tab-size][this StackOverflow's Q&A]], I can use ~::ng-deep~ to achieve that dynamical class. You can read more details from [[https://angular.io/guide/component-styles][angular's Doc]].
+
+* [2018-7-30 Mon] If you want to keep the mousedown event as the 1st emittion, you can do as follows
+#+begin_src js
+    this.resize$.pipe(
+      map(ev => of(ev).pipe(
+        concat(of(ev).pipe(
+        map(_ => self.device.onPointermove$.pipe(
+          takeUntil(self.device.onPointerup$),
+          concat(of(null))
+        )),
+        concatAll()
+      )))),
+      concatAll()
+    )
+#+end_src
+
 * [2018-7-29 Sun] Do something when I change the frame and deal with playbackRate and volume.
 1. Write a method named ~setiFrame(i: number)~ instead of setting iFrame directly so that I can do something when I want to change frame.
 2. Let ~me-mani-plate.component~ can set ~volume~, ~playbackRate~, etc.

@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Output } from '@angular/core';
+import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { MatBottomSheet } from '@angular/material';
 import { MessageComponent } from '../message/message.component';
@@ -12,8 +12,7 @@ import { MediaEditService, SideClickType } from '../services/media-edit.service'
 })
 export class NavbarComponent implements OnInit {
 
-  @Output() sideType: sideNavType = sideNavType.home;
-  @Output() _sideNavType = sideNavType;
+  @Output() toggleSidenav_Click = new EventEmitter<MouseEvent>();
 
   nUnReadMsg = 0;
   sideClickType_ = SideClickType;
@@ -54,9 +53,4 @@ export class NavbarComponent implements OnInit {
     const story = this.meService.story;
     await this.db.upsertAsync(DbService.storyTableName, story);
   }
-}
-
-export enum sideNavType {
-  none,
-  home
 }

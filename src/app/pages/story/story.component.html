@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="nameETC">
+    <mat-form-field>
+      <input matInput placeholder="媒體名稱" [(ngModel)]="meService.story.name">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput placeholder="媒體標題" [(ngModel)]="meService.story.title">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput placeholder="關鍵字" [(ngModel)]="meService.story.keywords">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput placeholder="媒體來源" [(ngModel)]="meService.story.urlOrID">
+    </mat-form-field>      
+  </div>
+  
+  <mat-form-field class="description">
+    <textarea matInput placeholder="描述" [(ngModel)]="meService.story.description">
+    </textarea>
+  </mat-form-field>
+</div>

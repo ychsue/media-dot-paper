@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // from(this.db.searchAsync()).subscribe(this.stories$);
     self.db.onDataChanged.subscribe(data => self.storySearch$.next(null));
     self.stories$ = self.storySearch$.pipe(map(val => {
-      if (val === null) { return self.db.searchAsync(); }
+      if (val === null) { return self.db.searchAsync(DbService.storyTableName, null, null, {viewTime: 'desc'}); }
     }),
     concatAll()
     );

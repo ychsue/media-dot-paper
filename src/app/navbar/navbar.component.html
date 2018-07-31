@@ -1,5 +1,5 @@
 <nav class="docs-navbar-header">
-  <button mat-icon-button (click)="sideType=(sideType===_sideNavType.none)?_sideNavType.home:_sideNavType.none">
+  <button mat-icon-button (click)="toggleSidenav_Click.next($event)">
       <mat-icon class="mat-18">menu</mat-icon>
   </button>
   <button mat-icon-button (click)="onSaveStory()" *ngIf="meService.sideClickType===sideClickType_.new">

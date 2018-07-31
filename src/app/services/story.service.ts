@@ -13,12 +13,14 @@ export class StoryService {
 export class Story implements IStory {
   name = '請給個名字';
   title = '歡迎使用本App來幫助學習';
+  description = '';
+  keywords = '';
 
   makeTime: number;
   modifyTime: number;
   viewTime: number;
 
-  urlOrID = 'https://youtu.be/rpvsEBdP4c8';
+  urlOrID = ''; // 'https://youtu.be/rpvsEBdP4c8';
   meType = PlayerType.url;
 
   frames: AFrame[];
@@ -35,6 +37,8 @@ export interface IStory {
   id?: string;
   name: string;
   title: string;
+  description: string;
+  keywords: string;
 
   makeTime: number;
   modifyTime: number;

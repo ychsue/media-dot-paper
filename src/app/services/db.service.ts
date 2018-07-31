@@ -21,6 +21,8 @@ export class DbService {
     {key: 'id', type: 'uuid', props: [ 'pk']},
     {key: 'name', type: 'string'},
     {key: 'title', type: 'string', props: ['trie']},
+    {key: 'description', type: 'string', props: ['trie']},
+    {key: 'keywords', type: 'string', props: ['trie']},
     {key: 'makeTime', type: 'int'},
     {key: 'modifyTime', type: 'int'},
     {key: 'viewTime', type: 'int'},
@@ -60,6 +62,7 @@ export class DbService {
 
   getSampleItem() {
     const result = new Story();
+    result.urlOrID = 'https://youtu.be/rpvsEBdP4c8';
     return result;
   }
 
