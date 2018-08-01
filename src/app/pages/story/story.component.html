@@ -13,7 +13,7 @@
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="媒體來源" [(ngModel)]="meService.story.urlOrID">
+      <input matInput placeholder="媒體來源" [(ngModel)]="(meService.story.meType===meService.PlayerType.file)?meService.story.fileName:meService.story.urlOrID">
     </mat-form-field>      
   </div>
   

@@ -1,3 +1,8 @@
+* [2018-8-1 Wed] I don't know what's wrong when I compile this code in windows
+When I call ~await nSQL(...).connect();~ will give me an error in windows system. I don't know what's wrong.
+
+* [2018-7-31 Tue] Looks like the size of Element inside a Grid will be justified automatically so it is not suitable to set your Element's size.
+
 * [2018-7-30 Mon] For dynamic css class, you can use ::ng-deep to rewrite its rule
 As mentioned in [[https://stackoverflow.com/questions/44386840/angular-2-material-md-tab-size][this StackOverflow's Q&A]], I can use ~::ng-deep~ to achieve that dynamical class. You can read more details from [[https://angular.io/guide/component-styles][angular's Doc]].
 

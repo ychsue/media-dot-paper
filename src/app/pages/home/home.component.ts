@@ -8,6 +8,8 @@ import { Observable, Subject, from } from 'rxjs';
 import { IStory } from '../../services/story.service';
 import { map, concatAll } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
+import { FsService } from '../../services/fs.service';
+import { MessageService, MessageTypes } from '../../services/message.service';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +28,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog,
     private meService: MediaEditService, private db: DbService,
-    private ngZone: NgZone) {
+    private ngZone: NgZone // , private fs: FsService
+    , private msg: MessageService) {
     }
 
   ngOnInit() {
@@ -43,6 +46,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         self.stories = s;
       });
     });
+    // * [2018-08-01 10:27] Check whether FsPlugin is available now
+    // self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
   }
 
   ngAfterViewInit() {

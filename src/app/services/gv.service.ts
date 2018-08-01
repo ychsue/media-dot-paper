@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class GvService {
 
   shownPage = PageType.Home;
+  sharedFolderName = 'SegmentedMediaLayer';
+
   constructor() { }
 }
 

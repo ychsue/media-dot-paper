@@ -23,6 +23,9 @@ export class Story implements IStory {
   urlOrID = ''; // 'https://youtu.be/rpvsEBdP4c8';
   meType = PlayerType.url;
 
+  fileName = '';
+  fileToken = '';
+
   frames: AFrame[];
   iFrame = -1;
 
@@ -46,6 +49,9 @@ export interface IStory {
 
   urlOrID: string;
   meType: PlayerType;
+
+  fileName: string;
+  fileToken: string;
 
   frames: AFrame[];
   iFrame: number;

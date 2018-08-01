@@ -23,6 +23,8 @@ export class DbService {
     {key: 'title', type: 'string', props: ['trie']},
     {key: 'description', type: 'string', props: ['trie']},
     {key: 'keywords', type: 'string', props: ['trie']},
+    {key: 'fileName', type: 'string'} ,
+    {key: 'fileToken', type: 'string'} ,
     {key: 'makeTime', type: 'int'},
     {key: 'modifyTime', type: 'int'},
     {key: 'viewTime', type: 'int'},
@@ -68,12 +70,12 @@ export class DbService {
 
   async iniNanoSQL(ob: Subscriber<boolean>) {
     const mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
-    const buf = await nSQL(DbService.storyTableName)
+    const buf = nSQL(DbService.storyTableName)
     .model(DbService.storyModel)
     .config({
       mode: mode
-    })
-    .connect();
+    });
+    await buf.connect();
     this._isInitialized = true;
     ob.next(true);
 

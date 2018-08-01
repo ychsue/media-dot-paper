@@ -15,6 +15,8 @@ export class MediaEditService {
 
   onPlayerAction: Subject<playerAction>;
 
+  PlayerType = PlayerType;
+
   private _state: MEState;
   public get state(): MEState {
     return this._state;
@@ -112,7 +114,7 @@ export class MediaEditService {
       this.blob = data as Blob;
       this.story.urlOrID = window.URL.createObjectURL(this.blob);
       if (!!(data as File)) {
-        this.story.title = (data as File).name;
+        this.story.title = this.story.fileName = (data as File).name;
       }
     }
 

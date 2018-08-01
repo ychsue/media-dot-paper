@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService, MessageTypes, OneMessage } from '../../services/message.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DbService } from '../../services/db.service';
+import { FsService } from '../../services/fs.service';
+import { map, concatAll } from '../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-test',
@@ -18,7 +20,7 @@ export class TestComponent implements OnInit {
   newFolderName: string;
 
   constructor(private msgService: MessageService, private sanitizer: DomSanitizer,
-    private DBService: DbService
+    private DBService: DbService // , private fsService: FsService
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,17 @@ export class TestComponent implements OnInit {
     this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
   }
 
-  async onSelFileChange(files: FileList, obj: object) {
+  // async onSelFileChange(files: FileList, obj: object) {
+  //   const file = files[0];
+  //   const self = this;
+  //   if (!!file === false) { return; }
+  //   await this.fsService.getFile$(file.name, true).pipe(
+  //     map(fEntry => {
+  //       return self.fsService.writeFile$(fEntry, file);
+  //     }), concatAll()).toPromise();
+  // }
+
+  async onSelFileChange_for_windows_videoLibrary(files: FileList, obj: object) {
     console.log(`obj= ${obj}`);
     this.audioFile = files[0];
     const fName = this.audioFile.name;

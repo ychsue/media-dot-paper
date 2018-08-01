@@ -29,6 +29,7 @@ import { DraglistComponent } from './components/draglist/draglist.component';
 import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
 import { CommonModule } from '../../node_modules/@angular/common';
 import { StoryComponent } from './pages/story/story.component';
+// import { FsService } from './services/fs.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import { StoryComponent } from './pages/story/story.component';
     MatSliderModule,
     MatTabsModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
+    // ,FsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
