@@ -8,6 +8,28 @@
 app-navbar{
     grid-area: navbar;
     color: white;
+    width: 100vw;
+}
+
+mat-sidenav {
+    display: flex;
+    overflow-x: hidden;
+}
+
+app-home {
+    flex: 1;
+}
+
+.vSeparate {
+    position: absolute;
+    z-index: 1;
+    width: 2px;
+    height: 100%;
+    background-color: black;
+    touch-action: none;
+}
+.vSeparate:hover {
+    cursor: col-resize;
 }
 
 .content{
@@ -17,5 +39,30 @@ app-navbar{
 
 .page{
     width: 100%;
+    height: 100%;
+}
+
+#resizeWidth {
+    touch-action: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 40px;
+    order: 2;
+    z-index: 2;
+}
+
+#sidenavTabs {
+    z-index: 0;
+    width: 100%;
+}
+
+#sidenavTabs ::ng-deep .mat-tab-label {
+    min-width: 40px !important;
+}
+
+#sidenavTabs ::ng-deep .mat-tab-body-wrapper {
+    position: relative;
     height: 100%;
 }

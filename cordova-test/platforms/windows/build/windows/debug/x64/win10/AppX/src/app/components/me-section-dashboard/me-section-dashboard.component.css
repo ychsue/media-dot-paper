@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+}
+
+.large {
+    font-size: large;
+}
+
+.listContainer {
+    flex-grow: 1;
+    max-height: 120px;
+    overflow-y: auto;
+    display: inline;
+}

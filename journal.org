@@ -1,3 +1,14 @@
+* [2018-8-2 Thu] Well, the problem is happened at ~storage.ts~ of ~nano-sql~.
+The problem is that ~rebuildIndexes~ function itself in fact is an async and its ~FastAll~ promise does not work in right sequence since it is a real asynchronized function.
+So, the ~_secondaryIndexUpdates[idxTable]~ will be cleaned by ~_flushIndexes()~ before using it.
+Let me try to modify it.
+Before that, let me commit this code at first.
+
+By the way, if you want to exclude something in ~.gitignore~ as mentioned in [[https://stackoverflow.com/questions/5533050/gitignore-exclude-folder-but-include-specific-subfolder][this StackOverflow's Q&A]].
+So, ~dir/~ and ~dir/*~ are not the same. 
+The first one ignore ~dir/~ itself so that the exclusion under it won't work.
+You need to use ~dir/*~ so that ~dir~ will be checked even if all its subfolder will be ignored.
+
 * [2018-8-1 Wed] I don't know what's wrong when I compile this code in windows
 When I call ~await nSQL(...).connect();~ will give me an error in windows system. I don't know what's wrong.
 

@@ -25,4 +25,13 @@
 </div>
 <div>
     <h3>讀入已備份的媒體：</h3>
+
+    <mat-list dense>
+        <!-- <mat-list-item *ngFor="let story of stories$| async"> -->
+        <app-draglist *ngFor="let story of stories" 
+            [story]="story"
+            (delete)="onStoryDelete(story)"
+            (contentClick)="onStoryOpen(story)" ></app-draglist>
+        <!-- </mat-list-item> -->
+    </mat-list>
 </div>

@@ -1,34 +1,34 @@
 {
-  "_from": "cordova-plugin-nano-sqlite@1.3.3",
-  "_id": "cordova-plugin-nano-sqlite@1.3.3",
+  "_from": "cordova-plugin-nano-sqlite@1.4.0",
+  "_id": "cordova-plugin-nano-sqlite@1.4.0",
   "_inBundle": false,
-  "_integrity": "sha512-OOpZ2TdPhXyqFP31lE7h+nZzwTif8o64xVLSA8XIk1rdZatj4AvIVjPFCNsdJ21XVTv52G6xLsw/khogtM8BtA==",
+  "_integrity": "sha512-2aVFT3pu1uP8cQz7H8RvMONglYk+DKRkBAi14W/QRobRO9oaZAFaTvN+fk21OjXxv0kZRUbwY4IkdFvSSPt4Mg==",
   "_location": "/cordova-plugin-nano-sqlite",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "cordova-plugin-nano-sqlite@1.3.3",
+    "raw": "cordova-plugin-nano-sqlite@1.4.0",
     "name": "cordova-plugin-nano-sqlite",
     "escapedName": "cordova-plugin-nano-sqlite",
-    "rawSpec": "1.3.3",
+    "rawSpec": "1.4.0",
     "saveSpec": null,
-    "fetchSpec": "1.3.3"
+    "fetchSpec": "1.4.0"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-nano-sqlite/-/cordova-plugin-nano-sqlite-1.3.3.tgz",
-  "_shasum": "bd1433e8e009ffe660987c22ca9b50b5d4f15cad",
-  "_spec": "cordova-plugin-nano-sqlite@1.3.3",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-nano-sqlite/-/cordova-plugin-nano-sqlite-1.4.0.tgz",
+  "_shasum": "d0de4e5140e387ab6e6d42993543e77cd8b33bcb",
+  "_spec": "cordova-plugin-nano-sqlite@1.4.0",
   "_where": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test",
   "author": {
     "name": "Scott Lott",
     "email": "Scott@ClickSimply.com"
   },
   "bugs": {
-    "url": "https://github.com/ClickSimply/cordova-Nano-SQLite/issues"
+    "url": "https://github.com/ClickSimply/Nano-SQL/issues"
   },
   "bundleDependencies": false,
   "dependencies": {
@@ -99,11 +99,11 @@
   "name": "cordova-plugin-nano-sqlite",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ClickSimply/cordova-Nano-SQLite.git"
+    "url": "git+https://github.com/ClickSimply/Nano-SQL.git"
   },
   "scripts": {
     "build": "rm -rf lib/* && webpack -p && tsc"
   },
   "typings": "lib/index.d.ts",
-  "version": "1.3.3"
+  "version": "1.4.0"
 }

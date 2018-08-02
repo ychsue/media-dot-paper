@@ -11,10 +11,14 @@
 /cordova/node_modules
 /cordova-test/node_modules
 /cordova-test/platforms/windows/src
+/cordova-test/platforms/windows/node_modules/*
 /cordova-test/www
 
 # dependencies
-/node_modules
+/node_modules/*
+!/node_modules/nano-sql/
+/node_modules/nano-sql/*
+!/node_modules/nano-sql/src/
 
 # IDEs and editors
 /.idea

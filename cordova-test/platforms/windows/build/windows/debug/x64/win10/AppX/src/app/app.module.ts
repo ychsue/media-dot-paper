@@ -6,7 +6,8 @@ import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule, MatSidenavModule} from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
+  MatSidenavModule, MatSliderModule, MatTabsModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -19,12 +20,16 @@ import { MeManiPlateComponent } from './components/me-mani-plate/me-mani-plate.c
 import { PlayerComponent } from './components/player/player.component';
 import { MediaEditService } from './services/media-edit.service';
 import { YoutubeService } from './services/youtube.service';
-import { GvService } from 'src/app/services/gv.service';
-import { StoryService } from 'src/app/services/story.service';
+import { GvService } from './services/gv.service';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
-import { DbService } from 'src/app/services/db.service';
-import { CordovaService } from './services/cordova.service';
+import { DbService } from './services/db.service';
+import { DeviceService } from './services/device.service';
+import { DraglistComponent } from './components/draglist/draglist.component';
+import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
+import { CommonModule } from '../../node_modules/@angular/common';
+import { StoryComponent } from './pages/story/story.component';
+// import { FsService } from './services/fs.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import { CordovaService } from './services/cordova.service';
     MeSectionDashboardComponent,
     MeManiPlateComponent,
     PlayerComponent,
-    DialogComponent
+    DialogComponent,
+    DraglistComponent,
+    SwapIconComponent,
+    StoryComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
@@ -54,9 +62,14 @@ import { CordovaService } from './services/cordova.service';
     MatFormFieldModule,
     MatBottomSheetModule,
     MatListModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule,
+    MatSliderModule,
+    MatTabsModule
   ],
-  providers: [MessageService, MediaEditService, YoutubeService, GvService, StoryService, DbService, CordovaService],
+  providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
+    // ,FsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

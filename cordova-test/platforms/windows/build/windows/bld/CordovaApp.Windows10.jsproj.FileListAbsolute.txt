@@ -10,12 +10,6 @@ C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\CordovaApp.Windows10.jsproj.GenerateResource.Cache
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\priconfig.xml
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\priconfig.xml.intermediate
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\unfiltered.layout.resfiles
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\unfiltered.layout.resfiles.intermediate
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\filtered.layout.resfiles
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\filtered.layout.resfiles.intermediate
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\excluded.layout.resfiles
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\excluded.layout.resfiles.intermediate
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\resources.resfiles
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\resources.resfiles.intermediate
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\pri.resfiles
@@ -24,3 +18,9 @@ C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\qualifiers.txt.intermediate
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\MultipleQualifiersPerDimensionFound.txt
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\ProjectArchitectures.txt
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\unfiltered.layout.resfiles
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\unfiltered.layout.resfiles.intermediate
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\filtered.layout.resfiles
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\filtered.layout.resfiles.intermediate
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\excluded.layout.resfiles
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\excluded.layout.resfiles.intermediate
