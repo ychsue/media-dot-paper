@@ -28,4 +28,5 @@
     <plugin name="cordova-plugin-nano-sqlite" spec="^1.4.0" />
     <engine name="windows" spec="^5.0.0" />
     <engine name="android" spec="^7.0.0" />
+    <engine name="browser" spec="^5.0.3" />
 </widget>

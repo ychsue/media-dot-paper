@@ -69,11 +69,12 @@ export class DbService {
   }
 
   async iniNanoSQL(ob: Subscriber<boolean>) {
-    const mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
+    const mode = (!!window['nSQLite'] && window.cordova.platformId !== 'browser') ? window['nSQLite'].getMode() : 'PERM';
     const buf = nSQL(DbService.storyTableName)
     .model(DbService.storyModel)
     .config({
-      mode: mode
+      mode: mode,
+      cache: false
     });
     await buf.connect();
     this._isInitialized = true;

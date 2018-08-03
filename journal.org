@@ -1,3 +1,9 @@
+* [2018-8-3 Fri] That's a promise racing, setting ~cache:false~ can avoid it.
+1. Has written a possible solution for the author. Hoping that he can solve it.
+    At this moment, I tried to compile it but has no luck. I cannot compile it successfully.
+
+2. By the way, for ~cordova run browser~, setting ~mode:'PERM'~ to avoid using SQLite3 plugin of cordova and it works. ^_^
+
 * [2018-8-2 Thu] Well, the problem is happened at ~storage.ts~ of ~nano-sql~.
 The problem is that ~rebuildIndexes~ function itself in fact is an async and its ~FastAll~ promise does not work in right sequence since it is a real asynchronized function.
 So, the ~_secondaryIndexUpdates[idxTable]~ will be cleaned by ~_flushIndexes()~ before using it.

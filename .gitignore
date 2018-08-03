@@ -13,6 +13,7 @@
 /cordova-test/platforms/windows/src
 /cordova-test/platforms/windows/node_modules/*
 /cordova-test/www
+/cordova-test/platforms/browser
 
 # dependencies
 /node_modules/*

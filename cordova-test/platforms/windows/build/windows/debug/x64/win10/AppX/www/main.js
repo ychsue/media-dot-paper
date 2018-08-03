@@ -2301,11 +2301,12 @@ var DbService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
+                        mode = (!!window['nSQLite'] && window.cordova.platformId !== 'browser') ? window['nSQLite'].getMode() : 'PERM';
                         buf = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
                             .model(DbService_1.storyModel)
                             .config({
-                            mode: mode
+                            mode: mode,
+                            cache: false
                         });
                         return [4 /*yield*/, buf.connect()];
                     case 1:
