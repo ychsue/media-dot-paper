@@ -734,7 +734,7 @@ module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-wid
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.story.meType===pType.url||dataService.story.meType===pType.file)?'block':'none'\"\n  (click)=\"onVideoPlayOrPause($event)\"\n  controls\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
+module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.story.meType===pType.url||dataService.story.meType===pType.file)?'block':'none'\"\n  (click)=\"onVideoPlayOrPause($event)\"\n  controls\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(dataService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
 
 /***/ }),
 
@@ -2306,7 +2306,7 @@ var DbService = /** @class */ (function () {
                             .model(DbService_1.storyModel)
                             .config({
                             mode: mode,
-                            cache: false
+                            cache: true
                         });
                         return [4 /*yield*/, buf.connect()];
                     case 1:

@@ -2306,7 +2306,7 @@ var DbService = /** @class */ (function () {
                             .model(DbService_1.storyModel)
                             .config({
                             mode: mode,
-                            cache: false
+                            cache: true
                         });
                         return [4 /*yield*/, buf.connect()];
                     case 1:

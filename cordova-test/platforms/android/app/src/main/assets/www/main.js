@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n    height: 100vh;\r\n        grid-template-areas: \"navbar\" \"content\";\r\n}\r\n\r\napp-navbar{\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: navbar;\r\n    color: white;\r\n}\r\n\r\n.content{\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: content;\r\n    overflow-y: auto;\r\n}\r\n\r\n.page{\r\n    width: 100%;\r\n    height: 100%;\r\n}"
+module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n    height: 100vh;\r\n        grid-template-areas: \"navbar\" \"content\";\r\n}\r\n\r\napp-navbar{\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: navbar;\r\n    color: white;\r\n    width: 100vw;\r\n}\r\n\r\nmat-sidenav {\r\n    display: flex;\r\n    overflow-x: hidden;\r\n}\r\n\r\napp-home {\r\n    flex: 1;\r\n}\r\n\r\n.vSeparate {\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 2px;\r\n    height: 100%;\r\n    background-color: black;\r\n    touch-action: none;\r\n}\r\n\r\n.vSeparate:hover {\r\n    cursor: col-resize;\r\n}\r\n\r\n.content{\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: content;\r\n    overflow-y: auto;\r\n}\r\n\r\n.page{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#resizeWidth {\r\n    touch-action: none;\r\n    position: absolute;\r\n    top: 50%;\r\n    right: 0;\r\n    width: 20px;\r\n    height: 40px;\r\n    order: 2;\r\n    z-index: 2;\r\n}\r\n\r\n#sidenavTabs {\r\n    z-index: 0;\r\n    width: 100%;\r\n}\r\n\r\n#sidenavTabs ::ng-deep .mat-tab-label {\r\n    min-width: 40px !important;\r\n}\r\n\r\n#sidenavTabs ::ng-deep .mat-tab-body-wrapper {\r\n    position: relative;\r\n    height: 100%;\r\n}"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <app-navbar #navbar class=\"mat-elevation-z6\"></app-navbar>\n  <mat-sidenav-container  class=\"content\">\n      <mat-sidenav mode=\"side\" align=\"start\" [opened]=\"navbar.sideType===navbar._sideNavType.home\" >\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\n        <app-home class=\"page\"></app-home>\n      </mat-sidenav>\n      <div class=\"page\">\n        <!-- <router-outlet></router-outlet> -->\n        <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n        <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n      </div>\n      </mat-sidenav-container>\n</div>\n"
+module.exports = "<div #container class=\"container\">\n  <app-navbar #navbar class=\"mat-elevation-z6\" (toggleSidenav_Click)=\"sidenav.opened=!sidenav.opened\"></app-navbar>\n  <mat-sidenav-container #sidenavContainer class=\"content\">\n      <mat-sidenav #sidenav [mode]=\"sidenavMode\" align=\"start\" [opened]=\"true\"\n        [style.width]=\"sidenavWidth+'px'\">\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\n        <mat-tab-group id=\"sidenavTabs\" mat-stretch-tabs [dynamicHeight]=\"true\">\n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>library_music</mat-icon>\n                </ng-template>\n                <app-home class=\"page\"></app-home>\n            </mat-tab>            \n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>music_video</mat-icon>\n                </ng-template>\n                <app-story class=\"page\" *ngIf=\"!!meService.story?.urlOrID===true\"></app-story>\n                <span *ngIf=\"!!meService.story?.urlOrID===false\">請先選一個媒體</span>\n            </mat-tab>            \n        </mat-tab-group>\n        <div class=\"vSeparate\" [style.left]=\"sidenavWidth-2+'px'\"\n          (pointerdown)=\"onvSepPointerDown($event)\"></div>\n        <svg id=\"resizeWidth\" viewBox=\"0 0 10 20\" (pointerdown)=\"onvSepPointerDown($event)\">\n          <polygon points=\"0,10 10,0 10,20\" style=\"fill:cadetblue;opacity: 0.5;\"/>\n        </svg>\n      </mat-sidenav>\n      <!-- <div class=\"page\"> -->\n        <!-- <router-outlet></router-outlet> -->\n        <mat-sidenav-content class=\"page\" [style.margin-left]=\"(sidenavMode==='over')?0:(sidenavWidth+'px')\"\n          [style.width]=\"((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'\">\n            <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n            <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n        </mat-sidenav-content>\n      <!-- </div> -->\n      </mat-sidenav-container>\n</div>\n"
 
 /***/ }),
 
@@ -57,8 +57,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/message.service */ "./src/app/services/message.service.ts");
-/* harmony import */ var src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/youtube.service */ "./src/app/services/youtube.service.ts");
-/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
+/* harmony import */ var _services_youtube_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/youtube.service */ "./src/app/services/youtube.service.ts");
+/* harmony import */ var _services_gv_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/gv.service */ "./src/app/services/gv.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./services/device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -72,20 +76,59 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(msgService, gv, ytService) {
+    function AppComponent(msgService, gv, ytService, device, meService) {
         this.msgService = msgService;
         this.gv = gv;
         this.ytService = ytService;
-        // title = window['cordova'].platformId;
-        this.title = 'Angular';
-        this.pageType = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__["PageType"];
+        this.device = device;
+        this.meService = meService;
+        this.resize$ = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+        this.pageType = _services_gv_service__WEBPACK_IMPORTED_MODULE_3__["PageType"];
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Error, message: document.location.toString() });
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Warn, message: 'Test 2' });
         msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Info, message: 'Test 321' });
+        this.sidenavWidth = (window.innerWidth < 800) ? 300 : window.innerWidth / 4;
+        this.decideSidenavMode();
     }
     AppComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        var self = this;
         this.ytService.embedApiScript();
+        var px = NaN;
+        // * [2018-07-29 20:11] For resizing the sideNav
+        this.resize$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (_) { return self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["takeUntil"])(self.device.onPointerup$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["merge"])(self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["debounceTime"])(1000))))), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["concat"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["of"])(null))); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["concatAll"])()).subscribe(function (ev) {
+            if (ev === null) {
+                px = NaN;
+                _this.decideSidenavMode();
+            }
+            else {
+                if (isNaN(px)) {
+                    px = ev.screenX;
+                }
+                else {
+                    var dx = ev.screenX - px;
+                    px = ev.screenX;
+                    self.sidenavWidth += dx;
+                }
+            }
+        });
+    };
+    AppComponent.prototype.decideSidenavMode = function () {
+        var self = this;
+        if (self.sidenavWidth * 2 > window.innerWidth) {
+            self.sidenavMode = 'over';
+        }
+        else {
+            self.sidenavMode = 'side';
+        }
+    };
+    AppComponent.prototype.onvSepPointerDown = function (ev) {
+        this.resize$.next(ev);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -93,7 +136,8 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_3__["GvService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"]])
+        __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_3__["GvService"],
+            _services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"], _services_device_service__WEBPACK_IMPORTED_MODULE_5__["DeviceService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_7__["MediaEditService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -130,12 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_player_player_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/player/player.component */ "./src/app/components/player/player.component.ts");
 /* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 /* harmony import */ var _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/youtube.service */ "./src/app/services/youtube.service.ts");
-/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
-/* harmony import */ var src_app_services_story_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/app/services/story.service */ "./src/app/services/story.service.ts");
-/* harmony import */ var _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./dialog/dialog.component */ "./src/app/dialog/dialog.component.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var src_app_services_db_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! src/app/services/db.service */ "./src/app/services/db.service.ts");
-/* harmony import */ var _services_cordova_service__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./services/cordova.service */ "./src/app/services/cordova.service.ts");
+/* harmony import */ var _services_gv_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/gv.service */ "./src/app/services/gv.service.ts");
+/* harmony import */ var _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./dialog/dialog.component */ "./src/app/dialog/dialog.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/db.service */ "./src/app/services/db.service.ts");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./services/device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var _components_draglist_draglist_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/draglist/draglist.component */ "./src/app/components/draglist/draglist.component.ts");
+/* harmony import */ var _components_swap_icon_swap_icon_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/swap-icon/swap-icon.component */ "./src/app/components/swap-icon/swap-icon.component.ts");
+/* harmony import */ var _node_modules_angular_common__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../node_modules/@angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _pages_story_story_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/story/story.component */ "./src/app/pages/story/story.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -166,6 +213,10 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+// import { FsService } from './services/fs.service';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -183,12 +234,15 @@ var AppModule = /** @class */ (function () {
                 _components_me_section_dashboard_me_section_dashboard_component__WEBPACK_IMPORTED_MODULE_13__["MeSectionDashboardComponent"],
                 _components_me_mani_plate_me_mani_plate_component__WEBPACK_IMPORTED_MODULE_14__["MeManiPlateComponent"],
                 _components_player_player_component__WEBPACK_IMPORTED_MODULE_15__["PlayerComponent"],
-                _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_20__["DialogComponent"]
+                _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_19__["DialogComponent"],
+                _components_draglist_draglist_component__WEBPACK_IMPORTED_MODULE_23__["DraglistComponent"],
+                _components_swap_icon_swap_icon_component__WEBPACK_IMPORTED_MODULE_24__["SwapIconComponent"],
+                _pages_story_story_component__WEBPACK_IMPORTED_MODULE_26__["StoryComponent"]
             ],
-            entryComponents: [_message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"], _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_20__["DialogComponent"]],
+            entryComponents: [_message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"], _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_19__["DialogComponent"]],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_21__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_20__["FormsModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatButtonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBadgeModule"],
@@ -198,13 +252,147 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatFormFieldModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatBottomSheetModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogModule"],
+                _node_modules_angular_common__WEBPACK_IMPORTED_MODULE_25__["CommonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatSliderModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatTabsModule"]
             ],
-            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], src_app_services_story_service__WEBPACK_IMPORTED_MODULE_19__["StoryService"], src_app_services_db_service__WEBPACK_IMPORTED_MODULE_22__["DbService"], _services_cordova_service__WEBPACK_IMPORTED_MODULE_23__["CordovaService"]],
+            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"]
+                // ,FsService
+            ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/draglist/draglist.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/components/draglist/draglist.component.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n}\r\n\r\n.backDel {\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    background-color: red;\r\n    border-radius: 4px;\r\n    display: flex;\r\n    align-items: center;\r\n    color: white;\r\n}\r\n\r\n.right {\r\n    margin-left: auto;\r\n}\r\n\r\n.content {\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row:1;\r\n    grid-row:1;\r\n    background-color: white;\r\n    touch-action: none;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/components/draglist/draglist.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/components/draglist/draglist.component.html ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"backDel\">\n    <mat-icon class=\"mat-18 left\">delete</mat-icon>\n    <mat-icon class=\"mat-18 right\">delete</mat-icon>\n  </div>\n  <button mat-button class=\"content\"\n    (pointerdown)=\"onContentPointerdown($event)\"\n    (click)=\"onContentClick($event)\"\n    [style.transform]=\"'translateX('+deltaX+'px)'\"\n  >{{story.name}}</button>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/draglist/draglist.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/draglist/draglist.component.ts ***!
+  \***********************************************************/
+/*! exports provided: DraglistComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DraglistComponent", function() { return DraglistComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DraglistComponent = /** @class */ (function () {
+    function DraglistComponent(deviceService) {
+        this.deviceService = deviceService;
+        this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.contentClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.maxSpeed = 0.9;
+        this._tmpXPointerdown = { time: 0, x: 0 };
+        this._tmpXPointermove = { time: 0, x: 0 };
+        // * inner events
+        this.contentPointerdown$ = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.contentPointerup$ = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+    }
+    DraglistComponent.prototype.onContentPointerdown = function (ev) {
+        this.contentPointerdown$.next(ev);
+    };
+    DraglistComponent.prototype.ngOnInit = function () {
+        var self = this;
+        // Get the startX
+        self._subDown = self.contentPointerdown$.subscribe(function (ev) { return self._tmpXPointerdown = { time: ev.timeStamp, x: ev.screenX }; });
+        // Get the movingX and final V_x
+        self._subSwap = self.contentPointerdown$.pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_) { return self.deviceService.onPointermove$.pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(self.deviceService.onPointerup$), 
+        // takeUntil(self.deviceService.onPointermove$.pipe(
+        //   debounceTime(400),
+        //   merge(self.deviceService.onPointerup$)
+        // )),
+        Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concat"])(Object(_node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])({ timeStamp: 0, movementX: 0, screenX: -1000 }))); }), Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])(), 
+        // map(ev => ev.clientX)
+        Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["withLatestFrom"])(self.contentPointerdown$, function (e_move, e_down) {
+            if (e_move.timeStamp !== 0) {
+                self._tmpXPointermove = { time: e_move.timeStamp, x: e_move.screenX };
+            }
+            return e_move.screenX - e_down.screenX;
+        })).subscribe(function (dx) {
+            if (dx < -1000) {
+                self.deltaX = 0;
+                self._tmpVx = (self._tmpXPointermove.x - self._tmpXPointerdown.x) / (self._tmpXPointermove.time - self._tmpXPointerdown.time);
+                // * [2018-07-19 10:38] send out a notification 'delete' when the speedX is higher than 0.5
+                if (Math.abs(self._tmpVx) > self.maxSpeed) {
+                    self.delete.next();
+                }
+            }
+            else {
+                self.deltaX = (dx < -1000) ? 0 : dx;
+            }
+        });
+    };
+    DraglistComponent.prototype.ngOnDestroy = function () {
+        this._subDown.unsubscribe();
+        this._subSwap.unsubscribe();
+    };
+    DraglistComponent.prototype.onContentClick = function (ev) {
+        this.contentClick.next();
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], DraglistComponent.prototype, "story", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], DraglistComponent.prototype, "delete", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], DraglistComponent.prototype, "contentClick", void 0);
+    DraglistComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-draglist',
+            template: __webpack_require__(/*! ./draglist.component.html */ "./src/app/components/draglist/draglist.component.html"),
+            styles: [__webpack_require__(/*! ./draglist.component.css */ "./src/app/components/draglist/draglist.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_device_service__WEBPACK_IMPORTED_MODULE_2__["DeviceService"]])
+    ], DraglistComponent);
+    return DraglistComponent;
 }());
 
 
@@ -218,7 +406,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".container {\r\n    width: 100%;\r\n    position: relative;\r\n    -ms-grid-row-align: center;\r\n        align-self: center;\r\n    height: 40px;\r\n    display:-ms-grid;\r\n    display:grid;\r\n}\r\n\r\n.slideContainer {\r\n    align-items: center;\r\n    /* display: flex; */\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n        -ms-grid-rows: 1fr;\r\n        grid-template-rows: 1fr;\r\n        grid-template-areas: \"start center end\";\r\n}\r\n\r\n.slideStart {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: start\r\n}\r\n\r\n.slidePart {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    position: relative;\r\n    height: 100%;\r\n    align-items: center;\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-area: center;\r\n    overflow: hidden;\r\n    min-width: 0;\r\n}\r\n\r\n.slideEnd {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-area: end\r\n}\r\n\r\n.slideCanvas {\r\n    order: 0;\r\n    z-index: 0;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -o-object-fit: fill;\r\n       object-fit: fill;\r\n    width: 100%;\r\n    height: 100%;\r\n    position: relative;\r\n    -webkit-transform-origin: left;\r\n            transform-origin: left;\r\n}\r\n"
 
 /***/ }),
 
@@ -229,7 +417,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='container'>\n  <!-- <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"dataService.state !== mEState.playing\"> -->\n  <button mat-icon-button (click)=\"onPlay()\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button>\n  <!-- <button mat-icon-button (click)=\"onPause()\" *ngIf=\"dataService.state===mEState.playing\"> -->\n  <button mat-icon-button (click)=\"onPause()\">\n      <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button>\n</div>"
+module.exports = "<div #container class='container'>\n  <!-- <button mat-icon-button (click)=\"onPlay()\" *ngIf=\"meService.state !== mEState.playing\"> -->\n  <!-- <button mat-icon-button (click)=\"onPlay()\">\n      <mat-icon class=\"mat-18\">play_arrow</mat-icon>\n  </button> -->\n  <!-- <button mat-icon-button (click)=\"onPause()\" *ngIf=\"meService.state===mEState.playing\"> -->\n  <!-- <button mat-icon-button (click)=\"onPause()\">\n      <mat-icon class=\"mat-18\">pause</mat-icon>\n  </button> -->\n  <div class=\"slideContainer\">\n    <span class=\"slideStart\">0.0</span>\n    <div #slidePart class=\"slidePart\" (click)=\"onChangeCurrentTime($event, slidePart)\" >\n      <svg #slideCanvas class=\"slideCanvas\" [attr.viewBox]=\"'0 0 '+meService.duration+' '+'1'\" [attr.preserveAspectRatio]=\"'none'\">\n        <rect *ngFor=\"let frame of meService.story.frames\"\n        [style.fill]=\"'rgba('+frame.colorR+','+frame.colorG+','+frame.colorB+','+((!!frame.colorA)?frame.colorA:0.9)+')'\"\n        [attr.width]= \"(frame.end-frame.start)\"\n        [attr.height]=\"frame.height\"\n        [attr.x]=\"frame.start\"\n        [attr.y]=\"frame.top\"\n        ></rect>\n\n        <!-- horizontal line -->\n        <rect [style.fill]=\"'black'\" [attr.height]=\"(!!container.clientHeight)?2/container.clientHeight:2\" [attr.width]=\"meService.duration\" x=\"0\" y=\"50%\"></rect>\n        <!-- pointer -->\n        <rect [style.fill]=\"'blue'\" [attr.x]=\"((meService.currentTime>0)?meService.currentTime:0)\" y=\"0\" [attr.width]=\"(!!container.clientWidth)?2*meService.duration/container.clientWidth:1\" height=\"100%\"></rect>\n      </svg>\n    </div>\n    <span class=\"slideEnd\">{{meService.duration| number: '1.1-1'}}</span>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -257,8 +445,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var MeMainDashboardComponent = /** @class */ (function () {
-    function MeMainDashboardComponent(dataService, nZone) {
-        this.dataService = dataService;
+    function MeMainDashboardComponent(meService, nZone) {
+        this.meService = meService;
         this.nZone = nZone;
         this.mEState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"];
         this.pAction = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"];
@@ -269,7 +457,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
             return this._action;
         },
         set: function (v) {
-            this.dataService.onPlayerAction.next(v);
+            this.meService.onPlayerAction.next(v);
             this._action = v;
         },
         enumerable: true,
@@ -288,6 +476,16 @@ var MeMainDashboardComponent = /** @class */ (function () {
         this.nZone.run(function () {
             _this.action = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause;
         });
+    };
+    MeMainDashboardComponent.prototype.onChangeCurrentTime = function (ev, evOf) {
+        // * [2018-07-23 11:35] since the support of ev.layerX for mobile is unknown, I tried to get them
+        // const target = ev.target as Element;
+        var target = evOf;
+        var rect = target.getBoundingClientRect();
+        var layerX = ev.clientX - rect.left;
+        // * [2018-07-23 11:36] Set the seekTime
+        this.meService.seekTime = layerX / rect.width * this.meService.duration;
+        this.meService.setiFrame(-1);
     };
     MeMainDashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -311,7 +509,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    \r\n    display: -ms-inline-grid;\r\n    \r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \r\n    \"main-play\" \r\n    \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: flex;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width:100%;\r\n    align-self: baseline;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n\r\n    display: -ms-grid;\r\n\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter, .upLeft, .upRight{\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n}\r\n\r\n#subtitle {\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n    width: 100%;\r\n}\r\n"
 
 /***/ }),
 
@@ -322,7 +520,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>For me-mani-plate</p>"
+module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" \r\n    (pointerenter)=\"HideShow='show'\" (pointerleave)=\"HideShow='hide'\">\r\n    <div class=\"main\">\r\n        <div class=\"main-up\" [@hideShow]=\"HideShow\">\r\n            <div #ratio class=\"smallSlider\">\r\n                <mat-icon>directions_walk</mat-icon>\r\n                <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\"\r\n                 [displayWith]=\"tickDisplayWith(meService)\" thumbLabel \r\n                 [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\"\r\n                 (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\" ></mat-slider>\r\n                <mat-icon>flight</mat-icon>\r\n            </div>\r\n            <div #volume class=\"smallSlider\">\r\n                    <mat-icon>volume_mute</mat-icon>\r\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                    <mat-icon>volume_up</mat-icon>\r\n            </div>    \r\n        </div>\r\n        <div class=\"main-play\" [@hideShow]=\"HideShow\">\r\n            <button id=\"btnStart\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\">\r\n                <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n            </button>\r\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n                    <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n                </svg>\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n                        <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                        <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                    </svg>\r\n            </button>\r\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\">\r\n                <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n            </button>\r\n        </div>\r\n        <div class=\"main-down\">\r\n            <textarea id=\"subtitle\" matInput \r\n             [(ngModel)]=\"meService.story.frames[meService.story.iFrame].subtitle\"\r\n             [style.background-color]=\"(HideShow==='hide')?'#00000000':'#FFFFFFFF'\"\r\n             [style.border-color]=\"(HideShow==='hide')?'#00000000':'#B0B0B0FF'\">\r\n            </textarea>\r\n        </div>\r\n    </div>\r\n    <div class=\"slider\">\r\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\"  (blur)=\"IOEndShown='out'\">\r\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\" >{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n            <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\"\r\n                [max]=\"meService.story.frames[meService.story.iFrame].end\"\r\n                [value]=\"meService.currentTime\"\r\n                (change)=\"meService.seekTime=frameSlider.value\"\r\n            ></mat-slider>\r\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\" >{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -338,6 +536,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeManiPlateComponent", function() { return MeManiPlateComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/@angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -349,17 +548,76 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var MeManiPlateComponent = /** @class */ (function () {
-    function MeManiPlateComponent(dataService) {
-        this.dataService = dataService;
+    function MeManiPlateComponent(meService) {
+        this.meService = meService;
+        this.previousState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].initialized;
+        this.MEState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"];
+        this.IOStartShown = 'out';
+        this.IOEndShown = 'out';
+        this.HideShow = 'show';
+        this.tickDisplayWith = function (meService) {
+            return function (i) {
+                return meService.availablePlaybackRates[i];
+            };
+        };
     }
     MeManiPlateComponent.prototype.ngOnInit = function () {
+        this.previousState = this.meService.state;
+    };
+    MeManiPlateComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        Promise.resolve(null).then(function (_) { return _this.HideShow = 'hide'; });
+    };
+    MeManiPlateComponent.prototype.onPlayPause = function () {
+        if (this.previousState !== src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing) {
+            this.meService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play);
+            this.previousState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing;
+        }
+        else if (this.previousState === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing) {
+            this.meService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause);
+            this.previousState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused;
+        }
+    };
+    MeManiPlateComponent.prototype.onOpenInputStart = function (inStart) {
+        inStart.focus();
+        this.IOStartShown = 'in';
+    };
+    MeManiPlateComponent.prototype.onOpenInputEnd = function (inEnd) {
+        inEnd.focus();
+        this.IOEndShown = 'in';
     };
     MeManiPlateComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-me-mani-plate',
             template: __webpack_require__(/*! ./me-mani-plate.component.html */ "./src/app/components/me-mani-plate/me-mani-plate.component.html"),
-            styles: [__webpack_require__(/*! ./me-mani-plate.component.css */ "./src/app/components/me-mani-plate/me-mani-plate.component.css")]
+            styles: [__webpack_require__(/*! ./me-mani-plate.component.css */ "./src/app/components/me-mani-plate/me-mani-plate.component.css")],
+            animations: [
+                Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["trigger"])('changeFrame', [
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('* => *', [
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(-100%)' }),
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s 0.1s ease-in', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(0)' }))
+                    ])
+                ]),
+                Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["trigger"])('flyInOut', [
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('in', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(0)', opacity: 1 })),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('out', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(100%)', opacity: 0 })),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('out => in', [
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(100%)', opacity: 0 }),
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s 0.1s ease-in', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(0)', opacity: 1 }))
+                    ]),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('in => out', [
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s 0.1s ease-out', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(100%)', opacity: 0 }))
+                    ])
+                ]),
+                Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["trigger"])('hideShow', [
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('show', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ opacity: 1 })),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('hide', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ opacity: 0 })),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('hide => show', [Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s 0.1s ease-in', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ opacity: 1 }))]),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('show => hide', [Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('4s 2s ease-out', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ opacity: 0 }))]),
+                ])
+            ]
         }),
         __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
     ], MeManiPlateComponent);
@@ -377,7 +635,7 @@ var MeManiPlateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".container {\r\n    display: flex;\r\n}\r\n\r\n.large {\r\n    font-size: large;\r\n}\r\n\r\n.listContainer {\r\n    flex-grow: 1;\r\n    max-height: 120px;\r\n    overflow-y: auto;\r\n    display: inline;\r\n}\r\n"
 
 /***/ }),
 
@@ -388,7 +646,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  me-section-dashboard works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <button id=\"allBtn\" mat-icon-button mat-raised-button (click)=\"onWhichFrame(-1)\">\n    <mat-icon class=\"mat-18\">all_inclusive</mat-icon>\n  </button>\n  <button id=\"plusBtn\" mat-icon-button mat-raised-button (click)=\"onAddFrame()\">\n    <span class=\"large\">+</span>\n  </button>\n\n  <div class=\"listContainer\">\n    <app-swap-icon\n    *ngFor=\"let aFrame of meService.story.frames; let i = index;\" \n    [index]=\"i\"\n    [bR]=\"aFrame.colorR\"\n    [bG]=\"aFrame.colorG\"\n    [bB]=\"aFrame.colorB\"\n    (contentClick)=\"onWhichFrame(i)\"\n    (delete)=\"onRemoveFrame(i)\">\n    </app-swap-icon>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -403,6 +661,8 @@ module.exports = "<p>\n  me-section-dashboard works!\n</p>\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MeSectionDashboardComponent", function() { return MeSectionDashboardComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _vm_a_frame__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../vm/a-frame */ "./src/app/vm/a-frame.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -413,10 +673,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var MeSectionDashboardComponent = /** @class */ (function () {
-    function MeSectionDashboardComponent() {
+    function MeSectionDashboardComponent(meService) {
+        this.meService = meService;
     }
     MeSectionDashboardComponent.prototype.ngOnInit = function () {
+    };
+    MeSectionDashboardComponent.prototype.onAddFrame = function () {
+        var frame = new _vm_a_frame__WEBPACK_IMPORTED_MODULE_2__["AFrame"]();
+        frame.start = this.meService.currentTime;
+        frame.end = frame.start + 10;
+        frame.height = 0.6;
+        frame.top = Math.random() * 0.4;
+        this.meService.story.frames.push(frame);
+    };
+    MeSectionDashboardComponent.prototype.onRemoveFrame = function (i) {
+        var frames = this.meService.story.frames;
+        frames.splice(i, 1);
+        this.meService.setiFrame(-1);
+    };
+    MeSectionDashboardComponent.prototype.onWhichFrame = function (i) {
+        this.meService.setiFrame(i);
+        if (i >= 0) {
+            this.meService.seekTime = this.meService.story.frames[i].start;
+        }
+        console.log(i + "/ **************************** TODO **************************/");
     };
     MeSectionDashboardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -424,7 +707,7 @@ var MeSectionDashboardComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./me-section-dashboard.component.html */ "./src/app/components/me-section-dashboard/me-section-dashboard.component.html"),
             styles: [__webpack_require__(/*! ./me-section-dashboard.component.css */ "./src/app/components/me-section-dashboard/me-section-dashboard.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
     ], MeSectionDashboardComponent);
     return MeSectionDashboardComponent;
 }());
@@ -451,7 +734,7 @@ module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-wid
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.pType===pType.url||dataService.pType===pType.file)?'block':'none'\"\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [style.display]=\"(dataService.pType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
+module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.story.meType===pType.url||dataService.story.meType===pType.file)?'block':'none'\"\n  (click)=\"onVideoPlayOrPause($event)\"\n  controls\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(dataService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
 
 /***/ }),
 
@@ -471,6 +754,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -486,13 +770,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var PlayerComponent = /** @class */ (function () {
     function PlayerComponent(dataService, YTservice, msgService, ngZone) {
         this.dataService = dataService;
         this.YTservice = YTservice;
         this.msgService = msgService;
         this.ngZone = ngZone;
-        this.pType = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"];
+        this.pType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"];
         this.unSubscribed = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.isInited = false;
     }
@@ -522,6 +807,21 @@ var PlayerComponent = /** @class */ (function () {
         this.unSubscribed.next(true);
         this.unSubscribed.complete();
     };
+    PlayerComponent.prototype.getCurrentTime = function () {
+        var self = this;
+        var meType = self.dataService.story.meType;
+        if (meType === self.pType.youtubeID) {
+            if (self.YTservice.isApiReady && !!self.YTservice.ytPlayer.getCurrentTime) {
+                return self.YTservice.ytPlayer.getCurrentTime();
+            }
+            else {
+                return -1;
+            }
+        }
+        else {
+            return self.videoEle.currentTime;
+        }
+    };
     PlayerComponent.prototype.eventListeners = function () {
         var self = this;
         // * For readyForPlayer
@@ -535,11 +835,63 @@ var PlayerComponent = /** @class */ (function () {
                 self.initMe();
             }
         });
+        // * [2018-07-21 19:44] For CurrentTime
+        self.dataService.onCurrentTimeChanged = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(200)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (_) { return self.getCurrentTime(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["distinctUntilChanged"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["share"])());
+        self.dataService.onCurrentTimeChanged
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
+            .subscribe(function (t) {
+            self.dataService.currentTime = t;
+            // console.log(t);
+        });
+        // * [2018-07-24 13:48] For repeating each frame
+        self.dataService.onCurrentTimeChanged
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
+            .subscribe(function (t) {
+            try {
+                var start = 0;
+                var end = self.dataService.duration - 0.1;
+                var iFrame = self.dataService.story.iFrame;
+                if (iFrame >= 0) {
+                    var frame = self.dataService.story.frames[iFrame];
+                    if (!!frame) {
+                        start = frame.start;
+                        end = frame.end;
+                    }
+                }
+                if (t < start) {
+                    self.dataService.seekTime = start;
+                }
+                else if (t > end) {
+                    self.dataService.seekTime = start;
+                    if (self.dataService.isRepeat === false) {
+                        self.dataService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause);
+                    }
+                }
+            }
+            catch (error) {
+                console.error(error);
+            }
+        });
+        // * [2018-07-22 22:16] Update Duration & availablePlaybackRates
+        Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["fromEvent"])(self.videoEle, 'durationchange')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
+            .subscribe(function (_) {
+            self.dataService.duration = self.videoEle.duration;
+            self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+        });
+        self.YTservice.onReady
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
+            .subscribe(function (_) {
+            self.dataService.duration = self.YTservice.ytPlayer.getDuration();
+            self.dataService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
+        });
         // * For playerAction
         this.dataService.onPlayerAction
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
             .subscribe(function (t) {
-            if (self.dataService.pType === self.pType.url || self.dataService.pType === self.pType.file) {
+            var meType = self.dataService.story.meType;
+            if (meType === self.pType.url || meType === self.pType.file) {
                 switch (t) {
                     case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play:
                         self.videoEle.play();
@@ -548,22 +900,66 @@ var PlayerComponent = /** @class */ (function () {
                         self.videoEle.pause();
                         break;
                     case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].seek:
-                        self.videoEle.currentTime = self.dataService.currentTime;
+                        self.videoEle.currentTime = self.dataService.seekTime;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getDuration:
+                        self.dataService.duration = self.videoEle.duration;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getVolume:
+                        self.dataService._volume = self.videoEle.volume;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].setVolume:
+                        self.videoEle.volume = self.dataService.volume;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getPlaybackRate:
+                        self.dataService._playbackRate = self.videoEle.playbackRate;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].setPlaybackRate:
+                        self.videoEle.playbackRate = self.dataService.playbackRate;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getAllowedPlaybackRate:
+                        self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
                         break;
                     default:
                         break;
                 }
             }
-            else if (self.dataService.pType === self.pType.youtubeID) {
+            else if (meType === self.pType.youtubeID) {
+                var ytPlayer = self.YTservice.ytPlayer;
+                if (!!ytPlayer === false) {
+                    return;
+                }
                 switch (t) {
                     case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play:
-                        self.YTservice.ytPlayer.playVideo();
+                        ytPlayer.playVideo();
                         break;
                     case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause:
-                        self.YTservice.ytPlayer.pauseVideo();
+                        ytPlayer.pauseVideo();
                         break;
                     case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].seek:
-                        self.YTservice.ytPlayer.seekTo(self.dataService.currentTime, true);
+                        if (!!ytPlayer.seekTo) {
+                            ytPlayer.seekTo(self.dataService.seekTime, true);
+                        }
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getDuration:
+                        if (!!ytPlayer && !!ytPlayer.getDuration) {
+                            self.dataService.duration = ytPlayer.getDuration();
+                        }
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getVolume:
+                        self.dataService._volume = ytPlayer.getVolume() / 100;
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].setVolume:
+                        ytPlayer.setVolume(self.dataService.volume * 100);
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getPlaybackRate:
+                        self.dataService._playbackRate = ytPlayer.getPlaybackRate();
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].setPlaybackRate:
+                        ytPlayer.setPlaybackRate(self.dataService.playbackRate);
+                        break;
+                    case src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].getAllowedPlaybackRate:
+                        self.dataService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
                         break;
                     default:
                         break;
@@ -630,25 +1026,37 @@ var PlayerComponent = /** @class */ (function () {
     };
     PlayerComponent.prototype.initMe = function () {
         // ******* TODO *******
-        if (this.dataService.pType === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].url) {
-            if (src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].isYoutubeURL(this.dataService.urlOrId)) {
-                this.dataService.pType = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].youtubeID;
-                this.ytVId = src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].getYTId(this.dataService.urlOrId);
+        var meType = this.dataService.story.meType;
+        var urlOrId = this.dataService.story.urlOrID;
+        if (meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"].url) {
+            if (src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].isYoutubeURL(urlOrId)) {
+                this.dataService.story.meType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"].youtubeID;
+                this.ytVId = src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].getYTId(urlOrId);
             }
             else {
-                this.videoSrc = this.dataService.urlOrId;
+                this.videoSrc = urlOrId;
             }
         }
-        else if (this.dataService.pType === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].youtubeID) {
-            if (src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].isYoutubeURL(this.dataService.urlOrId)) {
-                this.ytVId = src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].getYTId(this.dataService.urlOrId);
+        else if (meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"].youtubeID) {
+            if (src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].isYoutubeURL(urlOrId)) {
+                this.ytVId = src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"].getYTId(urlOrId);
             }
             else {
-                this.ytVId = this.dataService.urlOrId;
+                this.ytVId = urlOrId;
             }
         }
-        else if (this.dataService.pType === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].file) {
-            this.videoSrc = this.dataService.urlOrId;
+        else if (meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"].file) {
+            this.videoSrc = urlOrId;
+        }
+    };
+    PlayerComponent.prototype.onVideoPlayOrPause = function (ev) {
+        ev.preventDefault();
+        var state = this.dataService.state;
+        if (state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].readyForPlayer || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay) {
+            this.dataService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play);
+        }
+        else {
+            this.dataService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause);
         }
     };
     __decorate([
@@ -669,6 +1077,148 @@ var PlayerComponent = /** @class */ (function () {
             src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]])
     ], PlayerComponent);
     return PlayerComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/swap-icon/swap-icon.component.css":
+/*!**************************************************************!*\
+  !*** ./src/app/components/swap-icon/swap-icon.component.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n.container {\r\n    display: -ms-inline-grid;\r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr;\r\n        grid-template-rows: 1fr;\r\n        grid-template-areas: 'center';\r\n}\r\n\r\nbutton {\r\n    touch-action: none;\r\n}\r\n\r\n.eachButton, .delBK {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: center;\r\n    /* grid-column: 1;\r\n    grid-row: 1; */\r\n}\r\n\r\n.delBK {\r\n    background-color: red;\r\n    color: white;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/components/swap-icon/swap-icon.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/components/swap-icon/swap-icon.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<span class=\"container\">\n  <button mat-icon-button class=\"delBK\">\n    <mat-icon class=\"mat-18\">delete</mat-icon>\n  </button>\n  <button mat-icon-button mat-raised-button\n  class=\"eachButton\"\n  [style.transform]=\"'translateY('+deltaY+'px)'\"\n  [style.background-color]=\"'rgba('+bR+','+bG+','+bB+','+bA+')'\"\n  (pointerdown)=\"onContentPointerdown($event)\"\n  (click)=\"onBtnClick($event)\">\n  <span>{{index}}</span>\n</button>\n</span>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/swap-icon/swap-icon.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/components/swap-icon/swap-icon.component.ts ***!
+  \*************************************************************/
+/*! exports provided: SwapIconComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SwapIconComponent", function() { return SwapIconComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var SwapIconComponent = /** @class */ (function () {
+    function SwapIconComponent(deviceService) {
+        this.deviceService = deviceService;
+        this.bA = 1;
+        this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.contentClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.maxSpeed = 0.9;
+        this._tmpYPointerdown = { time: 0, y: 0 };
+        this._tmpYPointermove = { time: 0, y: 0 };
+        // * inner events
+        this.contentPointerdown$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        this.contentPointerup$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+    }
+    SwapIconComponent.prototype.onContentPointerdown = function (ev) {
+        this.contentPointerdown$.next(ev);
+    };
+    SwapIconComponent.prototype.ngOnInit = function () {
+        var self = this;
+        // Get the startX
+        self._subDown = self.contentPointerdown$.subscribe(function (ev) { return self._tmpYPointerdown = { time: ev.timeStamp, y: ev.screenY }; });
+        // Get the movingX and final V_x
+        self._subSwap = self.contentPointerdown$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_) { return self.deviceService.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(self.deviceService.onPointerup$), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concat"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])({ timeStamp: 0, movementY: 0, screenY: -1000 }))); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])(), 
+        // map(ev => ev.clientX)
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["withLatestFrom"])(self.contentPointerdown$, function (e_move, e_down) {
+            if (e_move.timeStamp !== 0) {
+                self._tmpYPointermove = { time: e_move.timeStamp, y: e_move.screenY };
+            }
+            return e_move.screenY - e_down.screenY;
+        })).subscribe(function (dy) {
+            if (dy < -1000) {
+                self.deltaY = 0;
+                self._tmpVy = (self._tmpYPointermove.y - self._tmpYPointerdown.y) / (self._tmpYPointermove.time - self._tmpYPointerdown.time);
+                // * [2018-07-19 10:38] send out a notification 'delete' when the speedX is higher than 0.5
+                if (Math.abs(self._tmpVy) > self.maxSpeed) {
+                    self.delete.next();
+                }
+            }
+            else {
+                self.deltaY = (dy < -1000) ? 0 : dy;
+            }
+        });
+    };
+    SwapIconComponent.prototype.ngOnDestroy = function () {
+        this._subDown.unsubscribe();
+        this._subSwap.unsubscribe();
+    };
+    SwapIconComponent.prototype.onBtnClick = function (ev) {
+        var self = this;
+        this.contentClick.next(self.index);
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], SwapIconComponent.prototype, "index", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], SwapIconComponent.prototype, "bR", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], SwapIconComponent.prototype, "bG", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Number)
+    ], SwapIconComponent.prototype, "bB", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], SwapIconComponent.prototype, "bA", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], SwapIconComponent.prototype, "delete", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], SwapIconComponent.prototype, "contentClick", void 0);
+    SwapIconComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-swap-icon',
+            template: __webpack_require__(/*! ./swap-icon.component.html */ "./src/app/components/swap-icon/swap-icon.component.html"),
+            styles: [__webpack_require__(/*! ./swap-icon.component.css */ "./src/app/components/swap-icon/swap-icon.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_device_service__WEBPACK_IMPORTED_MODULE_2__["DeviceService"]])
+    ], SwapIconComponent);
+    return SwapIconComponent;
 }());
 
 
@@ -837,7 +1387,7 @@ var MessageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-items: center;\r\n    padding: 8px 16px;\r\n    background: #673ab7;\r\n}\r\n\r\n.flex-spacer{\r\n    flex-grow: 1;\r\n}"
+module.exports = "nav{\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 8px 16px;\r\n    background: #673ab7;\r\n}\r\n\r\n.flex-spacer{\r\n    flex-grow: 1;\r\n    text-align: center;\r\n    overflow-x: auto;\r\n}"
 
 /***/ }),
 
@@ -848,7 +1398,7 @@ module.exports = "nav{\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    alig
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button (click)=\"sideType=(sideType===_sideNavType.none)?_sideNavType.home:_sideNavType.none\">\n      <mat-icon class=\"mat-18\">menu</mat-icon>\n  </button>\n  <div class=\"flex-spacer\"></div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n</nav>"
+module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button (click)=\"toggleSidenav_Click.next($event)\">\n      <mat-icon class=\"mat-18\">menu</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onSaveStory()\" *ngIf=\"meService.sideClickType===sideClickType_.new\">\n    <mat-icon class=\"mat-18\">save</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onUpdateStory()\" *ngIf=\"meService.sideClickType===sideClickType_.select\">\n    <mat-icon class=\"mat-18\">update</mat-icon>\n  </button>\n<div class=\"flex-spacer\">\n  <div>{{meService.story.title}}</div>\n</div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n</nav>"
 
 /***/ }),
 
@@ -856,17 +1406,18 @@ module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button 
 /*!********************************************!*\
   !*** ./src/app/navbar/navbar.component.ts ***!
   \********************************************/
-/*! exports provided: NavbarComponent, sideNavType */
+/*! exports provided: NavbarComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NavbarComponent", function() { return NavbarComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sideNavType", function() { return sideNavType; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _message_message_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../message/message.component */ "./src/app/message/message.component.ts");
+/* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/db.service */ "./src/app/services/db.service.ts");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -876,18 +1427,57 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
 
 
 
 
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(bottomSheet, ngZone, msgService) {
+    function NavbarComponent(bottomSheet, ngZone, db, meService, msgService) {
         this.bottomSheet = bottomSheet;
         this.ngZone = ngZone;
+        this.db = db;
+        this.meService = meService;
         this.msgService = msgService;
-        this.sideType = sideNavType.home;
-        this._sideNavType = sideNavType;
+        this.toggleSidenav_Click = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.nUnReadMsg = 0;
+        this.sideClickType_ = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["SideClickType"];
         var self = this;
         this.nUnReadMsg = msgService.getNUnRead();
         msgService.remindMsgIn.subscribe(function (n) {
@@ -907,30 +1497,57 @@ var NavbarComponent = /** @class */ (function () {
         var ref = this.bottomSheet.open(_message_message_component__WEBPACK_IMPORTED_MODULE_3__["MessageComponent"]);
         ref.instance.showMsgs();
     };
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
-        __metadata("design:type", Number)
-    ], NavbarComponent.prototype, "sideType", void 0);
+    NavbarComponent.prototype.onSaveStory = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var story, insert;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        story = this.meService.story;
+                        delete story['id'];
+                        return [4 /*yield*/, this.db.upsertAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"].storyTableName, story)];
+                    case 1:
+                        insert = _a.sent();
+                        // * [2018-07-25 19:04] Change its state to 'Update'
+                        story['id'] = insert[0].affectedRows[0].id;
+                        this.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["SideClickType"].select;
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    NavbarComponent.prototype.onUpdateStory = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var story;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        story = this.meService.story;
+                        return [4 /*yield*/, this.db.upsertAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"].storyTableName, story)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
         __metadata("design:type", Object)
-    ], NavbarComponent.prototype, "_sideNavType", void 0);
+    ], NavbarComponent.prototype, "toggleSidenav_Click", void 0);
     NavbarComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-navbar',
             template: __webpack_require__(/*! ./navbar.component.html */ "./src/app/navbar/navbar.component.html"),
             styles: [__webpack_require__(/*! ./navbar.component.css */ "./src/app/navbar/navbar.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBottomSheet"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBottomSheet"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
+            _services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["MediaEditService"],
+            _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
 
-var sideNavType;
-(function (sideNavType) {
-    sideNavType[sideNavType["none"] = 0] = "none";
-    sideNavType[sideNavType["home"] = 1] = "home";
-})(sideNavType || (sideNavType = {}));
 
 
 /***/ }),
@@ -942,7 +1559,7 @@ var sideNavType;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-width {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.question {\r\n    background-color: red;\r\n    color: yellow;\r\n    font-weight: bolder;\r\n    min-width: 0px;\r\n    box-shadow: 4px;\r\n}"
+module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-width {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.question {\r\n    background-color: red;\r\n    color: yellow;\r\n    font-weight: bolder;\r\n    min-width: 0px;\r\n    box-shadow: 4px;\r\n}\r\n\r\napp-draglist {\r\n    width:100%;\r\n}"
 
 /***/ }),
 
@@ -953,7 +1570,7 @@ module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3>\r\n        讀入新的媒體：\r\n    </h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                網址\r\n            </button>\r\n            <button mat-icon-button class=\"question\">\r\n                ?\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selFile.click()\" >\r\n                <input #selFile name=\"selFile\" id=\"selFile\"\r\n                type=\"file\" accept=\"video/*, audio/*\" (change)=\"onFileSelect(selFile.files)\">\r\n                檔案\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n</div>\r\n"
+module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3>\r\n        讀入新的媒體：\r\n    </h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                網址\r\n            </button>\r\n            <button mat-icon-button class=\"question\">\r\n                ?\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selFile.click()\" >\r\n                <input #selFile name=\"selFile\" id=\"selFile\"\r\n                type=\"file\" accept=\"video/*, audio/*\" (change)=\"onFileSelect(selFile.files)\">\r\n                檔案\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n\r\n    <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n    </mat-list>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -968,11 +1585,14 @@ module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/gv.service */ "./src/app/services/gv.service.ts");
-/* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _services_gv_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/gv.service */ "./src/app/services/gv.service.ts");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var src_app_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/dialog/dialog.component */ "./src/app/dialog/dialog.component.ts");
+/* harmony import */ var _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../dialog/dialog.component */ "./src/app/dialog/dialog.component.ts");
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/services/db.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -982,6 +1602,44 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
 
 
 
@@ -989,39 +1647,79 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(gv, dialog, meService, db) {
+    function HomeComponent(gv, dialog, meService, db, ngZone // , private fs: FsService
+    , msg) {
         this.gv = gv;
         this.dialog = dialog;
         this.meService = meService;
         this.db = db;
+        this.ngZone = ngZone; // , private fs: FsService
+        this.msg = msg;
         this.Url = 'https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3';
         this.testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
-        this.pageType = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"];
+        this.storySearch$ = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
+        this.pageType = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"];
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var self = this;
+        // from(this.db.searchAsync()).subscribe(this.stories$);
+        self.db.onDataChanged.subscribe(function (data) { return self.storySearch$.next(null); });
+        self.stories$ = self.storySearch$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (val) {
+            if (val === null) {
+                return self.db.searchAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, null, null, { viewTime: 'desc' });
+            }
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatAll"])());
+        self.stories$.subscribe(function (s) {
+            self.ngZone.run(function () {
+                self.stories = s;
+            });
+        });
+        // * [2018-08-01 10:27] Check whether FsPlugin is available now
+        // self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+    };
+    HomeComponent.prototype.ngAfterViewInit = function () {
+        this.storySearch$.next(null); // initialize the search
     };
     HomeComponent.prototype.onFileSelect = function (files) {
         if (files !== null && files.length > 0) {
             var file = files[0];
             this.meService.initMe(file);
-            this.gv.shownPage = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+            this.gv.shownPage = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
         }
+        // * [2018-07-19 21:28] Tell navbar that you want to create a story
+        this.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].new;
     };
     HomeComponent.prototype.onLoadFromURL = function () {
-        var _this = this;
         var self = this;
-        var dialogRef = this.dialog.open(src_app_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
+        var dialogRef = this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
             width: '50%',
-            data: { dType: src_app_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
+            data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
         });
         dialogRef.afterClosed().subscribe(function (result) {
             if (!!result === false) {
                 return;
             }
             self.Url = result;
-            _this.meService.initMe(self.Url);
-            _this.gv.shownPage = src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+            self.meService.initMe(self.Url);
+            self.gv.shownPage = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+            // * [2018-07-19 21:28] Tell navbar that you want to create a story
+            self.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].new;
         });
+    };
+    HomeComponent.prototype.onStoryDelete = function (story) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.db.deleteAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, ['id', '=', story.id]);
+                return [2 /*return*/];
+            });
+        });
+    };
+    HomeComponent.prototype.onStoryOpen = function (story) {
+        var duplicatedStory = Object.assign(story);
+        this.meService.initMe(duplicatedStory);
+        this.gv.shownPage = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+        // * [2018-07-19 21:28] Tell navbar that you select a story
+        this.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].select;
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1029,8 +1727,11 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/pages/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/pages/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [src_app_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
-            src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"], _services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"]])
+        __metadata("design:paramtypes", [_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
+            _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"], _services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"],
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] // , private fs: FsService
+            ,
+            _services_message_service__WEBPACK_IMPORTED_MODULE_8__["MessageService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -1046,7 +1747,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr auto auto;\r\n        grid-template-rows: auto 1fr auto auto;\r\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\nheader {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: header;\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    overflow: hidden;\r\n    width:100%;\r\n}\r\n\r\n.dashboardSection {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: cSection;\r\n}\r\n\r\n.dashboardMain {\r\n    -ms-grid-row: 4;\r\n    -ms-grid-column: 1;\r\n    grid-area: cMain;\r\n}"
+module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr auto auto;\r\n        grid-template-rows: auto 1fr auto auto;\r\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\nheader {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: header;\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    overflow: hidden;\r\n}\r\n\r\napp-player {\r\n    z-index: 0;\r\n}\r\n\r\napp-me-mani-plate {\r\n    z-index: 1;\r\n}\r\n\r\n.dashboardSection {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: cSection;\r\n}\r\n\r\n.dashboardMain {\r\n    -ms-grid-row: 4;\r\n    -ms-grid-column: 1;\r\n    grid-area: cMain;\r\n}"
 
 /***/ }),
 
@@ -1057,7 +1758,7 @@ module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <header>{{this.dataService.title}}</header>\r\n  <!-- <main> -->\r\n    <!-- <video #videoElement class=\"main\"></video> -->\r\n    <app-player class=\"main\"></app-player>\r\n    <app-me-mani-plate class=\"main\"></app-me-mani-plate>\r\n  <!-- </main> -->\r\n  <aside></aside>\r\n  <footer class=\"dashboardSection\">\r\n    <app-me-section-dashboard></app-me-section-dashboard>\r\n  </footer>\r\n  <footer class=\"dashboardMain\">\r\n    <app-me-main-dashboard></app-me-main-dashboard>\r\n  </footer>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\r\n  <!-- <header>{{this.dataService.story.name}}</header> -->\r\n  <!-- <main> -->\r\n    <!-- <video #videoElement class=\"main\"></video> -->\r\n    <app-player class=\"main\"></app-player>\r\n    <app-me-mani-plate class=\"main\"\r\n      [style.background-color]=\"(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'\"\r\n      *ngIf=\"meService.story.iFrame>=0\"\r\n      [@flyInOut]=\"'in'\"\r\n    ></app-me-mani-plate>\r\n  <!-- </main> -->\r\n  <aside></aside>\r\n  <footer class=\"dashboardSection\">\r\n    <app-me-section-dashboard></app-me-section-dashboard>\r\n  </footer>\r\n  <footer class=\"dashboardMain\">\r\n    <app-me-main-dashboard></app-me-main-dashboard>\r\n  </footer>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1072,7 +1773,8 @@ module.exports = "<div class=\"container\">\r\n  <header>{{this.dataService.titl
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MediaEditComponent", function() { return MediaEditComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/@angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1084,9 +1786,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var MediaEditComponent = /** @class */ (function () {
-    function MediaEditComponent(/*private route: ActivatedRoute, */ dataService) {
-        this.dataService = dataService;
+    function MediaEditComponent(/*private route: ActivatedRoute, */ meService) {
+        this.meService = meService;
     }
     MediaEditComponent.prototype.ngOnInit = function () {
         // const self = this;
@@ -1096,20 +1799,98 @@ var MediaEditComponent = /** @class */ (function () {
         //   if (para !== '0') {
         //     inData = para;
         //   } else {
-        //     inData = this.dataService.blob;
+        //     inData = this.meService.blob;
         //   }
-        //   self.dataService.initMe(inData);
+        //   self.meService.initMe(inData);
         // });
     };
     MediaEditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-media-edit',
             template: __webpack_require__(/*! ./media-edit.component.html */ "./src/app/pages/media-edit/media-edit.component.html"),
-            styles: [__webpack_require__(/*! ./media-edit.component.css */ "./src/app/pages/media-edit/media-edit.component.css")]
+            styles: [__webpack_require__(/*! ./media-edit.component.css */ "./src/app/pages/media-edit/media-edit.component.css")],
+            animations: [
+                Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["trigger"])('flyInOut', [
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["state"])('in', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(0)' })),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('void => *', [
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(-100%)' }),
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s ease-in')
+                    ]),
+                    Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('* => void', [
+                        Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.2s 0.1s ease-out', Object(_node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateY(-100%)' }))
+                    ])
+                ])
+            ]
         }),
-        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
+        __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
     ], MediaEditComponent);
     return MediaEditComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/story/story.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/pages/story/story.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    height: 100%;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n        grid-template-areas: 'main' 'des';\r\n}\r\n\r\n.nameETC {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n}\r\n\r\nmat-form-field {\r\n    width: 90%;\r\n}\r\n\r\n.description {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: des;\r\n    height: 100%;\r\n}\r\n\r\n.description ::ng-deep [class^=mat-form-field-wrapper], .description ::ng-deep [class^=mat-form-field-flex], .description ::ng-deep [class^=mat-form-field-infix], textarea {\r\n    height: 100%;\r\n}"
+
+/***/ }),
+
+/***/ "./src/app/pages/story/story.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/pages/story/story.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"nameETC\">\n    <mat-form-field>\n      <input matInput placeholder=\"媒體名稱\" [(ngModel)]=\"meService.story.name\">\n    </mat-form-field>\n    \n    <mat-form-field>\n      <input matInput placeholder=\"媒體標題\" [(ngModel)]=\"meService.story.title\">\n    </mat-form-field>\n    \n    <mat-form-field>\n      <input matInput placeholder=\"關鍵字\" [(ngModel)]=\"meService.story.keywords\">\n    </mat-form-field>\n    \n    <mat-form-field>\n      <input matInput placeholder=\"媒體來源\" [(ngModel)]=\"(meService.story.meType===meService.PlayerType.file)?meService.story.fileName:meService.story.urlOrID\">\n    </mat-form-field>      \n  </div>\n  \n  <mat-form-field class=\"description\">\n    <textarea matInput placeholder=\"描述\" [(ngModel)]=\"meService.story.description\">\n    </textarea>\n  </mat-form-field>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/story/story.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/pages/story/story.component.ts ***!
+  \************************************************/
+/*! exports provided: StoryComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoryComponent", function() { return StoryComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StoryComponent = /** @class */ (function () {
+    function StoryComponent(meService) {
+        this.meService = meService;
+    }
+    StoryComponent.prototype.ngOnInit = function () {
+    };
+    StoryComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-story',
+            template: __webpack_require__(/*! ./story.component.html */ "./src/app/pages/story/story.component.html"),
+            styles: [__webpack_require__(/*! ./story.component.css */ "./src/app/pages/story/story.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
+    ], StoryComponent);
+    return StoryComponent;
 }());
 
 
@@ -1201,16 +1982,26 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 var TestComponent = /** @class */ (function () {
-    function TestComponent(msgService, sanitizer, DBService) {
+    function TestComponent(msgService, sanitizer, DBService // , private fsService: FsService
+    ) {
         this.msgService = msgService;
         this.sanitizer = sanitizer;
-        this.DBService = DBService;
+        this.DBService = DBService; // , private fsService: FsService
     }
     TestComponent.prototype.ngOnInit = function () {
         this.isCordovaSupport = !!window.cordova;
         this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
     };
-    TestComponent.prototype.onSelFileChange = function (files, obj) {
+    // async onSelFileChange(files: FileList, obj: object) {
+    //   const file = files[0];
+    //   const self = this;
+    //   if (!!file === false) { return; }
+    //   await this.fsService.getFile$(file.name, true).pipe(
+    //     map(fEntry => {
+    //       return self.fsService.writeFile$(fEntry, file);
+    //     }), concatAll()).toPromise();
+    // }
+    TestComponent.prototype.onSelFileChange_for_windows_videoLibrary = function (files, obj) {
         return __awaiter(this, void 0, void 0, function () {
             var fName, newFile, outputFile, outStream, inStream, error_1;
             return __generator(this, function (_a) {
@@ -1289,7 +2080,6 @@ var TestComponent = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.DBService.searchAsync()];
                     case 1:
                         result = _a.sent();
-                        this.msgService.pushMessage({ type: 0, message: JSON.stringify(result) });
                         return [2 /*return*/];
                 }
             });
@@ -1326,7 +2116,8 @@ var TestComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/pages/test/test.component.css")]
         }),
         __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"],
-            _services_db_service__WEBPACK_IMPORTED_MODULE_3__["DbService"]])
+            _services_db_service__WEBPACK_IMPORTED_MODULE_3__["DbService"] // , private fsService: FsService
+        ])
     ], TestComponent);
     return TestComponent;
 }());
@@ -1379,57 +2170,6 @@ var SafePipe = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/services/cordova.service.ts":
-/*!*********************************************!*\
-  !*** ./src/app/services/cordova.service.ts ***!
-  \*********************************************/
-/*! exports provided: CordovaService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CordovaService", function() { return CordovaService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/rxjs */ "./node_modules/rxjs/_esm5/index.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var CordovaService = /** @class */ (function () {
-    function CordovaService() {
-        var _this = this;
-        this.isCordova = !!window.cordova;
-        var self = this;
-        if (this.isCordova) {
-            this.channel = cordova.require('cordova/channel');
-            this.onDeviceReady = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (ob) {
-                _this.channel.onDeviceReady.subscribe(function () {
-                    ob.next(); // For subscribe
-                    ob.complete(); // For toPromise and auto-unsubscribe
-                });
-            });
-        }
-    }
-    CordovaService = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
-            providedIn: 'root'
-        }),
-        __metadata("design:paramtypes", [])
-    ], CordovaService);
-    return CordovaService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/services/db.service.ts":
 /*!****************************************!*\
   !*** ./src/app/services/db.service.ts ***!
@@ -1443,13 +2183,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var nano_sql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nano-sql */ "./node_modules/nano-sql/lib/index.js");
 /* harmony import */ var nano_sql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nano_sql__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _cordova_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cordova.service */ "./src/app/services/cordova.service.ts");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
-/* harmony import */ var _media_edit_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./media-edit.service */ "./src/app/services/media-edit.service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/add/operator/toPromise */ "./node_modules/rxjs-compat/_esm5/add/operator/toPromise.js");
-/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/add/operator/toPromise */ "./node_modules/rxjs-compat/_esm5/add/operator/toPromise.js");
+/* harmony import */ var rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(rxjs_add_operator_toPromise__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _story_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./story.service */ "./src/app/services/story.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1508,6 +2248,7 @@ var DbService = /** @class */ (function () {
         this.cService = cService;
         this.msgService = msgService;
         this._isInitialized = false;
+        this._onDataChanged = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
         this.nStories = 0;
         var self = this;
         var subscriber = function (observer) {
@@ -1531,7 +2272,7 @@ var DbService = /** @class */ (function () {
             return function () { };
         };
         // this.onDBReady = StickyObservable.createWithInit<boolean>(subscriber); //original one
-        this.onDBReady = (new rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"](subscriber)).pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["shareReplay"])(1), Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])());
+        this.onDBReady = (new rxjs__WEBPACK_IMPORTED_MODULE_4__["Observable"](subscriber)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])());
         this.onDBReady.subscribe(); // initialize it!!!
     }
     DbService_1 = DbService;
@@ -1542,14 +2283,16 @@ var DbService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(DbService.prototype, "onDataChanged", {
+        get: function () {
+            return this._onDataChanged;
+        },
+        enumerable: true,
+        configurable: true
+    });
     DbService.prototype.getSampleItem = function () {
-        var now = Date.now();
-        var result = { name: 'test',
-            makeTime: now,
-            modifyTime: now,
-            viewTime: now,
-            urlOrID: 'https://youtu.be/f1SZ5GaAp3g',
-            meType: _media_edit_service__WEBPACK_IMPORTED_MODULE_4__["playerType"].url };
+        var result = new _story_service__WEBPACK_IMPORTED_MODULE_7__["Story"]();
+        result.urlOrID = 'https://youtu.be/rpvsEBdP4c8';
         return result;
     };
     DbService.prototype.iniNanoSQL = function (ob) {
@@ -1558,15 +2301,16 @@ var DbService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        mode = (!!window['nSQLite']) ? window['nSQLite'].getMode() : 'PERM';
-                        return [4 /*yield*/, Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
-                                .model(DbService_1.storyModel)
-                                .config({
-                                mode: mode
-                            })
-                                .connect()];
+                        mode = (!!window['nSQLite'] && window.cordova.platformId !== 'browser') ? window['nSQLite'].getMode() : 'PERM';
+                        buf = Object(nano_sql__WEBPACK_IMPORTED_MODULE_1__["nSQL"])(DbService_1.storyTableName)
+                            .model(DbService_1.storyModel)
+                            .config({
+                            mode: mode,
+                            cache: true
+                        });
+                        return [4 /*yield*/, buf.connect()];
                     case 1:
-                        buf = _a.sent();
+                        _a.sent();
                         this._isInitialized = true;
                         ob.next(true);
                         this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: buf.toString() });
@@ -1589,7 +2333,7 @@ var DbService = /** @class */ (function () {
     DbService.prototype.searchAsync = function (tName, selOptions, where, orderBy, offset, limit) {
         if (tName === void 0) { tName = DbService_1.storyTableName; }
         return __awaiter(this, void 0, void 0, function () {
-            var select;
+            var select, result, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
@@ -1613,7 +2357,20 @@ var DbService = /** @class */ (function () {
                         if (!!limit) {
                             select = select.limit(limit);
                         }
-                        return [2 /*return*/, select.exec()];
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, select.exec()];
+                    case 3:
+                        result = _a.sent();
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: JSON.stringify(result) });
+                        return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _a.sent();
+                        result = {};
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_1 });
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/, result];
                 }
             });
         });
@@ -1622,7 +2379,7 @@ var DbService = /** @class */ (function () {
         if (tName === void 0) { tName = DbService_1.storyTableName; }
         if (where === void 0) { where = ['viewTime', '>', 0]; }
         return __awaiter(this, void 0, void 0, function () {
-            var q, result, error_1;
+            var q, result, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
@@ -1638,11 +2395,12 @@ var DbService = /** @class */ (function () {
                         return [4 /*yield*/, q.exec()];
                     case 3:
                         result = _a.sent();
+                        this._onDataChanged.next(result);
                         return [3 /*break*/, 5];
                     case 4:
-                        error_1 = _a.sent();
+                        error_2 = _a.sent();
                         result = {};
-                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_1 });
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_2 });
                         return [3 /*break*/, 5];
                     case 5: return [2 /*return*/, result];
                 }
@@ -1652,7 +2410,7 @@ var DbService = /** @class */ (function () {
     DbService.prototype.upsertAsync = function (tName, item, where) {
         if (tName === void 0) { tName = DbService_1.storyTableName; }
         return __awaiter(this, void 0, void 0, function () {
-            var q, result, error_2;
+            var q, result, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.onDBReady.toPromise()];
@@ -1671,11 +2429,12 @@ var DbService = /** @class */ (function () {
                         return [4 /*yield*/, q.exec()];
                     case 3:
                         result = _a.sent();
+                        this._onDataChanged.next(result);
                         return [3 /*break*/, 5];
                     case 4:
-                        error_2 = _a.sent();
+                        error_3 = _a.sent();
                         result = {};
-                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_2 });
+                        this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Error, message: error_3 });
                         return [3 /*break*/, 5];
                     case 5:
                         this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: JSON.stringify(result) });
@@ -1689,21 +2448,95 @@ var DbService = /** @class */ (function () {
         { key: 'id', type: 'uuid', props: ['pk'] },
         { key: 'name', type: 'string' },
         { key: 'title', type: 'string', props: ['trie'] },
+        { key: 'description', type: 'string', props: ['trie'] },
+        { key: 'keywords', type: 'string', props: ['trie'] },
+        { key: 'fileName', type: 'string' },
+        { key: 'fileToken', type: 'string' },
         { key: 'makeTime', type: 'int' },
         { key: 'modifyTime', type: 'int' },
         { key: 'viewTime', type: 'int' },
         { key: 'urlOrID', type: 'string', default: '' },
         { key: 'meType', type: 'int', default: 0 },
-        { key: 'frames', type: 'map', default: {} }
+        { key: 'frames', type: 'map[]', default: [] }
     ];
     DbService = DbService_1 = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_cordova_service__WEBPACK_IMPORTED_MODULE_2__["CordovaService"], _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_2__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
     ], DbService);
     return DbService;
     var DbService_1;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/device.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/services/device.service.ts ***!
+  \********************************************/
+/*! exports provided: DeviceService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeviceService", function() { return DeviceService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DeviceService = /** @class */ (function () {
+    function DeviceService() {
+        var _this = this;
+        // * [2018-06-??] For cordova
+        this.isCordova = !!window.cordova;
+        var self = this;
+        if (this.isCordova) {
+            this.channel = cordova.require('cordova/channel');
+            this.onDeviceReady = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Observable"](function (ob) {
+                _this.channel.onDeviceReady.subscribe(function () {
+                    ob.next(); // For subscribe
+                    ob.complete(); // For toPromise and auto-unsubscribe
+                });
+            });
+        }
+        // * [2018-07-17 19:50] For pointing device's events
+        this.onPointerdown$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'pointerdown');
+        this.onPointermove$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'pointermove');
+        // this.onPointermove$ = new Observable(ob => document.addEventListener('pointermove', e => {
+        //   const ev = e as PointerEvent;
+        //   ob.next(ev);
+        //   console.log(ev.screenX);
+        // }));
+        this.onPointerup$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'pointerup');
+        this.onPointerout$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'pointerout');
+        this.onMouseup$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'mouseup');
+        this.onMousemove$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'mousemove');
+        // this.onMousemove$ = new Observable(ob => document.addEventListener('mousemove', e => {
+        //   const ev = e as MouseEvent;
+        //   ob.next(ev);
+        //   console.log(ev.screenX);
+        // }));
+        this.onMousedown$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["fromEvent"])(document, 'mousedown');
+    }
+    DeviceService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], DeviceService);
+    return DeviceService;
 }());
 
 
@@ -1735,6 +2568,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var GvService = /** @class */ (function () {
     function GvService() {
         this.shownPage = PageType.Home;
+        this.sharedFolderName = 'SegmentedMediaLayer';
     }
     GvService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1759,7 +2593,7 @@ var PageType;
 /*!************************************************!*\
   !*** ./src/app/services/media-edit.service.ts ***!
   \************************************************/
-/*! exports provided: MediaEditService, playerAction, MEState, playerType */
+/*! exports provided: MediaEditService, playerAction, MEState, SideClickType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1767,9 +2601,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MediaEditService", function() { return MediaEditService; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerAction", function() { return playerAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MEState", function() { return MEState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerType", function() { return playerType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SideClickType", function() { return SideClickType; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _story_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./story.service */ "./src/app/services/story.service.ts");
+/* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1781,11 +2617,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var MediaEditService = /** @class */ (function () {
     function MediaEditService() {
-        this.title = '';
-        this.urlOrId = '';
+        this.PlayerType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"];
+        this._duration = 100;
+        this._volume = 1; // **************** TODO *******************
+        // ********************** TODO *************************
+        this._playbackRate = 1;
+        this.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+        this.story = new _story_service__WEBPACK_IMPORTED_MODULE_2__["Story"]();
         this.currentTime = 0;
+        this.isRepeat = true;
+        this._seekTime = 0;
+        this.sideClickType = SideClickType.none;
         this._onStateChanged = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.onPlayerAction = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.state = MEState.initialized;
@@ -1810,37 +2656,186 @@ var MediaEditService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(MediaEditService.prototype, "duration", {
+        get: function () {
+            return (!!this._duration) ? this._duration : 100;
+        },
+        set: function (v) {
+            this._duration = v;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaEditService.prototype, "volume", {
+        get: function () {
+            return this._volume;
+        },
+        set: function (v) {
+            this._volume = v;
+            this.setVolumeIntoFrame();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaEditService.prototype, "playbackRate", {
+        get: function () {
+            return this._playbackRate;
+        },
+        set: function (v) {
+            this._playbackRate = v;
+            this.setPlaybackRateIntoFrame();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MediaEditService.prototype, "seekTime", {
+        get: function () {
+            return this._seekTime;
+        },
+        set: function (v) {
+            this._seekTime = v;
+            this.onPlayerAction.next(playerAction.seek);
+        },
+        enumerable: true,
+        configurable: true
+    });
     MediaEditService.prototype.initMe = function (data, pType) {
-        if (pType === void 0) { pType = playerType.auto; }
+        if (pType === void 0) { pType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].auto; }
+        // * [2018-07-19 17:58] pause previous action
+        this.onPlayerAction.next(playerAction.pause);
+        // * [2018-07-19 17:59] Start to initialize it.
         this.state = MEState.parsing;
         // * [2018-06-20 11:00] Check the type of service is
-        if (pType !== playerType.auto) {
-            this.pType = pType;
+        if (pType !== _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].auto) {
+            this.story.meType = pType;
         }
         else {
             if ((typeof data) === 'string') {
-                this.pType = playerType.url;
+                this.story = new _story_service__WEBPACK_IMPORTED_MODULE_2__["Story"]();
+                this.story.meType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].url;
+            }
+            else if (!!data['viewTime']) {
+                this.story = data;
             }
             else if (!!data) {
-                this.pType = playerType.file;
+                this.story = new _story_service__WEBPACK_IMPORTED_MODULE_2__["Story"]();
+                this.story.meType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].file;
             }
             else {
                 this.state = MEState.parseFailed;
                 return;
             }
         }
-        if ((this.pType === playerType.url) || (this.pType === playerType.youtubeID)) {
-            this.urlOrId = data;
-            this.title = this.urlOrId;
+        if (!!data['viewTime']) {
+            // * [2018-07-19 13:41] If input is a story
         }
-        else if (this.pType === playerType.file) {
+        else if ((this.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].url) || (this.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].youtubeID)) {
+            this.story.urlOrID = data;
+            this.story.title = this.story.urlOrID;
+        }
+        else if (this.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].file) {
             this.blob = data;
-            this.urlOrId = window.URL.createObjectURL(this.blob);
+            this.story.urlOrID = window.URL.createObjectURL(this.blob);
             if (!!data) {
-                this.title = data.name;
+                this.story.title = this.story.fileName = data.name;
             }
         }
+        // * [2018-07-23 10:16] Update the duration & playbackRates
+        if (this.story.meType !== _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].youtubeID) {
+            this.onPlayerAction.next(playerAction.getDuration);
+            this.onPlayerAction.next(playerAction.getAllowedPlaybackRate);
+        }
         this.state = MEState.readyForPlayer;
+    };
+    MediaEditService.prototype.setiFrame = function (i) {
+        var self = this;
+        if (!!self.story) {
+            // **************************** TODO ********************************************
+            self.story.iFrame = i;
+            self.setVolumeFromFrame();
+            self.setPlaybackRateFromFrame();
+        }
+        else {
+            console.log("Problem in setiFrame(" + i + ")");
+        }
+    };
+    MediaEditService.prototype.setVolumeFromFrame = function () {
+        var self = this;
+        if (!!self.story) {
+            var i = self.story.iFrame;
+            // **************************** TODO ********************************************
+            if (i >= 0) {
+                var frame = self.story.frames[i];
+                self._volume = frame.volume;
+            }
+            else {
+                self._volume = 1;
+            }
+            self.onPlayerAction.next(playerAction.setVolume);
+        }
+        else {
+            console.log("Problem in setVolume");
+        }
+    };
+    MediaEditService.prototype.setPlaybackRateFromFrame = function () {
+        var self = this;
+        if (!!self.story) {
+            var i = self.story.iFrame;
+            // **************************** TODO ********************************************
+            if (i >= 0) {
+                var frame = self.story.frames[i];
+                self._playbackRate = frame.rate;
+            }
+            else {
+                self._playbackRate = 1;
+            }
+            self.onPlayerAction.next(playerAction.setPlaybackRate);
+        }
+        else {
+            console.log("Problem in setPlaybackRate");
+        }
+    };
+    /**
+     * Provide self._volume at first.
+     */
+    MediaEditService.prototype.setVolumeIntoFrame = function () {
+        var self = this;
+        if (!!self.story) {
+            var i = self.story.iFrame;
+            // **************************** TODO ********************************************
+            if (i >= 0) {
+                var frame = self.story.frames[i];
+                frame.volume = self._volume;
+            }
+            else {
+                // self._volume = 1;
+            }
+            self.onPlayerAction.next(playerAction.setVolume);
+        }
+        else {
+            console.log("Problem in setVolume");
+        }
+    };
+    /**
+   * Provide self._playbackRate at first.
+   */
+    MediaEditService.prototype.setPlaybackRateIntoFrame = function () {
+        var self = this;
+        if (!!self.story) {
+            var i = self.story.iFrame;
+            // **************************** TODO ********************************************
+            if (i >= 0) {
+                var frame = self.story.frames[i];
+                frame.rate = self._playbackRate;
+            }
+            else {
+                // self._playbackRate = 1;
+            }
+            self.onPlayerAction.next(playerAction.setPlaybackRate);
+        }
+        else {
+            console.log("Problem in setPlaybackRate");
+        }
     };
     MediaEditService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1857,6 +2852,12 @@ var playerAction;
     playerAction[playerAction["play"] = 1] = "play";
     playerAction[playerAction["pause"] = 2] = "pause";
     playerAction[playerAction["seek"] = 3] = "seek";
+    playerAction[playerAction["getDuration"] = 4] = "getDuration";
+    playerAction[playerAction["getVolume"] = 5] = "getVolume";
+    playerAction[playerAction["setVolume"] = 6] = "setVolume";
+    playerAction[playerAction["getPlaybackRate"] = 7] = "getPlaybackRate";
+    playerAction[playerAction["setPlaybackRate"] = 8] = "setPlaybackRate";
+    playerAction[playerAction["getAllowedPlaybackRate"] = 9] = "getAllowedPlaybackRate";
 })(playerAction || (playerAction = {}));
 var MEState;
 (function (MEState) {
@@ -1872,14 +2873,12 @@ var MEState;
     MEState[MEState["stopped"] = 9] = "stopped";
     MEState[MEState["disposed"] = 10] = "disposed";
 })(MEState || (MEState = {}));
-var playerType;
-(function (playerType) {
-    playerType[playerType["none"] = 0] = "none";
-    playerType[playerType["auto"] = 1] = "auto";
-    playerType[playerType["file"] = 2] = "file";
-    playerType[playerType["url"] = 3] = "url";
-    playerType[playerType["youtubeID"] = 4] = "youtubeID";
-})(playerType || (playerType = {}));
+var SideClickType;
+(function (SideClickType) {
+    SideClickType[SideClickType["none"] = 0] = "none";
+    SideClickType[SideClickType["new"] = 1] = "new";
+    SideClickType[SideClickType["select"] = 2] = "select";
+})(SideClickType || (SideClickType = {}));
 
 
 /***/ }),
@@ -1959,15 +2958,15 @@ var MessageTypes;
 /*!*******************************************!*\
   !*** ./src/app/services/story.service.ts ***!
   \*******************************************/
-/*! exports provided: StoryService, AFrame */
+/*! exports provided: StoryService, Story */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StoryService", function() { return StoryService; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AFrame", function() { return AFrame; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Story", function() { return Story; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1981,7 +2980,6 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var StoryService = /** @class */ (function () {
     function StoryService() {
-        this.meType = _media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerType"].none;
     }
     StoryService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1992,17 +2990,23 @@ var StoryService = /** @class */ (function () {
     return StoryService;
 }());
 
-var AFrame = /** @class */ (function () {
-    function AFrame() {
-        this.pseudopath = '/';
-        this.top = 0.5; // 0 ~ ${1-height}
-        this.height = 0.3;
-        this.start = 0;
-        this.end = 0;
-        this.rate = 1;
-        this.subtitle = '';
+var Story = /** @class */ (function () {
+    function Story() {
+        this.name = '請給個名字';
+        this.title = '歡迎使用本App來幫助學習';
+        this.description = '';
+        this.keywords = '';
+        this.urlOrID = ''; // 'https://youtu.be/rpvsEBdP4c8';
+        this.meType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_1__["PlayerType"].url;
+        this.fileName = '';
+        this.fileToken = '';
+        this.iFrame = -1;
+        var time = Date.now();
+        this.makeTime = this.modifyTime = this.viewTime = time;
+        this.frames = [];
+        return this;
     }
-    return AFrame;
+    return Story;
 }());
 
 
@@ -2022,7 +3026,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var src_app_services_message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2080,7 +3084,7 @@ var YoutubeService = /** @class */ (function () {
         var doc = window.document;
         window.onYouTubeIframeAPIReady = function () {
             _this.isApiReady = true;
-            _this.msgService.pushMessage({ type: src_app_services_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: 'Youtube Api is initialized' });
+            _this.msgService.pushMessage({ type: _message_service__WEBPACK_IMPORTED_MODULE_3__["MessageTypes"].Info, message: 'Youtube Api is initialized' });
         };
         var apiScript = doc.createElement('script');
         apiScript.type = 'text/javascript';
@@ -2094,7 +3098,7 @@ var YoutubeService = /** @class */ (function () {
             return;
         }
         var self = this;
-        uiEle.src = "http://www.youtube.com/embed/" + VId + "?enablejsapi=1";
+        uiEle.src = "http://www.youtube.com/embed/" + VId + "?enablejsapi=1&html5=1";
         if (!!this.ytPlayer && (this.ytPlayer.getIframe() === uiEle)) {
             this.ytPlayer.loadVideoById(VId);
         }
@@ -2106,7 +3110,11 @@ var YoutubeService = /** @class */ (function () {
                 events: {
                     'onReady': function (ev) { self.onReady.next(ev); },
                     'onStateChange': function (ev) { self.onStateChange.next(ev); },
-                    'onError': function (ev) { self.onError.next(ev); }
+                    'onError': function (ev) { self.onError.next(ev); },
+                    'onApiChange': function (ev) {
+                        // ************************* TODO for caption******************************
+                        // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));
+                    }
                 }
             });
         }
@@ -2116,11 +3124,67 @@ var YoutubeService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [src_app_services_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
+        __metadata("design:paramtypes", [_message_service__WEBPACK_IMPORTED_MODULE_3__["MessageService"]])
     ], YoutubeService);
     return YoutubeService;
 }());
 
+
+
+/***/ }),
+
+/***/ "./src/app/vm/a-frame.ts":
+/*!*******************************!*\
+  !*** ./src/app/vm/a-frame.ts ***!
+  \*******************************/
+/*! exports provided: AFrame */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AFrame", function() { return AFrame; });
+var AFrame = /** @class */ (function () {
+    function AFrame() {
+        this.pseudopath = '/';
+        this.colorA = 0.9;
+        this.top = 0.5; // 0 ~ ${1-height}
+        this.height = 0.3;
+        this.start = 0;
+        this.end = 0;
+        this.rate = 1;
+        this.volume = 1;
+        this.subtitle = '';
+        this.colorR = Math.round(Math.random() * 200 + 20);
+        this.colorG = Math.round(Math.random() * 200 + 20);
+        this.colorB = Math.round(Math.random() * 200 + 20);
+        this.genTime = Date.now();
+        return this;
+    }
+    return AFrame;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/vm/player-type.enum.ts":
+/*!****************************************!*\
+  !*** ./src/app/vm/player-type.enum.ts ***!
+  \****************************************/
+/*! exports provided: PlayerType */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayerType", function() { return PlayerType; });
+var PlayerType;
+(function (PlayerType) {
+    PlayerType[PlayerType["none"] = 0] = "none";
+    PlayerType[PlayerType["auto"] = 1] = "auto";
+    PlayerType[PlayerType["file"] = 2] = "file";
+    PlayerType[PlayerType["url"] = 3] = "url";
+    PlayerType[PlayerType["youtubeID"] = 4] = "youtubeID";
+})(PlayerType || (PlayerType = {}));
 
 
 /***/ }),
