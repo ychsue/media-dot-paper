@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DeviceService } from './device.service';
 import { Observable, of, fromEvent } from 'rxjs';
-import { shareReplay, map, concatAll, first } from 'rxjs/operators';
+import { shareReplay, map, concatAll, first, concat, last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,6 @@ export class FsService {
   fs$: Observable<FileSystem>;
 
   constructor(private device: DeviceService) {
-    this.fs$ = this.getFs$();
     if (device.isCordova === true) {
       this.FSReady$ = device.onDeviceReady.pipe(
         map(_ => {
@@ -31,21 +30,69 @@ export class FsService {
     } else {
       this.FSReady$ = of(false).pipe(shareReplay(1), first());
     }
+    this.fs$ = this.getFs$();
   }
 
   getFs$(): Observable<FileSystem> {
     let obs: Observable<FileSystem>;
-    if (this.device.isCordova === true) {
-      obs = new Observable<FileSystem>( subs => {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fs => {
-          subs.next(fs);
-          subs.complete();
-        }, subs.error);
-      });
-    } else {
-      obs = of(null);
-    }
+    obs = this.FSReady$.pipe(map(isReady => {
+      if (isReady) {
+        return new Observable<FileSystem>( subs => {
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fs => {
+            subs.next(fs);
+            subs.complete();
+          }, subs.error);
+        });
+      } else {
+        return of(null);
+      }
+    }), concatAll());
     return obs.pipe(shareReplay(1), first());
+  }
+
+  getDir$(path: string, create: boolean = false, exclusive: boolean = false): Observable<DirectoryEntry> {
+    const self = this;
+    return self.fs$.pipe(map(fs => {
+      if (!!fs === false) {
+        return of(null);
+      } else {
+        return new Observable<DirectoryEntry>( subs => {
+          if (!!path === false) {
+            subs.next(fs.root);
+            subs.complete();
+          } else {
+            fs.root.getDirectory(path, {create: create, exclusive: exclusive},
+              dir => {
+                subs.next(dir);
+                subs.complete();
+              },
+              subs.error
+            );
+          }
+        });
+      }
+    }), concatAll());
+  }
+
+  ls$(dir: DirectoryEntry| string): Observable<Entry[]> {
+    const self = this;
+    if (typeof dir === 'string') {
+      return self.getDir$(dir).pipe(map(dEntry => {
+        return self.ls$(dEntry);
+      }), concatAll());
+    } else {
+      if (!!dir === false) {return of(null); }
+
+      return new Observable<Entry[]>( subs => {
+        dir.createReader().readEntries(
+          entries => {
+            subs.next(entries);
+            subs.complete();
+          },
+          subs.error
+        );
+      });
+    }
   }
 
   getFile$(name: string, create: boolean = false, exclusive: boolean = false): Observable<FileEntry> {
@@ -87,5 +134,20 @@ export class FsService {
       }, subs.error);
     });
     return obs;
+  }
+
+  rmFile$(file: FileEntry) {
+    return new Observable<boolean>( subs => {
+      file.remove(
+        () => {
+          subs.next(true);
+          subs.complete();
+        },
+        subs.error);
+    });
+  }
+
+  toURL(file: FileEntry) {
+    return file.toURL();
   }
 }

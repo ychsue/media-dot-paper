@@ -1,3 +1,8 @@
+* [2018-8-5 Sun] Testing File plugin & nanoSQL on Windows & Android
+1. Well, ~file plugin~ works fine in these two platforms; however, for a browser, it looks like that I need to query a suitable quota at first. Hm... Skip this one at this moment.
+2. There's a problem for deleting a row from nanoSQL table for devices. If your query in your ~where~ statement is for ~id~ which is a pK, it will delete nothing. Hm... If you look into the code, the problem happens at ~cordova-nanoSQLite:sqlite-adapter:batchRead~ function.
+Sigh, how to debug it? It means that I need to understand how to use ~SQLite plugin~ before solving this problem.
+
 * [2018-8-3 Fri] That's a promise racing, setting ~cache:false~ can avoid it.
 1. Has written a possible solution for the author. Hoping that he can solve it.
     At this moment, I tried to compile it but has no luck. I cannot compile it successfully.

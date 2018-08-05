@@ -183,6 +183,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_swap_icon_swap_icon_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/swap-icon/swap-icon.component */ "./src/app/components/swap-icon/swap-icon.component.ts");
 /* harmony import */ var _node_modules_angular_common__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../node_modules/@angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _pages_story_story_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/story/story.component */ "./src/app/pages/story/story.component.ts");
+/* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/fs.service */ "./src/app/services/fs.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -216,7 +217,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import { FsService } from './services/fs.service';
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -257,8 +258,8 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatSliderModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatTabsModule"]
             ],
-            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"]
-                // ,FsService
+            providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"],
+                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -324,7 +325,7 @@ var DraglistComponent = /** @class */ (function () {
         this.deviceService = deviceService;
         this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.contentClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.maxSpeed = 0.9;
+        this.maxSpeed = 0.5;
         this._tmpXPointerdown = { time: 0, x: 0 };
         this._tmpXPointermove = { time: 0, x: 0 };
         // * inner events
@@ -1592,7 +1593,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/services/db.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1646,14 +1648,15 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(gv, dialog, meService, db, ngZone // , private fs: FsService
-    , msg) {
+    function HomeComponent(gv, dialog, meService, db, ngZone, fs, msg) {
         this.gv = gv;
         this.dialog = dialog;
         this.meService = meService;
         this.db = db;
-        this.ngZone = ngZone; // , private fs: FsService
+        this.ngZone = ngZone;
+        this.fs = fs;
         this.msg = msg;
         this.Url = 'https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3';
         this.testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
@@ -1675,7 +1678,7 @@ var HomeComponent = /** @class */ (function () {
             });
         });
         // * [2018-08-01 10:27] Check whether FsPlugin is available now
-        // self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+        self.fs.FSReady$.subscribe(function (v) { return self.msg.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageTypes"].Info, message: "FSReady = " + v }); });
     };
     HomeComponent.prototype.ngAfterViewInit = function () {
         this.storySearch$.next(null); // initialize the search
@@ -1709,7 +1712,8 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.onStoryDelete = function (story) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.db.deleteAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, ['id', '=', story.id]);
+                // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
+                this.db.deleteAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, ['makeTime', '=', story.makeTime]);
                 return [2 /*return*/];
             });
         });
@@ -1729,9 +1733,8 @@ var HomeComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
             _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"], _services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"],
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] // , private fs: FsService
-            ,
-            _services_message_service__WEBPACK_IMPORTED_MODULE_8__["MessageService"]])
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _services_fs_service__WEBPACK_IMPORTED_MODULE_8__["FsService"],
+            _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -1915,7 +1918,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onSelectFromNSQL()\">select nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"ondeleteFromNSQL()\">delete nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onUpsertFromNSQL()\">upsert nanoSQL</button>\r\n</div>"
+module.exports = "<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<!-- list of files -->\r\n<mat-list dense *ngIf=\"!!entries\">\r\n    <app-draglist *ngFor=\"let entry of entries\"\r\n    [story]=\"entry\"\r\n    (delete)=\"onRmFile(entry)\"\r\n    (contentClick)=\"onClickAFile(entry)\" >\r\n    </app-draglist>\r\n</mat-list>\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onSelectFromNSQL()\">select nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"ondeleteFromNSQL()\">delete nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onUpsertFromNSQL()\">upsert nanoSQL</button>\r\n</div>"
 
 /***/ }),
 
@@ -1933,6 +1936,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/db.service */ "./src/app/services/db.service.ts");
+/* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1981,26 +1986,51 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var TestComponent = /** @class */ (function () {
-    function TestComponent(msgService, sanitizer, DBService // , private fsService: FsService
-    ) {
+    function TestComponent(msgService, sanitizer, DBService, fsService) {
         this.msgService = msgService;
         this.sanitizer = sanitizer;
-        this.DBService = DBService; // , private fsService: FsService
+        this.DBService = DBService;
+        this.fsService = fsService;
     }
     TestComponent.prototype.ngOnInit = function () {
+        var self = this;
         this.isCordovaSupport = !!window.cordova;
         this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
+        this.fsService.ls$('').subscribe(function (entries) { return self.entries = entries; });
     };
-    // async onSelFileChange(files: FileList, obj: object) {
-    //   const file = files[0];
-    //   const self = this;
-    //   if (!!file === false) { return; }
-    //   await this.fsService.getFile$(file.name, true).pipe(
-    //     map(fEntry => {
-    //       return self.fsService.writeFile$(fEntry, file);
-    //     }), concatAll()).toPromise();
-    // }
+    TestComponent.prototype.onSelFileChange = function (files, obj) {
+        return __awaiter(this, void 0, void 0, function () {
+            var file, self;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        file = files[0];
+                        self = this;
+                        if (!!file === false) {
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this.fsService.getFile$(file.name, true).pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (fEntry) {
+                                return self.fsService.writeFile$(fEntry, file);
+                            }), Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatAll"])()).toPromise()];
+                    case 1:
+                        _a.sent();
+                        this.fsService.ls$('').subscribe(function (entries) { return self.entries = entries; });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TestComponent.prototype.onRmFile = function (file) {
+        var self = this;
+        this.fsService.rmFile$(file).subscribe();
+        this.fsService.ls$('').subscribe(function (entries) { return self.entries = entries; });
+    };
+    TestComponent.prototype.onClickAFile = function (file) {
+        this.audioSrc = this.fsService.toURL(file);
+    };
     TestComponent.prototype.onSelFileChange_for_windows_videoLibrary = function (files, obj) {
         return __awaiter(this, void 0, void 0, function () {
             var fName, newFile, outputFile, outStream, inStream, error_1;
@@ -2116,8 +2146,7 @@ var TestComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/pages/test/test.component.css")]
         }),
         __metadata("design:paramtypes", [_services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"],
-            _services_db_service__WEBPACK_IMPORTED_MODULE_3__["DbService"] // , private fsService: FsService
-        ])
+            _services_db_service__WEBPACK_IMPORTED_MODULE_3__["DbService"], _services_fs_service__WEBPACK_IMPORTED_MODULE_4__["FsService"]])
     ], TestComponent);
     return TestComponent;
 }());
@@ -2306,7 +2335,8 @@ var DbService = /** @class */ (function () {
                             .model(DbService_1.storyModel)
                             .config({
                             mode: mode,
-                            cache: true
+                            cache: true,
+                            id: 'test'
                         });
                         return [4 /*yield*/, buf.connect()];
                     case 1:
@@ -2537,6 +2567,181 @@ var DeviceService = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], DeviceService);
     return DeviceService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/fs.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/services/fs.service.ts ***!
+  \****************************************/
+/*! exports provided: FsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FsService", function() { return FsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var FsService = /** @class */ (function () {
+    function FsService(device) {
+        this.device = device;
+        if (device.isCordova === true) {
+            this.FSReady$ = device.onDeviceReady.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_) {
+                if (!!window['isFilePluginReadyRaised'] === false) {
+                    return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(true);
+                }
+                if (!!window['isFilePluginReadyRaised']() === true) {
+                    window['initPersistentFileSystem']();
+                    return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(true);
+                }
+                else {
+                    return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'filePluginIsReady').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (ev) { return true; }));
+                }
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
+        }
+        else {
+            this.FSReady$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(false).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
+        }
+        this.fs$ = this.getFs$();
+    }
+    FsService.prototype.getFs$ = function () {
+        var obs;
+        obs = this.FSReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (isReady) {
+            if (isReady) {
+                return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+                    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                        subs.next(fs);
+                        subs.complete();
+                    }, subs.error);
+                });
+            }
+            else {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
+            }
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
+        return obs.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
+    };
+    FsService.prototype.getDir$ = function (path, create, exclusive) {
+        if (create === void 0) { create = false; }
+        if (exclusive === void 0) { exclusive = false; }
+        var self = this;
+        return self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) {
+            if (!!fs === false) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
+            }
+            else {
+                return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+                    if (!!path === false) {
+                        subs.next(fs.root);
+                        subs.complete();
+                    }
+                    else {
+                        fs.root.getDirectory(path, { create: create, exclusive: exclusive }, function (dir) {
+                            subs.next(dir);
+                            subs.complete();
+                        }, subs.error);
+                    }
+                });
+            }
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
+    };
+    FsService.prototype.ls$ = function (dir) {
+        var self = this;
+        if (typeof dir === 'string') {
+            return self.getDir$(dir).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (dEntry) {
+                return self.ls$(dEntry);
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
+        }
+        else {
+            if (!!dir === false) {
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
+            }
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+                dir.createReader().readEntries(function (entries) {
+                    subs.next(entries);
+                    subs.complete();
+                }, subs.error);
+            });
+        }
+    };
+    FsService.prototype.getFile$ = function (name, create, exclusive) {
+        if (create === void 0) { create = false; }
+        if (exclusive === void 0) { exclusive = false; }
+        var self = this;
+        if (self.device.isCordova === false) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
+        }
+        var obs = self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) { return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+            fs.root.getFile(name, { create: create, exclusive: exclusive }, function (file) {
+                subs.next(file);
+                subs.complete();
+            }, subs.error);
+        }); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
+        return obs;
+    };
+    FsService.prototype.writeFile$ = function (fEntry, data, isAppend) {
+        if (isAppend === void 0) { isAppend = false; }
+        var self = this;
+        if (self.device.isCordova === false) {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
+        }
+        var obs = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+            fEntry.createWriter(function (fWriter) {
+                fWriter.onwriteend = function (e) {
+                    subs.next(true);
+                    console.log(e);
+                    subs.complete();
+                };
+                fWriter.onerror = subs.error;
+                if (isAppend) {
+                    try {
+                        fWriter.seek(fWriter.length);
+                    }
+                    catch (e) {
+                        subs.error(e);
+                    }
+                }
+                fWriter.write(data);
+            }, subs.error);
+        });
+        return obs;
+    };
+    FsService.prototype.rmFile$ = function (file) {
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
+            file.remove(function () {
+                subs.next(true);
+                subs.complete();
+            }, subs.error);
+        });
+    };
+    FsService.prototype.toURL = function (file) {
+        return file.toURL();
+    };
+    FsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"]])
+    ], FsService);
+    return FsService;
 }());
 
 

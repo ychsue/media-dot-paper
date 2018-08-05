@@ -12,6 +12,7 @@ import { map, concatAll } from '../../../../node_modules/rxjs/operators';
 })
 export class TestComponent implements OnInit {
 
+  entries: Entry[];
   audioFile: File;
   // audioSrc: SafeUrl;
   audioSrc: string;
@@ -20,23 +21,37 @@ export class TestComponent implements OnInit {
   newFolderName: string;
 
   constructor(private msgService: MessageService, private sanitizer: DomSanitizer,
-    private DBService: DbService // , private fsService: FsService
+    private DBService: DbService , private fsService: FsService
   ) { }
 
   ngOnInit() {
+    const self = this;
     this.isCordovaSupport = !!window.cordova;
     this.isFilePluginSupport = this.isCordovaSupport && !!cordova.file;
+    this.fsService.ls$('').subscribe(entries => self.entries = entries);
   }
 
-  // async onSelFileChange(files: FileList, obj: object) {
-  //   const file = files[0];
-  //   const self = this;
-  //   if (!!file === false) { return; }
-  //   await this.fsService.getFile$(file.name, true).pipe(
-  //     map(fEntry => {
-  //       return self.fsService.writeFile$(fEntry, file);
-  //     }), concatAll()).toPromise();
-  // }
+  async onSelFileChange(files: FileList, obj: object) {
+    const file = files[0];
+    const self = this;
+    if (!!file === false) { return; }
+    await this.fsService.getFile$(file.name, true).pipe(
+      map(fEntry => {
+        return self.fsService.writeFile$(fEntry, file);
+      }), concatAll()).toPromise();
+
+    this.fsService.ls$('').subscribe(entries => self.entries = entries);
+  }
+
+  onRmFile(file: FileEntry) {
+    const self = this;
+    this.fsService.rmFile$(file).subscribe();
+    this.fsService.ls$('').subscribe(entries => self.entries = entries);
+  }
+
+  onClickAFile(file: FileEntry) {
+    this.audioSrc = this.fsService.toURL(file);
+  }
 
   async onSelFileChange_for_windows_videoLibrary(files: FileList, obj: object) {
     console.log(`obj= ${obj}`);

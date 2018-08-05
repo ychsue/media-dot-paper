@@ -1,4 +1,12 @@
 <input #selFile type="file" multiple (change)="onSelFileChange(selFile.files,$event.target === audioFile)">
+<!-- list of files -->
+<mat-list dense *ngIf="!!entries">
+    <app-draglist *ngFor="let entry of entries"
+    [story]="entry"
+    (delete)="onRmFile(entry)"
+    (contentClick)="onClickAFile(entry)" >
+    </app-draglist>
+</mat-list>
 <video #audioFromFile autoplay controls [src]="audioSrc|safe">
 </video>
 <hr>

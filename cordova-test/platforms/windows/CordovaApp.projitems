@@ -145,6 +145,8 @@
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\cordova.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\db.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\device.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\fs.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\gv.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\media-edit.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\story.service.ts" />

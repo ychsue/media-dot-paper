@@ -74,7 +74,8 @@ export class DbService {
     .model(DbService.storyModel)
     .config({
       mode: mode,
-      cache: true
+      cache: true,
+      id: 'test'
     });
     await buf.connect();
     this._isInitialized = true;

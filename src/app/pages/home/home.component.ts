@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog,
     private meService: MediaEditService, private db: DbService,
-    private ngZone: NgZone // , private fs: FsService
+    private ngZone: NgZone, private fs: FsService
     , private msg: MessageService) {
     }
 
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       });
     });
     // * [2018-08-01 10:27] Check whether FsPlugin is available now
-    // self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+    self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
   }
 
   ngAfterViewInit() {
@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async onStoryDelete(story: IStory) {
-    this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
+    // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
+    this.db.deleteAsync(DbService.storyTableName, ['makeTime', '=', story.makeTime]);
     // * [2018-07-19 21:28] Tell navbar that you delete a story
     // this.meService.sideClickType = SideClickType.none;
   }

@@ -10,13 +10,13 @@ import { map, takeUntil, concatAll, concat, withLatestFrom, debounce, debounceTi
   styleUrls: ['./draglist.component.css']
 })
 export class DraglistComponent implements OnInit, OnDestroy {
-  @Input() story: IStory;
+  @Input() story: IStory |{name: string};
 
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
 
   deltaX: number;
-  maxSpeed = 0.9;
+  maxSpeed = 0.5;
 
   private _tmpXPointerdown = {time: 0, x: 0};
   private _tmpXPointermove = {time: 0, x: 0};
