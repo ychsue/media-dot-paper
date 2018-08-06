@@ -1,3 +1,6 @@
+* [2018-8-6 Mon] It can save a file to ~dataDirectory~ and play it.
+However, for some files in android it cannot be stored into ~dataDirectory~. Size problem?
+
 * [2018-8-5 Sun] Testing File plugin & nanoSQL on Windows & Android
 1. Well, ~file plugin~ works fine in these two platforms; however, for a browser, it looks like that I need to query a suitable quota at first. Hm... Skip this one at this moment.
 2. There's a problem for deleting a row from nanoSQL table for devices. If your query in your ~where~ statement is for ~id~ which is a pK, it will delete nothing. Hm... If you look into the code, the problem happens at ~cordova-nanoSQLite:sqlite-adapter:batchRead~ function.

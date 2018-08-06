@@ -325,7 +325,7 @@ var DraglistComponent = /** @class */ (function () {
         this.deviceService = deviceService;
         this.delete = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.contentClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
-        this.maxSpeed = 0.9;
+        this.maxSpeed = 0.5;
         this._tmpXPointerdown = { time: 0, x: 0 };
         this._tmpXPointermove = { time: 0, x: 0 };
         // * inner events
@@ -1419,6 +1419,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _message_message_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../message/message.component */ "./src/app/message/message.component.ts");
 /* harmony import */ var _services_db_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/db.service */ "./src/app/services/db.service.ts");
 /* harmony import */ var _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/media-edit.service */ "./src/app/services/media-edit.service.ts");
+/* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
+/* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1469,11 +1472,15 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
+
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(bottomSheet, ngZone, db, meService, msgService) {
+    function NavbarComponent(bottomSheet, ngZone, db, fsService, meService, msgService) {
         this.bottomSheet = bottomSheet;
         this.ngZone = ngZone;
         this.db = db;
+        this.fsService = fsService;
         this.meService = meService;
         this.msgService = msgService;
         this.toggleSidenav_Click = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
@@ -1500,15 +1507,32 @@ var NavbarComponent = /** @class */ (function () {
     };
     NavbarComponent.prototype.onSaveStory = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var story, insert;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var story, self, isSaved, _a, insert;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         story = this.meService.story;
+                        self = this;
+                        if (!(story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"].file)) return [3 /*break*/, 4];
+                        return [4 /*yield*/, this.fsService.getFile$(story.fileName, true).pipe(Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (fEntry) {
+                                return self.fsService.writeFile$(fEntry, self.meService.blob);
+                            }), Object(_node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["concatAll"])()).toPromise()];
+                    case 1:
+                        isSaved = _b.sent();
+                        if (!(isSaved === true)) return [3 /*break*/, 3];
+                        _a = story;
+                        return [4 /*yield*/, this.fsService.getFile$(story.fileName).toPromise()];
+                    case 2:
+                        _a.urlOrID = (_b.sent()).toURL();
+                        _b.label = 3;
+                    case 3:
+                        self.msgService.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageTypes"].Info, message: "The file " + story.fileName + " is stored: " + isSaved });
+                        _b.label = 4;
+                    case 4:
                         delete story['id'];
                         return [4 /*yield*/, this.db.upsertAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"].storyTableName, story)];
-                    case 1:
-                        insert = _a.sent();
+                    case 5:
+                        insert = _b.sent();
                         // * [2018-07-25 19:04] Change its state to 'Update'
                         story['id'] = insert[0].affectedRows[0].id;
                         this.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["SideClickType"].select;
@@ -1543,7 +1567,7 @@ var NavbarComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./navbar.component.css */ "./src/app/navbar/navbar.component.css")]
         }),
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBottomSheet"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
-            _services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["MediaEditService"],
+            _services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"], _services_fs_service__WEBPACK_IMPORTED_MODULE_7__["FsService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["MediaEditService"],
             _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
     ], NavbarComponent);
     return NavbarComponent;
@@ -1595,6 +1619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1639,6 +1664,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
 
 
 
@@ -1711,10 +1737,22 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.onStoryDelete = function (story) {
         return __awaiter(this, void 0, void 0, function () {
+            var self, isDeleted;
             return __generator(this, function (_a) {
-                // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
-                this.db.deleteAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, ['makeTime', '=', story.makeTime]);
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        if (!(story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_10__["PlayerType"].file)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, self.fs.getFile$(story.fileName).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["map"])(function (fEntry) { return self.fs.rmFile$(fEntry); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concatAll"])()).toPromise()];
+                    case 1:
+                        isDeleted = _a.sent();
+                        self.msg.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageTypes"].Info, message: "The file " + story.fileName + " is deleted: " + isDeleted });
+                        _a.label = 2;
+                    case 2:
+                        // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
+                        this.db.deleteAsync(_services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"].storyTableName, ['makeTime', '=', story.makeTime]);
+                        return [2 /*return*/];
+                }
             });
         });
     };

@@ -10,6 +10,7 @@ import { map, concatAll } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
 import { MessageService, MessageTypes } from '../../services/message.service';
+import { PlayerType } from '../../vm/player-type.enum';
 
 @Component({
   selector: 'app-home',
@@ -82,6 +83,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   async onStoryDelete(story: IStory) {
+    const self = this;
+    if (story.meType === PlayerType.file) {
+      const isDeleted = await self.fs.getFile$(story.fileName).pipe(map(
+        fEntry => self.fs.rmFile$(fEntry)
+      ), concatAll()).toPromise();
+
+      self.msg.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}`});
+    }
     // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
     this.db.deleteAsync(DbService.storyTableName, ['makeTime', '=', story.makeTime]);
     // * [2018-07-19 21:28] Tell navbar that you delete a story
