@@ -1,3 +1,28 @@
+* [2018-8-8 Wed] It can work on iOS and macOS now
+To let it can run on iOS and macOS, you need to do something
+1. you need to install pepjs and declare it in ~polyfills.ts~ file so that it will be loaded just like declaring ~<script src=....>~ in index.html. The better thing is that it will be compiled into your code instead of calling that js file from network.
+2. you need to declare ~touch-action="none"~ as an attribute instead of just a CSS style for iOS system. Please read this [[https://github.com/jquery/PEP/issues/211][Q&A of PEP]].
+3. to avoid showing videos in Full screen, you need to 
+    a. declare ~<preference name="AllowInlineMediaPlayback" value="true" />~ in config.xml file.
+    b. add attribute ~playsinline~ for a ~<video>~ element.
+    c. add ~playsinline=1~ into youtube's query string.
+4. to let iOS can call ~https://www.youtube.com~, I need to add
+#+begin_src xml
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+#+end_src
+    into config.xml file as described in [[https://cordova.apache.org/docs/en/latest/guide/appdev/whitelist/#ios-whitelisting][this Cordova's Doc]].
+5. add ~<preference name="iosPersistentFileLocation" value="Library" />~ into config.xml for iOS; otherwise, it does not store data and quit the App directly.
+6. Seeking time might be larger than the setted time in iOS system. So I need to check whether it is in starting in ~player.component.ts~; however, I don't think that I wrote it in a safty way. Let me think later. 
+7. by the way, checking whether
+#+begin_src xml
+    <engine name="ios" spec="^4.5.5" />
+    <engine name="osx" spec="^4.0.1" />
+#+end_src
+are adding into your config.xml file. If not, you will find that your macOS or iOS App will out of plugins.
+i.e. no file and sqlite plugins.
+
+By the way, nanoSQL has updated its code so that 'trie' can use again now.
 * [2018-8-6 Mon] It can save a file to ~dataDirectory~ and play it.
 However, for some files in android it cannot be stored into ~dataDirectory~. Size problem?
 

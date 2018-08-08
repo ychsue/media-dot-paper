@@ -7,6 +7,7 @@ import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
 import { equalSegments } from '../../../../node_modules/@angular/router/src/url_tree';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
   selector: 'app-player',
@@ -39,10 +40,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isInited = false;
 
   constructor(public dataService: MediaEditService, private YTservice: YoutubeService,
-    private msgService: MessageService, private ngZone: NgZone) {
+    private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
   }
 
   ngOnInit() {
+    const self = this;
     this.videoEle = this.ngVideo.nativeElement;
     this.youtubeEle = this.ngYoutube.nativeElement;
     this.eventTriggers();
@@ -51,6 +53,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if ((this.dataService.state === MEState.readyForPlayer) && (this.isInited === false)) {
       this.initMe();
       this.isInited = true;
+    }
+    if (this.device.isCordova && cordova.platformId === 'ios') {
+      self.videoEle.setAttribute("playsinline", "true");
     }
   }
 
@@ -97,6 +102,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
       self.dataService.currentTime = t;
       // console.log(t);
     });
+
+    let isDuringStart = false; // For iOS because its seek time might be earlier than the time you are seeking to
     // * [2018-07-24 13:48] For repeating each frame
     self.dataService.onCurrentTimeChanged
     .pipe(takeUntil(self.unSubscribed))
@@ -113,11 +120,18 @@ export class PlayerComponent implements OnInit, OnDestroy {
           }
         }
         if (t < start) {
-          self.dataService.seekTime = start;
+          if (isDuringStart === false) {
+            isDuringStart = true;
+            self.dataService.seekTime = start;
+          }
         } else if (t > end) {
           self.dataService.seekTime = start;
           if (self.dataService.isRepeat === false) {
             self.dataService.onPlayerAction.next(playerAction.pause);
+          }
+        } else {
+          if (isDuringStart === true) {
+            isDuringStart = false;
           }
         }
       } catch (error) {

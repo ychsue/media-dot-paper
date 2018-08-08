@@ -70,7 +70,7 @@ export class YoutubeService {
       return;
     }
     const self = this;
-    uiEle.src = `http://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1`;
+    uiEle.src = `http://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1&playsinline=1`;
     if (!!this.ytPlayer && (this.ytPlayer.getIframe() === uiEle)) {
       this.ytPlayer.loadVideoById(VId);
     } else {

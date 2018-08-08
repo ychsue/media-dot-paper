@@ -14,6 +14,8 @@
 /cordova-test/platforms/windows/node_modules/*
 /cordova-test/www
 /cordova-test/platforms/browser
+/cordova-test/platforms/ios
+/cordova-test/platforms/osx
 
 # dependencies
 /node_modules/*

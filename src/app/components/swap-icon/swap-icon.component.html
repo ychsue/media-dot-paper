@@ -4,6 +4,7 @@
   </button>
   <button mat-icon-button mat-raised-button
   class="eachButton"
+  touch-action="none"
   [style.transform]="'translateY('+deltaY+'px)'"
   [style.background-color]="'rgba('+bR+','+bG+','+bB+','+bA+')'"
   (pointerdown)="onContentPointerdown($event)"

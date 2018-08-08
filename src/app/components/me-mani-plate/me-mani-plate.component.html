@@ -1,5 +1,5 @@
 <div class="container" [@changeFrame]="meService.story.iFrame" 
-    (pointerenter)="HideShow='show'" (pointerleave)="HideShow='hide'">
+    (pointerenter)="HideShow='show'" (pointerleave)="HideShow='hide'" touch-action="none">
     <div class="main">
         <div class="main-up" [@hideShow]="HideShow">
             <div #ratio class="smallSlider">

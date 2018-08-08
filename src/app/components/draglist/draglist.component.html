@@ -1,11 +1,7 @@
 <div class="container">
-  <div class="backDel">
-    <mat-icon class="mat-18 left">delete</mat-icon>
-    <mat-icon class="mat-18 right">delete</mat-icon>
-  </div>
-  <button mat-button class="content"
-    (pointerdown)="onContentPointerdown($event)"
-    (click)="onContentClick($event)"
-    [style.transform]="'translateX('+deltaX+'px)'"
-  >{{story.name}}</button>
+    <div class="backDel">
+        <mat-icon class="mat-18 left">delete</mat-icon>
+        <mat-icon class="mat-18 right">delete</mat-icon>
+    </div>
+    <button mat-button class="content" (pointerdown)="onContentPointerdown($event)" (click)="onContentClick($event)" [style.transform]="'translateX('+deltaX+'px)'" touch-action="none">{{story.name}}</button>
 </div>
