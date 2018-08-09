@@ -1,3 +1,11 @@
+* [2018-8-9 Thu] Testing on oPPo
+Hm... Input numbers form keyboard is not a good idea on a mobile, I add in two ~observable~ to handle the pointer events to increase or decrease start and end times.
+
+By the way, don't import ~pepjs~ for android and windows system might be a good idea since sometimes it makes the pointer control a little wierd. 
+
+Oh, one more thing. the ~accept="video/*,audio/*"~ does not work for a ~file input~. People said that I had better to use two buttons for them.
+However, for windows App, ~accept~ does not work. So, I need to find a better way.
+
 * [2018-8-8 Wed] It can work on iOS and macOS now
 To let it can run on iOS and macOS, you need to do something
 1. you need to install pepjs and declare it in ~polyfills.ts~ file so that it will be loaded just like declaring ~<script src=....>~ in index.html. The better thing is that it will be compiled into your code instead of calling that js file from network.

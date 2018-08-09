@@ -15,10 +15,15 @@
             </button>
         </mat-list-item>
         <mat-list-item>
-            <button mat-raised-button (click)="selFile.click()" >
-                <input #selFile name="selFile" id="selFile"
-                type="file" accept="video/*, audio/*" (change)="onFileSelect(selFile.files)">
-                檔案
+            <button mat-raised-button (click)="selaudio.click()" >
+                <input #selaudio
+                type="file" accept="audio/*" (change)="onFileSelect(selaudio.files)">
+                聲音檔
+            </button>
+            <button mat-raised-button (click)="selvideo.click()" >
+                <input #selvideo
+                type="file" accept="video/*" (change)="onFileSelect(selvideo.files)">
+                影片檔
             </button>
         </mat-list-item>
     </mat-list>

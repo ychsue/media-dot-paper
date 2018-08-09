@@ -38,6 +38,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ngYoutube: ElementRef;
   youtubeEle: HTMLIFrameElement;
   isInited = false;
+  _msInterval = 200;
 
   constructor(public dataService: MediaEditService, private YTservice: YoutubeService,
     private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
@@ -90,7 +91,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     });
     // * [2018-07-21 19:44] For CurrentTime
-    self.dataService.onCurrentTimeChanged = interval(200)
+    self.dataService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
       map(_ => self.getCurrentTime()),
       distinctUntilChanged(),
@@ -104,6 +105,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     });
 
     let isDuringStart = false; // For iOS because its seek time might be earlier than the time you are seeking to
+    let isDuringEnd = false;
     // * [2018-07-24 13:48] For repeating each frame
     self.dataService.onCurrentTimeChanged
     .pipe(takeUntil(self.unSubscribed))
@@ -124,10 +126,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
             isDuringStart = true;
             self.dataService.seekTime = start;
           }
-        } else if (t > end) {
-          self.dataService.seekTime = start;
-          if (self.dataService.isRepeat === false) {
-            self.dataService.onPlayerAction.next(playerAction.pause);
+        } else if (t > (end - (self._msInterval / 1000))) {
+          if (isDuringEnd === false) {
+            isDuringEnd = true;
+            setTimeout(() => {
+              isDuringEnd = false;
+              self.dataService.seekTime = start;
+              if (self.dataService.isRepeat === false) {
+                self.dataService.onPlayerAction.next(playerAction.pause);
+              }
+            }, (end - t) * 1000);
           }
         } else {
           if (isDuringStart === true) {

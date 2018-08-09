@@ -1,6 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
+import { Subject } from '../../../../node_modules/rxjs';
+import { DeviceService } from '../../services/device.service';
+import { map, concatAll, takeUntil, auditTime, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-me-mani-plate',
@@ -41,15 +44,68 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
   IOEndShown = 'out';
   HideShow = 'show';
 
+  _msDelta = 400;
 
-  constructor(public meService: MediaEditService) { }
+  startChanged$ = new Subject<PointerEvent>();
+  endChanged$ = new Subject<PointerEvent>();
+
+  constructor(public meService: MediaEditService, private device: DeviceService) { }
 
   ngOnInit() {
     this.previousState = this.meService.state;
   }
 
   ngAfterViewInit() {
+    const self = this;
     Promise.resolve(null).then(_ => this.HideShow = 'hide');
+    // * [2018-08-09 14:44] For start and value
+    self.startChanged$.pipe(map(ev =>
+      self.device.onPointermove$.pipe(
+        auditTime(self._msDelta),
+        takeUntil(self.device.onPointerup$)
+      )
+    ), concatAll())
+    .pipe(
+      withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
+        const frame = self.meService.story.frames[self.meService.story.iFrame];
+        if (vm.screenX > vd.screenX) {
+          const start = Math.ceil(frame.start + 0.001);
+          if (start < frame.end) {
+            frame.start = start;
+            self.meService.seekTime = frame.start;
+          }
+        } else if ( vm.screenX < vd.screenX) {
+          const start = Math.floor(frame.start - 0.001);
+          if (start < frame.end && start >= 0) {
+            frame.start = start;
+            self.meService.seekTime = frame.start;
+          }
+        }
+      })
+    ).subscribe();
+
+    self.endChanged$.pipe(map(ev =>
+      self.device.onPointermove$.pipe(
+        auditTime(self._msDelta),
+        takeUntil(self.device.onPointerup$)
+      )
+    ), concatAll())
+    .pipe(
+      withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
+        const frame = self.meService.story.frames[self.meService.story.iFrame];
+        if (vm.screenX > vd.screenX) {
+          const end = Math.ceil(frame.end + 0.001);
+          if (end > frame.start && end < self.meService.duration) {
+            frame.end = end;
+          }
+        } else if ( vm.screenX < vd.screenX) {
+          const end = Math.floor(frame.end - 0.001);
+          if (end > frame.start) {
+            frame.end = end;
+          }
+        }
+      })
+    ).subscribe();
   }
 
   onPlayPause() {

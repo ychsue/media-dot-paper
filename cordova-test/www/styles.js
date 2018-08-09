@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/ychsue/workspace/cordova-ng-test/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! C:\Users\ychsue\source\repos\Test\cordova-ng-test\src\styles.css */"./src/styles.css");
 
 
 /***/ })

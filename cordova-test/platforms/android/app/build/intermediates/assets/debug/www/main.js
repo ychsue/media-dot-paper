@@ -41,7 +41,7 @@ module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div #container class=\"container\">\n  <app-navbar #navbar class=\"mat-elevation-z6\" (toggleSidenav_Click)=\"sidenav.opened=!sidenav.opened\"></app-navbar>\n  <mat-sidenav-container #sidenavContainer class=\"content\">\n      <mat-sidenav #sidenav [mode]=\"sidenavMode\" align=\"start\" [opened]=\"true\"\n        [style.width]=\"sidenavWidth+'px'\">\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\n        <mat-tab-group id=\"sidenavTabs\" mat-stretch-tabs [dynamicHeight]=\"true\">\n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>library_music</mat-icon>\n                </ng-template>\n                <app-home class=\"page\"></app-home>\n            </mat-tab>            \n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>music_video</mat-icon>\n                </ng-template>\n                <app-story class=\"page\" *ngIf=\"!!meService.story?.urlOrID===true\"></app-story>\n                <span *ngIf=\"!!meService.story?.urlOrID===false\">請先選一個媒體</span>\n            </mat-tab>            \n        </mat-tab-group>\n        <div class=\"vSeparate\" [style.left]=\"sidenavWidth-2+'px'\"\n          (pointerdown)=\"onvSepPointerDown($event)\"></div>\n        <svg id=\"resizeWidth\" viewBox=\"0 0 10 20\" (pointerdown)=\"onvSepPointerDown($event)\">\n          <polygon points=\"0,10 10,0 10,20\" style=\"fill:cadetblue;opacity: 0.5;\"/>\n        </svg>\n      </mat-sidenav>\n      <!-- <div class=\"page\"> -->\n        <!-- <router-outlet></router-outlet> -->\n        <mat-sidenav-content class=\"page\" [style.margin-left]=\"(sidenavMode==='over')?0:(sidenavWidth+'px')\"\n          [style.width]=\"((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'\">\n            <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n            <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n        </mat-sidenav-content>\n      <!-- </div> -->\n      </mat-sidenav-container>\n</div>\n"
+module.exports = "<div #container class=\"container\">\r\n  <app-navbar #navbar class=\"mat-elevation-z6\" (toggleSidenav_Click)=\"sidenav.opened=!sidenav.opened\"></app-navbar>\r\n  <mat-sidenav-container #sidenavContainer class=\"content\">\r\n      <mat-sidenav #sidenav [mode]=\"sidenavMode\" align=\"start\" [opened]=\"true\"\r\n        [style.width]=\"sidenavWidth+'px'\">\r\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\r\n        <mat-tab-group id=\"sidenavTabs\" mat-stretch-tabs [dynamicHeight]=\"true\">\r\n            <mat-tab>\r\n                <ng-template matTabLabel>\r\n                    <mat-icon>library_music</mat-icon>\r\n                </ng-template>\r\n                <app-home class=\"page\"></app-home>\r\n            </mat-tab>            \r\n            <mat-tab>\r\n                <ng-template matTabLabel>\r\n                    <mat-icon>music_video</mat-icon>\r\n                </ng-template>\r\n                <app-story class=\"page\" *ngIf=\"!!meService.story?.urlOrID===true\"></app-story>\r\n                <span *ngIf=\"!!meService.story?.urlOrID===false\">請先選一個媒體</span>\r\n            </mat-tab>            \r\n        </mat-tab-group>\r\n        <div class=\"vSeparate\" [style.left]=\"sidenavWidth-2+'px'\" touch-action=\"none\"\r\n          (pointerdown)=\"onvSepPointerDown($event)\"></div>\r\n        <svg id=\"resizeWidth\" viewBox=\"0 0 10 20\" (pointerdown)=\"onvSepPointerDown($event)\" touch-action=\"none\">\r\n          <polygon points=\"0,10 10,0 10,20\" style=\"fill:cadetblue;opacity: 0.5;\"/>\r\n        </svg>\r\n      </mat-sidenav>\r\n      <!-- <div class=\"page\"> -->\r\n        <!-- <router-outlet></router-outlet> -->\r\n        <mat-sidenav-content class=\"page\" [style.margin-left]=\"(sidenavMode==='over')?0:(sidenavWidth+'px')\"\r\n          [style.width]=\"((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'\">\r\n            <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\r\n            <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\r\n        </mat-sidenav-content>\r\n      <!-- </div> -->\r\n      </mat-sidenav-container>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -289,7 +289,7 @@ module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"backDel\">\n    <mat-icon class=\"mat-18 left\">delete</mat-icon>\n    <mat-icon class=\"mat-18 right\">delete</mat-icon>\n  </div>\n  <button mat-button class=\"content\"\n    (pointerdown)=\"onContentPointerdown($event)\"\n    (click)=\"onContentClick($event)\"\n    [style.transform]=\"'translateX('+deltaX+'px)'\"\n  >{{story.name}}</button>\n</div>"
+module.exports = "<div class=\"container\">\r\n    <div class=\"backDel\">\r\n        <mat-icon class=\"mat-18 left\">delete</mat-icon>\r\n        <mat-icon class=\"mat-18 right\">delete</mat-icon>\r\n    </div>\r\n    <button mat-button class=\"content\" (pointerdown)=\"onContentPointerdown($event)\" (click)=\"onContentClick($event)\" [style.transform]=\"'translateX('+deltaX+'px)'\" touch-action=\"none\">{{story.name}}</button>\r\n</div>"
 
 /***/ }),
 
@@ -510,7 +510,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    \r\n    display: -ms-inline-grid;\r\n    \r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \r\n    \"main-play\" \r\n    \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: flex;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width:100%;\r\n    align-self: baseline;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n\r\n    display: -ms-grid;\r\n\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter, .upLeft, .upRight{\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n}\r\n\r\n#subtitle {\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n    width: 100%;\r\n}\r\n"
+module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    \r\n    display: -ms-inline-grid;\r\n    \r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \r\n    \"main-play\" \r\n    \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: flex;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width:100%;\r\n    align-self: baseline;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n\r\n    display: -ms-grid;\r\n\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter, .upLeft, .upRight{\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n    margin: 0 8px;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n    margin: 0 8px;\r\n}\r\n\r\n#subtitle {\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n    width: 100%;\r\n}\r\n"
 
 /***/ }),
 
@@ -521,7 +521,7 @@ module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" \r\n    (pointerenter)=\"HideShow='show'\" (pointerleave)=\"HideShow='hide'\">\r\n    <div class=\"main\">\r\n        <div class=\"main-up\" [@hideShow]=\"HideShow\">\r\n            <div #ratio class=\"smallSlider\">\r\n                <mat-icon>directions_walk</mat-icon>\r\n                <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\"\r\n                 [displayWith]=\"tickDisplayWith(meService)\" thumbLabel \r\n                 [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\"\r\n                 (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\" ></mat-slider>\r\n                <mat-icon>flight</mat-icon>\r\n            </div>\r\n            <div #volume class=\"smallSlider\">\r\n                    <mat-icon>volume_mute</mat-icon>\r\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                    <mat-icon>volume_up</mat-icon>\r\n            </div>    \r\n        </div>\r\n        <div class=\"main-play\" [@hideShow]=\"HideShow\">\r\n            <button id=\"btnStart\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\">\r\n                <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n            </button>\r\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n                    <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n                </svg>\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n                        <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                        <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                    </svg>\r\n            </button>\r\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\">\r\n                <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n            </button>\r\n        </div>\r\n        <div class=\"main-down\">\r\n            <textarea id=\"subtitle\" matInput \r\n             [(ngModel)]=\"meService.story.frames[meService.story.iFrame].subtitle\"\r\n             [style.background-color]=\"(HideShow==='hide')?'#00000000':'#FFFFFFFF'\"\r\n             [style.border-color]=\"(HideShow==='hide')?'#00000000':'#B0B0B0FF'\">\r\n            </textarea>\r\n        </div>\r\n    </div>\r\n    <div class=\"slider\">\r\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\"  (blur)=\"IOEndShown='out'\">\r\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\" >{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n            <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\"\r\n                [max]=\"meService.story.frames[meService.story.iFrame].end\"\r\n                [value]=\"meService.currentTime\"\r\n                (change)=\"meService.seekTime=frameSlider.value\"\r\n            ></mat-slider>\r\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\" >{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" \r\n    (pointerenter)=\"HideShow='show'\" (pointerleave)=\"HideShow='hide'\" touch-action=\"none\">\r\n    <div class=\"main\">\r\n        <div class=\"main-up\" [@hideShow]=\"HideShow\">\r\n            <div #ratio class=\"smallSlider\">\r\n                <mat-icon>directions_walk</mat-icon>\r\n                <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\"\r\n                 [displayWith]=\"tickDisplayWith(meService)\" thumbLabel \r\n                 [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\"\r\n                 (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\" ></mat-slider>\r\n                <mat-icon>flight</mat-icon>\r\n            </div>\r\n            <div #volume class=\"smallSlider\">\r\n                    <mat-icon>volume_mute</mat-icon>\r\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                    <mat-icon>volume_up</mat-icon>\r\n            </div>    \r\n        </div>\r\n        <div class=\"main-play\" [@hideShow]=\"HideShow\">\r\n            <button id=\"btnStart\" mat-icon-button mat-raised-button \r\n            (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\"\r\n            (pointerdown)=\"startChanged$.next($event)\" >\r\n                <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n            </button>\r\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n                    <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n                </svg>\r\n                <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n                        <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                        <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n                    </svg>\r\n            </button>\r\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button \r\n            (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\"\r\n            (pointerdown)=\"endChanged$.next($event)\" >\r\n                <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n            </button>\r\n        </div>\r\n        <div class=\"main-down\">\r\n            <textarea id=\"subtitle\" matInput \r\n             [(ngModel)]=\"meService.story.frames[meService.story.iFrame].subtitle\"\r\n             [style.background-color]=\"(HideShow==='hide')?'#00000000':'#FFFFFFFF'\"\r\n             [style.border-color]=\"(HideShow==='hide')?'#00000000':'#B0B0B0FF'\">\r\n            </textarea>\r\n        </div>\r\n    </div>\r\n    <div class=\"slider\">\r\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\"  (blur)=\"IOEndShown='out'\">\r\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\" >{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n            <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\"\r\n                [max]=\"meService.story.frames[meService.story.iFrame].end\"\r\n                [value]=\"meService.currentTime\"\r\n                (change)=\"meService.seekTime=frameSlider.value\"\r\n            ></mat-slider>\r\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\" >{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -538,6 +538,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/media-edit.service */ "./src/app/services/media-edit.service.ts");
 /* harmony import */ var _node_modules_angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/@angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
+/* harmony import */ var _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -550,14 +553,21 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var MeManiPlateComponent = /** @class */ (function () {
-    function MeManiPlateComponent(meService) {
+    function MeManiPlateComponent(meService, device) {
         this.meService = meService;
+        this.device = device;
         this.previousState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].initialized;
         this.MEState = src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"];
         this.IOStartShown = 'out';
         this.IOEndShown = 'out';
         this.HideShow = 'show';
+        this._msDelta = 300;
+        this.startChanged$ = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        this.endChanged$ = new _node_modules_rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.tickDisplayWith = function (meService) {
             return function (i) {
                 return meService.availablePlaybackRates[i];
@@ -569,7 +579,47 @@ var MeManiPlateComponent = /** @class */ (function () {
     };
     MeManiPlateComponent.prototype.ngAfterViewInit = function () {
         var _this = this;
+        var self = this;
         Promise.resolve(null).then(function (_) { return _this.HideShow = 'hide'; });
+        // * [2018-08-09 14:44] For start and value
+        self.startChanged$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (ev) {
+            return self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["auditTime"])(self._msDelta), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatAll"])())
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointerdown$, function (vm, vd) {
+            var frame = self.meService.story.frames[self.meService.story.iFrame];
+            if (vm.screenX > vd.screenX) {
+                var start = Math.ceil(frame.start + 0.001);
+                if (start < frame.end) {
+                    frame.start = start;
+                    self.meService.seekTime = frame.start;
+                }
+            }
+            else if (vm.screenX < vd.screenX) {
+                var start = Math.floor(frame.start - 0.001);
+                if (start < frame.end && start >= 0) {
+                    frame.start = start;
+                    self.meService.seekTime = frame.start;
+                }
+            }
+        })).subscribe();
+        self.endChanged$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (ev) {
+            return self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["auditTime"])(self._msDelta), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatAll"])())
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointerdown$, function (vm, vd) {
+            var frame = self.meService.story.frames[self.meService.story.iFrame];
+            if (vm.screenX > vd.screenX) {
+                var end = Math.ceil(frame.end + 0.001);
+                if (end > frame.start && end < self.meService.duration) {
+                    frame.end = end;
+                }
+            }
+            else if (vm.screenX < vd.screenX) {
+                var end = Math.floor(frame.end - 0.001);
+                if (end > frame.start) {
+                    frame.end = end;
+                }
+            }
+        })).subscribe();
     };
     MeManiPlateComponent.prototype.onPlayPause = function () {
         if (this.previousState !== src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].playing) {
@@ -620,7 +670,7 @@ var MeManiPlateComponent = /** @class */ (function () {
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"]])
+        __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"], _services_device_service__WEBPACK_IMPORTED_MODULE_4__["DeviceService"]])
     ], MeManiPlateComponent);
     return MeManiPlateComponent;
 }());
@@ -735,7 +785,7 @@ module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-wid
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <video #video [style.display]=\"(dataService.story.meType===pType.url||dataService.story.meType===pType.file)?'block':'none'\"\n  (click)=\"onVideoPlayOrPause($event)\"\n  controls\n  poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n  [src]=\"videoSrc|safe\"></video>\n  <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(dataService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
+module.exports = "<div class=\"container\">\r\n    <video #video [style.display]=\"(dataService.story.meType===pType.url||dataService.story.meType===pType.file)?'block':'none'\" (click)=\"onVideoPlayOrPause($event)\" controls poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\r\n        [src]=\"videoSrc|safe\"></video>\r\n    <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(dataService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\r\n</div>"
 
 /***/ }),
 
@@ -756,6 +806,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
+/* harmony import */ var _services_device_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/device.service */ "./src/app/services/device.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -772,15 +823,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var PlayerComponent = /** @class */ (function () {
-    function PlayerComponent(dataService, YTservice, msgService, ngZone) {
+    function PlayerComponent(dataService, YTservice, msgService, ngZone, device) {
         this.dataService = dataService;
         this.YTservice = YTservice;
         this.msgService = msgService;
         this.ngZone = ngZone;
+        this.device = device;
         this.pType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__["PlayerType"];
         this.unSubscribed = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
         this.isInited = false;
+        this._msInterval = 200;
     }
     Object.defineProperty(PlayerComponent.prototype, "ytVId", {
         get: function () {
@@ -794,6 +848,7 @@ var PlayerComponent = /** @class */ (function () {
         configurable: true
     });
     PlayerComponent.prototype.ngOnInit = function () {
+        var self = this;
         this.videoEle = this.ngVideo.nativeElement;
         this.youtubeEle = this.ngYoutube.nativeElement;
         this.eventTriggers();
@@ -802,6 +857,9 @@ var PlayerComponent = /** @class */ (function () {
         if ((this.dataService.state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].readyForPlayer) && (this.isInited === false)) {
             this.initMe();
             this.isInited = true;
+        }
+        if (this.device.isCordova && cordova.platformId === 'ios') {
+            self.videoEle.setAttribute("playsinline", "true");
         }
     };
     PlayerComponent.prototype.ngOnDestroy = function () {
@@ -837,7 +895,7 @@ var PlayerComponent = /** @class */ (function () {
             }
         });
         // * [2018-07-21 19:44] For CurrentTime
-        self.dataService.onCurrentTimeChanged = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(200)
+        self.dataService.onCurrentTimeChanged = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(self._msInterval)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (_) { return self.getCurrentTime(); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["distinctUntilChanged"])(), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["share"])());
         self.dataService.onCurrentTimeChanged
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
@@ -845,28 +903,44 @@ var PlayerComponent = /** @class */ (function () {
             self.dataService.currentTime = t;
             // console.log(t);
         });
+        var isDuringStart = false; // For iOS because its seek time might be earlier than the time you are seeking to
+        var isDuringEnd = false;
         // * [2018-07-24 13:48] For repeating each frame
         self.dataService.onCurrentTimeChanged
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["takeUntil"])(self.unSubscribed))
             .subscribe(function (t) {
             try {
-                var start = 0;
+                var start_1 = 0;
                 var end = self.dataService.duration - 0.1;
                 var iFrame = self.dataService.story.iFrame;
                 if (iFrame >= 0) {
                     var frame = self.dataService.story.frames[iFrame];
                     if (!!frame) {
-                        start = frame.start;
+                        start_1 = frame.start;
                         end = frame.end;
                     }
                 }
-                if (t < start) {
-                    self.dataService.seekTime = start;
+                if (t < start_1) {
+                    if (isDuringStart === false) {
+                        isDuringStart = true;
+                        self.dataService.seekTime = start_1;
+                    }
                 }
-                else if (t > end) {
-                    self.dataService.seekTime = start;
-                    if (self.dataService.isRepeat === false) {
-                        self.dataService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause);
+                else if (t > (end - (self._msInterval / 1000))) {
+                    if (isDuringEnd === false) {
+                        isDuringEnd = true;
+                        setTimeout(function () {
+                            isDuringEnd = false;
+                            self.dataService.seekTime = start_1;
+                            if (self.dataService.isRepeat === false) {
+                                self.dataService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].pause);
+                            }
+                        }, (end - t) * 1000);
+                    }
+                }
+                else {
+                    if (isDuringStart === true) {
+                        isDuringStart = false;
                     }
                 }
             }
@@ -1075,7 +1149,7 @@ var PlayerComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./player.component.css */ "./src/app/components/player/player.component.css")]
         }),
         __metadata("design:paramtypes", [src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"], src_app_services_youtube_service__WEBPACK_IMPORTED_MODULE_2__["YoutubeService"],
-            src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]])
+            src_app_services_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _services_device_service__WEBPACK_IMPORTED_MODULE_7__["DeviceService"]])
     ], PlayerComponent);
     return PlayerComponent;
 }());
@@ -1102,7 +1176,7 @@ module.exports = "\r\n.container {\r\n    display: -ms-inline-grid;\r\n    displ
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"container\">\n  <button mat-icon-button class=\"delBK\">\n    <mat-icon class=\"mat-18\">delete</mat-icon>\n  </button>\n  <button mat-icon-button mat-raised-button\n  class=\"eachButton\"\n  [style.transform]=\"'translateY('+deltaY+'px)'\"\n  [style.background-color]=\"'rgba('+bR+','+bG+','+bB+','+bA+')'\"\n  (pointerdown)=\"onContentPointerdown($event)\"\n  (click)=\"onBtnClick($event)\">\n  <span>{{index}}</span>\n</button>\n</span>\n"
+module.exports = "<span class=\"container\">\r\n  <button mat-icon-button class=\"delBK\">\r\n    <mat-icon class=\"mat-18\">delete</mat-icon>\r\n  </button>\r\n  <button mat-icon-button mat-raised-button\r\n  class=\"eachButton\"\r\n  touch-action=\"none\"\r\n  [style.transform]=\"'translateY('+deltaY+'px)'\"\r\n  [style.background-color]=\"'rgba('+bR+','+bG+','+bB+','+bA+')'\"\r\n  (pointerdown)=\"onContentPointerdown($event)\"\r\n  (click)=\"onBtnClick($event)\">\r\n  <span>{{index}}</span>\r\n</button>\r\n</span>\r\n"
 
 /***/ }),
 
@@ -1595,7 +1669,7 @@ module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3>\r\n        讀入新的媒體：\r\n    </h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                網址\r\n            </button>\r\n            <button mat-icon-button class=\"question\">\r\n                ?\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selFile.click()\" >\r\n                <input #selFile name=\"selFile\" id=\"selFile\"\r\n                type=\"file\" accept=\"video/*, audio/*\" (change)=\"onFileSelect(selFile.files)\">\r\n                檔案\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n\r\n    <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n    </mat-list>\r\n</div>\r\n"
+module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3>\r\n        讀入新的媒體：\r\n    </h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                網址\r\n            </button>\r\n            <button mat-icon-button class=\"question\">\r\n                ?\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selaudio.click()\" >\r\n                <input #selaudio\r\n                type=\"file\" accept=\"audio/*\" (change)=\"onFileSelect(selaudio.files)\">\r\n                聲音檔\r\n            </button>\r\n            <button mat-raised-button (click)=\"selvideo.click()\" >\r\n                <input #selvideo\r\n                type=\"file\" accept=\"video/*\" (change)=\"onFileSelect(selvideo.files)\">\r\n                影片檔\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n\r\n    <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n    </mat-list>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -3341,7 +3415,7 @@ var YoutubeService = /** @class */ (function () {
             return;
         }
         var self = this;
-        uiEle.src = "http://www.youtube.com/embed/" + VId + "?enablejsapi=1&html5=1";
+        uiEle.src = "http://www.youtube.com/embed/" + VId + "?enablejsapi=1&html5=1&playsinline=1";
         if (!!this.ytPlayer && (this.ytPlayer.getIframe() === uiEle)) {
             this.ytPlayer.loadVideoById(VId);
         }
