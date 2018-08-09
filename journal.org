@@ -1,3 +1,7 @@
+* [2018-8-9 Thu] Load material icons offline
+As mentioned in [[https://github.com/angular/angular-cli/issues/2662][this angular's Q&A]], once ~@import "~material-design-icons/iconfont/material-icons.css";~ is declared in ~styles.css~, the icons can be loaded offline.
+Oh, don't forget to install ~material-design-icons~ at first.
+
 * [2018-8-9 Thu] Testing on oPPo
 Hm... Input numbers form keyboard is not a good idea on a mobile, I add in two ~observable~ to handle the pointer events to increase or decrease start and end times.
 

@@ -103,10 +103,12 @@ mat-slider {
 
 #btnStart {
     border-radius: 50% 0 0 50%;
+    margin: 0 8px;
 }
 
 #btnEnd {
     border-radius: 0 50% 50% 0;
+    margin: 0 8px;
 }
 
 #subtitle {

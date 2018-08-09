@@ -440,6 +440,18 @@
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\MusicNotes.svg">
       <PackagePath>www\assets\MusicNotes.svg</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.eot">
+      <PackagePath>www\MaterialIcons-Regular.eot</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.ttf">
+      <PackagePath>www\MaterialIcons-Regular.ttf</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.woff">
+      <PackagePath>www\MaterialIcons-Regular.woff</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.woff2">
+      <PackagePath>www\MaterialIcons-Regular.woff2</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
     </AppxPackagedFile>

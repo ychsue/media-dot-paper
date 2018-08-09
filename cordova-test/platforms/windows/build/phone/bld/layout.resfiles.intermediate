@@ -104,6 +104,10 @@ www\favicon.ico
 www\index.html
 www\main.js
 www\main.js.map
+www\MaterialIcons-Regular.eot
+www\MaterialIcons-Regular.ttf
+www\MaterialIcons-Regular.woff
+www\MaterialIcons-Regular.woff2
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js
