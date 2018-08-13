@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
-import { Subject } from '../../../../node_modules/rxjs';
+import { Subject, interval } from '../../../../node_modules/rxjs';
 import { DeviceService } from '../../services/device.service';
 import { map, concatAll, takeUntil, auditTime, withLatestFrom } from 'rxjs/operators';
 
@@ -60,8 +60,9 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
     Promise.resolve(null).then(_ => this.HideShow = 'hide');
     // * [2018-08-09 14:44] For start and value
     self.startChanged$.pipe(map(ev =>
-      self.device.onPointermove$.pipe(
-        auditTime(self._msDelta),
+      interval(self._msDelta).pipe(
+        withLatestFrom(self.device.onPointermove$),
+        map(([ _ , vm]) => vm),
         takeUntil(self.device.onPointerup$)
       )
     ), concatAll())
@@ -85,8 +86,9 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
     ).subscribe();
 
     self.endChanged$.pipe(map(ev =>
-      self.device.onPointermove$.pipe(
-        auditTime(self._msDelta),
+      interval(self._msDelta).pipe(
+        withLatestFrom(self.device.onPointermove$),
+        map(([ _ , vm]) => vm),
         takeUntil(self.device.onPointerup$)
       )
     ), concatAll())

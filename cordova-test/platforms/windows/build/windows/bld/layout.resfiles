@@ -103,6 +103,8 @@ www\MaterialIcons-Regular.eot
 www\MaterialIcons-Regular.ttf
 www\MaterialIcons-Regular.woff
 www\MaterialIcons-Regular.woff2
+www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js
+www\plugins\cordova-clipboard\www\clipboard.js
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js

@@ -41,6 +41,8 @@
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova.js" "www\cordova.js"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova_plugins.js" "www\cordova_plugins.js"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js" "www\main.js"
+"C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js" "www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js"
+"C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-clipboard\www\clipboard.js" "www\plugins\cordova-clipboard\www\clipboard.js"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js" "www\plugins\cordova-plugin-file\src\windows\FileProxy.js"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js" "www\plugins\cordova-plugin-file\www\browser\isChrome.js"
 "C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js" "www\plugins\cordova-plugin-file\www\DirectoryEntry.js"

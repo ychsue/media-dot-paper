@@ -30,6 +30,7 @@ import { SwapIconComponent } from './components/swap-icon/swap-icon.component';
 import { CommonModule } from '../../node_modules/@angular/common';
 import { StoryComponent } from './pages/story/story.component';
 import { FsService } from './services/fs.service';
+import { ClipboardService } from './services/clipboard.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { FsService } from './services/fs.service';
     MatTabsModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService
+    , FsService, ClipboardService
   ],
   bootstrap: [AppComponent]
 })

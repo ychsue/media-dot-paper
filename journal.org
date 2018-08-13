@@ -1,3 +1,26 @@
+* [2018-8-11 Sat] Using Cordova-Clipboard to handle clipboard.
+It works for Android and Windows UWP.
+But the method ~paste~ of ~ClipboardProxy.js~ of [[https://github.com/ihadeed/cordova-clipboard][this plugin]] has a problem.
+They forget to handle the case of nothing inside the clipboard.
+This part you need to modify this code in ~platform-www~.
+
+Besides, I learned an important concept about ~Promise~.
+Remember that, the ~Promise~ will store its ~resolve~'s result and it will use the previous value instead of running the script again.
+
+Therefore, for this clipboard, I need to create a new ~Promise~ for each call; otherwise, it will behave strangely.
+
+You can test it by 
+#+begin_src javascript
+var i = 0;
+var promise1 = new Promise(function(resolve, reject) {
+  setTimeout(resolve, 100, 'foo'+(i++));
+});
+
+promise1.then(console.log);
+promise1.then(console.log);
+#+end_src
+and you'll get ~foo0  foo0~ instead of ~foo0 foo1~.
+
 * [2018-8-9 Thu] Load material icons offline
 As mentioned in [[https://github.com/angular/angular-cli/issues/2662][this angular's Q&A]], once ~@import "~material-design-icons/iconfont/material-icons.css";~ is declared in ~styles.css~, the icons can be loaded offline.
 Oh, don't forget to install ~material-design-icons~ at first.

@@ -11,6 +11,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
 import { MessageService, MessageTypes } from '../../services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
+import { ClipboardService } from '../../services/clipboard.service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(public gv: GvService, public dialog: MatDialog,
     private meService: MediaEditService, private db: DbService,
     private ngZone: NgZone, private fs: FsService
-    , private msg: MessageService) {
+    , private msg: MessageService, private clipboard: ClipboardService) {
     }
 
   ngOnInit() {
@@ -65,13 +66,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.meService.sideClickType = SideClickType.new;
   }
 
-  onLoadFromURL() {
+  async onLoadFromURL() {
     const self = this;
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '50%',
-      data: {dType: DialogType.inputUrl, url: self.Url}
-    });
+    try {
+      const text = await self.clipboard.getText$$();
+      if (!!text) {
+        self.Url = text;
+      }
+    } catch (error) {
+      self.msg.pushMessage({type: MessageTypes.Error, message: error});
+    }
 
+    let dialogRef;
+    self.ngZone.run(_ => {
+      dialogRef = this.dialog.open(DialogComponent, {
+        width: '50%',
+        data: {dType: DialogType.inputUrl, url: self.Url}
+      });
+    });
     dialogRef.afterClosed().subscribe(result => {
       if (!!result === false) {return; }
       self.Url = result;

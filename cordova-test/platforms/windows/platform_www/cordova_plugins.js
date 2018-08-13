@@ -192,6 +192,22 @@ module.exports = [
         "clobbers": [
             "nSQLite"
         ]
+    },
+    {
+        "id": "cordova-clipboard.Clipboard",
+        "file": "plugins/cordova-clipboard/www/clipboard.js",
+        "pluginId": "cordova-clipboard",
+        "clobbers": [
+            "cordova.plugins.clipboard"
+        ]
+    },
+    {
+        "id": "cordova-clipboard.ClipboardProxy",
+        "file": "plugins/cordova-clipboard/src/windows/ClipboardProxy.js",
+        "pluginId": "cordova-clipboard",
+        "merges": [
+            ""
+        ]
     }
 ];
 module.exports.metadata = 
@@ -200,7 +216,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-file": "6.0.1",
     "cordova-sqlite-storage": "2.3.0",
-    "cordova-plugin-nano-sqlite": "1.3.0"
+    "cordova-plugin-nano-sqlite": "1.3.0",
+    "cordova-clipboard": "1.2.1"
 };
 // BOTTOM OF METADATA
 });

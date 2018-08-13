@@ -184,12 +184,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_angular_common__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../node_modules/@angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _pages_story_story_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/story/story.component */ "./src/app/pages/story/story.component.ts");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/clipboard.service */ "./src/app/services/clipboard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -259,7 +261,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatTabsModule"]
             ],
             providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"],
-                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"]
+                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__["ClipboardService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -583,7 +585,10 @@ var MeManiPlateComponent = /** @class */ (function () {
         Promise.resolve(null).then(function (_) { return _this.HideShow = 'hide'; });
         // * [2018-08-09 14:44] For start and value
         self.startChanged$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (ev) {
-            return self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["auditTime"])(self._msDelta), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
+            return Object(_node_modules_rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(self._msDelta).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointermove$), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (_a) {
+                var _ = _a[0], vm = _a[1];
+                return vm;
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatAll"])())
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointerdown$, function (vm, vd) {
             var frame = self.meService.story.frames[self.meService.story.iFrame];
@@ -603,7 +608,10 @@ var MeManiPlateComponent = /** @class */ (function () {
             }
         })).subscribe();
         self.endChanged$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (ev) {
-            return self.device.onPointermove$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["auditTime"])(self._msDelta), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
+            return Object(_node_modules_rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(self._msDelta).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointermove$), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (_a) {
+                var _ = _a[0], vm = _a[1];
+                return vm;
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeUntil"])(self.device.onPointerup$));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["concatAll"])())
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["withLatestFrom"])(self.device.onPointerdown$, function (vm, vd) {
             var frame = self.meService.story.frames[self.meService.story.iFrame];
@@ -1694,6 +1702,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
+/* harmony import */ var _services_clipboard_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/clipboard.service */ "./src/app/services/clipboard.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1749,8 +1758,9 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(gv, dialog, meService, db, ngZone, fs, msg) {
+    function HomeComponent(gv, dialog, meService, db, ngZone, fs, msg, clipboard) {
         this.gv = gv;
         this.dialog = dialog;
         this.meService = meService;
@@ -1758,6 +1768,7 @@ var HomeComponent = /** @class */ (function () {
         this.ngZone = ngZone;
         this.fs = fs;
         this.msg = msg;
+        this.clipboard = clipboard;
         this.Url = 'https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3';
         this.testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
         this.storySearch$ = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
@@ -1793,20 +1804,47 @@ var HomeComponent = /** @class */ (function () {
         this.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].new;
     };
     HomeComponent.prototype.onLoadFromURL = function () {
-        var self = this;
-        var dialogRef = this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
-            width: '50%',
-            data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
-        });
-        dialogRef.afterClosed().subscribe(function (result) {
-            if (!!result === false) {
-                return;
-            }
-            self.Url = result;
-            self.meService.initMe(self.Url);
-            self.gv.shownPage = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
-            // * [2018-07-19 21:28] Tell navbar that you want to create a story
-            self.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].new;
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var self, text, error_1, dialogRef;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, self.clipboard.getText$$()];
+                    case 2:
+                        text = _a.sent();
+                        if (!!text) {
+                            self.Url = text;
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        self.msg.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageTypes"].Error, message: error_1 });
+                        return [3 /*break*/, 4];
+                    case 4:
+                        self.ngZone.run(function (_) {
+                            dialogRef = _this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
+                                width: '50%',
+                                data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
+                            });
+                        });
+                        dialogRef.afterClosed().subscribe(function (result) {
+                            if (!!result === false) {
+                                return;
+                            }
+                            self.Url = result;
+                            self.meService.initMe(self.Url);
+                            self.gv.shownPage = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"].MediaEdit;
+                            // * [2018-07-19 21:28] Tell navbar that you want to create a story
+                            self.meService.sideClickType = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["SideClickType"].new;
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     HomeComponent.prototype.onStoryDelete = function (story) {
@@ -1846,7 +1884,7 @@ var HomeComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
             _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"], _services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _services_fs_service__WEBPACK_IMPORTED_MODULE_8__["FsService"],
-            _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageService"]])
+            _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_11__["ClipboardService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -2305,6 +2343,57 @@ var SafePipe = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
     ], SafePipe);
     return SafePipe;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/clipboard.service.ts":
+/*!***********************************************!*\
+  !*** ./src/app/services/clipboard.service.ts ***!
+  \***********************************************/
+/*! exports provided: ClipboardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClipboardService", function() { return ClipboardService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ClipboardService = /** @class */ (function () {
+    // getText$$: Promise<string>;
+    function ClipboardService(device) {
+        this.device = device;
+    }
+    ClipboardService.prototype.getText$$ = function () {
+        return new Promise(function (res, rej) {
+            if (!!cordova.plugins) {
+                cordova.plugins.clipboard.paste(function (t) { return res(t); }, function (e) { return rej(e); });
+            }
+            else {
+                rej('cordova.plugins is undefined');
+            }
+        });
+    };
+    ClipboardService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"]])
+    ], ClipboardService);
+    return ClipboardService;
 }());
 
 
