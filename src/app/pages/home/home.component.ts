@@ -6,12 +6,13 @@ import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
 import { IStory } from '../../services/story.service';
-import { map, concatAll } from 'rxjs/operators';
+import { map, concatAll, concat } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
 import { MessageService, MessageTypes } from '../../services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
 import { ClipboardService } from '../../services/clipboard.service';
+import { PageTextsService } from '../../services/page-texts.service';
 
 @Component({
   selector: 'app-home',
@@ -27,11 +28,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
   stories: IStory[];
   storySearch$ = new Subject<IStory>();
 
+  pts: IHomePage;
+
   pageType = PageType;
-  constructor(public gv: GvService, public dialog: MatDialog,
+  constructor(public gv: GvService, public dialog: MatDialog, public ptsServic: PageTextsService,
     private meService: MediaEditService, private db: DbService,
     private ngZone: NgZone, private fs: FsService
     , private msg: MessageService, private clipboard: ClipboardService) {
+      const self = this;
+      ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).subscribe(_ => {
+        self.pts = ptsServic.pts.homePage;
+      });
     }
 
   ngOnInit() {

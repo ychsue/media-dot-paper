@@ -14,4 +14,12 @@
   <button mat-icon-button [matBadge]="nUnReadMsg" (click)="showMsgsAtBottom()" *ngIf="nUnReadMsg!=0">
     <mat-icon class="mat-18">event_note</mat-icon>
   </button>
+  <button mat-icon-button [matMenuTriggerFor]="langMenu" >
+      <mat-icon class="mat-18">translate</mat-icon>
+  </button>
+  <mat-menu #langMenu="matMenu">
+    <button mat-menu-item *ngFor="let each of ptsService.langList" 
+    (click)="ptsService.loadPTS$$(each.isoCode,true)"
+    [class.isSelect]="each.isoCode===ptsService.langCode">{{each.name}}</button>
+  </mat-menu>
 </nav>

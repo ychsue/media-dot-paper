@@ -7,6 +7,7 @@ import { MediaEditService, SideClickType } from '../services/media-edit.service'
 import { PlayerType } from '../vm/player-type.enum';
 import { FsService } from '../services/fs.service';
 import { map, concatAll } from '../../../node_modules/rxjs/operators';
+import { PageTextsService } from '../services/page-texts.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone,
     private db: DbService, private fsService: FsService, public meService: MediaEditService,
-    public msgService: MessageService) {
+    public msgService: MessageService, public ptsService: PageTextsService) {
     const self = this;
     this.nUnReadMsg = msgService.getNUnRead();
     msgService.remindMsgIn.subscribe(

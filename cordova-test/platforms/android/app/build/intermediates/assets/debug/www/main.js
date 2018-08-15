@@ -185,12 +185,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_story_story_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./pages/story/story.component */ "./src/app/pages/story/story.component.ts");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./services/fs.service */ "./src/app/services/fs.service.ts");
 /* harmony import */ var _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/clipboard.service */ "./src/app/services/clipboard.service.ts");
+/* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/page-texts.service */ "./src/app/services/page-texts.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -258,10 +262,12 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialogModule"],
                 _node_modules_angular_common__WEBPACK_IMPORTED_MODULE_25__["CommonModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatSliderModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatTabsModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatTabsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_30__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatMenuModule"]
             ],
             providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"],
-                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__["ClipboardService"]
+                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__["ClipboardService"], _services_page_texts_service__WEBPACK_IMPORTED_MODULE_29__["PageTextsService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -1470,7 +1476,7 @@ var MessageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav{\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 8px 16px;\r\n    background: #673ab7;\r\n}\r\n\r\n.flex-spacer{\r\n    flex-grow: 1;\r\n    text-align: center;\r\n    overflow-x: auto;\r\n}"
+module.exports = "nav{\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 8px 16px;\r\n    background: #673ab7;\r\n}\r\n\r\n.flex-spacer{\r\n    flex-grow: 1;\r\n    text-align: center;\r\n    overflow-x: auto;\r\n}\r\n\r\n.isSelect {\r\n    background-color: aliceblue;\r\n}"
 
 /***/ }),
 
@@ -1481,7 +1487,7 @@ module.exports = "nav{\r\n    display: flex;\r\n    align-items: center;\r\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button (click)=\"toggleSidenav_Click.next($event)\">\n      <mat-icon class=\"mat-18\">menu</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onSaveStory()\" *ngIf=\"meService.sideClickType===sideClickType_.new\">\n    <mat-icon class=\"mat-18\">save</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onUpdateStory()\" *ngIf=\"meService.sideClickType===sideClickType_.select\">\n    <mat-icon class=\"mat-18\">update</mat-icon>\n  </button>\n<div class=\"flex-spacer\">\n  <div>{{meService.story.title}}</div>\n</div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n</nav>"
+module.exports = "<nav class=\"docs-navbar-header\">\n  <button mat-icon-button (click)=\"toggleSidenav_Click.next($event)\">\n      <mat-icon class=\"mat-18\">menu</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onSaveStory()\" *ngIf=\"meService.sideClickType===sideClickType_.new\">\n    <mat-icon class=\"mat-18\">save</mat-icon>\n  </button>\n  <button mat-icon-button (click)=\"onUpdateStory()\" *ngIf=\"meService.sideClickType===sideClickType_.select\">\n    <mat-icon class=\"mat-18\">update</mat-icon>\n  </button>\n<div class=\"flex-spacer\">\n  <div>{{meService.story.title}}</div>\n</div>\n  <button mat-icon-button [matBadge]=\"nUnReadMsg\" (click)=\"showMsgsAtBottom()\" *ngIf=\"nUnReadMsg!=0\">\n    <mat-icon class=\"mat-18\">event_note</mat-icon>\n  </button>\n  <button mat-icon-button [matMenuTriggerFor]=\"langMenu\" >\n      <mat-icon class=\"mat-18\">translate</mat-icon>\n  </button>\n  <mat-menu #langMenu=\"matMenu\">\n    <button mat-menu-item *ngFor=\"let each of ptsService.langList\" \n    (click)=\"ptsService.loadPTS$$(each.isoCode,true)\"\n    [class.isSelect]=\"each.isoCode===ptsService.langCode\">{{each.name}}</button>\n  </mat-menu>\n</nav>"
 
 /***/ }),
 
@@ -1504,6 +1510,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/fs.service */ "./src/app/services/fs.service.ts");
 /* harmony import */ var _node_modules_rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../node_modules/rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1557,14 +1564,16 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var NavbarComponent = /** @class */ (function () {
-    function NavbarComponent(bottomSheet, ngZone, db, fsService, meService, msgService) {
+    function NavbarComponent(bottomSheet, ngZone, db, fsService, meService, msgService, ptsService) {
         this.bottomSheet = bottomSheet;
         this.ngZone = ngZone;
         this.db = db;
         this.fsService = fsService;
         this.meService = meService;
         this.msgService = msgService;
+        this.ptsService = ptsService;
         this.toggleSidenav_Click = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.nUnReadMsg = 0;
         this.sideClickType_ = _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["SideClickType"];
@@ -1650,7 +1659,7 @@ var NavbarComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatBottomSheet"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"],
             _services_db_service__WEBPACK_IMPORTED_MODULE_4__["DbService"], _services_fs_service__WEBPACK_IMPORTED_MODULE_7__["FsService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_5__["MediaEditService"],
-            _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"]])
+            _services_message_service__WEBPACK_IMPORTED_MODULE_1__["MessageService"], _services_page_texts_service__WEBPACK_IMPORTED_MODULE_9__["PageTextsService"]])
     ], NavbarComponent);
     return NavbarComponent;
 }());
@@ -1677,7 +1686,7 @@ module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3>\r\n        讀入新的媒體：\r\n    </h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                網址\r\n            </button>\r\n            <button mat-icon-button class=\"question\">\r\n                ?\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selaudio.click()\" >\r\n                <input #selaudio\r\n                type=\"file\" accept=\"audio/*\" (change)=\"onFileSelect(selaudio.files)\">\r\n                聲音檔\r\n            </button>\r\n            <button mat-raised-button (click)=\"selvideo.click()\" >\r\n                <input #selvideo\r\n                type=\"file\" accept=\"video/*\" (change)=\"onFileSelect(selvideo.files)\">\r\n                影片檔\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n\r\n    <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n    </mat-list>\r\n</div>\r\n"
+module.exports = "<div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div>\r\n<div>\r\n    <h3 [innerText]=\"(!!pts)?pts.newMedia:'讀入新的媒體：'\"></h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                {{(!!pts)?pts.url:'網址'}}\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selaudio.click()\" >\r\n                <input #selaudio\r\n                type=\"file\" accept=\"audio/*\" (change)=\"onFileSelect(selaudio.files)\">\r\n                聲音檔\r\n            </button>\r\n            <button mat-raised-button (click)=\"selvideo.click()\" >\r\n                <input #selvideo\r\n                type=\"file\" accept=\"video/*\" (change)=\"onFileSelect(selvideo.files)\">\r\n                影片檔\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div>\r\n    <h3>讀入已備份的媒體：</h3>\r\n\r\n    <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n    </mat-list>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1703,6 +1712,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 /* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
 /* harmony import */ var _services_clipboard_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../services/clipboard.service */ "./src/app/services/clipboard.service.ts");
+/* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1759,10 +1769,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(gv, dialog, meService, db, ngZone, fs, msg, clipboard) {
+    function HomeComponent(gv, dialog, ptsServic, meService, db, ngZone, fs, msg, clipboard) {
         this.gv = gv;
         this.dialog = dialog;
+        this.ptsServic = ptsServic;
         this.meService = meService;
         this.db = db;
         this.ngZone = ngZone;
@@ -1773,6 +1785,10 @@ var HomeComponent = /** @class */ (function () {
         this.testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
         this.storySearch$ = new rxjs__WEBPACK_IMPORTED_MODULE_6__["Subject"]();
         this.pageType = _services_gv_service__WEBPACK_IMPORTED_MODULE_1__["PageType"];
+        var self = this;
+        ptsServic.PTSReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["concat"])(ptsServic.ptsLoaded$)).subscribe(function (_) {
+            self.pts = ptsServic.pts.homePage;
+        });
     }
     HomeComponent.prototype.ngOnInit = function () {
         var self = this;
@@ -1805,6 +1821,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.onLoadFromURL = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             var self, text, error_1, dialogRef;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -1817,17 +1834,19 @@ var HomeComponent = /** @class */ (function () {
                     case 2:
                         text = _a.sent();
                         if (!!text) {
-                            self.Url = text; // ********************* TODO ************************
+                            self.Url = text;
                         }
                         return [3 /*break*/, 4];
                     case 3:
                         error_1 = _a.sent();
-                        self.msg.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageTypes"].Error, message: JSON.stringify(error_1) });
+                        self.msg.pushMessage({ type: _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageTypes"].Error, message: error_1 });
                         return [3 /*break*/, 4];
                     case 4:
-                        dialogRef = this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
-                            width: '50%',
-                            data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
+                        self.ngZone.run(function (_) {
+                            dialogRef = _this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
+                                width: '50%',
+                                data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogType"].inputUrl, url: self.Url }
+                            });
                         });
                         dialogRef.afterClosed().subscribe(function (result) {
                             if (!!result === false) {
@@ -1878,7 +1897,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/pages/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/pages/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
+        __metadata("design:paramtypes", [_services_gv_service__WEBPACK_IMPORTED_MODULE_1__["GvService"], _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"], _services_page_texts_service__WEBPACK_IMPORTED_MODULE_12__["PageTextsService"],
             _services_media_edit_service__WEBPACK_IMPORTED_MODULE_2__["MediaEditService"], _services_db_service__WEBPACK_IMPORTED_MODULE_5__["DbService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"], _services_fs_service__WEBPACK_IMPORTED_MODULE_8__["FsService"],
             _services_message_service__WEBPACK_IMPORTED_MODULE_9__["MessageService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_11__["ClipboardService"]])
@@ -2377,7 +2396,7 @@ var ClipboardService = /** @class */ (function () {
     ClipboardService.prototype.getText$$ = function () {
         return new Promise(function (res, rej) {
             if (!!cordova.plugins) {
-                cordova.plugins['clipboard'].paste(function (t) { return res(t); }, function (e) { return rej(e); });
+                cordova.plugins.clipboard.paste(function (t) { return res(t); }, function (e) { return rej(e); });
             }
             else {
                 rej('cordova.plugins is undefined');
@@ -3353,6 +3372,183 @@ var MessageTypes;
     MessageTypes[MessageTypes["Warn"] = 1] = "Warn";
     MessageTypes[MessageTypes["Error"] = 2] = "Error";
 })(MessageTypes || (MessageTypes = {}));
+
+
+/***/ }),
+
+/***/ "./src/app/services/page-texts.service.ts":
+/*!************************************************!*\
+  !*** ./src/app/services/page-texts.service.ts ***!
+  \************************************************/
+/*! exports provided: PageTextsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageTextsService", function() { return PageTextsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+var PageTextsService = /** @class */ (function () {
+    function PageTextsService(http) {
+        this.http = http;
+        this._ptsLoaded$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.langList = [
+            { name: "中文", isoCode: "zh-tw" },
+            { name: "English", isoCode: "en" },
+            { name: "Indonesia", isoCode: "id" }
+        ];
+        this._ptsKey = "PTS";
+        this._isoCodeKey = "IsoCode";
+        var self = this;
+        self.PTSReady$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["from"])(self._iniPTS$$()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1));
+    }
+    Object.defineProperty(PageTextsService.prototype, "ptsLoaded$", {
+        get: function () {
+            return this._ptsLoaded$;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    PageTextsService.prototype._iniPTS$$ = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var result, lang;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadPTSFromStorage$$()];
+                    case 1:
+                        result = _a.sent();
+                        if (!(!!result === false)) return [3 /*break*/, 3];
+                        lang = navigator.language;
+                        return [4 /*yield*/, this.loadPTS$$()];
+                    case 2:
+                        result = _a.sent();
+                        this.savePTS2Storage();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, (!!result)];
+                }
+            });
+        });
+    };
+    PageTextsService.prototype.loadPTS$$ = function (isoCode, isSaveIntoStorage) {
+        if (isoCode === void 0) { isoCode = 'en'; }
+        if (isSaveIntoStorage === void 0) { isSaveIntoStorage = false; }
+        return __awaiter(this, void 0, void 0, function () {
+            var self, httpGet, obj, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        httpGet = this.http.get("assets/i18n/" + isoCode + "/pageTexts.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
+                        obj = null;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, httpGet.toPromise()];
+                    case 2:
+                        obj = (_a.sent());
+                        self.langCode = isoCode;
+                        self.pts = obj;
+                        self._ptsLoaded$.next(self.pts);
+                        if (isSaveIntoStorage === true) {
+                            self.savePTS2Storage();
+                        }
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_1 = _a.sent();
+                        self._ptsLoaded$.next(null);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/, obj];
+                }
+            });
+        });
+    };
+    PageTextsService.prototype.loadPTSFromStorage$$ = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var self, code;
+            return __generator(this, function (_a) {
+                self = this;
+                code = null;
+                try {
+                    code = window.localStorage.getItem(self._isoCodeKey);
+                }
+                catch (error) {
+                    code = null;
+                }
+                if (!!code) {
+                    self.langCode = code;
+                    self.pts = JSON.parse(window.localStorage.getItem(self._ptsKey));
+                    self._ptsLoaded$.next(self.pts);
+                }
+                return [2 /*return*/, (!!code) ? self.pts : null];
+            });
+        });
+    };
+    PageTextsService.prototype.savePTS2Storage = function () {
+        var self = this;
+        if (!!this.pts) {
+            window.localStorage.setItem(self._ptsKey, JSON.stringify(this.pts));
+            window.localStorage.setItem(self._isoCodeKey, self.langCode);
+        }
+    };
+    PageTextsService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], PageTextsService);
+    return PageTextsService;
+}());
+
 
 
 /***/ }),

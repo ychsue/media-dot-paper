@@ -1,3 +1,7 @@
+* [2018-8-15 Wed] I have tested ~i18n-page-texts~ and it works fine in ~home.component~ on both windows and Android.
+Once the effort for ~page-texts.service~ is done, I can easily use it in my code.
+At this moment, I have tested it on ~home.component~ in Windows & Android system.
+
 * [2018-8-11 Sat] Using Cordova-Clipboard to handle clipboard.
 It works for Android and Windows UWP.
 But the method ~paste~ of ~ClipboardProxy.js~ of [[https://github.com/ihadeed/cordova-clipboard][this plugin]] has a problem.
