@@ -187,12 +187,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./services/clipboard.service */ "./src/app/services/clipboard.service.ts");
 /* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _services_ad_service__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./services/ad.service */ "./src/app/services/ad.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -267,7 +269,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatMenuModule"]
             ],
             providers: [_services_message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"], _services_media_edit_service__WEBPACK_IMPORTED_MODULE_16__["MediaEditService"], _services_youtube_service__WEBPACK_IMPORTED_MODULE_17__["YoutubeService"], _services_gv_service__WEBPACK_IMPORTED_MODULE_18__["GvService"], _services_db_service__WEBPACK_IMPORTED_MODULE_21__["DbService"], _services_device_service__WEBPACK_IMPORTED_MODULE_22__["DeviceService"],
-                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__["ClipboardService"], _services_page_texts_service__WEBPACK_IMPORTED_MODULE_29__["PageTextsService"]
+                _services_fs_service__WEBPACK_IMPORTED_MODULE_27__["FsService"], _services_clipboard_service__WEBPACK_IMPORTED_MODULE_28__["ClipboardService"], _services_page_texts_service__WEBPACK_IMPORTED_MODULE_29__["PageTextsService"], _services_ad_service__WEBPACK_IMPORTED_MODULE_31__["AdService"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]]
         })
@@ -2365,6 +2367,167 @@ var SafePipe = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/services/ad.service.ts":
+/*!****************************************!*\
+  !*** ./src/app/services/ad.service.ts ***!
+  \****************************************/
+/*! exports provided: AdService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdService", function() { return AdService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// Gotten from https://github.com/floatinghotpot/cordova-admob-pro
+var AdService = /** @class */ (function () {
+    function AdService(device) {
+        this.device = device;
+        this._adReady$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
+        // public get adReady$(): Observable<boolean> {
+        //   return this._adReady$.pipe(first());
+        // }
+        this.adReady$ = this._adReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["shareReplay"])(1));
+        var self = this;
+        if (!!cordova) {
+            if (cordova.platformId === 'windows') {
+                self.iniWinSDK();
+            }
+            else {
+                self.iniAdMob();
+            }
+            this.prepareInterstitial();
+        }
+    }
+    AdService.prototype.prepareInterstitial = function () {
+        var self = this;
+        self.adReady$.subscribe(function (isReady) {
+            if (isReady) {
+                // * [2018-08-15 16:19] Initialize it
+                if (!!window['MicrosoftNSJS']) {
+                    self.interstitial.requestAd(self.msAdv.InterstitialAdType.display, self.adWin.AppId, self.adWin.AdUnitId);
+                }
+                else if (!!window['AdMob']) {
+                    self.interstitial.prepareInterstitial({ adId: self.admobid.interstitial, autoShow: false });
+                }
+            }
+        });
+    };
+    AdService.prototype.showInterstitial = function () {
+        var self = this;
+        self.adReady$.subscribe(function (isReady) {
+            if (isReady) {
+                if (!!window['MicrosoftNSJS']) {
+                    self.interstitial.show();
+                }
+                else if (!!window['AdMob']) {
+                    self.interstitial.showInterstitial();
+                }
+                // * [2018-08-18 15:47] Renew it 2 min later
+                setTimeout(function () {
+                    self.prepareInterstitial();
+                }, 1000 * 60 * 2);
+            }
+        });
+    };
+    AdService.prototype.iniWinSDK = function () {
+        var self = this;
+        if (!!cordova && cordova.platformId === 'windows') {
+            // * [2018-08-16 09:33] Load in the needed script
+            var doc = window.document;
+            var sdkScript = doc.createElement('script');
+            sdkScript.type = 'text/javascript';
+            sdkScript.src = '//Microsoft.Advertising.JavaScript/ad.js';
+            doc.head.appendChild(sdkScript);
+            // * [2018-08-16 09:35] Start to load
+            // *********************** TODO **************************************
+            var isReady_1 = false;
+            Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["interval"])(100).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(10)).subscribe(function (i0) {
+                if (i0 >= 9 && isReady_1 === false) {
+                    self._adReady$.next(false);
+                    self._adReady$.complete();
+                }
+                else if (isReady_1 === false) {
+                    if (!!window['MicrosoftNSJS'] && !!window['MicrosoftNSJS']['Advertising']) {
+                        self.msAdv = window['MicrosoftNSJS']['Advertising'];
+                        self.interstitial = new self.msAdv.InterstitialAd();
+                        self.adWin = {
+                            AppId: "d25517cb-12d4-4699-8bdc-52040c712cab",
+                            AdUnitId: "test"
+                        };
+                        self._adReady$.next(true);
+                        self._adReady$.complete();
+                        isReady_1 = true;
+                    }
+                }
+            });
+        }
+    };
+    AdService.prototype.iniAdMob = function () {
+        var self = this;
+        // * [2018-08-15 16:17] Initialize admobid
+        if (/(android)/i.test(navigator.userAgent)) {
+            self.admobid = {
+                banner: 'ca-app-pub-3940256099942544/6300978111',
+                interstitial: 'ca-app-pub-3940256099942544/1033173712',
+                rewardvideo: 'ca-app-pub-3940256099942544/5224354917',
+            };
+        }
+        else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            self.admobid = {
+                banner: 'ca-app-pub-3940256099942544/4480807092',
+                interstitial: 'ca-app-pub-3940256099942544/4411468910',
+                rewardvideo: 'ca-app-pub-3940256099942544/1712485313',
+            };
+        }
+        else {
+            self.admobid = {
+                banner: 'ca-app-pub-6869992474017983/8878394753',
+                interstitial: 'ca-app-pub-6869992474017983/1355127956',
+                rewardvideo: '',
+            };
+        }
+        if (self.device.isCordova) {
+            self.device.onDeviceReady.subscribe(function (_) {
+                if (!!window['AdMob']) {
+                    self.interstitial = window['AdMob'];
+                    self._adReady$.next(true);
+                }
+                else {
+                    self._adReady$.next(false);
+                }
+                self._adReady$.complete();
+            });
+        }
+    };
+    AdService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"]])
+    ], AdService);
+    return AdService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/clipboard.service.ts":
 /*!***********************************************!*\
   !*** ./src/app/services/clipboard.service.ts ***!
@@ -3028,6 +3191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var _story_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./story.service */ "./src/app/services/story.service.ts");
 /* harmony import */ var _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vm/player-type.enum */ "./src/app/vm/player-type.enum.ts");
+/* harmony import */ var _ad_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ad.service */ "./src/app/services/ad.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3041,8 +3205,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MediaEditService = /** @class */ (function () {
-    function MediaEditService() {
+    function MediaEditService(adService) {
+        this.adService = adService;
         this.PlayerType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"];
         this._duration = 100;
         this._volume = 1; // **************** TODO *******************
@@ -3123,6 +3289,8 @@ var MediaEditService = /** @class */ (function () {
     });
     MediaEditService.prototype.initMe = function (data, pType) {
         if (pType === void 0) { pType = _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_3__["PlayerType"].auto; }
+        // * [2018-08-15 16:25] Try to show admob
+        this.adService.showInterstitial();
         // * [2018-07-19 17:58] pause previous action
         this.onPlayerAction.next(playerAction.pause);
         // * [2018-07-19 17:59] Start to initialize it.
@@ -3263,7 +3431,7 @@ var MediaEditService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_ad_service__WEBPACK_IMPORTED_MODULE_4__["AdService"]])
     ], MediaEditService);
     return MediaEditService;
 }());
@@ -3443,10 +3611,12 @@ var PageTextsService = /** @class */ (function () {
         this.http = http;
         this._ptsLoaded$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
         this.langList = [
-            { name: "中文", isoCode: "zh-tw" },
+            { name: "繁中", isoCode: "zh-tw" },
+            { name: "簡中", isoCode: "zh-cn" },
             { name: "English", isoCode: "en" },
             { name: "Indonesia", isoCode: "id" }
         ];
+        this.folder_prefix = "iso_";
         this._ptsKey = "PTS";
         this._isoCodeKey = "IsoCode";
         var self = this;
@@ -3488,7 +3658,7 @@ var PageTextsService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         self = this;
-                        httpGet = this.http.get("assets/i18n/" + isoCode + "/pageTexts.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
+                        httpGet = this.http.get("assets/i18n/" + self.folder_prefix + isoCode + "/pageTexts.json").pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1));
                         obj = null;
                         _a.label = 1;
                     case 1:

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { IStory, Story } from './story.service';
 import { PlayerType } from '../vm/player-type.enum';
+import { AdService } from './ad.service';
 
 @Injectable({
   providedIn: 'root'
@@ -76,13 +77,15 @@ export class MediaEditService {
 
   sideClickType = SideClickType.none;
 
-  constructor() {
+  constructor(private adService: AdService) {
     this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
   }
 
   initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
+    // * [2018-08-15 16:25] Try to show admob
+    this.adService.showInterstitial();
     // * [2018-07-19 17:58] pause previous action
     this.onPlayerAction.next(playerAction.pause);
     // * [2018-07-19 17:59] Start to initialize it.

@@ -87,6 +87,10 @@ src\tsconfig.app.json
 src\tsconfig.spec.json
 src\tslint.json
 www\3rdpartylicenses.txt
+www\assets\i18n\iso_en\pageTexts.json
+www\assets\i18n\iso_id\pageTexts.json
+www\assets\i18n\iso_zh-cn\pageTexts.json
+www\assets\i18n\iso_zh-tw\pageTexts.json
 www\assets\MusicNotes.svg
 www\cordova.js
 www\cordova_plugins.js
@@ -105,6 +109,7 @@ www\MaterialIcons-Regular.woff
 www\MaterialIcons-Regular.woff2
 www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js
 www\plugins\cordova-clipboard\www\clipboard.js
+www\plugins\cordova-plugin-admobpro\www\AdMob.js
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js

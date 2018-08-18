@@ -143,6 +143,7 @@
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\ad.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\clipboard.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\cordova.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\db.service.ts" />
@@ -150,6 +151,7 @@
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\fs.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\gv.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\media-edit.service.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\page-texts.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\story.service.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\youtube.service.ts" />
   </ItemGroup>

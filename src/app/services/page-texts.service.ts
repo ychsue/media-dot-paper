@@ -16,13 +16,15 @@ export class PageTextsService {
 
   langCode: string;
   langList: EachLang[] = [
-    {name: "中文", isoCode: "zh-tw"},
+    {name: "繁中", isoCode: "zh-tw"},
+    {name: "簡中", isoCode: "zh-cn"},
     {name: "English", isoCode: "en"},
     {name: "Indonesia", isoCode: "id"}
   ];
 
   PTSReady$: Observable<boolean>;
 
+  folder_prefix = "iso_";
   _ptsKey = "PTS";
   _isoCodeKey = "IsoCode";
   constructor(private http: HttpClient) {
@@ -42,7 +44,7 @@ export class PageTextsService {
 
   async loadPTS$$(isoCode = 'en', isSaveIntoStorage = false) {
     const self = this;
-    const httpGet = this.http.get(`assets/i18n/${isoCode}/pageTexts.json`).pipe(take(1));
+    const httpGet = this.http.get(`assets/i18n/${self.folder_prefix}${isoCode}/pageTexts.json`).pipe(take(1));
     let obj: IPageTexts = null;
     try {
       obj = await httpGet.toPromise() as IPageTexts;

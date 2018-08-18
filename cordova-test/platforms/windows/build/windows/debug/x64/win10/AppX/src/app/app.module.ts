@@ -7,7 +7,7 @@ import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
-  MatSidenavModule, MatSliderModule, MatTabsModule} from '@angular/material';
+  MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -31,6 +31,9 @@ import { CommonModule } from '../../node_modules/@angular/common';
 import { StoryComponent } from './pages/story/story.component';
 import { FsService } from './services/fs.service';
 import { ClipboardService } from './services/clipboard.service';
+import { PageTextsService } from './services/page-texts.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdService } from './services/ad.service';
 
 @NgModule({
   declarations: [
@@ -66,10 +69,12 @@ import { ClipboardService } from './services/clipboard.service';
     MatDialogModule,
     CommonModule,
     MatSliderModule,
-    MatTabsModule
+    MatTabsModule,
+    HttpClientModule,
+    MatMenuModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService, ClipboardService
+    , FsService, ClipboardService, PageTextsService, AdService
   ],
   bootstrap: [AppComponent]
 })

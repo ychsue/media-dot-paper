@@ -1,3 +1,8 @@
+* [2018-8-18 Sat] AdMob has been installed.
+1. I have installed ~cordova-plugin-admobpro~ and created a service ~ad.service~ to handle Windows Ad & Android and iOS Ads.
+
+2. The folder named as isoCode such as ~en~ or ~zh-tw~ will cause a problem in windows system. I need to rename them to be such as ~iso_zh=tw~. It means that I need to modify my ~i18n-page-texts~ node package.
+
 * [2018-8-15 Wed] I have tested ~i18n-page-texts~ and it works fine in ~home.component~ on both windows and Android.
 Once the effort for ~page-texts.service~ is done, I can easily use it in my code.
 At this moment, I have tested it on ~home.component~ in Windows & Android system.

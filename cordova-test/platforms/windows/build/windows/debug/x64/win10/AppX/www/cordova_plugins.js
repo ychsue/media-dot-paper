@@ -208,6 +208,14 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "id": "cordova-plugin-admobpro.AdMob",
+        "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
+        "pluginId": "cordova-plugin-admobpro",
+        "clobbers": [
+            "window.AdMob"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -217,7 +225,9 @@ module.exports.metadata =
     "cordova-plugin-file": "6.0.1",
     "cordova-sqlite-storage": "2.3.0",
     "cordova-plugin-nano-sqlite": "1.3.0",
-    "cordova-clipboard": "1.2.1"
+    "cordova-clipboard": "1.2.1",
+    "cordova-plugin-extension": "1.5.4",
+    "cordova-plugin-admobpro": "2.31.6"
 };
 // BOTTOM OF METADATA
 });

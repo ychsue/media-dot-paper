@@ -33,6 +33,7 @@ import { FsService } from './services/fs.service';
 import { ClipboardService } from './services/clipboard.service';
 import { PageTextsService } from './services/page-texts.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdService } from './services/ad.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatMenuModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService, ClipboardService, PageTextsService
+    , FsService, ClipboardService, PageTextsService, AdService
   ],
   bootstrap: [AppComponent]
 })
