@@ -43,30 +43,4 @@ export class NavbarComponent implements OnInit {
     const ref = this.bottomSheet.open(MessageComponent);
     ref.instance.showMsgs();
   }
-
-  async onSaveStory() {
-    const story = this.meService.story;
-    const self = this;
-    if (story.meType === PlayerType.file) {
-      const isSaved = await this.fsService.getFile$(story.fileName, true).pipe(map(fEntry => {
-        return self.fsService.writeFile$(fEntry, self.meService.blob);
-      }), concatAll()).toPromise();
-      // * [2018-08-05 17:23] if it is saved, renew its URL
-      if (isSaved === true) {
-        story.urlOrID = (await this.fsService.getFile$(story.fileName).toPromise()).toURL();
-      }
-
-      self.msgService.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is stored: ${isSaved}`});
-    }
-    delete story['id'];
-    const insert = await this.db.upsertAsync(DbService.storyTableName, story);
-    // * [2018-07-25 19:04] Change its state to 'Update'
-    story['id'] = insert[0].affectedRows[0].id;
-    this.meService.sideClickType = SideClickType.select;
-  }
-
-  async onUpdateStory() {
-    const story = this.meService.story;
-    await this.db.upsertAsync(DbService.storyTableName, story);
-  }
 }

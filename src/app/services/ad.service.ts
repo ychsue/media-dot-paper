@@ -31,7 +31,7 @@ export class AdService {
 
   constructor(private device: DeviceService) {
     const self = this;
-    if (!!cordova) {
+    if (!!window.cordova) {
       if (cordova.platformId === 'windows') {
         self.iniWinSDK();
       } else {
@@ -76,7 +76,7 @@ export class AdService {
 
   iniWinSDK() {
     const self = this;
-    if (!!cordova && cordova.platformId === 'windows') {
+    if (!!window.cordova && cordova.platformId === 'windows') {
       // * [2018-08-16 09:33] Load in the needed script
       const doc = window.document;
       const sdkScript = doc.createElement('script');

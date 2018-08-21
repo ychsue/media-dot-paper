@@ -1,3 +1,11 @@
+* [2018-8-21 Tue] ~i18n-page-texts~ is updated and the user can export and import ~story~ now
+1. when generating a story, its ~modifyTime=0~ so that I can use this value to make sure whether it is a new one.
+2. when youtube is ~onReady~, getting its title and set it as the name of that ~story~.
+3. let ~media-edit.service~ to handle the methods ~onSaveStory~ and ~onUpdateStory~.
+4. let those ~.json~ files for stories can be loaded in through ~File~ button.
+5. oh, an important thing need to be mentioned. Microsoft's browser doesn't allow ~dataURL~, so, I changed to use ~Blob~ and it works fine.
+6. remember that ~!!cordova~ might throw an error, you need to use ~!!window.cordova~.
+
 * [2018-8-18 Sat] AdMob has been installed.
 1. I have installed ~cordova-plugin-admobpro~ and created a service ~ad.service~ to handle Windows Ad & Android and iOS Ads.
 

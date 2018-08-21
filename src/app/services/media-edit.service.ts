@@ -3,6 +3,10 @@ import { Subject, Observable } from 'rxjs';
 import { IStory, Story } from './story.service';
 import { PlayerType } from '../vm/player-type.enum';
 import { AdService } from './ad.service';
+import { DbService } from './db.service';
+import { FsService } from './fs.service';
+import { MessageService, MessageTypes } from './message.service';
+import { concatAll, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +81,11 @@ export class MediaEditService {
 
   sideClickType = SideClickType.none;
 
-  constructor(private adService: AdService) {
+  constructor(private adService: AdService,
+              private fsService: FsService,
+              private msgService: MessageService,
+              private db: DbService
+  ) {
     this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
@@ -97,7 +105,7 @@ export class MediaEditService {
       if ((typeof data) === 'string') {
         this.story = new Story();
         this.story.meType = PlayerType.url;
-      } else if (!!data['viewTime']) {
+      } else if (!!data['makeTime']) {
         this.story = data as IStory;
       } else if (!!(data as Blob)) {
         this.story = new Story();
@@ -108,7 +116,7 @@ export class MediaEditService {
       }
     }
 
-    if (!!data['viewTime']) {
+    if (!!data['makeTime']) {
       // * [2018-07-19 13:41] If input is a story
     } else if ((this.story.meType === PlayerType.url) || (this.story.meType === PlayerType.youtubeID)) {
       this.story.urlOrID = data as string;
@@ -125,6 +133,12 @@ export class MediaEditService {
     if (this.story.meType !== PlayerType.youtubeID) {
       this.onPlayerAction.next(playerAction.getDuration);
       this.onPlayerAction.next(playerAction.getAllowedPlaybackRate);
+    }
+
+    // * [2018-08-20 12:44] Update viewTime if it has been stored before
+    if (this.story.modifyTime !== 0) {
+      this.story.viewTime = Date.now();
+      this.onUpdateStory$$();
     }
     this.state = MEState.readyForPlayer;
   }
@@ -213,6 +227,35 @@ export class MediaEditService {
     } else {
       console.log(`Problem in setPlaybackRate`);
     }
+  }
+
+
+  async onSaveStory$$() {
+    const story = this.story;
+    story.modifyTime = story.viewTime = Date.now();
+    const self = this;
+    if (story.meType === PlayerType.file) {
+      const isSaved = await this.fsService.getFile$(story.fileName, true).pipe(map(fEntry => {
+        return self.fsService.writeFile$(fEntry, self.blob);
+      }), concatAll()).toPromise();
+      // * [2018-08-05 17:23] if it is saved, renew its URL
+      if (isSaved === true) {
+        story.urlOrID = (await this.fsService.getFile$(story.fileName).toPromise()).toURL();
+      }
+
+      self.msgService.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is stored: ${isSaved}`});
+    }
+    delete story['id'];
+    const insert = await this.db.upsertAsync(DbService.storyTableName, story);
+    // * [2018-07-25 19:04] Change its state to 'Update'
+    story['id'] = insert[0].affectedRows[0].id;
+    this.sideClickType = SideClickType.select;
+  }
+
+  async onUpdateStory$$() {
+    const story = this.story;
+    story.modifyTime = story.viewTime = Date.now();
+    await this.db.upsertAsync(DbService.storyTableName, story);
   }
 }
 

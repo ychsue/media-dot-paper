@@ -40,7 +40,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isInited = false;
   _msInterval = 200;
 
-  constructor(public dataService: MediaEditService, private YTservice: YoutubeService,
+  constructor(public meService: MediaEditService, private YTservice: YoutubeService,
     private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
   }
 
@@ -51,7 +51,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.eventTriggers();
     this.eventListeners();
     // * [2018-06-18 20:57] because this component might be initialized after the MEState.readyForPlayer, I need to deal with this situation
-    if ((this.dataService.state === MEState.readyForPlayer) && (this.isInited === false)) {
+    if ((this.meService.state === MEState.readyForPlayer) && (this.isInited === false)) {
       this.initMe();
       this.isInited = true;
     }
@@ -67,7 +67,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   getCurrentTime(): number {
     const self = this;
-    const meType = self.dataService.story.meType;
+    const meType = self.meService.story.meType;
     if (meType === self.pType.youtubeID) {
       if (self.YTservice.isApiReady && !!self.YTservice.ytPlayer.getCurrentTime) {
         return self.YTservice.ytPlayer.getCurrentTime();
@@ -82,7 +82,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   eventListeners() {
     const self = this;
     // * For readyForPlayer
-    this.dataService.onStateChanged
+    this.meService.onStateChanged
     .pipe(takeUntil(self.unSubscribed))
     .subscribe((t) => {
       if (t === MEState.readyForPlayer) {
@@ -91,31 +91,31 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     });
     // * [2018-07-21 19:44] For CurrentTime
-    self.dataService.onCurrentTimeChanged = interval(self._msInterval)
+    self.meService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
       map(_ => self.getCurrentTime()),
       distinctUntilChanged(),
       share()
     );
-    self.dataService.onCurrentTimeChanged
+    self.meService.onCurrentTimeChanged
     .pipe(takeUntil(self.unSubscribed))
     .subscribe(t => {
-      self.dataService.currentTime = t;
+      self.meService.currentTime = t;
       // console.log(t);
     });
 
     let isDuringStart = false; // For iOS because its seek time might be earlier than the time you are seeking to
     let isDuringEnd = false;
     // * [2018-07-24 13:48] For repeating each frame
-    self.dataService.onCurrentTimeChanged
+    self.meService.onCurrentTimeChanged
     .pipe(takeUntil(self.unSubscribed))
     .subscribe(t => {
       try {
         let start = 0;
-        let end = self.dataService.duration - 0.1;
-        const iFrame = self.dataService.story.iFrame;
+        let end = self.meService.duration - 0.1;
+        const iFrame = self.meService.story.iFrame;
         if (iFrame >= 0) {
-          const frame = self.dataService.story.frames[iFrame];
+          const frame = self.meService.story.frames[iFrame];
           if (!!frame) {
             start = frame.start;
             end = frame.end;
@@ -124,16 +124,16 @@ export class PlayerComponent implements OnInit, OnDestroy {
         if (t < start) {
           if (isDuringStart === false) {
             isDuringStart = true;
-            self.dataService.seekTime = start;
+            self.meService.seekTime = start;
           }
         } else if (t > (end - (self._msInterval / 1000))) {
           if (isDuringEnd === false) {
             isDuringEnd = true;
             setTimeout(() => {
               isDuringEnd = false;
-              self.dataService.seekTime = start;
-              if (self.dataService.isRepeat === false) {
-                self.dataService.onPlayerAction.next(playerAction.pause);
+              self.meService.seekTime = start;
+              if (self.meService.isRepeat === false) {
+                self.meService.onPlayerAction.next(playerAction.pause);
               }
             }, (end - t) * 1000);
           }
@@ -152,21 +152,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
     .pipe( takeUntil(self.unSubscribed))
     .subscribe(_ => {
-      self.dataService.duration = self.videoEle.duration;
-      self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+      self.meService.duration = self.videoEle.duration;
+      self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
     });
     self.YTservice.onReady
     .pipe( takeUntil(self.unSubscribed))
     .subscribe(_ => {
-      self.dataService.duration = self.YTservice.ytPlayer.getDuration();
-      self.dataService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
+      self.meService.duration = self.YTservice.ytPlayer.getDuration();
+      self.meService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
     });
 
     // * For playerAction
-    this.dataService.onPlayerAction
+    this.meService.onPlayerAction
     .pipe(takeUntil(self.unSubscribed))
     .subscribe((t) => {
-      const meType = self.dataService.story.meType;
+      const meType = self.meService.story.meType;
       if (meType === self.pType.url || meType === self.pType.file) {
         switch (t) {
           case playerAction.play:
@@ -176,25 +176,25 @@ export class PlayerComponent implements OnInit, OnDestroy {
           self.videoEle.pause();
           break;
           case playerAction.seek:
-          self.videoEle.currentTime = self.dataService.seekTime;
+          self.videoEle.currentTime = self.meService.seekTime;
           break;
           case playerAction.getDuration:
-          self.dataService.duration = self.videoEle.duration;
+          self.meService.duration = self.videoEle.duration;
           break;
           case playerAction.getVolume:
-          self.dataService._volume = self.videoEle.volume;
+          self.meService._volume = self.videoEle.volume;
           break;
           case playerAction.setVolume:
-          self.videoEle.volume = self.dataService.volume;
+          self.videoEle.volume = self.meService.volume;
           break;
           case playerAction.getPlaybackRate:
-          self.dataService._playbackRate = self.videoEle.playbackRate;
+          self.meService._playbackRate = self.videoEle.playbackRate;
           break;
           case playerAction.setPlaybackRate:
-          self.videoEle.playbackRate = self.dataService.playbackRate;
+          self.videoEle.playbackRate = self.meService.playbackRate;
           break;
           case playerAction.getAllowedPlaybackRate:
-          self.dataService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+          self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
           break;
           default:
           break;
@@ -211,28 +211,28 @@ export class PlayerComponent implements OnInit, OnDestroy {
           break;
           case playerAction.seek:
           if (!!ytPlayer.seekTo) {
-            ytPlayer.seekTo(self.dataService.seekTime, true);
+            ytPlayer.seekTo(self.meService.seekTime, true);
           }
           break;
           case playerAction.getDuration:
           if (!!ytPlayer && !!ytPlayer.getDuration) {
-            self.dataService.duration = ytPlayer.getDuration();
+            self.meService.duration = ytPlayer.getDuration();
           }
           break;
           case playerAction.getVolume:
-          self.dataService._volume = ytPlayer.getVolume() / 100;
+          self.meService._volume = ytPlayer.getVolume() / 100;
           break;
           case playerAction.setVolume:
-          ytPlayer.setVolume(self.dataService.volume * 100);
+          ytPlayer.setVolume(self.meService.volume * 100);
           break;
           case playerAction.getPlaybackRate:
-          self.dataService._playbackRate = ytPlayer.getPlaybackRate();
+          self.meService._playbackRate = ytPlayer.getPlaybackRate();
           break;
           case playerAction.setPlaybackRate:
-          ytPlayer.setPlaybackRate(self.dataService.playbackRate);
+          ytPlayer.setPlaybackRate(self.meService.playbackRate);
           break;
           case playerAction.getAllowedPlaybackRate:
-          self.dataService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
+          self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
           break;
           default:
           break;
@@ -246,13 +246,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
       self.ngZone.run(() => {
         switch (ev.data) {
           case YT.PlayerState.PLAYING:
-            self.dataService.state = MEState.playing;
+            self.meService.state = MEState.playing;
             break;
           case YT.PlayerState.PAUSED:
-            self.dataService.state = MEState.paused;
+            self.meService.state = MEState.paused;
             break;
           case YT.PlayerState.ENDED:
-            self.dataService.state = MEState.stopped;
+            self.meService.state = MEState.stopped;
             break;
           default:
             break;
@@ -263,7 +263,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
     self.YTservice.onReady
     .pipe(takeUntil(this.unSubscribed))
     .subscribe( (ev) => {
-      self.dataService.state = MEState.canPlay;
+      if (self.meService.story.modifyTime === 0) {
+        const data = (self.YTservice.ytPlayer as any).getVideoData();
+        if (!!data && !!data.title) {
+          self.meService.story.name = data.title;
+        }
+      }
+      self.meService.state = MEState.canPlay;
     });
   }
 
@@ -271,41 +277,41 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const self = this;
     // * [2018-06-18 11:11] for MEState.canPlay
     this.videoEle.oncanplay = (ev) => {
-      self.dataService.state = MEState.canPlay;
+      self.meService.state = MEState.canPlay;
     };
     // * [2018-06-18 11:11] for MEState.error
     this.videoEle.onerror = (ev) => {
-      self.dataService.state = MEState.error;
+      self.meService.state = MEState.error;
     };
     // * [2018-06-18 11:11] for MEState.waiting
     this.videoEle.onwaiting = (ev) => {
-      self.dataService.state = MEState.waiting;
+      self.meService.state = MEState.waiting;
     };
     // * [2018-06-18 11:11] for MEState.playing
     this.videoEle.onplay = (ev) => {
-      self.dataService.state = MEState.playing;
+      self.meService.state = MEState.playing;
     };
     this.videoEle.onplaying = (ev) => {
-      self.dataService.state = MEState.playing;
+      self.meService.state = MEState.playing;
     };
     // * [2018-06-18 11:11] for MEState.paused
     this.videoEle.onpause = (ev) => {
-      self.dataService.state = MEState.paused;
+      self.meService.state = MEState.paused;
     };
     // * [2018-06-18 11:11] for MEState.stopped
     this.videoEle.onended = (ev) => {
-      self.dataService.state = MEState.stopped;
+      self.meService.state = MEState.stopped;
     };
     // ************************* TODO *****************************
   }
 
   initMe() {
     // ******* TODO *******
-    const meType = this.dataService.story.meType;
-    const urlOrId = this.dataService.story.urlOrID;
+    const meType = this.meService.story.meType;
+    const urlOrId = this.meService.story.urlOrID;
     if (meType ===  PlayerType.url) {
       if (YoutubeService.isYoutubeURL(urlOrId)) {
-        this.dataService.story.meType = PlayerType.youtubeID;
+        this.meService.story.meType = PlayerType.youtubeID;
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
         this.videoSrc = urlOrId;
@@ -323,11 +329,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   onVideoPlayOrPause(ev: MouseEvent) {
     ev.preventDefault();
-    const state = this.dataService.state;
+    const state = this.meService.state;
     if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
-      this.dataService.onPlayerAction.next(playerAction.play);
+      this.meService.onPlayerAction.next(playerAction.play);
     } else {
-      this.dataService.onPlayerAction.next(playerAction.pause);
+      this.meService.onPlayerAction.next(playerAction.pause);
     }
   }
 }

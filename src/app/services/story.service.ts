@@ -31,7 +31,8 @@ export class Story implements IStory {
 
   constructor() {
     const time = Date.now();
-    this.makeTime = this.modifyTime = this.viewTime = time;
+    this.makeTime = this.viewTime = time;
+    this.modifyTime = 0;
     this.frames = [];
     return this;
   }
