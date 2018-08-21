@@ -12,7 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { TestComponent } from './pages/test/test.component';
-import { SafePipe } from './pipes/safe.pipe';
+import { SafePipe, SafeHtmlPipe } from './pipes/safe.pipe';
 import { MediaEditComponent } from './pages/media-edit/media-edit.component';
 import { MeMainDashboardComponent } from './components/me-main-dashboard/me-main-dashboard.component';
 import { MeSectionDashboardComponent } from './components/me-section-dashboard/me-section-dashboard.component';
@@ -43,6 +43,7 @@ import { AdService } from './services/ad.service';
     HomeComponent,
     TestComponent,
     SafePipe,
+    SafeHtmlPipe,
     MediaEditComponent,
     MeMainDashboardComponent,
     MeSectionDashboardComponent,

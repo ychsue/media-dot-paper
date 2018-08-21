@@ -1,3 +1,6 @@
+* [2018-8-21 Tue] Now, once I consider ~sanitizer.bypassSecurityTrustHtml~, I can input subtitles with custom styles.
+By the way, I need to provide a min-height for the textarea so that the pointerleave event will not be triggered when my finger leaves the textarea.
+
 * [2018-8-21 Tue] ~i18n-page-texts~ is updated and the user can export and import ~story~ now
 1. when generating a story, its ~modifyTime=0~ so that I can use this value to make sure whether it is a new one.
 2. when youtube is ~onReady~, getting its title and set it as the name of that ~story~.

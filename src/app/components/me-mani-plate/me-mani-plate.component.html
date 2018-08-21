@@ -38,11 +38,11 @@
             </button>
         </div>
         <div class="main-down">
-            <textarea id="subtitle" matInput 
+            <textarea matInput #subtitleInput class="subtitle"
              [(ngModel)]="meService.story.frames[meService.story.iFrame].subtitle"
-             [style.background-color]="(HideShow==='hide')?'#00000000':'#FFFFFFFF'"
-             [style.border-color]="(HideShow==='hide')?'#00000000':'#B0B0B0FF'">
+             *ngIf="HideShow==='show'">
             </textarea>
+            <div class="subtitle shadow" [innerHTML]="meService.story.frames[meService.story.iFrame].subtitle|safeHtml" *ngIf="HideShow==='hide'"></div>
         </div>
     </div>
     <div class="slider">
