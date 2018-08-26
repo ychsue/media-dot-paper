@@ -1,0 +1,44 @@
+<div class="container">
+  <button mat-icon-button class="close" (click)="close.next()">
+    <mat-icon class="mat-18">close</mat-icon>
+  </button>
+  <div class="selVoiceContainer">
+    <mat-form-field class="selVoice">
+      <mat-select #selVoice [value]="utterPara.voice"
+      (selectionChange)="utterPara.voice=selVoice.value;change.next(utterPara)"
+      placeholder="選個語音模擬語言">
+        <mat-option *ngFor="let voice of SSService.voices" [value]="voice">{{voice.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="utterContainer">
+    <div>
+      <mat-icon class="mat-18">directions_walk</mat-icon>
+      <mat-slider #selRate
+        [thumbLabel]="true"
+        [value]="utterPara.rate"
+        (change)="utterPara.rate=selRate.value;change.next(utterPara);"
+        min="0.1" max="4" step="0.1"></mat-slider>
+      <mat-icon class="mat-18">flight</mat-icon>
+    </div>
+    
+    <div>
+      <mat-icon class="mat-18">keyboard_arrow_down</mat-icon>
+      <mat-slider #selPitch
+        [thumbLabel]="true"
+        [value]="utterPara.pitch"
+        (change)="utterPara.pitch=selPitch.value;change.next(utterPara);"
+        min="0" max="2" step="0.1"></mat-slider>
+      <mat-icon class="mat-18">keyboard_arrow_up</mat-icon>
+    </div>
+    <div>
+      <mat-icon class="mat-18">volume_mute</mat-icon>
+      <mat-slider #selVolume
+        [thumbLabel]="true"
+        [value]="utterPara.volume"
+        (change)="utterPara.volume=selVolume.value;change.next(utterPara);"
+        min="0.1" max="1" step="0.1"></mat-slider>
+      <mat-icon class="mat-18">volume_up</mat-icon>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@ import { AdService } from './ad.service';
 import { DbService } from './db.service';
 import { FsService } from './fs.service';
 import { MessageService, MessageTypes } from './message.service';
-import { concatAll, map } from 'rxjs/operators';
+import { concatAll, map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +81,11 @@ export class MediaEditService {
 
   sideClickType = SideClickType.none;
 
+  private _setiFrame$ = new Subject<number>();
+  setiFrame$ = this._setiFrame$.pipe(shareReplay(1));
+
+  repeatStart$ = new Subject<number>();
+
   constructor(private adService: AdService,
               private fsService: FsService,
               private msgService: MessageService,
@@ -89,6 +94,8 @@ export class MediaEditService {
     this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
+    // * [2018-08-25 21:26] light up setiFrame$
+    this.setiFrame$.subscribe();
   }
 
   initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
@@ -150,6 +157,7 @@ export class MediaEditService {
       self.story.iFrame = i;
       self.setVolumeFromFrame();
       self.setPlaybackRateFromFrame();
+      self._setiFrame$.next(i);
     } else {
       console.log(`Problem in setiFrame(${i})`);
     }

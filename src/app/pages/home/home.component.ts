@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   onStoryOpen(story: IStory) {
-    const duplicatedStory = Object.assign(story);
+    const duplicatedStory = Object.assign({}, story);
     this.meService.initMe(duplicatedStory);
     this.gv.shownPage = PageType.MediaEdit;
     // * [2018-07-19 21:28] Tell navbar that you select a story

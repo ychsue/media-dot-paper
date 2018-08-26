@@ -1,3 +1,12 @@
+* [2018-8-26 Sun] SpeechSynthesis I/II 
+1. Using a ~Subject~ to notice ~me-mani-plate.component~ that it will replay the section again.
+2. Using ~flex-wrap: wrap~ to wrap the sliders in ~set-speech-synthesis.component~ automatically.
+3. Remember that, ~Object.assign(target,source)~ will modify the ~target~. So, input ~{}~ as the target to copy an object.
+4. Using a ~Subject~ ~setiFrame$~ in ~media-edit.service~ to give a notice about the ~iFrame~ is setted.
+5. Before utter a sentence, it's better to ~pause~ -> ~cancel~ -> ~speak~ -> ~resume~; otherwise, it might not speak occationally.
+
+Next, I want to let the user can use SpeechSynthesis in the whole story.
+
 * [2018-8-21 Tue] Now, once I consider ~sanitizer.bypassSecurityTrustHtml~, I can input subtitles with custom styles.
 By the way, I need to provide a min-height for the textarea so that the pointerleave event will not be triggered when my finger leaves the textarea.
 

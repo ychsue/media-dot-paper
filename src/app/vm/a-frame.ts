@@ -1,3 +1,5 @@
+import { SSutterParameters } from "../services/speech-synthesis.service";
+
 export class AFrame {
     name: string;
     pseudopath = '/';
@@ -17,6 +19,9 @@ export class AFrame {
     volume = 1;
 
     subtitle = '';
+
+    isUtter = false;
+    utterPara = new SSutterParameters();
 
     constructor () {
         this.colorR = Math.round(Math.random() * 200 + 20);

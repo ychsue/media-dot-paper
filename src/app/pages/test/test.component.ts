@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DbService } from '../../services/db.service';
 import { FsService } from '../../services/fs.service';
 import { map, concatAll } from '../../../../node_modules/rxjs/operators';
+import { SpeechSynthesisService, SSutterParameters } from '../../services/speech-synthesis.service';
 
 @Component({
   selector: 'app-test',
@@ -11,6 +12,8 @@ import { map, concatAll } from '../../../../node_modules/rxjs/operators';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+
+  selVoice: SpeechSynthesisVoice;
 
   entries: Entry[];
   audioFile: File;
@@ -21,8 +24,16 @@ export class TestComponent implements OnInit {
   newFolderName: string;
 
   constructor(private msgService: MessageService, private sanitizer: DomSanitizer,
-    private DBService: DbService , private fsService: FsService
-  ) { }
+    private DBService: DbService , private fsService: FsService,
+    public SSService: SpeechSynthesisService
+  ) {
+    const self = this;
+    SSService.getVoices$.subscribe(isGotten => {
+      if (isGotten) {
+        self.selVoice = SSService.defaultVoice;
+      }
+    });
+  }
 
   ngOnInit() {
     const self = this;
@@ -53,34 +64,34 @@ export class TestComponent implements OnInit {
     this.audioSrc = this.fsService.toURL(file);
   }
 
-  async onSelFileChange_for_windows_videoLibrary(files: FileList, obj: object) {
-    console.log(`obj= ${obj}`);
-    this.audioFile = files[0];
-    const fName = this.audioFile.name;
-    let newFile: any;
-    if (!!window.cordova && (cordova.platformId === 'windows')) {
-      try {
-        const outputFile = await Windows.Storage.KnownFolders.videosLibrary.createFileAsync(this.audioFile.name);
-        const outStream = await outputFile.openAsync(Windows.Storage.FileAccessMode.readWrite);
-        const inStream = this.audioFile.msDetachStream();
-        await Windows.Storage.Streams.RandomAccessStream.copyAsync(inStream, outStream);
-        await outStream.flushAsync();
-        inStream.close();
-        outStream.close();
+  // async onSelFileChange_for_windows_videoLibrary(files: FileList, obj: object) {
+  //   console.log(`obj= ${obj}`);
+  //   this.audioFile = files[0];
+  //   const fName = this.audioFile.name;
+  //   let newFile: any;
+  //   if (!!window.cordova && (cordova.platformId === 'windows')) {
+  //     try {
+  //       const outputFile = await Windows.Storage.KnownFolders.videosLibrary.createFileAsync(this.audioFile.name);
+  //       const outStream = await outputFile.openAsync(Windows.Storage.FileAccessMode.readWrite);
+  //       const inStream = this.audioFile.msDetachStream();
+  //       await Windows.Storage.Streams.RandomAccessStream.copyAsync(inStream, outStream);
+  //       await outStream.flushAsync();
+  //       inStream.close();
+  //       outStream.close();
 
-        newFile = await Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName);
-  } catch (error) {
-        this.msgService.pushMessage({type: MessageTypes.Error, message: error});
-      }
-    } else {
-        newFile = this.audioFile;
-    }
-    // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl('https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3');
-    // this.audioSrc = 'https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3';
-    // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.audioFile));
-    this.audioSrc = window.URL.createObjectURL(newFile);
-    this.msgService.pushMessage({type : MessageTypes.Info, message: `audioSrc: ${JSON.stringify(this.audioSrc)}`});
-  }
+  //       newFile = await Windows.Storage.KnownFolders.videosLibrary.getFileAsync(fName);
+  // } catch (error) {
+  //       this.msgService.pushMessage({type: MessageTypes.Error, message: error});
+  //     }
+  //   } else {
+  //       newFile = this.audioFile;
+  //   }
+  //   // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl('https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3');
+  //   // this.audioSrc = 'https://www.scripturesongs.net/mp3/h1/01FountainFilledWithBlood.mp3';
+  //   // this.audioSrc = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(this.audioFile));
+  //   this.audioSrc = window.URL.createObjectURL(newFile);
+  //   this.msgService.pushMessage({type : MessageTypes.Info, message: `audioSrc: ${JSON.stringify(this.audioSrc)}`});
+  // }
 
   async onGetDocFolder() {
     if (!!window['Windows']) {
@@ -102,5 +113,12 @@ export class TestComponent implements OnInit {
 
   async onUpsertFromNSQL() {
     await this.DBService.upsertAsync();
+  }
+
+  onSpeak(text: string) {
+    const para = new SSutterParameters();
+    para.text = text;
+    para.voice = this.selVoice;
+    this.SSService.speak(para);
   }
 }

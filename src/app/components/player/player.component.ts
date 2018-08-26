@@ -134,6 +134,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
               self.meService.seekTime = start;
               if (self.meService.isRepeat === false) {
                 self.meService.onPlayerAction.next(playerAction.pause);
+              } else {
+                self.meService.repeatStart$.next(iFrame);
               }
             }, (end - t) * 1000);
           }

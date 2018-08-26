@@ -1,9 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
 import { Subject, interval } from '../../../../node_modules/rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, concatAll, takeUntil, auditTime, withLatestFrom } from 'rxjs/operators';
+import { map, concatAll, takeUntil, auditTime, withLatestFrom, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 
 @Component({
   selector: 'app-me-mani-plate',
@@ -35,7 +36,7 @@ import { map, concatAll, takeUntil, auditTime, withLatestFrom } from 'rxjs/opera
     ])
   ]
 })
-export class MeManiPlateComponent implements OnInit, AfterViewInit {
+export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   previousState: MEState = MEState.initialized;
   MEState = MEState;
@@ -46,20 +47,64 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
 
   _msDelta = 400;
 
+  isToUtter: boolean;
+  isSSShown = false;
+  utterPara: SSutterParameters;
+
+  isSubtitleClicked: boolean;
+
+  // [innerHtml,innerText]
+  subtitleChange$ = new Subject<string[]>();
+
+  unSubscribed$ = new Subject<boolean>();
+
   startChanged$ = new Subject<PointerEvent>();
   endChanged$ = new Subject<PointerEvent>();
 
-  constructor(public meService: MediaEditService, private device: DeviceService) { }
+  constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService,
+    private device: DeviceService) {
+    }
 
   ngOnInit() {
+    const self = this;
     this.previousState = this.meService.state;
+    // * [2018-08-25 18:19] Update utterPara when iFrame is updated
+    this.meService.setiFrame$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
+      if (i >= 0) {
+        self.updateUtterParaOfAFrame(i);
+        if (this.meService.story.frames[this.meService.story.iFrame].isUtter === true) {
+          self.utterSubtitle(self.utterPara.text, self.utterPara);
+        }
+      }
+    });
+    // * [2018-08-25 18:44] For subtitleChange
+    self.subtitleChange$.pipe(takeUntil(self.unSubscribed$)).pipe(
+      debounceTime(200),
+      distinctUntilChanged()).subscribe(sts => {
+        self.meService.story.frames[self.meService.story.iFrame].subtitle = sts[0];
+        self.meService.story.frames[self.meService.story.iFrame].utterPara.text = sts[0];
+      });
+    // * [2018-08-26 16:56] Reutter the subtitle for repeatStart
+    self.meService.repeatStart$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
+      if (i >= 0) {
+        if (this.meService.story.frames[i].isUtter === true) {
+          self.utterSubtitle(self.utterPara.text, self.utterPara);
+        }
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribed$.next(true);
+    this.unSubscribed$.complete();
+    this.unSubscribed$ = null;
   }
 
   ngAfterViewInit() {
     const self = this;
     Promise.resolve(null).then(_ => this.HideShow = 'hide');
     // * [2018-08-09 14:44] For start and value
-    self.startChanged$.pipe(map(ev =>
+    self.startChanged$.pipe(takeUntil(self.unSubscribed$)).pipe(map(ev =>
       interval(self._msDelta).pipe(
         withLatestFrom(self.device.onPointermove$),
         map(([ _ , vm]) => vm),
@@ -85,7 +130,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
       })
     ).subscribe();
 
-    self.endChanged$.pipe(map(ev =>
+    self.endChanged$.pipe(takeUntil(self.unSubscribed$)).pipe(map(ev =>
       interval(self._msDelta).pipe(
         withLatestFrom(self.device.onPointermove$),
         map(([ _ , vm]) => vm),
@@ -134,5 +179,58 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit {
     return (i: number) => {
       return meService.availablePlaybackRates[i];
     };
+  }
+
+  onUtterParaChanged(text: string, utterPara: SSutterParameters) {
+    // * [2018-08-25 16:14] Update the frame
+    if (this.meService.story.iFrame >= 0) {
+      const storyUtterPara = Object.assign({}, utterPara);
+      this.meService.story.frames[this.meService.story.iFrame].utterPara = storyUtterPara;
+      storyUtterPara.text = text;
+      storyUtterPara.voiceName = utterPara.voice.name;
+      storyUtterPara.lang = utterPara.voice.lang;
+      delete storyUtterPara['voice'];
+    }
+    // * [2018-08-25 16:15] Play it.
+    if (this.meService.story.frames[this.meService.story.iFrame].isUtter === true) {
+      this.utterSubtitle(text, utterPara);
+    }
+  }
+
+  utterSubtitle(text: string, utterPara: SSutterParameters) {
+    this.utterPara = utterPara;
+    this.utterPara.text = text;
+    this.SSService.speak(this.utterPara);
+  }
+
+  onPointLeave(e: PointerEvent) {
+    if (this.isSubtitleClicked === false) {
+      this.HideShow = 'hide';
+    }
+  }
+
+  onSubtitleClicked(e: MouseEvent) {
+    const self = this;
+    self.isSubtitleClicked = true;
+    this.HideShow = 'show';
+    setTimeout(_ => self.isSubtitleClicked = false, 100);
+  }
+
+  onShowSetSS(e: MouseEvent) {
+    this.isSSShown = true;
+  }
+
+  updateUtterParaOfAFrame(iFrame: number = 0) {
+    const self = this;
+    const story = self.meService.story;
+    let utterPara: SSutterParameters;
+    // * [2018-08-25 15:10] Update utterPara from a frame
+    if (!!story.frames[iFrame].utterPara === false) {
+      utterPara = new SSutterParameters();
+      story.frames[iFrame].utterPara = utterPara;
+    }
+    // * [2018-08-25 18:25] Also update this.utterPara
+    utterPara = Object.assign({}, story.frames[iFrame].utterPara);
+    self.utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
   }
 }

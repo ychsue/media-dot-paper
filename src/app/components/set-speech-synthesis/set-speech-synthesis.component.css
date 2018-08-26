@@ -1,0 +1,14 @@
+.close {
+    position: absolute;
+    right: 0;
+}
+
+.selVoiceContainer, .utterContainer {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selVoice {
+    min-width: 72%;
+}

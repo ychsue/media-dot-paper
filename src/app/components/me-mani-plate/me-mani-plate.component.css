@@ -22,15 +22,20 @@
 }
 .main-up {
     grid-area: main-up;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
+    z-index: 1;
 }
 .main-play {
     grid-area: main-play;
+    z-index: 1;
 }
 .main-down {
     grid-area: main-down;
     width:100%;
+    height: 100%;
     align-self: baseline;
+    display: grid;
 }
 
 .smallSlider {
@@ -115,14 +120,34 @@ mat-slider {
     text-align: center;
     min-height: 20px;
     width: 100%;
+    height: 100%;
     background-color: white;
+    z-index: 2;
+    grid-column-start: 1;
+    grid-row-start: 1;
 }
 
 .shadow {
+    z-index: 1;
     text-shadow: 3px 0px 5px black,
     -3px 0px 5px black,
     0px 3px 5px black,
     0px -3px 5px black;
     color: white;
     background-color: transparent;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+.setSS {
+    grid-area: main-up;
+    grid-row-start: main-up;
+    grid-row-end: main-play;
+    background-color: lightyellow;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 }
