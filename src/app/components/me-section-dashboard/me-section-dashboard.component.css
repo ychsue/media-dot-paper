@@ -12,3 +12,15 @@
     overflow-y: auto;
     display: inline;
 }
+
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    to {
+        opacity: 0.8;
+    }
+}

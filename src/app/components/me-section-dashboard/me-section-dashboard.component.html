@@ -13,6 +13,7 @@
     [bR]="aFrame.colorR"
     [bG]="aFrame.colorG"
     [bB]="aFrame.colorB"
+    [class.blink]="i===meService.story.iFrame"
     (contentClick)="onWhichFrame(i)"
     (delete)="onRemoveFrame(i)">
     </app-swap-icon>

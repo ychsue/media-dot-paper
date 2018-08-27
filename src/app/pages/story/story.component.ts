@@ -73,7 +73,10 @@ export class StoryComponent implements OnInit {
         return st;
       };
 
-      const input = self.meService.story.frames.reduce((pre, cur) => {
+      const frames = self.meService.story.frames.slice(0).sort( (p, b) => {
+        return p.start - b.start;
+      });
+      const input = frames.reduce((pre, cur) => {
         let st = (!!pre) ? '\n\n' : '';
         st += getTime(cur.start) + ',' + getTime(cur.end) + '\n';
         st += cur.utterPara.text;

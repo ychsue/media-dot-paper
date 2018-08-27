@@ -1,3 +1,6 @@
+* [2018-8-27 Mon] Blinking selected icon button.
+Hm... ~color~, ~background-color~ and ~transform~ does not work for it, I used ~opacity~ finally.
+
 * [2018-8-27 Mon] SpeechSynthesis II/II
 1. Now it can utter each segment's subtitle when the global play reaches that segment.
    The ~media-edit.component~ handles it because maybe I need to show each subtitles.
