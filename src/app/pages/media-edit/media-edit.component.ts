@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MediaEditService } from '../../services/media-edit.service';
+import { MediaEditService, MEState } from '../../services/media-edit.service';
 import { trigger, state, style, transition, animate } from '../../../../node_modules/@angular/animations';
+import { utterType } from '../../services/story.service';
+import { SpeechSynthesisService } from '../../services/speech-synthesis.service';
+import { takeWhile, first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-media-edit',
@@ -23,21 +26,32 @@ import { trigger, state, style, transition, animate } from '../../../../node_mod
 export class MediaEditComponent implements OnInit {
 
   constructor(/*private route: ActivatedRoute, */
-    public meService: MediaEditService) {
+    public meService: MediaEditService, private SSService: SpeechSynthesisService) {
   }
 
   ngOnInit() {
-    // const self = this;
-    // this.route.paramMap.subscribe( (paraM) => {
-    //   const para = decodeURIComponent(paraM.get('inUrl'));
-    //   let inData: Blob|string;
-    //   if (para !== '0') {
-    //     inData = para;
-    //   } else {
-    //     inData = this.meService.blob;
-    //   }
-    //   self.meService.initMe(inData);
-    // });
+    const self = this;
+    let currentIFrame = -1;
+    self.meService.onStateChanged.pipe(takeWhile(_ => !!self.meService.onCurrentTimeChanged === true), first()).subscribe(_ => {
+      self.meService.onCurrentTimeChanged.subscribe(t => {
+        if (self.meService.story.utterType === utterType.none) {
+          return;
+        } else {
+          const i = self.meService.story.frames.findIndex(v => ((t >= v.start) && (t <= v.end)));
+          if (i === currentIFrame) {
+            return;
+          } else {
+            currentIFrame = i;
+            if (i < 0) {return; }
+            if ((self.meService.story.utterType === utterType.all) || (self.meService.story.frames[i].isUtter === true)) {
+              let utterPara = Object.assign({}, self.meService.story.frames[i].utterPara);
+              utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
+              self.SSService.speak(utterPara);
+            }
+          }
+        }
+      });
+    });
   }
 
 }

@@ -1,3 +1,8 @@
+* [2018-8-27 Mon] SpeechSynthesis II/II
+1. Now it can utter each segment's subtitle when the global play reaches that segment.
+   The ~media-edit.component~ handles it because maybe I need to show each subtitles.
+2. It also can output the Youtube .sbv file now.
+
 * [2018-8-26 Sun] SpeechSynthesis I/II 
 1. Using a ~Subject~ to notice ~me-mani-plate.component~ that it will replay the section again.
 2. Using ~flex-wrap: wrap~ to wrap the sliders in ~set-speech-synthesis.component~ automatically.

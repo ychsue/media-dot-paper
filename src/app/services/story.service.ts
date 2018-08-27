@@ -29,6 +29,8 @@ export class Story implements IStory {
   frames: AFrame[];
   iFrame = -1;
 
+  utterType = utterType.none;
+
   constructor() {
     const time = Date.now();
     this.makeTime = this.viewTime = time;
@@ -56,4 +58,12 @@ export interface IStory {
 
   frames: AFrame[];
   iFrame: number;
+
+  utterType: utterType;
+}
+
+export enum utterType {
+  none,
+  byEach,
+  all
 }

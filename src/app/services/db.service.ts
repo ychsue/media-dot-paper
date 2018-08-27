@@ -30,7 +30,8 @@ export class DbService {
     {key: 'viewTime', type: 'int'},
     {key: 'urlOrID', type: 'string', default: ''},
     {key: 'meType', type: 'int', default: 0},
-    {key: 'frames', type: 'map[]', default: []}
+    {key: 'frames', type: 'map[]', default: []},
+    {key: 'utterType', type: 'int', default: 0}
   ];
 
   private _isInitialized = false;

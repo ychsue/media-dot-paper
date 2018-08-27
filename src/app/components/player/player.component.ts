@@ -58,6 +58,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     if (this.device.isCordova && cordova.platformId === 'ios') {
       self.videoEle.setAttribute("playsinline", "true");
     }
+    self.meService.state = MEState.playerReady;
   }
 
   ngOnDestroy(): void {

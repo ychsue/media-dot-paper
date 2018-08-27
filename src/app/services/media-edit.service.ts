@@ -291,7 +291,8 @@ export enum MEState {
   playing,
   paused,
   stopped,
-  disposed
+  disposed,
+  playerReady
 }
 
 export enum SideClickType {

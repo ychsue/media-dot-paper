@@ -4,6 +4,7 @@ import { MatAnchor } from '@angular/material';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
+import { utterType } from '../../services/story.service';
 
 @Component({
   selector: 'app-story',
@@ -12,7 +13,10 @@ import { PlayerType } from '../../vm/player-type.enum';
 })
 export class StoryComponent implements OnInit {
 
+  utterType = utterType;
+
   downloadHref: string;
+  downloadSBVHref: string;
   constructor(public meService: MediaEditService) { }
 
   ngOnInit() {
@@ -33,6 +37,50 @@ export class StoryComponent implements OnInit {
       const blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
       this.downloadHref = URL.createObjectURL(blob);
       // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));
+      setTimeout(_ => a.click());
+      // a.click();
+    }
+  }
+
+  onExportSBV(sender: MatAnchor, e: MouseEvent) {
+    const self = this;
+    const a = sender._elementRef.nativeElement as HTMLAnchorElement;
+    if (e.x === 0) {
+      return;
+    } else {
+      e.preventDefault();
+      const getTime = (t: number) => {
+        let st = '';
+        let buf = Math.floor(t);
+        // * [2018-08-27 15:29] Get minisecond
+        st = ('000' + Math.round((t - buf) * 1000)).slice(-3);
+        st = '.' + st;
+        // * [2018-08-27 15:34] Get second
+        t = buf;
+        buf = t % 60;
+        st = ('00' + buf).slice(-2) + st;
+        st = ':' + st;
+        // * [2018-08-27 15:38] Get minute
+        t = (t - buf) / 60;
+        buf = t % 60;
+        st = ('00' + buf).slice(-2) + st;
+        st = ':' + st;
+        // * [2018-08-27 15:38] Get hour
+        t = (t - buf) / 60;
+        buf = t;
+        st = buf + st;
+        // * [2018-08-27 15:42] Return the string
+        return st;
+      };
+
+      const input = self.meService.story.frames.reduce((pre, cur) => {
+        let st = (!!pre) ? '\n\n' : '';
+        st += getTime(cur.start) + ',' + getTime(cur.end) + '\n';
+        st += cur.utterPara.text;
+        return pre + st;
+      }, '');
+      const blob = new Blob([input], {type: 'text/plain'});
+      this.downloadSBVHref = URL.createObjectURL(blob);
       setTimeout(_ => a.click());
       // a.click();
     }

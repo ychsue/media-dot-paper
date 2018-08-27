@@ -13,6 +13,17 @@
         (click)="onExportStory(exportStory,$event)">
           <mat-icon class="mat-18">save</mat-icon>
       </a>
+      <a mat-icon-button #exportSBV [href]="downloadSBVHref|safe" [download]="meService.story.title+'.sbv'"
+        (click)="onExportSBV(exportSBV,$event)" matTooltip="輸出輸入的字幕">
+        <mat-icon class="mat-18">subtitles</mat-icon>
+      </a>
+  </div>
+    <div class="selectUtterType">
+      <mat-select [(ngModel)]="meService.story.utterType" placeholder="請選擇語音模擬字幕的模式">
+          <mat-option [value]="utterType.none">{{'不模擬'}}</mat-option>
+          <mat-option [value]="utterType.byEach">{{'依各段要求模擬'}}</mat-option>
+          <mat-option [value]="utterType.all">{{'全部模擬'}}</mat-option>
+      </mat-select>
     </div>
     <mat-form-field>
       <input matInput placeholder="媒體名稱" [(ngModel)]="meService.story.name">
