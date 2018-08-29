@@ -7,12 +7,13 @@ import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
-  MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule} from '@angular/material';
+  MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
+  MatTooltipModule, MatSelectModule, MatSlideToggleModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { TestComponent } from './pages/test/test.component';
-import { SafePipe } from './pipes/safe.pipe';
+import { SafePipe, SafeHtmlPipe } from './pipes/safe.pipe';
 import { MediaEditComponent } from './pages/media-edit/media-edit.component';
 import { MeMainDashboardComponent } from './components/me-main-dashboard/me-main-dashboard.component';
 import { MeSectionDashboardComponent } from './components/me-section-dashboard/me-section-dashboard.component';
@@ -34,6 +35,9 @@ import { ClipboardService } from './services/clipboard.service';
 import { PageTextsService } from './services/page-texts.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdService } from './services/ad.service';
+import { SpeechSynthesisService } from './services/speech-synthesis.service';
+import { SetSpeechSynthesisComponent } from './components/set-speech-synthesis/set-speech-synthesis.component';
+import { CrossCompService } from './services/cross-comp.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import { AdService } from './services/ad.service';
     HomeComponent,
     TestComponent,
     SafePipe,
+    SafeHtmlPipe,
     MediaEditComponent,
     MeMainDashboardComponent,
     MeSectionDashboardComponent,
@@ -51,7 +56,8 @@ import { AdService } from './services/ad.service';
     DialogComponent,
     DraglistComponent,
     SwapIconComponent,
-    StoryComponent
+    StoryComponent,
+    SetSpeechSynthesisComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
@@ -70,11 +76,14 @@ import { AdService } from './services/ad.service';
     CommonModule,
     MatSliderModule,
     MatTabsModule,
+    MatTooltipModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService, ClipboardService, PageTextsService, AdService
+    , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService
   ],
   bootstrap: [AppComponent]
 })

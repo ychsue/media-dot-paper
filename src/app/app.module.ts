@@ -37,6 +37,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdService } from './services/ad.service';
 import { SpeechSynthesisService } from './services/speech-synthesis.service';
 import { SetSpeechSynthesisComponent } from './components/set-speech-synthesis/set-speech-synthesis.component';
+import { CrossCompService } from './services/cross-comp.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { SetSpeechSynthesisComponent } from './components/set-speech-synthesis/s
     MatSlideToggleModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService
+    , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,10 @@
+* [2018-8-29 Wed] Oh, SpeechSynthesis does not work in Android's webview. I need to do it through native code (plugin).
+1. ~min-height: 0~ is necessary for an item of ~grid~ when the height of that item is larger than that sub-grid's height.
+2. I need to scroll, so I put the one I want to scroll into ~cross-comp.service~ and then I set its ~scrollTop~ to scroll it.
+   Remember that, ~scroll(...)~ does not work in windows uwp.
+3. ~mat-list~ cannot get its nativeElement.
+4. As [[https://stackoverflow.com/questions/22143837/speechsynthesisutterance-not-working-in-an-html5-app-built-for-android][this StackOverflow's Q&A]], speechsynthesis does not exist in Android's webview. I need to install the plugin to call it natively.
+
 * [2018-8-28 Tue] Multilingual
 1. In ~story.component~, once I change language, the ~mat-select~ may throw an ~ExpressionChangedAfterItHasBeenCheckedError~ error sometimes. The good news is that it can be solved by ~ChangeDetectorRef~ as mentioned in [[https://stackoverflow.com/questions/47425569/angular-2-material-mat-chip-change-selected][this StackOverflow's Q&A]].
 2. Oh, I need to remove the ~outDefaultFile~ and rename the ~outInterfaceFile~ to be ~....d.ts~, a definition ts file; otherwise, angular will show error messages of ~ts2304~ and ~ts2339~.

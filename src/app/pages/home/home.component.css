@@ -18,3 +18,14 @@ input[type='file'] {
 app-draglist {
     width:100%;
 }
+
+.storedContainer {
+    min-height: 0; /* crucial */
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.listStored {
+    overflow-y: auto;
+    overflow-x: hidden;
+}

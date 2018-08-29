@@ -1,3 +1,12 @@
+<div>
+    <h1>Test of Speech Synthesis</h1>
+    <input type="text" #ssInput/>
+    <mat-select [(value)]="selVoice" placeholder="選個想模擬的語言">
+        <mat-option *ngFor="let voice of SSService.voices" [value]="voice">{{voice.name}}</mat-option>
+    </mat-select>
+    <button (click)="onSpeak(ssInput.value)">play</button>
+</div>
+
 <input #selFile type="file" multiple (change)="onSelFileChange(selFile.files,$event.target === audioFile)">
 <!-- list of files -->
 <mat-list dense *ngIf="!!entries">

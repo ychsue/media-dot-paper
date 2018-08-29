@@ -50,6 +50,8 @@ src\app\app.component.html
 src\app\app.component.spec.ts
 src\app\app.component.ts
 src\app\app.module.ts
+src\app\components\draglist\draglist.component.css
+src\app\components\draglist\draglist.component.html
 src\app\components\me-main-dashboard\me-main-dashboard.component.css
 src\app\components\me-main-dashboard\me-main-dashboard.component.html
 src\app\components\me-mani-plate\me-mani-plate.component.css

@@ -48,6 +48,8 @@
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.css" />
+    <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.html" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.css" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.html" />
     <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.css" />
@@ -122,6 +124,8 @@
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\std-query.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\transaction.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\utilities.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.spec.ts" />
+    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.spec.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.ts" />
     <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.spec.ts" />

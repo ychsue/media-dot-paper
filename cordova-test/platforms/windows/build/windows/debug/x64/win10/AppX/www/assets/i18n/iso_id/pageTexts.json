@@ -2,6 +2,37 @@
   "homePage": {
     "newMedia": "Muat Media baru",
     "url": "url",
-    "file": "Mengajukan"
+    "file": "Mengajukan",
+    "ttFile": "Pilih file video atau audio, atau file json yang diekspor oleh APP ini",
+    "storedMedia": "Pilih Media Tersimpan",
+    "errWrongFormat": "Format input .json file salah. Pesan eror:",
+    "errFileType": "File yang dipilih harus berupa video atau file audio, atau file json yang diekspor oleh APP ini."
+  },
+  "appComp": {
+    "chooseAMediaAtFirst": "Halaman ini untuk pengaturan media yang Anda pilih.\nJadi, tolong pilih media pada awalnya."
+  },
+  "NewStory": {
+    "name": "Tolong beri saya nama",
+    "title": "Selamat menggunakan APP ini untuk membantu Anda belajar"
+  },
+  "storyComp": {
+    "notYetFileExport": "Karena media yang diekspor terkait dengan file lokal, saya harus mengekspor file lokalnya juga. Pada versi ini, kemampuan ini belum dibangun. Maaf untuk itu.",
+    "exportSBV": "Ekspor subtitel ke dalam file .sbv",
+    "howtoUtter": "Harap pilih mode untuk mengucapkan subtitel",
+    "noSS": "Jangan mensintesis",
+    "actualSS": "Mensintesis yang Anda inginkan",
+    "allSS": "Sintesa semua subtitle",
+    "name": "Nama media",
+    "title": "Judul media",
+    "keywords": "kata kunci",
+    "source": "Sumber media",
+    "description": "Deskripsi"
+  },
+  "dialogComp": {
+    "desireURL": "Silakan masukkan URL yang diinginkan",
+    "load": "Beban"
+  },
+  "setSSComp": {
+    "selLang": "Pilih bahasa untuk sintesis ucapan"
   }
 }

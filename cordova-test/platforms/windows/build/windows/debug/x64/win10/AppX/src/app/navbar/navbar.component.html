@@ -2,10 +2,10 @@
   <button mat-icon-button (click)="toggleSidenav_Click.next($event)">
       <mat-icon class="mat-18">menu</mat-icon>
   </button>
-  <button mat-icon-button (click)="onSaveStory()" *ngIf="meService.sideClickType===sideClickType_.new">
-    <mat-icon class="mat-18">save</mat-icon>
+  <button mat-icon-button (click)="meService.onSaveStory$$()" *ngIf="meService.sideClickType===sideClickType_.new">
+    <mat-icon class="mat-18">archive</mat-icon>
   </button>
-  <button mat-icon-button (click)="onUpdateStory()" *ngIf="meService.sideClickType===sideClickType_.select">
+  <button mat-icon-button (click)="meService.onUpdateStory$$()" *ngIf="meService.sideClickType===sideClickType_.select">
     <mat-icon class="mat-18">update</mat-icon>
   </button>
 <div class="flex-spacer">

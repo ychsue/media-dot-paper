@@ -2,6 +2,37 @@
   "homePage": {
     "newMedia": "加載新媒體",
     "url": "網址",
-    "file": "文件"
+    "file": "文件",
+    "ttFile": "選擇視頻或音頻文件，或此APP導出的json文件",
+    "storedMedia": "選擇存儲的媒體",
+    "errWrongFormat": "輸入.json文件的格式錯誤。錯誤信息：",
+    "errFileType": "所選文件必須是視頻或音頻文件，或此APP導出的json文件。"
+  },
+  "appComp": {
+    "chooseAMediaAtFirst": "此頁面用於設置您選擇的媒體。\n所以，請先選擇一個媒體。"
+  },
+  "NewStory": {
+    "name": "請給我一個名字",
+    "title": "歡迎使用此APP來幫助您學習"
+  },
+  "storyComp": {
+    "notYetFileExport": "由於導出的媒體與本地文件相關，因此我也應該導出其本地文件。在此版本中，此功能尚未內置。很抱歉。",
+    "exportSBV": "將字幕導出為.sbv文件",
+    "howtoUtter": "請選擇說出字幕的模式",
+    "noSS": "不要合成",
+    "actualSS": "合成你想要的那個",
+    "allSS": "合成所有字幕",
+    "name": "媒體的名字",
+    "title": "媒體的頭銜",
+    "keywords": "關鍵字",
+    "source": "媒體的來源",
+    "description": "描述"
+  },
+  "dialogComp": {
+    "desireURL": "請輸入所需的URL",
+    "load": "加載"
+  },
+  "setSSComp": {
+    "selLang": "選擇語音合成的語言"
   }
 }

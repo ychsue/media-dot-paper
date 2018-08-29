@@ -1,7 +1,7 @@
 <!-- <div>
     <button mat-raised-button (click)="gv.shownPage = pageType.Test">Test</button>
 </div> -->
-<div>
+<div class="newContainer">
     <h3 [innerText]="(!!pts)?pts.newMedia:'讀入新的媒體：'"></h3>
     <mat-list dense>
         <mat-list-item>
@@ -19,15 +19,17 @@
         </mat-list-item>
     </mat-list>
 </div>
-<div>
+<div class="storedContainer">
     <h3>{{(!!pts)?pts.storedMedia:'已備份的媒體：'}}</h3>
 
-    <mat-list dense>
+    <div #listOfStored class="listStored">
+        <mat-list dense>
         <!-- <mat-list-item *ngFor="let story of stories$| async"> -->
         <app-draglist *ngFor="let story of stories" 
             [story]="story"
             (delete)="onStoryDelete(story)"
             (contentClick)="onStoryOpen(story)" ></app-draglist>
         <!-- </mat-list-item> -->
-    </mat-list>
+        </mat-list>
+    </div>
 </div>

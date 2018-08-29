@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, AfterViewInit } from '@angular/core';
+import { Component, OnInit, NgZone, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { GvService, PageType } from '../../services/gv.service';
 import { MediaEditService, SideClickType } from '../../services/media-edit.service';
 import { MatDialog } from '@angular/material';
@@ -6,20 +6,21 @@ import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
 import { IStory } from '../../services/story.service';
-import { map, concatAll, concat } from 'rxjs/operators';
+import { map, concatAll, concat, takeUntil } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
 import { MessageService, MessageTypes } from '../../services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
 import { ClipboardService } from '../../services/clipboard.service';
 import { PageTextsService } from '../../services/page-texts.service';
+import { CrossCompService } from '../../services/cross-comp.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   Url = 'https://dzxuyknqkmi1e.cloudfront.net/odb/2018/06/odb-06-12-18.mp3';
   testYoutubeUrl = 'https://youtu.be/f1SZ5GaAp3g';
@@ -28,15 +29,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
   stories: IStory[];
   storySearch$ = new Subject<IStory>();
 
+  @ViewChild('listOfStored')
+  listStoredRef: ElementRef;
+
+  private _unsubscribed = new Subject<boolean>();
+
   pts: IHomePage;
 
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog, public ptsServic: PageTextsService,
     private meService: MediaEditService, private db: DbService,
     private ngZone: NgZone, private fs: FsService
-    , private msg: MessageService, private clipboard: ClipboardService) {
+    , private msg: MessageService, private clipboard: ClipboardService,
+    private ccService: CrossCompService) {
       const self = this;
-      ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).subscribe(_ => {
+      ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).pipe(takeUntil(self._unsubscribed)).subscribe(_ => {
         self.pts = ptsServic.pts.homePage;
       });
     }
@@ -44,23 +51,33 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     const self = this;
     // from(this.db.searchAsync()).subscribe(this.stories$);
-    self.db.onDataChanged.subscribe(data => self.storySearch$.next(null));
+    self.db.onDataChanged.pipe(takeUntil(self._unsubscribed)).subscribe(data => self.storySearch$.next(null));
     self.stories$ = self.storySearch$.pipe(map(val => {
       if (val === null) { return self.db.searchAsync(DbService.storyTableName, null, null, {viewTime: 'desc'}); }
     }),
     concatAll()
     );
-    self.stories$.subscribe(s => {
+    self.stories$.pipe(takeUntil(self._unsubscribed)).subscribe(s => {
       self.ngZone.run(() => {
         self.stories = s;
       });
     });
     // * [2018-08-01 10:27] Check whether FsPlugin is available now
-    self.fs.FSReady$.subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+    self.fs.FSReady$.pipe(takeUntil(self._unsubscribed))
+    .subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+
+    this.ccService.listOfStoredEle = this.listStoredRef.nativeElement;
   }
 
   ngAfterViewInit() {
     this.storySearch$.next(null); // initialize the search
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribed.next(true);
+    this._unsubscribed.complete();
+    this._unsubscribed = null;
+    this.ccService.listOfStoredEle = null;
   }
 
   onFileSelect(files: FileList) {
@@ -123,7 +140,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         data: {dType: DialogType.inputUrl, url: self.Url}
       });
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(result => {
       if (!!result === false) {return; }
       self.Url = result;
       self.meService.initMe(self.Url);

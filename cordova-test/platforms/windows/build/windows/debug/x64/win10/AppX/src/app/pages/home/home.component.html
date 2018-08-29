@@ -1,7 +1,7 @@
-<div>
+<!-- <div>
     <button mat-raised-button (click)="gv.shownPage = pageType.Test">Test</button>
-</div>
-<div>
+</div> -->
+<div class="newContainer">
     <h3 [innerText]="(!!pts)?pts.newMedia:'讀入新的媒體：'"></h3>
     <mat-list dense>
         <mat-list-item>
@@ -10,28 +10,26 @@
             </button>
         </mat-list-item>
         <mat-list-item>
-            <button mat-raised-button (click)="selaudio.click()" >
+            <button mat-raised-button (click)="selaudio.click()"
+                [matTooltip]="(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'" >
                 <input #selaudio
-                type="file" accept="audio/*" (change)="onFileSelect(selaudio.files)">
-                聲音檔
-            </button>
-            <button mat-raised-button (click)="selvideo.click()" >
-                <input #selvideo
-                type="file" accept="video/*" (change)="onFileSelect(selvideo.files)">
-                影片檔
+                type="file" (change)="onFileSelect(selaudio.files)">
+                {{(!!pts)?pts.file:'檔案'}}
             </button>
         </mat-list-item>
     </mat-list>
 </div>
-<div>
-    <h3>讀入已備份的媒體：</h3>
+<div class="storedContainer">
+    <h3>{{(!!pts)?pts.storedMedia:'已備份的媒體：'}}</h3>
 
-    <mat-list dense>
+    <div #listOfStored class="listStored">
+        <mat-list dense>
         <!-- <mat-list-item *ngFor="let story of stories$| async"> -->
         <app-draglist *ngFor="let story of stories" 
             [story]="story"
             (delete)="onStoryDelete(story)"
             (contentClick)="onStoryOpen(story)" ></app-draglist>
         <!-- </mat-list-item> -->
-    </mat-list>
+        </mat-list>
+    </div>
 </div>

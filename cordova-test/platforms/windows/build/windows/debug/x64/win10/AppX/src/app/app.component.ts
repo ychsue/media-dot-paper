@@ -8,6 +8,7 @@ import { Subject, of } from 'rxjs';
 import { DeviceService } from './services/device.service';
 import { concatAll, takeUntil, map, concat, merge, take, debounceTime } from 'rxjs/operators';
 import { MediaEditService } from './services/media-edit.service';
+import { PageTextsService } from './services/page-texts.service';
 
 @Component({
   selector: 'app-root',
@@ -22,12 +23,19 @@ export class AppComponent implements AfterViewInit {
 
   pageType = PageType;
 
+  pts: IAppComp;
+
   constructor(public msgService: MessageService, public gv: GvService,
+    public ptsService: PageTextsService,
     private ytService: YoutubeService, private device: DeviceService, public meService: MediaEditService) {
-    msgService.pushMessage({type: MessageTypes.Error, message: document.location.toString() });
-    msgService.pushMessage({type: MessageTypes.Warn, message: 'Test 2' });
-    msgService.pushMessage({type: MessageTypes.Info, message: 'Test 321' });
-    this.sidenavWidth = (window.innerWidth < 800) ? 300 : window.innerWidth / 4;
+      const self = this;
+      self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(isDone => {
+        if (isDone) {
+          self.pts = self.ptsService.pts.appComp;
+        }
+      });
+
+      this.sidenavWidth = (window.innerWidth < 800) ? 300 : window.innerWidth / 4;
     this.decideSidenavMode();
   }
 
