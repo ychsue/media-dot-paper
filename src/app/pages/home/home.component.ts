@@ -95,9 +95,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
             story.modifyTime = 0;
             self.meService.initMe(story);
           })
-          .catch( err => alert(`輸入的json檔格式不合。錯誤訊息： ${JSON.stringify(err)}`));
+          .catch( err => alert(((!!this.pts) ? this.pts.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`));
       } else {
-        alert('所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+        alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
         return;
       }
     }

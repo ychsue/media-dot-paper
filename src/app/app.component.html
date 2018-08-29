@@ -16,7 +16,7 @@
                     <mat-icon>music_video</mat-icon>
                 </ng-template>
                 <app-story class="page" *ngIf="!!meService.story?.urlOrID===true"></app-story>
-                <span *ngIf="!!meService.story?.urlOrID===false">請先選一個媒體</span>
+                <span *ngIf="!!meService.story?.urlOrID===false">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>
             </mat-tab>            
         </mat-tab-group>
         <div class="vSeparate" [style.left]="sidenavWidth-2+'px'" touch-action="none"

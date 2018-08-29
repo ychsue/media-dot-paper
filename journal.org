@@ -1,3 +1,10 @@
+* [2018-8-28 Tue] Multilingual
+1. In ~story.component~, once I change language, the ~mat-select~ may throw an ~ExpressionChangedAfterItHasBeenCheckedError~ error sometimes. The good news is that it can be solved by ~ChangeDetectorRef~ as mentioned in [[https://stackoverflow.com/questions/47425569/angular-2-material-mat-chip-change-selected][this StackOverflow's Q&A]].
+2. Oh, I need to remove the ~outDefaultFile~ and rename the ~outInterfaceFile~ to be ~....d.ts~, a definition ts file; otherwise, angular will show error messages of ~ts2304~ and ~ts2339~.
+3. I add a property ~isShown~ in ~message.service~ to control whether to show messages.
+   At this moment, I turned it off.
+   One day, I want to toggle it in a global setting page.
+
 * [2018-8-27 Mon] Blinking selected icon button.
 Hm... ~color~, ~background-color~ and ~transform~ does not work for it, I used ~opacity~ finally.
 

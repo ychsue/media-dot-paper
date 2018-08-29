@@ -39,7 +39,7 @@ export class SpeechSynthesisService {
 
   speak(para: SSutterParameters ) {
     if (!!para === false) {
-      alert(`啟動語音模擬參數有誤`);
+      alert(`Warning: input of SpeechSynthesisService.speak cannot be ${para}`);
       return;
     }
     // * [2018-08-22 19:53] Cancel previous utterance

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PlayerType } from '../vm/player-type.enum';
 import { AFrame } from '../vm/a-frame';
+import { PageTextsService } from './page-texts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,11 @@ export class Story implements IStory {
 
   utterType = utterType.none;
 
-  constructor() {
+  constructor(pts?: IPageTexts) {
+    if (!!pts === true) {
+      this.name = pts.NewStory.name;
+      this.title = pts.NewStory.title;
+    }
     const time = Date.now();
     this.makeTime = this.viewTime = time;
     this.modifyTime = 0;

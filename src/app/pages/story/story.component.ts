@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
 import { MatAnchor } from '@angular/material';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
-import { utterType } from '../../services/story.service';
+import { utterType, IStory } from '../../services/story.service';
+import { PageTextsService } from '../../services/page-texts.service';
+import { concat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-story',
@@ -17,9 +19,20 @@ export class StoryComponent implements OnInit {
 
   downloadHref: string;
   downloadSBVHref: string;
-  constructor(public meService: MediaEditService) { }
+
+  pts: IStoryComp;
+
+  constructor(public meService: MediaEditService,
+  public ptsService: PageTextsService,
+  private cdr: ChangeDetectorRef) {
+  }
 
   ngOnInit() {
+    const self = this;
+    self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(_ => {
+      self.pts = self.ptsService.pts.storyComp;
+      self.cdr.detectChanges();
+    });
   }
 
   onExportStory(sender: MatAnchor, e: MouseEvent) {
@@ -31,7 +44,7 @@ export class StoryComponent implements OnInit {
     } else {
       e.preventDefault();
       if (self.meService.story.meType === PlayerType.file) {
-        alert('抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
+        alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
         return;
       }
       const blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});

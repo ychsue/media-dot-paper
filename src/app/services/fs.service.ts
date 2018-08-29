@@ -138,6 +138,11 @@ export class FsService {
 
   rmFile$(file: FileEntry) {
     return new Observable<boolean>( subs => {
+      if (!!file === false) {
+        subs.next(false);
+        subs.complete();
+        return;
+      }
       file.remove(
         () => {
           subs.next(true);

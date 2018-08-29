@@ -6,7 +6,7 @@
     <mat-form-field class="selVoice">
       <mat-select #selVoice [value]="utterPara.voice"
       (selectionChange)="utterPara.voice=selVoice.value;change.next(utterPara)"
-      placeholder="選個語音模擬語言">
+      [placeholder]="(!!pts)?pts.selLang:'選個語音模擬語言'">
         <mat-option *ngFor="let voice of SSService.voices" [value]="voice">{{voice.name}}</mat-option>
       </mat-select>
     </mat-form-field>

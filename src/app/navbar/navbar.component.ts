@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
     this.nUnReadMsg = msgService.getNUnRead();
     msgService.remindMsgIn.subscribe(
       (n) => {
+        if (msgService.isShown === false) {return; }
         const isInZone = NgZone.isInAngularZone();
         const action = () => { self.nUnReadMsg = n; };
         if (isInZone === false) {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { PageTextsService } from '../services/page-texts.service';
+import { concat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dialog',
@@ -10,10 +12,17 @@ export class DialogComponent implements OnInit {
 
   dialogType = DialogType;
 
-  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+  pts: IDialogComp;
+
+  constructor(public ptsService: PageTextsService,
+    public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
+    const self = this;
+    self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(_ => {
+      self.pts = self.ptsService.pts.dialogComp;
+    });
   }
 
   onLoadURL() {

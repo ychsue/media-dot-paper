@@ -6,7 +6,8 @@ import { AdService } from './ad.service';
 import { DbService } from './db.service';
 import { FsService } from './fs.service';
 import { MessageService, MessageTypes } from './message.service';
-import { concatAll, map, shareReplay } from 'rxjs/operators';
+import { concatAll, map, shareReplay, concat } from 'rxjs/operators';
+import { PageTextsService } from './page-texts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -86,11 +87,21 @@ export class MediaEditService {
 
   repeatStart$ = new Subject<number>();
 
+  pts: IPageTexts;
   constructor(private adService: AdService,
               private fsService: FsService,
               private msgService: MessageService,
-              private db: DbService
+              private db: DbService,
+              private ptsService: PageTextsService
   ) {
+    const self = this;
+    self.ptsService.PTSReady$.subscribe(_ => {
+      self.pts = self.ptsService.pts;
+      self.story = new Story(self.pts);
+    });
+    self.ptsService.ptsLoaded$.subscribe(_ => {
+      self.pts = self.ptsService.pts;
+    });
     this._onStateChanged  = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
@@ -110,12 +121,12 @@ export class MediaEditService {
       this.story.meType = pType;
     } else {
       if ((typeof data) === 'string') {
-        this.story = new Story();
+        this.story = new Story(this.pts);
         this.story.meType = PlayerType.url;
       } else if (!!data['makeTime']) {
         this.story = data as IStory;
       } else if (!!(data as Blob)) {
-        this.story = new Story();
+        this.story = new Story(this.pts);
         this.story.meType = PlayerType.file;
       } else {
         this.state = MEState.parseFailed;
@@ -128,11 +139,13 @@ export class MediaEditService {
     } else if ((this.story.meType === PlayerType.url) || (this.story.meType === PlayerType.youtubeID)) {
       this.story.urlOrID = data as string;
       this.story.title = this.story.urlOrID;
+      this.story.name = this.story.title.slice(this.story.title.lastIndexOf('/') + 1);
     } else if (this.story.meType === PlayerType.file) {
       this.blob = data as Blob;
       this.story.urlOrID = window.URL.createObjectURL(this.blob);
       if (!!(data as File)) {
         this.story.title = this.story.fileName = (data as File).name;
+        this.story.name = this.story.title;
       }
     }
 
@@ -159,7 +172,7 @@ export class MediaEditService {
       self.setPlaybackRateFromFrame();
       self._setiFrame$.next(i);
     } else {
-      console.log(`Problem in setiFrame(${i})`);
+      alert(`Problem in setiFrame(${i})`);
     }
   }
 
@@ -176,7 +189,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
-      console.log(`Problem in setVolume`);
+      alert(`Problem in setVolume`);
     }
   }
 
@@ -193,7 +206,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {
-      console.log(`Problem in setPlaybackRate`);
+      alert(`Problem in setPlaybackRate`);
     }
   }
 
@@ -213,7 +226,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
-      console.log(`Problem in setVolume`);
+      alert(`Problem in setVolume`);
     }
   }
 
@@ -233,7 +246,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {
-      console.log(`Problem in setPlaybackRate`);
+      alert(`Problem in setPlaybackRate`);
     }
   }
 

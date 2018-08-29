@@ -1,6 +1,6 @@
-<div>
+<!-- <div>
     <button mat-raised-button (click)="gv.shownPage = pageType.Test">Test</button>
-</div>
+</div> -->
 <div>
     <h3 [innerText]="(!!pts)?pts.newMedia:'讀入新的媒體：'"></h3>
     <mat-list dense>
@@ -11,16 +11,16 @@
         </mat-list-item>
         <mat-list-item>
             <button mat-raised-button (click)="selaudio.click()"
-                [matTooltip]="'請選擇影片、聲音或本APP匯出的json檔'" >
+                [matTooltip]="(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'" >
                 <input #selaudio
                 type="file" (change)="onFileSelect(selaudio.files)">
-                檔案
+                {{(!!pts)?pts.file:'檔案'}}
             </button>
         </mat-list-item>
     </mat-list>
 </div>
 <div>
-    <h3>讀入已備份的媒體：</h3>
+    <h3>{{(!!pts)?pts.storedMedia:'已備份的媒體：'}}</h3>
 
     <mat-list dense>
         <!-- <mat-list-item *ngFor="let story of stories$| async"> -->

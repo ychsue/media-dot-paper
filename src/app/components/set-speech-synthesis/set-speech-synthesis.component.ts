@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SpeechSynthesisService, SSutterParameters } from '../../services/speech-synthesis.service';
+import { PageTextsService } from '../../services/page-texts.service';
+import { concat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-set-speech-synthesis',
@@ -15,12 +17,18 @@ export class SetSpeechSynthesisComponent implements OnInit {
 
   selVoice: SpeechSynthesisVoice;
 
-  constructor(public SSService: SpeechSynthesisService) {
+  pts: ISetSSComp;
+
+  constructor(public SSService: SpeechSynthesisService, public ptsService: PageTextsService) {
     if (!!this.utterPara === false) {
       this.utterPara = new SSutterParameters();
     }
   }
 
   ngOnInit() {
+    const self = this;
+    self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(_ => {
+      self.pts = self.ptsService.pts.setSSComp;
+    });
   }
 }
