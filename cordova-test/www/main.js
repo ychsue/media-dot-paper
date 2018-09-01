@@ -731,6 +731,8 @@ var MeManiPlateComponent = /** @class */ (function () {
             storyUtterPara.text = text;
             storyUtterPara.voiceName = utterPara.voice.name;
             storyUtterPara.lang = utterPara.voice.lang;
+            utterPara.voiceName = utterPara.voice.name;
+            utterPara.lang = utterPara.voice.lang;
             delete storyUtterPara['voice'];
         }
         // * [2018-08-25 16:15] Play it.
@@ -1319,7 +1321,7 @@ module.exports = ".close {\r\n    position: absolute;\r\n    right: 0;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <button mat-icon-button class=\"close\" (click)=\"close.next()\">\n    <mat-icon class=\"mat-18\">close</mat-icon>\n  </button>\n  <div class=\"selVoiceContainer\">\n    <mat-form-field class=\"selVoice\">\n      <mat-select #selVoice [value]=\"utterPara.voice\"\n      (selectionChange)=\"utterPara.voice=selVoice.value;change.next(utterPara)\"\n      [placeholder]=\"(!!pts)?pts.selLang:'選個語音模擬語言'\">\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{voice.name}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n  <div class=\"utterContainer\">\n    <div>\n      <mat-icon class=\"mat-18\">directions_walk</mat-icon>\n      <mat-slider #selRate\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.rate\"\n        (change)=\"utterPara.rate=selRate.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"4\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">flight</mat-icon>\n    </div>\n    \n    <div>\n      <mat-icon class=\"mat-18\">keyboard_arrow_down</mat-icon>\n      <mat-slider #selPitch\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.pitch\"\n        (change)=\"utterPara.pitch=selPitch.value;change.next(utterPara);\"\n        min=\"0\" max=\"2\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">keyboard_arrow_up</mat-icon>\n    </div>\n    <div>\n      <mat-icon class=\"mat-18\">volume_mute</mat-icon>\n      <mat-slider #selVolume\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.volume\"\n        (change)=\"utterPara.volume=selVolume.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"1\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">volume_up</mat-icon>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <button mat-icon-button class=\"close\" (click)=\"close.next()\">\n    <mat-icon class=\"mat-18\">close</mat-icon>\n  </button>\n  <div class=\"selVoiceContainer\">\n    <mat-form-field class=\"selVoice\">\n      <mat-select #selVoice [value]=\"utterPara.voice\"\n      (selectionChange)=\"utterPara.voice=selVoice.value;change.next(utterPara)\"\n      [placeholder]=\"(!!pts)?pts.selLang:'選個語音模擬語言'\">\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{SSService.getVoiceName(voice)}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n  <div class=\"utterContainer\">\n    <div>\n      <mat-icon class=\"mat-18\">directions_walk</mat-icon>\n      <mat-slider #selRate\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.rate\"\n        (change)=\"utterPara.rate=selRate.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"4\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">flight</mat-icon>\n    </div>\n    \n    <div>\n      <mat-icon class=\"mat-18\">keyboard_arrow_down</mat-icon>\n      <mat-slider #selPitch\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.pitch\"\n        (change)=\"utterPara.pitch=selPitch.value;change.next(utterPara);\"\n        min=\"0\" max=\"2\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">keyboard_arrow_up</mat-icon>\n    </div>\n    <div>\n      <mat-icon class=\"mat-18\">volume_mute</mat-icon>\n      <mat-slider #selVolume\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.volume\"\n        (change)=\"utterPara.volume=selVolume.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"1\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">volume_up</mat-icon>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -4221,6 +4223,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4268,26 +4272,49 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var SpeechSynthesisService = /** @class */ (function () {
-    function SpeechSynthesisService() {
+    function SpeechSynthesisService(device, ptsService) {
+        this.device = device;
+        this.ptsService = ptsService;
         this._getVoices$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.getVoices$ = this._getVoices$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["shareReplay"])(1));
+        var self = this;
         this.updateVoices$$();
+        if (!!window.cordova && cordova.platformId === 'android') {
+            ptsService.PTSReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concat"])(ptsService.ptsLoaded$)).subscribe(function (_) {
+                // **************** TODO: To notice it that the voices is changed (at least for differnt language) **************
+                self.voices = self.voices.slice(0);
+            });
+        }
     }
     SpeechSynthesisService.prototype.updateVoices$$ = function () {
         return __awaiter(this, void 0, void 0, function () {
             var voices;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
+                    case 0:
+                        if (!(this.device.isCordova && cordova.platformId === 'android')) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.device.onDeviceReady.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["first"])()).toPromise()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, window['TTS'].getVoices()];
+                    case 2:
+                        voices = (_a.sent());
+                        voices = voices.sort(function (a, b) { return (a.lang < b.lang) ? -1 : 1; });
+                        return [3 /*break*/, 5];
+                    case 3: 
                     // * [2018-08-23 11:05] Try 5 times to get the voices
                     return [4 /*yield*/, Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["interval"])(100).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(5), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["takeWhile"])(function (_) {
                             voices = speechSynthesis.getVoices();
                             return !!voices === false || voices.length === 0;
                         })).toPromise()];
-                    case 1:
+                    case 4:
                         // * [2018-08-23 11:05] Try 5 times to get the voices
                         _a.sent();
+                        _a.label = 5;
+                    case 5:
                         // * [2018-08-23 11:07] If I got the voice, set the default voice
                         if (!!voices !== false && voices.length > 0) {
                             this.defaultVoice = voices.find(function (v) { return /en.*US/.test(v.lang); });
@@ -4300,28 +4327,82 @@ var SpeechSynthesisService = /** @class */ (function () {
             });
         });
     };
-    SpeechSynthesisService.prototype.speak = function (para) {
-        if (!!para === false) {
-            alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
-            return;
-        }
-        // * [2018-08-22 19:53] Cancel previous utterance
-        speechSynthesis.pause();
-        speechSynthesis.cancel();
-        // * [2018-08-22 19:53] Create a new utterance
-        var utter = new SpeechSynthesisUtterance(para.text);
-        utter.pitch = para.pitch;
-        utter.rate = para.rate;
-        utter.volume = para.volume;
-        if (!!para.voice === true) {
-            utter.voice = para.voice;
+    SpeechSynthesisService.prototype.getVoiceName = function (voiceOrLang) {
+        if (typeof voiceOrLang === 'string') {
+            var voice = this.voices.find(function (v) { return v.lang.replace('_', '-') === voiceOrLang.replace('_', '-'); });
+            if (!!voice) {
+                return voice.name;
+            }
+            else {
+                return "";
+            }
         }
         else {
-            utter.lang = para.lang;
+            if (!!window.cordova && cordova.platformId === 'android') {
+                var voice = voiceOrLang;
+                var codes = voice.lang.split(/(\-|\_)/);
+                if (!!this.ptsService.pts === false) {
+                    return voice.name;
+                }
+                else {
+                    var result = "";
+                    var buf = "";
+                    buf = this.ptsService.pts.iso639[codes[0]];
+                    if (!!buf) {
+                        result += buf;
+                    }
+                    if (!!buf === true) {
+                        result += ': ';
+                    }
+                    if (codes.length === 3) {
+                        buf = this.ptsService.pts.iso3166Country[codes[2]];
+                        if (!!buf) {
+                            result += buf;
+                        }
+                    }
+                    // * [2018-08-31 16:46] Give more information
+                    buf = voice.name.substring(voice.name.lastIndexOf('#') + 1);
+                    result += '(' + buf + ')';
+                    return result;
+                }
+            }
+            else {
+                return voiceOrLang.name;
+            }
         }
-        // * [2018-08-22 19:54] Play it
-        speechSynthesis.speak(utter);
-        speechSynthesis.resume();
+    };
+    SpeechSynthesisService.prototype.speak = function (para) {
+        if (this.device.isCordova && cordova.platformId === 'android') {
+            window['TTS'].stop();
+            if (!!para.voiceName === false) {
+                para.voiceName = this.getVoiceName(para.lang);
+            }
+            var androidPara = Object.assign({ name: para.voiceName }, para);
+            window['TTS'].speak(androidPara);
+        }
+        else {
+            if (!!para === false) {
+                alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
+                return;
+            }
+            // * [2018-08-22 19:53] Cancel previous utterance
+            speechSynthesis.pause();
+            speechSynthesis.cancel();
+            // * [2018-08-22 19:53] Create a new utterance
+            var utter = new SpeechSynthesisUtterance(para.text);
+            utter.pitch = para.pitch;
+            utter.rate = para.rate;
+            utter.volume = para.volume;
+            if (!!para.voice === true) {
+                utter.voice = para.voice;
+            }
+            else {
+                utter.lang = para.lang;
+            }
+            // * [2018-08-22 19:54] Play it
+            speechSynthesis.speak(utter);
+            speechSynthesis.resume();
+        }
     };
     SpeechSynthesisService.prototype.updateUtterParaWithVoice = function (old) {
         if (!!old.voiceName === true) {
@@ -4331,7 +4412,7 @@ var SpeechSynthesisService = /** @class */ (function () {
             }
         }
         if (!!old.lang === true) {
-            old.voice = this.voices.find(function (v) { return v.lang === old.lang; });
+            old.voice = this.voices.find(function (v) { return v.lang.replace('_', '-') === old.lang.replace('_', '-'); });
             if (!!old.voice === true) {
                 return old;
             }
@@ -4342,7 +4423,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
     ], SpeechSynthesisService);
     return SpeechSynthesisService;
 }());

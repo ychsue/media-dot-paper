@@ -216,6 +216,14 @@ module.exports = [
         "clobbers": [
             "window.AdMob"
         ]
+    },
+    {
+        "id": "cordova-plugin-tts.tts",
+        "file": "plugins/cordova-plugin-tts/www/tts.js",
+        "pluginId": "cordova-plugin-tts",
+        "clobbers": [
+            "TTS"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -227,7 +235,8 @@ module.exports.metadata =
     "cordova-plugin-nano-sqlite": "1.3.0",
     "cordova-clipboard": "1.2.1",
     "cordova-plugin-extension": "1.5.4",
-    "cordova-plugin-admobpro": "2.31.6"
+    "cordova-plugin-admobpro": "2.31.6",
+    "cordova-plugin-tts": "0.2.3"
 };
 // BOTTOM OF METADATA
 });

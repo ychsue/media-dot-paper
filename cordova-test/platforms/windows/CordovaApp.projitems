@@ -1,167 +1,167 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-    <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9</SharedGUID>
-  </PropertyGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\bin\build.sh" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\CHANGELOG.md" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.js" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.js.map" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\LICENSE" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\package.json" />
-    <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\README.md" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
-    <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
-    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\favicon.ico" />
-    <Content Include="$(MSBuildThisFileDirectory)src\index.html" />
-    <Content Include="$(MSBuildThisFileDirectory)src\karma.conf.js" />
-    <Content Include="$(MSBuildThisFileDirectory)src\main.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\polyfills.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\styles.css" />
-    <Content Include="$(MSBuildThisFileDirectory)src\test.ts" />
-    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.app.json" />
-    <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.spec.json" />
-    <Content Include="$(MSBuildThisFileDirectory)src\tslint.json" />
-    <Content Include="$(MSBuildThisFileDirectory)www\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)config.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.d.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\adapter-test.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-indexedDB.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-levelDB.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-sync.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-websql.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\db-idx.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\index.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\query.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\storage.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\history-plugin.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\index-server.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\index.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\observable.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\std-query.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\transaction.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\utilities.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\extends\sticky-observable.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\ad.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\clipboard.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\cordova.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\db.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\device.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\fs.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\gv.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\media-edit.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\page-texts.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\story.service.ts" />
-    <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\youtube.service.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)src\%40types\" />
-  </ItemGroup>
-  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
-  <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
+    <PropertyGroup>
+        <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+        <HasSharedItems>true</HasSharedItems>
+        <SharedGUID>9ebdb27f-d75b-4d8c-b53f-7be4a1fe89f9</SharedGUID>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\bin\build.sh" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\CHANGELOG.md" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.js" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.js.map" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\LICENSE" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\package.json" />
+        <Content Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\README.md" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.spec.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\app.component.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\app.module.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.spec.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\message\message.component.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\assets\.gitkeep" />
+        <Content Include="$(MSBuildThisFileDirectory)src\browserslist" />
+        <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.prod.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\environments\environment.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\favicon.ico" />
+        <Content Include="$(MSBuildThisFileDirectory)src\index.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\karma.conf.js" />
+        <Content Include="$(MSBuildThisFileDirectory)src\main.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\polyfills.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\styles.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\test.ts" />
+        <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.app.json" />
+        <Content Include="$(MSBuildThisFileDirectory)src\tsconfig.spec.json" />
+        <Content Include="$(MSBuildThisFileDirectory)src\tslint.json" />
+        <Content Include="$(MSBuildThisFileDirectory)www\**" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="$(MSBuildThisFileDirectory)config.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\adapter-test.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-indexedDB.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-levelDB.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-sync.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\adapter-websql.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\db-idx.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\index.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\query.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\database\storage.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\history-plugin.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index-server.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\index.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\observable.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\std-query.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\query\transaction.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\lib\utilities.d.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\adapter-test.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-indexedDB.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-levelDB.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-sync.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\adapter-websql.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\db-idx.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\index.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\query.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\database\storage.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\history-plugin.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\index-server.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\index.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\observable.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\std-query.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\query\transaction.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)node_modules\nano-sql\src\utilities.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\draglist\draglist.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-main-dashboard\me-main-dashboard.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-mani-plate\me-mani-plate.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\me-section-dashboard\me-section-dashboard.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\components\player\player.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\dialog\dialog.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\extends\sticky-observable.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\modules\app-routing\app-routing.module.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\ad.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\clipboard.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\cordova.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\db.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\device.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\fs.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\gv.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\media-edit.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\page-texts.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\story.service.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\services\youtube.service.ts" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="$(MSBuildThisFileDirectory)src\%40types\" />
+    </ItemGroup>
+    <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppDebug.projitems') And '$(Configuration)'=='Debug'" Project="CordovaAppDebug.projitems" />
+    <Import Condition="Exists('$(MSBuildThisFileDirectory)CordovaAppRelease.projitems') And '$(Configuration)'!='Debug'" Project="CordovaAppRelease.projitems" />
 </Project>

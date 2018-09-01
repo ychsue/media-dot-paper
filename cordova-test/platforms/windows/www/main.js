@@ -4221,6 +4221,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4268,8 +4269,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var SpeechSynthesisService = /** @class */ (function () {
-    function SpeechSynthesisService() {
+    function SpeechSynthesisService(device) {
+        this.device = device;
         this._getVoices$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.getVoices$ = this._getVoices$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["shareReplay"])(1));
         this.updateVoices$$();
@@ -4279,15 +4282,23 @@ var SpeechSynthesisService = /** @class */ (function () {
             var voices;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
+                    case 0:
+                        if (!(this.device.isCordova && cordova.platformId === 'android')) return [3 /*break*/, 2];
+                        return [4 /*yield*/, window['TTS'].getVoices()];
+                    case 1:
+                        voices = (_a.sent());
+                        return [3 /*break*/, 4];
+                    case 2: 
                     // * [2018-08-23 11:05] Try 5 times to get the voices
                     return [4 /*yield*/, Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["interval"])(100).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(5), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["takeWhile"])(function (_) {
                             voices = speechSynthesis.getVoices();
                             return !!voices === false || voices.length === 0;
                         })).toPromise()];
-                    case 1:
+                    case 3:
                         // * [2018-08-23 11:05] Try 5 times to get the voices
                         _a.sent();
+                        _a.label = 4;
+                    case 4:
                         // * [2018-08-23 11:07] If I got the voice, set the default voice
                         if (!!voices !== false && voices.length > 0) {
                             this.defaultVoice = voices.find(function (v) { return /en.*US/.test(v.lang); });
@@ -4342,7 +4353,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"]])
     ], SpeechSynthesisService);
     return SpeechSynthesisService;
 }());

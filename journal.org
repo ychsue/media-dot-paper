@@ -1,3 +1,10 @@
+* [2018-9-1 Sat] Modify the original cordova-plugin-tts to output voice.name & set its pitch
+1. If you want to change an exist cordova plugin, the better way is to clone it outside your cordova App's folder.
+   Once you modify it, run ~cordova plugin remove PLUGIN~ and then ~codova plugin add LOCAL_PLUGIN_FOLDER~ to renew it so that your modified plugin will be compiled correctly.
+2. Because the name of android's voice is not user friendly, I need to use a function to transform that name instead of get the name directly.
+   By the way, I use ~i18n-page-texts~ to handle the names for the user. Well, it takes a lot of time and crashed at ~indonesian~.
+3. I try to renew the whole ~voices~ to notice Angular that it should be dealt as a new one so that it will try to recall the function after I change page texts.
+
 * [2018-8-29 Wed] Oh, SpeechSynthesis does not work in Android's webview. I need to do it through native code (plugin).
 1. ~min-height: 0~ is necessary for an item of ~grid~ when the height of that item is larger than that sub-grid's height.
 2. I need to scroll, so I put the one I want to scroll into ~cross-comp.service~ and then I set its ~scrollTop~ to scroll it.

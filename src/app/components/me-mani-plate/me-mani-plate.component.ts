@@ -189,6 +189,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       storyUtterPara.text = text;
       storyUtterPara.voiceName = utterPara.voice.name;
       storyUtterPara.lang = utterPara.voice.lang;
+      utterPara.voiceName = utterPara.voice.name;
+      utterPara.lang = utterPara.voice.lang;
       delete storyUtterPara['voice'];
     }
     // * [2018-08-25 16:15] Play it.
