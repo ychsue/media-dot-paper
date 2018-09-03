@@ -4,7 +4,7 @@ import { MediaEditService, MEState } from '../../services/media-edit.service';
 import { trigger, state, style, transition, animate } from '../../../../node_modules/@angular/animations';
 import { utterType } from '../../services/story.service';
 import { SpeechSynthesisService } from '../../services/speech-synthesis.service';
-import { takeWhile, first } from 'rxjs/operators';
+import { takeWhile, first, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-media-edit',
@@ -32,13 +32,13 @@ export class MediaEditComponent implements OnInit {
   ngOnInit() {
     const self = this;
     let currentIFrame = -1;
-    self.meService.onStateChanged.pipe(takeWhile(_ => !!self.meService.onCurrentTimeChanged === true), first()).subscribe(_ => {
+    self.meService.onStateChanged.pipe(filter(_ => !!self.meService.onCurrentTimeChanged === true), first()).subscribe(_ => {
       self.meService.onCurrentTimeChanged.subscribe(t => {
         if (self.meService.story.utterType === utterType.none) {
           return;
         } else {
           const i = self.meService.story.frames.findIndex(v => ((t >= v.start) && (t <= v.end)));
-          if (i === currentIFrame) {
+          if (i === currentIFrame || self.meService.story.iFrame >= 0) {
             return;
           } else {
             currentIFrame = i;

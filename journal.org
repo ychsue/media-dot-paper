@@ -1,3 +1,26 @@
+* [2018-9-3 Mon] Oh. Bad news, <a download ...> does not work for ios and osx
+1. Even after I add
+#+begin_src xml
+    <allow-navigation href="blob:*" />
+    <allow-intent href="blob:*" />
+#+end_src
+into config.xml file.
+I just can see them, but I cannot get them....
+I need to find a new way to save them.
+
+2. By the way, when you run ~cordova plugin add PLUGIN~, don't forget to add ~--save~.
+    If not, the plugin may not be added into your platform.
+
+3. Some error might be caused by the off of ~Capabilities -> App Sandbox -> Network: Outgoing Connections (Client)~, I'm not sure.
+* [2018-9-2 Sun] Some problems happened in osx
+1. Plugins Admob & Clipboard do not support osx, so I need to control this problems in my ~services~.
+2. The structure of plugin Clipboard is not too hard, maybe someday I can try to write one for osx.
+3. I need to run ~cordova platform remove osx; cordova platform add osx~ to force it to include the information of plugins into ~config.xml~ file in ~osx/HelloCordova~. Otherwise, if you build it from cli again will lose these information and you can see the error of missing plugins from XCode.
+4. In ~me-mani-dashboard.component~, the ~<div>~ always on the top of ~<textarea>~ so that I use ~[style.display]~ to hide it forcely.
+5. Well, finally, I got an error: ( sendMessageWithDictionary: Failed to get remote object proxy: Error Domain=NSCocoaErrorDomain Code=4097 "connection to service named com.apple.rtcreportingd" ).
+   I tried to find a solution since it will affect how I get the ~innerText~ of ~<div>~.
+6. By the way, I still don't know how to debug the javascript part of my APP in osx system.
+
 * [2018-9-1 Sat] Modify the original cordova-plugin-tts to output voice.name & set its pitch
 1. If you want to change an exist cordova plugin, the better way is to clone it outside your cordova App's folder.
    Once you modify it, run ~cordova plugin remove PLUGIN~ and then ~codova plugin add LOCAL_PLUGIN_FOLDER~ to renew it so that your modified plugin will be compiled correctly.

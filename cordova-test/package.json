@@ -14,7 +14,7 @@
         "cordova-browser": "^5.0.3",
         "cordova-clipboard": "^1.2.1",
         "cordova-ios": "^4.5.5",
-        "cordova-osx": "^4.0.1",
+        "cordova-osx": "^4.0.2",
         "cordova-plugin-admobpro": "^2.31.6",
         "cordova-plugin-extension": "^1.5.4",
         "cordova-plugin-file": "^6.0.1",
@@ -28,11 +28,11 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-file": {},
             "cordova-plugin-nano-sqlite": {},
             "cordova-clipboard": {},
             "cordova-plugin-admobpro": {},
-            "cordova-plugin-tts": {}
+            "cordova-plugin-tts": {},
+            "cordova-plugin-file": {}
         },
         "platforms": [
             "windows",

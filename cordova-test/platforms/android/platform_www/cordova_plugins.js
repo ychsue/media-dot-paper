@@ -1,6 +1,46 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
+    "id": "cordova-sqlite-storage.SQLitePlugin",
+    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+    "pluginId": "cordova-sqlite-storage",
+    "clobbers": [
+      "SQLitePlugin"
+    ]
+  },
+  {
+    "id": "cordova-plugin-nano-sqlite.nSQLite",
+    "file": "plugins/cordova-plugin-nano-sqlite/plugin.js",
+    "pluginId": "cordova-plugin-nano-sqlite",
+    "clobbers": [
+      "nSQLite"
+    ]
+  },
+  {
+    "id": "cordova-clipboard.Clipboard",
+    "file": "plugins/cordova-clipboard/www/clipboard.js",
+    "pluginId": "cordova-clipboard",
+    "clobbers": [
+      "cordova.plugins.clipboard"
+    ]
+  },
+  {
+    "id": "cordova-plugin-admobpro.AdMob",
+    "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
+    "pluginId": "cordova-plugin-admobpro",
+    "clobbers": [
+      "window.AdMob"
+    ]
+  },
+  {
+    "id": "cordova-plugin-tts.tts",
+    "file": "plugins/cordova-plugin-tts/www/tts.js",
+    "pluginId": "cordova-plugin-tts",
+    "clobbers": [
+      "TTS"
+    ]
+  },
+  {
     "id": "cordova-plugin-file.DirectoryEntry",
     "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
     "pluginId": "cordova-plugin-file",
@@ -172,59 +212,19 @@ module.exports = [
       "cordova"
     ],
     "runs": true
-  },
-  {
-    "id": "cordova-sqlite-storage.SQLitePlugin",
-    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-    "pluginId": "cordova-sqlite-storage",
-    "clobbers": [
-      "SQLitePlugin"
-    ]
-  },
-  {
-    "id": "cordova-plugin-nano-sqlite.nSQLite",
-    "file": "plugins/cordova-plugin-nano-sqlite/plugin.js",
-    "pluginId": "cordova-plugin-nano-sqlite",
-    "clobbers": [
-      "nSQLite"
-    ]
-  },
-  {
-    "id": "cordova-clipboard.Clipboard",
-    "file": "plugins/cordova-clipboard/www/clipboard.js",
-    "pluginId": "cordova-clipboard",
-    "clobbers": [
-      "cordova.plugins.clipboard"
-    ]
-  },
-  {
-    "id": "cordova-plugin-admobpro.AdMob",
-    "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
-    "pluginId": "cordova-plugin-admobpro",
-    "clobbers": [
-      "window.AdMob"
-    ]
-  },
-  {
-    "id": "cordova-plugin-tts.tts",
-    "file": "plugins/cordova-plugin-tts/www/tts.js",
-    "pluginId": "cordova-plugin-tts",
-    "clobbers": [
-      "TTS"
-    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "cordova-plugin-file": "6.0.1",
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-sqlite-storage": "2.3.0",
   "cordova-plugin-nano-sqlite": "1.3.0",
   "cordova-clipboard": "1.2.1",
   "cordova-plugin-extension": "1.5.4",
   "cordova-plugin-admobpro": "2.31.6",
-  "cordova-plugin-tts": "0.2.3"
+  "cordova-plugin-tts": "0.2.3",
+  "cordova-plugin-file": "6.0.1"
 };
 // BOTTOM OF METADATA
 });

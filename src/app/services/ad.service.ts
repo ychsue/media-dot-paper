@@ -34,8 +34,11 @@ export class AdService {
     if (!!window.cordova) {
       if (cordova.platformId === 'windows') {
         self.iniWinSDK();
-      } else {
+      } else if (cordova.platformId === 'android' || cordova.platformId === 'ios') {
         self.iniAdMob();
+      } else {
+        self._adReady$.next(false);
+        self._adReady$.complete();
       }
       this.prepareInterstitial();
     }

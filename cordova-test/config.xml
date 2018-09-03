@@ -12,12 +12,14 @@
     <hook src="scripts/prepareAngular6App.js" type="before_prepare" />
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
+    <allow-navigation href="blob:*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="blob:*" />
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
@@ -28,14 +30,14 @@
         <preference name="iosPersistentFileLocation" value="Library" />
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-file" spec="~6.0.1" />
     <plugin name="cordova-plugin-nano-sqlite" spec="~1.4.0" />
-    <plugin name="cordova-clipboard" spec="~1.2.1" />
-    <plugin name="cordova-plugin-admobpro" spec="~2.31.6" />
     <plugin name="cordova-plugin-tts" spec="../cordova-plugin-tts/" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-clipboard" spec="^1.2.1" />
+    <plugin name="cordova-plugin-admobpro" spec="^2.31.6" />
     <engine name="windows" spec="^5.0.0" />
     <engine name="android" spec="^7.0.0" />
     <engine name="browser" spec="^5.0.3" />
     <engine name="ios" spec="^4.5.5" />
-    <engine name="osx" spec="^4.0.1" />
+    <engine name="osx" spec="^4.0.2" />
 </widget>

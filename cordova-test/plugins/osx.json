@@ -7,10 +7,19 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-clipboard": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-admobpro": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-tts": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-whitelist": {
@@ -18,6 +27,9 @@
     }
   },
   "dependent_plugins": {
+    "cordova-plugin-extension": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }

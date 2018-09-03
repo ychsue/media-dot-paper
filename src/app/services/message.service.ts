@@ -8,7 +8,7 @@ export class MessageService {
 
   remindMsgIn: Subject<number> = new Subject();
 
-  isShown = false;
+  isShown = true;
 
   private _messages: OneMessage[] = [];
   private _nRead = 0;

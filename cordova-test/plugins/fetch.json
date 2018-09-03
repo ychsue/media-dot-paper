@@ -7,14 +7,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-file": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-file@6.0.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-sqlite-storage": {
     "source": {
       "type": "registry",
@@ -34,7 +26,7 @@
   "cordova-clipboard": {
     "source": {
       "type": "registry",
-      "id": "cordova-clipboard"
+      "id": "cordova-clipboard@^1.2.1"
     },
     "is_top_level": true,
     "variables": {}
@@ -42,7 +34,7 @@
   "cordova-plugin-admobpro": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-admobpro"
+      "id": "cordova-plugin-admobpro@^2.31.6"
     },
     "is_top_level": true,
     "variables": {}
@@ -59,6 +51,14 @@
     "source": {
       "type": "local",
       "path": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\node_modules\\cordova-plugin-tts"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-file": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-file@6.0.1"
     },
     "is_top_level": true,
     "variables": {}

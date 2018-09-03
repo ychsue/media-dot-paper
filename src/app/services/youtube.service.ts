@@ -9,7 +9,7 @@ import { MessageService, MessageTypes } from './message.service';
 })
 export class YoutubeService {
 
-  static regYT = /^(http(s)?:\/\/)?(((www\.youtube\.com|youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
+  static regYT = /^(http(s)?:\/\/)?(((.*\.youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
 
   ytPlayer: YT.Player;
   onReady: Subject<YT.PlayerEvent>;

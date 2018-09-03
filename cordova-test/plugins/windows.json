@@ -10,9 +10,6 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "HelloCordova"
     },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
     "cordova-plugin-nano-sqlite": {
       "PACKAGE_NAME": "HelloCordova"
     },
@@ -23,6 +20,9 @@
       "PACKAGE_NAME": "HelloCordova"
     },
     "cordova-plugin-tts": {
+      "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "HelloCordova"
     }
   },

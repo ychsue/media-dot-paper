@@ -32,7 +32,6 @@ export class SpeechSynthesisService {
     if (this.device.isCordova && cordova.platformId === 'android') {
       await this.device.onDeviceReady.pipe(first()).toPromise();
       voices = await window['TTS'].getVoices() as SpeechSynthesisVoice[];
-      voices = voices.sort( (a , b) => (a.lang < b.lang) ? -1 : 1);
     } else {
       // * [2018-08-23 11:05] Try 5 times to get the voices
       await interval(100).pipe(take(5),
@@ -45,6 +44,7 @@ export class SpeechSynthesisService {
 
     // * [2018-08-23 11:07] If I got the voice, set the default voice
     if (!!voices !== false && voices.length > 0) {
+      voices = voices.sort( (a , b) => (a.lang < b.lang) ? -1 : 1);
       this.defaultVoice = voices.find(v => /en.*US/.test(v.lang));
       this.defaultVoice = (!!this.defaultVoice) ? this.defaultVoice : voices[0];
       this._getVoices$.next(true);
@@ -62,7 +62,7 @@ export class SpeechSynthesisService {
         return "";
       }
     } else { // From set-speech-synthesis.component
-      if (!!window.cordova && cordova.platformId === 'android') {
+      if (!!window.cordova && cordova.platformId !== 'windows') {
         const voice = voiceOrLang as SpeechSynthesisVoice;
         const codes = voice.lang.split(/(\-|\_)/);
         if (!!this.ptsService.pts === false) {
@@ -84,8 +84,12 @@ export class SpeechSynthesisService {
             }
           }
           // * [2018-08-31 16:46] Give more information
-          buf = voice.name.substring(voice.name.lastIndexOf('#') + 1);
-          result += '(' + buf + ')';
+          if (cordova.platformId === 'android') {
+            buf = voice.name.substring(voice.name.lastIndexOf('#') + 1);
+            result += '(' + buf + ')';
+          } else {
+            result = '(' + result + ')' + voice.name;
+          }
           return result;
         }
       } else { // Not an Android system
