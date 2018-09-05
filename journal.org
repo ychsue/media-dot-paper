@@ -1,3 +1,8 @@
+* [2018-9-5 Wed] For ios, ~cordova-plugin-x-socialsharing~ does not work correctly.
+Because the user cannot get the file directly from the folder in ios, I decided to use the plugin ~socialsharing~.
+However, it will crash at the first time loading and sharing file in my App will crash.
+Well, finally, I decided to share its texts. I don't like it.
+
 * [2018-9-5 Wed] For osx, we can use cordova.file.documentsDirectory directly without any permission
 So, in this commission I just modify one file ~fs.service.ts~ to use the ~Documents~ folder as the folder for sharing files with others.
 

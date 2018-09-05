@@ -1,4 +1,4 @@
-import { Injectable, SystemJsNgModuleLoader } from '@angular/core';
+import { Injectable, SystemJsNgModuleLoader, NgZone } from '@angular/core';
 import { DeviceService } from './device.service';
 import { Observable, of, fromEvent, from } from 'rxjs';
 import { shareReplay, map, concatAll, first, concat, last } from 'rxjs/operators';
@@ -30,6 +30,19 @@ export class FsService {
         }),
         concatAll()
       ).pipe(shareReplay(1), first());
+      if (cordova.platformId === 'ios') {
+        // * [2018-09-05 16:04] Try to initialize the socialsharing
+        const action = new Promise<boolean>((res, rej) => {
+          device.onDeviceReady.subscribe(_ => {
+            window.plugins.socialsharing.available(b => res(b));
+          });
+        });
+        action.then();
+        // action.then(b => {
+        //   // * [2018-09-05 17:01] ****** TODO ****** dirty start of socialsharing
+        //   if (b) {window.plugins.socialsharing.share('Start'); }
+        // });
+      }
     } else {
       this.FSReady$ = of(false).pipe(shareReplay(1), first());
     }
@@ -130,7 +143,6 @@ export class FsService {
       fEntry.createWriter( fWriter => {
         fWriter.onwriteend = e => {
           subs.next(true);
-          console.log(e);
           subs.complete();
         };
         fWriter.onerror = subs.error;
@@ -180,7 +192,7 @@ export class FsService {
             `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
           }
         }
-      } else if (cordova.platformId === 'android' || cordova.platformId === 'osx' || cordova.platformId === 'ios' ) {
+      } else if (cordova.platformId === 'android' || cordova.platformId === 'osx') {
         const permissions = cordova.plugins.permissions;
         let action: Promise<AndroidPermissionsState>;
         if (cordova.platformId === 'android') {
@@ -215,6 +227,41 @@ export class FsService {
             `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
           }
         }
+      } else if ( cordova.platformId === 'ios' ) {
+        // // * [2018-09-05 14:19] Save it into cacheDirectory
+        // const cacheDir = await self.getDir$('', false, false, cordova.file.cacheDirectory).toPromise();
+        // let isSaved = false;
+        // let fileEntry: FileEntry;
+        // if (!!cacheDir) {
+        //   fileEntry = await self.getFile$(fileName, true, false, cacheDir).toPromise();
+        //   const blob = new Blob([data], {type: 'text/plain'});
+        //   isSaved = await self.writeFile$(fileEntry, blob).toPromise();
+        //   if (isSaved) {
+        //     self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
+        //     `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
+        //   }
+        // }
+        // // * [2018-09-05 14:24] Share this file
+        // if (isSaved) {
+          let action = new Promise<any>((res, rej) => {
+            window.plugins.socialsharing.available(b => res(b));
+          });
+          if ((await action) === false) {
+            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.cannotShare : 'Oh, I cannot share the file.');
+          } else {
+              action = new Promise<any>((res, rej) => {
+                // window.plugins.socialsharing.shareWithOptions({files: fileEntry.toURL()}, res, rej);
+                window.plugins.socialsharing.shareWithOptions({message: data}, res, rej);
+              });
+              console.log('before sharing');
+              const result = await action;
+              console.log(JSON.stringify(result));
+              if (result.completed === true) {
+                self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.askSavingToFile : '請將取得的文字存到{0}的檔案裡頭，這些文字才能被正確使用。')
+                .replace('{0}', '<b style="color:red;">' + fileName.substring(fileName.lastIndexOf('.')) + '</b>'));
+              }
+          }
+        // }
       }
     }
   }

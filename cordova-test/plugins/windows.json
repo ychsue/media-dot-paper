@@ -27,6 +27,9 @@
     },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "HelloCordova"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "HelloCordova"
     }
   },
   "dependent_plugins": {
@@ -34,6 +37,9 @@
       "PACKAGE_NAME": "HelloCordova"
     },
     "cordova-plugin-extension": {
+      "PACKAGE_NAME": "HelloCordova"
+    },
+    "es6-promise-plugin": {
       "PACKAGE_NAME": "HelloCordova"
     }
   }

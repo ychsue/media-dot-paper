@@ -35,6 +35,10 @@
             {
               "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -52,12 +56,22 @@
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 1
+              "count": 2
             }
           ],
           "/manifest/application": [
             {
               "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
+              "count": 1
+            },
+            {
+              "xml": "<provider android:authorities=\"${applicationId}.sharing.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"nl.xservices.plugins.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/sharing_paths\" /></provider>",
+              "count": 1
+            }
+          ],
+          "/*/application": [
+            {
+              "xml": "<receiver android:enabled=\"true\" android:name=\"nl.xservices.plugins.ShareChooserPendingIntent\"><intent-filter><action android:name=\"android.intent.action.SEND\" /></intent-filter></receiver>",
               "count": 1
             }
           ]
@@ -101,6 +115,12 @@
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-x-socialsharing": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -326,6 +346,20 @@
       "clobbers": [
         "cordova.plugins.permissions"
       ]
+    },
+    {
+      "id": "es6-promise-plugin.Promise",
+      "file": "plugins/es6-promise-plugin/www/promise.js",
+      "pluginId": "es6-promise-plugin",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-x-socialsharing.SocialSharing",
+      "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+      "pluginId": "cordova-plugin-x-socialsharing",
+      "clobbers": [
+        "window.plugins.socialsharing"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -337,6 +371,8 @@
     "cordova-plugin-admobpro": "2.31.6",
     "cordova-plugin-tts": "0.2.3",
     "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-android-permissions": "1.0.0"
+    "cordova-plugin-android-permissions": "1.0.0",
+    "es6-promise-plugin": "4.2.2",
+    "cordova-plugin-x-socialsharing": "5.4.1"
   }
 }

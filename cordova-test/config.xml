@@ -38,6 +38,7 @@
     <plugin name="cordova-clipboard" spec="^1.2.1" />
     <plugin name="cordova-plugin-admobpro" spec="^2.31.6" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
     <engine name="windows" spec="^5.0.0" />
     <engine name="android" spec="^7.0.0" />
     <engine name="browser" spec="^5.0.3" />

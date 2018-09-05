@@ -222,19 +222,17 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-dialogs.notification",
-    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
-    ]
+    "id": "es6-promise-plugin.Promise",
+    "file": "plugins/es6-promise-plugin/www/promise.js",
+    "pluginId": "es6-promise-plugin",
+    "runs": true
   },
   {
-    "id": "cordova-plugin-dialogs.notification_android",
-    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
-    "pluginId": "cordova-plugin-dialogs",
-    "merges": [
-      "navigator.notification"
+    "id": "cordova-plugin-x-socialsharing.SocialSharing",
+    "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+    "pluginId": "cordova-plugin-x-socialsharing",
+    "clobbers": [
+      "window.plugins.socialsharing"
     ]
   }
 ];
@@ -250,7 +248,8 @@ module.exports.metadata =
   "cordova-plugin-tts": "0.2.3",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-android-permissions": "1.0.0",
-  "cordova-plugin-dialogs": "2.0.1"
+  "es6-promise-plugin": "4.2.2",
+  "cordova-plugin-x-socialsharing": "5.4.1"
 };
 // BOTTOM OF METADATA
 });

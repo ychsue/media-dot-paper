@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n    height: 100vh;\r\n        grid-template-areas: \"navbar\" \"content\";\r\n}\r\n\r\napp-navbar{\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: navbar;\r\n    color: white;\r\n    width: 100vw;\r\n}\r\n\r\nmat-sidenav {\r\n    display: flex;\r\n    overflow-x: hidden;\r\n}\r\n\r\napp-home {\r\n    flex: 1;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n}\r\n\r\n.vSeparate {\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 2px;\r\n    height: 100%;\r\n    background-color: black;\r\n    touch-action: none;\r\n}\r\n\r\n.vSeparate:hover {\r\n    cursor: col-resize;\r\n}\r\n\r\n.content{\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: content;\r\n    overflow-y: auto;\r\n}\r\n\r\n.page{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n#resizeWidth {\r\n    touch-action: none;\r\n    position: absolute;\r\n    top: 50%;\r\n    right: 0;\r\n    width: 20px;\r\n    height: 40px;\r\n    order: 2;\r\n    z-index: 2;\r\n}\r\n\r\n#sidenavTabs {\r\n    z-index: 0;\r\n    width: 100%;\r\n}\r\n\r\n#sidenavTabs ::ng-deep .mat-tab-label {\r\n    min-width: 40px !important;\r\n}\r\n\r\n#sidenavTabs ::ng-deep .mat-tab-body-wrapper {\r\n    position: relative;\r\n    height: 100%;\r\n}"
+module.exports = ".container{\n    display: -ms-grid;\n    display: grid;\n        -ms-grid-rows: auto 1fr;\n        grid-template-rows: auto 1fr;\n    height: 100vh;\n        grid-template-areas: \"navbar\" \"content\";\n}\n\napp-navbar{\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: navbar;\n    color: white;\n    width: 100vw;\n}\n\nmat-sidenav {\n    display: flex;\n    overflow-x: hidden;\n}\n\napp-home {\n    flex: 1;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto 1fr;\n        grid-template-rows: auto 1fr;\n}\n\n.vSeparate {\n    position: absolute;\n    z-index: 1;\n    width: 2px;\n    height: 100%;\n    background-color: black;\n    touch-action: none;\n}\n\n.vSeparate:hover {\n    cursor: col-resize;\n}\n\n.content{\n    -ms-grid-row: 2;\n    -ms-grid-column: 1;\n    grid-area: content;\n    overflow-y: auto;\n}\n\n.page{\n    width: 100%;\n    height: 100%;\n}\n\n#resizeWidth {\n    touch-action: none;\n    position: absolute;\n    top: 50%;\n    right: 0;\n    width: 20px;\n    height: 40px;\n    order: 2;\n    z-index: 2;\n}\n\n#sidenavTabs {\n    z-index: 0;\n    width: 100%;\n}\n\n#sidenavTabs ::ng-deep .mat-tab-label {\n    min-width: 40px !important;\n}\n\n#sidenavTabs ::ng-deep .mat-tab-body-wrapper {\n    position: relative;\n    height: 100%;\n}"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ".container{\r\n    display: -ms-grid;\r\n    display: grid;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div #container class=\"container\">\r\n  <app-navbar #navbar class=\"mat-elevation-z6\" (toggleSidenav_Click)=\"sidenav.opened=!sidenav.opened\"></app-navbar>\r\n  <mat-sidenav-container #sidenavContainer class=\"content\">\r\n      <mat-sidenav #sidenav [mode]=\"sidenavMode\" align=\"start\" [opened]=\"true\"\r\n        [style.width]=\"sidenavWidth+'px'\">\r\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\r\n        <mat-tab-group id=\"sidenavTabs\" mat-stretch-tabs [dynamicHeight]=\"true\">\r\n            <mat-tab>\r\n                <ng-template matTabLabel>\r\n                    <mat-icon>library_music</mat-icon>\r\n                </ng-template>\r\n                <app-home class=\"page\"></app-home>\r\n            </mat-tab>            \r\n            <mat-tab>\r\n                <ng-template matTabLabel>\r\n                    <mat-icon>music_video</mat-icon>\r\n                </ng-template>\r\n                <app-story class=\"page\" *ngIf=\"!!meService.story?.urlOrID===true\"></app-story>\r\n                <span *ngIf=\"!!meService.story?.urlOrID===false\">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>\r\n            </mat-tab>            \r\n        </mat-tab-group>\r\n        <div class=\"vSeparate\" [style.left]=\"sidenavWidth-2+'px'\" touch-action=\"none\"\r\n          (pointerdown)=\"onvSepPointerDown($event)\"></div>\r\n        <svg id=\"resizeWidth\" viewBox=\"0 0 10 20\" (pointerdown)=\"onvSepPointerDown($event)\" touch-action=\"none\">\r\n          <polygon points=\"0,10 10,0 10,20\" style=\"fill:cadetblue;opacity: 0.5;\"/>\r\n        </svg>\r\n      </mat-sidenav>\r\n      <!-- <div class=\"page\"> -->\r\n        <!-- <router-outlet></router-outlet> -->\r\n        <mat-sidenav-content class=\"page\" [style.margin-left]=\"(sidenavMode==='over')?0:(sidenavWidth+'px')\"\r\n          [style.width]=\"((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'\">\r\n            <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\r\n            <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\r\n        </mat-sidenav-content>\r\n      <!-- </div> -->\r\n      </mat-sidenav-container>\r\n</div>\r\n"
+module.exports = "<div #container class=\"container\">\n  <app-navbar #navbar class=\"mat-elevation-z6\" (toggleSidenav_Click)=\"sidenav.opened=!sidenav.opened\"></app-navbar>\n  <mat-sidenav-container #sidenavContainer class=\"content\">\n      <mat-sidenav #sidenav [mode]=\"sidenavMode\" align=\"start\" [opened]=\"true\"\n        [style.width]=\"sidenavWidth+'px'\">\n        <!-- <app-home class=\"page\" [style.display]=\"(gv.shownPage===pageType.Home)?'block':'none'\"></app-home> -->\n        <mat-tab-group id=\"sidenavTabs\" mat-stretch-tabs [dynamicHeight]=\"true\">\n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>library_music</mat-icon>\n                </ng-template>\n                <app-home class=\"page\"></app-home>\n            </mat-tab>            \n            <mat-tab>\n                <ng-template matTabLabel>\n                    <mat-icon>music_video</mat-icon>\n                </ng-template>\n                <app-story class=\"page\" *ngIf=\"!!meService.story?.urlOrID===true\"></app-story>\n                <span *ngIf=\"!!meService.story?.urlOrID===false\">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>\n            </mat-tab>            \n        </mat-tab-group>\n        <div class=\"vSeparate\" [style.left]=\"sidenavWidth-2+'px'\" touch-action=\"none\"\n          (pointerdown)=\"onvSepPointerDown($event)\"></div>\n        <svg id=\"resizeWidth\" viewBox=\"0 0 10 20\" (pointerdown)=\"onvSepPointerDown($event)\" touch-action=\"none\">\n          <polygon points=\"0,10 10,0 10,20\" style=\"fill:cadetblue;opacity: 0.5;\"/>\n        </svg>\n      </mat-sidenav>\n      <!-- <div class=\"page\"> -->\n        <!-- <router-outlet></router-outlet> -->\n        <mat-sidenav-content class=\"page\" [style.margin-left]=\"(sidenavMode==='over')?0:(sidenavWidth+'px')\"\n          [style.width]=\"((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'\">\n            <app-media-edit class=\"page\" [style.display]=\"(gv.shownPage===pageType.MediaEdit)?'block':'none'\"></app-media-edit>\n            <app-test class=\"page\" [style.display]=\"(gv.shownPage===pageType.Test)?'block':'none'\"></app-test>\n        </mat-sidenav-content>\n      <!-- </div> -->\n      </mat-sidenav-container>\n</div>\n"
 
 /***/ }),
 
@@ -306,7 +306,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n}\r\n\r\n.backDel {\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    background-color: red;\r\n    border-radius: 4px;\r\n    display: flex;\r\n    align-items: center;\r\n    color: white;\r\n}\r\n\r\n.right {\r\n    margin-left: auto;\r\n}\r\n\r\n.content {\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row:1;\r\n    grid-row:1;\r\n    background-color: white;\r\n    touch-action: none;\r\n}"
+module.exports = ".container {\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr;\n        grid-template-columns: 1fr;\n}\n\n.backDel {\n    -ms-grid-column: 1;\n    grid-column: 1;\n    -ms-grid-row: 1;\n    grid-row: 1;\n    background-color: red;\n    border-radius: 4px;\n    display: flex;\n    align-items: center;\n    color: white;\n}\n\n.right {\n    margin-left: auto;\n}\n\n.content {\n    -ms-grid-column: 1;\n    grid-column: 1;\n    -ms-grid-row:1;\n    grid-row:1;\n    background-color: white;\n    touch-action: none;\n}"
 
 /***/ }),
 
@@ -317,7 +317,7 @@ module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <div class=\"backDel\">\r\n        <mat-icon class=\"mat-18 left\">delete</mat-icon>\r\n        <mat-icon class=\"mat-18 right\">delete</mat-icon>\r\n    </div>\r\n    <button mat-button class=\"content\" (pointerdown)=\"onContentPointerdown($event)\" (click)=\"onContentClick($event)\" [style.transform]=\"'translateX('+deltaX+'px)'\" touch-action=\"none\">{{story.name}}</button>\r\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\"backDel\">\n        <mat-icon class=\"mat-18 left\">delete</mat-icon>\n        <mat-icon class=\"mat-18 right\">delete</mat-icon>\n    </div>\n    <button mat-button class=\"content\" (pointerdown)=\"onContentPointerdown($event)\" (click)=\"onContentClick($event)\" [style.transform]=\"'translateX('+deltaX+'px)'\" touch-action=\"none\">{{story.name}}</button>\n</div>"
 
 /***/ }),
 
@@ -449,7 +449,7 @@ var DraglistComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    width: 100%;\r\n    position: relative;\r\n    -ms-grid-row-align: center;\r\n        align-self: center;\r\n    height: 40px;\r\n    display:-ms-grid;\r\n    display:grid;\r\n}\r\n\r\n.slideContainer {\r\n    align-items: center;\r\n    /* display: flex; */\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n        -ms-grid-rows: 1fr;\r\n        grid-template-rows: 1fr;\r\n        grid-template-areas: \"start center end\";\r\n}\r\n\r\n.slideStart {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: start\r\n}\r\n\r\n.slidePart {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    position: relative;\r\n    height: 100%;\r\n    align-items: center;\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-area: center;\r\n    overflow: hidden;\r\n    min-width: 0;\r\n}\r\n\r\n.slideEnd {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-area: end\r\n}\r\n\r\n.slideCanvas {\r\n    order: 0;\r\n    z-index: 0;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -o-object-fit: fill;\r\n       object-fit: fill;\r\n    width: 100%;\r\n    height: 100%;\r\n    position: relative;\r\n    -webkit-transform-origin: left;\r\n            transform-origin: left;\r\n}\r\n"
+module.exports = ".container {\n    width: 100%;\n    position: relative;\n    -ms-grid-row-align: center;\n        align-self: center;\n    height: 40px;\n    display:-ms-grid;\n    display:grid;\n}\n\n.slideContainer {\n    align-items: center;\n    /* display: flex; */\n    display: -ms-grid;\n    display: grid;\n        -ms-grid-columns: auto 1fr auto;\n        grid-template-columns: auto 1fr auto;\n        -ms-grid-rows: 1fr;\n        grid-template-rows: 1fr;\n        grid-template-areas: \"start center end\";\n}\n\n.slideStart {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: start\n}\n\n.slidePart {\n    display: -ms-grid;\n    display: grid;\n    position: relative;\n    height: 100%;\n    align-items: center;\n    -ms-grid-row: 1;\n    -ms-grid-column: 2;\n    grid-area: center;\n    overflow: hidden;\n    min-width: 0;\n}\n\n.slideEnd {\n    -ms-grid-row: 1;\n    -ms-grid-column: 3;\n    grid-area: end\n}\n\n.slideCanvas {\n    order: 0;\n    z-index: 0;\n    -ms-grid-column: 1;\n    grid-column: 1;\n    -ms-grid-row: 1;\n    grid-row: 1;\n    -o-object-fit: fill;\n       object-fit: fill;\n    width: 100%;\n    height: 100%;\n    position: relative;\n    -webkit-transform-origin: left;\n            transform-origin: left;\n}\n"
 
 /***/ }),
 
@@ -552,7 +552,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    display: -ms-inline-grid;\r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \"main-play\" \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n    z-index: 1;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n    z-index: 1;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width: 100%;\r\n    height: 100%;\r\n    align-self: baseline;\r\n    display: -ms-grid;\r\n    display: grid;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter,\r\n.upLeft,\r\n.upRight {\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n    margin: 0 8px;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n    margin: 0 8px;\r\n}\r\n\r\n.subtitle,\r\n.subtitle-shadow {\r\n    text-align: center;\r\n    min-height: 20px;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: white;\r\n    -ms-grid-column: 1;\r\n        grid-column-start: 1;\r\n    -ms-grid-row: 1;\r\n        grid-row-start: 1;\r\n}\r\n\r\n.subtitle {\r\n    z-index: 2;\r\n}\r\n\r\n.subtitle-shadow {\r\n    z-index: 1;\r\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\r\n    color: white;\r\n    background-color: transparent;\r\n}\r\n\r\n.flex {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.setSS {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    -ms-grid-row: main-up;\r\n        grid-row-start: main-up;\r\n    -ms-grid-row-span: NaN;\r\n    grid-row-end: main-play;\r\n    background-color: lightyellow;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index: 2;\r\n}"
+module.exports = ".container {\n    touch-action: none;\n    width: 100%;\n    height: 100%;\n    display: -ms-grid;\n    display: grid;\n        -ms-grid-columns: 1fr;\n        grid-template-columns: 1fr;\n        -ms-grid-rows: 1fr auto;\n        grid-template-rows: 1fr auto;\n        grid-template-areas: \"main\" \"slider\";\n}\n\n.main {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: main;\n    display: -ms-inline-grid;\n    display: inline-grid;\n        -ms-grid-columns: 1fr;\n        grid-template-columns: 1fr;\n        -ms-grid-rows: 1fr 1fr 1fr;\n        grid-template-rows: 1fr 1fr 1fr;\n        grid-template-areas: \"main-up\" \"main-play\" \"main-down\";\n    align-items: center;\n    justify-items: center;\n}\n\n.main-up {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: main-up;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: 1fr;\n        grid-template-columns: 1fr;\n    z-index: 1;\n}\n\n.main-play {\n    -ms-grid-row: 2;\n    -ms-grid-column: 1;\n    grid-area: main-play;\n    z-index: 1;\n}\n\n.main-down {\n    -ms-grid-row: 3;\n    -ms-grid-column: 1;\n    grid-area: main-down;\n    width: 100%;\n    height: 100%;\n    align-self: baseline;\n    display: -ms-grid;\n    display: grid;\n}\n\n.smallSlider {\n    display: flex;\n    align-items: center;\n    border-radius: 20px;\n    background-color: white;\n    margin: 4px;\n}\n\n.slider {\n    -ms-grid-row: 2;\n    -ms-grid-column: 1;\n    grid-area: slider;\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-columns: auto 1fr auto;\n        grid-template-columns: auto 1fr auto;\n    background-color: white;\n    border-radius: 20px;\n    align-items: center;\n}\n\nmat-slider {\n    -ms-grid-row: 1;\n    grid-row: 1;\n    -ms-grid-column: 2;\n    grid-column: 2;\n}\n\n.slider-start {\n    -ms-grid-row: 1;\n    grid-row: 1;\n    -ms-grid-column: 1;\n    grid-column: 1;\n    margin: 4px;\n}\n\n.slider-end {\n    -ms-grid-row: 1;\n    grid-row: 1;\n    -ms-grid-column: 3;\n    grid-column: 3;\n    margin: 4px;\n}\n\n.upCenter,\n.upLeft,\n.upRight {\n    width: 30%;\n    top: -100%;\n    position: relative;\n    -ms-grid-row: 1;\n    grid-row: 1;\n}\n\n.upLeft {\n    -ms-grid-column: 1;\n    -ms-grid-column-span: 2;\n    grid-column: 1/3;\n}\n\n.upCenter {\n    -ms-grid-column: 2;\n    grid-column: 2;\n    -ms-grid-column-align: center;\n        justify-self: center;\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\n    text-align: center;\n    color: white;\n}\n\n.upRight {\n    -ms-grid-column: 2;\n    -ms-grid-column-span: 2;\n    grid-column: 2/4;\n    -ms-grid-column-align: right;\n        justify-self: right;\n}\n\n.largeBtn {\n    width: 120px;\n    height: 120px;\n}\n\n#btnStart {\n    border-radius: 50% 0 0 50%;\n    margin: 0 8px;\n}\n\n#btnEnd {\n    border-radius: 0 50% 50% 0;\n    margin: 0 8px;\n}\n\n.subtitle,\n.subtitle-shadow {\n    text-align: center;\n    min-height: 20px;\n    width: 100%;\n    height: 100%;\n    background-color: white;\n    -ms-grid-column: 1;\n        grid-column-start: 1;\n    -ms-grid-row: 1;\n        grid-row-start: 1;\n}\n\n.subtitle {\n    z-index: 2;\n}\n\n.subtitle-shadow {\n    z-index: 1;\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\n    color: white;\n    background-color: transparent;\n}\n\n.flex {\n    display: flex;\n    justify-content: center;\n}\n\n.setSS {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: main-up;\n    -ms-grid-row: main-up;\n        grid-row-start: main-up;\n    -ms-grid-row-span: NaN;\n    grid-row-end: main-play;\n    background-color: lightyellow;\n    width: 100%;\n    height: 100%;\n    z-index: 2;\n}"
 
 /***/ }),
 
@@ -563,7 +563,7 @@ module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" (pointerenter)=\"HideShow='show'\" (pointerleave)=\"onPointLeave($event)\" touch-action=\"none\">\r\n    <div class=\"main\">\r\n        <div class=\"main-up\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n            <div class=\"flex\">\r\n                <div #ratio class=\"smallSlider\">\r\n                    <mat-icon>directions_walk</mat-icon>\r\n                    <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\" [displayWith]=\"tickDisplayWith(meService)\" thumbLabel [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\" (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\"></mat-slider>\r\n                    <mat-icon>flight</mat-icon>\r\n                </div>\r\n                <div #volume class=\"smallSlider\">\r\n                    <mat-icon>volume_mute</mat-icon>\r\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                    <mat-icon>volume_up</mat-icon>\r\n                </div>\r\n            </div>\r\n            <div class=\"flex\">\r\n                <mat-slide-toggle [(ngModel)]=\"meService.story.frames[meService.story.iFrame].isUtter\" color=\"primary\">\r\n                    語音模擬字幕？\r\n                </mat-slide-toggle>\r\n                <button mat-icon-button mat-raised-button *ngIf=\"meService.story.frames[meService.story.iFrame].isUtter\" (click)=\"onShowSetSS($event)\">\r\n                <mat-icon class=\"mat-18\">build</mat-icon>\r\n            </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"main-play\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n            <button id=\"btnStart\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\" (pointerdown)=\"startChanged$.next($event)\">\r\n        <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n    </button>\r\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n            <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n        </svg>\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n            <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n            <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n        </svg>\r\n    </button>\r\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\" (pointerdown)=\"endChanged$.next($event)\">\r\n    <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n</button>\r\n        </div>\r\n\r\n        <app-set-speech-synthesis class=\"setSS\" *ngIf=\"isSSShown\" [utterPara]=\"utterPara\" (change)=\"onUtterParaChanged(subtitleView.innerText,$event)\" (close)=\"isSSShown=false\" [@hideShow]=\"HideShow\" [@flyInOut]=\"isSSShown\"></app-set-speech-synthesis>\r\n\r\n        <div class=\"main-down\">\r\n            <div #subtitleView class=\"subtitle-shadow\" [innerHTML]=\"subtitleInput.value|safeHtml\" [style.display]=\"(HideShow==='show')?'none':'block'\"></div>\r\n            <textarea matInput #subtitleInput class=\"subtitle\" [ngModel]=\"meService.story.frames[meService.story.iFrame].subtitle\" (ngModelChange)=\"subtitleChange$.next([subtitleInput.value,subtitleView.innerText])\" (click)=\"onSubtitleClicked($event)\" [style.opacity]=\"(HideShow==='show')?1:0\">\r\n            </textarea>\r\n        </div>\r\n    </div>\r\n    <div class=\"slider\">\r\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\" (blur)=\"IOEndShown='out'\">\r\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n        <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\" [max]=\"meService.story.frames[meService.story.iFrame].end\" [value]=\"meService.currentTime\" (change)=\"meService.seekTime=frameSlider.value\"></mat-slider>\r\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" (pointerenter)=\"HideShow='show'\" (pointerleave)=\"onPointLeave($event)\" touch-action=\"none\">\n    <div class=\"main\">\n        <div class=\"main-up\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\n            <div class=\"flex\">\n                <div #ratio class=\"smallSlider\">\n                    <mat-icon>directions_walk</mat-icon>\n                    <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\" [displayWith]=\"tickDisplayWith(meService)\" thumbLabel [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\" (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\"></mat-slider>\n                    <mat-icon>flight</mat-icon>\n                </div>\n                <div #volume class=\"smallSlider\">\n                    <mat-icon>volume_mute</mat-icon>\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\n                    <mat-icon>volume_up</mat-icon>\n                </div>\n            </div>\n            <div class=\"flex\">\n                <mat-slide-toggle [(ngModel)]=\"meService.story.frames[meService.story.iFrame].isUtter\" color=\"primary\">\n                    語音模擬字幕？\n                </mat-slide-toggle>\n                <button mat-icon-button mat-raised-button *ngIf=\"meService.story.frames[meService.story.iFrame].isUtter\" (click)=\"onShowSetSS($event)\">\n                <mat-icon class=\"mat-18\">build</mat-icon>\n            </button>\n            </div>\n        </div>\n\n        <div class=\"main-play\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\n            <button id=\"btnStart\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\" (pointerdown)=\"startChanged$.next($event)\">\n        <mat-icon class=\"mat-18\">skip_previous</mat-icon>\n    </button>\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\n            <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\n        </svg>\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\n            <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\n            <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\n        </svg>\n    </button>\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\" (pointerdown)=\"endChanged$.next($event)\">\n    <mat-icon class=\"mat-18\">skip_next</mat-icon>\n</button>\n        </div>\n\n        <app-set-speech-synthesis class=\"setSS\" *ngIf=\"isSSShown\" [utterPara]=\"utterPara\" (change)=\"onUtterParaChanged(subtitleView.innerText,$event)\" (close)=\"isSSShown=false\" [@hideShow]=\"HideShow\" [@flyInOut]=\"isSSShown\"></app-set-speech-synthesis>\n\n        <div class=\"main-down\">\n            <div #subtitleView class=\"subtitle-shadow\" [innerHTML]=\"subtitleInput.value|safeHtml\" [style.display]=\"(HideShow==='show')?'none':'block'\"></div>\n            <textarea matInput #subtitleInput class=\"subtitle\" [ngModel]=\"meService.story.frames[meService.story.iFrame].subtitle\" (ngModelChange)=\"subtitleChange$.next([subtitleInput.value,subtitleView.innerText])\" (click)=\"onSubtitleClicked($event)\" [style.opacity]=\"(HideShow==='show')?1:0\">\n            </textarea>\n        </div>\n    </div>\n    <div class=\"slider\">\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\" (blur)=\"IOEndShown='out'\">\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\n        <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\" [max]=\"meService.story.frames[meService.story.iFrame].end\" [value]=\"meService.currentTime\" (change)=\"meService.seekTime=frameSlider.value\"></mat-slider>\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -821,7 +821,7 @@ var MeManiPlateComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: flex;\r\n}\r\n\r\n.large {\r\n    font-size: large;\r\n}\r\n\r\n.listContainer {\r\n    flex-grow: 1;\r\n    max-height: 120px;\r\n    overflow-y: auto;\r\n    display: inline;\r\n}\r\n\r\n.blink {\r\n    -webkit-animation-duration: 1s;\r\n            animation-duration: 1s;\r\n    -webkit-animation-name: blink;\r\n            animation-name: blink;\r\n    -webkit-animation-iteration-count: infinite;\r\n            animation-iteration-count: infinite;\r\n}\r\n\r\n@-webkit-keyframes blink {\r\n    to {\r\n        opacity: 0.8;\r\n    }\r\n}\r\n\r\n@keyframes blink {\r\n    to {\r\n        opacity: 0.8;\r\n    }\r\n}"
+module.exports = ".container {\n    display: flex;\n}\n\n.large {\n    font-size: large;\n}\n\n.listContainer {\n    flex-grow: 1;\n    max-height: 120px;\n    overflow-y: auto;\n    display: inline;\n}\n\n.blink {\n    -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n    -webkit-animation-name: blink;\n            animation-name: blink;\n    -webkit-animation-iteration-count: infinite;\n            animation-iteration-count: infinite;\n}\n\n@-webkit-keyframes blink {\n    to {\n        opacity: 0.8;\n    }\n}\n\n@keyframes blink {\n    to {\n        opacity: 0.8;\n    }\n}"
 
 /***/ }),
 
@@ -909,7 +909,7 @@ var MeSectionDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-width: 100%;\r\n    background: transparent no-repeat;\r\n    /* For windows, it should be '/www/...' and for android is '/android_asset/www/...' */\r\n    /* Now I declare it in html file */\r\n    background-size: contain;\r\n    background-position: center;\r\n}\r\n\r\n.container, #youtube {\r\n    width: 100%;\r\n    height: 100%\r\n}"
+module.exports = "video{\n    height: 100%;\n    width: auto;\n    max-width: 100%;\n    background: transparent no-repeat;\n    /* For windows, it should be '/www/...' and for android is '/android_asset/www/...' */\n    /* Now I declare it in html file */\n    background-size: contain;\n    background-position: center;\n}\n\n.container, #youtube {\n    width: 100%;\n    height: 100%\n}"
 
 /***/ }),
 
@@ -920,7 +920,7 @@ module.exports = "video{\r\n    height: 100%;\r\n    width: auto;\r\n    max-wid
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <video #video [style.display]=\"(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'\" (click)=\"onVideoPlayOrPause($event)\" controls poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\r\n        [src]=\"videoSrc|safe\"></video>\r\n    <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(meService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\r\n</div>"
+module.exports = "<div class=\"container\">\n    <video #video [style.display]=\"(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'\" (click)=\"onVideoPlayOrPause($event)\" controls poster=\"data:image/gif;base64,AAAA\" [style.background-image]=\"'url(\\'assets/MusicNotes.svg\\')'\"\n        [src]=\"videoSrc|safe\"></video>\n    <iframe #youtube id=\"youtube\" [frameBorder]=\"0\" [style.display]=\"(meService.story.meType===pType.youtubeID)?'block':'none'\"></iframe>\n</div>"
 
 /***/ }),
 
@@ -1310,7 +1310,7 @@ var PlayerComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".close {\r\n    position: absolute;\r\n    right: 0;\r\n}\r\n\r\n.selVoiceContainer, .utterContainer {\r\n    justify-content: center;\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n}\r\n\r\n.selVoice {\r\n    min-width: 72%;\r\n}\r\n"
+module.exports = ".close {\n    position: absolute;\n    right: 0;\n}\n\n.selVoiceContainer, .utterContainer {\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n}\n\n.selVoice {\n    min-width: 72%;\n}\n"
 
 /***/ }),
 
@@ -1402,7 +1402,7 @@ var SetSpeechSynthesisComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n.container {\r\n    display: -ms-inline-grid;\r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr;\r\n        grid-template-rows: 1fr;\r\n        grid-template-areas: 'center';\r\n}\r\n\r\nbutton {\r\n    touch-action: none;\r\n}\r\n\r\n.eachButton, .delBK {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: center;\r\n    /* grid-column: 1;\r\n    grid-row: 1; */\r\n}\r\n\r\n.delBK {\r\n    background-color: red;\r\n    color: white;\r\n}"
+module.exports = "\n.container {\n    display: -ms-inline-grid;\n    display: inline-grid;\n        -ms-grid-columns: 1fr;\n        grid-template-columns: 1fr;\n        -ms-grid-rows: 1fr;\n        grid-template-rows: 1fr;\n        grid-template-areas: 'center';\n}\n\nbutton {\n    touch-action: none;\n}\n\n.eachButton, .delBK {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: center;\n    /* grid-column: 1;\n    grid-row: 1; */\n}\n\n.delBK {\n    background-color: red;\n    color: white;\n}"
 
 /***/ }),
 
@@ -1413,7 +1413,7 @@ module.exports = "\r\n.container {\r\n    display: -ms-inline-grid;\r\n    displ
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"container\">\r\n  <button mat-icon-button class=\"delBK\">\r\n    <mat-icon class=\"mat-18\">delete</mat-icon>\r\n  </button>\r\n  <button mat-icon-button mat-raised-button\r\n  class=\"eachButton\"\r\n  touch-action=\"none\"\r\n  [style.transform]=\"'translateY('+deltaY+'px)'\"\r\n  [style.background-color]=\"'rgba('+bR+','+bG+','+bB+','+bA+')'\"\r\n  (pointerdown)=\"onContentPointerdown($event)\"\r\n  (click)=\"onBtnClick($event)\">\r\n  <span>{{index}}</span>\r\n</button>\r\n</span>\r\n"
+module.exports = "<span class=\"container\">\n  <button mat-icon-button class=\"delBK\">\n    <mat-icon class=\"mat-18\">delete</mat-icon>\n  </button>\n  <button mat-icon-button mat-raised-button\n  class=\"eachButton\"\n  touch-action=\"none\"\n  [style.transform]=\"'translateY('+deltaY+'px)'\"\n  [style.background-color]=\"'rgba('+bR+','+bG+','+bB+','+bA+')'\"\n  (pointerdown)=\"onContentPointerdown($event)\"\n  (click)=\"onBtnClick($event)\">\n  <span>{{index}}</span>\n</button>\n</span>\n"
 
 /***/ }),
 
@@ -1544,7 +1544,7 @@ var SwapIconComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".full-width {\r\n    width: 100%;\r\n}\r\n\r\n.buttons {\r\n    display: flex;\r\n    justify-content: center;\r\n}"
+module.exports = ".full-width {\n    width: 100%;\n}\n\n.buttons {\n    display: flex;\n    justify-content: center;\n}"
 
 /***/ }),
 
@@ -1635,7 +1635,7 @@ var DialogType;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n.Error{\r\n    background-color: red;\r\n    color: white;\r\n    text-shadow: 1px 1px 1px black;\r\n}\r\n\r\n.Warn{\r\n    background-color: yellow;\r\n    color: blue;\r\n    text-shadow: 1px 1px 1px green;\r\n}\r\n\r\n.Info{\r\n    background-color: lightblue;\r\n    color: green;\r\n    text-shadow: 1px 1px 1px black;\r\n}"
+module.exports = "\n.Error{\n    background-color: red;\n    color: white;\n    text-shadow: 1px 1px 1px black;\n}\n\n.Warn{\n    background-color: yellow;\n    color: blue;\n    text-shadow: 1px 1px 1px green;\n}\n\n.Info{\n    background-color: lightblue;\n    color: green;\n    text-shadow: 1px 1px 1px black;\n}"
 
 /***/ }),
 
@@ -1710,7 +1710,7 @@ var MessageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav{\r\n    display: flex;\r\n    align-items: center;\r\n    padding: 8px 16px;\r\n    background: #673ab7;\r\n}\r\n\r\n.flex-spacer{\r\n    flex-grow: 1;\r\n    text-align: center;\r\n    overflow-x: auto;\r\n}\r\n\r\n.isSelect {\r\n    background-color: aliceblue;\r\n}"
+module.exports = "nav{\n    display: flex;\n    align-items: center;\n    padding: 8px 16px;\n    background: #673ab7;\n}\n\n.flex-spacer{\n    flex-grow: 1;\n    text-align: center;\n    overflow-x: auto;\n}\n\n.isSelect {\n    background-color: aliceblue;\n}"
 
 /***/ }),
 
@@ -1822,7 +1822,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-width {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.question {\r\n    background-color: red;\r\n    color: yellow;\r\n    font-weight: bolder;\r\n    min-width: 0px;\r\n    box-shadow: 4px;\r\n}\r\n\r\napp-draglist {\r\n    width:100%;\r\n}\r\n\r\n.storedContainer {\r\n    min-height: 0; /* crucial */\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n}\r\n\r\n.listStored {\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n}"
+module.exports = "input[type='file'] {\n    display: none;\n}\n\n.full-width {\n    width: 100%;\n    display: block;\n}\n\n.question {\n    background-color: red;\n    color: yellow;\n    font-weight: bolder;\n    min-width: 0px;\n    box-shadow: 4px;\n}\n\napp-draglist {\n    width:100%;\n}\n\n.storedContainer {\n    min-height: 0; /* crucial */\n    display: -ms-grid;\n    display: grid;\n    -ms-grid-rows: auto 1fr;\n        grid-template-rows: auto 1fr;\n}\n\n.listStored {\n    overflow-y: auto;\n    overflow-x: hidden;\n}"
 
 /***/ }),
 
@@ -1833,7 +1833,7 @@ module.exports = "input[type='file'] {\r\n    display: none;\r\n}\r\n\r\n.full-w
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div>\r\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\r\n</div> -->\r\n<div class=\"newContainer\">\r\n    <h3 [innerText]=\"(!!pts)?pts.newMedia:'讀入新的媒體：'\"></h3>\r\n    <mat-list dense>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\r\n                {{(!!pts)?pts.url:'網址'}}\r\n            </button>\r\n        </mat-list-item>\r\n        <mat-list-item>\r\n            <button mat-raised-button (click)=\"selaudio.click()\"\r\n                [matTooltip]=\"(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'\" >\r\n                <input #selaudio\r\n                type=\"file\" (change)=\"onFileSelect(selaudio.files)\">\r\n                {{(!!pts)?pts.file:'檔案'}}\r\n            </button>\r\n        </mat-list-item>\r\n    </mat-list>\r\n</div>\r\n<div class=\"storedContainer\">\r\n    <h3>{{(!!pts)?pts.storedMedia:'已備份的媒體：'}}</h3>\r\n\r\n    <div #listOfStored class=\"listStored\">\r\n        <mat-list dense>\r\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\r\n        <app-draglist *ngFor=\"let story of stories\" \r\n            [story]=\"story\"\r\n            (delete)=\"onStoryDelete(story)\"\r\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\r\n        <!-- </mat-list-item> -->\r\n        </mat-list>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<!-- <div>\n    <button mat-raised-button (click)=\"gv.shownPage = pageType.Test\">Test</button>\n</div> -->\n<div class=\"newContainer\">\n    <h3 [innerText]=\"(!!pts)?pts.newMedia:'讀入新的媒體：'\"></h3>\n    <mat-list dense>\n        <mat-list-item>\n            <button mat-raised-button (click)=\"onLoadFromURL();\">\n                {{(!!pts)?pts.url:'網址'}}\n            </button>\n        </mat-list-item>\n        <mat-list-item>\n            <button mat-raised-button (click)=\"selaudio.click()\"\n                [matTooltip]=\"(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'\" >\n                <input #selaudio\n                type=\"file\" (change)=\"onFileSelect(selaudio.files)\">\n                {{(!!pts)?pts.file:'檔案'}}\n            </button>\n        </mat-list-item>\n    </mat-list>\n</div>\n<div class=\"storedContainer\">\n    <h3>{{(!!pts)?pts.storedMedia:'已備份的媒體：'}}</h3>\n\n    <div #listOfStored class=\"listStored\">\n        <mat-list dense>\n        <!-- <mat-list-item *ngFor=\"let story of stories$| async\"> -->\n        <app-draglist *ngFor=\"let story of stories\" \n            [story]=\"story\"\n            (delete)=\"onStoryDelete(story)\"\n            (contentClick)=\"onStoryOpen(story)\" ></app-draglist>\n        <!-- </mat-list-item> -->\n        </mat-list>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -2005,10 +2005,10 @@ var HomeComponent = /** @class */ (function () {
                     story.modifyTime = 0;
                     self.meService.initMe(story);
                 })
-                    .catch(function (err) { return alert(((!!_this.pts) ? _this.pts.errWrongFormat : "\u8F38\u5165\u7684json\u6A94\u683C\u5F0F\u4E0D\u5408\u3002\u932F\u8AA4\u8A0A\u606F\uFF1A ") + ("" + JSON.stringify(err))); });
+                    .catch(function (err) { return self.msg.alert(((!!_this.pts) ? _this.pts.errWrongFormat : "\u8F38\u5165\u7684json\u6A94\u683C\u5F0F\u4E0D\u5408\u3002\u932F\u8AA4\u8A0A\u606F\uFF1A ") + ("" + JSON.stringify(err))); });
             }
             else {
-                alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+                self.msg.alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
                 return;
             }
         }
@@ -2117,7 +2117,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-rows: auto 1fr auto auto;\r\n        grid-template-rows: auto 1fr auto auto;\r\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\nheader {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: header;\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    overflow: hidden;\r\n}\r\n\r\napp-player {\r\n    z-index: 0;\r\n}\r\n\r\napp-me-mani-plate {\r\n    z-index: 1;\r\n}\r\n\r\n.dashboardSection {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: cSection;\r\n}\r\n\r\n.dashboardMain {\r\n    -ms-grid-row: 4;\r\n    -ms-grid-column: 1;\r\n    grid-area: cMain;\r\n}"
+module.exports = ".container {\n    display: -ms-grid;\n    display: grid;\n        -ms-grid-rows: auto 1fr auto auto;\n        grid-template-rows: auto 1fr auto auto;\n        grid-template-areas: \"header\" \"main\" \"cSection\" \"cMain\";\n    height: 100%;\n    width: 100%;\n}\n\nheader {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: header;\n}\n\n.main {\n    -ms-grid-row: 2;\n    -ms-grid-column: 1;\n    grid-area: main;\n    overflow: hidden;\n}\n\napp-player {\n    z-index: 0;\n}\n\napp-me-mani-plate {\n    z-index: 1;\n}\n\n.dashboardSection {\n    -ms-grid-row: 3;\n    -ms-grid-column: 1;\n    grid-area: cSection;\n}\n\n.dashboardMain {\n    -ms-grid-row: 4;\n    -ms-grid-column: 1;\n    grid-area: cMain;\n}"
 
 /***/ }),
 
@@ -2128,7 +2128,7 @@ module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <!-- <header>{{this.dataService.story.name}}</header> -->\r\n  <!-- <main> -->\r\n    <!-- <video #videoElement class=\"main\"></video> -->\r\n    <app-player class=\"main\"></app-player>\r\n    <app-me-mani-plate class=\"main\"\r\n      [style.background-color]=\"(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'\"\r\n      *ngIf=\"meService.story.iFrame>=0\"\r\n      [@flyInOut]=\"'in'\"\r\n    ></app-me-mani-plate>\r\n  <!-- </main> -->\r\n  <aside></aside>\r\n  <footer class=\"dashboardSection\">\r\n    <app-me-section-dashboard></app-me-section-dashboard>\r\n  </footer>\r\n  <footer class=\"dashboardMain\">\r\n    <app-me-main-dashboard></app-me-main-dashboard>\r\n  </footer>\r\n</div>\r\n"
+module.exports = "<div class=\"container\">\n  <!-- <header>{{this.dataService.story.name}}</header> -->\n  <!-- <main> -->\n    <!-- <video #videoElement class=\"main\"></video> -->\n    <app-player class=\"main\"></app-player>\n    <app-me-mani-plate class=\"main\"\n      [style.background-color]=\"(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'\"\n      *ngIf=\"meService.story.iFrame>=0\"\n      [@flyInOut]=\"'in'\"\n    ></app-me-mani-plate>\n  <!-- </main> -->\n  <aside></aside>\n  <footer class=\"dashboardSection\">\n    <app-me-section-dashboard></app-me-section-dashboard>\n  </footer>\n  <footer class=\"dashboardMain\">\n    <app-me-main-dashboard></app-me-main-dashboard>\n  </footer>\n</div>\n"
 
 /***/ }),
 
@@ -2230,7 +2230,7 @@ var MediaEditComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    display: -ms-grid;\r\n    display: grid;\r\n    height: 100%;\r\n        -ms-grid-rows: auto 1fr;\r\n        grid-template-rows: auto 1fr;\r\n        grid-template-areas: 'main' 'des';\r\n}\r\n\r\n.nameETC {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n}\r\n\r\nmat-form-field {\r\n    width: 90%;\r\n}\r\n\r\n.description {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: des;\r\n    height: 100%;\r\n}\r\n\r\n.description ::ng-deep [class^=mat-form-field-wrapper], .description ::ng-deep [class^=mat-form-field-flex], .description ::ng-deep [class^=mat-form-field-infix], textarea {\r\n    height: 100%;\r\n}"
+module.exports = ".container {\n    display: -ms-grid;\n    display: grid;\n    height: 100%;\n        -ms-grid-rows: auto 1fr;\n        grid-template-rows: auto 1fr;\n        grid-template-areas: 'main' 'des';\n}\n\n.nameETC {\n    -ms-grid-row: 1;\n    -ms-grid-column: 1;\n    grid-area: main;\n}\n\nmat-form-field {\n    width: 90%;\n}\n\n.description {\n    -ms-grid-row: 2;\n    -ms-grid-column: 1;\n    grid-area: des;\n    height: 100%;\n}\n\n.description ::ng-deep [class^=mat-form-field-wrapper], .description ::ng-deep [class^=mat-form-field-flex], .description ::ng-deep [class^=mat-form-field-infix], textarea {\n    height: 100%;\n}"
 
 /***/ }),
 
@@ -2262,6 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2313,10 +2314,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var StoryComponent = /** @class */ (function () {
-    function StoryComponent(meService, ptsService, fs, cdr) {
+    function StoryComponent(meService, ptsService, msg, fs, cdr) {
         this.meService = meService;
         this.ptsService = ptsService;
+        this.msg = msg;
         this.fs = fs;
         this.cdr = cdr;
         this.utterType = _services_story_service__WEBPACK_IMPORTED_MODULE_3__["utterType"];
@@ -2332,13 +2335,14 @@ var StoryComponent = /** @class */ (function () {
         var self = this;
         var a = sender._elementRef.nativeElement;
         if (self.meService.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_2__["PlayerType"].file) {
-            alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
+            self.msg.alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
             return;
         }
         // * [2018-09-04 12:06] Start to store into the file
         if (!!window.cordova === true) {
             e.preventDefault();
-            self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime + self.meService.story.title + '.json');
+            self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime
+                + self.meService.story.title.replace(/\/|\:/g, '_') + '.json');
         }
         else {
             var blob = new Blob([JSON.stringify(self.meService.story)], { type: 'application/json' });
@@ -2387,7 +2391,7 @@ var StoryComponent = /** @class */ (function () {
                 // * [2018-09-04 12:00] The part to store the .SBV file
                 if (!!window.cordova === true) {
                     e.preventDefault();
-                    self.fs.saveTxtFile$$(input, self.meService.story.title + '.sbv');
+                    self.fs.saveTxtFile$$(input, self.meService.story.title.replace(/\/|\:/g, '_') + '.sbv');
                 }
                 else {
                     blob = new Blob([input], { type: 'text/plain' });
@@ -2405,6 +2409,7 @@ var StoryComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"],
             _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"],
+            _services_message_service__WEBPACK_IMPORTED_MODULE_7__["MessageService"],
             _services_fs_service__WEBPACK_IMPORTED_MODULE_6__["FsService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], StoryComponent);
@@ -2433,7 +2438,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n    <h1>Test of Speech Synthesis</h1>\r\n    <input type=\"text\" #ssInput/>\r\n    <mat-select [(value)]=\"selVoice\" placeholder=\"選個想模擬的語言\">\r\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{voice.name}}</mat-option>\r\n    </mat-select>\r\n    <button (click)=\"onSpeak(ssInput.value)\">play</button>\r\n</div>\r\n\r\n<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\r\n<!-- list of files -->\r\n<mat-list dense *ngIf=\"!!entries\">\r\n    <app-draglist *ngFor=\"let entry of entries\"\r\n    [story]=\"entry\"\r\n    (delete)=\"onRmFile(entry)\"\r\n    (contentClick)=\"onClickAFile(entry)\" >\r\n    </app-draglist>\r\n</mat-list>\r\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\r\n</video>\r\n<hr>\r\n<div>\r\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\r\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\r\n</div>\r\n<div>\r\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\r\n        <mat-icon>folder</mat-icon>\r\n    </button>\r\n    {{newFolderName}}\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onSelectFromNSQL()\">select nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"ondeleteFromNSQL()\">delete nanoSQL</button>\r\n</div>\r\n<br/>\r\n<div>\r\n    <button (click)=\"onUpsertFromNSQL()\">upsert nanoSQL</button>\r\n</div>"
+module.exports = "<div>\n    <h1>Test of Speech Synthesis</h1>\n    <input type=\"text\" #ssInput/>\n    <mat-select [(value)]=\"selVoice\" placeholder=\"選個想模擬的語言\">\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{voice.name}}</mat-option>\n    </mat-select>\n    <button (click)=\"onSpeak(ssInput.value)\">play</button>\n</div>\n\n<input #selFile type=\"file\" multiple (change)=\"onSelFileChange(selFile.files,$event.target === audioFile)\">\n<!-- list of files -->\n<mat-list dense *ngIf=\"!!entries\">\n    <app-draglist *ngFor=\"let entry of entries\"\n    [story]=\"entry\"\n    (delete)=\"onRmFile(entry)\"\n    (contentClick)=\"onClickAFile(entry)\" >\n    </app-draglist>\n</mat-list>\n<video #audioFromFile autoplay controls [src]=\"audioSrc|safe\">\n</video>\n<hr>\n<div>\n    <div>Is cordova support? {{(isCordovaSupport)?\"Yes\":\"No\"}}</div>\n    <div>Is cordova.file support? {{(isFilePluginSupport)?\"Yes\":\"No\"}}</div>\n</div>\n<div>\n    <button mat-raised-button (click)=\"onGetDocFolder()\">\n        <mat-icon>folder</mat-icon>\n    </button>\n    {{newFolderName}}\n</div>\n<br/>\n<div>\n    <button (click)=\"onSelectFromNSQL()\">select nanoSQL</button>\n</div>\n<br/>\n<div>\n    <button (click)=\"ondeleteFromNSQL()\">delete nanoSQL</button>\n</div>\n<br/>\n<div>\n    <button (click)=\"onUpsertFromNSQL()\">upsert nanoSQL</button>\n</div>"
 
 /***/ }),
 
@@ -3367,6 +3372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3416,8 +3422,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var FsService = /** @class */ (function () {
-    function FsService(device, msgService) {
+    function FsService(pts, device, msgService) {
+        this.pts = pts;
         this.device = device;
         this.msgService = msgService;
         if (device.isCordova === true) {
@@ -3456,10 +3464,15 @@ var FsService = /** @class */ (function () {
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
         return obs.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
     };
-    FsService.prototype.getDir$ = function (path, create, exclusive) {
+    FsService.prototype.getDir$ = function (path, create, exclusive, fsURL) {
         if (create === void 0) { create = false; }
         if (exclusive === void 0) { exclusive = false; }
         var self = this;
+        if (!!fsURL === true) {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (sub) {
+                window.resolveLocalFileSystemURL(fsURL + path, function (entry) { sub.next(entry); sub.complete(); }, function (err) { return sub.error(err); });
+            });
+        }
         return self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) {
             if (!!fs === false) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
@@ -3499,7 +3512,7 @@ var FsService = /** @class */ (function () {
             });
         }
     };
-    FsService.prototype.getFile$ = function (name, create, exclusive) {
+    FsService.prototype.getFile$ = function (name, create, exclusive, dir) {
         if (create === void 0) { create = false; }
         if (exclusive === void 0) { exclusive = false; }
         var self = this;
@@ -3507,7 +3520,8 @@ var FsService = /** @class */ (function () {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
         }
         var obs = self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) { return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
-            fs.root.getFile(name, { create: create, exclusive: exclusive }, function (file) {
+            var dirEntry = (!!dir) ? dir : fs.root;
+            dirEntry.getFile(name, { create: create, exclusive: exclusive }, function (file) {
                 subs.next(file);
                 subs.complete();
             }, subs.error);
@@ -3543,7 +3557,7 @@ var FsService = /** @class */ (function () {
     };
     FsService.prototype.saveTxtFile$$ = function (data, fileName) {
         return __awaiter(this, void 0, void 0, function () {
-            var self, savePicker, iDot, ext, winFile, status_1;
+            var self, savePicker, iDot, ext, winFile, status_1, permissions_1, action, downloadDir, fileEntry, blob, isDone;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -3555,7 +3569,7 @@ var FsService = /** @class */ (function () {
                         // * [2018-09-04 11:06] TODO: ignore the case for pure angular project
                         return [2 /*return*/, null];
                     case 1:
-                        if (!(cordova.platformId === 'windows')) return [3 /*break*/, 5];
+                        if (!(cordova.platformId === 'windows')) return [3 /*break*/, 6];
                         savePicker = new Windows.Storage.Pickers.FileSavePicker();
                         savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
                         iDot = fileName.lastIndexOf('.');
@@ -3576,10 +3590,60 @@ var FsService = /** @class */ (function () {
                         status_1 = _a.sent();
                         // *** [2018-09-04 11:55] Alert about your action
                         if (status_1 === Windows.Storage.Provider.FileUpdateStatus.complete) {
-                            self.msgService.alert("File <b style=\"color:red;\">" + fileName + "</b> is saved!");
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
+                                "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
                         }
                         _a.label = 5;
-                    case 5: return [2 /*return*/];
+                    case 5: return [3 /*break*/, 16];
+                    case 6:
+                        if (!(cordova.platformId === 'android' || cordova.platformId === 'osx' || cordova.platformId === 'ios')) return [3 /*break*/, 16];
+                        permissions_1 = cordova.plugins.permissions;
+                        action = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 9];
+                        // * [2018-09-04 15:21] Check permission at first
+                        action = new Promise(function (res, rej) {
+                            permissions_1.checkPermission(permissions_1.READ_EXTERNAL_STORAGE, res, rej);
+                        });
+                        return [4 /*yield*/, action];
+                    case 7:
+                        if (!((_a.sent()).hasPermission === false)) return [3 /*break*/, 9];
+                        // ** [2018-09-04 15:26] Since out of permission, request for one
+                        action = new Promise(function (res, rej) {
+                            permissions_1.requestPermission(permissions_1.READ_EXTERNAL_STORAGE, res, rej);
+                        });
+                        return [4 /*yield*/, action];
+                    case 8:
+                        if ((_a.sent()).hasPermission === false) {
+                            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
+                            return [2 /*return*/, null];
+                        }
+                        _a.label = 9;
+                    case 9:
+                        downloadDir = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 11];
+                        return [4 /*yield*/, self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise()];
+                    case 10:
+                        downloadDir = _a.sent();
+                        return [3 /*break*/, 13];
+                    case 11: return [4 /*yield*/, self.getDir$('', false, false, cordova.file.documentsDirectory).toPromise()];
+                    case 12:
+                        downloadDir = _a.sent();
+                        _a.label = 13;
+                    case 13:
+                        if (!!!downloadDir) return [3 /*break*/, 16];
+                        return [4 /*yield*/, self.getFile$(fileName, true, false, downloadDir).toPromise()];
+                    case 14:
+                        fileEntry = _a.sent();
+                        blob = new Blob([data], { type: 'text/plain' });
+                        return [4 /*yield*/, self.writeFile$(fileEntry, blob).toPromise()];
+                    case 15:
+                        isDone = _a.sent();
+                        if (isDone) {
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
+                                "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
+                        }
+                        _a.label = 16;
+                    case 16: return [2 /*return*/];
                 }
             });
         });
@@ -3604,7 +3668,8 @@ var FsService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"]])
+        __metadata("design:paramtypes", [_page_texts_service__WEBPACK_IMPORTED_MODULE_5__["PageTextsService"],
+            _device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"]])
     ], FsService);
     return FsService;
 }());
@@ -3901,7 +3966,7 @@ var MediaEditService = /** @class */ (function () {
             self._setiFrame$.next(i);
         }
         else {
-            alert("Problem in setiFrame(" + i + ")");
+            self.msgService.alert("Problem in setiFrame(" + i + ")");
         }
     };
     MediaEditService.prototype.setVolumeFromFrame = function () {
@@ -3919,7 +3984,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setVolume);
         }
         else {
-            alert("Problem in setVolume");
+            self.msgService.alert("Problem in setVolume");
         }
     };
     MediaEditService.prototype.setPlaybackRateFromFrame = function () {
@@ -3937,7 +4002,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setPlaybackRate);
         }
         else {
-            alert("Problem in setPlaybackRate");
+            self.msgService.alert("Problem in setPlaybackRate");
         }
     };
     /**
@@ -3958,7 +4023,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setVolume);
         }
         else {
-            alert("Problem in setVolume");
+            self.msgService.alert("Problem in setVolume");
         }
     };
     /**
@@ -3979,7 +4044,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setPlaybackRate);
         }
         else {
-            alert("Problem in setPlaybackRate");
+            self.msgService.alert("Problem in setPlaybackRate");
         }
     };
     MediaEditService.prototype.onSaveStory$$ = function () {
@@ -4138,10 +4203,7 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.getNUnRead = function () {
         return this._messages.length - this._nRead;
     };
-    MessageService.prototype.alert = function (msg, alertCallback, title, buttonName) {
-        if (!!alertCallback === false) {
-            alertCallback = function () { };
-        }
+    MessageService.prototype.alert = function (msg) {
         if (!!window.cordova === true) {
             this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__["DialogComponent"], {
                 width: '50%',
@@ -4372,6 +4434,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
 /* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4421,8 +4484,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var SpeechSynthesisService = /** @class */ (function () {
-    function SpeechSynthesisService(device, ptsService) {
+    function SpeechSynthesisService(msg, device, ptsService) {
+        this.msg = msg;
         this.device = device;
         this.ptsService = ptsService;
         this._getVoices$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
@@ -4536,7 +4601,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         }
         else {
             if (!!para === false) {
-                alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
+                this.msg.alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
                 return;
             }
             // * [2018-08-22 19:53] Cancel previous utterance
@@ -4577,7 +4642,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
+        __metadata("design:paramtypes", [_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
     ], SpeechSynthesisService);
     return SpeechSynthesisService;
 }());
@@ -4912,7 +4977,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\ychsue\source\repos\Test\cordova-ng-test\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/ychsue/workspace/cordova-ng-test/src/main.ts */"./src/main.ts");
 
 
 /***/ })

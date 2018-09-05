@@ -48,6 +48,8 @@ interface ISetSSComp {
 interface IFsService {
     fileSaved: string;
     noPermission: string;
+    cannotShare: string;
+    askSavingToFile: string;
 }
 interface IIso639 {
     ab: string;
