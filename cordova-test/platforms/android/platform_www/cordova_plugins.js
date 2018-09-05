@@ -212,6 +212,30 @@ module.exports = [
       "cordova"
     ],
     "runs": true
+  },
+  {
+    "id": "cordova-plugin-android-permissions.Permissions",
+    "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+    "pluginId": "cordova-plugin-android-permissions",
+    "clobbers": [
+      "cordova.plugins.permissions"
+    ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification_android",
+    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -224,7 +248,9 @@ module.exports.metadata =
   "cordova-plugin-extension": "1.5.4",
   "cordova-plugin-admobpro": "2.31.6",
   "cordova-plugin-tts": "0.2.3",
-  "cordova-plugin-file": "6.0.1"
+  "cordova-plugin-file": "6.0.1",
+  "cordova-plugin-android-permissions": "1.0.0",
+  "cordova-plugin-dialogs": "2.0.1"
 };
 // BOTTOM OF METADATA
 });

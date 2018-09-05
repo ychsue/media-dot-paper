@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { DialogComponent, DialogType } from '../dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +33,18 @@ export class MessageService {
     return this._messages.length - this._nRead;
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
-
+  alert(msg: string) {
+    if (!!window.cordova === true) {
+      this.dialog.open(DialogComponent, {
+        width: '50%',
+        data: {dType: DialogType.alert, msg: msg}
+      });
+    } else {
+      this.alert(msg);
+    }
+  }
 }
 
 export class OneMessage {

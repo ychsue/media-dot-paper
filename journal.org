@@ -1,3 +1,11 @@
+* [2018-9-5 Wed] At this moment, both windows and android can save files now.
+1. For windows uwp, I chose to use FileSavePicker to deal with this saving file's problem.
+2. For android, I chose to use the plugin ~cordova-plugin-android-permissions~ to deal with this problem.
+    By the way, remember to add in two preferences about ~file~ into your ~config.xml~ file.
+3. Sigh, ~alert~ also cannot be used in cordova; therefore, I create one for myself.
+
+Now, I need to switch back to Mac to test it in ~ios~ and ~osx~.
+
 * [2018-9-3 Mon] Oh. Bad news, <a download ...> does not work for ios and osx
 1. Even after I add
 #+begin_src xml

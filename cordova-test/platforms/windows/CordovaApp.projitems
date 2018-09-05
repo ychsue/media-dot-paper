@@ -68,6 +68,10 @@
         <Content Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.html" />
         <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.css" />
         <Content Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\media-edit\media-edit.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\media-edit\media-edit.component.html" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\story\story.component.css" />
+        <Content Include="$(MSBuildThisFileDirectory)src\app\pages\story\story.component.html" />
         <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.css" />
         <Content Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.html" />
         <Content Include="$(MSBuildThisFileDirectory)src\app\services\message.service.spec.ts" />
@@ -143,6 +147,10 @@
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\navbar\navbar.component.ts" />
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.spec.ts" />
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\home\home.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\media-edit\media-edit.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\media-edit\media-edit.component.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\story\story.component.spec.ts" />
+        <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\story\story.component.ts" />
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.spec.ts" />
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pages\test\test.component.ts" />
         <TypeScriptCompile Include="$(MSBuildThisFileDirectory)src\app\pipes\safe.pipe.spec.ts" />

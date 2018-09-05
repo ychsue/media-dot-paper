@@ -552,7 +552,7 @@ var MeMainDashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    \r\n    display: -ms-inline-grid;\r\n    \r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \r\n    \"main-play\" \r\n    \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n    z-index: 1;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n    z-index: 1;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width:100%;\r\n    height: 100%;\r\n    align-self: baseline;\r\n    display: -ms-grid;\r\n    display: grid;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n\r\n    display: -ms-grid;\r\n\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter, .upLeft, .upRight{\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n    margin: 0 8px;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n    margin: 0 8px;\r\n}\r\n\r\n.subtitle {\r\n    text-align: center;\r\n    min-height: 20px;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: white;\r\n    z-index: 2;\r\n    -ms-grid-column: 1;\r\n        grid-column-start: 1;\r\n    -ms-grid-row: 1;\r\n        grid-row-start: 1;\r\n}\r\n\r\n.shadow {\r\n    z-index: 1;\r\n    text-shadow: 3px 0px 5px black,\r\n    -3px 0px 5px black,\r\n    0px 3px 5px black,\r\n    0px -3px 5px black;\r\n    color: white;\r\n    background-color: transparent;\r\n}\r\n\r\n.flex {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.setSS {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    -ms-grid-row: main-up;\r\n        grid-row-start: main-up;\r\n    -ms-grid-row-span: NaN;\r\n    grid-row-end: main-play;\r\n    background-color: lightyellow;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index: 2;\r\n}"
+module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\n    height: 100%;\r\n    display: -ms-grid;\r\n    display: grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr auto;\r\n        grid-template-rows: 1fr auto;\r\n        grid-template-areas: \"main\" \"slider\";\r\n}\r\n\r\n.main {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main;\r\n    display: -ms-inline-grid;\r\n    display: inline-grid;\r\n        -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n        -ms-grid-rows: 1fr 1fr 1fr;\r\n        grid-template-rows: 1fr 1fr 1fr;\r\n        grid-template-areas: \"main-up\" \"main-play\" \"main-down\";\r\n    align-items: center;\r\n    justify-items: center;\r\n}\r\n\r\n.main-up {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: 1fr;\r\n        grid-template-columns: 1fr;\r\n    z-index: 1;\r\n}\r\n\r\n.main-play {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-play;\r\n    z-index: 1;\r\n}\r\n\r\n.main-down {\r\n    -ms-grid-row: 3;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-down;\r\n    width: 100%;\r\n    height: 100%;\r\n    align-self: baseline;\r\n    display: -ms-grid;\r\n    display: grid;\r\n}\r\n\r\n.smallSlider {\r\n    display: flex;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color: white;\r\n    margin: 4px;\r\n}\r\n\r\n.slider {\r\n    -ms-grid-row: 2;\r\n    -ms-grid-column: 1;\r\n    grid-area: slider;\r\n    display: -ms-grid;\r\n    display: grid;\r\n    -ms-grid-columns: auto 1fr auto;\r\n        grid-template-columns: auto 1fr auto;\r\n    background-color: white;\r\n    border-radius: 20px;\r\n    align-items: center;\r\n}\r\n\r\nmat-slider {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n}\r\n\r\n.slider-start {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-column: 1;\r\n    margin: 4px;\r\n}\r\n\r\n.slider-end {\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n    -ms-grid-column: 3;\r\n    grid-column: 3;\r\n    margin: 4px;\r\n}\r\n\r\n.upCenter,\r\n.upLeft,\r\n.upRight {\r\n    width: 30%;\r\n    top: -100%;\r\n    position: relative;\r\n    -ms-grid-row: 1;\r\n    grid-row: 1;\r\n}\r\n\r\n.upLeft {\r\n    -ms-grid-column: 1;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 1/3;\r\n}\r\n\r\n.upCenter {\r\n    -ms-grid-column: 2;\r\n    grid-column: 2;\r\n    -ms-grid-column-align: center;\r\n        justify-self: center;\r\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\r\n    text-align: center;\r\n    color: white;\r\n}\r\n\r\n.upRight {\r\n    -ms-grid-column: 2;\r\n    -ms-grid-column-span: 2;\r\n    grid-column: 2/4;\r\n    -ms-grid-column-align: right;\r\n        justify-self: right;\r\n}\r\n\r\n.largeBtn {\r\n    width: 120px;\r\n    height: 120px;\r\n}\r\n\r\n#btnStart {\r\n    border-radius: 50% 0 0 50%;\r\n    margin: 0 8px;\r\n}\r\n\r\n#btnEnd {\r\n    border-radius: 0 50% 50% 0;\r\n    margin: 0 8px;\r\n}\r\n\r\n.subtitle,\r\n.subtitle-shadow {\r\n    text-align: center;\r\n    min-height: 20px;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: white;\r\n    -ms-grid-column: 1;\r\n        grid-column-start: 1;\r\n    -ms-grid-row: 1;\r\n        grid-row-start: 1;\r\n}\r\n\r\n.subtitle {\r\n    z-index: 2;\r\n}\r\n\r\n.subtitle-shadow {\r\n    z-index: 1;\r\n    text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;\r\n    color: white;\r\n    background-color: transparent;\r\n}\r\n\r\n.flex {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.setSS {\r\n    -ms-grid-row: 1;\r\n    -ms-grid-column: 1;\r\n    grid-area: main-up;\r\n    -ms-grid-row: main-up;\r\n        grid-row-start: main-up;\r\n    -ms-grid-row-span: NaN;\r\n    grid-row-end: main-play;\r\n    background-color: lightyellow;\r\n    width: 100%;\r\n    height: 100%;\r\n    z-index: 2;\r\n}"
 
 /***/ }),
 
@@ -563,7 +563,7 @@ module.exports = ".container {\r\n    touch-action: none;\r\n    width: 100%;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" \r\n(pointerenter)=\"HideShow='show'\" (pointerleave)=\"onPointLeave($event)\" touch-action=\"none\">\r\n<div class=\"main\">\r\n    <div class=\"main-up\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n        <div class=\"flex\">\r\n            <div #ratio class=\"smallSlider\">\r\n                <mat-icon>directions_walk</mat-icon>\r\n                <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\"\r\n                [displayWith]=\"tickDisplayWith(meService)\" thumbLabel \r\n                [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\"\r\n                (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\" ></mat-slider>\r\n                <mat-icon>flight</mat-icon>\r\n            </div>\r\n            <div #volume class=\"smallSlider\">\r\n                <mat-icon>volume_mute</mat-icon>\r\n                <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                <mat-icon>volume_up</mat-icon>\r\n            </div>                \r\n        </div>\r\n        <div class=\"flex\">\r\n            <mat-slide-toggle [(ngModel)]=\"meService.story.frames[meService.story.iFrame].isUtter\" color=\"primary\">\r\n                語音模擬字幕？\r\n            </mat-slide-toggle>\r\n            <button mat-icon-button mat-raised-button\r\n              *ngIf=\"meService.story.frames[meService.story.iFrame].isUtter\"\r\n              (click)=\"onShowSetSS($event)\">\r\n                <mat-icon class=\"mat-18\">build</mat-icon>\r\n            </button>\r\n        </div>\r\n    </div>\r\n    \r\n    <div class=\"main-play\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n        <button id=\"btnStart\" mat-icon-button mat-raised-button \r\n        (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\"\r\n        (pointerdown)=\"startChanged$.next($event)\" >\r\n        <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n    </button>\r\n    <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n            <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n        </svg>\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n            <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n            <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n        </svg>\r\n    </button>\r\n    <button id=\"btnEnd\" mat-icon-button mat-raised-button \r\n    (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\"\r\n    (pointerdown)=\"endChanged$.next($event)\" >\r\n    <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n</button>\r\n</div>\r\n    \r\n<app-set-speech-synthesis class=\"setSS\"\r\n*ngIf=\"isSSShown\"\r\n[utterPara]=\"utterPara\"\r\n(change)=\"onUtterParaChanged(subtitleView.innerText,$event)\"\r\n(close)=\"isSSShown=false\"\r\n[@hideShow]=\"HideShow\"\r\n[@flyInOut]=\"isSSShown\" ></app-set-speech-synthesis>\r\n\r\n<div class=\"main-down\">\r\n    <textarea matInput #subtitleInput class=\"subtitle\"\r\n    [ngModel]=\"meService.story.frames[meService.story.iFrame].subtitle\"\r\n    (ngModelChange)=\"subtitleChange$.next([subtitleInput.value,subtitleView.innerText])\"\r\n    (click)=\"onSubtitleClicked($event)\"\r\n    [style.opacity]=\"(HideShow==='show')?1:0\">\r\n</textarea>\r\n<div #subtitleView class=\"subtitle shadow\" \r\n[innerHTML]=\"subtitleInput.value|safeHtml\" \r\n></div>\r\n</div>\r\n</div>\r\n<div class=\"slider\">\r\n    <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n    <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n    <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\"  (blur)=\"IOEndShown='out'\">\r\n    <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\" >{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n    <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n    <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\"\r\n    [max]=\"meService.story.frames[meService.story.iFrame].end\"\r\n    [value]=\"meService.currentTime\"\r\n    (change)=\"meService.seekTime=frameSlider.value\"\r\n    ></mat-slider>\r\n    <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\" >{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n</div>\r\n</div>"
+module.exports = "<div class=\"container\" [@changeFrame]=\"meService.story.iFrame\" (pointerenter)=\"HideShow='show'\" (pointerleave)=\"onPointLeave($event)\" touch-action=\"none\">\r\n    <div class=\"main\">\r\n        <div class=\"main-up\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n            <div class=\"flex\">\r\n                <div #ratio class=\"smallSlider\">\r\n                    <mat-icon>directions_walk</mat-icon>\r\n                    <mat-slider min=\"0\" [max]=\"meService.availablePlaybackRates.length-1\" step=\"1\" [displayWith]=\"tickDisplayWith(meService)\" thumbLabel [value]=\"meService.availablePlaybackRates.indexOf(meService.playbackRate)\" (input)=\"meService.playbackRate=meService.availablePlaybackRates[$event.value]\"></mat-slider>\r\n                    <mat-icon>flight</mat-icon>\r\n                </div>\r\n                <div #volume class=\"smallSlider\">\r\n                    <mat-icon>volume_mute</mat-icon>\r\n                    <mat-slider min=\"0\" max=\"1\" step=\"0.2\" thumbLabel [(ngModel)]=\"meService.volume\"></mat-slider>\r\n                    <mat-icon>volume_up</mat-icon>\r\n                </div>\r\n            </div>\r\n            <div class=\"flex\">\r\n                <mat-slide-toggle [(ngModel)]=\"meService.story.frames[meService.story.iFrame].isUtter\" color=\"primary\">\r\n                    語音模擬字幕？\r\n                </mat-slide-toggle>\r\n                <button mat-icon-button mat-raised-button *ngIf=\"meService.story.frames[meService.story.iFrame].isUtter\" (click)=\"onShowSetSS($event)\">\r\n                <mat-icon class=\"mat-18\">build</mat-icon>\r\n            </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"main-play\" [@hideShow]=\"HideShow\" *ngIf=\"isSSShown===false\">\r\n            <button id=\"btnStart\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].start\" (pointerdown)=\"startChanged$.next($event)\">\r\n        <mat-icon class=\"mat-18\">skip_previous</mat-icon>\r\n    </button>\r\n            <button mat-icon-button mat-raised-button class=\"largeBtn\" (click)=\"onPlayPause()\">\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState!==MEState.playing\">\r\n            <polygon points=\"8,5 3,2 3,8\" style=\"fill:darkblue\"/>\r\n        </svg>\r\n        <svg viewBox=\"0 0 10 10\" *ngIf=\"previousState===MEState.playing\">\r\n            <rect x=\"2\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n            <rect x=\"6\" y=\"2\" width=\"2\" height=\"6\" style=\"fill:red\"/>\r\n        </svg>\r\n    </button>\r\n            <button id=\"btnEnd\" mat-icon-button mat-raised-button (click)=\"meService.seekTime=meService.story.frames[meService.story.iFrame].end\" (pointerdown)=\"endChanged$.next($event)\">\r\n    <mat-icon class=\"mat-18\">skip_next</mat-icon>\r\n</button>\r\n        </div>\r\n\r\n        <app-set-speech-synthesis class=\"setSS\" *ngIf=\"isSSShown\" [utterPara]=\"utterPara\" (change)=\"onUtterParaChanged(subtitleView.innerText,$event)\" (close)=\"isSSShown=false\" [@hideShow]=\"HideShow\" [@flyInOut]=\"isSSShown\"></app-set-speech-synthesis>\r\n\r\n        <div class=\"main-down\">\r\n            <div #subtitleView class=\"subtitle-shadow\" [innerHTML]=\"subtitleInput.value|safeHtml\" [style.display]=\"(HideShow==='show')?'none':'block'\"></div>\r\n            <textarea matInput #subtitleInput class=\"subtitle\" [ngModel]=\"meService.story.frames[meService.story.iFrame].subtitle\" (ngModelChange)=\"subtitleChange$.next([subtitleInput.value,subtitleView.innerText])\" (click)=\"onSubtitleClicked($event)\" [style.opacity]=\"(HideShow==='show')?1:0\">\r\n            </textarea>\r\n        </div>\r\n    </div>\r\n    <div class=\"slider\">\r\n        <input #inStart type=\"number\" [@flyInOut]=\"IOStartShown\" class=\"upLeft\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\" (blur)=\"IOStartShown='out'\">\r\n        <div class=\"upCenter\">{{meService.currentTime}}</div>\r\n        <input #inEnd type=\"number\" [@flyInOut]=\"IOEndShown\" class=\"upRight\" [(ngModel)]=\"meService.story.frames[meService.story.iFrame].end\" (blur)=\"IOEndShown='out'\">\r\n        <span class=\"slider-start\" (click)=\"onOpenInputStart(inStart)\">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>\r\n        <!-- <mat-form-field><input class=\"slider-start\" matInput [(ngModel)]=\"meService.story.frames[meService.story.iFrame].start\"></mat-form-field> -->\r\n        <mat-slider #frameSlider [min]=\"meService.story.frames[meService.story.iFrame].start\" [max]=\"meService.story.frames[meService.story.iFrame].end\" [value]=\"meService.currentTime\" (change)=\"meService.seekTime=frameSlider.value\"></mat-slider>\r\n        <span class=\"slider-end\" (click)=\"onOpenInputEnd(inEnd)\">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -731,6 +731,8 @@ var MeManiPlateComponent = /** @class */ (function () {
             storyUtterPara.text = text;
             storyUtterPara.voiceName = utterPara.voice.name;
             storyUtterPara.lang = utterPara.voice.lang;
+            utterPara.voiceName = utterPara.voice.name;
+            utterPara.lang = utterPara.voice.lang;
             delete storyUtterPara['voice'];
         }
         // * [2018-08-25 16:15] Play it.
@@ -1319,7 +1321,7 @@ module.exports = ".close {\r\n    position: absolute;\r\n    right: 0;\r\n}\r\n\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <button mat-icon-button class=\"close\" (click)=\"close.next()\">\n    <mat-icon class=\"mat-18\">close</mat-icon>\n  </button>\n  <div class=\"selVoiceContainer\">\n    <mat-form-field class=\"selVoice\">\n      <mat-select #selVoice [value]=\"utterPara.voice\"\n      (selectionChange)=\"utterPara.voice=selVoice.value;change.next(utterPara)\"\n      [placeholder]=\"(!!pts)?pts.selLang:'選個語音模擬語言'\">\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{voice.name}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n  <div class=\"utterContainer\">\n    <div>\n      <mat-icon class=\"mat-18\">directions_walk</mat-icon>\n      <mat-slider #selRate\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.rate\"\n        (change)=\"utterPara.rate=selRate.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"4\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">flight</mat-icon>\n    </div>\n    \n    <div>\n      <mat-icon class=\"mat-18\">keyboard_arrow_down</mat-icon>\n      <mat-slider #selPitch\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.pitch\"\n        (change)=\"utterPara.pitch=selPitch.value;change.next(utterPara);\"\n        min=\"0\" max=\"2\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">keyboard_arrow_up</mat-icon>\n    </div>\n    <div>\n      <mat-icon class=\"mat-18\">volume_mute</mat-icon>\n      <mat-slider #selVolume\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.volume\"\n        (change)=\"utterPara.volume=selVolume.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"1\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">volume_up</mat-icon>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <button mat-icon-button class=\"close\" (click)=\"close.next()\">\n    <mat-icon class=\"mat-18\">close</mat-icon>\n  </button>\n  <div class=\"selVoiceContainer\">\n    <mat-form-field class=\"selVoice\">\n      <mat-select #selVoice [value]=\"utterPara.voice\"\n      (selectionChange)=\"utterPara.voice=selVoice.value;change.next(utterPara)\"\n      [placeholder]=\"(!!pts)?pts.selLang:'選個語音模擬語言'\">\n        <mat-option *ngFor=\"let voice of SSService.voices\" [value]=\"voice\">{{SSService.getVoiceName(voice)}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </div>\n  <div class=\"utterContainer\">\n    <div>\n      <mat-icon class=\"mat-18\">directions_walk</mat-icon>\n      <mat-slider #selRate\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.rate\"\n        (change)=\"utterPara.rate=selRate.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"4\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">flight</mat-icon>\n    </div>\n    \n    <div>\n      <mat-icon class=\"mat-18\">keyboard_arrow_down</mat-icon>\n      <mat-slider #selPitch\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.pitch\"\n        (change)=\"utterPara.pitch=selPitch.value;change.next(utterPara);\"\n        min=\"0\" max=\"2\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">keyboard_arrow_up</mat-icon>\n    </div>\n    <div>\n      <mat-icon class=\"mat-18\">volume_mute</mat-icon>\n      <mat-slider #selVolume\n        [thumbLabel]=\"true\"\n        [value]=\"utterPara.volume\"\n        (change)=\"utterPara.volume=selVolume.value;change.next(utterPara);\"\n        min=\"0.1\" max=\"1\" step=\"0.1\"></mat-slider>\n      <mat-icon class=\"mat-18\">volume_up</mat-icon>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1553,7 +1555,7 @@ module.exports = ".full-width {\r\n    width: 100%;\r\n}\r\n\r\n.buttons {\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"data.dType===dialogType.inputUrl\">\n  <mat-form-field class=\"full-width\" >\n    <input matInput [placeholder]=\"(!!pts)?pts.desireURL:'請輸入想要的網址'\" [(ngModel)]=\"data.url\" >\n  </mat-form-field>\n  <div class=\"buttons\">\n    <button mat-raised-button (click)=\"onLoadURL()\" >{{(!!pts)?pts.load:'載入'}}</button>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"data.dType===dialogType.inputUrl\">\n  <mat-form-field class=\"full-width\" >\n    <input matInput [placeholder]=\"(!!pts)?pts.desireURL:'請輸入想要的網址'\" [(ngModel)]=\"data.url\" >\n  </mat-form-field>\n  <div class=\"buttons\">\n    <button mat-raised-button (click)=\"onLoadURL()\" >{{(!!pts)?pts.load:'載入'}}</button>\n  </div>\n</div>\n<div *ngIf=\"data.dType===dialogType.alert\">\n  <div [innerHTML]=\"data.msg|safeHtml\"></div>\n</div>\n"
 
 /***/ }),
 
@@ -1620,6 +1622,7 @@ var DialogComponent = /** @class */ (function () {
 var DialogType;
 (function (DialogType) {
     DialogType[DialogType["inputUrl"] = 0] = "inputUrl";
+    DialogType[DialogType["alert"] = 1] = "alert";
 })(DialogType || (DialogType = {}));
 
 
@@ -2168,14 +2171,14 @@ var MediaEditComponent = /** @class */ (function () {
     MediaEditComponent.prototype.ngOnInit = function () {
         var self = this;
         var currentIFrame = -1;
-        self.meService.onStateChanged.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["takeWhile"])(function (_) { return !!self.meService.onCurrentTimeChanged === true; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_) {
+        self.meService.onStateChanged.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (_) { return !!self.meService.onCurrentTimeChanged === true; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_) {
             self.meService.onCurrentTimeChanged.subscribe(function (t) {
                 if (self.meService.story.utterType === _services_story_service__WEBPACK_IMPORTED_MODULE_3__["utterType"].none) {
                     return;
                 }
                 else {
                     var i = self.meService.story.frames.findIndex(function (v) { return ((t >= v.start) && (t <= v.end)); });
-                    if (i === currentIFrame) {
+                    if (i === currentIFrame || self.meService.story.iFrame >= 0) {
                         return;
                     }
                     else {
@@ -2258,6 +2261,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_story_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/story.service */ "./src/app/services/story.service.ts");
 /* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2267,6 +2271,42 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
 
 
 
@@ -2274,9 +2314,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var StoryComponent = /** @class */ (function () {
-    function StoryComponent(meService, ptsService, cdr) {
+    function StoryComponent(meService, ptsService, fs, cdr) {
         this.meService = meService;
         this.ptsService = ptsService;
+        this.fs = fs;
         this.cdr = cdr;
         this.utterType = _services_story_service__WEBPACK_IMPORTED_MODULE_3__["utterType"];
     }
@@ -2290,68 +2331,71 @@ var StoryComponent = /** @class */ (function () {
     StoryComponent.prototype.onExportStory = function (sender, e) {
         var self = this;
         var a = sender._elementRef.nativeElement;
-        if (e.x === 0) {
-            // URL.revokeObjectURL(self.downloadHref);
+        if (self.meService.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_2__["PlayerType"].file) {
+            alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
             return;
         }
-        else {
+        // * [2018-09-04 12:06] Start to store into the file
+        if (!!window.cordova === true) {
             e.preventDefault();
-            if (self.meService.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_2__["PlayerType"].file) {
-                alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
-                return;
-            }
+            self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime + self.meService.story.title + '.json');
+        }
+        else {
             var blob = new Blob([JSON.stringify(self.meService.story)], { type: 'application/json' });
             this.downloadHref = URL.createObjectURL(blob);
             // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));
-            setTimeout(function (_) { return a.click(); });
-            // a.click();
         }
     };
     StoryComponent.prototype.onExportSBV = function (sender, e) {
-        var self = this;
-        var a = sender._elementRef.nativeElement;
-        if (e.x === 0) {
-            return;
-        }
-        else {
-            e.preventDefault();
-            var getTime_1 = function (t) {
-                var st = '';
-                var buf = Math.floor(t);
-                // * [2018-08-27 15:29] Get minisecond
-                st = ('000' + Math.round((t - buf) * 1000)).slice(-3);
-                st = '.' + st;
-                // * [2018-08-27 15:34] Get second
-                t = buf;
-                buf = t % 60;
-                st = ('00' + buf).slice(-2) + st;
-                st = ':' + st;
-                // * [2018-08-27 15:38] Get minute
-                t = (t - buf) / 60;
-                buf = t % 60;
-                st = ('00' + buf).slice(-2) + st;
-                st = ':' + st;
-                // * [2018-08-27 15:38] Get hour
-                t = (t - buf) / 60;
-                buf = t;
-                st = buf + st;
-                // * [2018-08-27 15:42] Return the string
-                return st;
-            };
-            var frames_1 = self.meService.story.frames.slice(0).sort(function (p, b) {
-                return p.start - b.start;
+        return __awaiter(this, void 0, void 0, function () {
+            var self, a, getTime, frames, input, blob;
+            return __generator(this, function (_a) {
+                self = this;
+                a = sender._elementRef.nativeElement;
+                getTime = function (t) {
+                    var st = '';
+                    var buf = Math.floor(t);
+                    // * [2018-08-27 15:29] Get minisecond
+                    st = ('000' + Math.round((t - buf) * 1000)).slice(-3);
+                    st = '.' + st;
+                    // * [2018-08-27 15:34] Get second
+                    t = buf;
+                    buf = t % 60;
+                    st = ('00' + buf).slice(-2) + st;
+                    st = ':' + st;
+                    // * [2018-08-27 15:38] Get minute
+                    t = (t - buf) / 60;
+                    buf = t % 60;
+                    st = ('00' + buf).slice(-2) + st;
+                    st = ':' + st;
+                    // * [2018-08-27 15:38] Get hour
+                    t = (t - buf) / 60;
+                    buf = t;
+                    st = buf + st;
+                    // * [2018-08-27 15:42] Return the string
+                    return st;
+                };
+                frames = self.meService.story.frames.slice(0).sort(function (p, b) {
+                    return p.start - b.start;
+                });
+                input = frames.reduce(function (pre, cur) {
+                    var st = (!!pre) ? '\n\n' : '';
+                    st += getTime(cur.start) + ',' + getTime(cur.end) + '\n';
+                    st += cur.utterPara.text;
+                    return pre + st;
+                }, '');
+                // * [2018-09-04 12:00] The part to store the .SBV file
+                if (!!window.cordova === true) {
+                    e.preventDefault();
+                    self.fs.saveTxtFile$$(input, self.meService.story.title + '.sbv');
+                }
+                else {
+                    blob = new Blob([input], { type: 'text/plain' });
+                    this.downloadSBVHref = URL.createObjectURL(blob);
+                }
+                return [2 /*return*/];
             });
-            var input = frames_1.reduce(function (pre, cur) {
-                var st = (!!pre) ? '\n\n' : '';
-                st += getTime_1(cur.start) + ',' + getTime_1(cur.end) + '\n';
-                st += cur.utterPara.text;
-                return pre + st;
-            }, '');
-            var blob = new Blob([input], { type: 'text/plain' });
-            this.downloadSBVHref = URL.createObjectURL(blob);
-            setTimeout(function (_) { return a.click(); });
-            // a.click();
-        }
+        });
     };
     StoryComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2361,6 +2405,7 @@ var StoryComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"],
             _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"],
+            _services_fs_service__WEBPACK_IMPORTED_MODULE_6__["FsService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], StoryComponent);
     return StoryComponent;
@@ -2720,8 +2765,12 @@ var AdService = /** @class */ (function () {
             if (cordova.platformId === 'windows') {
                 self.iniWinSDK();
             }
-            else {
+            else if (cordova.platformId === 'android' || cordova.platformId === 'ios') {
                 self.iniAdMob();
+            }
+            else {
+                self._adReady$.next(false);
+                self._adReady$.complete();
             }
             this.prepareInterstitial();
         }
@@ -2870,7 +2919,7 @@ var ClipboardService = /** @class */ (function () {
     }
     ClipboardService.prototype.getText$$ = function () {
         return new Promise(function (res, rej) {
-            if (!!cordova.plugins) {
+            if (!!cordova.plugins && cordova.platformId !== 'osx' && cordova.platformId !== 'browser' && !!cordova.plugins.clipboard) {
                 cordova.plugins.clipboard.paste(function (t) { return res(t); }, function (e) { return rej(e); });
             }
             else {
@@ -3317,6 +3366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3326,13 +3376,50 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
 
 
 
 
 var FsService = /** @class */ (function () {
-    function FsService(device) {
+    function FsService(device, msgService) {
         this.device = device;
+        this.msgService = msgService;
         if (device.isCordova === true) {
             this.FSReady$ = device.onDeviceReady.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_) {
                 if (!!window['isFilePluginReadyRaised'] === false) {
@@ -3454,6 +3541,49 @@ var FsService = /** @class */ (function () {
         });
         return obs;
     };
+    FsService.prototype.saveTxtFile$$ = function (data, fileName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var self, savePicker, iDot, ext, winFile, status_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        if (!!fileName === false) {
+                            return [2 /*return*/, null];
+                        }
+                        if (!(!!window.cordova === false)) return [3 /*break*/, 1];
+                        // * [2018-09-04 11:06] TODO: ignore the case for pure angular project
+                        return [2 /*return*/, null];
+                    case 1:
+                        if (!(cordova.platformId === 'windows')) return [3 /*break*/, 5];
+                        savePicker = new Windows.Storage.Pickers.FileSavePicker();
+                        savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
+                        iDot = fileName.lastIndexOf('.');
+                        ext = [(iDot < 0) ? '' : fileName.slice(iDot)];
+                        ext.size = 1;
+                        savePicker.fileTypeChoices.insert("Plain Text", ext);
+                        savePicker.suggestedFileName = fileName.substr(0, iDot);
+                        return [4 /*yield*/, savePicker.pickSaveFileAsync()];
+                    case 2:
+                        winFile = _a.sent();
+                        if (!!!winFile) return [3 /*break*/, 5];
+                        Windows.Storage.CachedFileManager.deferUpdates(winFile);
+                        return [4 /*yield*/, Windows.Storage.FileIO.writeTextAsync(winFile, data)];
+                    case 3:
+                        _a.sent();
+                        return [4 /*yield*/, Windows.Storage.CachedFileManager.completeUpdatesAsync(winFile)];
+                    case 4:
+                        status_1 = _a.sent();
+                        // *** [2018-09-04 11:55] Alert about your action
+                        if (status_1 === Windows.Storage.Provider.FileUpdateStatus.complete) {
+                            self.msgService.alert("File <b style=\"color:red;\">" + fileName + "</b> is saved!");
+                        }
+                        _a.label = 5;
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
     FsService.prototype.rmFile$ = function (file) {
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
             if (!!file === false) {
@@ -3474,7 +3604,7 @@ var FsService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"]])
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"]])
     ], FsService);
     return FsService;
 }());
@@ -3970,6 +4100,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageTypes", function() { return MessageTypes; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../dialog/dialog.component */ "./src/app/dialog/dialog.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3981,10 +4113,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
 var MessageService = /** @class */ (function () {
-    function MessageService() {
+    function MessageService(dialog) {
+        this.dialog = dialog;
         this.remindMsgIn = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
-        this.isShown = false;
+        this.isShown = true;
         this._messages = [];
         this._nRead = 0;
     }
@@ -4003,11 +4138,25 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.getNUnRead = function () {
         return this._messages.length - this._nRead;
     };
+    MessageService.prototype.alert = function (msg, alertCallback, title, buttonName) {
+        if (!!alertCallback === false) {
+            alertCallback = function () { };
+        }
+        if (!!window.cordova === true) {
+            this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__["DialogComponent"], {
+                width: '50%',
+                data: { dType: _dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__["DialogType"].alert, msg: msg }
+            });
+        }
+        else {
+            this.alert(msg);
+        }
+    };
     MessageService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]])
     ], MessageService);
     return MessageService;
 }());
@@ -4221,6 +4370,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
+/* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4268,28 +4419,53 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
+
 var SpeechSynthesisService = /** @class */ (function () {
-    function SpeechSynthesisService() {
+    function SpeechSynthesisService(device, ptsService) {
+        this.device = device;
+        this.ptsService = ptsService;
         this._getVoices$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.getVoices$ = this._getVoices$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["shareReplay"])(1));
+        var self = this;
         this.updateVoices$$();
+        if (!!window.cordova && cordova.platformId === 'android') {
+            ptsService.PTSReady$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["concat"])(ptsService.ptsLoaded$)).subscribe(function (_) {
+                // **************** TODO: To notice it that the voices is changed (at least for differnt language) **************
+                if (!!self.voices === true) {
+                    self.voices = self.voices.slice(0);
+                }
+            });
+        }
     }
     SpeechSynthesisService.prototype.updateVoices$$ = function () {
         return __awaiter(this, void 0, void 0, function () {
             var voices;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: 
+                    case 0:
+                        if (!(this.device.isCordova && cordova.platformId === 'android')) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this.device.onDeviceReady.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["first"])()).toPromise()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, window['TTS'].getVoices()];
+                    case 2:
+                        voices = (_a.sent());
+                        return [3 /*break*/, 5];
+                    case 3: 
                     // * [2018-08-23 11:05] Try 5 times to get the voices
                     return [4 /*yield*/, Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["interval"])(100).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(5), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["takeWhile"])(function (_) {
                             voices = speechSynthesis.getVoices();
                             return !!voices === false || voices.length === 0;
                         })).toPromise()];
-                    case 1:
+                    case 4:
                         // * [2018-08-23 11:05] Try 5 times to get the voices
                         _a.sent();
+                        _a.label = 5;
+                    case 5:
                         // * [2018-08-23 11:07] If I got the voice, set the default voice
                         if (!!voices !== false && voices.length > 0) {
+                            voices = voices.sort(function (a, b) { return (a.lang < b.lang) ? -1 : 1; });
                             this.defaultVoice = voices.find(function (v) { return /en.*US/.test(v.lang); });
                             this.defaultVoice = (!!this.defaultVoice) ? this.defaultVoice : voices[0];
                             this._getVoices$.next(true);
@@ -4300,28 +4476,87 @@ var SpeechSynthesisService = /** @class */ (function () {
             });
         });
     };
-    SpeechSynthesisService.prototype.speak = function (para) {
-        if (!!para === false) {
-            alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
-            return;
-        }
-        // * [2018-08-22 19:53] Cancel previous utterance
-        speechSynthesis.pause();
-        speechSynthesis.cancel();
-        // * [2018-08-22 19:53] Create a new utterance
-        var utter = new SpeechSynthesisUtterance(para.text);
-        utter.pitch = para.pitch;
-        utter.rate = para.rate;
-        utter.volume = para.volume;
-        if (!!para.voice === true) {
-            utter.voice = para.voice;
+    SpeechSynthesisService.prototype.getVoiceName = function (voiceOrLang) {
+        if (typeof voiceOrLang === 'string') {
+            var voice = this.voices.find(function (v) { return v.lang.replace('_', '-') === voiceOrLang.replace('_', '-'); });
+            if (!!voice) {
+                return voice.name;
+            }
+            else {
+                return "";
+            }
         }
         else {
-            utter.lang = para.lang;
+            if (!!window.cordova && cordova.platformId !== 'windows') {
+                var voice = voiceOrLang;
+                var codes = voice.lang.split(/(\-|\_)/);
+                if (!!this.ptsService.pts === false) {
+                    return voice.name;
+                }
+                else {
+                    var result = "";
+                    var buf = "";
+                    buf = this.ptsService.pts.iso639[codes[0]];
+                    if (!!buf) {
+                        result += buf;
+                    }
+                    if (!!buf === true) {
+                        result += ': ';
+                    }
+                    if (codes.length === 3) {
+                        buf = this.ptsService.pts.iso3166Country[codes[2]];
+                        if (!!buf) {
+                            result += buf;
+                        }
+                    }
+                    // * [2018-08-31 16:46] Give more information
+                    if (cordova.platformId === 'android') {
+                        buf = voice.name.substring(voice.name.lastIndexOf('#') + 1);
+                        result += '(' + buf + ')';
+                    }
+                    else {
+                        result = '(' + result + ')' + voice.name;
+                    }
+                    return result;
+                }
+            }
+            else {
+                return voiceOrLang.name;
+            }
         }
-        // * [2018-08-22 19:54] Play it
-        speechSynthesis.speak(utter);
-        speechSynthesis.resume();
+    };
+    SpeechSynthesisService.prototype.speak = function (para) {
+        if (this.device.isCordova && cordova.platformId === 'android') {
+            window['TTS'].stop();
+            if (!!para.voiceName === false) {
+                para.voiceName = this.getVoiceName(para.lang);
+            }
+            var androidPara = Object.assign({ name: para.voiceName }, para);
+            window['TTS'].speak(androidPara);
+        }
+        else {
+            if (!!para === false) {
+                alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
+                return;
+            }
+            // * [2018-08-22 19:53] Cancel previous utterance
+            speechSynthesis.pause();
+            speechSynthesis.cancel();
+            // * [2018-08-22 19:53] Create a new utterance
+            var utter = new SpeechSynthesisUtterance(para.text);
+            utter.pitch = para.pitch;
+            utter.rate = para.rate;
+            utter.volume = para.volume;
+            if (!!para.voice === true) {
+                utter.voice = para.voice;
+            }
+            else {
+                utter.lang = para.lang;
+            }
+            // * [2018-08-22 19:54] Play it
+            speechSynthesis.speak(utter);
+            speechSynthesis.resume();
+        }
     };
     SpeechSynthesisService.prototype.updateUtterParaWithVoice = function (old) {
         if (!!old.voiceName === true) {
@@ -4331,7 +4566,7 @@ var SpeechSynthesisService = /** @class */ (function () {
             }
         }
         if (!!old.lang === true) {
-            old.voice = this.voices.find(function (v) { return v.lang === old.lang; });
+            old.voice = this.voices.find(function (v) { return v.lang.replace('_', '-') === old.lang.replace('_', '-'); });
             if (!!old.voice === true) {
                 return old;
             }
@@ -4342,7 +4577,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
     ], SpeechSynthesisService);
     return SpeechSynthesisService;
 }());
@@ -4540,7 +4775,7 @@ var YoutubeService = /** @class */ (function () {
             });
         }
     };
-    YoutubeService.regYT = /^(http(s)?:\/\/)?(((www\.youtube\.com|youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
+    YoutubeService.regYT = /^(http(s)?:\/\/)?(((.*\.youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
     YoutubeService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'

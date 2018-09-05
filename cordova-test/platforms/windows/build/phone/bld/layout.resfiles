@@ -55,6 +55,8 @@ src\app\app.component.html
 src\app\app.component.spec.ts
 src\app\app.component.ts
 src\app\app.module.ts
+src\app\components\draglist\draglist.component.css
+src\app\components\draglist\draglist.component.html
 src\app\components\me-main-dashboard\me-main-dashboard.component.css
 src\app\components\me-main-dashboard\me-main-dashboard.component.html
 src\app\components\me-mani-plate\me-mani-plate.component.css
@@ -73,6 +75,10 @@ src\app\navbar\navbar.component.css
 src\app\navbar\navbar.component.html
 src\app\pages\home\home.component.css
 src\app\pages\home\home.component.html
+src\app\pages\media-edit\media-edit.component.css
+src\app\pages\media-edit\media-edit.component.html
+src\app\pages\story\story.component.css
+src\app\pages\story\story.component.html
 src\app\pages\test\test.component.css
 src\app\pages\test\test.component.html
 src\app\services\message.service.spec.ts
@@ -103,6 +109,7 @@ www\cordova-js-src\confighelper.js
 www\cordova-js-src\exec.js
 www\cordova-js-src\platform.js
 www\cordova-js-src\splashscreen.js
+www\css\notification.css
 www\css\splashscreen.css
 www\favicon.ico
 www\index.html
@@ -115,6 +122,8 @@ www\MaterialIcons-Regular.woff2
 www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js
 www\plugins\cordova-clipboard\www\clipboard.js
 www\plugins\cordova-plugin-admobpro\www\AdMob.js
+www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js
+www\plugins\cordova-plugin-dialogs\www\notification.js
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js
@@ -137,6 +146,7 @@ www\plugins\cordova-plugin-file\www\ProgressEvent.js
 www\plugins\cordova-plugin-file\www\requestFileSystem.js
 www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js
 www\plugins\cordova-plugin-nano-sqlite\plugin.js
+www\plugins\cordova-plugin-tts\www\tts.js
 www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js
 www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js
 www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js

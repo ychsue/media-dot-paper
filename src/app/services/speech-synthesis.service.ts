@@ -3,6 +3,7 @@ import { interval, Observable, Subject } from 'rxjs';
 import { take, map, takeWhile, shareReplay, last, first, concat } from 'rxjs/operators';
 import { DeviceService } from './device.service';
 import { PageTextsService } from './page-texts.service';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,15 @@ export class SpeechSynthesisService {
   private _getVoices$ = new Subject<boolean>();
   getVoices$ = this._getVoices$.pipe(shareReplay(1));
 
-  constructor(private device: DeviceService, private ptsService: PageTextsService) {
+  constructor(public msg: MessageService, private device: DeviceService, private ptsService: PageTextsService) {
     const self = this;
     this.updateVoices$$();
     if (!!window.cordova && cordova.platformId === 'android') {
       ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).subscribe(_ => {
         // **************** TODO: To notice it that the voices is changed (at least for differnt language) **************
-        self.voices = self.voices.slice(0);
+        if (!!self.voices === true) {
+          self.voices = self.voices.slice(0);
+        }
       });
     }
    }
@@ -108,7 +111,7 @@ export class SpeechSynthesisService {
       window['TTS'].speak(androidPara);
     } else {
       if (!!para === false) {
-        alert(`Warning: input of SpeechSynthesisService.speak cannot be ${para}`);
+        this.msg.alert(`Warning: input of SpeechSynthesisService.speak cannot be ${para}`);
         return;
       }
       // * [2018-08-22 19:53] Cancel previous utterance

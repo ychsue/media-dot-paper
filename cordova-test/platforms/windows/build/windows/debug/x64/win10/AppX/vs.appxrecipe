@@ -32,7 +32,7 @@
     <AppXManifest Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\x64\win10\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-08-29T08:41:05.764</Modified>
+      <Modified>2018-09-04T06:10:21.036</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
@@ -169,15 +169,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\confighelper.js">
       <PackagePath>www\cordova-js-src\confighelper.js</PackagePath>
-      <Modified>2018-08-29T08:39:24.991</Modified>
+      <Modified>2018-09-04T06:09:21.857</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\exec.js">
       <PackagePath>www\cordova-js-src\exec.js</PackagePath>
-      <Modified>2018-08-29T08:39:24.993</Modified>
+      <Modified>2018-09-04T06:09:21.858</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\platform.js">
       <PackagePath>www\cordova-js-src\platform.js</PackagePath>
-      <Modified>2018-08-29T08:39:24.996</Modified>
+      <Modified>2018-09-04T06:09:21.860</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova-js-src\splashscreen.js">
       <PackagePath>www\cordova-js-src\splashscreen.js</PackagePath>
@@ -189,139 +189,151 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\cordova_plugins.js">
       <PackagePath>www\cordova_plugins.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.019</Modified>
+      <Modified>2018-09-04T06:09:21.865</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js">
       <PackagePath>www\main.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.034</Modified>
+      <Modified>2018-09-04T06:09:21.879</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js">
       <PackagePath>www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.081</Modified>
+      <Modified>2018-09-04T06:09:21.880</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-clipboard\www\clipboard.js">
       <PackagePath>www\plugins\cordova-clipboard\www\clipboard.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.087</Modified>
+      <Modified>2018-09-04T06:09:21.882</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-admobpro\www\AdMob.js">
       <PackagePath>www\plugins\cordova-plugin-admobpro\www\AdMob.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.090</Modified>
+      <Modified>2018-09-04T06:09:21.884</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js</PackagePath>
+      <Modified>2018-09-04T06:09:21.886</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-dialogs\www\notification.js">
+      <PackagePath>www\plugins\cordova-plugin-dialogs\www\notification.js</PackagePath>
+      <Modified>2018-09-04T06:09:21.887</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\src\windows\FileProxy.js">
       <PackagePath>www\plugins\cordova-plugin-file\src\windows\FileProxy.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.107</Modified>
+      <Modified>2018-09-04T06:09:21.889</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\browser\isChrome.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\browser\isChrome.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.109</Modified>
+      <Modified>2018-09-04T06:09:21.891</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryEntry.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.111</Modified>
+      <Modified>2018-09-04T06:09:21.892</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\DirectoryReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\DirectoryReader.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.113</Modified>
+      <Modified>2018-09-04T06:09:21.894</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\Entry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Entry.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.116</Modified>
+      <Modified>2018-09-04T06:09:21.897</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\File.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\File.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.118</Modified>
+      <Modified>2018-09-04T06:09:21.902</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileEntry.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileEntry.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.124</Modified>
+      <Modified>2018-09-04T06:09:21.905</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileError.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileError.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.127</Modified>
+      <Modified>2018-09-04T06:09:21.908</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileReader.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileReader.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.128</Modified>
+      <Modified>2018-09-04T06:09:21.910</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileSystem.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.131</Modified>
+      <Modified>2018-09-04T06:09:21.911</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystemPaths.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystemPaths.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.133</Modified>
+      <Modified>2018-09-04T06:09:21.913</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\fileSystems.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\fileSystems.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.133</Modified>
+      <Modified>2018-09-04T06:09:21.914</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadOptions.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadOptions.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.137</Modified>
+      <Modified>2018-09-04T06:09:21.916</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileUploadResult.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileUploadResult.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.140</Modified>
+      <Modified>2018-09-04T06:09:21.917</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\FileWriter.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\FileWriter.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.145</Modified>
+      <Modified>2018-09-04T06:09:21.919</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\Flags.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Flags.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.147</Modified>
+      <Modified>2018-09-04T06:09:21.920</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\LocalFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\LocalFileSystem.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.148</Modified>
+      <Modified>2018-09-04T06:09:21.921</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\Metadata.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\Metadata.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.150</Modified>
+      <Modified>2018-09-04T06:09:21.923</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\ProgressEvent.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\ProgressEvent.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.152</Modified>
+      <Modified>2018-09-04T06:09:21.924</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\requestFileSystem.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\requestFileSystem.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.155</Modified>
+      <Modified>2018-09-04T06:09:21.926</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js">
       <PackagePath>www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.156</Modified>
+      <Modified>2018-09-04T06:09:21.928</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-nano-sqlite\plugin.js">
       <PackagePath>www\plugins\cordova-plugin-nano-sqlite\plugin.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.159</Modified>
+      <Modified>2018-09-04T06:09:21.930</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-plugin-tts\www\tts.js">
+      <PackagePath>www\plugins\cordova-plugin-tts\www\tts.js</PackagePath>
+      <Modified>2018-09-04T06:09:21.931</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.161</Modified>
+      <Modified>2018-09-04T06:09:21.933</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.163</Modified>
+      <Modified>2018-09-04T06:09:21.938</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js">
       <PackagePath>www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.167</Modified>
+      <Modified>2018-09-04T06:09:21.941</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js">
       <PackagePath>www\polyfills.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.188</Modified>
+      <Modified>2018-09-04T06:09:21.953</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\runtime.js">
       <PackagePath>www\runtime.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.192</Modified>
+      <Modified>2018-09-04T06:09:21.955</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\styles.js">
       <PackagePath>www\styles.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.195</Modified>
+      <Modified>2018-09-04T06:09:21.960</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\vendor.js">
       <PackagePath>www\vendor.js</PackagePath>
-      <Modified>2018-08-29T08:39:25.431</Modified>
+      <Modified>2018-09-04T06:09:22.136</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\WinJS\js\base.js">
       <PackagePath>www\WinJS\js\base.js</PackagePath>
@@ -393,23 +405,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\main.js.map">
       <PackagePath>www\main.js.map</PackagePath>
-      <Modified>2018-08-29T08:39:24.438</Modified>
+      <Modified>2018-09-04T06:09:21.414</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\polyfills.js.map">
       <PackagePath>www\polyfills.js.map</PackagePath>
-      <Modified>2018-08-29T08:39:24.670</Modified>
+      <Modified>2018-09-04T06:09:21.588</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\runtime.js.map">
       <PackagePath>www\runtime.js.map</PackagePath>
-      <Modified>2018-08-29T08:39:24.680</Modified>
+      <Modified>2018-09-04T06:09:21.597</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\styles.js.map">
       <PackagePath>www\styles.js.map</PackagePath>
-      <Modified>2018-08-29T08:39:24.689</Modified>
+      <Modified>2018-09-04T06:09:21.605</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\vendor.js.map">
       <PackagePath>www\vendor.js.map</PackagePath>
-      <Modified>2018-08-29T08:39:24.738</Modified>
+      <Modified>2018-09-04T06:09:21.649</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\node_modules\nano-sql\LICENSE">
       <PackagePath>node_modules\nano-sql\LICENSE</PackagePath>
@@ -437,19 +449,19 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n\iso_en\pageTexts.json">
       <PackagePath>www\assets\i18n\iso_en\pageTexts.json</PackagePath>
-      <Modified>2018-08-29T08:39:24.976</Modified>
+      <Modified>2018-09-04T06:09:21.849</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n\iso_id\pageTexts.json">
       <PackagePath>www\assets\i18n\iso_id\pageTexts.json</PackagePath>
-      <Modified>2018-08-29T08:39:24.981</Modified>
+      <Modified>2018-09-04T06:09:21.851</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n\iso_zh-cn\pageTexts.json">
       <PackagePath>www\assets\i18n\iso_zh-cn\pageTexts.json</PackagePath>
-      <Modified>2018-08-29T08:39:24.984</Modified>
+      <Modified>2018-09-04T06:09:21.853</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\i18n\iso_zh-tw\pageTexts.json">
       <PackagePath>www\assets\i18n\iso_zh-tw\pageTexts.json</PackagePath>
-      <Modified>2018-08-29T08:39:24.988</Modified>
+      <Modified>2018-09-04T06:09:21.855</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.css">
       <PackagePath>src\app\app.component.css</PackagePath>
@@ -465,7 +477,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-mani-plate\me-mani-plate.component.css">
       <PackagePath>src\app\components\me-mani-plate\me-mani-plate.component.css</PackagePath>
-      <Modified>2018-08-25T03:13:53.463</Modified>
+      <Modified>2018-09-03T11:13:32.306</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-section-dashboard\me-section-dashboard.component.css">
       <PackagePath>src\app\components\me-section-dashboard\me-section-dashboard.component.css</PackagePath>
@@ -491,6 +503,14 @@
       <PackagePath>src\app\pages\home\home.component.css</PackagePath>
       <Modified>2018-08-29T06:46:08.441</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\media-edit\media-edit.component.css">
+      <PackagePath>src\app\pages\media-edit\media-edit.component.css</PackagePath>
+      <Modified>2018-07-31T07:51:03.998</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\story\story.component.css">
+      <PackagePath>src\app\pages\story\story.component.css</PackagePath>
+      <Modified>2018-07-30T13:07:22.756</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\test\test.component.css">
       <PackagePath>src\app\pages\test\test.component.css</PackagePath>
       <Modified>2018-06-06T13:25:42.750</Modified>
@@ -498,6 +518,10 @@
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\styles.css">
       <PackagePath>src\styles.css</PackagePath>
       <Modified>2018-08-09T12:58:18.548</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\css\notification.css">
+      <PackagePath>www\css\notification.css</PackagePath>
+      <Modified>2018-09-04T06:09:21.867</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\css\splashscreen.css">
       <PackagePath>www\css\splashscreen.css</PackagePath>
@@ -517,7 +541,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-mani-plate\me-mani-plate.component.html">
       <PackagePath>src\app\components\me-mani-plate\me-mani-plate.component.html</PackagePath>
-      <Modified>2018-08-25T14:15:46.717</Modified>
+      <Modified>2018-09-03T11:13:32.307</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\components\me-section-dashboard\me-section-dashboard.component.html">
       <PackagePath>src\app\components\me-section-dashboard\me-section-dashboard.component.html</PackagePath>
@@ -529,7 +553,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\dialog\dialog.component.html">
       <PackagePath>src\app\dialog\dialog.component.html</PackagePath>
-      <Modified>2018-08-28T09:31:52.810</Modified>
+      <Modified>2018-09-04T05:58:00.489</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\message\message.component.html">
       <PackagePath>src\app\message\message.component.html</PackagePath>
@@ -543,6 +567,14 @@
       <PackagePath>src\app\pages\home\home.component.html</PackagePath>
       <Modified>2018-08-29T06:45:49.387</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\media-edit\media-edit.component.html">
+      <PackagePath>src\app\pages\media-edit\media-edit.component.html</PackagePath>
+      <Modified>2018-07-26T09:09:09.355</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\story\story.component.html">
+      <PackagePath>src\app\pages\story\story.component.html</PackagePath>
+      <Modified>2018-08-28T07:56:01.279</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\pages\test\test.component.html">
       <PackagePath>src\app\pages\test\test.component.html</PackagePath>
       <Modified>2018-08-22T13:32:04.603</Modified>
@@ -553,7 +585,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\index.html">
       <PackagePath>www\index.html</PackagePath>
-      <Modified>2018-08-29T08:40:42.588</Modified>
+      <Modified>2018-09-04T06:10:06.063</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\app.component.spec.ts">
       <PackagePath>src\app\app.component.spec.ts</PackagePath>
@@ -581,7 +613,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\app\services\message.service.ts">
       <PackagePath>src\app\services\message.service.ts</PackagePath>
-      <Modified>2018-08-28T12:48:26.978</Modified>
+      <Modified>2018-09-04T06:01:27.129</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\src\environments\environment.prod.ts">
       <PackagePath>src\environments\environment.prod.ts</PackagePath>
@@ -613,35 +645,35 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\favicon.ico">
       <PackagePath>www\favicon.ico</PackagePath>
-      <Modified>2018-08-29T08:39:24.425</Modified>
+      <Modified>2018-09-04T06:09:21.402</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\3rdpartylicenses.txt">
       <PackagePath>www\3rdpartylicenses.txt</PackagePath>
-      <Modified>2018-08-29T08:39:24.358</Modified>
+      <Modified>2018-09-04T06:09:21.329</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\assets\MusicNotes.svg">
       <PackagePath>www\assets\MusicNotes.svg</PackagePath>
-      <Modified>2018-08-29T08:39:24.381</Modified>
+      <Modified>2018-09-04T06:09:21.360</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.eot">
       <PackagePath>www\MaterialIcons-Regular.eot</PackagePath>
-      <Modified>2018-08-29T08:39:24.362</Modified>
+      <Modified>2018-09-04T06:09:21.334</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.ttf">
       <PackagePath>www\MaterialIcons-Regular.ttf</PackagePath>
-      <Modified>2018-08-29T08:39:24.366</Modified>
+      <Modified>2018-09-04T06:09:21.338</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.woff">
       <PackagePath>www\MaterialIcons-Regular.woff</PackagePath>
-      <Modified>2018-08-29T08:39:24.371</Modified>
+      <Modified>2018-09-04T06:09:21.342</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\www\MaterialIcons-Regular.woff2">
       <PackagePath>www\MaterialIcons-Regular.woff2</PackagePath>
-      <Modified>2018-08-29T08:39:24.375</Modified>
+      <Modified>2018-09-04T06:09:21.355</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\config.xml">
       <PackagePath>config.xml</PackagePath>
-      <Modified>2018-08-29T08:39:24.268</Modified>
+      <Modified>2018-09-04T06:09:21.236</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.17134.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -650,7 +682,7 @@
     <AppxPackagedFile Include="C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\x64\win10\ReverseMap\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2018-08-29T08:40:59.300</Modified>
+      <Modified>2018-09-04T06:10:17.278</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

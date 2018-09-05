@@ -112,9 +112,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             story.modifyTime = 0;
             self.meService.initMe(story);
           })
-          .catch( err => alert(((!!this.pts) ? this.pts.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`));
+          .catch( err => self.msg.alert(((!!this.pts) ? this.pts.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`));
       } else {
-        alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+        self.msg.alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
         return;
       }
     }

@@ -172,7 +172,7 @@ export class MediaEditService {
       self.setPlaybackRateFromFrame();
       self._setiFrame$.next(i);
     } else {
-      alert(`Problem in setiFrame(${i})`);
+      self.msgService.alert(`Problem in setiFrame(${i})`);
     }
   }
 
@@ -189,7 +189,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
-      alert(`Problem in setVolume`);
+      self.msgService.alert(`Problem in setVolume`);
     }
   }
 
@@ -206,7 +206,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {
-      alert(`Problem in setPlaybackRate`);
+      self.msgService.alert(`Problem in setPlaybackRate`);
     }
   }
 
@@ -226,7 +226,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
-      alert(`Problem in setVolume`);
+      self.msgService.alert(`Problem in setVolume`);
     }
   }
 
@@ -246,7 +246,7 @@ export class MediaEditService {
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {
-      alert(`Problem in setPlaybackRate`);
+      self.msgService.alert(`Problem in setPlaybackRate`);
     }
   }
 

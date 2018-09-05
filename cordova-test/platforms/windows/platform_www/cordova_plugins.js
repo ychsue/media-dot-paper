@@ -236,7 +236,8 @@ module.exports.metadata =
     "cordova-plugin-extension": "1.5.4",
     "cordova-plugin-admobpro": "2.31.6",
     "cordova-plugin-tts": "0.2.3",
-    "cordova-plugin-file": "6.0.1"
+    "cordova-plugin-file": "6.0.1",
+    "cordova-plugin-android-permissions": "1.0.0"
 };
 // BOTTOM OF METADATA
 });

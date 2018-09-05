@@ -6,3 +6,6 @@
     <button mat-raised-button (click)="onLoadURL()" >{{(!!pts)?pts.load:'載入'}}</button>
   </div>
 </div>
+<div *ngIf="data.dType===dialogType.alert">
+  <div [innerHTML]="data.msg|safeHtml"></div>
+</div>

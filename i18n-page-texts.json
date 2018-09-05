@@ -36,6 +36,10 @@
     "setSSComp": {
       "selLang": "Select a language for speech synthesis"
     },
+    "fsService": {
+      "fileSaved": "The file {0} have been saved.",
+      "noPermission": "Sorry, because I cannot get your permission, I cannot save the file you want into your device."
+    },
     "iso639": {
       "ab" :	"Abkhaz",
       "aa" :	"Afar",

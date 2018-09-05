@@ -5,6 +5,7 @@ interface IPageTexts {
     storyComp: IStoryComp;
     dialogComp: IDialogComp;
     setSSComp: ISetSSComp;
+    fsService: IFsService;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -43,6 +44,10 @@ interface IDialogComp {
 }
 interface ISetSSComp {
     selLang: string;
+}
+interface IFsService {
+    fileSaved: string;
+    noPermission: string;
 }
 interface IIso639 {
     ab: string;

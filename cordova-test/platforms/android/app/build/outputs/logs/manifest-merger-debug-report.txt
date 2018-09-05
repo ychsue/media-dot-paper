@@ -170,16 +170,16 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\ychsue\.gradle\cache
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:14:42-71
 	android:minSdkVersion
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:14:15-41
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:15:5-81
-	android:name
-		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:15:22-78
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:16:5-79
+ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:15:5-79
 MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\ce22d98a5d9a056057f391bdebb22614\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\ce22d98a5d9a056057f391bdebb22614\AndroidManifest.xml:24:5-79
 	android:name
-		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:16:22-76
+		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:15:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:16:5-81
+	android:name
+		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:16:22-78
 meta-data#android.support.VERSION
 ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6f106678b0b6f7449a7da91b0f69688b\AndroidManifest.xml:23:9-25:38
 MERGED from [com.android.support:support-v4:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\e79d3d9d4bc8bb7bd6c4291830b1506f\AndroidManifest.xml:26:9-28:38

@@ -31,10 +31,12 @@ export class DialogComponent implements OnInit {
 }
 
 export enum DialogType {
-  inputUrl = 0
+  inputUrl = 0,
+  alert = 1
 }
 
 export interface DialogData {
   dType: DialogType;
-  url: string;
+  url?: string;
+  msg?: string;
 }

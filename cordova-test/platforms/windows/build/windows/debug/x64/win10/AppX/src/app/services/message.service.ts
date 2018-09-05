@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { DialogComponent, DialogType } from '../dialog/dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ export class MessageService {
 
   remindMsgIn: Subject<number> = new Subject();
 
-  isShown = false;
+  isShown = true;
 
   private _messages: OneMessage[] = [];
   private _nRead = 0;
@@ -31,9 +33,21 @@ export class MessageService {
     return this._messages.length - this._nRead;
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
-
+  alert(msg: string, alertCallback?: Function, title?: string, buttonName?: string) {
+    if (!!alertCallback === false) {
+      alertCallback = () => {};
+    }
+    if (!!window.cordova === true) {
+      this.dialog.open(DialogComponent, {
+        width: '50%',
+        data: {dType: DialogType.alert, msg: msg}
+      });
+    } else {
+      this.alert(msg);
+    }
+  }
 }
 
 export class OneMessage {

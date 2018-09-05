@@ -471,5 +471,9 @@
     "YE": "Yemen",
     "ZM": "Zambia",
     "ZW": "Zimbabwe"
+  },
+  "fsService": {
+    "fileSaved": "File {0} telah disimpan.",
+    "noPermission": "Maaf, karena saya tidak bisa mendapatkan izin Anda, saya tidak dapat menyimpan file yang Anda inginkan ke perangkat Anda."
   }
 }
