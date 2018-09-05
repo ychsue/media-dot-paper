@@ -180,25 +180,32 @@ export class FsService {
             `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
           }
         }
-      } else if (cordova.platformId === 'android') {
+      } else if (cordova.platformId === 'android' || cordova.platformId === 'osx' || cordova.platformId === 'ios' ) {
         const permissions = cordova.plugins.permissions;
         let action: Promise<AndroidPermissionsState>;
-        // * [2018-09-04 15:21] Check permission at first
-        action = new Promise<AndroidPermissionsState>((res, rej) => {
-          permissions.checkPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
-        });
-        if ((await action).hasPermission === false) {
-          // ** [2018-09-04 15:26] Since out of permission, request for one
+        if (cordova.platformId === 'android') {
+          // * [2018-09-04 15:21] Check permission at first
           action = new Promise<AndroidPermissionsState>((res, rej) => {
-            permissions.requestPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
+            permissions.checkPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
           });
           if ((await action).hasPermission === false) {
-            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
-            return null;
+            // ** [2018-09-04 15:26] Since out of permission, request for one
+            action = new Promise<AndroidPermissionsState>((res, rej) => {
+              permissions.requestPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
+            });
+            if ((await action).hasPermission === false) {
+              self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
+              return null;
+            }
           }
         }
         // * [2018-09-04 15:29] Let me store the file
-        const downloadDir = await self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise();
+        let downloadDir: DirectoryEntry;
+        if (cordova.platformId === 'android') {
+          downloadDir = await self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise();
+        } else {
+          downloadDir = await self.getDir$('', false, false, cordova.file.documentsDirectory).toPromise();
+        }
         if (!!downloadDir) {
           const fileEntry = await self.getFile$(fileName, true, false, downloadDir).toPromise();
           const blob = new Blob([data], {type: 'text/plain'});

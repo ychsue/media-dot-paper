@@ -1,3 +1,6 @@
+* [2018-9-5 Wed] For osx, we can use cordova.file.documentsDirectory directly without any permission
+So, in this commission I just modify one file ~fs.service.ts~ to use the ~Documents~ folder as the folder for sharing files with others.
+
 * [2018-9-5 Wed] At this moment, both windows and android can save files now.
 1. For windows uwp, I chose to use FileSavePicker to deal with this saving file's problem.
 2. For android, I chose to use the plugin ~cordova-plugin-android-permissions~ to deal with this problem.
