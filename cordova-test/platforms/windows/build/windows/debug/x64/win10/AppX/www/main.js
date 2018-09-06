@@ -1270,7 +1270,7 @@ var PlayerComponent = /** @class */ (function () {
         }
     };
     PlayerComponent.prototype.onVideoPlayOrPause = function (ev) {
-        ev.preventDefault();
+        // ev.preventDefault();
         var state = this.meService.state;
         if (state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].readyForPlayer || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay) {
             this.meService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play);
@@ -2005,10 +2005,10 @@ var HomeComponent = /** @class */ (function () {
                     story.modifyTime = 0;
                     self.meService.initMe(story);
                 })
-                    .catch(function (err) { return alert(((!!_this.pts) ? _this.pts.errWrongFormat : "\u8F38\u5165\u7684json\u6A94\u683C\u5F0F\u4E0D\u5408\u3002\u932F\u8AA4\u8A0A\u606F\uFF1A ") + ("" + JSON.stringify(err))); });
+                    .catch(function (err) { return self.msg.alert(((!!_this.pts) ? _this.pts.errWrongFormat : "\u8F38\u5165\u7684json\u6A94\u683C\u5F0F\u4E0D\u5408\u3002\u932F\u8AA4\u8A0A\u606F\uFF1A ") + ("" + JSON.stringify(err))); });
             }
             else {
-                alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+                self.msg.alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
                 return;
             }
         }
@@ -2262,6 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/page-texts.service */ "./src/app/services/page-texts.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _services_fs_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/fs.service */ "./src/app/services/fs.service.ts");
+/* harmony import */ var _services_message_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../services/message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2313,10 +2314,12 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var StoryComponent = /** @class */ (function () {
-    function StoryComponent(meService, ptsService, fs, cdr) {
+    function StoryComponent(meService, ptsService, msg, fs, cdr) {
         this.meService = meService;
         this.ptsService = ptsService;
+        this.msg = msg;
         this.fs = fs;
         this.cdr = cdr;
         this.utterType = _services_story_service__WEBPACK_IMPORTED_MODULE_3__["utterType"];
@@ -2332,13 +2335,14 @@ var StoryComponent = /** @class */ (function () {
         var self = this;
         var a = sender._elementRef.nativeElement;
         if (self.meService.story.meType === _vm_player_type_enum__WEBPACK_IMPORTED_MODULE_2__["PlayerType"].file) {
-            alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
+            self.msg.alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
             return;
         }
         // * [2018-09-04 12:06] Start to store into the file
         if (!!window.cordova === true) {
             e.preventDefault();
-            self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime + self.meService.story.title + '.json');
+            self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime
+                + self.meService.story.title.replace(/\/|\:/g, '_') + '.json');
         }
         else {
             var blob = new Blob([JSON.stringify(self.meService.story)], { type: 'application/json' });
@@ -2387,7 +2391,7 @@ var StoryComponent = /** @class */ (function () {
                 // * [2018-09-04 12:00] The part to store the .SBV file
                 if (!!window.cordova === true) {
                     e.preventDefault();
-                    self.fs.saveTxtFile$$(input, self.meService.story.title + '.sbv');
+                    self.fs.saveTxtFile$$(input, self.meService.story.title.replace(/\/|\:/g, '_') + '.sbv');
                 }
                 else {
                     blob = new Blob([input], { type: 'text/plain' });
@@ -2405,6 +2409,7 @@ var StoryComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MediaEditService"],
             _services_page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"],
+            _services_message_service__WEBPACK_IMPORTED_MODULE_7__["MessageService"],
             _services_fs_service__WEBPACK_IMPORTED_MODULE_6__["FsService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], StoryComponent);
@@ -3367,6 +3372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
+/* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3416,8 +3422,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var FsService = /** @class */ (function () {
-    function FsService(device, msgService) {
+    function FsService(pts, device, msgService) {
+        this.pts = pts;
         this.device = device;
         this.msgService = msgService;
         if (device.isCordova === true) {
@@ -3433,6 +3441,19 @@ var FsService = /** @class */ (function () {
                     return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'filePluginIsReady').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (ev) { return true; }));
                 }
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
+            if (cordova.platformId === 'ios') {
+                // * [2018-09-05 16:04] Try to initialize the socialsharing
+                var action = new Promise(function (res, rej) {
+                    device.onDeviceReady.subscribe(function (_) {
+                        window.plugins.socialsharing.available(function (b) { return res(b); });
+                    });
+                });
+                action.then();
+                // action.then(b => {
+                //   // * [2018-09-05 17:01] ****** TODO ****** dirty start of socialsharing
+                //   if (b) {window.plugins.socialsharing.share('Start'); }
+                // });
+            }
         }
         else {
             this.FSReady$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(false).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
@@ -3456,10 +3477,15 @@ var FsService = /** @class */ (function () {
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])());
         return obs.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
     };
-    FsService.prototype.getDir$ = function (path, create, exclusive) {
+    FsService.prototype.getDir$ = function (path, create, exclusive, fsURL) {
         if (create === void 0) { create = false; }
         if (exclusive === void 0) { exclusive = false; }
         var self = this;
+        if (!!fsURL === true) {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (sub) {
+                window.resolveLocalFileSystemURL(fsURL + path, function (entry) { sub.next(entry); sub.complete(); }, function (err) { return sub.error(err); });
+            });
+        }
         return self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) {
             if (!!fs === false) {
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
@@ -3499,7 +3525,7 @@ var FsService = /** @class */ (function () {
             });
         }
     };
-    FsService.prototype.getFile$ = function (name, create, exclusive) {
+    FsService.prototype.getFile$ = function (name, create, exclusive, dir) {
         if (create === void 0) { create = false; }
         if (exclusive === void 0) { exclusive = false; }
         var self = this;
@@ -3507,7 +3533,8 @@ var FsService = /** @class */ (function () {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(null);
         }
         var obs = self.fs$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (fs) { return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (subs) {
-            fs.root.getFile(name, { create: create, exclusive: exclusive }, function (file) {
+            var dirEntry = (!!dir) ? dir : fs.root;
+            dirEntry.getFile(name, { create: create, exclusive: exclusive }, function (file) {
                 subs.next(file);
                 subs.complete();
             }, subs.error);
@@ -3524,7 +3551,6 @@ var FsService = /** @class */ (function () {
             fEntry.createWriter(function (fWriter) {
                 fWriter.onwriteend = function (e) {
                     subs.next(true);
-                    console.log(e);
                     subs.complete();
                 };
                 fWriter.onerror = subs.error;
@@ -3543,7 +3569,7 @@ var FsService = /** @class */ (function () {
     };
     FsService.prototype.saveTxtFile$$ = function (data, fileName) {
         return __awaiter(this, void 0, void 0, function () {
-            var self, savePicker, iDot, ext, winFile, status_1;
+            var self, savePicker, iDot, ext, winFile, status_1, permissions_1, action, downloadDir, fileEntry, blob, isDone, action, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -3555,7 +3581,7 @@ var FsService = /** @class */ (function () {
                         // * [2018-09-04 11:06] TODO: ignore the case for pure angular project
                         return [2 /*return*/, null];
                     case 1:
-                        if (!(cordova.platformId === 'windows')) return [3 /*break*/, 5];
+                        if (!(cordova.platformId === 'windows')) return [3 /*break*/, 6];
                         savePicker = new Windows.Storage.Pickers.FileSavePicker();
                         savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
                         iDot = fileName.lastIndexOf('.');
@@ -3576,10 +3602,86 @@ var FsService = /** @class */ (function () {
                         status_1 = _a.sent();
                         // *** [2018-09-04 11:55] Alert about your action
                         if (status_1 === Windows.Storage.Provider.FileUpdateStatus.complete) {
-                            self.msgService.alert("File <b style=\"color:red;\">" + fileName + "</b> is saved!");
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
+                                "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
                         }
                         _a.label = 5;
-                    case 5: return [2 /*return*/];
+                    case 5: return [3 /*break*/, 21];
+                    case 6:
+                        if (!(cordova.platformId === 'android' || cordova.platformId === 'osx')) return [3 /*break*/, 17];
+                        permissions_1 = cordova.plugins.permissions;
+                        action = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 9];
+                        // * [2018-09-04 15:21] Check permission at first
+                        action = new Promise(function (res, rej) {
+                            permissions_1.checkPermission(permissions_1.READ_EXTERNAL_STORAGE, res, rej);
+                        });
+                        return [4 /*yield*/, action];
+                    case 7:
+                        if (!((_a.sent()).hasPermission === false)) return [3 /*break*/, 9];
+                        // ** [2018-09-04 15:26] Since out of permission, request for one
+                        action = new Promise(function (res, rej) {
+                            permissions_1.requestPermission(permissions_1.READ_EXTERNAL_STORAGE, res, rej);
+                        });
+                        return [4 /*yield*/, action];
+                    case 8:
+                        if ((_a.sent()).hasPermission === false) {
+                            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
+                            return [2 /*return*/, null];
+                        }
+                        _a.label = 9;
+                    case 9:
+                        downloadDir = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 11];
+                        return [4 /*yield*/, self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise()];
+                    case 10:
+                        downloadDir = _a.sent();
+                        return [3 /*break*/, 13];
+                    case 11: return [4 /*yield*/, self.getDir$('', false, false, cordova.file.documentsDirectory).toPromise()];
+                    case 12:
+                        downloadDir = _a.sent();
+                        _a.label = 13;
+                    case 13:
+                        if (!!!downloadDir) return [3 /*break*/, 16];
+                        return [4 /*yield*/, self.getFile$(fileName, true, false, downloadDir).toPromise()];
+                    case 14:
+                        fileEntry = _a.sent();
+                        blob = new Blob([data], { type: 'text/plain' });
+                        return [4 /*yield*/, self.writeFile$(fileEntry, blob).toPromise()];
+                    case 15:
+                        isDone = _a.sent();
+                        if (isDone) {
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
+                                "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
+                        }
+                        _a.label = 16;
+                    case 16: return [3 /*break*/, 21];
+                    case 17:
+                        if (!(cordova.platformId === 'ios')) return [3 /*break*/, 21];
+                        action = new Promise(function (res, rej) {
+                            window.plugins.socialsharing.available(function (b) { return res(b); });
+                        });
+                        return [4 /*yield*/, action];
+                    case 18:
+                        if (!((_a.sent()) === false)) return [3 /*break*/, 19];
+                        self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.cannotShare : 'Oh, I cannot share the file.');
+                        return [3 /*break*/, 21];
+                    case 19:
+                        action = new Promise(function (res, rej) {
+                            // window.plugins.socialsharing.shareWithOptions({files: fileEntry.toURL()}, res, rej);
+                            window.plugins.socialsharing.shareWithOptions({ message: data }, res, rej);
+                        });
+                        console.log('before sharing');
+                        return [4 /*yield*/, action];
+                    case 20:
+                        result = _a.sent();
+                        console.log(JSON.stringify(result));
+                        if (result.completed === true) {
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.askSavingToFile : '請將取得的文字存到{0}的檔案裡頭，這些文字才能被正確使用。')
+                                .replace('{0}', '<b style="color:red;">' + fileName.substring(fileName.lastIndexOf('.')) + '</b>'));
+                        }
+                        _a.label = 21;
+                    case 21: return [2 /*return*/];
                 }
             });
         });
@@ -3604,7 +3706,8 @@ var FsService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"]])
+        __metadata("design:paramtypes", [_page_texts_service__WEBPACK_IMPORTED_MODULE_5__["PageTextsService"],
+            _device_service__WEBPACK_IMPORTED_MODULE_1__["DeviceService"], _message_service__WEBPACK_IMPORTED_MODULE_4__["MessageService"]])
     ], FsService);
     return FsService;
 }());
@@ -3901,7 +4004,7 @@ var MediaEditService = /** @class */ (function () {
             self._setiFrame$.next(i);
         }
         else {
-            alert("Problem in setiFrame(" + i + ")");
+            self.msgService.alert("Problem in setiFrame(" + i + ")");
         }
     };
     MediaEditService.prototype.setVolumeFromFrame = function () {
@@ -3919,7 +4022,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setVolume);
         }
         else {
-            alert("Problem in setVolume");
+            self.msgService.alert("Problem in setVolume");
         }
     };
     MediaEditService.prototype.setPlaybackRateFromFrame = function () {
@@ -3937,7 +4040,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setPlaybackRate);
         }
         else {
-            alert("Problem in setPlaybackRate");
+            self.msgService.alert("Problem in setPlaybackRate");
         }
     };
     /**
@@ -3958,7 +4061,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setVolume);
         }
         else {
-            alert("Problem in setVolume");
+            self.msgService.alert("Problem in setVolume");
         }
     };
     /**
@@ -3979,7 +4082,7 @@ var MediaEditService = /** @class */ (function () {
             self.onPlayerAction.next(playerAction.setPlaybackRate);
         }
         else {
-            alert("Problem in setPlaybackRate");
+            self.msgService.alert("Problem in setPlaybackRate");
         }
     };
     MediaEditService.prototype.onSaveStory$$ = function () {
@@ -4138,10 +4241,7 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.getNUnRead = function () {
         return this._messages.length - this._nRead;
     };
-    MessageService.prototype.alert = function (msg, alertCallback, title, buttonName) {
-        if (!!alertCallback === false) {
-            alertCallback = function () { };
-        }
+    MessageService.prototype.alert = function (msg) {
         if (!!window.cordova === true) {
             this.dialog.open(_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__["DialogComponent"], {
                 width: '50%',
@@ -4372,6 +4472,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _device_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./device.service */ "./src/app/services/device.service.ts");
 /* harmony import */ var _page_texts_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./page-texts.service */ "./src/app/services/page-texts.service.ts");
+/* harmony import */ var _message_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./message.service */ "./src/app/services/message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4421,8 +4522,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var SpeechSynthesisService = /** @class */ (function () {
-    function SpeechSynthesisService(device, ptsService) {
+    function SpeechSynthesisService(msg, device, ptsService) {
+        this.msg = msg;
         this.device = device;
         this.ptsService = ptsService;
         this._getVoices$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
@@ -4536,7 +4639,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         }
         else {
             if (!!para === false) {
-                alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
+                this.msg.alert("Warning: input of SpeechSynthesisService.speak cannot be " + para);
                 return;
             }
             // * [2018-08-22 19:53] Cancel previous utterance
@@ -4577,7 +4680,7 @@ var SpeechSynthesisService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
+        __metadata("design:paramtypes", [_message_service__WEBPACK_IMPORTED_MODULE_5__["MessageService"], _device_service__WEBPACK_IMPORTED_MODULE_3__["DeviceService"], _page_texts_service__WEBPACK_IMPORTED_MODULE_4__["PageTextsService"]])
     ], SpeechSynthesisService);
     return SpeechSynthesisService;
 }());

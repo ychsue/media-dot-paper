@@ -3,6 +3,7 @@ C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\x64\win10\CordovaApp.Windows10.build.appxrecipe
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\x64\win10\SQLite3.winmd
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\Debug\x64\win10\SQLite3.pri
+C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\CordovaApp.Windows10.jsprojAssemblyReference.cache
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\CordovaApp.Windows10.jsproj.CoreCompileInputs.cache
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\CordovaApp.Windows10.jsproj.CopyComplete
 C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\build\windows\bld\ResourceHandlingTask.state

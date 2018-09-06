@@ -471,5 +471,11 @@
     "YE": "Yemen",
     "ZM": "Zambia",
     "ZW": "Zimbabwe"
+  },
+  "fsService": {
+    "fileSaved": "The file {0} have been saved.",
+    "noPermission": "Sorry, because I cannot get your permission, I cannot save the file you want into your device.",
+    "cannotShare": "Sorry, the sharing is not available at this moment.",
+    "askSavingToFile": "The words you got must be stored in {0} file so that they can be used properly."
   }
 }

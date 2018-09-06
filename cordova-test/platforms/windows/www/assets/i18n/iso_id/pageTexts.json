@@ -474,6 +474,8 @@
   },
   "fsService": {
     "fileSaved": "File {0} telah disimpan.",
-    "noPermission": "Maaf, karena saya tidak bisa mendapatkan izin Anda, saya tidak dapat menyimpan file yang Anda inginkan ke perangkat Anda."
+    "noPermission": "Maaf, karena saya tidak bisa mendapatkan izin Anda, saya tidak dapat menyimpan file yang Anda inginkan ke perangkat Anda.",
+    "cannotShare": "Maaf, pembagian tidak tersedia untuk saat ini.",
+    "askSavingToFile": "Kata-kata yang Anda dapatkan harus disimpan dalam {0} file sehingga mereka dapat digunakan dengan benar."
   }
 }

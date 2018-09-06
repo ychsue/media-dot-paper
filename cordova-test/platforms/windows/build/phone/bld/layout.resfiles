@@ -109,7 +109,6 @@ www\cordova-js-src\confighelper.js
 www\cordova-js-src\exec.js
 www\cordova-js-src\platform.js
 www\cordova-js-src\splashscreen.js
-www\css\notification.css
 www\css\splashscreen.css
 www\favicon.ico
 www\index.html
@@ -122,8 +121,6 @@ www\MaterialIcons-Regular.woff2
 www\plugins\cordova-clipboard\src\windows\ClipboardProxy.js
 www\plugins\cordova-clipboard\www\clipboard.js
 www\plugins\cordova-plugin-admobpro\www\AdMob.js
-www\plugins\cordova-plugin-dialogs\src\windows\NotificationProxy.js
-www\plugins\cordova-plugin-dialogs\www\notification.js
 www\plugins\cordova-plugin-file\src\windows\FileProxy.js
 www\plugins\cordova-plugin-file\www\browser\isChrome.js
 www\plugins\cordova-plugin-file\www\DirectoryEntry.js
@@ -147,9 +144,12 @@ www\plugins\cordova-plugin-file\www\requestFileSystem.js
 www\plugins\cordova-plugin-file\www\resolveLocalFileSystemURI.js
 www\plugins\cordova-plugin-nano-sqlite\plugin.js
 www\plugins\cordova-plugin-tts\www\tts.js
+www\plugins\cordova-plugin-x-socialsharing\src\windows\SocialSharingProxy.js
+www\plugins\cordova-plugin-x-socialsharing\www\SocialSharing.js
 www\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3JS\js\SQLite3.js
 www\plugins\cordova-sqlite-storage\src\windows\sqlite-proxy.js
 www\plugins\cordova-sqlite-storage\www\SQLitePlugin.js
+www\plugins\es6-promise-plugin\www\promise.js
 www\polyfills.js
 www\polyfills.js.map
 www\runtime.js

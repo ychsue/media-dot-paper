@@ -1270,7 +1270,7 @@ var PlayerComponent = /** @class */ (function () {
         }
     };
     PlayerComponent.prototype.onVideoPlayOrPause = function (ev) {
-        ev.preventDefault();
+        // ev.preventDefault();
         var state = this.meService.state;
         if (state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].paused || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].readyForPlayer || state === src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["MEState"].canPlay) {
             this.meService.onPlayerAction.next(src_app_services_media_edit_service__WEBPACK_IMPORTED_MODULE_1__["playerAction"].play);
@@ -3441,6 +3441,19 @@ var FsService = /** @class */ (function () {
                     return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(window, 'filePluginIsReady').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (ev) { return true; }));
                 }
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["concatAll"])()).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
+            if (cordova.platformId === 'ios') {
+                // * [2018-09-05 16:04] Try to initialize the socialsharing
+                var action = new Promise(function (res, rej) {
+                    device.onDeviceReady.subscribe(function (_) {
+                        window.plugins.socialsharing.available(function (b) { return res(b); });
+                    });
+                });
+                action.then();
+                // action.then(b => {
+                //   // * [2018-09-05 17:01] ****** TODO ****** dirty start of socialsharing
+                //   if (b) {window.plugins.socialsharing.share('Start'); }
+                // });
+            }
         }
         else {
             this.FSReady$ = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(false).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["shareReplay"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])());
@@ -3538,7 +3551,6 @@ var FsService = /** @class */ (function () {
             fEntry.createWriter(function (fWriter) {
                 fWriter.onwriteend = function (e) {
                     subs.next(true);
-                    console.log(e);
                     subs.complete();
                 };
                 fWriter.onerror = subs.error;
@@ -3557,7 +3569,7 @@ var FsService = /** @class */ (function () {
     };
     FsService.prototype.saveTxtFile$$ = function (data, fileName) {
         return __awaiter(this, void 0, void 0, function () {
-            var self, savePicker, iDot, ext, winFile, status_1, permissions_1, action, downloadDir, fileEntry, blob, isDone;
+            var self, savePicker, iDot, ext, winFile, status_1, permissions_1, action, downloadDir, fileEntry, blob, isDone, action, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -3594,11 +3606,12 @@ var FsService = /** @class */ (function () {
                                 "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
                         }
                         _a.label = 5;
-                    case 5: return [3 /*break*/, 13];
+                    case 5: return [3 /*break*/, 21];
                     case 6:
-                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 13];
+                        if (!(cordova.platformId === 'android' || cordova.platformId === 'osx')) return [3 /*break*/, 17];
                         permissions_1 = cordova.plugins.permissions;
                         action = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 9];
                         // * [2018-09-04 15:21] Check permission at first
                         action = new Promise(function (res, rej) {
                             permissions_1.checkPermission(permissions_1.READ_EXTERNAL_STORAGE, res, rej);
@@ -3617,23 +3630,58 @@ var FsService = /** @class */ (function () {
                             return [2 /*return*/, null];
                         }
                         _a.label = 9;
-                    case 9: return [4 /*yield*/, self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise()];
+                    case 9:
+                        downloadDir = void 0;
+                        if (!(cordova.platformId === 'android')) return [3 /*break*/, 11];
+                        return [4 /*yield*/, self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise()];
                     case 10:
                         downloadDir = _a.sent();
-                        if (!!!downloadDir) return [3 /*break*/, 13];
+                        return [3 /*break*/, 13];
+                    case 11: return [4 /*yield*/, self.getDir$('', false, false, cordova.file.documentsDirectory).toPromise()];
+                    case 12:
+                        downloadDir = _a.sent();
+                        _a.label = 13;
+                    case 13:
+                        if (!!!downloadDir) return [3 /*break*/, 16];
                         return [4 /*yield*/, self.getFile$(fileName, true, false, downloadDir).toPromise()];
-                    case 11:
+                    case 14:
                         fileEntry = _a.sent();
                         blob = new Blob([data], { type: 'text/plain' });
                         return [4 /*yield*/, self.writeFile$(fileEntry, blob).toPromise()];
-                    case 12:
+                    case 15:
                         isDone = _a.sent();
                         if (isDone) {
                             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
                                 "\u6A94\u6848 {0} \u5DF2\u7D93\u5B58\u597D\u4E86").replace('{0}', "<b style=\"color:red;\">" + fileName + "</b>"));
                         }
-                        _a.label = 13;
-                    case 13: return [2 /*return*/];
+                        _a.label = 16;
+                    case 16: return [3 /*break*/, 21];
+                    case 17:
+                        if (!(cordova.platformId === 'ios')) return [3 /*break*/, 21];
+                        action = new Promise(function (res, rej) {
+                            window.plugins.socialsharing.available(function (b) { return res(b); });
+                        });
+                        return [4 /*yield*/, action];
+                    case 18:
+                        if (!((_a.sent()) === false)) return [3 /*break*/, 19];
+                        self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.cannotShare : 'Oh, I cannot share the file.');
+                        return [3 /*break*/, 21];
+                    case 19:
+                        action = new Promise(function (res, rej) {
+                            // window.plugins.socialsharing.shareWithOptions({files: fileEntry.toURL()}, res, rej);
+                            window.plugins.socialsharing.shareWithOptions({ message: data }, res, rej);
+                        });
+                        console.log('before sharing');
+                        return [4 /*yield*/, action];
+                    case 20:
+                        result = _a.sent();
+                        console.log(JSON.stringify(result));
+                        if (result.completed === true) {
+                            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.askSavingToFile : '請將取得的文字存到{0}的檔案裡頭，這些文字才能被正確使用。')
+                                .replace('{0}', '<b style="color:red;">' + fileName.substring(fileName.lastIndexOf('.')) + '</b>'));
+                        }
+                        _a.label = 21;
+                    case 21: return [2 /*return*/];
                 }
             });
         });

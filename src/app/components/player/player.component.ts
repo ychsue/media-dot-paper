@@ -331,7 +331,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   onVideoPlayOrPause(ev: MouseEvent) {
-    ev.preventDefault();
+    // ev.preventDefault();
     const state = this.meService.state;
     if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
       this.meService.onPlayerAction.next(playerAction.play);

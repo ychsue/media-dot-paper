@@ -184,6 +184,10 @@
         "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\441cf6f2bfd6d8fdbb52b0255a0f33d6\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
+        "merged": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_sharing_paths.xml.flat",
+        "source": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\src\\main\\res\\xml\\sharing_paths.xml"
+    },
+    {
         "merged": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_normal_pressed.9.png.flat",
         "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\441cf6f2bfd6d8fdbb52b0255a0f33d6\\res\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png"
     },

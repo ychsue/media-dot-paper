@@ -46,12 +46,30 @@
             android:exported="false"
             android:theme="@android:style/Theme.Translucent" />
 
-        <meta-data
-            android:name="android.support.VERSION"
-            android:value="26.1.0" />
+        <receiver
+            android:name="nl.xservices.plugins.ShareChooserPendingIntent"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="nl.xservices.plugins.FileProvider"
+            android:authorities="io.cordova.hellocordova.sharing.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/sharing_paths" />
+        </provider>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="android.support.VERSION"
+            android:value="26.1.0" />
         <meta-data
             android:name="android.arch.lifecycle.VERSION"
             android:value="27.0.0-SNAPSHOT" />

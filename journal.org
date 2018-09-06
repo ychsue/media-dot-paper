@@ -1,3 +1,5 @@
+* [2018-9-6 Thu] Testing socialsharing in windows and android. Looks like that it can coexist with my code.
+
 * [2018-9-5 Wed] For ios, ~cordova-plugin-x-socialsharing~ does not work correctly.
 Because the user cannot get the file directly from the folder in ios, I decided to use the plugin ~socialsharing~.
 However, it will crash at the first time loading and sharing file in my App will crash.
