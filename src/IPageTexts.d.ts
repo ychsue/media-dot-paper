@@ -6,6 +6,7 @@ interface IPageTexts {
     dialogComp: IDialogComp;
     setSSComp: ISetSSComp;
     fsService: IFsService;
+    meMainPlateComp: IMeMainPlateComp;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -50,6 +51,9 @@ interface IFsService {
     noPermission: string;
     cannotShare: string;
     askSavingToFile: string;
+}
+interface IMeMainPlateComp {
+    isUtterSubtitle: string;
 }
 interface IIso639 {
     ab: string;

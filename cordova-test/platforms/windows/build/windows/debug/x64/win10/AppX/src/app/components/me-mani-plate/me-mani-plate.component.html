@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="flex">
-                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary">
-                    語音模擬字幕？
+                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" class="subtitle-shadow" (change)="HideShow='show';subtitleInput.focus();">
+                    {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
                 </mat-slide-toggle>
                 <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">
                 <mat-icon class="mat-18">build</mat-icon>

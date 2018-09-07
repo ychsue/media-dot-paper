@@ -42,6 +42,9 @@
             "cannotShare": "Sorry, the sharing is not available at this moment.",
             "askSavingToFile": "The words you got must be stored in {0} file so that they can be used properly."
         },
+        "meMainPlateComp": {
+            "isUtterSubtitle": "Do you want to utter your input?"
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

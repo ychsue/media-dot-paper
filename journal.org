@@ -1,3 +1,9 @@
+* [2018-9-7 Fri] About transition -> animate, the delay part will affect the previous one.
+Because when the user touch the screen, it will trigger the state 'show' first and change to 'hide' immediately.
+Well, you'll see that it shows up in a very low pace as the time period of delay of state 'hide'.
+So, I use ~await of(true).pipe(delay(300)).toPromise()~ for changing to state 'hide' so that the whole process of the state 'show' can be finished.
+By the way, I have applied a web URL as ~yescirculation.at.tw~ and apply an id from google play.
+
 * [2018-9-6 Thu] Testing socialsharing in windows and android. Looks like that it can coexist with my code.
 
 * [2018-9-5 Wed] For ios, ~cordova-plugin-x-socialsharing~ does not work correctly.

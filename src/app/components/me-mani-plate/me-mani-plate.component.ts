@@ -1,10 +1,11 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
-import { Subject, interval } from '../../../../node_modules/rxjs';
+import { Subject, interval, of } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, concatAll, takeUntil, auditTime, withLatestFrom, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { map, concatAll, takeUntil, auditTime, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay } from 'rxjs/operators';
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
+import { PageTextsService } from '../../services/page-texts.service';
 
 @Component({
   selector: 'app-me-mani-plate',
@@ -32,7 +33,7 @@ import { SSutterParameters, SpeechSynthesisService } from '../../services/speech
       state('show', style({opacity: 1})),
       state('hide', style({opacity: 0})),
       transition('hide => show', [animate('0.2s 0.1s ease-in', style({opacity: 1}))]),
-      transition('show => hide', [animate('4s 2s ease-out', style({opacity: 0}))]),
+      transition('show => hide', [animate('0.2s 3.8s ease-out', style({opacity: 0}))]),
     ])
   ]
 })
@@ -61,8 +62,14 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   startChanged$ = new Subject<PointerEvent>();
   endChanged$ = new Subject<PointerEvent>();
 
-  constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService,
+  pts: IMeMainPlateComp;
+
+  constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
     private device: DeviceService) {
+      const self = this;
+      ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
+        self.pts = ptsService.pts.meMainPlateComp;
+      });
     }
 
   ngOnInit() {
@@ -205,8 +212,9 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.SSService.speak(this.utterPara);
   }
 
-  onPointLeave(e: PointerEvent) {
+  async onPointLeave(e: PointerEvent) {
     if (this.isSubtitleClicked === false) {
+      await of(true).pipe(delay(300)).toPromise();
       this.HideShow = 'hide';
     }
   }
