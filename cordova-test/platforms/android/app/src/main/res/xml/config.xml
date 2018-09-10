@@ -1,12 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="SQLitePlugin">
-        <param name="android-package" value="io.sqlc.SQLitePlugin" />
-    </feature>
+<widget id="tw.at.yescirculation.mediadotpaper" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Clipboard">
         <param name="android-package" value="com.verso.cordova.clipboard.Clipboard" />
     </feature>
@@ -14,27 +7,34 @@
         <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
-    <feature name="Permissions">
-        <param name="android-package" value="com.android.plugins.Permissions" />
-    </feature>
     <feature name="FileOpener2">
         <param name="android-package" value="io.github.pwlin.cordova.plugins.fileopener2.FileOpener2" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="io.sqlc.SQLitePlugin" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
     </feature>
     <feature name="TTS">
         <param name="android-package" value="com.wordsbaking.cordova.tts.TTS" />
         <param name="onload" value="true" />
     </feature>
-    <name>HelloCordova</name>
+    <name>MediaDotPaper</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        My first cordova App to help people to add some extra functions to their medias.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="yescirculation@gmail.com" href="http://yescirculation.at.tw">
+        Yes Circulation
     </author>
     <content src="index.html" />
     <access origin="*" />

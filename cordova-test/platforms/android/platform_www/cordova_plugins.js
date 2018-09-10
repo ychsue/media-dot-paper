@@ -1,22 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
-    "id": "cordova-sqlite-storage.SQLitePlugin",
-    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-    "pluginId": "cordova-sqlite-storage",
-    "clobbers": [
-      "SQLitePlugin"
-    ]
-  },
-  {
-    "id": "cordova-plugin-nano-sqlite.nSQLite",
-    "file": "plugins/cordova-plugin-nano-sqlite/plugin.js",
-    "pluginId": "cordova-plugin-nano-sqlite",
-    "clobbers": [
-      "nSQLite"
-    ]
-  },
-  {
     "id": "cordova-clipboard.Clipboard",
     "file": "plugins/cordova-clipboard/www/clipboard.js",
     "pluginId": "cordova-clipboard",
@@ -33,11 +17,11 @@ module.exports = [
     ]
   },
   {
-    "id": "cordova-plugin-tts.tts",
-    "file": "plugins/cordova-plugin-tts/www/tts.js",
-    "pluginId": "cordova-plugin-tts",
+    "id": "cordova-plugin-android-permissions.Permissions",
+    "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+    "pluginId": "cordova-plugin-android-permissions",
     "clobbers": [
-      "TTS"
+      "cordova.plugins.permissions"
     ]
   },
   {
@@ -214,51 +198,51 @@ module.exports = [
     "runs": true
   },
   {
-    "id": "cordova-plugin-android-permissions.Permissions",
-    "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
-    "pluginId": "cordova-plugin-android-permissions",
-    "clobbers": [
-      "cordova.plugins.permissions"
-    ]
-  },
-  {
-    "id": "es6-promise-plugin.Promise",
-    "file": "plugins/es6-promise-plugin/www/promise.js",
-    "pluginId": "es6-promise-plugin",
-    "runs": true
-  },
-  {
-    "id": "cordova-plugin-x-socialsharing.SocialSharing",
-    "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
-    "pluginId": "cordova-plugin-x-socialsharing",
-    "clobbers": [
-      "window.plugins.socialsharing"
-    ]
-  },
-  {
     "id": "cordova-plugin-file-opener2.FileOpener2",
     "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
     "pluginId": "cordova-plugin-file-opener2",
     "clobbers": [
       "cordova.plugins.fileOpener2"
     ]
+  },
+  {
+    "id": "cordova-sqlite-storage.SQLitePlugin",
+    "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
+    "pluginId": "cordova-sqlite-storage",
+    "clobbers": [
+      "SQLitePlugin"
+    ]
+  },
+  {
+    "id": "cordova-plugin-nano-sqlite.nSQLite",
+    "file": "plugins/cordova-plugin-nano-sqlite/plugin.js",
+    "pluginId": "cordova-plugin-nano-sqlite",
+    "clobbers": [
+      "nSQLite"
+    ]
+  },
+  {
+    "id": "cordova-plugin-tts.tts",
+    "file": "plugins/cordova-plugin-tts/www/tts.js",
+    "pluginId": "cordova-plugin-tts",
+    "clobbers": [
+      "TTS"
+    ]
   }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-  "cordova-plugin-whitelist": "1.3.3",
-  "cordova-sqlite-storage": "2.3.0",
-  "cordova-plugin-nano-sqlite": "1.3.0",
   "cordova-clipboard": "1.2.1",
   "cordova-plugin-extension": "1.5.4",
   "cordova-plugin-admobpro": "2.31.6",
-  "cordova-plugin-tts": "0.2.3",
-  "cordova-plugin-file": "6.0.1",
   "cordova-plugin-android-permissions": "1.0.0",
-  "es6-promise-plugin": "4.2.2",
-  "cordova-plugin-x-socialsharing": "5.4.1",
-  "cordova-plugin-file-opener2": "2.0.19"
+  "cordova-plugin-file": "6.0.1",
+  "cordova-plugin-file-opener2": "2.0.19",
+  "cordova-sqlite-storage": "2.3.0",
+  "cordova-plugin-nano-sqlite": "1.3.0",
+  "cordova-plugin-tts": "0.2.3",
+  "cordova-plugin-whitelist": "1.3.3"
 };
 // BOTTOM OF METADATA
 });

@@ -7,37 +7,37 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-nano-sqlite": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-clipboard": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-admobpro": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-tts": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-file-opener2": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-tts": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-extension": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   }
 }

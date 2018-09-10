@@ -7,6 +7,8 @@ I'm not sure.
 
 3. Now I'm installing the update of Android SDK 28, I'm not sure whether it can work.
 
+4. Finally, I did not install that plugin and just add a new file ~gradle.properties~ to set ~cdvCompileSdkVersion=android-28~ as describe in [[https://cordova.apache.org/docs/en/latest/guide/platforms/android/][Cordova's Guide]] and some other discussions and it works!
+
 * [2018-9-10 Mon] Change to use file-opener2 for ios 
 1. Since that, I removed cordova-plugin-x-socialsharing since ~file-opener2~ will do similar job.
 

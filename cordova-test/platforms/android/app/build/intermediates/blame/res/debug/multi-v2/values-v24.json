@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.1.0.aar\\dad37e6e51498e0dd960f2e9a96e244f\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-28.0.0-rc02.aar\\ce4af0f9b590f4fc503f417f1dc54b47\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

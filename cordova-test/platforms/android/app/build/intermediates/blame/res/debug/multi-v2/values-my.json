@@ -4,6 +4,23 @@
             "outputFile": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-my\\values-my.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-28.0.0-rc02.aar\\2ee8a9ce83169d827250bebf8e3c08e9\\res\\values-my\\values-my.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "959",
+                        "endColumns": "100",
+                        "endOffsets": "1055"
+                    }
+                },
+                {
                     "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-15.0.1.aar\\4c02e7389697561b8aa28c379332116d\\res\\values-my\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -18,23 +35,6 @@
                         "startOffsets": "105",
                         "endColumns": "212",
                         "endOffsets": "313"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\ychsue\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\441cf6f2bfd6d8fdbb52b0255a0f33d6\\res\\values-my\\values-my.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "959",
-                        "endColumns": "100",
-                        "endOffsets": "1055"
                     }
                 },
                 {

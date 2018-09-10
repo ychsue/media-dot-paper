@@ -40,10 +40,10 @@
         },
         "platforms": [
             "windows",
-            "android",
             "browser",
             "ios",
-            "osx"
+            "osx",
+            "android"
         ]
     }
 }
