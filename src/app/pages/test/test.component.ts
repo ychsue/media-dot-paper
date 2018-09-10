@@ -42,7 +42,7 @@ export class TestComponent implements OnInit {
     this.fsService.ls$('').subscribe(entries => self.entries = entries);
   }
 
-  async onSelFileChange(files: FileList, obj: object) {
+  async onSelFileChange(files: FileList) {
     const file = files[0];
     const self = this;
     if (!!file === false) { return; }
