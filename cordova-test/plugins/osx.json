@@ -25,7 +25,7 @@
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-x-socialsharing": {
+    "cordova-plugin-file-opener2": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   },
@@ -34,9 +34,6 @@
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "es6-promise-plugin": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     }
   }

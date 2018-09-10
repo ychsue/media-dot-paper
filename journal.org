@@ -1,3 +1,10 @@
+* [2018-9-10 Mon] Change to use file-opener2 for ios 
+1. Since that, I removed cordova-plugin-x-socialsharing since ~file-opener2~ will do similar job.
+
+2. By the way, using ~cordova prepare osx~ and then compiling it in XCode can load all plugins correctly in OSX.
+
+3. Because the filePath will be encoded before sending to ~file-opener2~, I need to ~decodeURIComponent(filePaht)~ before sending to it. After this modification, it works fine in iOS now.
+
 * [2018-9-7 Fri] About transition -> animate, the delay part will affect the previous one.
 Because when the user touch the screen, it will trigger the state 'show' first and change to 'hide' immediately.
 Well, you'll see that it shows up in a very low pace as the time period of delay of state 'hide'.

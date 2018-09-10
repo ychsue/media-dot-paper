@@ -228,6 +228,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onShowSetSS(e: MouseEvent) {
     this.isSSShown = true;
+    this.HideShow = 'show';
   }
 
   updateUtterParaOfAFrame(iFrame: number = 0) {

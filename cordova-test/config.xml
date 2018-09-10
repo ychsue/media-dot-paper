@@ -28,7 +28,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="AllowInlineMediaPlayback" value="true" />
-        <preference name="iosPersistentFileLocation" value="Library" />
+        <preference name="iosPersistentFileLocation" value="Compatibility" />
     </platform>
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-nano-sqlite" spec="~1.4.0" />
@@ -37,7 +37,7 @@
     <plugin name="cordova-clipboard" spec="^1.2.1" />
     <plugin name="cordova-plugin-admobpro" spec="^2.31.6" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
-    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
+    <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
     <engine name="windows" spec="^5.0.0" />
     <engine name="android" spec="^7.0.0" />
     <engine name="browser" spec="^5.0.3" />

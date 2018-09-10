@@ -52,7 +52,7 @@ export class StoryComponent implements OnInit {
     if (!!window.cordova === true) {
       e.preventDefault();
       self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime
-        + self.meService.story.title.replace(/\/|\:/g, '_') + '.json');
+        + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
     } else {
       const blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
       this.downloadHref = URL.createObjectURL(blob);
@@ -100,7 +100,7 @@ export class StoryComponent implements OnInit {
     // * [2018-09-04 12:00] The part to store the .SBV file
     if (!!window.cordova === true) {
       e.preventDefault();
-      self.fs.saveTxtFile$$(input, self.meService.story.title.replace(/\/|\:/g, '_') + '.sbv');
+      self.fs.saveTxtFile$$(input, self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
     } else {
       const blob = new Blob([input], {type: 'text/plain'});
       this.downloadSBVHref = URL.createObjectURL(blob);
