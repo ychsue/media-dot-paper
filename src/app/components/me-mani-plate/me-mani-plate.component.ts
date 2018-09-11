@@ -213,7 +213,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async onPointLeave(e: PointerEvent) {
-    if (this.isSubtitleClicked === false) {
+    await of(1).pipe(delay(100)).toPromise(); // for document.activeElement works correctly.
+    if (document.activeElement.localName !== "textarea" && this.isSubtitleClicked === false) {
       await of(true).pipe(delay(300)).toPromise();
       this.HideShow = 'hide';
     }

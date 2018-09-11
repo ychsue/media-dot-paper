@@ -1,3 +1,10 @@
+* [2018-9-11 Tue] Using ~document.activeElement~ to check whether the textarea is focused.
+1. Remember that, it takes time to get focus, so I use an ~await~ about 100ms before checking it.
+    Not so beautiful solution. If I can get its event will be better.
+    a. Remember that, once you ~cordova platform add android~, copy the file ~gradle.properties~ to ~./platforms/android~.
+
+2. Now I want to generate icons automatically.
+
 * [2018-9-10 Mon] Now I'm stuck in building for Android.
 1. As [[https://stackoverflow.com/questions/49208772/error-resource-androidattr-fontvariationsettings-not-found][this StackOverflow's Q&A]] mentioned, I need to install the plugin ~cordova-android-support-gradle-release~ so that I can pass the problem coming from gradle.
 However, I have no luck. Maybe my version of Android SDK is too old and I need to update it?

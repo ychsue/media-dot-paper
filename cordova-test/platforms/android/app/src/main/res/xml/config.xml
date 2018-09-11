@@ -52,4 +52,5 @@
     <preference name="loglevel" value="DEBUG" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,root" />
+    <preference name="android-minSdkVersion" value="28" />
 </widget>
