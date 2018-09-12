@@ -7,13 +7,13 @@
 
     For more information on package manifest files, see http://go.microsoft.com/fwlink/?LinkID=241727
   -->
-  <Identity Name="io.cordova.hellocordova" Publisher="CN=Apache Cordova Team" Version="1.0.0.0" ProcessorArchitecture="x64" />
+  <Identity Name="tw.at.yescirculation.mediadotpaper" Publisher="CN=Apache Cordova Team" Version="2018.912.1.0" ProcessorArchitecture="x64" />
   <mp:PhoneIdentity PhoneProductId="dae16ff0-6570-11e8-94bf-d57c735276d9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>HelloCordova</DisplayName>
-    <PublisherDisplayName>Apache Cordova Team</PublisherDisplayName>
+    <DisplayName>MediaDotPaper</DisplayName>
+    <PublisherDisplayName>Yes Circulation</PublisherDisplayName>
     <Logo>images\StoreLogo.png</Logo>
-    <Description>A sample Apache Cordova application that responds to the deviceready event.</Description>
+    <Description>My first cordova App to help people to add some extra functions to their medias.</Description>
   </Properties>
   <Dependencies>
     <TargetDeviceFamily MaxVersionTested="10.0.17134.0" MinVersion="10.0.10240.0" Name="Windows.Universal" />
@@ -24,10 +24,15 @@
     <Resource Language="EN-US" />
   </Resources>
   <Applications>
-    <Application Id="io.cordova.hellocordova" StartPage="ms-appx-web://io.cordova.hellocordova/www/index.html">
-      <uap:VisualElements BackgroundColor="#464646" Description="A sample Apache Cordova application that responds to the deviceready event." DisplayName="HelloCordova" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
+    <Application Id="tw.at.yescirculation.mediadotpaper" StartPage="ms-appx-web://tw.at.yescirculation.mediadotpaper/www/index.html">
+      <uap:VisualElements BackgroundColor="#464646" Description="My first cordova App to help people to add some extra functions to their medias." DisplayName="MediaDotPaper" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
         <uap:SplashScreen Image="images\splashscreen.png" />
-        <uap:DefaultTile ShortName="HelloCordova" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png"></uap:DefaultTile>
+        <uap:DefaultTile ShortName="Media Dot Paper" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png" Wide310x150Logo="images\Wide310x150Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="landscape" />

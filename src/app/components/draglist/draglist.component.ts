@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angu
 import { IStory } from '../../services/story.service';
 import { Subject, of, Subscription } from '../../../../node_modules/rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concatAll, concat, withLatestFrom, debounce, debounceTime, merge } from '../../../../node_modules/rxjs/operators';
+import { map, takeUntil, concatAll, concat, withLatestFrom, debounce, debounceTime, merge, first, delay } from 'rxjs/operators';
 import { CrossCompService } from '../../services/cross-comp.service';
 
 @Component({
@@ -45,7 +45,10 @@ export class DraglistComponent implements OnInit, OnDestroy {
     // Get the movingX and final V_x
     self._subSwap = self.contentPointerdown$.pipe(
       map( _ => self.deviceService.onPointermove$.pipe(
-        takeUntil(self.deviceService.onPointerup$),
+        takeUntil(self.deviceService.onPointerup$.pipe(merge(
+          self.deviceService.onPointermove$.pipe(first(), delay(1000))
+          )
+        )),
         // takeUntil(self.deviceService.onPointermove$.pipe(
         //   debounceTime(400),
         //   merge(self.deviceService.onPointerup$)

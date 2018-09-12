@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, Subject, of } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concat, concatAll, withLatestFrom } from 'rxjs/operators';
+import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge } from 'rxjs/operators';
 
 @Component({
   selector: 'app-swap-icon',
@@ -47,7 +47,10 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     // Get the movingX and final V_x
     self._subSwap = self.contentPointerdown$.pipe(
       map( _ => self.deviceService.onPointermove$.pipe(
-        takeUntil(self.deviceService.onPointerup$),
+        takeUntil(self.deviceService.onPointerup$.pipe(merge(
+          self.deviceService.onPointermove$.pipe(first(), delay(1000))
+          )
+        )),
         concat(of({timeStamp: 0, movementY: 0, screenY: -1000}))
       )),
       concatAll(),

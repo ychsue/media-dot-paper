@@ -95,7 +95,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     self.meService.requestMediaReady$.pipe(takeUntil(self.unSubscribed))
       .subscribe(_ => {
         let isReady = false;
-        if (self.meService.story.meType === PlayerType.youtubeID) {
+        if (self.meService.story.meType === PlayerType.youtubeID && !!self.YTservice.ytPlayer === true) {
           isReady = self.YTservice.ytPlayer.getPlayerState() >= 0;
         } else {
           isReady = self.videoEle.readyState === 4;
@@ -279,7 +279,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     .subscribe( (ev) => {
       if (self.meService.story.modifyTime === 0) {
         const data = (self.YTservice.ytPlayer as any).getVideoData();
-        if (!!data && !!data.title) {
+        if (self.meService.story.makeTime === self.meService.lastTimeCallInitMeFromUrl && !!data && !!data.title) {
           self.meService.story.name = data.title;
         }
       }

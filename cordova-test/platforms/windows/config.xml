@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="tw.at.yescirculation.mediadotpaper" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="tw.at.yescirculation.mediadotpaper" version="2018.912.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>MediaDotPaper</name>
     <description>
-        My first cordova App to help people to add some extra functions to their media.
+        My first cordova App to help people to add some extra functions to their medias.
     </description>
     <author email="yescirculation@gmail.com" href="http://yescirculation.at.tw">
         Yes Circulation

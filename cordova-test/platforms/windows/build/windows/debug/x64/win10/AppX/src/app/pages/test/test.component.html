@@ -7,7 +7,7 @@
     <button (click)="onSpeak(ssInput.value)">play</button>
 </div>
 
-<input #selFile type="file" multiple (change)="onSelFileChange(selFile.files,$event.target === audioFile)">
+<input #selFile type="file" multiple (change)="onSelFileChange(selFile.files)">
 <!-- list of files -->
 <mat-list dense *ngIf="!!entries">
     <app-draglist *ngFor="let entry of entries"

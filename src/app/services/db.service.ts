@@ -84,10 +84,11 @@ export class DbService {
 
     this.msgService.pushMessage({type: MessageTypes.Info, message: buf.toString() });
 
-    let rows = await nSQL(DbService.storyTableName).query('select', ['COUNT(*) AS count']).exec();
+    let rows: any;
+    rows = await nSQL(DbService.storyTableName).query('select', ['COUNT(*) AS count']).exec();
     if (!!rows[0].count && rows[0].count > 0) {
     } else {
-      rows = await this.upsertAsync();
+      // rows = await this.upsertAsync(); // Windows uwp doesn't like it
     }
     this.msgService.pushMessage({type: MessageTypes.Info, message: JSON.stringify(rows) });
 

@@ -90,6 +90,8 @@ export class MediaEditService {
 
   repeatStart$ = new Subject<number>();
 
+  lastTimeCallInitMeFromUrl = 0;
+
   pts: IPageTexts;
   constructor(private adService: AdService,
               private fsService: FsService,
@@ -125,6 +127,7 @@ export class MediaEditService {
     } else {
       if ((typeof data) === 'string') {
         this.story = new Story(this.pts);
+        this.lastTimeCallInitMeFromUrl = this.story.makeTime;
         this.story.meType = PlayerType.url;
       } else if (!!data['makeTime']) {
         this.story = data as IStory;

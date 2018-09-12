@@ -1,3 +1,9 @@
+* [2018-9-12 Wed] I have given it a version and it does really change the version shown in windows uwp.
+Windows uwp can generate all icons automatically; however, some of them are too small.
+Owing to the benefit of git, I can change some of them back to its original one.
+
+By the way, I also try to let Youtube to change the name just when the video is just initialized from url string not from other types.
+
 * [2018-9-12 Wed] After installing cordova-icon and cordova-splash, I can generate the icons automatically.
 Remember that, I change the widget id of cordova so I need to remove ~ios~ and ~osx~ at first and then add them in again.
 

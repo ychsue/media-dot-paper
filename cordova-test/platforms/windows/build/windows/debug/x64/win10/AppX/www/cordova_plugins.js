@@ -226,24 +226,20 @@ module.exports = [
         "runs": true
     },
     {
-        "id": "es6-promise-plugin.Promise",
-        "file": "plugins/es6-promise-plugin/www/promise.js",
-        "pluginId": "es6-promise-plugin",
-        "runs": true
-    },
-    {
-        "id": "cordova-plugin-x-socialsharing.SocialSharing",
-        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
-        "pluginId": "cordova-plugin-x-socialsharing",
+        "id": "cordova-plugin-file-opener2.FileOpener2",
+        "file": "plugins/cordova-plugin-file-opener2/www/plugins.FileOpener2.js",
+        "pluginId": "cordova-plugin-file-opener2",
         "clobbers": [
-            "window.plugins.socialsharing"
+            "cordova.plugins.fileOpener2"
         ]
     },
     {
-        "id": "cordova-plugin-x-socialsharing.SocialSharingProxy",
-        "file": "plugins/cordova-plugin-x-socialsharing/src/windows/SocialSharingProxy.js",
-        "pluginId": "cordova-plugin-x-socialsharing",
-        "runs": true
+        "id": "cordova-plugin-file-opener2.fileOpener2Proxy",
+        "file": "plugins/cordova-plugin-file-opener2/src/windows/fileOpener2Proxy.js",
+        "pluginId": "cordova-plugin-file-opener2",
+        "merges": [
+            ""
+        ]
     }
 ];
 module.exports.metadata = 
@@ -258,8 +254,7 @@ module.exports.metadata =
     "cordova-plugin-tts": "0.2.3",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-android-permissions": "1.0.0",
-    "es6-promise-plugin": "4.2.2",
-    "cordova-plugin-x-socialsharing": "5.4.1"
+    "cordova-plugin-file-opener2": "2.0.19"
 };
 // BOTTOM OF METADATA
 });
