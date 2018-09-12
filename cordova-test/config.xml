@@ -41,7 +41,7 @@
     <plugin name="cordova-plugin-file-opener2" spec="^2.0.19" />
     <engine name="windows" spec="^5.0.0" />
     <engine name="browser" spec="^5.0.3" />
-    <engine name="ios" spec="^4.5.5" />
-    <engine name="osx" spec="^4.0.2" />
     <engine name="android" spec="^7.0.0" />
+    <engine name="osx" spec="^4.0.2" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>

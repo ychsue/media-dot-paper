@@ -1,5 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-me-main-dashboard',
@@ -19,7 +20,8 @@ export class MeMainDashboardComponent implements OnInit {
     this._action = v;
   }
 
-  constructor(public meService: MediaEditService, private nZone: NgZone) { }
+  constructor(public meService: MediaEditService, public msg: MessageService,
+     private nZone: NgZone) { }
 
   ngOnInit() {
   }
@@ -36,7 +38,16 @@ export class MeMainDashboardComponent implements OnInit {
     });
   }
 
-  onChangeCurrentTime(ev: MouseEvent, evOf: Element) {
+  async onChangeCurrentTime(ev: MouseEvent, evOf: Element) {
+    // * [2018-09-12 11:21] Used to avoid to seekTime when it is not ready
+    const self = this;
+    const state = this.meService.state;
+    console.log(state);
+    if (await self.meService.canGetCurrentTime$$() === false  ) {
+          self.msg.alert('Sorry, it is not ready. Please wait.');
+        return;
+    }
+
     // * [2018-07-23 11:35] since the support of ev.layerX for mobile is unknown, I tried to get them
     // const target = ev.target as Element;
     const target = evOf;

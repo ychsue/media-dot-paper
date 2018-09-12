@@ -91,6 +91,17 @@ export class PlayerComponent implements OnInit, OnDestroy {
         self.initMe();
       }
     });
+    // * [2018-09-12 13:21] Check whether the media is ready
+    self.meService.requestMediaReady$.pipe(takeUntil(self.unSubscribed))
+      .subscribe(_ => {
+        let isReady = false;
+        if (self.meService.story.meType === PlayerType.youtubeID) {
+          isReady = self.YTservice.ytPlayer.getPlayerState() >= 0;
+        } else {
+          isReady = self.videoEle.readyState === 4;
+        }
+        self.meService.responseMediaReady$.next(isReady);
+    });
     // * [2018-07-21 19:44] For CurrentTime
     self.meService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
@@ -310,6 +321,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   initMe() {
     // ******* TODO *******
+    const self = this;
     const meType = this.meService.story.meType;
     const urlOrId = this.meService.story.urlOrID;
     if (meType ===  PlayerType.url) {
@@ -318,6 +330,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
         this.videoSrc = urlOrId;
+        // * [2018-09-12 11:48] It might have been loaded
+        if (this.videoEle.readyState === 4) {
+          setTimeout(() => {
+            self.meService.state = MEState.paused;
+          }, 10);
+        }
       }
     } else if (meType === PlayerType.youtubeID) {
       if (YoutubeService.isYoutubeURL(urlOrId)) {
@@ -327,7 +345,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
       }
     } else if (meType === PlayerType.file) {
       this.videoSrc = urlOrId;
-    }
+        // * [2018-09-12 11:48] It might have been loaded
+        if (this.videoEle.readyState === 4) {
+          setTimeout(() => {
+            self.meService.state = MEState.paused;
+          }, 10);
+      }
+  }
   }
 
   onVideoPlayOrPause(ev: MouseEvent) {

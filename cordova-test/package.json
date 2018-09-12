@@ -41,9 +41,9 @@
         "platforms": [
             "windows",
             "browser",
-            "ios",
+            "android",
             "osx",
-            "android"
+            "ios"
         ]
     }
 }

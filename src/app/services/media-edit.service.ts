@@ -6,7 +6,7 @@ import { AdService } from './ad.service';
 import { DbService } from './db.service';
 import { FsService } from './fs.service';
 import { MessageService, MessageTypes } from './message.service';
-import { concatAll, map, shareReplay, concat } from 'rxjs/operators';
+import { concatAll, map, shareReplay, concat, first } from 'rxjs/operators';
 import { PageTextsService } from './page-texts.service';
 
 @Injectable({
@@ -18,6 +18,9 @@ export class MediaEditService {
   public get onStateChanged(): Observable<MEState> {
     return this._onStateChanged;
   }
+
+  requestMediaReady$ = new Subject<null>();  // Subscribed by player
+  responseMediaReady$ = new Subject<boolean>(); // emmited by player
 
   onPlayerAction: Subject<playerAction>;
 
@@ -277,6 +280,14 @@ export class MediaEditService {
     const story = this.story;
     story.modifyTime = story.viewTime = Date.now();
     await this.db.upsertAsync(DbService.storyTableName, story);
+  }
+
+  async canGetCurrentTime$$() {
+    const self = this;
+    setTimeout(() => { // Run after await
+      self.requestMediaReady$.next();
+    }, 0);
+    return await self.responseMediaReady$.pipe(first()).toPromise();
   }
 }
 

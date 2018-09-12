@@ -1,3 +1,6 @@
+* [2018-9-12 Wed] After installing cordova-icon and cordova-splash, I can generate the icons automatically.
+Remember that, I change the widget id of cordova so I need to remove ~ios~ and ~osx~ at first and then add them in again.
+
 * [2018-9-11 Tue] Using ~document.activeElement~ to check whether the textarea is focused.
 1. Remember that, it takes time to get focus, so I use an ~await~ about 100ms before checking it.
     Not so beautiful solution. If I can get its event will be better.

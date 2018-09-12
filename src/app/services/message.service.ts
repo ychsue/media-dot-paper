@@ -42,7 +42,7 @@ export class MessageService {
         data: {dType: DialogType.alert, msg: msg}
       });
     } else {
-      this.alert(msg);
+      alert(msg);
     }
   }
 }

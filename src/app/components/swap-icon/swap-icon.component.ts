@@ -21,7 +21,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   @Output() contentClick = new EventEmitter();
 
   deltaY: number;
-  maxSpeed = 0.9;
+  maxSpeed = 0.5;
 
   private _tmpYPointerdown = {time: 0, y: 0};
   private _tmpYPointermove = {time: 0, y: 0};
