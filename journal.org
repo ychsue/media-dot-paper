@@ -1,3 +1,8 @@
+* [2018-9-13 Thu] I want to build it as a bundle, but how?
+
+* [2018-9-13 Thu] If you want to set ~android-minSdkVersion~ in ~config.xml~, don't set it too high.
+Because I set it too high, I cannot install it on my Laptop since its SDK version is 24 and this one cannot be changed by hand.
+
 * [2018-9-12 Wed] I have given it a version and it does really change the version shown in windows uwp.
 Windows uwp can generate all icons automatically; however, some of them are too small.
 Owing to the benefit of git, I can change some of them back to its original one.
