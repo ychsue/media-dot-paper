@@ -26,10 +26,11 @@ buildscript {
         maven {
             url "https://maven.google.com"
         }
+      google()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.1.4'
     }
 }
 
@@ -42,7 +43,7 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.1.0'
+    gradleVersion = '4.4.0'
 }
 
 // Configuration properties. Set these via environment variables, build-extras.gradle, or gradle.properties.
@@ -69,7 +70,7 @@ ext {
     if (!project.hasProperty('cdvBuildMultipleApks')) {
         cdvBuildMultipleApks = null
     }
-    // Whether to append a 0 "abi digit" to versionCode when only a single APK is build 
+    // Whether to append a 0 "abi digit" to versionCode when only a single APK is build
     if (!project.hasProperty('cdvVersionCodeForceAbiDigit')) {
         cdvVersionCodeForceAbiDigit = null
     }
@@ -176,7 +177,7 @@ android {
     buildToolsVersion cdvBuildToolsVersion
 
     //This code exists for Crosswalk and other Native APIs.
-    //By default, we multiply the existing version code in the Android Manifest by 10 and 
+    //By default, we multiply the existing version code in the Android Manifest by 10 and
     //add a number for each architecture.  If you are not using Crosswalk or SQLite, you can
     //ignore this chunk of code, and your version codes will be respected.
 

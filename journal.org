@@ -1,3 +1,8 @@
+* [2018-9-13 Thu] Update the gradle from 4.1 to 4.4
+Modify the value in ~gradle-wrapper.properties~, ~app/build.gradle~, 
+~GradleBuilder.js~, ~StudioBuilder.js~
+That's all. Commit again.
+
 * [2018-9-13 Thu] I want to build it as a bundle, but how?
 
 * [2018-9-13 Thu] If you want to set ~android-minSdkVersion~ in ~config.xml~, don't set it too high.
