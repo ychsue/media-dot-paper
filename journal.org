@@ -1,3 +1,11 @@
+* [2018-9-14 Fri] Now I can create a android bundle.
+1. You need to download Android studio >3.2 version so that it can create a bundle one.
+2. Once you finished the extraction of the Android Studio's zip file, run ~bin/studio64.exe~
+3. It will update gradle to version 4.6 and of course you'll face the error again.
+4. Change 4.4 to 4.6 as mentioned previously, *restart the computer* because some folders are locked and ~cordova build android~ again.
+5. Get into AS3.2 again and this time it might show other errors such as you declared ~minSdkversion~ at wrong position and they can be fixed easily by clicking its autofix.
+6. Finally, I can create a signed bundle. Interestingly, I still need to create a keystore with key... Hm. this key should be for public key.
+
 * [2018-9-13 Thu] Update the gradle from 4.1 to 4.4
 Modify the value in ~gradle-wrapper.properties~, ~app/build.gradle~, 
 ~GradleBuilder.js~, ~StudioBuilder.js~

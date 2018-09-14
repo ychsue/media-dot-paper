@@ -16,6 +16,9 @@
 /cordova-test/platforms/browser
 /cordova-test/platforms/ios
 /cordova-test/platforms/osx
+/cordova-test/platforms/android/app/build
+/cordova-test/platforms/android/app/release
+/cordova-test/platforms/android/CordovaLib
 
 # dependencies
 /node_modules/*

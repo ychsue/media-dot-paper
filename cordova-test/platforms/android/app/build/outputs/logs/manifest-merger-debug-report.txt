@@ -15,38 +15,38 @@ ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platfo
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
-MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\87986f6a69b1d38c8abef59f67b51e70\AndroidManifest.xml:17:1-25:12
-MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\d81e527f95afea4a9569e6f8730e6618\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:17:1-36:12
-MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\5f61cfe5d3b378539e4782253ae151c8\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\d931407fb229306655f0f7e1bf36c5c0\AndroidManifest.xml:17:1-22:12
-MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:1-27:12
-MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:17:1-28:12
-MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\a08120b71d5a09578974142955145965\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\1320e2ada78587da405c779eb5d8de6d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\57097fc59acd44810f5e2ec287dc3ecd\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\ec3195315ffcd796c5f1e2308456f35d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\109d8d61c4527190fffca67b522a9712\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\59b5055a83950facdfbac5b1a00f172e\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b70017c17290a03b6c239a22ea53d129\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\97de219fe2b27c091c4610f5185a1596\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\0596d262b5c001541b75a0d4ccfcaf85\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\3cc2b3fe4db297393f11a27866b4682e\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\442fffa4b71d30623ae882f6de8a6101\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\980339771a0c16e2387cf96611675143\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\57d271671e6b1ac057aa728db2779bc6\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\590a900c9b4c91d0bd9e399ce013b855\AndroidManifest.xml:17:1-25:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\2d2a8291dff4052d897a33786970ad79\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\bc8526e2cf19a477797ba45745fc2aec\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\4f8723751d2888b68c3f0e78a80ff75d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\edf7f0b39f46c54bfe9efedac2a1817b\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\4e8d2f67a67830fa30ecbebab41ebc3d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\14cab79df2874766ed34be52becbd607\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\ed74b973a01a68c62bb5a13ef766f514\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\3eeb7e7199f7accab30904d161940b20\AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\23cd4acd14f15a965aeee26e09e84794\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\b3f425721228dbf77ad091c53a4acaa8\AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\8655e6311a7dd5b165b433378d47bfca\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:17:1-36:12
+MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\c207220b60230c28a1bb1a889d5e316e\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\e3703550df560685351193ecedf4be27\AndroidManifest.xml:17:1-22:12
+MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:20:1-27:12
+MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\7758c1ed840c007df6a61aeddd5eea33\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\5a74508092c635bacbf736a82ecab36b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\dcad1dfcb2bf86dbbb118b14144b7781\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\b9c557b34c28258588c6d1d344190a88\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\d18310250c02030fd2858b31abe646f3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\7c7482a54c3cee22053682f6a40c7e3d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\a1e30fcb65f6863be6d9f4ab19f2e3d5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\e9405245a37543df83af58c490495bee\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\685318cf38d4cfaa279a266bff5174f5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\c29d48138d9391005ba6f92cb9083fee\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\42c6ed1be35804f2de2ef047d531ef54\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\29ddf8d2c9d13e0d8ec8c90c47efed70\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\0097efa63ee20df9a86a10fab284d159\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\1051023c719d5414155aa3ac9e8f8440\AndroidManifest.xml:17:1-25:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\40f8bcc750454f02543644b88d0421ac\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\cdc9f73029c8193b0b0ad80f47bc4f5b\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b116f8708e7031b2b2dca83cf1c7bfe5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\2c9f1045c5e42664d2d349b10c0d50c0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\b3c4ee3b2cfeb93debebebdac1dfb470\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\827b942c53dfc00b5e79132985142763\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\9775aa9829944b498d7158f9d33f8380\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\4d7d1eaabd5210192ec3cd955bd4893a\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\65d5d89f16c93ebdf03a9954ba96fa26\AndroidManifest.xml:17:1-22:12
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
 INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:2:1-21:12
@@ -82,30 +82,30 @@ ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platfo
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:3:23-48
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:4:5-67
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:23:5-67
 	android:name
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:4:22-64
 application
 ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:5:5-16:19
-MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\d81e527f95afea4a9569e6f8730e6618\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\d81e527f95afea4a9569e6f8730e6618\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:26:5-34:19
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:26:5-34:19
-MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\5f61cfe5d3b378539e4782253ae151c8\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\5f61cfe5d3b378539e4782253ae151c8\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\a08120b71d5a09578974142955145965\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\a08120b71d5a09578974142955145965\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:22:5-94
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\590a900c9b4c91d0bd9e399ce013b855\AndroidManifest.xml:22:5-23:19
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\590a900c9b4c91d0bd9e399ce013b855\AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\8655e6311a7dd5b165b433378d47bfca\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\8655e6311a7dd5b165b433378d47bfca\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\c207220b60230c28a1bb1a889d5e316e\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\c207220b60230c28a1bb1a889d5e316e\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\7758c1ed840c007df6a61aeddd5eea33\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\7758c1ed840c007df6a61aeddd5eea33\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\1051023c719d5414155aa3ac9e8f8440\AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\1051023c719d5414155aa3ac9e8f8440\AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:22:18-91
+		ADDED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:22:18-91
 	android:supportsRtl
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:5:114-140
 	android:label
@@ -142,10 +142,10 @@ ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platfo
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
 activity#com.google.android.gms.ads.AdActivity
 ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:12:9-233
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:29:9-33:64
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:29:9-33:64
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:29:9-33:64
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:29:9-33:64
 	android:exported
-		ADDED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:32:13-37
+		ADDED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:32:13-37
 	android:configChanges
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:12:19-128
 	android:theme
@@ -153,81 +153,85 @@ MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychs
 	android:name
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:12:129-181
 uses-sdk
-ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:5-74
-MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\87986f6a69b1d38c8abef59f67b51e70\AndroidManifest.xml:21:5-23:62
-MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\87986f6a69b1d38c8abef59f67b51e70\AndroidManifest.xml:21:5-23:62
-MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\d81e527f95afea4a9569e6f8730e6618\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\d81e527f95afea4a9569e6f8730e6618\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\5f61cfe5d3b378539e4782253ae151c8\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\5f61cfe5d3b378539e4782253ae151c8\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\d931407fb229306655f0f7e1bf36c5c0\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\d931407fb229306655f0f7e1bf36c5c0\AndroidManifest.xml:20:5-44
-MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
-MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
-MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\a08120b71d5a09578974142955145965\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\a08120b71d5a09578974142955145965\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\1320e2ada78587da405c779eb5d8de6d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\1320e2ada78587da405c779eb5d8de6d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\57097fc59acd44810f5e2ec287dc3ecd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\57097fc59acd44810f5e2ec287dc3ecd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\ec3195315ffcd796c5f1e2308456f35d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\ec3195315ffcd796c5f1e2308456f35d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\109d8d61c4527190fffca67b522a9712\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\109d8d61c4527190fffca67b522a9712\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\59b5055a83950facdfbac5b1a00f172e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\59b5055a83950facdfbac5b1a00f172e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b70017c17290a03b6c239a22ea53d129\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\b70017c17290a03b6c239a22ea53d129\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\97de219fe2b27c091c4610f5185a1596\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\97de219fe2b27c091c4610f5185a1596\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\0596d262b5c001541b75a0d4ccfcaf85\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\0596d262b5c001541b75a0d4ccfcaf85\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\3cc2b3fe4db297393f11a27866b4682e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\3cc2b3fe4db297393f11a27866b4682e\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\442fffa4b71d30623ae882f6de8a6101\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\442fffa4b71d30623ae882f6de8a6101\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\980339771a0c16e2387cf96611675143\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\980339771a0c16e2387cf96611675143\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\57d271671e6b1ac057aa728db2779bc6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\57d271671e6b1ac057aa728db2779bc6\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\69add3af0ce3ae7b2229752ee8d47ccd\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\590a900c9b4c91d0bd9e399ce013b855\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\590a900c9b4c91d0bd9e399ce013b855\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\2d2a8291dff4052d897a33786970ad79\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\2d2a8291dff4052d897a33786970ad79\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\bc8526e2cf19a477797ba45745fc2aec\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\bc8526e2cf19a477797ba45745fc2aec\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\4f8723751d2888b68c3f0e78a80ff75d\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\4f8723751d2888b68c3f0e78a80ff75d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\edf7f0b39f46c54bfe9efedac2a1817b\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\edf7f0b39f46c54bfe9efedac2a1817b\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\4e8d2f67a67830fa30ecbebab41ebc3d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\4e8d2f67a67830fa30ecbebab41ebc3d\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\14cab79df2874766ed34be52becbd607\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\14cab79df2874766ed34be52becbd607\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\ed74b973a01a68c62bb5a13ef766f514\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\ed74b973a01a68c62bb5a13ef766f514\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\3eeb7e7199f7accab30904d161940b20\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\3eeb7e7199f7accab30904d161940b20\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\23cd4acd14f15a965aeee26e09e84794\AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\23cd4acd14f15a965aeee26e09e84794\AndroidManifest.xml:20:5-44
+ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:5-47
+INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:5-47
+MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\b3f425721228dbf77ad091c53a4acaa8\AndroidManifest.xml:21:5-23:62
+MERGED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\b3f425721228dbf77ad091c53a4acaa8\AndroidManifest.xml:21:5-23:62
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\8655e6311a7dd5b165b433378d47bfca\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-identifier-15.0.1.aar\8655e6311a7dd5b165b433378d47bfca\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\c207220b60230c28a1bb1a889d5e316e\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-gass:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-gass-15.0.1.aar\c207220b60230c28a1bb1a889d5e316e\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\e3703550df560685351193ecedf4be27\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-v4-28.0.0-rc02.aar\e3703550df560685351193ecedf4be27\AndroidManifest.xml:20:5-44
+MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:25:5-44
+MERGED from [:CordovaLib] C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\CordovaLib\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:25:5-44
+MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\7758c1ed840c007df6a61aeddd5eea33\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-base:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-15.0.1.aar\7758c1ed840c007df6a61aeddd5eea33\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\5a74508092c635bacbf736a82ecab36b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0-rc02.aar\5a74508092c635bacbf736a82ecab36b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\dcad1dfcb2bf86dbbb118b14144b7781\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0-rc02.aar\dcad1dfcb2bf86dbbb118b14144b7781\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\b9c557b34c28258588c6d1d344190a88\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0-rc02.aar\b9c557b34c28258588c6d1d344190a88\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\d18310250c02030fd2858b31abe646f3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-core-utils-28.0.0-rc02.aar\d18310250c02030fd2858b31abe646f3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\7c7482a54c3cee22053682f6a40c7e3d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\loader-28.0.0-rc02.aar\7c7482a54c3cee22053682f6a40c7e3d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\a1e30fcb65f6863be6d9f4ab19f2e3d5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewpager-28.0.0-rc02.aar\a1e30fcb65f6863be6d9f4ab19f2e3d5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\e9405245a37543df83af58c490495bee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-28.0.0-rc02.aar\e9405245a37543df83af58c490495bee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\685318cf38d4cfaa279a266bff5174f5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\drawerlayout-28.0.0-rc02.aar\685318cf38d4cfaa279a266bff5174f5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\c29d48138d9391005ba6f92cb9083fee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-28.0.0-rc02.aar\c29d48138d9391005ba6f92cb9083fee\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\42c6ed1be35804f2de2ef047d531ef54\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customview-28.0.0-rc02.aar\42c6ed1be35804f2de2ef047d531ef54\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\29ddf8d2c9d13e0d8ec8c90c47efed70\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-28.0.0-rc02.aar\29ddf8d2c9d13e0d8ec8c90c47efed70\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\0097efa63ee20df9a86a10fab284d159\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-28.0.0-rc02.aar\0097efa63ee20df9a86a10fab284d159\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0-rc02.aar\42abffc525b25e20823c58b98dd8ed68\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\1051023c719d5414155aa3ac9e8f8440\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0-rc02.aar\1051023c719d5414155aa3ac9e8f8440\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\40f8bcc750454f02543644b88d0421ac\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\40f8bcc750454f02543644b88d0421ac\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\cdc9f73029c8193b0b0ad80f47bc4f5b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\cdc9f73029c8193b0b0ad80f47bc4f5b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b116f8708e7031b2b2dca83cf1c7bfe5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\b116f8708e7031b2b2dca83cf1c7bfe5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\2c9f1045c5e42664d2d349b10c0d50c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\documentfile-28.0.0-rc02.aar\2c9f1045c5e42664d2d349b10c0d50c0\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\b3c4ee3b2cfeb93debebebdac1dfb470\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-28.0.0-rc02.aar\b3c4ee3b2cfeb93debebebdac1dfb470\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\827b942c53dfc00b5e79132985142763\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\print-28.0.0-rc02.aar\827b942c53dfc00b5e79132985142763\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\9775aa9829944b498d7158f9d33f8380\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0-rc02.aar\9775aa9829944b498d7158f9d33f8380\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\4d7d1eaabd5210192ec3cd955bd4893a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0-rc02] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\cursoradapter-28.0.0-rc02.aar\4d7d1eaabd5210192ec3cd955bd4893a\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\65d5d89f16c93ebdf03a9954ba96fa26\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.1.aar\65d5d89f16c93ebdf03a9954ba96fa26\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:5-47
 	tools:overrideLibrary
-		ADDED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\87986f6a69b1d38c8abef59f67b51e70\AndroidManifest.xml:23:9-59
+		ADDED from [com.google.android.gms:play-services-ads:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-15.0.1.aar\b3f425721228dbf77ad091c53a4acaa8\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
-		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:42-71
+		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:15-44
 	android:minSdkVersion
-		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:15-41
+		INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:17:5-47
+		INJECTED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:18:5-79
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\359d76b47dfab5ac1b025986464d24de\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-ads-lite:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-15.0.1.aar\bcdbed28187ab817c5cf1aec7860788f\AndroidManifest.xml:24:5-79
 	android:name
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:18:22-76
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
@@ -245,14 +249,14 @@ ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platfo
 	android:name
 		ADDED from C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\android\app\src\main\AndroidManifest.xml:14:24-74
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\e7e681dc37daf7ead256dfcbe2acfe0e\AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\cc5994dee0acdcdaa42db6fbde3ba5f4\AndroidManifest.xml:24:13-58
 meta-data#android.support.VERSION
-ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:23:9-25:38
+ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:23:9-25:38
 	android:value
-		ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:25:13-35
+		ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:25:13-35
 	android:name
-		ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\6c0af403b18d7431378dfcc2487cdc96\AndroidManifest.xml:24:13-51
+		ADDED from [com.android.support:customtabs:26.1.0] C:\Users\ychsue\.gradle\caches\transforms-1\files-1.1\customtabs-26.1.0.aar\4e3b285a60b28abae076664bbd312238\AndroidManifest.xml:24:13-51
