@@ -1,3 +1,7 @@
+* [2018-9-14 Fri] I have applied a new AdMob account and now I need to think about how to keep these Id privately.
+1. I got an id for android system for AdMob; however, it shows nothing. I am not sure whether it works.
+2. I want to keep my Id privately, but how? Thinking.
+
 * [2018-9-14 Fri] Now I can create a android bundle.
 1. You need to download Android studio >3.2 version so that it can create a bundle one.
 2. Once you finished the extraction of the Android Studio's zip file, run ~bin/studio64.exe~

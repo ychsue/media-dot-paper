@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Sep 13 21:35:00 CST 2018
+#Fri Sep 14 14:39:51 CST 2018
 56.path=www/plugins/cordova-plugin-file/www/LocalFileSystem.js
 5.base=C\:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
 42.base=C\:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test\\platforms\\android\\app\\build\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
