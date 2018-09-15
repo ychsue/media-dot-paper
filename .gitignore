@@ -5,6 +5,9 @@
 /tmp
 /out-tsc
 
+# Private Info
+/src/app/privateValues.ts
+
 #cordova part
 #/cordova/www
 #/cordova/platforms

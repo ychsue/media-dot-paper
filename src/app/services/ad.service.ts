@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, interval } from 'rxjs';
 import { take, last, share, shareReplay, first } from "rxjs/operators";
 import { DeviceService } from './device.service';
+import * as pv from '../privateValues'; // SORRY, I did not commit this file since it is for my private variables.
+// You need to create it in src/app folder. In src/app/privateValues.ts, give it
+//    export const adIntAndroid = '';
+//    export const adIntIOS = '';
+//    export const adIntWindows = '';
+//    export const adIntUnitIdWin = '';
+// so that you can tell this code to use the default values.
 
 // Gotten from https://github.com/floatinghotpot/cordova-admob-pro
 
@@ -98,8 +105,8 @@ export class AdService {
             self.msAdv = window['MicrosoftNSJS']['Advertising'];
             self.interstitial = new self.msAdv.InterstitialAd();
             self.adWin = {
-              AppId : "d25517cb-12d4-4699-8bdc-52040c712cab",
-              AdUnitId : "test"
+              AppId : (!!pv.adIntWindows) ? pv.adIntWindows : "d25517cb-12d4-4699-8bdc-52040c712cab",
+              AdUnitId : (!!pv.adIntUnitIdWin) ? pv.adIntUnitIdWin : "test"
             };
             self._adReady$.next(true);
             self._adReady$.complete();
@@ -116,13 +123,13 @@ export class AdService {
     if ( /(android)/i.test(navigator.userAgent) ) {
       self.admobid = { // for Android
         banner: 'ca-app-pub-3940256099942544/6300978111',
-        interstitial: 'ca-app-pub-3940256099942544/1033173712',
+        interstitial: (!!pv.adIntAndroid) ? pv.adIntAndroid : 'ca-app-pub-3940256099942544/1033173712',
         rewardvideo: 'ca-app-pub-3940256099942544/5224354917',
       };
     } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       self.admobid = { // for iOS
         banner: 'ca-app-pub-3940256099942544/4480807092',
-        interstitial: 'ca-app-pub-3940256099942544/4411468910',
+        interstitial: (!!pv.adIntIOS) ? pv.adIntIOS : 'ca-app-pub-3940256099942544/4411468910',
         rewardvideo: 'ca-app-pub-3940256099942544/1712485313',
       };
     } else {
