@@ -480,5 +480,8 @@
   },
   "meMainPlateComp": {
     "isUtterSubtitle": "你想说出你输入的文字吗？"
+  },
+  "adService": {
+    "showAdLater": "<h1>注意</h1>因為加载媒体需要一些时间。所以我会显示你一则广告。"
   }
 }

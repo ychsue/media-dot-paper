@@ -1,3 +1,6 @@
+* [2018-9-16 Sun] Oh. I can see the Ad. from AdMob on Android platform.
+In this commit, I have shown an alert to let the user know that they will see an Ad. before they switch to another story. 
+
 * [2018-9-16 Sun] .gitignore just can ignore the untracked files
 If you do really want to ignore some tracked files or folders, you need to run 
 #+begin_src sh

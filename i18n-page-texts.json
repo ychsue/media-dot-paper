@@ -45,6 +45,9 @@
         "meMainPlateComp": {
             "isUtterSubtitle": "Do you want to utter your input?"
         },
+        "adService": {
+            "showAdLater": "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad."
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

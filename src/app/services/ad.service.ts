@@ -4,6 +4,7 @@ import { take, last, share, shareReplay, first } from "rxjs/operators";
 import { DeviceService } from './device.service';
 import * as pv from '../privateValues'; // SORRY, I did not commit this file since it is for my private variables.
 import { MessageService } from './message.service';
+import { PageTextsService } from './page-texts.service';
 // You need to create it in src/app folder. In src/app/privateValues.ts, give it
 //    export const adIntAndroid = '';
 //    export const adIntIOS = '';
@@ -39,7 +40,8 @@ export class AdService {
   msAdv: any;
   interstitial: any;
 
-  constructor(private device: DeviceService, public msg: MessageService) {
+  constructor(private device: DeviceService, private ptsService: PageTextsService,
+    public msg: MessageService) {
     const self = this;
     if (!!window.cordova) {
       if (cordova.platformId === 'windows') {
@@ -91,7 +93,8 @@ export class AdService {
       isReady = isReady && await self.isAdIntReady$$();
       if (isReady && self.isHinderAdInt === false) {
         self.isHinderAdInt = true;
-        await self.msg.alert("<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad.");
+        await self.msg.alert((!!self.ptsService.pts) ? self.ptsService.pts.adService.showAdLater
+         : "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad.");
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.show();
         } else if (!!window['AdMob']) {

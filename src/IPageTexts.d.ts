@@ -7,6 +7,7 @@ interface IPageTexts {
     setSSComp: ISetSSComp;
     fsService: IFsService;
     meMainPlateComp: IMeMainPlateComp;
+    adService: IAdService;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -54,6 +55,9 @@ interface IFsService {
 }
 interface IMeMainPlateComp {
     isUtterSubtitle: string;
+}
+interface IAdService {
+    showAdLater: string;
 }
 interface IIso639 {
     ab: string;

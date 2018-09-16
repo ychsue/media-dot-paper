@@ -480,5 +480,8 @@
   },
   "meMainPlateComp": {
     "isUtterSubtitle": "Apakah Anda ingin menyampaikan masukan Anda?"
+  },
+  "adService": {
+    "showAdLater": "<h1> Perhatian </h1> Butuh waktu untuk memuat media. Jadi saya akan menunjukkan Anda sebuah Iklan."
   }
 }
