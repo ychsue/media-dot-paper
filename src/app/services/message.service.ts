@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType } from '../dialog/dialog.component';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -35,12 +36,13 @@ export class MessageService {
 
   constructor(public dialog: MatDialog) { }
 
-  alert(msg: string) {
+  async alert(msg: string) {
     if (!!window.cordova === true) {
-      this.dialog.open(DialogComponent, {
+      const dialogRef = this.dialog.open(DialogComponent, {
         width: '50%',
         data: {dType: DialogType.alert, msg: msg}
       });
+      await dialogRef.afterClosed().pipe(first()).toPromise();
     } else {
       alert(msg);
     }

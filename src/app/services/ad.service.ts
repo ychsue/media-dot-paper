@@ -3,6 +3,7 @@ import { Observable, Subject, interval } from 'rxjs';
 import { take, last, share, shareReplay, first } from "rxjs/operators";
 import { DeviceService } from './device.service';
 import * as pv from '../privateValues'; // SORRY, I did not commit this file since it is for my private variables.
+import { MessageService } from './message.service';
 // You need to create it in src/app folder. In src/app/privateValues.ts, give it
 //    export const adIntAndroid = '';
 //    export const adIntIOS = '';
@@ -33,10 +34,12 @@ export class AdService {
 
   adReady$ = this._adReady$.pipe(shareReplay(1));
 
+  isHinderAdInt = false;
+
   msAdv: any;
   interstitial: any;
 
-  constructor(private device: DeviceService) {
+  constructor(private device: DeviceService, public msg: MessageService) {
     const self = this;
     if (!!window.cordova) {
       if (cordova.platformId === 'windows') {
@@ -67,10 +70,28 @@ export class AdService {
     });
   }
 
-  showInterstitial() {
+  async isAdIntReady$$() {
     const self = this;
-    self.adReady$.subscribe(isReady => {
-      if (isReady) {
+    if (!!window['MicrosoftNSJS']) {
+      return self.interstitial.state === window['MicrosoftNSJS'].Advertising.InterstitialAdState.ready;
+    } else if (!!window['AdMob']) {
+      const action = new Promise<boolean>((res, rej) => {
+        self.interstitial.isInterstitialReady(res);
+      });
+      return await action;
+    } else {
+      return false;
+    }
+  }
+
+  async showInterstitial() {
+    const self = this;
+    // self.adReady$.subscribe(isReady => {
+      let isReady = await self.adReady$.pipe(first()).toPromise();
+      isReady = isReady && await self.isAdIntReady$$();
+      if (isReady && self.isHinderAdInt === false) {
+        self.isHinderAdInt = true;
+        await self.msg.alert("<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad.");
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.show();
         } else if (!!window['AdMob']) {
@@ -79,9 +100,10 @@ export class AdService {
         // * [2018-08-18 15:47] Renew it 2 min later
         setTimeout(() => {
           self.prepareInterstitial();
+          self.isHinderAdInt = false;
         }, 1000 * 60 * 2);
       }
-    });
+    // });
   }
 
   iniWinSDK() {

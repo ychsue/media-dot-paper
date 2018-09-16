@@ -1,3 +1,11 @@
+* [2018-9-16 Sun] .gitignore just can ignore the untracked files
+If you do really want to ignore some tracked files or folders, you need to run 
+#+begin_src sh
+git rm -r --cached <folderName>
+git add .
+#+end_src
+well, then they'll be ignored.
+
 * [2018-9-14 Fri] I have applied a new AdMob account and now I need to think about how to keep these Id privately.
 1. I got an id for android system for AdMob; however, it shows nothing. I am not sure whether it works.
 2. I want to keep my Id privately, but how? Thinking.
