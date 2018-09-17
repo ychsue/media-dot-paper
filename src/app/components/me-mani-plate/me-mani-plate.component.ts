@@ -77,6 +77,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.previousState = this.meService.state;
     // * [2018-08-25 18:19] Update utterPara when iFrame is updated
     this.meService.setiFrame$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
+      self.isSSShown = false;
       if (i >= 0) {
         self.updateUtterParaOfAFrame(i);
         if (this.meService.story.frames[this.meService.story.iFrame].isUtter === true) {

@@ -117,8 +117,8 @@ mat-slider {
 .subtitle-shadow {
     text-align: center;
     min-height: 20px;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     background-color: white;
     grid-column-start: 1;
     grid-row-start: 1;

@@ -7,8 +7,13 @@
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+    margin: 20px;
 }
 
 .selVoice {
     min-width: 72%;
+}
+
+.container {
+    height: 100%;
 }

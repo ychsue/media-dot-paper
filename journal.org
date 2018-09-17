@@ -1,4 +1,8 @@
 * [2018-9-17 Mon] Ok. Make a Youtube video to introduce this App.
+Takes a lot of time because I found a bug for android tablet.
+Well, finally I used ~[style.width]="PARENT.height"~ and ~[style.height]="PARENT.width"~ instead of ~100%~, the problem of unstable subtitle has gone.
+
+By the way, I also hide the setting part for speech synthesizer when the frame is changed.
 
 * [2018-9-16 Sun] Oh. I can see the Ad. from AdMob on Android platform.
 In this commit, I have shown an alert to let the user know that they will see an Ad. before they switch to another story. 

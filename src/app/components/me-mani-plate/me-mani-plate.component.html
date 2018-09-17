@@ -43,9 +43,11 @@
 
         <app-set-speech-synthesis class="setSS" *ngIf="isSSShown" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="isSSShown=false" [@hideShow]="HideShow" [@flyInOut]="isSSShown"></app-set-speech-synthesis>
 
-        <div class="main-down">
-            <div #subtitleView class="subtitle-shadow" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
-            <textarea matInput #subtitleInput class="subtitle" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next([subtitleInput.value,subtitleView.innerText])" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0">
+        <div #mainDown class="main-down">
+            <div #subtitleView class="subtitle-shadow" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"
+            [style.width]="mainDown.width" [style.height]="mainDown.height"></div>
+            <textarea matInput #subtitleInput class="subtitle" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next([subtitleInput.value,subtitleView.innerText])" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0"
+            [style.width]="mainDown.width" [style.height]="mainDown.height">
             </textarea>
         </div>
     </div>
