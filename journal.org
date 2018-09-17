@@ -1,3 +1,5 @@
+* [2018-9-17 Mon] Ok. Make a Youtube video to introduce this App.
+
 * [2018-9-16 Sun] Oh. I can see the Ad. from AdMob on Android platform.
 In this commit, I have shown an alert to let the user know that they will see an Ad. before they switch to another story. 
 
