@@ -1,1 +1,0 @@
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\AppPackages\CordovaApp.Windows_2018.912.1.0_anycpu_debug_Test\CordovaApp.Windows_2018.912.1.0_anycpu_debug.appx

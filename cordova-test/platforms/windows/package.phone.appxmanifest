@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-    <Identity Name="tw.at.yescirculation.mediadotpaper" Publisher="CN=$username$" Version="2018.912.1.0" />
+    <Identity Name="tw.at.yescirculation.mediadotpaper" Publisher="CN=$username$" Version="2018.918.1.0" />
     <mp:PhoneIdentity PhoneProductId="dae16ff0-6570-11e8-94bf-d57c735276d9" PhonePublisherId="db093ed5-53b1-45f7-af72-751e8f36ab80" />
     <Properties>
         <DisplayName>MediaDotPaper</DisplayName>

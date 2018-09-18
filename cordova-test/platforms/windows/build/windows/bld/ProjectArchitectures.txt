@@ -1,2 +1,0 @@
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\CordovaApp.Windows10.jsproj;x64
-C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\plugins\cordova-sqlite-storage\src\windows\SQLite3-Win-RT\SQLite3\SQLite3.UWP\SQLite3.UWP.vcxproj;x64

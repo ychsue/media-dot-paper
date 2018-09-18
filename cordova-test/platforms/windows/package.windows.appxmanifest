@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-    <Identity Name="tw.at.yescirculation.mediadotpaper" Publisher="CN=$username$" Version="2018.912.1.0" />
+    <Identity Name="tw.at.yescirculation.mediadotpaper" Publisher="CN=$username$" Version="2018.918.1.0" />
     <Properties>
         <DisplayName>MediaDotPaper</DisplayName>
         <PublisherDisplayName>Yes Circulation</PublisherDisplayName>

@@ -1,7 +1,0 @@
-<div class="main">
-    <ol>
-        <li *ngFor="let msg of messages">
-          <span [textContent]="msg.message" [class.Info]="msg.type==msgType.Info" [class.Warn]="msg.type==msgType.Warn" [class.Error]="msg.type==msgType.Error"></span>
-        </li>
-    </ol>
-</div>

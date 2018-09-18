@@ -1,5 +1,0 @@
-<div class="container">
-    <video #video [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'" (click)="onVideoPlayOrPause($event)" controls poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/MusicNotes.svg\')'"
-        [src]="videoSrc|safe"></video>
-    <iframe #youtube id="youtube" [frameBorder]="0" [style.display]="(meService.story.meType===pType.youtubeID)?'block':'none'"></iframe>
-</div>
