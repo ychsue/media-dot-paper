@@ -27,6 +27,8 @@
 /cordova-test/platforms/android/.idea
 /cordova-test/platforms/windows/build
 /cordova-test/platforms/windows/www
+/cordova-test/platforms/windows/AppPackages
+
 
 # dependencies
 /node_modules/*

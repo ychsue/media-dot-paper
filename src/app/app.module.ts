@@ -10,7 +10,7 @@ import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
   MatTooltipModule, MatSelectModule, MatSlideToggleModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AppRoutingModule } from './modules/app-routing/app-routing.module';
+// import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { TestComponent } from './pages/test/test.component';
 import { SafePipe, SafeHtmlPipe } from './pipes/safe.pipe';

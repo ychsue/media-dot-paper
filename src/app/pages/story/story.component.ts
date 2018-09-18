@@ -44,6 +44,7 @@ export class StoryComponent implements OnInit {
     const self = this;
     const a = sender._elementRef.nativeElement as HTMLAnchorElement;
     if (self.meService.story.meType === PlayerType.file) {
+      e.preventDefault();
       self.msg.alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
       return;
     }
@@ -54,7 +55,11 @@ export class StoryComponent implements OnInit {
       self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime
         + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
     } else {
-      const blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
+      let blob: Blob;
+      // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
+      // if (!!window.cordova && cordova.platformId === 'android') {
+        blob = new Blob([JSON.stringify(self.meService.story)], <any>{encoding: 'UTF-8', type: 'application/json;charset=UTF-8'});
+      // }
       this.downloadHref = URL.createObjectURL(blob);
       // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));
     }
@@ -102,7 +107,11 @@ export class StoryComponent implements OnInit {
       e.preventDefault();
       self.fs.saveTxtFile$$(input, self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
     } else {
-      const blob = new Blob([input], {type: 'text/plain'});
+      let blob: Blob;
+      // blob = new Blob([input], {type: 'text/plain'});
+      // if (!!window.cordova && cordova.platformId === 'android') {
+        blob = new Blob([input], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
+      // }
       this.downloadSBVHref = URL.createObjectURL(blob);
     }
   }

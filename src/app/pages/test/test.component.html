@@ -16,12 +16,12 @@
     (contentClick)="onClickAFile(entry)" >
     </app-draglist>
 </mat-list>
-<video #audioFromFile autoplay controls [src]="audioSrc|safe">
+<video #audioFromFile autoplay controls [src]="((!!audioSrc)?audioSrc:'')|safe">
 </video>
 <hr>
 <div>
-    <div>Is cordova support? {{(isCordovaSupport)?"Yes":"No"}}</div>
-    <div>Is cordova.file support? {{(isFilePluginSupport)?"Yes":"No"}}</div>
+    <div>Is cordova support? {{(!!isCordovaSupport)?"Yes":"No"}}</div>
+    <div>Is cordova.file support? {{(!!isFilePluginSupport)?"Yes":"No"}}</div>
 </div>
 <div>
     <button mat-raised-button (click)="onGetDocFolder()">

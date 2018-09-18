@@ -93,7 +93,7 @@ export class AdService {
       isReady = isReady && await self.isAdIntReady$$();
       if (isReady && self.isHinderAdInt === false) {
         self.isHinderAdInt = true;
-        await self.msg.alert((!!self.ptsService.pts) ? self.ptsService.pts.adService.showAdLater
+        await self.msg.alert$$((!!self.ptsService.pts) ? self.ptsService.pts.adService.showAdLater
          : "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad.");
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.show();

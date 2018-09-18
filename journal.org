@@ -1,8 +1,21 @@
+* [2018-9-18 Tue] Fix the error: Failed ~[http://localhost:4200/undefined]~
+1. The problem is caused by the ~[src]="url|safe"~ and the ~url~ might be ~undefined~.
+    So, writing the code as ~[src]="((!!url)?url:'')|safe"~ can solve the problem.
+
+2. Using ~<a>~ is dangerous because you need to take care of its default behavior.
+    Don't forget to call ~ev.preventDefault()~ to avoid it to navigate to something which does not exist.
+
+* [2018-9-18 Tue] Some Android device's encoding for text blob is wrong
+As mentioned in [[https://stackOverflow.com/questions/6672834/specifying-blob-encoding-in-google-chrome][this StackOverflow's Q&A]], for them I need to specify the encoding of the blob as ~{encoding: 'UTF-8', type: "text/plain;charset=UTF-8"}~.
+It works for Android. Now I want to test it on Windows.
+
 * [2018-9-17 Mon] Ok. Make a Youtube video to introduce this App.
-Takes a lot of time because I found a bug for android tablet.
+1. Takes a lot of time because I found a bug for android tablet.
 Well, finally I used ~[style.width]="PARENT.height"~ and ~[style.height]="PARENT.width"~ instead of ~100%~, the problem of unstable subtitle has gone.
 
-By the way, I also hide the setting part for speech synthesizer when the frame is changed.
+2. By the way, I also hide the setting part for speech synthesizer when the frame is changed.
+
+3. Oh, one more thing. If this project is opened by the old Android studio, you might need to rebuild it again because I got a problem after that action. Why do I need to rebuild it? Read [[https://www.androidstrike.com/unable-to-resolve-dependency-for-appdebugcompileclasspath-could-not-resolve-android-studio/][this article]].
 
 * [2018-9-16 Sun] Oh. I can see the Ad. from AdMob on Android platform.
 In this commit, I have shown an alert to let the user know that they will see an Ad. before they switch to another story. 
