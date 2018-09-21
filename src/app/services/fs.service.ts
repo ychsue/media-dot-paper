@@ -224,7 +224,7 @@ export class FsService {
           const isDone = await self.writeFile$(fileEntry, blob).toPromise();
           if (isDone) {
             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
-            `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
+            `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileEntry.nativeURL}</b>`));
             console.log(fileEntry.toURL());
           }
         }

@@ -1,3 +1,19 @@
+* [2018-9-20 Thu] Submit this code to iOS & macOS store (takes 2 days)
+1. For ios and osx, if you want to submit them, their bundle id cannot be the same.
+    So, for osx, I added a suffix ~mac~ as its bundle id.
+2. For osx, if you want to release your App to the store, you need to turn on ~[Target of your project] -> Capabilities -> App Sandbox~.
+    Oh, once you turn this one on, you'll find that you cannot call the ~Finder~ to pick up a file by ~<input type='file'~,
+    your ~documents~ folder is redirected to your sandbox.
+    Well, the 1st one can be solved by setting its ~File Access: -> User Selected File~ to be ~Read Only~.
+    I also check the ~Network: Outgoing Connections (Client)~ to avoid it to block my connection.
+    However, the 2nd one looks like I need to modify the code ~CDVFile.m~ of cordova-plugin-file. Sigh, *next job*.
+    By the way, although [[https://stackoverflow.com/questions/10952225/is-there-any-way-to-give-my-sandboxed-mac-app-read-only-access-to-files-in-lib][this StackOverflow's Q&A]] shows me a method by setting ~temporary-exception~ for ~home-relatvie-path~, but no help.
+3.  For osx, you'll get another error about ~Cordova/....h~ file not found, you need to add something like ~$(OBJROOT)/UninstalledProducts/$(PLATFORM_NAME)/include~ into it mentioned in [[https://stackoverflow.com/questions/34546607/xcode-7-2-in-archive-getting-the-issue-cordova-cdvviewcontroller-h-file-n][this StackOverflow's Q&A]].
+4. About the final question in your submission about the ~Ads~, you can take a look of [[https://stackoverflow.com/questions/23124663/does-this-app-use-the-advertising-identifier-idfa-admob-6-8-0][this StackOverflow's Q&A]].
+5. Important, if you want to submit to App store, you must active one profiles in ~Certificates....~ site. 
+    You can read its detail from [[https://clearbridgemobile.com/how-to-create-a-distribution-provisioning-profile-for-ios/][this article]].
+6. [2018-9-21 Fri] Both are rejected. Hm... Let me think. Anyway, let me borrow a book about ~Objective-C~ to solve the problem of ~Download~ folder.
+
 * [2018-9-18 Tue] Fix the error: Failed ~[http://localhost:4200/undefined]~
 1. The problem is caused by the ~[src]="url|safe"~ and the ~url~ might be ~undefined~.
     So, writing the code as ~[src]="((!!url)?url:'')|safe"~ can solve the problem.

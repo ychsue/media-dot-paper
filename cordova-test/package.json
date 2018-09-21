@@ -42,8 +42,8 @@
             "windows",
             "browser",
             "android",
-            "osx",
-            "ios"
+            "ios",
+            "osx"
         ]
     }
 }
