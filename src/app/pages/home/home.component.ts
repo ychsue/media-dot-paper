@@ -111,6 +111,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         action$$.then( (story: IStory) => {
             story.modifyTime = 0;
             self.meService.initMe(story);
+            this.gv.shownPage = PageType.MediaEdit;
           })
           .catch( err => self.msg.alert(((!!this.pts) ? this.pts.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`));
       } else {

@@ -155,6 +155,8 @@ export class MediaEditService {
       }
     }
 
+    this.state = MEState.readyForPlayer;
+
     // * [2018-07-23 10:16] Update the duration & playbackRates
     if (this.story.meType !== PlayerType.youtubeID) {
       this.onPlayerAction.next(playerAction.getDuration);
@@ -166,7 +168,6 @@ export class MediaEditService {
       this.story.viewTime = Date.now();
       this.onUpdateStory$$();
     }
-    this.state = MEState.readyForPlayer;
   }
 
   setiFrame(i: number) {

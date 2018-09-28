@@ -220,7 +220,8 @@ export class FsService {
         }
         if (!!downloadDir) {
           const fileEntry = await self.getFile$(fileName, true, false, downloadDir).toPromise();
-          const blob = new Blob([data], {type: 'text/plain'});
+          // const blob = new Blob([data], {type: 'text/plain'});
+          const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
           const isDone = await self.writeFile$(fileEntry, blob).toPromise();
           if (isDone) {
             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
@@ -235,7 +236,8 @@ export class FsService {
         let fileEntry: FileEntry;
         if (!!cacheDir) {
           fileEntry = await self.getFile$(fileName, true, false, cacheDir).toPromise();
-          const blob = new Blob([data], {type: 'text/plain'});
+          // const blob = new Blob([data], {type: 'text/plain'});
+          const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
           isSaved = await self.writeFile$(fileEntry, blob).toPromise();
           if (isSaved) {
             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :

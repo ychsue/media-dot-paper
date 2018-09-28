@@ -1,0 +1,11 @@
+﻿  pch.cpp
+  Constants.cpp
+  Database.cpp
+  Statement.cpp
+c:\users\ychsue\source\repos\test\cordova-ng-test\cordova-test\plugins\cordova-sqlite-storage\src\windows\sqlite3-win-rt\sqlite3\database.cpp(48): warning C4244: 'return': conversion from 'sqlite3_int64' to 'int', possible loss of data
+  sqlite3.c
+     Creating library C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\x64\Release\SQLite3.UWP\SQLite3.UWP.lib and object C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\x64\Release\SQLite3.UWP\SQLite3.UWP.exp
+  Generating code
+  All 2683 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SQLite3.UWP.vcxproj -> C:\Users\ychsue\source\repos\Test\cordova-ng-test\cordova-test\platforms\windows\x64\Release\SQLite3.UWP\SQLite3.UWP.dll

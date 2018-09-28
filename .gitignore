@@ -9,9 +9,7 @@
 /src/app/privateValues.ts
 
 #cordova part
-#/cordova/www
-#/cordova/platforms
-/cordova/node_modules
+/cordova
 /cordova-test/node_modules
 /cordova-test/platforms/windows/src
 /cordova-test/platforms/windows/node_modules/*
@@ -27,8 +25,16 @@
 /cordova-test/platforms/android/.idea
 /cordova-test/platforms/windows/build
 /cordova-test/platforms/windows/www
+/cordova-test/platforms/windows/config.xml
 /cordova-test/platforms/windows/AppPackages
-
+/cordova-test/platforms/windows/ARM
+/cordova-test/platforms/windows/BundleArtifacts
+/cordova-test/platforms/windows/Release
+/cordova-test/platforms/windows/x64
+/cordova-test/platforms/windows/CordovaApp*
+/cordova-test/platforms/windows/Package*
+/cordova-test/platforms/windows/.vs
+/cordova-test/platforms/windows/_pkginfo.txt
 
 # dependencies
 /node_modules/*

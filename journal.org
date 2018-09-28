@@ -1,3 +1,12 @@
+* [2018-9-28 Fri] To build a release for windows
+1. For windows, I have to change the ~id~ in ~config.xml~ file to be the one provided by the store.
+    Once ~cordova prepare windows~ has done, I need to modify the ~Application id~ of its ~package.Windows10.appxmanifest~ file back to be the original id in my ~config.xml~; otherwise, the windows ad. cannot work.
+2. I need to limit the navigation of my App as described in [[https://stackoverflow.com/questions/20488856/how-to-embed-youtube-video-in-cordova-android-app][this StackOverflow's Q&A]].
+    After testing, it does not affect the load of URL.
+3. To make visual studio to uncompile my original code is another nightmare, you can follow [[https://stackoverflow.com/questions/42724820/how-to-disable-javascript-build-error-in-visual-studio-2017][this StackOverflow's Q&A]] to turn off it. And you still need to something more than that to let it can compile your code into a release package.
+
+4. Now, the page-texts has been added in a property 'version' to control whether to reload page-texts.
+
 * [2018-9-20 Thu] Submit this code to iOS & macOS store (takes 2 days)
 1. For ios and osx, if you want to submit them, their bundle id cannot be the same.
     So, for osx, I added a suffix ~mac~ as its bundle id.
