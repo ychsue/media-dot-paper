@@ -3,11 +3,14 @@
   <!-- <main> -->
     <!-- <video #videoElement class="main"></video> -->
     <app-player class="main"></app-player>
-    <app-me-mani-plate class="main"
+    <app-me-mani-plate class="sideView"
       [style.background-color]="(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'"
       *ngIf="meService.story.iFrame>=0"
       [@flyInOut]="'in'"
     ></app-me-mani-plate>
+    <app-mdps-list class="sideView">
+      
+    </app-mdps-list>
   <!-- </main> -->
   <aside></aside>
   <footer class="dashboardSection">

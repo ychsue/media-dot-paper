@@ -1,3 +1,7 @@
+* [2018-9-30 Sun] For a user who has larger screen, they'll see a list of all pieces of MDP on the right hand side.
+Now, the user has a mdps-list on the right hand side.
+Unfinished, I still need to make the ~me-mani-plate.component~ better.
+
 * [2018-9-28 Fri] To build a release for windows
 1. For windows, I have to change the ~id~ in ~config.xml~ file to be the one provided by the store.
     Once ~cordova prepare windows~ has done, I need to modify the ~Application id~ of its ~package.Windows10.appxmanifest~ file back to be the original id in my ~config.xml~; otherwise, the windows ad. cannot work.

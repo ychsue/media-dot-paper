@@ -1,0 +1,12 @@
+.btnWords {
+    overflow-wrap: break-word;
+    white-space: pre-line;
+    font-size: 10px;
+}
+
+.mat-button {
+    line-height: 12px;
+    width:100%;
+    min-height: 32px;
+    margin: 2px 0px;
+}

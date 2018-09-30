@@ -80,6 +80,27 @@ export class PlayerComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkYoutubStateAndSetState() {
+    const self = this;
+    let state = -2;
+    if (self.meService.story.meType === PlayerType.youtubeID &&
+      !!self.YTservice.ytPlayer === true && !!self.YTservice.ytPlayer.getPlayerState === true) {
+      const ytState = self.YTservice.ytPlayer.getPlayerState();
+      // 0:ended, 1: playing, 2: paused, 3: buffering, 5: video cued
+      if ((self.meService.state !== MEState.playing) && (ytState === 1)) {
+        self.meService.state = MEState.playing;
+      } else if ((self.meService.state !== MEState.stopped) && (ytState === 0)) {
+        self.meService.state = MEState.stopped;
+      } else if ((self.meService.state !== MEState.paused) && (ytState === 2)) {
+        self.meService.state = MEState.paused;
+      } else if ((self.meService.state !== MEState.waiting) && ((ytState === 3) || (ytState === 5))) {
+        self.meService.state = MEState.waiting;
+      }
+      state = self.meService.state;
+    }
+    return state;
+  }
+
   eventListeners() {
     const self = this;
     // * For readyForPlayer
@@ -96,7 +117,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
       .subscribe(_ => {
         let isReady = false;
         if (self.meService.story.meType === PlayerType.youtubeID && !!self.YTservice.ytPlayer === true) {
-          isReady = self.YTservice.ytPlayer.getPlayerState() >= 0;
+          const ytState = self.checkYoutubStateAndSetState();
+          isReady = ytState >= 0;
         } else {
           isReady = self.videoEle.readyState === 4;
         }
@@ -105,7 +127,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     // * [2018-07-21 19:44] For CurrentTime
     self.meService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
-      map(_ => self.getCurrentTime()),
+      map(_ => {
+        self.checkYoutubStateAndSetState();
+        return self.getCurrentTime();
+      }),
       distinctUntilChanged(),
       share()
     );

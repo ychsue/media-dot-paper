@@ -17,6 +17,8 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   @Input() bB: number;
   @Input() bA = 1;
 
+  @Input() isBlink = false;
+
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
 

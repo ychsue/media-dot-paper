@@ -38,6 +38,7 @@ import { AdService } from './services/ad.service';
 import { SpeechSynthesisService } from './services/speech-synthesis.service';
 import { SetSpeechSynthesisComponent } from './components/set-speech-synthesis/set-speech-synthesis.component';
 import { CrossCompService } from './services/cross-comp.service';
+import { MdpsListComponent } from './components/mdps-list/mdps-list.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { CrossCompService } from './services/cross-comp.service';
     DraglistComponent,
     SwapIconComponent,
     StoryComponent,
-    SetSpeechSynthesisComponent
+    SetSpeechSynthesisComponent,
+    MdpsListComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [

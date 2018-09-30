@@ -6,6 +6,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
     grid-template-areas: "main" "slider";
+    overflow-x: hidden;
 }
 
 .main {
@@ -43,7 +44,7 @@
     align-items: center;
     border-radius: 20px;
     background-color: white;
-    margin: 4px;
+    /* margin: 4px; */
 }
 
 .slider {
@@ -63,13 +64,13 @@ mat-slider {
 .slider-start {
     grid-row: 1;
     grid-column: 1;
-    margin: 4px;
+    /* margin: 4px; */
 }
 
 .slider-end {
     grid-row: 1;
     grid-column: 3;
-    margin: 4px;
+    /* margin: 4px; */
 }
 
 .upCenter,
@@ -79,6 +80,7 @@ mat-slider {
     top: -100%;
     position: relative;
     grid-row: 1;
+    z-index: 2;
 }
 
 .upLeft {
@@ -122,6 +124,8 @@ mat-slider {
     background-color: white;
     grid-column-start: 1;
     grid-row-start: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .subtitle {
@@ -138,6 +142,7 @@ mat-slider {
 .flex {
     display: flex;
     justify-content: center;
+    min-width: 0;
 }
 
 .setSS {

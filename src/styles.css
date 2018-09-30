@@ -7,3 +7,16 @@ body{
     -ms-content-zooming: none;
     overflow: hidden;
 }
+
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    to {
+        /* opacity: 0.8; */
+        background-color: white;
+    }
+}

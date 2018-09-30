@@ -1,13 +1,14 @@
 .close {
     position: absolute;
     right: 0;
+    z-index: 1;
 }
 
 .selVoiceContainer, .utterContainer {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    margin: 20px;
+    margin: 0 20px;
 }
 
 .selVoice {

@@ -39,7 +39,7 @@ import { PageTextsService } from '../../services/page-texts.service';
 })
 export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  previousState: MEState = MEState.initialized;
+  previousState: MEState = MEState.initialized; // Might be unnecessary since now even Youtube one will check its state.
   MEState = MEState;
 
   IOStartShown = 'out';

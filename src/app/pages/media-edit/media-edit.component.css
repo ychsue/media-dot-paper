@@ -1,7 +1,11 @@
 .container {
     display: grid;
+    grid-template-columns: 1fr 200px;
     grid-template-rows: auto 1fr auto auto;
-    grid-template-areas: "header" "main" "cSection" "cMain";
+    grid-template-areas: "header   side" 
+                         "main     side"
+                         "cSection side" 
+                         "cMain    side";
     height: 100%;
     width: 100%;
 }
@@ -13,6 +17,12 @@ header {
 .main {
     grid-area: main;
     overflow: hidden;
+}
+
+.sideView {
+    grid-area: side;
+    height: 100%;
+    overflow-y: auto;
 }
 
 app-player {
