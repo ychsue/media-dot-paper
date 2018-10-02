@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
 import { Subject, interval, of } from 'rxjs';
@@ -33,7 +33,7 @@ import { PageTextsService } from '../../services/page-texts.service';
       state('show', style({opacity: 1})),
       state('hide', style({opacity: 0})),
       transition('hide => show', [animate('0.2s 0.1s ease-in', style({opacity: 1}))]),
-      transition('show => hide', [animate('0.2s 3.8s ease-out', style({opacity: 0}))]),
+      transition('show => hide', [animate('0.2s 1.8s ease-out', style({opacity: 0}))]),
     ])
   ]
 })
@@ -44,7 +44,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   IOStartShown = 'out';
   IOEndShown = 'out';
-  HideShow = 'show';
+  @Input()HideShow = 'show';
 
   _msDelta = 400;
 
@@ -100,6 +100,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     });
+    // * [2018-10-01 21:54] Handle pointerUp
+    self.device.onPointerup$.subscribe(ev => self.onPointLeave(ev, self));
   }
 
   ngOnDestroy(): void {
@@ -213,11 +215,12 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.SSService.speak(this.utterPara);
   }
 
-  async onPointLeave(e: PointerEvent) {
+  async onPointLeave(e: PointerEvent, ele: MeManiPlateComponent = null) {
+    const self = (!!ele) ? ele : this;
     await of(1).pipe(delay(100)).toPromise(); // for document.activeElement works correctly.
-    if (document.activeElement.localName !== "textarea" && this.isSubtitleClicked === false) {
+    if (document.activeElement.localName !== "textarea" && self.isSubtitleClicked === false) {
       await of(true).pipe(delay(300)).toPromise();
-      this.HideShow = 'hide';
+        self.HideShow = 'hide';
     }
   }
 

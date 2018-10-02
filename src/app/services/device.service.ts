@@ -19,6 +19,8 @@ export class DeviceService {
   onMousemove$: Observable<MouseEvent>;
   onMousedown$: Observable<MouseEvent>;
 
+  onWindowResize$: Observable<Event>;
+
   constructor() {
     // * [2018-06-??] For cordova
     this.isCordova = !!window.cordova;
@@ -51,5 +53,7 @@ export class DeviceService {
     //   console.log(ev.screenX);
     // }));
     this.onMousedown$ = fromEvent(document, 'mousedown') as Observable<MouseEvent>;
+
+    this.onWindowResize$ = fromEvent(window, 'resize') as Observable<Event>;
   }
 }

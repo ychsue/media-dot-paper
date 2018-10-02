@@ -14,6 +14,16 @@
   <button mat-icon-button [matBadge]="nUnReadMsg" (click)="showMsgsAtBottom()" *ngIf="nUnReadMsg!=0">
     <mat-icon class="mat-18">event_note</mat-icon>
   </button>
+
+  <button id="tgManiSide" mat-icon-button (click)="meService.isSideMani=!meService.isSideMani" *ngIf="meService.isToShowList">
+    <img src="assets/PlayRight.svg" *ngIf="meService.isSideMani"/>
+    <img src="assets/PlayLeft.svg" *ngIf="!meService.isSideMani"/>
+  </button>
+
+  <button mat-icon-button *ngIf="isAllowSide" (click)="meService.isToShowList=!meService.isToShowList">
+      <mat-icon class="mat-18">list</mat-icon>
+  </button>
+
   <button mat-icon-button [matMenuTriggerFor]="langMenu" >
       <mat-icon class="mat-18">translate</mat-icon>
   </button>

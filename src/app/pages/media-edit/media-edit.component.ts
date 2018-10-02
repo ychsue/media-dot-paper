@@ -4,7 +4,9 @@ import { MediaEditService, MEState } from '../../services/media-edit.service';
 import { trigger, state, style, transition, animate } from '../../../../node_modules/@angular/animations';
 import { utterType } from '../../services/story.service';
 import { SpeechSynthesisService } from '../../services/speech-synthesis.service';
-import { takeWhile, first, filter } from 'rxjs/operators';
+import { takeWhile, first, filter, map, takeUntil, concatAll, withLatestFrom, pairwise } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { DeviceService } from '../../services/device.service';
 
 @Component({
   selector: 'app-media-edit',
@@ -25,8 +27,14 @@ import { takeWhile, first, filter } from 'rxjs/operators';
 })
 export class MediaEditComponent implements OnInit {
 
+  sideWidth = 250;
+
+  changeSideWidth$ = new Subject<PointerEvent>();
+
+
   constructor(/*private route: ActivatedRoute, */
-    public meService: MediaEditService, private SSService: SpeechSynthesisService) {
+    public meService: MediaEditService, private SSService: SpeechSynthesisService,
+    private device: DeviceService) {
   }
 
   ngOnInit() {
@@ -52,6 +60,13 @@ export class MediaEditComponent implements OnInit {
         }
       });
     });
+
+    // * [2018-10-01 15:10] Used to change the sideWidth
+    self.changeSideWidth$.pipe(map(_ => self.device.onPointermove$.pipe(takeUntil(self.device.onPointerup$))),
+      concatAll(),
+      pairwise()).subscribe(arr => {
+        self.sideWidth -= arr[1].screenX - arr[0].screenX;
+      });
   }
 
 }

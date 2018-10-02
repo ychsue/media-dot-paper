@@ -8,6 +8,7 @@ import { PlayerType } from '../vm/player-type.enum';
 import { FsService } from '../services/fs.service';
 import { map, concatAll } from '../../../node_modules/rxjs/operators';
 import { PageTextsService } from '../services/page-texts.service';
+import { DeviceService } from '../services/device.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +21,11 @@ export class NavbarComponent implements OnInit {
 
   nUnReadMsg = 0;
   sideClickType_ = SideClickType;
+  isAllowSide = false;
 
   constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone,
-    private db: DbService, private fsService: FsService, public meService: MediaEditService,
+    private db: DbService, private fsService: FsService, private device: DeviceService,
+    public meService: MediaEditService,
     public msgService: MessageService, public ptsService: PageTextsService) {
     const self = this;
     this.nUnReadMsg = msgService.getNUnRead();
@@ -35,9 +38,25 @@ export class NavbarComponent implements OnInit {
           ngZone.run(action);
         } else {action(); }
       });
+    device.onWindowResize$.subscribe(ev => {
+      if (ev.type === 'resize') {
+        self.prepareLayout(window.innerWidth, window.innerHeight);
+      }
+    });
   }
 
   ngOnInit() {
+    this.prepareLayout(window.innerWidth, window.innerHeight);
+  }
+
+  prepareLayout(width: number, height: number) {
+    if (width >= 500) {
+      this.isAllowSide = true;
+      this.meService.isToShowList = true;
+    } else {
+      this.isAllowSide = false;
+      this.meService.isToShowList = false;
+    }
   }
 
   showMsgsAtBottom() {

@@ -92,6 +92,16 @@ export class MediaEditService {
 
   lastTimeCallInitMeFromUrl = 0;
 
+  isToShowList = false;
+
+  private _isSideMani = true;
+  public get isSideMani(): boolean {
+    return this._isSideMani && this.isToShowList;
+  }
+  public set isSideMani(v: boolean) { // Force it to be false when isToShowList is false
+    this._isSideMani = v && this.isToShowList;
+  }
+
   pts: IPageTexts;
   constructor(private adService: AdService,
               private fsService: FsService,

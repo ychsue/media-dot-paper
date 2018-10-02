@@ -163,6 +163,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
             isDuringStart = true;
             self.meService.seekTime = start;
           }
+        } else if ((self.meService.state === MEState.paused) || (self.meService.state === MEState.canPlay)) {
+          self.meService.currentTime = t;
         } else if (t > (end - (self._msInterval / 1000))) {
           if (isDuringEnd === false) {
             isDuringEnd = true;

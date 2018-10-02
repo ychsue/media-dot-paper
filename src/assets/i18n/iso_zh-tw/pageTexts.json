@@ -479,7 +479,7 @@
     "askSavingToFile": "您獲得的文字必須存儲在{0}文件中，以便正確使用它們。"
   },
   "meMainPlateComp": {
-    "isUtterSubtitle": "你想說出你輸入的文字嗎？"
+    "isUtterSubtitle": "念出你的輸入？"
   },
   "adService": {
     "showAdLater": "<h1>注意</h1>因為加載媒體需要一些時間。所以我會显示你一則廣告。"

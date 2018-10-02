@@ -14,3 +14,7 @@ nav{
 .isSelect {
     background-color: aliceblue;
 }
+
+#tgManiSide img{
+    height: 24px;
+}

@@ -1,3 +1,9 @@
+* [2018-10-2 Tue] Now, the user can choose to show MDP on main window or just upon the MDP-list.
+By the way, I also let the user can resize the MDP-list part.
+Some changes: 
+1. The ~rxjs.operators.pairwise~ is used because I want to get ~dx~ between two ~pointerMove~ events.
+2. Now, the ~onPointLeave~ is also called when ~document.onPointerup$~ so that it will hide needed items no matter where the pointer leaves.
+
 * [2018-9-30 Sun] For a user who has larger screen, they'll see a list of all pieces of MDP on the right hand side.
 Now, the user has a mdps-list on the right hand side.
 Unfinished, I still need to make the ~me-mani-plate.component~ better.

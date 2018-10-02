@@ -479,7 +479,7 @@
     "askSavingToFile": "The words you got must be stored in {0} file so that they can be used properly."
   },
   "meMainPlateComp": {
-    "isUtterSubtitle": "Do you want to utter your input?"
+    "isUtterSubtitle": "To utter your input?"
   },
   "adService": {
     "showAdLater": "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad."

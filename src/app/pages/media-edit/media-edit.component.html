@@ -1,16 +1,23 @@
-<div class="container">
+<div class="container" [style.grid-template-columns]="'1fr '+((meService.isToShowList)?(sideWidth+'px'):'0')">
   <!-- <header>{{this.dataService.story.name}}</header> -->
   <!-- <main> -->
     <!-- <video #videoElement class="main"></video> -->
     <app-player class="main"></app-player>
-    <app-me-mani-plate class="sideView"
+    <app-mdps-list #mdpsList *ngIf="meService.isToShowList" class="sideView">          
+    </app-mdps-list>
+
+    <app-me-mani-plate [class]="(meService.isSideMani)?'sideView':'main'"
       [style.background-color]="(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'"
       *ngIf="meService.story.iFrame>=0"
       [@flyInOut]="'in'"
+      [HideShow]="(meService.story.iFrame>=0)?'hide':'show'"
     ></app-me-mani-plate>
-    <app-mdps-list class="sideView">
-      
-    </app-mdps-list>
+
+    <div id="vSideSep" class="sideView" *ngIf="meService.isToShowList" [style.right]="sideWidth+'px'"></div>
+    <svg id="reSideWidth" viewBox="0 0 10 20" touch-action="none" [style.right]="(sideWidth-20)+'px'" class="sideView"
+      *ngIf="meService.isToShowList" (pointerdown)="changeSideWidth$.next($event)">
+      <polygon points="0,0 0,20 10,10" style="fill:cadetblue;opacity: 0.5;"/>
+    </svg>
   <!-- </main> -->
   <aside></aside>
   <footer class="dashboardSection">

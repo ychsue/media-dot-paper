@@ -1,6 +1,6 @@
 .container {
     display: grid;
-    grid-template-columns: 1fr 200px;
+    /* grid-template-columns: 1fr 200px; */
     grid-template-rows: auto 1fr auto auto;
     grid-template-areas: "header   side" 
                          "main     side"
@@ -39,4 +39,18 @@ app-me-mani-plate {
 
 .dashboardMain {
     grid-area: cMain;
+}
+
+#reSideWidth {
+    position: absolute;
+    top:50%;
+    height: 40px;
+    z-index: 2;
+}
+
+#vSideSep {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    background-color: black;
 }

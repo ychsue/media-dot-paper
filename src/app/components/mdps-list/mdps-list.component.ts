@@ -20,7 +20,10 @@ export class MdpsListComponent implements OnInit, OnDestroy {
     self.meService.onCurrentTimeChanged.pipe(takeUntil(self.unsubscribed$)).subscribe(t => {
       // * [2018-09-29 14:43] Check whether the current time is inside a frame
       const i = self.meService.story.frames.findIndex( frame => ((t <= frame.end) && (t >= frame.start)));
-      if (i !== this.currentIFrame) {
+      const iFrame = self.meService.story.iFrame;
+      if (iFrame >= 0 && this.currentIFrame !== iFrame) {
+        this.currentIFrame = iFrame;
+      } else if (i !== this.currentIFrame) {
         this.currentIFrame = i;
       }
     });
