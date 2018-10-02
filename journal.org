@@ -1,3 +1,5 @@
+* [2018-10-2 Tue] Okay, its tutorial, web version and submitting source code to GitHub have been done.
+
 * [2018-10-2 Tue] Add in a welcome page.
 For windows UWP, the ~<a>~ with ~target="_blank"~ is enough to ask the App to open the link in a browser. Good.
 Now, let's open the source code for everyone.
