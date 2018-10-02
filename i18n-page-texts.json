@@ -48,6 +48,14 @@
         "adService": {
             "showAdLater": "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad."
         },
+        "welcomePage": {
+            "title": "Welcome to use this APP",
+            "pTitle": "This App is constituted of 4 parts: The nav-bar, the side-nav for taking and choosing media, the media window, and the list for media dot paper (MDP) are on the top, left, center and right of this App, respectively. If you don't have any idea how to use it, below is some URL links might give you some help.",
+            "s1": "URL links",
+            "l1": "Tutorial of this App",
+            "l2": "Youtube video: MDP on Android",
+            "l3": "Main web site"
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

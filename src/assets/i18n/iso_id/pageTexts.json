@@ -483,5 +483,13 @@
   },
   "adService": {
     "showAdLater": "<h1> Perhatian </h1> Butuh waktu untuk memuat media. Jadi saya akan menunjukkan Anda sebuah Iklan."
+  },
+  "welcomePage": {
+    "title": "Selamat menggunakan APP ini",
+    "pTitle": "Aplikasi ini terdiri dari 4 bagian: nav-bar, sisi-nav untuk mengambil dan memilih media, jendela media, dan daftar untuk kertas dot media (MDP) berada di bagian atas, kiri, tengah, dan kanan dari Aplikasi ini , masing-masing. Jika Anda tidak tahu cara menggunakannya, di bawah ini beberapa tautan URL mungkin memberi Anda bantuan.",
+    "s1": "Tautan URL",
+    "l1": "Tutorial Aplikasi ini",
+    "l2": "Video Youtube: MDP di Android",
+    "l3": "Situs web utama"
   }
 }

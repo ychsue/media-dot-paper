@@ -31,6 +31,7 @@
           [style.width]="((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'">
             <app-media-edit class="page" [style.display]="(gv.shownPage===pageType.MediaEdit)?'block':'none'"></app-media-edit>
             <app-test class="page" [style.display]="(gv.shownPage===pageType.Test)?'block':'none'"></app-test>
+            <app-welcome class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-welcome>
         </mat-sidenav-content>
       <!-- </div> -->
       </mat-sidenav-container>

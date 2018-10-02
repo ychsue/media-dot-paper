@@ -6,7 +6,7 @@
 /out-tsc
 
 # Private Info
-/src/app/privateValues.ts
+/src/app/privateValues.ts.bak
 
 #cordova part
 /cordova

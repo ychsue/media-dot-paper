@@ -8,6 +8,7 @@ interface IPageTexts {
     fsService: IFsService;
     meMainPlateComp: IMeMainPlateComp;
     adService: IAdService;
+    welcomePage: IWelcomePage;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -58,6 +59,14 @@ interface IMeMainPlateComp {
 }
 interface IAdService {
     showAdLater: string;
+}
+interface IWelcomePage {
+    title: string;
+    pTitle: string;
+    s1: string;
+    l1: string;
+    l2: string;
+    l3: string;
 }
 interface IIso639 {
     ab: string;

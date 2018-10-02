@@ -1,0 +1,10 @@
+.container {
+    display: grid;
+    justify-items: center;
+    height: 100%;
+    margin: 12px;
+}
+
+.link {
+    margin: 4px;
+}
