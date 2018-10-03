@@ -90,7 +90,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       debounceTime(200),
       distinctUntilChanged()).subscribe(sts => {
         self.meService.story.frames[self.meService.story.iFrame].subtitle = sts[0];
-        self.meService.story.frames[self.meService.story.iFrame].utterPara.text = sts[0];
+        self.meService.story.frames[self.meService.story.iFrame].utterPara.text = sts[1];
+        self.utterPara.text = sts[1];
       });
     // * [2018-08-26 16:56] Reutter the subtitle for repeatStart
     self.meService.repeatStart$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
@@ -201,6 +202,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       storyUtterPara.lang = utterPara.voice.lang;
       utterPara.voiceName = utterPara.voice.name;
       utterPara.lang = utterPara.voice.lang;
+      utterPara.text = text;
       delete storyUtterPara['voice'];
     }
     // * [2018-08-25 16:15] Play it.
@@ -218,7 +220,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   async onPointLeave(e: PointerEvent, ele: MeManiPlateComponent = null) {
     const self = (!!ele) ? ele : this;
     await of(1).pipe(delay(100)).toPromise(); // for document.activeElement works correctly.
-    if (document.activeElement.localName !== "textarea" && self.isSubtitleClicked === false) {
+    if (document.activeElement.localName !== "textarea" && !!self.isSubtitleClicked === false) {
       await of(true).pipe(delay(300)).toPromise();
         self.HideShow = 'hide';
     }

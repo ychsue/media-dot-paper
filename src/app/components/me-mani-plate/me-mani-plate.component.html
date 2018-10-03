@@ -1,5 +1,5 @@
 <div class="container" [@changeFrame]="meService.story.iFrame" touch-action="none"
- (pointerenter)="HideShow='show'" (pointerleave)="onPointLeave($event,this)" > 
+ (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)" > 
     <div class="main">
         <div class="main-up" [@hideShow]="HideShow" *ngIf="isSSShown===false">
             <div class="flex">
@@ -15,7 +15,8 @@
                 </div>
             </div>
             <div class="flex">
-                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" class="subtitle-shadow" [style.overflow-y]="'hidden'" (change)="HideShow='show';subtitleInput.focus();">
+                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow" [style.overflow-y]="'hidden'" 
+                (change)="HideShow='show';subtitleInput.focus();(toggleUtter.checked)?subtitleChange$.next([subtitleInput.value,subtitleView.innerText]):null;">
                     {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
                 </mat-slide-toggle>
                 <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">
@@ -28,7 +29,7 @@
             <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
-            <button mat-icon-button mat-raised-button class="largeBtn" (click)="onPlayPause()" *ngIf="!meService.isSideMani">
+            <button mat-icon-button mat-raised-button [class.largeBtn]="!meService.isSideMani" (click)="onPlayPause()">
                 <svg viewBox="0 0 10 10" *ngIf="meService.state!==MEState.playing">
                     <polygon points="8,5 3,2 3,8" style="fill:darkblue"/>
                 </svg>

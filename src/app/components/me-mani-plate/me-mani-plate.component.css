@@ -106,6 +106,12 @@ mat-slider {
     height: 120px;
 }
 
+.smallBtn {
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+}
+
 #btnStart {
     border-radius: 50% 0 0 50%;
     margin: 0 8px;

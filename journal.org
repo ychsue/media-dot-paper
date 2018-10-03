@@ -1,3 +1,8 @@
+* [2018-10-3 Wed] I had published a YouTube video.
+1. Its location is [[https://youtu.be/MI6VE6TUgho][https://youtu.be/MI6VE6TUgho]].
+2. Find some bugs which is mainly related to the property ~utterPara~ of ~me-mani-plate.component~. 
+    Maybe someday I need to change it to be a getter. Hm... Let me think of it.
+
 * [2018-10-2 Tue] Okay, its tutorial, web version and submitting source code to GitHub have been done.
 
 * [2018-10-2 Tue] Add in a welcome page.
