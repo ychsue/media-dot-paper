@@ -1,3 +1,7 @@
+* [2018-10-5 Fri] The draglist and swapIcon are both changed to use the new way to handle it.
+1. ~pairwise~ should be called as the first operation, if you invoke it after ~concatAll~, it will ~pairwise~ the previous series of ~pointerMove~ event and you'll see your element has a quick move.
+2. Since the numbers of ~draglist~ and ~swapIcon~ both are unknown. If I ask them to listen to the same event, I need to tell them who need to take the deal; otherwise, all of them will run the same code which you don't want them to do so.
+
 * [2018-10-5 Fri] Try to improve the mouse dragging behavior.
 Looks like the ~iframe~ used for Youtube will block the ~pointerevents~, or I should say that it will call ~event.stopPropagation()~ to prevent the event bubbling.
 Because of that, the dragging for resizing the sub-windows will behave wierd.

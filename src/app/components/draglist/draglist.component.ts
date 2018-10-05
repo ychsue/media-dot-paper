@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { IStory } from '../../services/story.service';
-import { Subject, of, Subscription } from '../../../../node_modules/rxjs';
+import { Subject} from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concatAll, concat, withLatestFrom, debounce, debounceTime, merge, first, delay } from 'rxjs/operators';
+import { map, takeUntil, concatAll, merge, pairwise } from 'rxjs/operators';
 import { CrossCompService } from '../../services/cross-comp.service';
+import { GvService } from '../../services/gv.service';
 
 @Component({
   selector: 'app-draglist',
@@ -19,75 +20,86 @@ export class DraglistComponent implements OnInit, OnDestroy {
   deltaX: number;
   maxSpeed = 0.5;
 
-  private _tmpXPointerdown = {time: 0, x: 0};
-  private _tmpXPointermove = {time: 0, x: 0};
-  private _tmpVx: number;
-
-  private _subDown: Subscription;
-  private _subSwap: Subscription;
+  private _pointerDownTime = 0.1;
+  private unsubscribed$ = new Subject<boolean>();
+  private _isActivating = false;
+  public set isActivating(v: boolean) {
+    this.gv.isJustPointerEvents = v;
+    this._isActivating = v;
+  }
+  public get isActivating(): boolean {
+    return this._isActivating;
+  }
 
   // * inner events
   protected contentPointerdown$ = new Subject<PointerEvent>();
-  protected contentPointerup$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
     this.contentPointerdown$.next(ev);
   }
 
-  constructor(private deviceService: DeviceService, private ccService: CrossCompService) { }
+  constructor(private device: DeviceService, private ccService: CrossCompService,
+    private gv: GvService) { }
 
   ngOnInit() {
     const self = this;
-    // Get the startX
-    self._subDown = self.contentPointerdown$.subscribe(ev => self._tmpXPointerdown = {time: ev.timeStamp, x: ev.screenX});
-    // Get scrollTop value
-    let scrollTop = -Infinity;
-    // Get the movingX and final V_x
-    self._subSwap = self.contentPointerdown$.pipe(
-      map( _ => self.deviceService.onPointermove$.pipe(
-        takeUntil(self.deviceService.onPointerup$.pipe(merge(
-          self.deviceService.onPointermove$.pipe(first(), delay(1000))
-          )
-        )),
-        // takeUntil(self.deviceService.onPointermove$.pipe(
-        //   debounceTime(400),
-        //   merge(self.deviceService.onPointerup$)
-        // )),
-        concat(of({timeStamp: 0, movementX: 0, screenX: -Infinity, screenY: -Infinity}))
-      )),
-      concatAll(),
-      // map(ev => ev.clientX)
-      withLatestFrom(self.contentPointerdown$, (e_move, e_down) => {
-        if (e_move.timeStamp !== 0) {
-          self._tmpXPointermove = {time: e_move.timeStamp, x: e_move.screenX};
-        }
-        return [e_move.screenX - e_down.screenX, e_move.screenY - e_down.screenY];
-      })
-    ).subscribe( dxy => {
-      if (dxy[0] < -1000) {
-        self.deltaX = 0;
-        self._tmpVx = (self._tmpXPointermove.x - self._tmpXPointerdown.x) / (self._tmpXPointermove.time - self._tmpXPointerdown.time);
-        // * [2018-07-19 10:38] send out a notification 'delete' when the speedX is higher than 0.5
-        if (Math.abs(self._tmpVx) > self.maxSpeed) {
-          self.delete.next();
-        }
-        scrollTop = -Infinity;
+    self.deltaX = 0;
+    // * [2018-10-05 11:50] Rewrite the event listener
+    let count = 0;
+    // When Pointer is pressed, get its time and let this App just capture the pointer events.
+    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    .subscribe(ev => {
+      self._pointerDownTime = ev.timeStamp;
+      // self.gv.isJustPointerEvents = true;
+      self.isActivating = true;
+    });
+    // When Pointer is up, release the capturing of pointer events and check the pace
+    this.device.onPointerup$.pipe(takeUntil(self.unsubscribed$))
+    .subscribe(ev => {
+      if (self.isActivating === false) { // All of other list items are listening to this event, too.
+        return;
       } else {
-        if (Math.abs(dxy[0]) > Math.abs(dxy[1])) {
-          self.deltaX = (dxy[0] < -1000) ? 0 : dxy[0];
+        self.isActivating = false;
+        // self.gv.isJustPointerEvents = false;
+        count = 0;
+        if (Math.abs(self.deltaX) / (ev.timeStamp - self._pointerDownTime) > self.maxSpeed) {
+          self.delete.next();
         } else {
-          if (!!self.ccService.listOfStoredEle) {
-            scrollTop = (scrollTop < -1000) ? self.ccService.listOfStoredEle.scrollTop : scrollTop;
-            self.ccService.listOfStoredEle.scrollTop = scrollTop - dxy[1];
-          }
+          self.deltaX = 0;
+        }
+        // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click.
+        // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
+        if (ev.timeStamp - self._pointerDownTime < 250) {
+          self.onContentClick(ev);
         }
       }
     });
+    // Listen to the move of the pointer
+    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    .pipe(
+      map(_ => self.device.onPointermove$
+        .pipe(
+          pairwise(),
+          takeUntil(self.device.onPointerup$.pipe(merge(self.device.onNoButtonPressed$))))),
+      concatAll())
+      .subscribe(arr => {
+        if (arr[0].buttons === 0 && arr[1].buttons === 0) {
+          if (++count > 10) {
+            count = 0;
+            self.device.onNoButtonPressed$.next(true);
+          }
+          return;
+        }
+        // Move the list
+        self.deltaX += arr[1].screenX - arr[0].screenX;
+        self.ccService.listOfStoredEle.scrollTop -= arr[1].screenY - arr[0].screenY;
+      });
   }
 
   ngOnDestroy(): void {
-    this._subDown.unsubscribe();
-    this._subSwap.unsubscribe();
+    this.unsubscribed$.next(true);
+    this.unsubscribed$.complete();
+    this.unsubscribed$ = null;
   }
 
   onContentClick(ev) {

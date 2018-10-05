@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, Subject, of } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge } from 'rxjs/operators';
+import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge, pairwise } from 'rxjs/operators';
+import { GvService } from '../../services/gv.service';
 
 @Component({
   selector: 'app-swap-icon',
@@ -25,61 +26,82 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   deltaY: number;
   maxSpeed = 0.5;
 
-  private _tmpYPointerdown = {time: 0, y: 0};
-  private _tmpYPointermove = {time: 0, y: 0};
-  private _tmpVy: number;
-
-  private _subDown: Subscription;
-  private _subSwap: Subscription;
+  private unsubscribed$ = new Subject<boolean>();
+  private _pointerDownTime = 0;
+  private _isActivating = false;
+  public set isActivating(v: boolean) {
+    this.gv.isJustPointerEvents = v;
+    this._isActivating = v;
+  }
+  public get isActivating(): boolean {
+    return this._isActivating;
+  }
 
   // * inner events
   protected contentPointerdown$ = new Subject<PointerEvent>();
-  protected contentPointerup$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
     this.contentPointerdown$.next(ev);
   }
 
-  constructor(private deviceService: DeviceService) { }
+  constructor(private device: DeviceService, private gv: GvService) { }
 
   ngOnInit() {
     const self = this;
-    // Get the startX
-    self._subDown = self.contentPointerdown$.subscribe(ev => self._tmpYPointerdown = {time: ev.timeStamp, y: ev.screenY});
-    // Get the movingX and final V_x
-    self._subSwap = self.contentPointerdown$.pipe(
-      map( _ => self.deviceService.onPointermove$.pipe(
-        takeUntil(self.deviceService.onPointerup$.pipe(merge(
-          self.deviceService.onPointermove$.pipe(first(), delay(1000))
-          )
-        )),
-        concat(of({timeStamp: 0, movementY: 0, screenY: -1000}))
-      )),
-      concatAll(),
-      // map(ev => ev.clientX)
-      withLatestFrom(self.contentPointerdown$, (e_move, e_down) => {
-        if (e_move.timeStamp !== 0) {
-          self._tmpYPointermove = {time: e_move.timeStamp, y: e_move.screenY};
-        }
-        return e_move.screenY - e_down.screenY;
-      })
-    ).subscribe( dy => {
-      if (dy < -1000) {
-        self.deltaY = 0;
-        self._tmpVy = (self._tmpYPointermove.y - self._tmpYPointerdown.y) / (self._tmpYPointermove.time - self._tmpYPointerdown.time);
-        // * [2018-07-19 10:38] send out a notification 'delete' when the speedX is higher than 0.5
-        if (Math.abs(self._tmpVy) > self.maxSpeed) {
-          self.delete.next();
-        }
+    self.deltaY = 0;
+    // * [2018-10-05 11:50] Rewrite the event listener
+    let count = 0;
+    // When Pointer is pressed, get its time and let this App just capture the pointer events.
+    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    .subscribe(ev => {
+      self._pointerDownTime = ev.timeStamp;
+      self.isActivating = true;
+    });
+    // When Pointer is up, release the capturing of pointer events and check the pace
+    this.device.onPointerup$.pipe(takeUntil(self.unsubscribed$))
+    .subscribe(ev => {
+      if (self.isActivating === false) { // All of other buttons are listening to this event, too.
+        return;
       } else {
-        self.deltaY = (dy < -1000) ? 0 : dy;
+        self.isActivating = false;
+        count = 0;
+        if (Math.abs(self.deltaY) / (ev.timeStamp - self._pointerDownTime) > self.maxSpeed) {
+          self.delete.next();
+        } else {
+          self.deltaY = 0;
+        }
+        // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click
+        // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
+        if (ev.timeStamp - self._pointerDownTime < 250) {
+          self.onBtnClick(ev);
+        }
       }
+    });
+    // Listen to the move of the pointer
+    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    .pipe(
+      map(_ => self.device.onPointermove$.pipe(
+        pairwise(),
+        takeUntil(self.device.onPointerup$.pipe(merge(self.device.onNoButtonPressed$))))
+      ),
+      concatAll())
+    .subscribe(arr => {
+      if (arr[0].buttons === 0 && arr[1].buttons === 0) {
+        if (++count > 10) {
+          count = 0;
+          self.device.onNoButtonPressed$.next(true);
+        }
+        return;
+      }
+      // Move the list
+      self.deltaY += arr[1].screenY - arr[0].screenY;
     });
   }
 
   ngOnDestroy(): void {
-    this._subDown.unsubscribe();
-    this._subSwap.unsubscribe();
+    this.unsubscribed$.next(true);
+    this.unsubscribed$.complete();
+    this.unsubscribed$ = null;
   }
 
   onBtnClick(ev) {
