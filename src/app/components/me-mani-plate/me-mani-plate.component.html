@@ -50,7 +50,7 @@
         [style.width]="mainDown.width" [style.height]="mainDown.height"></div>
 
         <div #mainDown class="main-down">
-            <textarea matInput #subtitleInput class="subtitle" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next([subtitleInput.value,subtitleView.innerText])" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0"
+            <textarea matInput #subtitleInput class="subtitle" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="onSubInputChange(subtitleInput, subtitleView)" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0"
             [style.width]="mainDown.width" [style.height]="mainDown.height">
             </textarea>
         </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable, fromEvent, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ export class DeviceService {
   onMousedown$: Observable<MouseEvent>;
 
   onWindowResize$: Observable<Event>;
+
+  onNoButtonPressed$ = new Subject<boolean>();
 
   constructor() {
     // * [2018-06-??] For cordova

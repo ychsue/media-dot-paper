@@ -36,8 +36,17 @@ export class PageTextsService {
   private async _iniPTS$$() {
     let result = await this.loadPTSFromStorage$$();
     if (!!result === false) {
-      const lang = this.langList.find(o => navigator.language.replace('_', '-').indexOf(o.isoCode) >= 0 );
-      result = await this.loadPTS$$((!!lang) ? lang.isoCode : 'en');
+      const lang = this.langList.find(o => navigator.language.toLowerCase().replace('_', '-').indexOf(o.isoCode) >= 0 );
+      for (let i0 = 0; i0 < 10; i0++) { // try at most 10 times to load the PTS for the one on internet.
+        try {
+          result = await this.loadPTS$$((!!lang) ? lang.isoCode : 'en');
+          if (!!result && !!result.homePage && !!result.homePage.file) {
+            break;
+          }
+        } catch (error) {
+          continue;
+        }
+      }
       this.savePTS2Storage();
     }
     return (!!result);

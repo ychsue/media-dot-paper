@@ -1,3 +1,18 @@
+* [2018-10-5 Fri] Try to improve the mouse dragging behavior.
+Looks like the ~iframe~ used for Youtube will block the ~pointerevents~, or I should say that it will call ~event.stopPropagation()~ to prevent the event bubbling.
+Because of that, the dragging for resizing the sub-windows will behave wierd.
+Finally, I added a ~<div>~ upon all of them in ~app.componet~ when they are dragging and it works like a charm.
+Should I change the behavior of ~dragList~ and ~swap-icon~? Hm... maybe I should rename ~swap~ to ~swipe~.
+
+* [2018-10-3 Wed] Now I'm compiling for windows
+1. Thanks to [[https://stackoverflow.com/questions/32378645/in-cordova-how-do-i-set-a-different-package-name-for-windows-platform][this StackOverflow's Q&A]], now I can make a windows release package without any modification in windows subfolder directly.
+2. ~http.get~ json file might fail when it is on internet, I need to get that json file again and again in ~page-texts.service~.
+3. Since it takes time to update the ~innerText~, I use a ~setTimeout~ to delay this taking. 
+    I just delay it about 10 ms, let's see whether it works.
+4. Looks like that the browser can just load part of json if time is not enough.
+    So, finally, I tried to check whether one of its deepest element is undefined to avoid it is cheated by the empty JSON structure.
+    Work or not? I'm not sure. [2018-10-5 Fri] Until now, it seems work.
+
 * [2018-10-3 Wed] I had published a YouTube video.
 1. Its location is [[https://youtu.be/MI6VE6TUgho][https://youtu.be/MI6VE6TUgho]].
 2. Find some bugs which is mainly related to the property ~utterPara~ of ~me-mani-plate.component~. 

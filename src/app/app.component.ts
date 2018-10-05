@@ -6,7 +6,7 @@ import { YoutubeService } from './services/youtube.service';
 import { GvService, PageType } from './services/gv.service';
 import { Subject, of } from 'rxjs';
 import { DeviceService } from './services/device.service';
-import { concatAll, takeUntil, map, concat, merge, take, debounceTime } from 'rxjs/operators';
+import { concatAll, takeUntil, map, concat, merge, take, debounceTime, pairwise } from 'rxjs/operators';
 import { MediaEditService } from './services/media-edit.service';
 import { PageTextsService } from './services/page-texts.service';
 
@@ -42,30 +42,32 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     const self = this;
     this.ytService.embedApiScript();
-    let px = NaN;
+    let count = 0;
     // * [2018-07-29 20:11] For resizing the sideNav
     this.resize$.pipe(
         map(_ => self.device.onPointermove$.pipe(
           takeUntil(self.device.onPointerup$.pipe(
-            merge(self.device.onPointermove$.pipe(debounceTime(1000)))
-          )),
-          concat(of(null))
+            // merge(self.device.onPointermove$.pipe(debounceTime(1000)))
+            merge(self.device.onNoButtonPressed$)
+          ))
         )),
         concatAll(),
-    ).subscribe((ev: PointerEvent) => {
-      if (ev === null) { // if at the end
-        px = NaN;
-        this.decideSidenavMode();
-      } else {
-        if (isNaN(px)) { // if at the start
-          px = ev.screenX;
-        } else {
-          const dx = ev.screenX - px;
-          px = ev.screenX;
-            self.sidenavWidth += dx;
+        pairwise()
+    ).subscribe(arr => {
+      if (arr[0].buttons === 0 && arr[1].buttons === 0) {
+        if (++count > 10) {
+          self.device.onNoButtonPressed$.next(true);
+          count = 0;
         }
       }
+      self.sidenavWidth += arr[1].screenX - arr[0].screenX;
     });
+
+    self.device.onPointerup$.subscribe(_ => {
+      self.gv.isJustPointerEvents = false;
+      self.decideSidenavMode();
+    });
+    self.resize$.subscribe(_ => {self.gv.isJustPointerEvents = true; });
   }
 
   decideSidenavMode() {

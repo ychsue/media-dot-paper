@@ -9,6 +9,7 @@ export class GvService {
   sharedFolderName = 'SegmentedMediaLayer';
   ptVersion = "2018.1002.1";
 
+  isJustPointerEvents = false;
   constructor() { }
 }
 

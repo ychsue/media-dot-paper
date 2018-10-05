@@ -35,6 +35,11 @@
 /cordova-test/platforms/windows/Package*
 /cordova-test/platforms/windows/.vs
 /cordova-test/platforms/windows/_pkginfo.txt
+/cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/ARM
+/cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/Debug
+/cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/Release
+/cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/x64
+
 
 # dependencies
 /node_modules/*

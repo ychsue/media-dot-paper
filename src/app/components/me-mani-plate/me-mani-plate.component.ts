@@ -166,6 +166,13 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe();
   }
 
+  onSubInputChange(subtitleInput: HTMLTextAreaElement, subtitleView: HTMLDivElement) {
+    const self = this;
+    setTimeout(() => {
+      self.subtitleChange$.next([subtitleInput.value, subtitleView.innerText]);
+    }, 10);
+  }
+
   onPlayPause() {
     if (this.previousState !== MEState.playing) {
       this.meService.onPlayerAction.next(playerAction.play);
