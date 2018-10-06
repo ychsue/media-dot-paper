@@ -8,6 +8,7 @@
         Yes Circulation
     </author>
     <content src="index.html" />
+    <access origin="*" />
     <allow-navigation href="https://*.youtube.com" />
     <allow-navigation href="https://*.ytimg.com" />
     <allow-navigation href="https://*.youtube-nocookie.com" />

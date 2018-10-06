@@ -46,13 +46,13 @@ export class AppComponent implements AfterViewInit {
     // * [2018-07-29 20:11] For resizing the sideNav
     this.resize$.pipe(
         map(_ => self.device.onPointermove$.pipe(
+          pairwise(),
           takeUntil(self.device.onPointerup$.pipe(
             // merge(self.device.onPointermove$.pipe(debounceTime(1000)))
             merge(self.device.onNoButtonPressed$)
           ))
         )),
-        concatAll(),
-        pairwise()
+        concatAll()
     ).subscribe(arr => {
       if (arr[0].buttons === 0 && arr[1].buttons === 0) {
         if (++count > 10) {

@@ -69,9 +69,9 @@ export class MediaEditComponent implements OnInit {
     let count = 0;
     // * [2018-10-01 15:10] Used to change the sideWidth
     self.changeSideWidth$.pipe(map(_ => self.device.onPointermove$.pipe(
+      pairwise(),
       takeUntil(self.device.onPointerup$.pipe(merge(self.device.onNoButtonPressed$))))),
-      concatAll(),
-      pairwise()).subscribe(arr => {
+      concatAll()).subscribe(arr => {
         if (arr[0].buttons === 0 && arr[1].buttons === 0) {
           if (++count > 10) {
             self.device.onNoButtonPressed$.next(true);

@@ -1,3 +1,16 @@
+* [2018-10-6 Sat] Give your local storage key a name related to your App.
+At this morning, I finally realized that why did my code on the web sometimes the ~page-texts~ does not work.
+The reason is that I put this App's web version and its tutorial under the same host ~yescirculation.at.tw~.
+Although they are located at different path, they share the same local storage.
+Because I use the same key ~PTS~ for ~page-texts~ so that ~PTS~ will be overwritten when I navigate between them.
+The solution is that I give the key a different name for tutorial one and it seems work.
+Hope so.
+
+I also had compile this App on Android system again. I found that I need to declare 
+~<accept origin='*'/>~ in config.xml; if not, I cannot get the video from Youtube and play the audio from network.
+
+By the way, the ~pairwise()~ problem appeared again for resizing. After correcting the time to call it, it works fine on Android now.
+
 * [2018-10-5 Fri] The draglist and swapIcon are both changed to use the new way to handle it.
 1. ~pairwise~ should be called as the first operation, if you invoke it after ~concatAll~, it will ~pairwise~ the previous series of ~pointerMove~ event and you'll see your element has a quick move.
 2. Since the numbers of ~draglist~ and ~swapIcon~ both are unknown. If I ask them to listen to the same event, I need to tell them who need to take the deal; otherwise, all of them will run the same code which you don't want them to do so.
