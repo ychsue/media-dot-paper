@@ -104,6 +104,7 @@ typedef int CDVFileError;
 @interface CDVFile : CDVPlugin {
     NSString* rootDocsPath;
     NSString* appDocsPath;
+    NSString* appDownloadsPath;
     NSString* appLibraryPath;
     NSString* appTempPath;
 
@@ -158,6 +159,11 @@ typedef int CDVFileError;
  * local path of the 'documents' file system (~/Documents)
  */
 @property (nonatomic, strong) NSString* appDocsPath;
+
+/**
+ * local path of the 'downloade' file system (~/Downloads)
+ */
+@property (nonatomic, strong) NSString* appDownloadsPath;
 
 /**
 * local path of the 'applicationStorageDirectory' file system (~/Library/Application Support/<bundle-id>)

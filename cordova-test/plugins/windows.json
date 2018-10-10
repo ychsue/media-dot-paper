@@ -7,37 +7,40 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
-    "cordova-plugin-nano-sqlite": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
-    "cordova-clipboard": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
     "cordova-plugin-admobpro": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
-    "cordova-plugin-tts": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "HelloCordova"
+      "PACKAGE_NAME": "Media Dot Paper"
     },
     "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "HelloCordova"
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "Media Dot Paper"
     },
     "cordova-plugin-file-opener2": {
-      "PACKAGE_NAME": "HelloCordova"
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-tts": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-clipboard": {
+      "PACKAGE_NAME": "Media Dot Paper"
     }
   },
   "dependent_plugins": {
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "HelloCordova"
-    },
     "cordova-plugin-extension": {
-      "PACKAGE_NAME": "HelloCordova"
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "Media Dot Paper"
     }
   }
 }

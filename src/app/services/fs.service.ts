@@ -216,7 +216,7 @@ export class FsService {
         if (cordova.platformId === 'android') {
           downloadDir = await self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise();
         } else {
-          downloadDir = await self.getDir$('', false, false, cordova.file.documentsDirectory).toPromise();
+          downloadDir = await self.getDir$('', false, false, cordova.file.downloadsDirectory).toPromise();
         }
         if (!!downloadDir) {
           const fileEntry = await self.getFile$(fileName, true, false, downloadDir).toPromise();

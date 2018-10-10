@@ -15,26 +15,27 @@
 /cordova-test/platforms/windows/node_modules/*
 /cordova-test/www
 /cordova-test/platforms/browser
-/cordova-test/platforms/ios
-/cordova-test/platforms/osx
-/cordova-test/platforms/android/app/build
-/cordova-test/platforms/android/app/src
-/cordova-test/platforms/android/app/release
-/cordova-test/platforms/android/CordovaLib
-/cordova-test/platforms/android/.gradle
-/cordova-test/platforms/android/.idea
-/cordova-test/platforms/windows/build
-/cordova-test/platforms/windows/www
-/cordova-test/platforms/windows/config.xml
-/cordova-test/platforms/windows/AppPackages
-/cordova-test/platforms/windows/ARM
-/cordova-test/platforms/windows/BundleArtifacts
-/cordova-test/platforms/windows/Release
-/cordova-test/platforms/windows/x64
-/cordova-test/platforms/windows/CordovaApp*
-/cordova-test/platforms/windows/Package*
-/cordova-test/platforms/windows/.vs
-/cordova-test/platforms/windows/_pkginfo.txt
+# keep each platforms' images
+/cordova-test/platforms/ios/*
+!/cordova-test/platforms/ios/Media\ Dot\ Paper/
+/cordova-test/platforms/ios/Media\ Dot\ Paper/*
+!/cordova-test/platforms/ios/Media\ Dot\ Paper/Images.xcassets
+
+/cordova-test/platforms/osx/*
+!/cordova-test/platforms/osx/Media\ Dot\ Paper/
+
+/cordova-test/platforms/android/*
+# !/cordova-test/platforms/android/app/
+# /cordova-test/platforms/android/app/*
+# !/cordova-test/platforms/android/app/src/
+# /cordova-test/platforms/android/app/src/*
+# !/cordova-test/platforms/android/app/src/main/
+# /cordova-test/platforms/android/app/src/main/*
+# !/cordova-test/platforms/android/app/src/main/res
+
+/cordova-test/platforms/windows/*
+!/cordova-test/platforms/windows/images/
+
 /cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/ARM
 /cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/Debug
 /cordova-test/plugins/cordova-sqlite-storage/src/windows/SQLite3-Win-RT/SQLite3/SQLite3.UWP/Release

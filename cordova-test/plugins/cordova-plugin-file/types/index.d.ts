@@ -63,7 +63,7 @@ interface Entry {
     /** The full absolute path from the root to the entry. */
     fullPath: string;
     /** The file system on which the entry resides. */
-    fileSystem: FileSystem;
+    filesystem: FileSystem;
     nativeURL: string;
     /**
      * Look up metadata about this entry.
@@ -294,9 +294,9 @@ interface FileWriter extends FileSaver {
     length: number;
     /**
      * Write the supplied data to the file at position.
-     * @param {Blob} data The blob to write.
+     * @param {Blob|string} data The blob to write.
      */
-    write(data: Blob): void;
+    write(data: Blob|string): void;
     /**
      * The file position at which the next write will occur.
      * @param offset If nonnegative, an absolute byte offset into the file.
@@ -366,6 +366,8 @@ interface Cordova {
         syncedDataDirectory: string;
         /* iOS: Files private to the app, but that are meaningful to other applciations (e.g. Office files) */
         documentsDirectory: string;
+        // macOS: now we are in a sandbox and we just can output file to a download folder
+        downloadsDirectory: string;
         /* BlackBerry10: Files globally available to all apps */
         sharedDirectory: string
     }

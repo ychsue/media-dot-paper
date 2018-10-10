@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 var exec = require('cordova/exec');
 var channel = require('cordova/channel');
@@ -46,13 +46,15 @@ exports.file = {
     syncedDataDirectory: null,
     // iOS: Files private to the app, but that are meaningful to other applications (e.g. Office files)
     documentsDirectory: null,
+    // macOS: now we are in a sandbox and we just can output file to a download folder
+    downloadsDirectory: null,
     // BlackBerry10: Files globally available to all apps
     sharedDirectory: null
 };
 
 channel.waitForInitialization('onFileSystemPathsReady');
-channel.onCordovaReady.subscribe(function () {
-    function after (paths) {
+channel.onCordovaReady.subscribe(function() {
+    function after(paths) {
         for (var k in paths) {
             exports.file[k] = paths[k];
         }

@@ -26,7 +26,7 @@ var cordova = require('cordova');
 
 module.exports = {
 
-    copy: function (successCallback, errorCallback, args) {
+    copy: function(successCallback, errorCallback, args) {
         try {
             var text = args[0];
 
@@ -38,26 +38,26 @@ module.exports = {
             errorCallback(e);;
         }
     },
-    paste: function (successCallback, errorCallback, args) {
+    paste: function(successCallback, errorCallback, args) {
         try {
             var text = "";
 
             var dataPackageView = Windows.ApplicationModel.DataTransfer.Clipboard.getContent();
             if (dataPackageView.contains(Windows.ApplicationModel.DataTransfer.StandardDataFormats.text)) {
-                dataPackageView.getTextAsync().then(function (value) {
+                dataPackageView.getTextAsync().then(function(value) {
                     text = value;
                     successCallback(text);
                 });
             } else {
-                throw Error('not a text in the clipboard');
+                throw new Error('not a txt in clipboard');
             }
         } catch (e) {
             errorCallback(e);;
         }
     },
-    clear: function (successCallback, errorCallback, args) {
+    clear: function(successCallback, errorCallback, args) {
         try {
-            if(Windows.ApplicationModel.DataTransfer.Clipboard.getContent()){
+            if (Windows.ApplicationModel.DataTransfer.Clipboard.getContent()) {
                 successCallback(true);
             }
         } catch (e) {

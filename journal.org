@@ -1,3 +1,8 @@
+* [2018-10-8 Mon] Now, I want to modify the ~cordova-plugin-file~ for macOS
+To tell the truth, I'm a little don't wanna do that.
+However, change is a chance and a chance might have another new chances.
+Just do it.
+
 * [2018-10-6 Sat] Give your local storage key a name related to your App.
 At this morning, I finally realized that why did my code on the web sometimes the ~page-texts~ does not work.
 The reason is that I put this App's web version and its tutorial under the same host ~yescirculation.at.tw~.

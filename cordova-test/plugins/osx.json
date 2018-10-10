@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-clipboard": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
     "cordova-plugin-admobpro": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
@@ -29,6 +26,12 @@
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-clipboard": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },

@@ -184,7 +184,7 @@ NSString* const kCDVFilesystemURLPrefix = @"cdvfile";
 
 @implementation CDVFile
 
-@synthesize appDocsPath, appDataPath, appSupportPath, appTempPath, appCachePath, userHasAllowed, fileSystems=fileSystems_;
+@synthesize appDocsPath, appDownloadsPath, appDataPath, appSupportPath, appTempPath, appCachePath, userHasAllowed, fileSystems=fileSystems_;
 
 - (void)registerFilesystem:(NSObject<CDVFileSystem> *)fs {
     __weak CDVFile* weakSelf = self;
@@ -278,6 +278,7 @@ NSString* const kCDVFilesystemURLPrefix = @"cdvfile";
 {
     return @{
         @"documents": self.appDocsPath,
+        @"downloads": self.appDownloadsPath,
         @"cache": self.appCachePath,
         @"bundle": [[NSBundle mainBundle] bundlePath],
         @"root": @"/"
@@ -303,6 +304,9 @@ NSString* const kCDVFilesystemURLPrefix = @"cdvfile";
 
     // ~/Documents/
     self.appDocsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+ 
+    // ~/Downloads/
+    self.appDownloadsPath = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES)[0];
 
     // ~/Library/Caches/<bundle-id>/files
     self.appCachePath = [self getSupportDirectoryFor:NSCachesDirectory pathComponents:nil];
@@ -456,6 +460,7 @@ NSString* const kCDVFilesystemURLPrefix = @"cdvfile";
         @"applicationStorageDirectory": [[NSURL fileURLWithPath:self.appSupportPath] absoluteString],
         @"dataDirectory": [[NSURL fileURLWithPath:self.appDataPath] absoluteString],
         @"documentsDirectory": [[NSURL fileURLWithPath:self.appDocsPath] absoluteString],
+        @"downloadsDirectory": [[NSURL fileURLWithPath:self.appDownloadsPath] absoluteString],
         @"cacheDirectory": [[NSURL fileURLWithPath:self.appCachePath] absoluteString],
         @"tempDirectory":[[NSURL fileURLWithPath:self.appTempPath] absoluteString],
         @"rootDirectory": @"file:///",

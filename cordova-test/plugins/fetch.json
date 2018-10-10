@@ -23,14 +23,6 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-clipboard": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-clipboard@^1.2.1"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-admobpro": {
     "source": {
       "type": "registry",
@@ -57,8 +49,8 @@
   },
   "cordova-plugin-file": {
     "source": {
-      "type": "registry",
-      "id": "cordova-plugin-file@6.0.1"
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-plugin-file"
     },
     "is_top_level": true,
     "variables": {}
@@ -83,6 +75,22 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-file-opener2"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-inappbrowser": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-inappbrowser@3.0.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-clipboard": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-clipboard"
     },
     "is_top_level": true,
     "variables": {}

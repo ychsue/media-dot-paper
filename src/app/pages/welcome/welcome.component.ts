@@ -30,4 +30,10 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.unsubscribed$.complete();
     this.unsubscribed$ = null;
   }
+
+  onLinkToUrl(sUrl: string) {
+    if (!!cordova && cordova.platformId === 'osx') {
+      cordova['InAppBrowser'].open(sUrl, '_system', 'location=yes');
+    }
+  }
 }
