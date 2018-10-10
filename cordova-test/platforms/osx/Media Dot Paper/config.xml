@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="tw.at.yescirculation.mediadotpaper" packageName="48028Young-ChungHsue.MediaDotPaper" version="2018.1009.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="LocalStorage">
+        <param name="osx-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="ios-package" value="SQLitePlugin" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="osx-package" value="CDVInAppBrowser" />
+    </feature>
+    <feature name="Clipboard">
+        <param name="ios-package" value="CDVClipboard" />
+    </feature>
+    <name>Media Dot Paper</name>
+    <description>
+        My first cordova App to help people to add some extra functions to their media.
+    </description>
+    <author email="yescirculation@gmail.com" href="http://yescirculation.at.tw">
+        Yes Circulation
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-navigation href="https://*.youtube.com" />
+    <allow-navigation href="https://*.ytimg.com" />
+    <allow-navigation href="https://*.youtube-nocookie.com" />
+    <hook src="scripts/prepareAngular6App.js" type="before_prepare" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="blob:*" />
+    <preference name="AllowInlineMediaPlayback" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+</widget>
