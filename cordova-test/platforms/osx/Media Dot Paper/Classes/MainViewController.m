@@ -19,11 +19,16 @@
 
 #import "MainViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <NSWindowDelegate>
 
 @end
 
 @implementation MainViewController
+
+- (BOOL)windowShouldClose:(NSWindow *)sender {
+    [NSApp hide:self];
+    return false;
+}
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -66,6 +71,7 @@
     [super awakeFromNib];
 
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    self.webView.window.delegate = self;
 }
 
 @end

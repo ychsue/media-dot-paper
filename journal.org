@@ -1,3 +1,24 @@
+* [2018-10-11 Thu] Some functions changed
+1. How to show an information for ~About~?
+    You should create a ~Resources/Credits.rtf~ file as mentioned in [[https://stackoverflow.com/questions/32364955/main-menu-items-change-about-credits-rtf-after-change-his-type][this StackOverflow's Q&A]]. Once you created it, you'll find it is shown in the ~About~ page.
+
+2. How to create a help book?
+    In fact, in MacOS, ~.help~ folder is worked as an App. You can follow the steps shown in [[http://swiftrien.blogspot.com/2015/06/adding-apple-help-to-os-x-application.html][this web page]].
+    Be careful, don't make your ~Help Book identifier(HPDBookTitle)~ too long. If you make it too long, you cannot open that ~YourApp.help~ in a Helper so that your App cannot open it.
+    I think the application ~Numbers~ is a good example.
+
+3. Originally, I cannot close this App just by clicking the red ~close~ button at top-left corner. In [[https://medium.com/@venj/hide-window-instead-of-close-it-when-clicks-the-close-button-25768e41ee2d][this article]], I follow his suggestion to hide this App instead of close it and it works. Thanks to them.
+The method it used is by handling ~windowShouldClose~ of ~NSWindowDelegate~ to hide it. Remember that, you need to set ~self.webView.window.delegate = self;~ in ~awakeFromNib~ so that you can handle ~windowShouldClose~.
+
+* [2018-10-10 Wed] For osx, the download folder is included, plugin cordova-clipboard is updated and cordova-plugin-inappbrowser is installed.
+1. Without ~cordova-plugin-inappbrowser~ and setting ~target='_system'~, click a URL link cannot open the default browser to link to that URL. 
+2. Thanks to the plugin ~cordova-clipboard~, now this App in macOS can get the text data from clipboard, too.
+3. Owing to sandbox, I have to save file into ~Download~ folder.
+    After invoking ~NSDownloadsDirectory~ defined in ~NSPathUtilities.h~ in ~CDVFile.m~ and defining a property ~appDownloadsPath~ for communication with cordova, I can save file into ~Download~ folder.
+
+Now, I'm facing a new problem about the ~Menu Bar~. However, it means that I have to modify ~Cocoa~ part's code. I need to do more try and error since I don't have any idea about it.
+If I want to make it better, I need to learn it. Okay, let me do it. But I have to commit this one at first.
+
 * [2018-10-8 Mon] Now, I want to modify the ~cordova-plugin-file~ for macOS
 To tell the truth, I'm a little don't wanna do that.
 However, change is a chance and a chance might have another new chances.
