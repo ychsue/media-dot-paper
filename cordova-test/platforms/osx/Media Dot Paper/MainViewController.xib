@@ -25,14 +25,6 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-2" id="142"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="236">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Preferences…" keyEquivalent="," id="129">
-                                <connections>
-                                    <action selector="onPreferences:" target="732" id="vnu-8N-0ci"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -56,12 +48,6 @@
                             <menuItem title="Show All" id="150">
                                 <connections>
                                     <action selector="unhideAllApplications:" target="-1" id="370"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Toggle Full Screen" keyEquivalent="f" id="afF-KY-ioe">
-                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
-                                <connections>
-                                    <action selector="onFullscreen:" target="732" id="nPq-se-igd"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="149">
@@ -290,6 +276,44 @@
                                         </menuItem>
                                     </items>
                                 </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="View" id="wLH-rz-ncl">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="CaI-VC-rkh">
+                        <items>
+                            <menuItem title="Enter Full Screen/Exit Full Screen" keyEquivalent="f" id="CCe-lu-S1A">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
+                                <connections>
+                                    <action selector="onFullscreen:" target="732" id="oFD-jV-fjK"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Window" id="pa0-H2-x8A">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Window" systemMenu="window" id="9Gl-DG-zpT">
+                        <items>
+                            <menuItem title="Minimize" keyEquivalent="m" id="cTM-yo-XZ1">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="RXv-h6-3j9"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom" id="6ob-dM-k5d">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performZoom:" target="-1" id="ApL-XN-M6w"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="DJb-72-goG"/>
+                            <menuItem title="Bring All to Front" id="8Fj-3V-XhX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="cmh-i4-Q6I"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

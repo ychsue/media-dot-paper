@@ -1,3 +1,8 @@
+* [2018-10-11 Thu] Modify the Menu Bar
+1. Remove ~preferences~ which links to ~view Controller onPreferences:~ with a ~Separator~.
+2. Add ~Window~ and ~View~ menus with related items.
+3. Sigh.... I cannot submit it to Apple Store.
+
 * [2018-10-11 Thu] Some functions changed
 1. How to show an information for ~About~?
     You should create a ~Resources/Credits.rtf~ file as mentioned in [[https://stackoverflow.com/questions/32364955/main-menu-items-change-about-credits-rtf-after-change-his-type][this StackOverflow's Q&A]]. Once you created it, you'll find it is shown in the ~About~ page.
