@@ -25,13 +25,13 @@
 !/cordova-test/platforms/osx/Media\ Dot\ Paper/
 
 /cordova-test/platforms/android/*
-# !/cordova-test/platforms/android/app/
-# /cordova-test/platforms/android/app/*
-# !/cordova-test/platforms/android/app/src/
-# /cordova-test/platforms/android/app/src/*
-# !/cordova-test/platforms/android/app/src/main/
-# /cordova-test/platforms/android/app/src/main/*
-# !/cordova-test/platforms/android/app/src/main/res
+!/cordova-test/platforms/android/app/
+/cordova-test/platforms/android/app/*
+!/cordova-test/platforms/android/app/src/
+/cordova-test/platforms/android/app/src/*
+!/cordova-test/platforms/android/app/src/main/
+/cordova-test/platforms/android/app/src/main/*
+!/cordova-test/platforms/android/app/src/main/res
 
 /cordova-test/platforms/windows/*
 !/cordova-test/platforms/windows/images/

@@ -1,3 +1,6 @@
+* [2018-10-12 Fri] Oh no, when I back to windows and android, they cannot be used anymore
+let me commit it again before I do any modification.
+
 * [2018-10-12 Fri] For iOS, I have to modify the output of ~JSON.stringify(...)~
 1. Since iOS cannot download JSON file from the browser, at least let users can copy its content and paste that content into this App.
 2. I found that in ~config.xml~, we can change the id of ~iOS~ but not ~osx~. Oh... I do really want to ask them whether I can change the id for iOS and osx.
