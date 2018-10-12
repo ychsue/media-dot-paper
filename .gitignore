@@ -18,8 +18,8 @@
 # keep each platforms' images
 /cordova-test/platforms/ios/*
 !/cordova-test/platforms/ios/Media\ Dot\ Paper/
-/cordova-test/platforms/ios/Media\ Dot\ Paper/*
-!/cordova-test/platforms/ios/Media\ Dot\ Paper/Images.xcassets
+# /cordova-test/platforms/ios/Media\ Dot\ Paper/*
+# !/cordova-test/platforms/ios/Media\ Dot\ Paper/Images.xcassets
 
 /cordova-test/platforms/osx/*
 !/cordova-test/platforms/osx/Media\ Dot\ Paper/

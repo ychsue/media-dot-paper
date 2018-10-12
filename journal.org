@@ -1,7 +1,14 @@
+* [2018-10-12 Fri] This time is the problem of ios part.
+Hm... They said that when this App running on iPad with iOS 12.0.1 connected to an IPV6 network, it will crash when the user click the "File" button and try to "Take a Photo or Video".
+Nice new feature but unfortunately I couldn't find a simulator for iOS 12.0.1.
+What kind of device that I can reproduce this bug? Hm... Let me think.
+
+Anyway, I guess that is related to the permission of microphone and camera. Before I do any change, I want to commit this modification.
+
 * [2018-10-11 Thu] Modify the Menu Bar
 1. Remove ~preferences~ which links to ~view Controller onPreferences:~ with a ~Separator~.
 2. Add ~Window~ and ~View~ menus with related items.
-3. Sigh.... I cannot submit it to Apple Store.
+3. Sigh.... I cannot submit it to Apple Store because it said that my installer certificate is revoked. I don't know the reason and I have sent a message to ask their help. -_-
 
 * [2018-10-11 Thu] Some functions changed
 1. How to show an information for ~About~?
