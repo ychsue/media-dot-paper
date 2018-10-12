@@ -1,3 +1,14 @@
+* [2018-10-12 Fri] For iOS, I have to modify the output of ~JSON.stringify(...)~
+1. Since iOS cannot download JSON file from the browser, at least let users can copy its content and paste that content into this App.
+2. I found that in ~config.xml~, we can change the id of ~iOS~ but not ~osx~. Oh... I do really want to ask them whether I can change the id for iOS and osx.
+3. Now I want to add some new functionality into this code and I want to test it in windows and android, too.
+   I need to commit again.
+4. In this commit, I also using the DecimalPipe to shorten the digits of currentTime.
+
+* [2018-10-12 Fri] Add in the privacy Usage Description for iOS
+Well, as [[https://iosdevcenters.blogspot.com/2016/09/infoplist-privacy-settings-in-ios-10.html][this Article]] said, your App will be crash if you don't provide iOS the privacy Usage Description in ~Info.plist~ file.
+To add in privacy usage descriptions of ~Camera~ and ~Microphone~, you can simply use ~Finder~ to open ~Media Dot Paper-info.plist~ file and click the "+" button of ~Information Property List~, then you can find both of them are on the list. Great!
+
 * [2018-10-12 Fri] This time is the problem of ios part.
 Hm... They said that when this App running on iPad with iOS 12.0.1 connected to an IPV6 network, it will crash when the user click the "File" button and try to "Take a Photo or Video".
 Nice new feature but unfortunately I couldn't find a simulator for iOS 12.0.1.

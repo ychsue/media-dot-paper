@@ -54,7 +54,7 @@
     </div>
     <div class="slider">
         <input #inStart type="number" [@flyInOut]="IOStartShown" class="upLeft" [(ngModel)]="meService.story.frames[meService.story.iFrame].start" (blur)="IOStartShown='out'">
-        <div class="upCenter">{{meService.currentTime}}</div>
+        <div class="upCenter">{{meService.currentTime | number: '1.0-3'}}</div>
         <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'">
         <span class="slider-start" (click)="onOpenInputStart(inStart)">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>
         <!-- <mat-form-field><input class="slider-start" matInput [(ngModel)]="meService.story.frames[meService.story.iFrame].start"></mat-form-field> -->
