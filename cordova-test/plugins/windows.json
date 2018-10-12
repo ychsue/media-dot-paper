@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-clipboard": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
     "cordova-plugin-admobpro": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
@@ -19,6 +22,9 @@
     "cordova-plugin-file-opener2": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "Media Dot Paper"
+    },
     "cordova-plugin-nano-sqlite": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
@@ -26,12 +32,6 @@
       "PACKAGE_NAME": "Media Dot Paper"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "Media Dot Paper"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "Media Dot Paper"
-    },
-    "cordova-clipboard": {
       "PACKAGE_NAME": "Media Dot Paper"
     }
   },

@@ -45,7 +45,7 @@
     <plugin name="cordova-clipboard" spec="/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-clipboard" />
     <engine name="browser" spec="^5.0.3" />
     <engine name="osx" spec="^4.0.2" />
-    <engine name="android" spec="^7.1.1" />
-    <engine name="windows" spec="^6.0.1" />
     <engine name="ios" spec="^4.5.5" />
+    <engine name="windows" spec="^6.0.1" />
+    <engine name="android" spec="^7.1.1" />
 </widget>

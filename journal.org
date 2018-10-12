@@ -1,3 +1,20 @@
+* [2018-10-12 Fri] Make them work again
+1. For windows, run
+#+begin_src sh
+cordova platform remove windows
+cordova platform add windows
+#+end_src
+then check the reference of ~Windows advertising SDK~ again.
+It can work.
+2. For android,
+#+begin_src sh
+cordova platform remove android
+cordova platform add android
+#+end_src
+Then, as described in ~[2018-9-13 Thu]~, you need to make some modification to those files.
+Then you need to open Android Studio to build it and it will help you to correct some errors.
+However, admobpro doesn't work. Let me try more.
+
 * [2018-10-12 Fri] Oh no, when I back to windows and android, they cannot be used anymore
 let me commit it again before I do any modification.
 
