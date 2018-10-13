@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
-import { IStory } from '../../services/story.service';
+import { IStory, StoryService } from '../../services/story.service';
 import { map, concatAll, concat, takeUntil } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private meService: MediaEditService, private db: DbService,
     private ngZone: NgZone, private fs: FsService
     , private msg: MessageService, private clipboard: ClipboardService,
-    private ccService: CrossCompService) {
+    private ccService: CrossCompService, private storyService: StoryService) {
       const self = this;
       ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).pipe(takeUntil(self._unsubscribed)).subscribe(_ => {
         self.pts = ptsServic.pts.homePage;
@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             let story: IStory;
             try {
               text = (e.srcElement as any).result;
-              story = self.getMDPfromJSONstring(text);
+              story = self.storyService.getAStoryFromString(text);
               if (!!story) {
                 res(story);
               } else {
@@ -146,7 +146,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       let story: IStory;
       if (!!result === false) {
         return;
-      } else if (!!(story = self.getMDPfromJSONstring(result))) {
+      } else if (!!(story = self.storyService.getAStoryFromString(result))) {
       // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
         story.modifyTime = 0;
         self.meService.initMe(story);
@@ -159,19 +159,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       // * [2018-07-19 21:28] Tell navbar that you want to create a story
       self.meService.sideClickType = SideClickType.new;
     });
-  }
-
-  getMDPfromJSONstring(stJson: string): IStory {
-    let story: IStory = null;
-    try {
-      story = JSON.parse(stJson);
-      if (!!story === false || !!story.viewTime === false) {
-        story = null; // Since it is not what I want, clean it up.
-      }
-    } catch (error) {
-      story = null;
-    }
-    return story;
   }
 
   async onStoryDelete(story: IStory) {

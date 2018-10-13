@@ -4,7 +4,7 @@ import { MatAnchor } from '@angular/material';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
-import { utterType, IStory } from '../../services/story.service';
+import { utterType, IStory, StoryService } from '../../services/story.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { concat, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -29,7 +29,8 @@ export class StoryComponent implements OnInit {
   public ptsService: PageTextsService,
   public msg: MessageService,
   private fs: FsService,
-  private cdr: ChangeDetectorRef) {
+  private cdr: ChangeDetectorRef,
+  private storyService: StoryService) {
   }
 
   ngOnInit() {
@@ -52,13 +53,14 @@ export class StoryComponent implements OnInit {
     // * [2018-09-04 12:06] Start to store into the file
     if (!!window.cordova === true) {
       e.preventDefault();
-      self.fs.saveTxtFile$$(JSON.stringify(self.meService.story), self.meService.story.viewTime
+      self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), self.meService.story.viewTime
         + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
     } else {
       let blob: Blob;
       // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
       // if (!!window.cordova && cordova.platformId === 'android') {
-        blob = new Blob([JSON.stringify(self.meService.story)], <any>{encoding: 'UTF-8', type: 'application/json;charset=UTF-8'});
+        blob = new Blob([self.storyService.stringifyAStory(self.meService.story)],
+         <any>{encoding: 'UTF-8', type: 'application/json;charset=UTF-8'});
       // }
       this.downloadHref = URL.createObjectURL(blob);
       // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));

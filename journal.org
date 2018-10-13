@@ -1,3 +1,7 @@
+* [2018-10-13 Sat] Run encodeURI and decodeURI for a story (MDP)
+It seems to work fine.
+Because iOS will not download a file from a download link but show its content, I have to do so to avoid encoding problem for iOS.
+
 * [2018-10-13 Sat] Originally, I want to commit ~gradle-wrapper.properties~. However, it is ignored by android's ~.gitignore~.
 I believed it, so I did not commit it.
 

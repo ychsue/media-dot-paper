@@ -9,6 +9,23 @@ import { PageTextsService } from './page-texts.service';
 export class StoryService {
 
   constructor() { }
+
+  stringifyAStory(story: IStory): string {
+    return encodeURI(JSON.stringify(story));
+  }
+
+  getAStoryFromString(stJson: string): IStory {
+    let story: IStory = null;
+    try {
+      story = JSON.parse(decodeURI(stJson));
+      if (!!story === false || !!story.viewTime === false) {
+        story = null; // Since it is not what I want, clean it up.
+      }
+    } catch (error) {
+      story = null;
+    }
+    return story;
+  }
 }
 
 export class Story implements IStory {
