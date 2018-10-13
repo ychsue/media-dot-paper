@@ -26,13 +26,19 @@
 
 /cordova-test/platforms/android/*
 !/cordova-test/platforms/android/*.*
+# !/cordova-test/platforms/android/gradle/ #[2018-10-13 Sat] this one does not work since it is in the list of .gitignore of android.
 !/cordova-test/platforms/android/app/
+/cordova-test/platforms/android/.gradle
+/cordova-test/platforms/android/.idea
 /cordova-test/platforms/android/app/*
 !/cordova-test/platforms/android/app/*.*
 !/cordova-test/platforms/android/app/src/
 /cordova-test/platforms/android/app/src/*
+!/cordova-test/platforms/android/app/src/*.*
 !/cordova-test/platforms/android/app/src/main/
 /cordova-test/platforms/android/app/src/main/*
+!/cordova-test/platforms/android/app/src/main/java
+!/cordova-test/platforms/android/app/src/main/*.*
 !/cordova-test/platforms/android/app/src/main/res
 !/cordova-test/platforms/android/cordova/
 /cordova-test/platforms/android/cordova/node_modules

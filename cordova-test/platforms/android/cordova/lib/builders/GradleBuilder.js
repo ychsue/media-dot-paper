@@ -207,7 +207,7 @@ GradleBuilder.prototype.prepBuildFiles = function () {
                 throw new CordovaError('Unsupported system library (does not work with gradle): ' + p);
             }
         }
-        depsList += '    compile "' + mavenRef + '"\n';
+        depsList += '    implementation "' + mavenRef + '"\n';
     });
 
     // This code is dangerous and actually writes gradle declarations directly into the build.gradle

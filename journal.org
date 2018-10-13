@@ -1,4 +1,10 @@
+* [2018-10-13 Sat] Originally, I want to commit ~gradle-wrapper.properties~. However, it is ignored by android's ~.gitignore~.
+I believed it, so I did not commit it.
+
 * [2018-10-12 Fri] Make them work again
+Before I release a new version, I need to remember to renew ~privateValues.ts~.
+And for android, I need to modify the ~Admob App ID~ in its two files to the value that I want.
+
 1. For windows, run
 #+begin_src sh
 cordova platform remove windows
@@ -6,6 +12,7 @@ cordova platform add windows
 #+end_src
 then check the reference of ~Windows advertising SDK~ again.
 It can work.
+
 2. For android,
 #+begin_src sh
 cordova platform remove android
@@ -13,7 +20,16 @@ cordova platform add android
 #+end_src
 Then, as described in ~[2018-9-13 Thu]~, you need to make some modification to those files.
 Then you need to open Android Studio to build it and it will help you to correct some errors.
-However, admobpro doesn't work. Let me try more.
+However, admobpro doesn't work and it will crash this App. Based on the concept described in [[https://developers.google.com/admob/android/quick-start][this start page of AdMob]]
+that I need to modify ~app/src/main/AndroidManifest.xml~ and ~app/src/main/java/com/rjfun/cordova/admob/AdMobPlugin.java~ to fit its needs. Both of these two files can be modified through ~Android Studio~ directly.
+Remember that, you cannot use ~this~ in 2nd file, you need to change ~this~ to be ~this.cordova.getContext()~.
+
+By the way, for checking, you can see how it works through the ~4.Run~ window and searching for ~ads~.
+
+3. For osx, I need to
+    a. Rename its id
+    b. turn on ~sandbox~
+    c. turn on ~network for client~, ~Read only for loaded file~ and ~ReadWrite of Download folder~.
 
 * [2018-10-12 Fri] Oh no, when I back to windows and android, they cannot be used anymore
 let me commit it again before I do any modification.
