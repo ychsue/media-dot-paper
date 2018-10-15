@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
-import { Subject, interval, of } from 'rxjs';
+import { Subject, interval, of, fromEvent } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, concatAll, takeUntil, auditTime, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay } from 'rxjs/operators';
+import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay } from 'rxjs/operators';
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { PageTextsService } from '../../services/page-texts.service';
 
@@ -65,7 +65,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   pts: IMeMainPlateComp;
 
   constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
-    private device: DeviceService) {
+    private device: DeviceService, private uiEleRef: ElementRef) {
       const self = this;
       ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
         self.pts = ptsService.pts.meMainPlateComp;
@@ -101,8 +101,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     });
-    // * [2018-10-01 21:54] Handle pointerUp
-    self.device.onPointerup$.subscribe(ev => self.onPointLeave(ev, self));
+    // // * [2018-10-01 21:54] Handle pointerUp
+    // self.device.onPointerup$.subscribe(ev => self.onPointLeave(ev, self));
   }
 
   ngOnDestroy(): void {
@@ -226,10 +226,17 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async onPointLeave(e: PointerEvent, ele: MeManiPlateComponent = null) {
     const self = (!!ele) ? ele : this;
-    await of(1).pipe(delay(100)).toPromise(); // for document.activeElement works correctly.
-    if (document.activeElement.localName !== "textarea" && !!self.isSubtitleClicked === false) {
-      await of(true).pipe(delay(300)).toPromise();
-        self.HideShow = 'hide';
+    const n = await fromEvent(self.uiEleRef.nativeElement, 'pointermove')
+    .pipe(
+      takeUntil(of(true).pipe(delay(1000))),
+      count(x => !!x)
+    ).toPromise();
+    if (n === 0) {
+      if ((document.activeElement.localName === "textarea") || self.isSSShown || !!self.isSubtitleClicked) {
+        return; // Because this delay will change a lot of thing like ~self.isSSShown~ might change, I dealt it at this place.
+      }
+      self.HideShow = 'hide';
+      // console.log('onPointerLeave: hide' + 'isSSShown:' + self.isSSShown);
     }
   }
 
@@ -243,6 +250,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   onShowSetSS(e: MouseEvent) {
     this.isSSShown = true;
     this.HideShow = 'show';
+    // console.log('onShowSetSS');
   }
 
   updateUtterParaOfAFrame(iFrame: number = 0) {

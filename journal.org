@@ -1,3 +1,10 @@
+* [2018-10-15 Mon] When pointer is moving and it is not hide, it will keep showing
+Anyway, once ~onPointerLeave~ is triggered, it will listen to ~pointermove~ event for 1s.
+If there is no pointermove, it will hide it.
+
+By the way, it is interesting that the ~pointerleave~ event of ~container~ might be ahead the ~click~ event of ~toggleUtter~.
+Because of that, I add the condition just before ~self.HideShow='hide';~ to avoid missing some actions.
+
 * [2018-10-13 Sat] Run encodeURI and decodeURI for a story (MDP)
 It seems to work fine.
 Because iOS will not download a file from a download link but show its content, I have to do so to avoid encoding problem for iOS.
