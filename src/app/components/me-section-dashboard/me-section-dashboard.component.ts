@@ -25,8 +25,8 @@ export class MeSectionDashboardComponent implements OnInit {
 
   onRemoveFrame(i: number) {
     const frames = this.meService.story.frames;
-    frames.splice(i, 1);
     this.meService.setiFrame(-1);
+    frames.splice(i, 1);
   }
 
   onWhichFrame(i: number) {
@@ -34,6 +34,12 @@ export class MeSectionDashboardComponent implements OnInit {
     if (i >= 0) {
       this.meService.seekTime = this.meService.story.frames[i].start;
     }
-    console.log(`${i}/ **************************** TODO **************************/`);
+    // console.log(`${i}/ **************************** TODO **************************/`);
+  }
+
+  onShownStoryGSetting() {
+    const isShown = this.meService.isToShowStoryGSetting;
+    this.meService.setiFrame(-1); // this.meService.isToShowStoryGSetting will be modified during this action.
+    this.meService.isToShowStoryGSetting = !isShown;
   }
 }

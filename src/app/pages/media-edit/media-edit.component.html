@@ -7,11 +7,18 @@
     </app-mdps-list>
 
     <app-me-mani-plate [class]="(meService.isSideMani)?'sideView':'main'"
-      [style.background-color]="(meService.story.iFrame<0)?'rgba(0,0,0,0)':'rgba('+meService.story.frames[meService.story.iFrame].colorR+','+meService.story.frames[meService.story.iFrame].colorG+','+meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'"
+      [style.background-color]="((meService.story.iFrame<0)||(meService.story.frames.length<=meService.story.iFrame))?'rgba(0,0,0,0)':
+      'rgba('+meService.story.frames[meService.story.iFrame].colorR+','
+      +meService.story.frames[meService.story.iFrame].colorG+','
+      +meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'"
       *ngIf="meService.story.iFrame>=0"
       [@flyInOut]="'in'"
       [HideShow]="(meService.story.iFrame>=0)?'hide':'show'"
     ></app-me-mani-plate>
+
+    <app-story-gsetting-plate [class]="(meService.isSideMani)?'sideView':'main'"
+      *ngIf="(meService.story.iFrame<0)&&meService.isToShowStoryGSetting"
+      [@flyInOut]="'in'"></app-story-gsetting-plate>
 
     <div id="vSideSep" class="sideView" *ngIf="meService.isToShowList" [style.right]="sideWidth+'px'"></div>
     <svg id="reSideWidth" viewBox="0 0 10 20" touch-action="none" [style.right]="(sideWidth-20)+'px'" class="sideView"

@@ -103,7 +103,10 @@ export class MediaEditService {
     this._isSideMani = v && this.isToShowList;
   }
 
+  isToShowStoryGSetting = false;
+
   pts: IPageTexts;
+
   constructor(private adService: AdService,
               private fsService: FsService,
               private msgService: MessageService,
@@ -184,6 +187,8 @@ export class MediaEditService {
 
   setiFrame(i: number) {
     const self = this;
+    self.isToShowStoryGSetting = false;
+
     if (!!self.story) {
       // **************************** TODO ********************************************
       self.story.iFrame = i;

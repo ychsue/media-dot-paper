@@ -66,11 +66,11 @@ export class DraglistComponent implements OnInit, OnDestroy {
           self.delete.next();
         } else {
           self.deltaX = 0;
-        }
-        // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click.
-        // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
-        if (ev.timeStamp - self._pointerDownTime < 250) {
-          self.onContentClick(ev);
+          // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click.
+          // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
+          if (ev.timeStamp - self._pointerDownTime < 250) {
+            self.onContentClick(ev);
+          }
         }
       }
     });

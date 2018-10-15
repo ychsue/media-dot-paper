@@ -1,3 +1,8 @@
+* [2018-10-15 Mon] Find a bug, the ~delete~ and ~click~ events of swapIcon & dradlist should be mutually exclusive.
+1. Because of this, the event ~click~ might be triggered after it is deleted.
+
+2. Add a component ~story-gsetting-plate~, but I want to set its elements in next commit.
+
 * [2018-10-15 Mon] Add a new field named ~gSetting~ for a story.
    NEED MORE TEST.
 1. Add a new field for a story (MDP), it means that I need to add a new field for nanoSQL.

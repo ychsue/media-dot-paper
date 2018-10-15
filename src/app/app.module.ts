@@ -41,6 +41,7 @@ import { CrossCompService } from './services/cross-comp.service';
 import { MdpsListComponent } from './components/mdps-list/mdps-list.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { StoryService } from './services/story.service';
+import { StoryGsettingPlateComponent } from './components/story-gsetting-plate/story-gsetting-plate.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { StoryService } from './services/story.service';
     StoryComponent,
     SetSpeechSynthesisComponent,
     MdpsListComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    StoryGsettingPlateComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
