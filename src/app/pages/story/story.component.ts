@@ -4,12 +4,13 @@ import { MatAnchor } from '@angular/material';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
-import { utterType, IStory, StoryService } from '../../services/story.service';
+import { StoryService } from '../../services/story.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { concat, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FsService } from '../../services/fs.service';
 import { MessageService } from '../../services/message.service';
+import { utterType } from 'src/app/vm/story';
 
 @Component({
   selector: 'app-story',

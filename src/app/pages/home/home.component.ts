@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
-import { IStory, StoryService } from '../../services/story.service';
+import { StoryService } from '../../services/story.service';
 import { map, concatAll, concat, takeUntil } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
@@ -14,6 +14,7 @@ import { PlayerType } from '../../vm/player-type.enum';
 import { ClipboardService } from '../../services/clipboard.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { CrossCompService } from '../../services/cross-comp.service';
+import { IStory } from 'src/app/vm/story';
 
 @Component({
   selector: 'app-home',

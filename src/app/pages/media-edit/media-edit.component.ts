@@ -2,12 +2,12 @@ import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, NgZone 
 import { ActivatedRoute } from '@angular/router';
 import { MediaEditService, MEState } from '../../services/media-edit.service';
 import { trigger, state, style, transition, animate } from '../../../../node_modules/@angular/animations';
-import { utterType } from '../../services/story.service';
 import { SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { takeWhile, first, filter, map, takeUntil, concatAll, withLatestFrom, pairwise, merge } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
 import { GvService } from '../../services/gv.service';
+import { utterType } from 'src/app/vm/story';
 
 @Component({
   selector: 'app-media-edit',

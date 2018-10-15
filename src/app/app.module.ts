@@ -40,6 +40,7 @@ import { SetSpeechSynthesisComponent } from './components/set-speech-synthesis/s
 import { CrossCompService } from './services/cross-comp.service';
 import { MdpsListComponent } from './components/mdps-list/mdps-list.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { StoryService } from './services/story.service';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
     MatSlideToggleModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
-    , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService
+    , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService,
+    StoryService
   ],
   bootstrap: [AppComponent]
 })

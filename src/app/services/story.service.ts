@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { PlayerType } from '../vm/player-type.enum';
 import { AFrame } from '../vm/a-frame';
 import { PageTextsService } from './page-texts.service';
+import { DbService } from './db.service';
+import { StoryGSetting } from '../vm/story-g-setting';
+import { IStory } from '../vm/story';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoryService {
 
-  constructor() { }
+  constructor(private db: DbService) { }
 
   stringifyAStory(story: IStory): string {
     return encodeURI(JSON.stringify(story));
@@ -26,66 +29,29 @@ export class StoryService {
     }
     return story;
   }
-}
 
-export class Story implements IStory {
-  name = '請給個名字';
-  title = '歡迎使用本App來幫助學習';
-  description = '';
-  keywords = '';
+  async upsertAStoryAsync(story: IStory) {
+    if (!!story) {
+      const bufStory = Object.assign({}, story);
+      // * [2018-10-15 11:43] Clean up the "voice" part which is related to the speechSynthesis and it will cause an exception.
+      if (!!bufStory.gSetting &&
+          !!bufStory.gSetting.utterPara &&
+          !!bufStory.gSetting.utterPara.voice) {
+        delete bufStory.gSetting.utterPara.voice;
+      }
+      if (!!bufStory.frames && bufStory.frames.length !== 0) {
+        for (let i0 = 0; i0 < bufStory.frames.length; i0++) {
+          const element = bufStory.frames[i0];
+          if (!!element.utterPara && !!element.utterPara.voice) {
+            delete element.utterPara.voice;
+          }
+        }
+      }
 
-  makeTime: number;
-  modifyTime: number;
-  viewTime: number;
-
-  urlOrID = ''; // 'https://youtu.be/rpvsEBdP4c8';
-  meType = PlayerType.url;
-
-  fileName = '';
-  fileToken = '';
-
-  frames: AFrame[];
-  iFrame = -1;
-
-  utterType = utterType.none;
-
-  constructor(pts?: IPageTexts) {
-    if (!!pts === true) {
-      this.name = pts.NewStory.name;
-      this.title = pts.NewStory.title;
+      return await this.db.upsertAsync(DbService.storyTableName, bufStory);
+    } else {
+      return;
     }
-    const time = Date.now();
-    this.makeTime = this.viewTime = time;
-    this.modifyTime = 0;
-    this.frames = [];
-    return this;
   }
 }
-export interface IStory {
-  id?: string;
-  name: string;
-  title: string;
-  description: string;
-  keywords: string;
 
-  makeTime: number;
-  modifyTime: number;
-  viewTime: number;
-
-  urlOrID: string;
-  meType: PlayerType;
-
-  fileName: string;
-  fileToken: string;
-
-  frames: AFrame[];
-  iFrame: number;
-
-  utterType: utterType;
-}
-
-export enum utterType {
-  none,
-  byEach,
-  all
-}

@@ -1,6 +1,7 @@
 import { SSutterParameters } from "../services/speech-synthesis.service";
+import { IFrameBase } from "./i-frame-base";
 
-export class AFrame {
+export class AFrame implements IFrameBase {
     name: string;
     pseudopath = '/';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
-import { IStory, Story } from './story.service';
+import { StoryService } from './story.service';
 import { PlayerType } from '../vm/player-type.enum';
 import { AdService } from './ad.service';
 import { DbService } from './db.service';
@@ -8,6 +8,7 @@ import { FsService } from './fs.service';
 import { MessageService, MessageTypes } from './message.service';
 import { concatAll, map, shareReplay, concat, first } from 'rxjs/operators';
 import { PageTextsService } from './page-texts.service';
+import { Story, IStory } from '../vm/story';
 
 @Injectable({
   providedIn: 'root'
@@ -107,7 +108,8 @@ export class MediaEditService {
               private fsService: FsService,
               private msgService: MessageService,
               private db: DbService,
-              private ptsService: PageTextsService
+              private ptsService: PageTextsService,
+              private storyService: StoryService
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe(_ => {
@@ -284,7 +286,7 @@ export class MediaEditService {
       self.msgService.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is stored: ${isSaved}`});
     }
     delete story['id'];
-    const insert = await this.db.upsertAsync(DbService.storyTableName, story);
+    const insert = await this.storyService.upsertAStoryAsync(story);
     // * [2018-07-25 19:04] Change its state to 'Update'
     story['id'] = insert[0].affectedRows[0].id;
     this.sideClickType = SideClickType.select;
@@ -293,7 +295,7 @@ export class MediaEditService {
   async onUpdateStory$$() {
     const story = this.story;
     story.modifyTime = story.viewTime = Date.now();
-    await this.db.upsertAsync(DbService.storyTableName, story);
+    await this.storyService.upsertAStoryAsync(story);
   }
 
   async canGetCurrentTime$$() {

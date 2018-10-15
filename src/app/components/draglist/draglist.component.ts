@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { IStory } from '../../services/story.service';
+import { IStory } from '../../vm/story';
 import { Subject} from 'rxjs';
 import { DeviceService } from '../../services/device.service';
 import { map, takeUntil, concatAll, merge, pairwise } from 'rxjs/operators';

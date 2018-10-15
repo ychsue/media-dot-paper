@@ -8,7 +8,7 @@ import { Subscriber, Observable, Subject } from 'rxjs';
 import { first, shareReplay } from 'rxjs/operators';
 import 'rxjs/add/operator/toPromise';
 import { _NanoSQLQuery } from 'nano-sql/lib/query/std-query';
-import { IStory, Story } from './story.service';
+import { IStory, Story } from '../vm/story';
 import { PlayerType } from '../vm/player-type.enum';
 
 @Injectable({
@@ -31,7 +31,8 @@ export class DbService {
     {key: 'urlOrID', type: 'string', default: ''},
     {key: 'meType', type: 'int', default: 0},
     {key: 'frames', type: 'map[]', default: []},
-    {key: 'utterType', type: 'int', default: 0}
+    {key: 'utterType', type: 'int', default: 0},
+    {key: 'gSetting', type: 'map', default: null}
   ];
 
   private _isInitialized = false;

@@ -1,3 +1,15 @@
+* [2018-10-15 Mon] Add a new field named ~gSetting~ for a story.
+   NEED MORE TEST.
+1. Add a new field for a story (MDP), it means that I need to add a new field for nanoSQL.
+   It looks like adding a new field for nanoSQL doesn't cause a problem.
+   It has been tested on Browser, Windows and Android. Hope so.
+
+2. To avoid facing a problem of upserting ~SpeechSynthesisVoice~ into DB of nanoSQL, I tried to remove all ~voice~ properties from a story.
+    Q: Why not ~JSON.parse(JSON.stringify(story))~?
+    A: I'm afraid that it will throw an exception. Need more test.
+
+3. Because I called DbService in StoryService and I also declared the class ~Story~ which will be used in ~db.service.ts~ in ~story.service.ts~, it will generate a recursive calling warning. So, I move ~Story~ and ~IStory~ to ~vm/story.ts~ file.
+
 * [2018-10-15 Mon] When pointer is moving and it is not hide, it will keep showing
 Anyway, once ~onPointerLeave~ is triggered, it will listen to ~pointermove~ event for 1s.
 If there is no pointermove, it will hide it.
