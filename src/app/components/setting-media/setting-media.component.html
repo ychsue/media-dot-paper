@@ -1,0 +1,12 @@
+<div class="flex">
+    <div #ratio class="smallSlider">
+        <mat-icon>directions_walk</mat-icon>
+        <mat-slider min="0" [max]="meService.availablePlaybackRates.length-1" step="1" [displayWith]="tickDisplayWith(meService)" thumbLabel [value]="meService.availablePlaybackRates.indexOf(meService.playbackRate)" (input)="meService.playbackRate=meService.availablePlaybackRates[$event.value]"></mat-slider>
+        <mat-icon>flight</mat-icon>
+    </div>
+    <div #volume class="smallSlider">
+        <mat-icon>volume_mute</mat-icon>
+        <mat-slider min="0" max="1" step="0.2" thumbLabel [(ngModel)]="meService.volume"></mat-slider>
+        <mat-icon>volume_up</mat-icon>
+    </div>
+</div>

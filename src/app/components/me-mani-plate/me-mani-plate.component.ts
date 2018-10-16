@@ -193,12 +193,6 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.IOEndShown = 'in';
   }
 
-  tickDisplayWith = (meService: MediaEditService) => {
-    return (i: number) => {
-      return meService.availablePlaybackRates[i];
-    };
-  }
-
   onUtterParaChanged(text: string, utterPara: SSutterParameters) {
     // * [2018-08-25 16:14] Update the frame
     if (this.meService.story.iFrame >= 0) {

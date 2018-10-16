@@ -1,18 +1,7 @@
 <div class="container" [@changeFrame]="meService.story.iFrame" touch-action="none" (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
     <div class="main">
         <div class="main-up" [@hideShow]="HideShow" *ngIf="isSSShown===false">
-            <div class="flex">
-                <div #ratio class="smallSlider">
-                    <mat-icon>directions_walk</mat-icon>
-                    <mat-slider min="0" [max]="meService.availablePlaybackRates.length-1" step="1" [displayWith]="tickDisplayWith(meService)" thumbLabel [value]="meService.availablePlaybackRates.indexOf(meService.playbackRate)" (input)="meService.playbackRate=meService.availablePlaybackRates[$event.value]"></mat-slider>
-                    <mat-icon>flight</mat-icon>
-                </div>
-                <div #volume class="smallSlider">
-                    <mat-icon>volume_mute</mat-icon>
-                    <mat-slider min="0" max="1" step="0.2" thumbLabel [(ngModel)]="meService.volume"></mat-slider>
-                    <mat-icon>volume_up</mat-icon>
-                </div>
-            </div>
+            <app-setting-media></app-setting-media>
             <div class="flex">
                 <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next([subtitleInput.value,subtitleView.innerText]):null;">
                     {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}

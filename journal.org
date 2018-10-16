@@ -1,3 +1,8 @@
+* [2018-10-16 Tue] During this coding, I found that ~id~ is higher than ~class~
+In ~story-gsetting-plate~, you'll find that I set ~#container mat-expansion-panel-header~ instead of ~.container ....~.
+The reason is that the second one sometimes will be overwritten by its default value since its rank is lower than the default one.
+How to overcome this problem? Here I was using ~id~ instead of ~class~ and it works.
+
 * [2018-10-15 Mon] Find a bug, the ~delete~ and ~click~ events of swapIcon & dradlist should be mutually exclusive.
 1. Because of this, the event ~click~ might be triggered after it is deleted.
 

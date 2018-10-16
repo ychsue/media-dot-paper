@@ -1,0 +1,6 @@
+.flex {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    flex-wrap: wrap;
+}

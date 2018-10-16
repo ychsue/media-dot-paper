@@ -14,6 +14,7 @@ export class SetSpeechSynthesisComponent implements OnInit {
 
   @Output() change: EventEmitter<SSutterParameters> = new EventEmitter();
   @Input() utterPara: SSutterParameters;
+  @Input() isShownClsBtn = true;
 
   selVoice: SpeechSynthesisVoice;
 

@@ -1,3 +1,52 @@
-<div class='container'>
+<div id='container'>
+    <!-- <div>此處主要在設定當使用者不在任何MDP片段裡撥放方式與當作各MDP片段的預設值。</div> -->
+    <mat-accordion displayMode="default" [multi]="true"
+                   [hideToggle]="false">
 
+        <!-- #region 媒體本身? -->
+        <mat-expansion-panel id="forMedia" [hideToggle]="false">
+            <mat-expansion-panel-header>媒體本身</mat-expansion-panel-header>
+            <h4>改變預設值：</h4>
+            <app-setting-media></app-setting-media>
+            <h4>如何套用：</h4>
+            <mat-select [(ngModel)]="modelName" [placeholder]="'請選一個'">
+                <mat-option [value]="">各MDP決定</mat-option>
+                <mat-option [value]="">統一由這些值決定</mat-option>
+            </mat-select>
+        </mat-expansion-panel>
+        <!-- #endregion 媒體本身? -->
+
+        <!-- #region 如何撥放? -->
+        <mat-expansion-panel id="forHowToPlay" [hideToggle]="false">
+            <mat-expansion-panel-header>如何撥放?</mat-expansion-panel-header>
+             <h4>撥放規則：</h4>
+             <mat-select [(ngModel)]="modelName" placeholder="請選一個規則">
+                 <mat-option [value]="">按時間</mat-option>
+                 <mat-option [value]="">按MDP</mat-option>
+             </mat-select>
+        </mat-expansion-panel>
+        <!-- #endregion 如何撥放? -->
+
+        <!-- #region 字幕 -->
+        <mat-expansion-panel id="forHowToPlay" [hideToggle]="false">
+            <mat-expansion-panel-header>字幕與模擬</mat-expansion-panel-header>
+            <h4>設定預設值：</h4>
+            <app-set-speech-synthesis [isShownClsBtn]="false"></app-set-speech-synthesis>
+            <h4>唸字幕否？</h4>
+            <mat-select [(ngModel)]="modelName" placeholder="請選一個">
+                <mat-option [value]="">不唸</mat-option>
+                <mat-option [value]="">按各MDP片段的設定唸</mat-option>
+                <mat-option [value]="">全唸</mat-option>
+            </mat-select>
+        </mat-expansion-panel>
+        <!-- #endregion 字幕 -->
+
+        <!-- #region 動作 -->
+        <mat-expansion-panel id="forHowToPlay" [hideToggle]="false">
+            <mat-expansion-panel-header>動作</mat-expansion-panel-header>
+            <button mat-raised-button (click)="onClick">重排MDP片段</button>
+        </mat-expansion-panel>
+        <!-- #endregion 動作 -->
+
+    </mat-accordion>
 </div>
