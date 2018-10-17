@@ -24,6 +24,10 @@ export class AFrame implements IFrameBase {
     isUtter = false;
     utterPara = new SSutterParameters();
 
+    // * [2018-10-17 14:11] To control whether this frame will use the default values
+    useDefVP = true;
+    useDefutterPara = true;
+
     constructor () {
         this.colorR = Math.round(Math.random() * 200 + 20);
         this.colorG = Math.round(Math.random() * 200 + 20);

@@ -491,5 +491,9 @@
     "l1": "Tutorial of this App",
     "l2": "Youtube video: MDP on Android",
     "l3": "Main web site"
+  },
+  "meManiPlateComp": {
+    "isUtterSubtitle": "To utter your input?",
+    "useDefVP": "Use Default values?"
   }
 }

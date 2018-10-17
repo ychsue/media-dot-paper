@@ -491,5 +491,9 @@
     "l1": "Tutorial Aplikasi ini",
     "l2": "Video Youtube: MDP di Android",
     "l3": "Situs web utama"
+  },
+  "meManiPlateComp": {
+    "isUtterSubtitle": "Untuk menyampaikan masukan Anda?",
+    "useDefVP": "Gunakan nilai Default?"
   }
 }

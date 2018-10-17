@@ -204,16 +204,22 @@ export class MediaEditService {
     }
   }
 
-  setVolumeFromFrame() {
+  setVolumeFromFrame(i: number = Number.NaN) {
     const self = this;
     if (!!self.story) {
-      const i = self.story.iFrame;
-      // **************************** TODO ********************************************
+      i = (Number.isNaN(i)) ? self.story.iFrame : i;
+      const setFromDefault = () => {
+        self._volume = (!!self.story.gSetting) ? self.story.gSetting.volume : 1;
+      };
       if (i >= 0) { // if it is a frame.
         const frame = self.story.frames[i];
-        self._volume = frame.volume;
+        if (!!frame.useDefVP) {
+          setFromDefault();
+        } else {
+          self._volume = frame.volume;
+        }
       } else { // for all
-        self._volume = 1;
+        setFromDefault();
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
@@ -221,16 +227,22 @@ export class MediaEditService {
     }
   }
 
-  setPlaybackRateFromFrame() {
+  setPlaybackRateFromFrame(i: number = Number.NaN) {
     const self = this;
     if (!!self.story) {
-      const i = self.story.iFrame;
-      // **************************** TODO ********************************************
+      i = (Number.isNaN(i)) ? self.story.iFrame : i;
+      const setFromDefault = () => {
+        self._playbackRate = (!!self.story.gSetting) ? self.story.gSetting.rate : 1;
+      };
       if (i >= 0) { // if it is a frame.
         const frame = self.story.frames[i];
-        self._playbackRate = frame.rate;
+        if (!!frame.useDefVP) {
+          setFromDefault();
+        } else {
+          self._playbackRate = frame.rate;
+        }
       } else { // for whole story
-        self._playbackRate = 1;
+        setFromDefault();
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {
@@ -245,12 +257,13 @@ export class MediaEditService {
     const self = this;
     if (!!self.story) {
       const i = self.story.iFrame;
-      // **************************** TODO ********************************************
       if (i >= 0) { // if it is a frame.
         const frame = self.story.frames[i];
         frame.volume = self._volume;
       } else { // for all
-        // self._volume = 1;
+        if (!!self.story.gSetting) {
+          self.story.gSetting.volume = self._volume;
+        }
       }
       self.onPlayerAction.next(playerAction.setVolume);
     } else {
@@ -265,12 +278,13 @@ export class MediaEditService {
     const self = this;
     if (!!self.story) {
       const i = self.story.iFrame;
-      // **************************** TODO ********************************************
       if (i >= 0) { // if it is a frame.
         const frame = self.story.frames[i];
         frame.rate = self._playbackRate;
       } else { // for whole story
-        // self._playbackRate = 1;
+        if (!!self.story.gSetting) {
+          self.story.gSetting.rate = self._playbackRate;
+        }
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
     } else {

@@ -1,9 +1,16 @@
 <div class="container" [@changeFrame]="meService.story.iFrame" touch-action="none" (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
     <div class="main">
         <div class="main-up" [@hideShow]="HideShow" *ngIf="isSSShown===false">
-            <app-setting-media></app-setting-media>
             <div class="flex">
-                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next([subtitleInput.value,subtitleView.innerText]):null;">
+                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow"
+                    [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP"
+                    (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();" >
+                    {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
+                </mat-slide-toggle>    
+            </div>
+            <app-setting-media *ngIf="!!meService.story.frames[meService.story.iFrame]?.useDefVP===false"></app-setting-media>
+            <div class="flex">
+                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow use-margin-not-overflow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next([subtitleInput.value,subtitleView.innerText]):null;">
                     {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
                 </mat-slide-toggle>
                 <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">

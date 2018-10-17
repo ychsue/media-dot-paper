@@ -491,5 +491,9 @@
     "l1": "本App的教學網站",
     "l2": "Youtube視頻：Android上的MDP",
     "l3": "主要網站"
+  },
+  "meManiPlateComp": {
+    "isUtterSubtitle": "說出你的意見？",
+    "useDefVP": "使用預設值？"
   }
 }

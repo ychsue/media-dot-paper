@@ -42,8 +42,9 @@
             "cannotShare": "Sorry, the sharing is not available at this moment.",
             "askSavingToFile": "The words you got must be stored in {0} file so that they can be used properly."
         },
-        "meMainPlateComp": {
-            "isUtterSubtitle": "To utter your input?"
+        "meManiPlateComp": {
+            "isUtterSubtitle": "To utter your input?",
+            "useDefVP": "Use Default values?"
         },
         "adService": {
             "showAdLater": "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad."

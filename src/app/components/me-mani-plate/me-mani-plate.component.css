@@ -40,14 +40,6 @@
     display: grid;
 }
 
-.smallSlider {
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    background-color: white;
-    /* margin: 4px; */
-}
-
 .slider {
     grid-area: slider;
     display: grid;
@@ -168,4 +160,9 @@ mat-slider {
     grid-row-end: 4;
     align-self: flex-end;
     padding: 0 20px 40px 12px;
+}
+
+.use-margin-not-overflow {
+    margin: 12px 0;
+    overflow-y: hidden;
 }

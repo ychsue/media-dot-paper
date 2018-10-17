@@ -1,3 +1,7 @@
+* [2018-10-17 Wed] Let the user can use the default volume and pace(rate) for their pieces of MDP.
+In this commit, I have made some important change in ~media-service~ about ~setVolume~ and ~setPlaybackRate~
+so that the user can choose whether to use the default values to play the media. 
+
 * [2018-10-17 Wed] Provide story.gSetting
 Since originally this code does not include ~story.gSetting~ so that it is null by default.
 When do I need it? At least when a story is loaded.

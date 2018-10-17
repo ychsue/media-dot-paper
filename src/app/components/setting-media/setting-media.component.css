@@ -4,3 +4,11 @@
     min-width: 0;
     flex-wrap: wrap;
 }
+
+.smallSlider {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    /* margin: 4px; */
+}

@@ -62,13 +62,13 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   startChanged$ = new Subject<PointerEvent>();
   endChanged$ = new Subject<PointerEvent>();
 
-  pts: IMeMainPlateComp;
+  pts: IMeManiPlateComp;
 
   constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
     private device: DeviceService, private uiEleRef: ElementRef) {
       const self = this;
       ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
-        self.pts = ptsService.pts.meMainPlateComp;
+        self.pts = ptsService.pts.meManiPlateComp;
       });
     }
 

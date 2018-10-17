@@ -6,7 +6,7 @@ interface IPageTexts {
     dialogComp: IDialogComp;
     setSSComp: ISetSSComp;
     fsService: IFsService;
-    meMainPlateComp: IMeMainPlateComp;
+    meManiPlateComp: IMeManiPlateComp;
     adService: IAdService;
     welcomePage: IWelcomePage;
     iso639: IIso639;
@@ -54,8 +54,9 @@ interface IFsService {
     cannotShare: string;
     askSavingToFile: string;
 }
-interface IMeMainPlateComp {
+interface IMeManiPlateComp {
     isUtterSubtitle: string;
+    useDefVP: string;
 }
 interface IAdService {
     showAdLater: string;

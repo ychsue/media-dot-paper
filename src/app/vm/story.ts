@@ -23,7 +23,7 @@ export class Story implements IStory {
 
     utterType = utterType.none;
 
-    gSetting = null;
+    gSetting: StoryGSetting = null;
 
     constructor(pts?: IPageTexts) {
       if (!!pts === true) {
