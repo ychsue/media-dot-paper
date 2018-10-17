@@ -1,6 +1,6 @@
 import { PlayerType } from "./player-type.enum";
 import { AFrame } from "./a-frame";
-import { StoryGSetting } from "./story-g-setting";
+import { StoryGSetting, utterType } from "./story-g-setting";
 
 export class Story implements IStory {
     name = '請給個名字';
@@ -60,10 +60,4 @@ export class Story implements IStory {
     utterType: utterType;
 
     gSetting: StoryGSetting;
-  }
-
-  export enum utterType {
-    none,
-    byEach,
-    all
   }

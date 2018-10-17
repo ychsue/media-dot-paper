@@ -5,4 +5,24 @@ export class StoryGSetting implements IFrameBase {
     rate = 1;
     volume = 1;
     utterPara = new SSutterParameters();
+
+    mVPType = mediaVPType.main;
+    mPlayType = mediaPlayType.timeline;
+    utterType = utterType.none;
 }
+
+export enum utterType {
+    none,
+    byEach,
+    all
+  }
+
+  export enum mediaVPType {
+    mdp,
+    main
+  }
+
+  export enum mediaPlayType {
+    timeline,
+    mdp
+  }

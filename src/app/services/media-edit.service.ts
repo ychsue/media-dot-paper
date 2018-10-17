@@ -9,6 +9,7 @@ import { MessageService, MessageTypes } from './message.service';
 import { concatAll, map, shareReplay, concat, first } from 'rxjs/operators';
 import { PageTextsService } from './page-texts.service';
 import { Story, IStory } from '../vm/story';
+import { StoryGSetting } from '../vm/story-g-setting';
 
 @Injectable({
   providedIn: 'root'
@@ -169,6 +170,9 @@ export class MediaEditService {
         this.story.name = this.story.title;
       }
     }
+
+    // * [2018-10-17 10:31] Since we have anewed the story, force it to set its gSetting
+    this.story.gSetting = (!!this.story.gSetting) ? this.story.gSetting : new StoryGSetting();
 
     this.state = MEState.readyForPlayer;
 

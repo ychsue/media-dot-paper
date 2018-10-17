@@ -7,7 +7,7 @@ import { takeWhile, first, filter, map, takeUntil, concatAll, withLatestFrom, pa
 import { Subject } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
 import { GvService } from '../../services/gv.service';
-import { utterType } from 'src/app/vm/story';
+import { utterType } from 'src/app/vm/story-g-setting';
 
 @Component({
   selector: 'app-media-edit',

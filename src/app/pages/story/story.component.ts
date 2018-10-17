@@ -10,7 +10,7 @@ import { concat, delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FsService } from '../../services/fs.service';
 import { MessageService } from '../../services/message.service';
-import { utterType } from 'src/app/vm/story';
+import { utterType } from 'src/app/vm/story-g-setting';
 
 @Component({
   selector: 'app-story',

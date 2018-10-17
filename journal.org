@@ -1,3 +1,8 @@
+* [2018-10-17 Wed] Provide story.gSetting
+Since originally this code does not include ~story.gSetting~ so that it is null by default.
+When do I need it? At least when a story is loaded.
+Therefore, I initialize it at ~media-service.initME~.
+
 * [2018-10-16 Tue] During this coding, I found that ~id~ is higher than ~class~
 In ~story-gsetting-plate~, you'll find that I set ~#container mat-expansion-panel-header~ instead of ~.container ....~.
 The reason is that the second one sometimes will be overwritten by its default value since its rank is lower than the default one.
