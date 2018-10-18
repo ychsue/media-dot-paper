@@ -478,9 +478,6 @@
     "cannotShare": "抱歉，目前无法进行分享。",
     "askSavingToFile": "您获得的文字必须存储在{0}文件中，以便正确使用它们。"
   },
-  "meMainPlateComp": {
-    "isUtterSubtitle": "念出你的输入？"
-  },
   "adService": {
     "showAdLater": "<h1>注意</h1>因為加载媒体需要一些时间。所以我会显示你一则广告。"
   },
@@ -493,7 +490,7 @@
     "l3": "主要网站"
   },
   "meManiPlateComp": {
-    "isUtterSubtitle": "说出你的意见？",
+    "isUtterSubtitle": "念出你的输入？",
     "useDefVP": "使用默认值？"
   }
 }

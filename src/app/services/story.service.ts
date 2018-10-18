@@ -37,13 +37,18 @@ export class StoryService {
       if (!!bufStory.gSetting &&
           !!bufStory.gSetting.utterPara &&
           !!bufStory.gSetting.utterPara.voice) {
+        bufStory.gSetting = Object.assign({}, story.gSetting);
+        bufStory.gSetting.utterPara = Object.assign({}, story.gSetting.utterPara);
         delete bufStory.gSetting.utterPara.voice;
       }
       if (!!bufStory.frames && bufStory.frames.length !== 0) {
+        bufStory.frames = Object.assign([], bufStory.frames);
         for (let i0 = 0; i0 < bufStory.frames.length; i0++) {
-          const element = bufStory.frames[i0];
+          const element = Object.assign({}, bufStory.frames[i0]);
           if (!!element.utterPara && !!element.utterPara.voice) {
+            element.utterPara = Object.assign({}, element.utterPara);
             delete element.utterPara.voice;
+            bufStory.frames[i0] = element;
           }
         }
       }

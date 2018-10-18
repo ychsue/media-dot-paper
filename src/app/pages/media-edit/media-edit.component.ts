@@ -69,13 +69,22 @@ export class MediaEditComponent implements OnInit {
             const isVPMain = (vpType === mediaVPType.main);
             self.meService.setVolumeFromFrame((isVPMain) ? -1 : i);
             self.meService.setPlaybackRateFromFrame((isVPMain) ? -1 : i);
-            let utterPara: SSutterParameters = null;
             // * [2018-10-18 11:40] Setup uttering
-            if (i < 0) {return; }
-            if ((self.meService.story.utterType === utterType.all) || (self.meService.story.frames[i].isUtter === true)) {
-              utterPara = Object.assign({}, self.meService.story.frames[i].utterPara);
-              utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
-              self.SSService.speak(utterPara);
+            let utterPara: SSutterParameters = null;
+            if (i >= 0) {
+              const isUtter = self.meService.story.frames[i].isUtter;
+              if ((self.meService.story.utterType === utterType.all) && (isUtter === false)) {
+                utterPara = Object.assign({}, self.meService.story.gSetting.utterPara);
+                utterPara.text = self.meService.story.frames[i].utterPara.text;
+              } else if ((self.meService.story.utterType !== utterType.none) && isUtter) {
+                utterPara = Object.assign({}, self.meService.story.frames[i].utterPara);
+              } else {
+                // Do nothing
+              }
+              if (!!utterPara) {
+                utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
+                self.SSService.speak(utterPara);
+              }
             }
             preIFrame = i;
           }

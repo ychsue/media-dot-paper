@@ -31,7 +31,12 @@
         <mat-expansion-panel [hideToggle]="false">
             <mat-expansion-panel-header>字幕與模擬</mat-expansion-panel-header>
             <h4>設定預設值：</h4>
-            <app-set-speech-synthesis [isShownClsBtn]="false"></app-set-speech-synthesis>
+            <app-set-speech-synthesis
+             #ssynthesis
+             [isShownClsBtn]="false"
+             [utterPara]="meServie.story.gSetting?.utterPara"
+             (change)="onChangeGUtterPara(ssynthesis.utterPara)"
+             ></app-set-speech-synthesis>
             <h4>唸字幕否？</h4>
             <mat-select [(ngModel)]="meServie.story.utterType" placeholder="請選一個">
                 <mat-option [value]="utterType.none">不唸</mat-option>

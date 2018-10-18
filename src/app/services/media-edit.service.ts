@@ -10,6 +10,7 @@ import { concatAll, map, shareReplay, concat, first } from 'rxjs/operators';
 import { PageTextsService } from './page-texts.service';
 import { Story, IStory } from '../vm/story';
 import { StoryGSetting } from '../vm/story-g-setting';
+import { SSutterParameters, SpeechSynthesisService } from './speech-synthesis.service';
 
 @Injectable({
   providedIn: 'root'
@@ -113,7 +114,8 @@ export class MediaEditService {
               private msgService: MessageService,
               private db: DbService,
               private ptsService: PageTextsService,
-              private storyService: StoryService
+              private storyService: StoryService,
+              private SSService: SpeechSynthesisService
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe(_ => {
@@ -172,7 +174,10 @@ export class MediaEditService {
     }
 
     // * [2018-10-17 10:31] Since we have anewed the story, force it to set its gSetting
-    this.story.gSetting = (!!this.story.gSetting) ? this.story.gSetting : new StoryGSetting();
+    if (!!this.story.gSetting === false) {
+      this.story.gSetting = new StoryGSetting();
+    }
+    this.story.gSetting.utterPara = this.SSService.updateUtterParaWithVoice(this.story.gSetting.utterPara);
 
     this.state = MEState.readyForPlayer;
 

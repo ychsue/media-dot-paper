@@ -153,7 +153,7 @@ export class SpeechSynthesisService {
   voiceName?: string;
   pitch = 1;
   rate = 1;
-  text = '..';
+  text = '';
   voice?: SpeechSynthesisVoice;
   volume = 1;
  }

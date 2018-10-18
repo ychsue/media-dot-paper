@@ -478,9 +478,6 @@
     "cannotShare": "Maaf, pembagian tidak tersedia untuk saat ini.",
     "askSavingToFile": "Kata-kata yang Anda dapatkan harus disimpan dalam {0} file sehingga mereka dapat digunakan dengan benar."
   },
-  "meMainPlateComp": {
-    "isUtterSubtitle": "membaca masukan Anda?"
-  },
   "adService": {
     "showAdLater": "<h1> Perhatian </h1> Butuh waktu untuk memuat media. Jadi saya akan menunjukkan Anda sebuah Iklan."
   },
@@ -493,7 +490,7 @@
     "l3": "Situs web utama"
   },
   "meManiPlateComp": {
-    "isUtterSubtitle": "Untuk menyampaikan masukan Anda?",
+    "isUtterSubtitle": "membaca masukan Anda?",
     "useDefVP": "Gunakan nilai Default?"
   }
 }

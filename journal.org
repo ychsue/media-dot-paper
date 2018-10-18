@@ -1,5 +1,10 @@
 * [2018-10-18 Thu] both mVPType & mPlayType has been embedded into this code
-Before editing the part for utterType, I want to commit it at first.
+1. Before editing the part for utterType, I want to commit it at first.
+
+2. 16:38, I made it worked. However, I'm not sure whether it will always work correctly.
+Need to be tested.
+
+3. One more thing. The ~Object.assign~ does not deep clone an object, you need to do so by yourself.
 
 * [2018-10-17 Wed] Let the user can use the default volume and pace(rate) for their pieces of MDP.
 In this commit, I have made some important change in ~media-service~ about ~setVolume~ and ~setPlaybackRate~
