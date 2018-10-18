@@ -1,3 +1,6 @@
+* [2018-10-18 Thu] both mVPType & mPlayType has been embedded into this code
+Before editing the part for utterType, I want to commit it at first.
+
 * [2018-10-17 Wed] Let the user can use the default volume and pace(rate) for their pieces of MDP.
 In this commit, I have made some important change in ~media-service~ about ~setVolume~ and ~setPlaybackRate~
 so that the user can choose whether to use the default values to play the media. 

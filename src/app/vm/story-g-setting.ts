@@ -8,7 +8,6 @@ export class StoryGSetting implements IFrameBase {
 
     mVPType = mediaVPType.main;
     mPlayType = mediaPlayType.timeline;
-    utterType = utterType.none;
 }
 
 export enum utterType {
