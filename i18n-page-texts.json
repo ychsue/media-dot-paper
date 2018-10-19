@@ -57,6 +57,27 @@
             "l2": "Youtube video: MDP on Android",
             "l3": "Main web site"
         },
+        "sGsetComp": {
+            "title" : "This window is for setting default values and behavior of the whole media.",
+            "mediaPara": "Media's parameters",
+            "setDefault": "Set default values:",
+            "howToUse": "How to use:",
+            "plsSelOne": "Please select one.",
+            "byEachMDP": "Decided by each piece of MDP",
+            "oneForAll": "Apply to the entire media",
+            "tPlaySeq": "Play sequence",
+            "rule": "Rule:",
+            "byTime": "by time",
+            "byMDP": "by MDP",
+            "tSubSyn": "Subtitles and synthesis",
+            "setDef2": "Set default values:",
+            "isToUtter": "To utter?",
+            "no": "no",
+            "byMDP2": "by MDP",
+            "all": "all",
+            "tAction": "Actions",
+            "rearrange": "Rearrange MDP"
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

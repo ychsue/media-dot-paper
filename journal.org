@@ -1,3 +1,5 @@
+* [2018-10-19 Fri] Setting multi-lingual for story-gsetting-synthesis
+
 * [2018-10-18 Thu] both mVPType & mPlayType has been embedded into this code
 1. Before editing the part for utterType, I want to commit it at first.
 

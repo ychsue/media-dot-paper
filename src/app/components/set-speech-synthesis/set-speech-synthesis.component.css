@@ -17,4 +17,18 @@
 
 .container {
     height: 100%;
+    display: grid;
+    justify-content: center;
+    min-width: 0;
+    flex-wrap: wrap;
+    grid-template-rows: auto auto 1fr;
+}
+
+
+.smallSlider {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    /* margin: 4px; */
 }

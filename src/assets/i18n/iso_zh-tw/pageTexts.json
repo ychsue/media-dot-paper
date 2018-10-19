@@ -492,5 +492,26 @@
   "meManiPlateComp": {
     "isUtterSubtitle": "念出你的輸入？",
     "useDefVP": "使用預設值？"
+  },
+  "sGsetComp": {
+    "title": "此窗口用於設置整個媒體的預設值和行為。",
+    "mediaPara": "媒體的參數",
+    "setDefault": "設定預設值：",
+    "howToUse": "如何使用：",
+    "plsSelOne": "請選擇一個。",
+    "byEachMDP": "由MDP各別決定",
+    "oneForAll": "套用至整個媒體",
+    "tPlaySeq": "播放順序",
+    "rule": "規則：",
+    "byTime": "按時間",
+    "byMDP": "按MDP",
+    "tSubSyn": "字幕和模擬",
+    "setDef2": "設定預設值：",
+    "isToUtter": "唸出來？",
+    "no": "不要",
+    "byMDP2": "各MDP各自決定",
+    "all": "全唸",
+    "tAction": "操作",
+    "rearrange": "重新排列MDP"
   }
 }

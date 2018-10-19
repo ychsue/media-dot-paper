@@ -1,55 +1,55 @@
 <div id='container'>
-    <!-- <div>此處主要在設定當使用者不在任何MDP片段裡撥放方式與當作各MDP片段的預設值。</div> -->
+    <div>{{(!!pts)?pts.title:"這窗格在設定整個媒體的行為與提供預設值"}}</div>
     <mat-accordion displayMode="default" [multi]="true"
                    [hideToggle]="false">
 
         <!-- #region 媒體本身? -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>媒體本身</mat-expansion-panel-header>
-            <h4>改變預設值：</h4>
+            <mat-expansion-panel-header>{{(!!pts)?pts.mediaPara:'媒體本身'}}</mat-expansion-panel-header>
+            <h4>{{(!!pts)?pts.setDefault:'改變預設值：'}}</h4>
             <app-setting-media></app-setting-media>
-            <h4>如何套用：</h4>
-            <mat-select [(ngModel)]="meServie.story.gSetting.mVPType" [placeholder]="'請選一個'">
-                <mat-option [value]="mVPType.mdp">各MDP決定</mat-option>
-                <mat-option [value]="mVPType.main">統一由這些值決定</mat-option>
+            <h4>{{(!!pts)?pts.howToUse:'如何套用：'}}</h4>
+            <mat-select [(ngModel)]="meServie.story.gSetting.mVPType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個'">
+                <mat-option [value]="mVPType.mdp">{{(!!pts)?pts.byEachMDP:'各MDP決定'}}</mat-option>
+                <mat-option [value]="mVPType.main">{{(!!pts)?pts.oneForAll:'統一由這些值決定'}}</mat-option>
             </mat-select>
         </mat-expansion-panel>
         <!-- #endregion 媒體本身? -->
 
         <!-- #region 如何撥放? -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>如何撥放?</mat-expansion-panel-header>
-             <h4>撥放規則：</h4>
-             <mat-select [(ngModel)]="meServie.story.gSetting.mPlayType" placeholder="請選一個規則">
-                 <mat-option [value]="mPlayType.timeline">按時間</mat-option>
-                 <mat-option [value]="mPlayType.mdp">按MDP</mat-option>
+            <mat-expansion-panel-header>{{(!!pts)?pts.tPlaySeq:'如何撥放?'}}</mat-expansion-panel-header>
+             <h4>{{(!!pts)?pts.rule:'撥放規則：'}}</h4>
+             <mat-select [(ngModel)]="meServie.story.gSetting.mPlayType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個規則'">
+                 <mat-option [value]="mPlayType.timeline">{{(!!pts)?pts.byTime:'按時間'}}</mat-option>
+                 <mat-option [value]="mPlayType.mdp">{{(!!pts)?pts.byMDP:'按MDP'}}</mat-option>
              </mat-select>
         </mat-expansion-panel>
         <!-- #endregion 如何撥放? -->
 
         <!-- #region 字幕 -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>字幕與模擬</mat-expansion-panel-header>
-            <h4>設定預設值：</h4>
+            <mat-expansion-panel-header>{{(!!pts)?pts.tSubSyn:'字幕與模擬'}}</mat-expansion-panel-header>
+            <h4>{{(!!pts)?pts.setDef2:'設定預設值：'}}</h4>
             <app-set-speech-synthesis
              #ssynthesis
              [isShownClsBtn]="false"
              [utterPara]="meServie.story.gSetting?.utterPara"
              (change)="onChangeGUtterPara(ssynthesis.utterPara)"
              ></app-set-speech-synthesis>
-            <h4>唸字幕否？</h4>
-            <mat-select [(ngModel)]="meServie.story.utterType" placeholder="請選一個">
-                <mat-option [value]="utterType.none">不唸</mat-option>
-                <mat-option [value]="utterType.byEach">按各MDP片段的設定唸</mat-option>
-                <mat-option [value]="utterType.all">全唸</mat-option>
+            <h4>{{(!!pts)?pts.isToUtter:'唸字幕否？'}}</h4>
+            <mat-select [(ngModel)]="meServie.story.utterType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個'">
+                <mat-option [value]="utterType.none">{{(!!pts)?pts.no:'不唸'}}</mat-option>
+                <mat-option [value]="utterType.byEach">{{(!!pts)?pts.byMDP2:'按各MDP片段的設定唸'}}</mat-option>
+                <mat-option [value]="utterType.all">{{(!!pts)?pts.all:'全唸'}}</mat-option>
             </mat-select>
         </mat-expansion-panel>
         <!-- #endregion 字幕 -->
 
         <!-- #region 動作 -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>動作</mat-expansion-panel-header>
-            <button mat-raised-button (click)="onRearrangeMDP()">重排MDP片段</button>
+            <mat-expansion-panel-header>{{(!!pts)?pts.tAction:'動作'}}</mat-expansion-panel-header>
+            <button mat-raised-button (click)="onRearrangeMDP()">{{(!!pts)?pts.rearrange:'重排MDP片段'}}</button>
         </mat-expansion-panel>
         <!-- #endregion 動作 -->
 

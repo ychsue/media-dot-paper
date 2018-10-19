@@ -9,6 +9,7 @@ interface IPageTexts {
     meManiPlateComp: IMeManiPlateComp;
     adService: IAdService;
     welcomePage: IWelcomePage;
+    sGsetComp: ISGsetComp;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -68,6 +69,27 @@ interface IWelcomePage {
     l1: string;
     l2: string;
     l3: string;
+}
+interface ISGsetComp {
+    title: string;
+    mediaPara: string;
+    setDefault: string;
+    howToUse: string;
+    plsSelOne: string;
+    byEachMDP: string;
+    oneForAll: string;
+    tPlaySeq: string;
+    rule: string;
+    byTime: string;
+    byMDP: string;
+    tSubSyn: string;
+    setDef2: string;
+    isToUtter: string;
+    no: string;
+    byMDP2: string;
+    all: string;
+    tAction: string;
+    rearrange: string;
 }
 interface IIso639 {
     ab: string;

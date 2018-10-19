@@ -492,5 +492,26 @@
   "meManiPlateComp": {
     "isUtterSubtitle": "membaca masukan Anda?",
     "useDefVP": "Gunakan nilai Default?"
+  },
+  "sGsetComp": {
+    "title": "Jendela ini untuk menetapkan nilai dan perilaku default dari seluruh media.",
+    "mediaPara": "Parameter media",
+    "setDefault": "Setel nilai default:",
+    "howToUse": "Bagaimana cara menggunakan:",
+    "plsSelOne": "Tolong pilih satu.",
+    "byEachMDP": "Diputuskan oleh masing-masing bagian MDP",
+    "oneForAll": "Terapkan ke seluruh media",
+    "tPlaySeq": "Mainkan urutan",
+    "rule": "Aturan:",
+    "byTime": "Oleh waktu",
+    "byMDP": "oleh MDP",
+    "tSubSyn": "Subtitel dan sintesis",
+    "setDef2": "Setel nilai default:",
+    "isToUtter": "Untuk diucapkan?",
+    "no": "tidak",
+    "byMDP2": "oleh MDP",
+    "all": "semua",
+    "tAction": "Tindakan",
+    "rearrange": "Atur ulang MDP"
   }
 }

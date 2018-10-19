@@ -492,5 +492,26 @@
   "meManiPlateComp": {
     "isUtterSubtitle": "念出你的输入？",
     "useDefVP": "使用默认值？"
+  },
+  "sGsetComp": {
+    "title": "此窗口用于设置整个媒体的默认值和行为。 ",
+    "mediaPara": "媒体的参数",
+    "setDefault": "设定默认值：",
+    "howToUse": "如何使用：",
+    "plsSelOne": "请选择一个。 ",
+    "byEachMDP": "由MDP各别决定",
+    "oneForAll": "套用至整个媒体",
+    "tPlaySeq": "播放顺序",
+    "rule": "规则：",
+    "byTime": "按时间",
+    "byMDP": "按MDP",
+    "tSubSyn": "字幕和仿真",
+    "setDef2": "设定默认值：",
+    "isToUtter": "念出来？ ",
+    "no": "不要",
+    "byMDP2": "各MDP各自决定",
+    "all": "全念",
+    "tAction": "操作",
+    "rearrange": "重新排列MDP"
   }
 }
