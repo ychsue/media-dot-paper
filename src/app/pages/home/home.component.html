@@ -10,13 +10,16 @@
             </button>
         </mat-list-item>
         <mat-list-item>
-            <button mat-raised-button (click)="selaudio.click()"
+            <button #btnSelFile mat-raised-button (click)="selaudio.click()"
                 [matTooltip]="(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'" >
-                <input #selaudio
-                type="file" (change)="onFileSelect(selaudio.files)">
                 {{(!!pts)?pts.file:'檔案'}}
             </button>
-        </mat-list-item>
+            <input #selaudio
+            type="file" (change)="onFileSelect(selaudio.files)">
+            <button mat-icon-button (click)="onSelFileWarning()" *ngIf="isShownSelFileWarning">
+                <mat-icon class="mat-18" [style.color]="'blue'">warning</mat-icon>
+            </button>
+    </mat-list-item>
     </mat-list>
 </div>
 <div class="storedContainer">

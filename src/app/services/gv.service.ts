@@ -7,7 +7,7 @@ export class GvService {
 
   shownPage = PageType.Home;
   sharedFolderName = 'SegmentedMediaLayer';
-  ptVersion = "2018.1019.1";
+  ptVersion = "2018.1019.2";
 
   isJustPointerEvents = false;
   constructor() { }

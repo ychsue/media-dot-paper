@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   pts: IHomePage;
 
+  isShownSelFileWarning = false;
+
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog, public ptsServic: PageTextsService,
     private meService: MediaEditService, private db: DbService,
@@ -72,6 +74,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.storySearch$.next(null); // initialize the search
+    this.isShownSelFileWarning = (
+      (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios')) ||
+        (!!window['cordova'] === false)
+      ));
   }
 
   ngOnDestroy(): void {
@@ -79,6 +85,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this._unsubscribed.complete();
     this._unsubscribed = null;
     this.ccService.listOfStoredEle = null;
+  }
+
+  onSelFileWarning() {
+    const self = this;
+    const action = async () => {
+      if (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios')) ) {
+        await this.msg.alert$$((self.pts) ? self.pts.mobileFileSelWarn :
+         '如果選取的裝置上的影音檔很大，雖然一切運作應該還是很正常，但是，當使用者想將該檔轉存到此APP裡時可能會因為檔案過大而被拒，甚至直接關閉此APP。目前的版本尚未處理此問題，造成不便之處請見諒。');
+      } else if (!!window['cordova'] === false) {
+        await this.msg.alert$$((self.pts) ? self.pts.browserFileSelWarn :
+         '此版本只允許讀入影音檔，一切的操作都可行，除了想要將該檔存入此APP的空間不能做到，很抱歉。');
+      } else {
+        // do nothing
+      }
+    };
+    action().then();
   }
 
   onFileSelect(files: FileList) {

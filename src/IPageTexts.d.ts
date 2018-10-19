@@ -21,6 +21,8 @@ interface IHomePage {
     storedMedia: string;
     errWrongFormat: string;
     errFileType: string;
+    mobileFileSelWarn: string;
+    browserFileSelWarn: string;
 }
 interface IAppComp {
     chooseAMediaAtFirst: string;

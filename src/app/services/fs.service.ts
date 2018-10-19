@@ -123,13 +123,24 @@ export class FsService {
     const self = this;
     if (self.device.isCordova === false) {return of(null); }
     const obs = self.fs$.pipe(map(fs => new Observable<FileEntry>( subs => {
-      const dirEntry = (!!dir) ? dir : fs.root;
-      dirEntry.getFile(name, {create: create, exclusive: exclusive},
-        file => {
-          subs.next(file);
-          subs.complete();
-        },
-        subs.error);
+      const action = async () => {
+        let dirEntry = null;
+        if (!!dir) {
+          dirEntry = dir;
+        } else if (cordova.platformId === 'android') {
+          dirEntry = await self.getDir$('', false, false, cordova.file.externalDataDirectory).toPromise();
+          if (!!dirEntry === false) {dirEntry = fs.root; }
+        } else {
+          dirEntry = fs.root;
+        }
+        dirEntry.getFile(name, {create: create, exclusive: exclusive},
+          file => {
+            subs.next(file);
+            subs.complete();
+          },
+          subs.error);
+      };
+      action().then().catch(subs.error);
     })),
     concatAll()
     );

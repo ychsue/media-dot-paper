@@ -6,7 +6,9 @@
     "ttFile": "選擇視頻或音頻文件，或此APP導出的json文件",
     "storedMedia": "選擇存儲的媒體",
     "errWrongFormat": "輸入.json文件的格式錯誤。錯誤信息：",
-    "errFileType": "所選文件必須是視頻或音頻文件，或此APP導出的json文件。"
+    "errFileType": "所選文件必須是視頻或音頻文件，或此APP導出的json文件。",
+    "mobileFileSelWarn": "如果您選擇的本地媒體文件很大，大多數操作仍應有效;但是，當您嘗試將其保存到MDP列表中時，它可能會使此應用程序崩潰。",
+    "browserFileSelWarn": "雖然您可以載入本地媒體文件，但無法將其保存到此平台的MDP列表中。"
   },
   "appComp": {
     "chooseAMediaAtFirst": "此頁面用於設置您選擇的媒體。\n所以，請先選擇一個媒體。"

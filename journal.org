@@ -1,3 +1,10 @@
+* [2018-10-19 Fri] Deal with the problem of file size limit
+1. Try to use ~externalDataDirectory~ for android system; however, a file with about 30MB cannot be saved into that folder.
+2. Since that, I add a warnning for it.
+3. Very strange, ~INPUT.click()~ does not work after an ~await self.msg.alert$$(....)~.
+   It can work when it is before that ~await~.
+   I still don't know the answer.
+
 * [2018-10-19 Fri] Setting multi-lingual for story-gsetting-synthesis
 
 * [2018-10-18 Thu] both mVPType & mPlayType has been embedded into this code
