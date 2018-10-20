@@ -11,6 +11,7 @@ import { PageTextsService } from './page-texts.service';
 import { Story, IStory } from '../vm/story';
 import { StoryGSetting } from '../vm/story-g-setting';
 import { SSutterParameters, SpeechSynthesisService } from './speech-synthesis.service';
+import { GvService } from './gv.service';
 
 @Injectable({
   providedIn: 'root'
@@ -115,7 +116,8 @@ export class MediaEditService {
               private db: DbService,
               private ptsService: PageTextsService,
               private storyService: StoryService,
-              private SSService: SpeechSynthesisService
+              private SSService: SpeechSynthesisService,
+              private gv: GvService
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe(_ => {
@@ -302,6 +304,7 @@ export class MediaEditService {
     const story = this.story;
     story.modifyTime = story.viewTime = Date.now();
     const self = this;
+    self.gv.appComp.startProgress("請稍後", "處理中");
     if (story.meType === PlayerType.file) {
       const isSaved = await this.fsService.getFile$(story.fileName, true).pipe(map(fEntry => {
         return self.fsService.writeFile$(fEntry, self.blob);
@@ -318,12 +321,15 @@ export class MediaEditService {
     // * [2018-07-25 19:04] Change its state to 'Update'
     story['id'] = insert[0].affectedRows[0].id;
     this.sideClickType = SideClickType.select;
+    self.gv.appComp.stopProgress();
   }
 
   async onUpdateStory$$() {
     const story = this.story;
     story.modifyTime = story.viewTime = Date.now();
+    this.gv.appComp.startProgress("請稍後", "處理中");
     await this.storyService.upsertAStoryAsync(story);
+    this.gv.appComp.stopProgress();
   }
 
   async canGetCurrentTime$$() {

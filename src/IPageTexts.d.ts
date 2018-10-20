@@ -2,6 +2,7 @@ interface IPageTexts {
     homePage: IHomePage;
     appComp: IAppComp;
     NewStory: INewStory;
+    InProgress: IInProgress;
     storyComp: IStoryComp;
     dialogComp: IDialogComp;
     setSSComp: ISetSSComp;
@@ -30,6 +31,10 @@ interface IAppComp {
 interface INewStory {
     name: string;
     title: string;
+}
+interface IInProgress {
+    inProgress: string;
+    wait: string;
 }
 interface IStoryComp {
     notYetFileExport: string;

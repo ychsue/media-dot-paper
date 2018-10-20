@@ -70,14 +70,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     .subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
 
     this.ccService.listOfStoredEle = this.listStoredRef.nativeElement;
-  }
 
-  ngAfterViewInit() {
-    this.storySearch$.next(null); // initialize the search
     this.isShownSelFileWarning = (
       (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios')) ||
         (!!window['cordova'] === false)
       ));
+  }
+
+  ngAfterViewInit() {
+    this.storySearch$.next(null); // initialize the search
   }
 
   ngOnDestroy(): void {

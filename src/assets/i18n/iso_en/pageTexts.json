@@ -515,5 +515,9 @@
     "all": "all",
     "tAction": "Actions",
     "rearrange": "Rearrange MDP"
+  },
+  "InProgress": {
+    "inProgress": "In progress",
+    "wait": "Please wait for a moment"
   }
 }

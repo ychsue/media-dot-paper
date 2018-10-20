@@ -36,4 +36,9 @@
       <!-- </div> -->
       </mat-sidenav-container>
       <div class="justPointerEvents" *ngIf="gv.isJustPointerEvents"></div>
+      <app-in-progress #inProgress *ngIf="isShowProgress" class="inProgress"
+        [title]="progressPara.title"
+        [message]="progressPara.message"
+        [sMode]="progressPara.sMode"
+      ></app-in-progress>
 </div>

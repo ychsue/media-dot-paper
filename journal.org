@@ -1,3 +1,10 @@
+* [2018-10-20 Sat] Add in a progress ring component into AppComponent
+1. Because it will take time to save file, I add in a progress ring to let the user know that it is still working.
+
+2. To avoid cross relative, I store the AppComponent's instance at ~GvService~ for ~MediaEditService~ since ~AppComponent~ is the head of all component.
+
+3. Don't set a property inside the ~ngAfterViewInit()~ because angular has finished the checking and it will throw an ~ExpressionChangedAfterItHasBeenCheckedError~ error.
+
 * [2018-10-19 Fri] Deal with the problem of file size limit
 1. Try to use ~externalDataDirectory~ for android system; however, a file with about 30MB cannot be saved into that folder.
 2. Since that, I add a warnning for it.

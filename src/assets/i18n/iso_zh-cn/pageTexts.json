@@ -515,5 +515,9 @@
     "all": "全念",
     "tAction": "操作",
     "rearrange": "重新排列MDP"
+  },
+  "InProgress": {
+    "inProgress": "进行中",
+    "wait": "请等一下"
   }
 }

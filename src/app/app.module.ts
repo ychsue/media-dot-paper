@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
   MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
-  MatTooltipModule, MatSelectModule, MatSlideToggleModule, MatExpansionModule} from '@angular/material';
+  MatTooltipModule, MatSelectModule, MatSlideToggleModule, MatExpansionModule, MatProgressSpinnerModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 // import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -43,6 +43,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { StoryService } from './services/story.service';
 import { StoryGsettingPlateComponent } from './components/story-gsetting-plate/story-gsetting-plate.component';
 import { SettingMediaComponent } from './components/setting-media/setting-media.component';
+import { InProgressComponent } from './components/in-progress/in-progress.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { SettingMediaComponent } from './components/setting-media/setting-media.
     MdpsListComponent,
     WelcomeComponent,
     StoryGsettingPlateComponent,
-    SettingMediaComponent
+    SettingMediaComponent,
+    InProgressComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [
@@ -90,7 +92,8 @@ import { SettingMediaComponent } from './components/setting-media/setting-media.
     MatMenuModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
     , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService,

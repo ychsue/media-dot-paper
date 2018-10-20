@@ -515,5 +515,9 @@
     "all": "semua",
     "tAction": "Tindakan",
     "rearrange": "Atur ulang MDP"
+  },
+  "InProgress": {
+    "inProgress": "Sedang berlangsung",
+    "wait": "Harap tunggu sebentar"
   }
 }

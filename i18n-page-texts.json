@@ -18,6 +18,10 @@
             "name": "Give me a name, please",
             "title": "Welcome to use this APP to help you study"
         },
+        "InProgress": {
+            "inProgress": "In progress",
+            "wait": "Please wait for a moment"
+        },
         "storyComp": {
             "notYetFileExport": "Because the exported media is related to a local file, I should export its local file, too. At this version, this ability is not yet built in. Sorry for that.",
             "exportSBV": "Export subtitles into a .sbv file",

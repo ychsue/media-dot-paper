@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MessageService, MessageTypes } from './services/message.service';
 import { MatBottomSheet } from '@angular/material';
 import { MessageComponent } from './message/message.component';
@@ -9,6 +9,7 @@ import { DeviceService } from './services/device.service';
 import { concatAll, takeUntil, map, concat, merge, take, debounceTime, pairwise } from 'rxjs/operators';
 import { MediaEditService } from './services/media-edit.service';
 import { PageTextsService } from './services/page-texts.service';
+import { IProgressPara, InProgressComponent } from './components/in-progress/in-progress.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,13 @@ export class AppComponent implements AfterViewInit {
   sidenavMode: string;
 
   pageType = PageType;
+
+  progressPara: IProgressPara = {
+    title: 'In progress',
+    message: 'Please wait',
+    sMode: InProgressComponent.mode.indet
+  };
+  isShowProgress = false;
 
   pts: IAppComp;
 
@@ -37,6 +45,7 @@ export class AppComponent implements AfterViewInit {
 
       this.sidenavWidth = (window.innerWidth < 800) ? 300 : window.innerWidth / 4;
     this.decideSidenavMode();
+    gv.appComp = this;
   }
 
   ngAfterViewInit() {
@@ -81,5 +90,15 @@ export class AppComponent implements AfterViewInit {
 
   onvSepPointerDown(ev: PointerEvent) {
     this.resize$.next(ev);
+  }
+
+  startProgress(message = "Please wait.", title = "In progress" ) {
+    this.progressPara.title = title;
+    this.progressPara.message = message;
+    this.isShowProgress = true;
+  }
+
+  stopProgress() {
+    this.isShowProgress = false;
   }
 }

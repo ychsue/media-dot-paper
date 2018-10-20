@@ -69,7 +69,7 @@ app-home {
     height: 100%;
 }
 
-.justPointerEvents {
+.justPointerEvents, .inProgress {
     position: absolute;
     width: 100%;
     height: 100%;
