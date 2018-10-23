@@ -1,11 +1,12 @@
 <div id='container'>
     <div>{{(!!pts)?pts.title:"這窗格在設定整個媒體的行為與提供預設值"}}</div>
-    <mat-accordion displayMode="default" [multi]="true"
-                   [hideToggle]="false">
+    <mat-accordion displayMode="default" [multi]="true" [hideToggle]="false">
 
         <!-- #region 媒體本身? -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>{{(!!pts)?pts.mediaPara:'媒體本身'}}</mat-expansion-panel-header>
+            <mat-expansion-panel-header>
+                <img class="mat-icon h-icon" src="assets/media.svg" alt="media"> {{(!!pts)?pts.mediaPara:'媒體本身'}}
+            </mat-expansion-panel-header>
             <h4>{{(!!pts)?pts.setDefault:'改變預設值：'}}</h4>
             <app-setting-media></app-setting-media>
             <h4>{{(!!pts)?pts.howToUse:'如何套用：'}}</h4>
@@ -18,25 +19,24 @@
 
         <!-- #region 如何撥放? -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>{{(!!pts)?pts.tPlaySeq:'如何撥放?'}}</mat-expansion-panel-header>
-             <h4>{{(!!pts)?pts.rule:'撥放規則：'}}</h4>
-             <mat-select [(ngModel)]="meServie.story.gSetting.mPlayType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個規則'">
-                 <mat-option [value]="mPlayType.timeline">{{(!!pts)?pts.byTime:'按時間'}}</mat-option>
-                 <mat-option [value]="mPlayType.mdp">{{(!!pts)?pts.byMDP:'按MDP'}}</mat-option>
-             </mat-select>
+            <mat-expansion-panel-header>
+                <mat-icon class="h-icon">av_timer</mat-icon>
+                {{(!!pts)?pts.tPlaySeq:'如何撥放?'}}</mat-expansion-panel-header>
+            <h4>{{(!!pts)?pts.rule:'撥放規則：'}}</h4>
+            <mat-select [(ngModel)]="meServie.story.gSetting.mPlayType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個規則'">
+                <mat-option [value]="mPlayType.timeline">{{(!!pts)?pts.byTime:'按時間'}}</mat-option>
+                <mat-option [value]="mPlayType.mdp">{{(!!pts)?pts.byMDP:'按MDP'}}</mat-option>
+            </mat-select>
         </mat-expansion-panel>
         <!-- #endregion 如何撥放? -->
 
         <!-- #region 字幕 -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>{{(!!pts)?pts.tSubSyn:'字幕與模擬'}}</mat-expansion-panel-header>
+            <mat-expansion-panel-header>
+                <img src="assets/uttering.svg" class="mat-icon h-icon" alt="uttering"> {{(!!pts)?pts.tSubSyn:'字幕與模擬'}}
+            </mat-expansion-panel-header>
             <h4>{{(!!pts)?pts.setDef2:'設定預設值：'}}</h4>
-            <app-set-speech-synthesis
-             #ssynthesis
-             [isShownClsBtn]="false"
-             [utterPara]="meServie.story.gSetting?.utterPara"
-             (change)="onChangeGUtterPara(ssynthesis.utterPara)"
-             ></app-set-speech-synthesis>
+            <app-set-speech-synthesis #ssynthesis [isShownClsBtn]="false" [utterPara]="meServie.story.gSetting?.utterPara" (change)="onChangeGUtterPara(ssynthesis.utterPara)"></app-set-speech-synthesis>
             <h4>{{(!!pts)?pts.isToUtter:'唸字幕否？'}}</h4>
             <mat-select [(ngModel)]="meServie.story.utterType" [placeholder]="(!!pts)?pts.plsSelOne:'請選一個'">
                 <mat-option [value]="utterType.none">{{(!!pts)?pts.no:'不唸'}}</mat-option>
@@ -48,7 +48,9 @@
 
         <!-- #region 動作 -->
         <mat-expansion-panel [hideToggle]="false">
-            <mat-expansion-panel-header>{{(!!pts)?pts.tAction:'動作'}}</mat-expansion-panel-header>
+            <mat-expansion-panel-header>
+                <img src="assets/toolbox.svg" class="mat-icon h-icon" alt="toolbox"> {{(!!pts)?pts.tAction:'動作'}}
+            </mat-expansion-panel-header>
             <button mat-raised-button (click)="onRearrangeMDP()">{{(!!pts)?pts.rearrange:'重排MDP片段'}}</button>
         </mat-expansion-panel>
         <!-- #endregion 動作 -->

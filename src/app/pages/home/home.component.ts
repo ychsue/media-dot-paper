@@ -195,7 +195,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       self.msg.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}`});
     }
     // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
-    this.db.deleteAsync(DbService.storyTableName, ['makeTime', '=', story.makeTime]);
+    this.db.deleteAsync(DbService.storyTableName, ['modifyTime', '=', story.modifyTime]);
     // * [2018-07-19 21:28] Tell navbar that you delete a story
     // this.meService.sideClickType = SideClickType.none;
   }

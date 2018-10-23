@@ -5,10 +5,13 @@
     overflow-y: auto;
 }
 
-#container mat-expansion-panel-header
-{
+#container mat-expansion-panel-header {
     background-color: wheat;
-    text-align: center;
+    text-align: left;
+}
+
+.h-icon {
+    margin: 0 4px 0 0;
 }
 
 .flex {

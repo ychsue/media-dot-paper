@@ -1,3 +1,8 @@
+* [2018-10-23 Tue] Test it on iOS and macOS
+1. Added some icons to beautify the buttons for entire media.
+2. Since ~makeTime~ might be the same and ~id~ cannot be used for searching, I changed to use ~modifyTime~ since it will change when people want to save it so that it cannot be the same.
+3. Hm... Because I can change the rate of the video, it means the time for each piece of MDP is not the correct time, I need to re-design this part.
+
 * [2018-10-20 Sat] Add in a progress ring component into AppComponent
 1. Because it will take time to save file, I add in a progress ring to let the user know that it is still working.
 
