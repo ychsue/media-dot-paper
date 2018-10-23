@@ -1,3 +1,6 @@
+* [2018-10-23 Tue] sbv file now is based on real time.
+Next, I want to let the user has the chance to modify the start time.
+
 * [2018-10-23 Tue] Test it on iOS and macOS
 1. Added some icons to beautify the buttons for entire media.
 2. Since ~makeTime~ might be the same and ~id~ cannot be used for searching, I changed to use ~modifyTime~ since it will change when people want to save it so that it cannot be the same.

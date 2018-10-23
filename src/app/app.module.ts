@@ -44,6 +44,7 @@ import { StoryService } from './services/story.service';
 import { StoryGsettingPlateComponent } from './components/story-gsetting-plate/story-gsetting-plate.component';
 import { SettingMediaComponent } from './components/setting-media/setting-media.component';
 import { InProgressComponent } from './components/in-progress/in-progress.component';
+import { SbvService } from './services/sbv.service';
 
 @NgModule({
   declarations: [
@@ -97,7 +98,7 @@ import { InProgressComponent } from './components/in-progress/in-progress.compon
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
     , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService,
-    StoryService
+    StoryService, SbvService
   ],
   bootstrap: [AppComponent]
 })

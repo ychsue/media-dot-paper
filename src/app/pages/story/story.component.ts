@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { FsService } from '../../services/fs.service';
 import { MessageService } from '../../services/message.service';
 import { utterType } from 'src/app/vm/story-g-setting';
+import { SbvService } from 'src/app/services/sbv.service';
 
 @Component({
   selector: 'app-story',
@@ -31,7 +32,8 @@ export class StoryComponent implements OnInit {
   public msg: MessageService,
   private fs: FsService,
   private cdr: ChangeDetectorRef,
-  private storyService: StoryService) {
+  private storyService: StoryService,
+  private sbvService: SbvService) {
   }
 
   ngOnInit() {
@@ -72,39 +74,8 @@ export class StoryComponent implements OnInit {
     const self = this;
     const a = sender._elementRef.nativeElement as HTMLAnchorElement;
     // * [2018-09-04 11:59] The part to translate into .SBV
-    const getTime = (t: number) => {
-      let st = '';
-      let buf = Math.floor(t);
-      // * [2018-08-27 15:29] Get minisecond
-      st = ('000' + Math.round((t - buf) * 1000)).slice(-3);
-      st = '.' + st;
-      // * [2018-08-27 15:34] Get second
-      t = buf;
-      buf = t % 60;
-      st = ('00' + buf).slice(-2) + st;
-      st = ':' + st;
-      // * [2018-08-27 15:38] Get minute
-      t = (t - buf) / 60;
-      buf = t % 60;
-      st = ('00' + buf).slice(-2) + st;
-      st = ':' + st;
-      // * [2018-08-27 15:38] Get hour
-      t = (t - buf) / 60;
-      buf = t;
-      st = buf + st;
-      // * [2018-08-27 15:42] Return the string
-      return st;
-    };
-
-    const frames = self.meService.story.frames.slice(0).sort( (p, b) => {
-      return p.start - b.start;
-    });
-    const input = frames.reduce((pre, cur) => {
-      let st = (!!pre) ? '\n\n' : '';
-      st += getTime(cur.start) + ',' + getTime(cur.end) + '\n';
-      st += cur.utterPara.text;
-      return pre + st;
-    }, '');
+    const input = self.sbvService.getSbvStringFromStory(
+      self.meService.story, 0);
     // * [2018-09-04 12:00] The part to store the .SBV file
     if (!!window.cordova === true) {
       e.preventDefault();
