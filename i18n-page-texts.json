@@ -33,11 +33,13 @@
             "title": "Media's title",
             "keywords": "keywords",
             "source": "Media's source",
-            "description": "Description"
+            "description": "Description",
+            "sbvShiftT": "If you want to shift all the time, please input a non-zero number in seconds."
         },
         "dialogComp": {
             "desireURL": "Please input desired URL",
-            "load": "Load"
+            "load": "Load",
+            "desireNum": "Please input desired number"
         },
         "setSSComp": {
             "selLang": "Select a language for speech synthesis"
@@ -64,7 +66,7 @@
             "l3": "Main web site"
         },
         "sGsetComp": {
-            "title" : "This window is for setting default values and behavior of the whole media.",
+            "title": "This window is for setting default values and behavior of the whole media.",
             "mediaPara": "Media's parameters",
             "setDefault": "Set default values:",
             "howToUse": "How to use:",

@@ -28,11 +28,13 @@
     "title": "Judul media",
     "keywords": "kata kunci",
     "source": "Sumber media",
-    "description": "Deskripsi"
+    "description": "Deskripsi",
+    "sbvShiftT": "Jika Anda ingin bergeser sepanjang waktu, silakan masukkan angka bukan nol dalam hitungan detik."
   },
   "dialogComp": {
     "desireURL": "Silakan masukkan URL yang diinginkan",
-    "load": "Beban"
+    "load": "Beban",
+    "desireNum": "Silakan masukan nomor yang diinginkan"
   },
   "setSSComp": {
     "selLang": "Pilih bahasa untuk sintesis ucapan"

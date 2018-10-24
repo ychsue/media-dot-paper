@@ -48,10 +48,12 @@ interface IStoryComp {
     keywords: string;
     source: string;
     description: string;
+    sbvShiftT: string;
 }
 interface IDialogComp {
     desireURL: string;
     load: string;
+    desireNum: string;
 }
 interface ISetSSComp {
     selLang: string;

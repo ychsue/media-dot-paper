@@ -28,15 +28,22 @@ export class DialogComponent implements OnInit {
   onLoadURL() {
     this.dialogRef.close(this.data.url);
   }
+
+  onLoadNumber() {
+    const num = Number(this.data.number);
+    this.dialogRef.close((Number.isNaN(num)) ? 0 : num);
+  }
 }
 
 export enum DialogType {
   inputUrl = 0,
-  alert = 1
+  alert = 1,
+  inputNum = 2
 }
 
 export interface DialogData {
   dType: DialogType;
   url?: string;
   msg?: string;
+  number?: number;
 }

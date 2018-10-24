@@ -1,17 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
-import { MatAnchor } from '@angular/material';
+import { MatAnchor, MatDialog } from '@angular/material';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
 import { StoryService } from '../../services/story.service';
 import { PageTextsService } from '../../services/page-texts.service';
-import { concat, delay } from 'rxjs/operators';
+import { concat, delay, first } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FsService } from '../../services/fs.service';
 import { MessageService } from '../../services/message.service';
 import { utterType } from 'src/app/vm/story-g-setting';
 import { SbvService } from 'src/app/services/sbv.service';
+import { DialogComponent, DialogType } from 'src/app/dialog/dialog.component';
 
 @Component({
   selector: 'app-story',
@@ -33,7 +34,8 @@ export class StoryComponent implements OnInit {
   private fs: FsService,
   private cdr: ChangeDetectorRef,
   private storyService: StoryService,
-  private sbvService: SbvService) {
+  private sbvService: SbvService,
+  public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -70,15 +72,19 @@ export class StoryComponent implements OnInit {
     }
   }
 
-  async onExportSBV(sender: MatAnchor, e: MouseEvent) {
+  async onExportSBV(sender: HTMLAnchorElement) {
     const self = this;
-    const a = sender._elementRef.nativeElement as HTMLAnchorElement;
+    const dialogRef = self.dialog.open(DialogComponent, {
+      width: '50%',
+      data: {dType: DialogType.inputNum, msg:
+        (!!self.pts) ? self.pts.sbvShiftT : "若想平移時間，請輸入秒數", number: 0}
+    });
+    const shiftT = await dialogRef.afterClosed().pipe(first()).toPromise();
     // * [2018-09-04 11:59] The part to translate into .SBV
     const input = self.sbvService.getSbvStringFromStory(
-      self.meService.story, 0);
+      self.meService.story, shiftT);
     // * [2018-09-04 12:00] The part to store the .SBV file
     if (!!window.cordova === true) {
-      e.preventDefault();
       self.fs.saveTxtFile$$(input, self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
     } else {
       let blob: Blob;
@@ -87,6 +93,9 @@ export class StoryComponent implements OnInit {
         blob = new Blob([input], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
       // }
       this.downloadSBVHref = URL.createObjectURL(blob);
+      setTimeout(() => { // wait until downloadSBVHref has been really updated.
+        sender.click();
+      }, 0);
     }
   }
 }

@@ -81,7 +81,7 @@ export class MediaEditComponent implements OnInit {
               } else {
                 // Do nothing
               }
-              if (!!utterPara) {
+              if (!!utterPara && !!utterPara.text) {
                 utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
                 self.SSService.speak(utterPara);
               }

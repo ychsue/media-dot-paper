@@ -1,3 +1,6 @@
+* [2018-10-24 Wed] For sbv file, you can shift all time with a number
+For this added number, I created a new dialog for it. It works fine when I tested it with ~ng serve~.
+
 * [2018-10-23 Tue] sbv file now is based on real time.
 Next, I want to let the user has the chance to modify the start time.
 

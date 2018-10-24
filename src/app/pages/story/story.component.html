@@ -1,49 +1,48 @@
 <div class="container">
-  <div class="nameETC">
-    <div class="btns">
-      <button mat-icon-button (click)="meService.onSaveStory$$()"
-        *ngIf="meService.story.viewTime===0">
+    <div class="nameETC">
+        <div class="btns">
+            <button mat-icon-button (click)="meService.onSaveStory$$()" *ngIf="meService.story.viewTime===0">
           <mat-icon class="mat-18">archive</mat-icon>
       </button>
-      <button mat-icon-button (click)="meService.onUpdateStory$$()"
-        *ngIf="meService.story.viewTime!==0">
+            <button mat-icon-button (click)="meService.onUpdateStory$$()" *ngIf="meService.story.viewTime!==0">
           <mat-icon class="mat-18">update</mat-icon>
       </button>
-      <a mat-icon-button #exportStory [href]="downloadHref|safe" [download]="meService.story.viewTime+meService.story.title+'.json'"
-        (click)="onExportStory(exportStory,$event)">
-          <mat-icon class="mat-18">save</mat-icon>
-      </a>
-      <a mat-icon-button #exportSBV [href]="downloadSBVHref|safe" [download]="meService.story.title+'.sbv'"
-        (click)="onExportSBV(exportSBV,$event)" [matTooltip]="(!!pts)?pts.exportSBV:'輸出輸入的字幕'">
+            <a mat-icon-button #exportStory [href]="downloadHref|safe" [download]="meService.story.viewTime+meService.story.title+'.json'" (click)="onExportStory(exportStory,$event)">
+                <mat-icon class="mat-18">save</mat-icon>
+            </a>
+            <button mat-icon-button (click)="onExportSBV(exportSBV)" [matTooltip]="(!!pts)?pts.exportSBV:'輸出輸入的字幕'">
         <mat-icon class="mat-18">subtitles</mat-icon>
-      </a>
-  </div>
-    <div class="selectUtterType">
-      <mat-select [(ngModel)]="meService.story.utterType" placeholder="請選擇語音模擬字幕的模式">
-          <mat-option [value]="utterType.none">{{(!!pts)?pts.noSS:'不模擬'}}</mat-option>
-          <mat-option [value]="utterType.byEach">{{(!!pts)?pts.actualSS:'依各段要求模擬'}}</mat-option>
-          <mat-option [value]="utterType.all">{{(!!pts)?pts.allSS:'全部模擬'}}</mat-option>
-      </mat-select>
+      </button>
+            <a [style.display]="'none'" #exportSBV [href]="downloadSBVHref|safe" [download]="meService.story.title+'.sbv'">
+                <mat-icon class="mat-18">subtitles</mat-icon>
+            </a>
+        </div>
+        <div class="selectUtterType">
+            <mat-select [(ngModel)]="meService.story.utterType" placeholder="請選擇語音模擬字幕的模式">
+                <mat-option [value]="utterType.none">{{(!!pts)?pts.noSS:'不模擬'}}</mat-option>
+                <mat-option [value]="utterType.byEach">{{(!!pts)?pts.actualSS:'依各段要求模擬'}}</mat-option>
+                <mat-option [value]="utterType.all">{{(!!pts)?pts.allSS:'全部模擬'}}</mat-option>
+            </mat-select>
+        </div>
+        <mat-form-field>
+            <input matInput [placeholder]="(!!pts)?pts.name:'媒體名稱'" [(ngModel)]="meService.story.name">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [placeholder]="(!!pts)?pts.title:'媒體標題'" [(ngModel)]="meService.story.title">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [placeholder]="(!!pts)?pts.keywords:'關鍵字'" [(ngModel)]="meService.story.keywords">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [placeholder]="(!!pts)?pts.source:'媒體來源'" [(ngModel)]="(meService.story.meType===meService.PlayerType.file)?meService.story.fileName:meService.story.urlOrID">
+        </mat-form-field>
     </div>
-    <mat-form-field>
-      <input matInput [placeholder]="(!!pts)?pts.name:'媒體名稱'" [(ngModel)]="meService.story.name">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput [placeholder]="(!!pts)?pts.title:'媒體標題'" [(ngModel)]="meService.story.title">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput [placeholder]="(!!pts)?pts.keywords:'關鍵字'" [(ngModel)]="meService.story.keywords">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput [placeholder]="(!!pts)?pts.source:'媒體來源'" [(ngModel)]="(meService.story.meType===meService.PlayerType.file)?meService.story.fileName:meService.story.urlOrID">
-    </mat-form-field>      
-  </div>
-  
-  <mat-form-field class="description">
-    <textarea matInput [placeholder]="(!!pts)?pts.description:'描述'" [(ngModel)]="meService.story.description">
+
+    <mat-form-field class="description">
+        <textarea matInput [placeholder]="(!!pts)?pts.description:'描述'" [(ngModel)]="meService.story.description">
     </textarea>
-  </mat-form-field>
+    </mat-form-field>
 </div>

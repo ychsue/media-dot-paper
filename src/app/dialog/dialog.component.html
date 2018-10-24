@@ -1,11 +1,20 @@
 <div *ngIf="data.dType===dialogType.inputUrl">
-  <mat-form-field class="full-width" >
-    <input matInput [placeholder]="(!!pts)?pts.desireURL:'請輸入想要的網址'" [(ngModel)]="data.url" >
-  </mat-form-field>
-  <div class="buttons">
-    <button mat-raised-button (click)="onLoadURL()" >{{(!!pts)?pts.load:'載入'}}</button>
-  </div>
+    <mat-form-field class="full-width">
+        <input matInput [placeholder]="(!!pts)?pts.desireURL:'請輸入想要的網址'" [(ngModel)]="data.url">
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-raised-button (click)="onLoadURL()">{{(!!pts)?pts.load:'載入'}}</button>
+    </div>
 </div>
 <div *ngIf="data.dType===dialogType.alert">
-  <div [innerHTML]="data.msg|safeHtml"></div>
+    <div [innerHTML]="data.msg|safeHtml"></div>
+</div>
+<div *ngIf="data.dType===dialogType.inputNum">
+    <div [innerHTML]="data.msg|safeHtml"></div>
+    <mat-form-field class="full-width">
+        <input type="number" matInput [placeholder]="(!!pts)?pts.desireNum:'請輸入想要的數字'" [(ngModel)]="data.number">
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-raised-button (click)="onLoadNumber()">{{(!!pts)?pts.load:'載入'}}</button>
+    </div>
 </div>
