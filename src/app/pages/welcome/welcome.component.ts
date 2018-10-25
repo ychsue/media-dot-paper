@@ -11,6 +11,7 @@ import { takeUntil, merge } from 'rxjs/operators';
 export class WelcomeComponent implements OnInit, OnDestroy {
 
   unsubscribed$ = new Subject<boolean>();
+  platformId: string;
 
   pts: IWelcomePage;
 
@@ -23,6 +24,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    if (!!window['cordova']) {this.platformId = cordova.platformId; }
   }
 
   ngOnDestroy(): void {

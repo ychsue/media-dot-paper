@@ -4,7 +4,20 @@
     <h2>{{(!!pts)?pts.s1:'連結網址'}}</h2>
     <div>
         <div class="link"><a #aTutor href="https://memorizeyc.azurewebsites.net/Static/MediaDotPaper/tutorial" target="_blank" (click)="onLinkToUrl(aTutor.href)">{{(!!pts)?pts.l1:'此教學網頁'}}</a></div>
-        <div class="link"><a #aVideo1 href="https://youtu.be/5Jrkep05Ib0" target="_blank" (click)="onLinkToUrl(aVideo1.href)">{{(!!pts)?pts.l2:'Youtube影片'}}</a></div>
+        <div class="link">
+            <div *ngIf="(!!platformId===false)||(platformId==='android')">
+                <a #aVideo1 href="https://youtu.be/5Jrkep05Ib0" target="_blank" (click)="onLinkToUrl(aVideo1.href)">{{(!!pts)?pts.l2:'Youtube影片'}} : Android</a>
+            </div>
+            <div *ngIf="(!!platformId===false)||(platformId==='windows')">
+                <a #aVideo2 href="https://youtu.be/MI6VE6TUgho" target="_blank" (click)="onLinkToUrl(aVideo2.href)">{{(!!pts)?pts.l2:'Youtube影片'}} : Windows</a>
+            </div>
+            <div *ngIf="(!!platformId===false)||(platformId==='ios')||(platformId==='osx')">
+                <a #aVideo3 href="https://youtu.be/l8LJAgLAalI" target="_blank" (click)="onLinkToUrl(aVideo3.href)">{{(!!pts)?pts.l2:'Youtube影片'}} : iOS</a>
+            </div>
+            <div *ngIf="(!!platformId===false)||(platformId==='ios')||(platformId==='osx')">
+                <a #aVideo4 href="https://youtu.be/zSV-Axt11Go" target="_blank" (click)="onLinkToUrl(aVideo4.href)">{{(!!pts)?pts.l2:'Youtube影片'}} : iMac</a>
+            </div>
+        </div>
         <div class="link"><a #aMain href="https://memorizeyc.azurewebsites.net" target="_blank" (click)="onLinkToUrl(aMain.href)">{{(!!pts)?pts.l3:'相關網頁'}}</a></div>
     </div>
 </div>

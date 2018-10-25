@@ -1,3 +1,6 @@
+* [2018-10-25 Thu] I have recorded two videos for iMac and iOS and give each platform a related link.
+Before doing any submission to each platform, let me commit this one at first.
+
 * [2018-10-24 Wed] For sbv file, you can shift all time with a number
 For this added number, I created a new dialog for it. It works fine when I tested it with ~ng serve~.
 
