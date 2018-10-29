@@ -1,3 +1,17 @@
+* [2018-10-29 Mon] The version 2018.1025.2 has been submitted to windows, android, iOS, iMac and browser
+After checking on brothers' mobile devices, it has some problems on older Android platform.
+The modification in app.component.html and navbar.component.css is for older Android system.
+I need to provide the hight instead of height=100%.
+
+However, when the height of the navbar is changed, it will throw an exception of ExpressionChangedAfterItHasBeenCheckedError.
+Although following the tutorial shown in [[https://github.com/angular/angular/issues/6005][finion's answer]], I can force it to check changing in ngAfterViewChecked.
+Although it works, it will be called frequently even I did nothing, i.e. will have a lot of redundant checking.
+Hm... Keeping this solution in mind.
+Perhaps this is the reason that the Angular team don't solve it directly by themselves.
+
+Another useful [[https://stackoverflow.com/questions/34827334/triggering-change-detection-manually-in-angular][StackOverflow's Q&A]].
+It talks about the possible ways for change detection.
+
 * [2018-10-25 Thu] I have recorded two videos for iMac and iOS and give each platform a related link.
 Before doing any submission to each platform, let me commit this one at first.
 

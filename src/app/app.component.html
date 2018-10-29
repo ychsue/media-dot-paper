@@ -1,6 +1,8 @@
 <div #container class="container">
-  <app-navbar #navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
-  <mat-sidenav-container #sidenavContainer class="content">
+  <div #navbar>
+      <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
+  </div>
+  <mat-sidenav-container #sidenavContainer class="content" [style.height.px]="container.offsetHeight-navbar.offsetHeight" >
       <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true"
         [style.width]="sidenavWidth+'px'">
         <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
