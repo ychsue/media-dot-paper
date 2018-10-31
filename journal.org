@@ -1,3 +1,9 @@
+* [2018-10-31 Wed] The version 2018.1030.2 has been submitted to iMac
+In this commit
+1. Using ~applicationShouldTerminateAfterLastWindowClosed~ as described in [[https://stackoverflow.com/questions/5268757/how-to-quit-cocoa-app-when-windows-close][this StackOverflow's Q&A]] to close it completely when the user clicks the red light button. Add this function into ~AppDelegate.m~ is enough.
+2. Add some ~min-width: 0;~ to disable the default ~min-width~ of a grid.
+3. Add some tool-tips for some buttons so that the user can get a more clear picture about what those buttons want to do.
+
 * [2018-10-29 Mon] The version 2018.1025.2 has been submitted to windows, android, iOS, iMac and browser
 After checking on brothers' mobile devices, it has some problems on older Android platform.
 The modification in app.component.html and navbar.component.css is for older Android system.

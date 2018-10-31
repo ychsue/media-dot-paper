@@ -1,6 +1,6 @@
 {
     "homePage": {
-        "newMedia": "加載新媒體",
+        "newMedia": "載入新媒體",
         "url": "網址",
         "file": "文件",
         "ttFile": "選擇視頻或音頻文件，或此APP導出的json文件",
@@ -11,7 +11,9 @@
         "browserFileSelWarn": "雖然您可以載入本地媒體文件，但無法將其保存到此平台的MDP列表中。"
     },
     "appComp": {
-        "chooseAMediaAtFirst": "此頁面用於設置您選擇的媒體。\n所以，請先選擇一個媒體。"
+        "chooseAMediaAtFirst": "此頁面用於設置您選擇的媒體。\n所以，請先選擇一個媒體。",
+        "chooseAMedia": "選擇一個媒體",
+        "infoOfAMedia": "當前媒體的資訊"
     },
     "NewStory": {
         "name": "請給我一個名字",
@@ -29,11 +31,12 @@
         "keywords": "關鍵字",
         "source": "媒體的來源",
         "description": "描述",
-        "sbvShiftT": "如果想平移所有的時間，那麼，請輸入一個單位為秒的非零數字。"
+        "sbvShiftT": "如果想平移所有的時間，那麼，請輸入一個單位為秒的非零數字。",
+        "exportJson": "將當前MDP輸出到.json文件中"
     },
     "dialogComp": {
         "desireURL": "請輸入想要的URL",
-        "load": "加載",
+        "load": "載入",
         "desireNum": "請輸入想要的數字"
     },
     "setSSComp": {
@@ -483,7 +486,7 @@
         "askSavingToFile": "您獲得的文字必須存儲在{0}文件中，以便正確使用它們。"
     },
     "adService": {
-        "showAdLater": "<h1>注意</h1>因為加載媒體需要一些時間。所以我會顯示你一則廣告。"
+        "showAdLater": "<h1>注意</h1>因為載入媒體需要一些時間。所以我會顯示你一則廣告。"
     },
     "welcomePage": {
         "title": "歡迎使用此APP",

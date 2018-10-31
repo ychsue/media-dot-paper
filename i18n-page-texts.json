@@ -12,7 +12,9 @@
             "browserFileSelWarn": "Although you can load a local media file, you cannot save it into the MDP list for this platform."
         },
         "appComp": {
-            "chooseAMediaAtFirst": "This page is for the setting of the media you selected.\nSo, please choose a media at first."
+            "chooseAMediaAtFirst": "This page is for the setting of the media you selected.\nSo, please choose a media at first.",
+            "chooseAMedia": "Select a media",
+            "infoOfAMedia": "Information of current media"
         },
         "NewStory": {
             "name": "Give me a name, please",
@@ -34,7 +36,8 @@
             "keywords": "keywords",
             "source": "Media's source",
             "description": "Description",
-            "sbvShiftT": "If you want to shift all the time, please input a non-zero number in seconds."
+            "sbvShiftT": "If you want to shift all the time, please input a non-zero number in seconds.",
+            "exportJson": "Export current MDP into a .json file"
         },
         "dialogComp": {
             "desireURL": "Please input desired URL",

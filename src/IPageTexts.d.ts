@@ -27,6 +27,8 @@ interface IHomePage {
 }
 interface IAppComp {
     chooseAMediaAtFirst: string;
+    chooseAMedia: string;
+    infoOfAMedia: string;
 }
 interface INewStory {
     name: string;
@@ -49,6 +51,7 @@ interface IStoryComp {
     source: string;
     description: string;
     sbvShiftT: string;
+    exportJson: string;
 }
 interface IDialogComp {
     desireURL: string;

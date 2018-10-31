@@ -18,6 +18,8 @@
     grid-template-areas: "main-up" "main-play" "main-down";
     align-items: center;
     justify-items: center;
+    min-height: 0;
+    min-width: 0;
 }
 
 .main-up {
@@ -155,7 +157,7 @@ mat-slider {
     z-index: 2;
 }
 
-#htmlSubtitle{
+#htmlSubtitle {
     grid-row-start: 1;
     grid-row-end: 4;
     align-self: flex-end;
@@ -165,4 +167,8 @@ mat-slider {
 .use-margin-not-overflow {
     margin: 12px 0;
     overflow-y: hidden;
+}
+
+.canShortSlider {
+    min-width: 20px;
 }

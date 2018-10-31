@@ -1,12 +1,10 @@
 <div class="container" [@changeFrame]="meService.story.iFrame" touch-action="none" (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
-    <div class="main">
+    <div #main class="main">
         <div class="main-up" [@hideShow]="HideShow" *ngIf="isSSShown===false">
             <div class="flex">
-                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow"
-                    [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP"
-                    (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();" >
+                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP" (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();">
                     {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
-                </mat-slide-toggle>    
+                </mat-slide-toggle>
             </div>
             <app-setting-media *ngIf="!!meService.story.frames[meService.story.iFrame]?.useDefVP===false"></app-setting-media>
             <div class="flex">
@@ -23,7 +21,7 @@
             <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
-            <button mat-icon-button mat-raised-button [class.largeBtn]="!meService.isSideMani" (click)="onPlayPause()">
+            <button mat-icon-button mat-raised-button [class.largeBtn]="!meService.isSideMani&&(main.offsetHeight>450)" (click)="onPlayPause()">
                 <svg viewBox="0 0 10 10" *ngIf="meService.state!==MEState.playing">
                     <polygon points="8,5 3,2 3,8" style="fill:darkblue"/>
                 </svg>
@@ -42,9 +40,9 @@
 
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'" [style.width]="mainDown.width" [style.height]="mainDown.height"></div>
 
-        <div #mainDown class="main-down">
+        <div #mainDown class="main-down" [style.width.px]="main.width">
             <textarea matInput #subtitleInput class="subtitle" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="onSubInputChange(subtitleInput, subtitleView)" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0"
-                [style.width]="mainDown.width" [style.height]="mainDown.height">
+                [style.width.px]="mainDown.width" [style.height.px]="mainDown.height">
             </textarea>
         </div>
     </div>
@@ -54,7 +52,7 @@
         <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'">
         <span class="slider-start" (click)="onOpenInputStart(inStart)">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>
         <!-- <mat-form-field><input class="slider-start" matInput [(ngModel)]="meService.story.frames[meService.story.iFrame].start"></mat-form-field> -->
-        <mat-slider #frameSlider [min]="meService.story.frames[meService.story.iFrame].start" [max]="meService.story.frames[meService.story.iFrame].end" [value]="meService.currentTime" (change)="meService.seekTime=frameSlider.value"></mat-slider>
+        <mat-slider #frameSlider class="canShortSlider" [min]="meService.story.frames[meService.story.iFrame].start" [max]="meService.story.frames[meService.story.iFrame].end" [value]="meService.currentTime" (change)="meService.seekTime=frameSlider.value"></mat-slider>
         <span class="slider-end" (click)="onOpenInputEnd(inEnd)">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>
     </div>
 </div>

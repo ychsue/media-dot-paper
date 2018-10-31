@@ -44,4 +44,9 @@
 
 }
 
+- (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
+{
+    return true;
+}
+
 @end

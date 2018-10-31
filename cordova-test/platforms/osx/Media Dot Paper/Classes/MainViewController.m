@@ -27,7 +27,8 @@
 
 - (BOOL)windowShouldClose:(NSWindow *)sender {
     [NSApp hide:self];
-    return false;
+    //return false;
+    return true;
 }
 
 - (id)initWithWindow:(NSWindow *)window
