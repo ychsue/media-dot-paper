@@ -151,6 +151,7 @@ export class MediaEditService {
         this.story.meType = PlayerType.url;
       } else if (!!data['makeTime']) {
         this.story = data as IStory;
+        this.setiFrame(this.story.iFrame); // TODO: It is for avoiding iFrame!=-1 so that the utterPara hasn't been updated.
       } else if (!!(data as Blob)) {
         this.story = new Story(this.pts);
         this.story.meType = PlayerType.file;

@@ -34,7 +34,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   onLinkToUrl(sUrl: string) {
-    if (!!cordova && cordova.platformId === 'osx') {
+    if (!!window['cordova'] && cordova.platformId === 'osx') {
       cordova['InAppBrowser'].open(sUrl, '_system', 'location=yes');
     }
   }

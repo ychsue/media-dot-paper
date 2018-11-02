@@ -1,3 +1,15 @@
+* [2018-11-2 Fri] Try to let the old device can understand ~promise~
+1. Added ~import 'core-js/es6/promise';~ can let the old browser can understand the ~promise~ as described in [[https://github.com/angular/zone.js/issues/1078][this Q&A answered by jesgundy at Sep. 26, 2018]].
+2. Because I use ~animation~ in this App, I'm facing a problem as described in [[https://github.com/angular/angular/issues/24094][this Q&A]]. Unfortunately, only ~NoopAnimationsModule~ works for me which is mutually excluded with ~BrowserAnimationsModule~.
+    I have tried to load the modules conditionally. Although I could test it, I could not build an AOT one which will be faster.
+    Possible solutions:
+    a. By routing to achieve ~lazy loading~. Searching it on google can find its document in Angular's website.
+    b. By something like ~NgModuleFactory~ as described in [[https://github.com/angular/angular/issues/13984][github's Q&A]]. I need to learn about it.
+    c. Some ways similar to my original thought: [[https://stackoverflow.com/questions/47357114/how-to-import-module-or-provide-service-conditionally-aot][StackOverflow's Q&A]].
+    * ******************************SINCE I STILL NOT FIND A RELIABLE METHOD, LET ME DEFER THIS TOPIC************************ *
+
+3. Because I need to test it on an android emulator to see what will happen in old device, I follow [[https://github.com/angular/angular-cli/issues/2542][angular-cli's github Q&A]] and using ~ng serve --host=MyIP~. It can work.
+
 * [2018-10-31 Wed] The version 2018.1030.2 has been submitted to iMac
 In this commit
 1. Using ~applicationShouldTerminateAfterLastWindowClosed~ as described in [[https://stackoverflow.com/questions/5268757/how-to-quit-cocoa-app-when-windows-close][this StackOverflow's Q&A]] to close it completely when the user clicks the red light button. Add this function into ~AppDelegate.m~ is enough.
