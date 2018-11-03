@@ -19,10 +19,6 @@ mat-sidenav {
     right: 0;
 }
 
-#sidenavTabs ::ng-deep .mat-tab-body-wrapper {
-    flex: 1 1 auto;
-}
-
 .vSeparate {
     position: absolute;
     z-index: 1;
@@ -57,8 +53,20 @@ mat-sidenav {
 }
 
 #sidenavTabs ::ng-deep .mat-tab-body-wrapper {
+    flex: 1 1 auto;
     position: relative;
     height: 100%;
+}
+
+#sidenavTabs ::ng-deep .mat-tab-body, #sidenavTabs ::ng-deep .mat-tab-body-content {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* For old android */
+#sidenavTabs ::ng-deep .mat-ink-bar {
+    visibility: inherit !important;
 }
 
 .justPointerEvents, .inProgress {

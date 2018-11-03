@@ -2,11 +2,6 @@ input[type='file'] {
     display: none;
 }
 
-.full-width {
-    width: 100%;
-    display: block;
-}
-
 .question {
     background-color: red;
     color: yellow;
@@ -21,8 +16,6 @@ app-draglist {
 
 .storedContainer {
     min-height: 0; /* crucial */
-    display: grid;
-    grid-template-rows: auto 1fr;
 }
 
 .listStored {

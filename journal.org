@@ -1,3 +1,7 @@
+* [2018-11-3 Sat] home, welcome and app components are modified for display:flex;.
+At this moment, I tested it in ~Android 4.4~, ~IE11~, ~Edge~ and ~Chrome~. They looks fine.
+I'm not sure what will it be when I test it in iOS and iMac.
+
 * [2018-11-3 Sat] Try to use ~flex~ instead of ~grid~ for 1d arrangement.
 At this moment, ~welcome~, ~navbar~ and ~app.component~ are changed to use ~flex~.
 By the way, I wrote a css file ~common-use.css~ for almost all ~component~. Those ~component~s should list this file in the array ~StyleUrls~ of its ~.ts~ file.

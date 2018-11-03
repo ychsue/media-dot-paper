@@ -7,11 +7,11 @@
             <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" [style.width]="sidenavWidth+'px'">
                 <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
                 <mat-tab-group id="sidenavTabs" mat-stretch-tabs [dynamicHeight]="true">
-                    <mat-tab>
+                    <mat-tab class="display-flex-column">
                         <ng-template matTabLabel>
                             <mat-icon [matTooltip]="(!!pts)?pts.chooseAMedia:'選擇一個媒體'">library_music</mat-icon>
                         </ng-template>
-                        <app-home class="flex-auto display-flex-column"></app-home>
+                        <app-home class="flex-110 display-flex-column min-height-0"></app-home>
                     </mat-tab>
                     <mat-tab>
                         <ng-template matTabLabel>
@@ -31,7 +31,7 @@
             <mat-sidenav-content id="sidenav-content" [style.width]="((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'">
                 <app-media-edit class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.MediaEdit)?'flex':'none'"></app-media-edit>
                 <app-test class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.Test)?'flex':'none'"></app-test>
-                <app-welcome class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.Home)?'flex':'none'"></app-welcome>
+                <app-welcome class="flex-auto width-100 display-flex-column" [style.display]="(gv.shownPage===pageType.Home)?'flex':'none'"></app-welcome>
             </mat-sidenav-content>
             <!-- </div> -->
         </mat-sidenav-container>    

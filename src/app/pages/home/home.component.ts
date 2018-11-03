@@ -19,7 +19,7 @@ import { IStory } from 'src/app/vm/story';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css', '../../common-use.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
