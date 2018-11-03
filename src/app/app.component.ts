@@ -14,7 +14,7 @@ import { IProgressPara, InProgressComponent } from './components/in-progress/in-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css', './common-use.css']
 })
 export class AppComponent implements AfterViewInit {
 

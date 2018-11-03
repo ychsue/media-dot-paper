@@ -1,8 +1,8 @@
 <div class="container">
-    <h1>{{(!!pts)?pts.title:'歡迎使用本APP'}}</h1>
-    <div>{{(!!pts)?pts.pTitle:'若需要相關的幫助，請至以下網頁觀賞，謝謝。'}}</div>
-    <h2>{{(!!pts)?pts.s1:'連結網址'}}</h2>
-    <div>
+    <h1 class="flex-item">{{(!!pts)?pts.title:'歡迎使用本APP'}}</h1>
+    <div class="flex-item">{{(!!pts)?pts.pTitle:'若需要相關的幫助，請至以下網頁觀賞，謝謝。'}}</div>
+    <h2 class="flex-item">{{(!!pts)?pts.s1:'連結網址'}}</h2>
+    <div class="flex-item">
         <div class="link"><a #aTutor href="https://memorizeyc.azurewebsites.net/Static/MediaDotPaper/tutorial" target="_blank" (click)="onLinkToUrl(aTutor.href)">{{(!!pts)?pts.l1:'此教學網頁'}}</a></div>
         <div class="link">
             <div *ngIf="(!!platformId===false)||(platformId==='android')">

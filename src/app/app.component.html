@@ -1,39 +1,41 @@
-<div #container class="container">
-    <div #navbar>
+<div #container class="container display-flex-column">
+    <div #navbar class="navbar flex-none">
         <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
     </div>
-    <mat-sidenav-container #sidenavContainer class="content" [style.height.px]="container.offsetHeight-navbar.offsetHeight">
-        <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" [style.width]="sidenavWidth+'px'">
-            <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
-            <mat-tab-group id="sidenavTabs" mat-stretch-tabs [dynamicHeight]="true">
-                <mat-tab>
-                    <ng-template matTabLabel>
-                        <mat-icon [matTooltip]="(!!pts)?pts.chooseAMedia:'選擇一個媒體'">library_music</mat-icon>
-                    </ng-template>
-                    <app-home class="page"></app-home>
-                </mat-tab>
-                <mat-tab>
-                    <ng-template matTabLabel>
-                        <mat-icon [matTooltip]="(!!pts)?pts.infoOfAMedia:'目前媒體的資訊'">music_video</mat-icon>
-                    </ng-template>
-                    <app-story class="page" *ngIf="!!meService.story?.urlOrID===true"></app-story>
-                    <span *ngIf="!!meService.story?.urlOrID===false">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>
-                </mat-tab>
-            </mat-tab-group>
-            <div class="vSeparate" [style.left]="sidenavWidth-2+'px'" touch-action="none" (pointerdown)="onvSepPointerDown($event)"></div>
-            <svg id="resizeWidth" viewBox="0 0 10 20" (pointerdown)="onvSepPointerDown($event)" touch-action="none">
-          <polygon points="0,10 10,0 10,20" style="fill:cadetblue;opacity: 0.5;"/>
-        </svg>
-        </mat-sidenav>
-        <!-- <div class="page"> -->
-        <!-- <router-outlet></router-outlet> -->
-        <mat-sidenav-content class="page" [style.margin-left]="(sidenavMode==='over')?0:(sidenavWidth+'px')" [style.width]="((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'">
-            <app-media-edit class="page" [style.display]="(gv.shownPage===pageType.MediaEdit)?'block':'none'"></app-media-edit>
-            <app-test class="page" [style.display]="(gv.shownPage===pageType.Test)?'block':'none'"></app-test>
-            <app-welcome class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-welcome>
-        </mat-sidenav-content>
-        <!-- </div> -->
-    </mat-sidenav-container>
+    <div class="flex-auto display-flex-row overflow-y-auto">
+        <mat-sidenav-container #sidenavContainer class="flex-auto display-flex-row">
+            <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" [style.width]="sidenavWidth+'px'">
+                <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
+                <mat-tab-group id="sidenavTabs" mat-stretch-tabs [dynamicHeight]="true">
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <mat-icon [matTooltip]="(!!pts)?pts.chooseAMedia:'選擇一個媒體'">library_music</mat-icon>
+                        </ng-template>
+                        <app-home class="flex-auto display-flex-column"></app-home>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template matTabLabel>
+                            <mat-icon [matTooltip]="(!!pts)?pts.infoOfAMedia:'目前媒體的資訊'">music_video</mat-icon>
+                        </ng-template>
+                        <app-story class="flex-auto display-flex-column" *ngIf="!!meService.story?.urlOrID===true"></app-story>
+                        <span *ngIf="!!meService.story?.urlOrID===false">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>
+                    </mat-tab>
+                </mat-tab-group>
+                <div class="vSeparate" [style.left]="sidenavWidth-2+'px'" touch-action="none" (pointerdown)="onvSepPointerDown($event)"></div>
+                <svg id="resizeWidth" viewBox="0 0 10 20" (pointerdown)="onvSepPointerDown($event)" touch-action="none" [style.left]="(sidenavWidth-20)+'px'" >
+              <polygon points="0,10 10,0 10,20" style="fill:cadetblue;opacity: 0.5;"/>
+            </svg>
+            </mat-sidenav>
+            <!-- <div class="page"> -->
+            <!-- <router-outlet></router-outlet> -->
+            <mat-sidenav-content id="sidenav-content" [style.width]="((sidenavMode==='over'||(sidenav.opened===false))?container.clientWidth:(container.clientWidth-sidenavWidth))+'px'">
+                <app-media-edit class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.MediaEdit)?'flex':'none'"></app-media-edit>
+                <app-test class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.Test)?'flex':'none'"></app-test>
+                <app-welcome class="flex-auto display-flex-column" [style.display]="(gv.shownPage===pageType.Home)?'flex':'none'"></app-welcome>
+            </mat-sidenav-content>
+            <!-- </div> -->
+        </mat-sidenav-container>    
+    </div>
     <div class="justPointerEvents" *ngIf="gv.isJustPointerEvents"></div>
     <app-in-progress #inProgress *ngIf="isShowProgress" class="inProgress" [title]="progressPara.title" [message]="progressPara.message" [sMode]="progressPara.sMode"></app-in-progress>
 </div>

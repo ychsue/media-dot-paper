@@ -30,6 +30,7 @@
   <mat-menu #langMenu="matMenu">
     <button mat-menu-item *ngFor="let each of ptsService.langList" 
     (click)="ptsService.loadPTS$$(each.isoCode,true)"
-    [class.isSelect]="each.isoCode===ptsService.langCode">{{each.name}}</button>
+    [class.isSelect]="each.isoCode===ptsService.langCode"
+    [disableRipple]="true">{{each.name}}</button>
   </mat-menu>
 </nav>
