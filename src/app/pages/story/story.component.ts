@@ -17,7 +17,7 @@ import { DialogComponent, DialogType } from 'src/app/dialog/dialog.component';
 @Component({
   selector: 'app-story',
   templateUrl: './story.component.html',
-  styleUrls: ['./story.component.css']
+  styleUrls: ['./story.component.css', '../../common-use.css']
 })
 export class StoryComponent implements OnInit {
 

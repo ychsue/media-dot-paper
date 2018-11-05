@@ -1,3 +1,16 @@
+* [2018-11-5 Mon] Modify draglist & story components
+Well, as mentioned in [[https://stackoverflow.com/questions/16109687/overlay-hover-a-div-in-flexbox-container-div][this StackOverflow's Q&A]], I can overlay the whole part of flex element by
+#+begin_src css
+.parent {
+    position: relative;
+}
+.overlay=child {
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    width: 100%;
+}
+#+end_src
+
 * [2018-11-3 Sat] home, welcome and app components are modified for display:flex;.
 At this moment, I tested it in ~Android 4.4~, ~IE11~, ~Edge~ and ~Chrome~. They looks fine.
 I'm not sure what will it be when I test it in iOS and iMac.

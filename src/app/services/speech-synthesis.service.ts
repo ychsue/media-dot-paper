@@ -36,7 +36,10 @@ export class SpeechSynthesisService {
       await this.device.onDeviceReady.pipe(first()).toPromise();
       voices = await window['TTS'].getVoices() as SpeechSynthesisVoice[];
     } else {
-      if (!!window['speechSynthesis'] === false) {return; } // For the case without speechSynthesis
+      if (!!window['speechSynthesis'] === false) {
+        this.voices = [];
+        return;
+      } // For the case without speechSynthesis
       // * [2018-08-23 11:05] Try 5 times to get the voices
       await interval(100).pipe(take(5),
         takeWhile(_ => {

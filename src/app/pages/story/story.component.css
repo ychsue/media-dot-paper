@@ -1,23 +1,8 @@
-.container {
-    display: grid;
-    height: 100%;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: 'main' 'des';
-}
-
-.nameETC {
-    grid-area: main;
-}
-
-mat-form-field {
-    width: 90%;
-}
-
-.description {
-    grid-area: des;
-    height: 100%;
-}
-
+.description,
 .description ::ng-deep [class^=mat-form-field-wrapper], .description ::ng-deep [class^=mat-form-field-flex], .description ::ng-deep [class^=mat-form-field-infix], textarea {
-    height: 100%;
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
 }

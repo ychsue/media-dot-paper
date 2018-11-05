@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="nameETC">
+<div class="flex-auto display-flex-column" style="margin: 0 5%;">
+    <div class="flex-none display-flex-column">
         <div class="btns">
             <button mat-icon-button (click)="meService.onSaveStory$$()" *ngIf="meService.story.viewTime===0">
           <mat-icon class="mat-18">archive</mat-icon>
@@ -41,7 +41,7 @@
         </mat-form-field>
     </div>
 
-    <mat-form-field class="description">
+    <mat-form-field class="description flex-110">
         <textarea matInput [placeholder]="(!!pts)?pts.description:'描述'" [(ngModel)]="meService.story.description">
     </textarea>
     </mat-form-field>
