@@ -1,3 +1,8 @@
+* [2018-11-5 Mon] For dradlist.component, I changed to make the position of ~backDel~ to be ~absolute~.
+Because the button one has texts so that its height will be changed when some texts inside.
+So, this time, I make the position ~backDel~ one to be fixed and the button one is responded to the flex.
+It works fine.
+
 * [2018-11-5 Mon] Modify draglist & story components
 Well, as mentioned in [[https://stackoverflow.com/questions/16109687/overlay-hover-a-div-in-flexbox-container-div][this StackOverflow's Q&A]], I can overlay the whole part of flex element by
 #+begin_src css
