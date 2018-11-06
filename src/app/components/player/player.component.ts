@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone, AfterViewChecked, EventEmitter, Output } from '@angular/core';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { Subject, interval, from, fromEvent } from 'rxjs';
@@ -14,7 +14,11 @@ import { DeviceService } from '../../services/device.service';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements OnInit, OnDestroy {
+export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
+
+  @Output()
+  heightChange: EventEmitter<number> = new EventEmitter<number>();
+  private _height = 0;
 
   pType = PlayerType;
   unSubscribed = new Subject<boolean>();
@@ -40,6 +44,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   isInited = false;
   _msInterval = 200;
 
+  @ViewChild('container')
+  ngContainer: ElementRef;
+  containerEle: HTMLDivElement;
+
   constructor(public meService: MediaEditService, private YTservice: YoutubeService,
     private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
   }
@@ -48,6 +56,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     const self = this;
     this.videoEle = this.ngVideo.nativeElement;
     this.youtubeEle = this.ngYoutube.nativeElement;
+    this.containerEle = this.ngContainer.nativeElement;
     this.eventTriggers();
     this.eventListeners();
     // * [2018-06-18 20:57] because this component might be initialized after the MEState.readyForPlayer, I need to deal with this situation
@@ -64,6 +73,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unSubscribed.next(true);
     this.unSubscribed.complete();
+  }
+
+  ngAfterViewChecked(): void {
+    const ele = this.containerEle;
+    // * [2018-11-06 11:38] Check height
+    if (!!ele && (ele.offsetHeight !== this._height)) {
+      this._height = ele.offsetHeight;
+      this.heightChange.emit(this._height);
+    }
   }
 
   getCurrentTime(): number {

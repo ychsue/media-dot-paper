@@ -1,3 +1,10 @@
+* [2018-11-6 Tue] Provide the playerComponent a heightChange event
+As mentioned in [[https://stackoverflow.com/questions/40776351/what-is-the-best-way-to-listen-for-component-resize-events-within-an-angular2-co][this StackOverflow's Q&A]], a component doesn't has a ~resize~ event.
+Although they suggested some libraries, I don't wanna use them at this moment.
+Well, I create a ~heightChange~ event for my playerComponent and check it in its ~ngAfterViewChecked~ method.
+It works, but I'm a little worry about the time consumed by it.
+Fortunately, it looks fine. Hope so.
+
 * [2018-11-5 Mon] For dradlist.component, I changed to make the position of ~backDel~ to be ~absolute~.
 Because the button one has texts so that its height will be changed when some texts inside.
 So, this time, I make the position ~backDel~ one to be fixed and the button one is responded to the flex.
