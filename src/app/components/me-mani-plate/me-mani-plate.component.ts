@@ -10,7 +10,7 @@ import { PageTextsService } from '../../services/page-texts.service';
 @Component({
   selector: 'app-me-mani-plate',
   templateUrl: './me-mani-plate.component.html',
-  styleUrls: ['./me-mani-plate.component.css'],
+  styleUrls: ['./me-mani-plate.component.css', '../../common-use.css'],
   animations: [
     trigger('changeFrame', [
       transition('* => *', [

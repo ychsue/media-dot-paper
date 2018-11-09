@@ -3,44 +3,22 @@
     position: relative;
     align-self: center;
     height: 40px;
-    display:grid;
-}
-
-.slideContainer {
-    align-items: center;
-    /* display: flex; */
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: 1fr;
-    grid-template-areas: "start center end";
-}
-
-.slideStart {
-    grid-area: start
 }
 
 .slidePart {
-    display: grid;
     position: relative;
     height: 100%;
     align-items: center;
-    grid-area: center;
     overflow: hidden;
     min-width: 0;
-}
-
-.slideEnd {
-    grid-area: end
 }
 
 .slideCanvas {
     order: 0;
     z-index: 0;
-    grid-column: 1;
-    grid-row: 1;
     object-fit: fill;
     width: 100%;
-    height: 100%;
+    flex: 1 1 0px;
     position: relative;
     transform-origin: left;
 }

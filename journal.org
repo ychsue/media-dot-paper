@@ -1,3 +1,16 @@
+* [2018-11-9 Fri] When ytPlayer is ready, its getDuration() might still give you '0'
+For this case, I tried to capture its duration multiple times if it returns 0.
+And I also check the duration when the user seekTo some time so that the duration will be updated.
+
+* [2018-11-7 Wed] I'm dealing with the me-mani-plate part.
+1. In ~heightChange~ event of ~app-player~ of ~media-edit.component.html~, you can find that I call ~cdr.detectChanges()~.
+   It is used to tell Angular that the height of ~app-player~ is changed so that its siblines will not throw an exception of ~ExpressionChangedAfterItHasBeenCheckedError~.
+   Thanks to [[https://github.com/angular/angular/issues/17572][ver-1000000 wrote at Jun 19, 2017 at github]].
+2. The error of ~Failed to execute 'postMessage' on 'DOMWindow': The target origin (https://....) provided does not match the recipient window's origin ('https://...')~
+can be washed out as long as I run ~new YT.player~ in the ~load~ event of the iFrame which is mentioned in [[https://github.com/davidjbradshaw/iframe-resizer/issues/443][the reply of rafaelbiten at Sep. 25, 2017 at github]].
+3. By ~[ngClass]~ and ~[ngStyle]~, the emittion of ~ExpressionChangedAfterItHasBeenCheckedError~ is less than ~[class.NAME]~ and ~[style.NAME]~.
+  Perhaps the checking of ~[ngClass]~ and ~[ngStyle]~ are earlier.
+
 * [2018-11-6 Tue] Provide the playerComponent a heightChange event
 As mentioned in [[https://stackoverflow.com/questions/40776351/what-is-the-best-way-to-listen-for-component-resize-events-within-an-angular2-co][this StackOverflow's Q&A]], a component doesn't has a ~resize~ event.
 Although they suggested some libraries, I don't wanna use them at this moment.

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
   MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
@@ -75,7 +75,8 @@ import { SbvService } from './services/sbv.service';
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
+    NoopAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,

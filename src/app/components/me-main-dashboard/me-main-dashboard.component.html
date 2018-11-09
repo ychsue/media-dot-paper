@@ -1,15 +1,7 @@
-<div #container class='container'>
-  <!-- <button mat-icon-button (click)="onPlay()" *ngIf="meService.state !== mEState.playing"> -->
-  <!-- <button mat-icon-button (click)="onPlay()">
-      <mat-icon class="mat-18">play_arrow</mat-icon>
-  </button> -->
-  <!-- <button mat-icon-button (click)="onPause()" *ngIf="meService.state===mEState.playing"> -->
-  <!-- <button mat-icon-button (click)="onPause()">
-      <mat-icon class="mat-18">pause</mat-icon>
-  </button> -->
-  <div class="slideContainer">
-    <span class="slideStart">0.0</span>
-    <div #slidePart class="slidePart" (click)="onChangeCurrentTime($event, slidePart)" >
+<div #container class='container display-flex-column'>
+  <div class="flex-auto display-flex-row">
+    <span class="flex-none">0.0</span>
+    <div #slidePart class="flex-auto display-flex-column" (click)="onChangeCurrentTime($event, slidePart)" >
       <svg #slideCanvas class="slideCanvas" [attr.viewBox]="'0 0 '+meService.duration+' '+'1'" [attr.preserveAspectRatio]="'none'">
         <rect *ngFor="let frame of meService.story.frames"
         [style.fill]="'rgba('+frame.colorR+','+frame.colorG+','+frame.colorB+','+((!!frame.colorA)?frame.colorA:0.9)+')'"
@@ -25,6 +17,6 @@
         <rect [style.fill]="'blue'" [attr.x]="((meService.currentTime>0)?meService.currentTime:0)" y="0" [attr.width]="(!!container.clientWidth)?2*meService.duration/container.clientWidth:1" height="100%"></rect>
       </svg>
     </div>
-    <span class="slideEnd">{{meService.duration| number: '1.1-1'}}</span>
+    <span class="flex-none">{{meService.duration| number: '1.1-1'}}</span>
   </div>
 </div>

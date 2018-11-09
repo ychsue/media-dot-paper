@@ -5,7 +5,7 @@ import { MessageService } from '../../services/message.service';
 @Component({
   selector: 'app-me-main-dashboard',
   templateUrl: './me-main-dashboard.component.html',
-  styleUrls: ['./me-main-dashboard.component.css']
+  styleUrls: ['./me-main-dashboard.component.css', '../../common-use.css']
 })
 export class MeMainDashboardComponent implements OnInit {
 
@@ -42,7 +42,7 @@ export class MeMainDashboardComponent implements OnInit {
     // * [2018-09-12 11:21] Used to avoid to seekTime when it is not ready
     const self = this;
     const state = this.meService.state;
-    console.log(state);
+    // console.log(state);
     if (await self.meService.canGetCurrentTime$$() === false  ) {
           self.msg.alert('Sorry, it is not ready. Please wait.');
         return;

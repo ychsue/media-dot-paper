@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
   selector: 'app-in-progress',
   templateUrl: './in-progress.component.html',
-  styleUrls: ['./in-progress.component.css']
+  styleUrls: ['./in-progress.component.css', '../../common-use.css']
 })
 export class InProgressComponent implements OnInit {
   static mode = {det: 'determinate', indet: 'indeterminate'};

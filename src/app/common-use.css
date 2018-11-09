@@ -1,11 +1,6 @@
-/* #region     For usually used */
 .display-flex-column {
     display: flex;
     flex-direction: column;
-}
-
-.width-100 {
-    width: 100%;
 }
 
 .display-flex-row {
@@ -28,11 +23,22 @@
     /* 0 0 auto; */
 }
 
+.min-height-0 {
+    min-height: 0;
+}
+
 .overflow-y-auto {
     overflow-y: auto;
 }
 
-.min-height-0 {
-    min-height: 0;
+.position-relative {
+    position: relative;
 }
-/* #endregion     For usually used */
+
+.position-absolute {
+    position: absolute;
+}
+
+.width-100 {
+    width: 100%;
+}

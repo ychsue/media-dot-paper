@@ -10,5 +10,11 @@
     flex-grow: 1;
     max-height: 120px;
     overflow-y: auto;
-    display: inline;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+app-swap-icon {
+    height: 40px;
+    margin: 0;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, fromEvent } from 'rxjs';
 import { first } from 'rxjs/operators';
 // import 'rxjs/add/operator/first';
 import { MessageService, MessageTypes } from './message.service';
@@ -70,24 +70,26 @@ export class YoutubeService {
       return;
     }
     const self = this;
-    uiEle.src = `https://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1&playsinline=1`;
-    if (!!this.ytPlayer && (this.ytPlayer.getIframe() === uiEle)) {
-      this.ytPlayer.loadVideoById(VId);
-    } else {
-      if (!!this.ytPlayer) {
-        this.ytPlayer.destroy(); // ******************** TODO *****************************
-      }
-      this.ytPlayer = new YT.Player(uiEle, {
-        events: {
-          'onReady': (ev) => {self.onReady.next(ev); },
-          'onStateChange': (ev) => {self.onStateChange.next(ev); },
-          'onError': (ev) => {self.onError.next(ev); },
-          'onApiChange': (ev) => {
-            // ************************* TODO for caption******************************
-            // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));
-          }
+    fromEvent(uiEle, 'load').subscribe(_ => {
+      if (!!self.ytPlayer && (self.ytPlayer.getIframe() === uiEle)) {
+        self.ytPlayer.loadVideoById(VId);
+      } else {
+        if (!!self.ytPlayer) {
+          self.ytPlayer.destroy(); // ******************** TODO *****************************
         }
-      });
-    }
+        self.ytPlayer = new YT.Player(uiEle, {
+          events: {
+            'onReady': (ev) => {self.onReady.next(ev); },
+            'onStateChange': (ev) => {self.onStateChange.next(ev); },
+            'onError': (ev) => {self.onError.next(ev); },
+            'onApiChange': (ev) => {
+              // ************************* TODO for caption******************************
+              // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));
+            }
+          }
+        });
+      }
+    });
+    uiEle.src = `https://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1&playsinline=1`;
   }
 }

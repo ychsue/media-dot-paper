@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone, AfterViewChecked, EventEmitter, Output } from '@angular/core';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { YoutubeService } from 'src/app/services/youtube.service';
-import { Subject, interval, from, fromEvent } from 'rxjs';
-import { takeUntil, map, distinctUntilChanged, merge, share } from 'rxjs/operators';
+import { Subject, interval, from, fromEvent, of } from 'rxjs';
+import { takeUntil, map, distinctUntilChanged, merge, share, take, takeWhile, concat } from 'rxjs/operators';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
@@ -12,7 +12,7 @@ import { DeviceService } from '../../services/device.service';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css']
+  styleUrls: ['./player.component.css', '../../common-use.css']
 })
 export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
@@ -146,8 +146,8 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     self.meService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
       map(_ => {
-        self.checkYoutubStateAndSetState();
-        return self.getCurrentTime();
+        const yState = self.checkYoutubStateAndSetState();
+        return ((self.meService.story.meType === self.pType.youtubeID) && (yState === -2)) ? -1 : self.getCurrentTime();
       }),
       distinctUntilChanged(),
       share()
@@ -211,13 +211,13 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
     .pipe( takeUntil(self.unSubscribed))
     .subscribe(_ => {
-      self.meService.duration = self.videoEle.duration;
+      self.meService.onPlayerAction.next(playerAction.getDuration);
       self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
     });
     self.YTservice.onReady
     .pipe( takeUntil(self.unSubscribed))
     .subscribe(_ => {
-      self.meService.duration = self.YTservice.ytPlayer.getDuration();
+      self.meService.onPlayerAction.next(playerAction.getDuration);
       self.meService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
     });
 
@@ -227,71 +227,99 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     .subscribe((t) => {
       const meType = self.meService.story.meType;
       if (meType === self.pType.url || meType === self.pType.file) {
-        switch (t) {
-          case playerAction.play:
-          self.videoEle.play();
-          break;
-          case playerAction.pause:
-          self.videoEle.pause();
-          break;
-          case playerAction.seek:
-          self.videoEle.currentTime = self.meService.seekTime;
-          break;
-          case playerAction.getDuration:
-          self.meService.duration = self.videoEle.duration;
-          break;
-          case playerAction.getVolume:
-          self.meService._volume = self.videoEle.volume;
-          break;
-          case playerAction.setVolume:
-          self.videoEle.volume = self.meService.volume;
-          break;
-          case playerAction.getPlaybackRate:
-          self.meService._playbackRate = self.videoEle.playbackRate;
-          break;
-          case playerAction.setPlaybackRate:
-          self.videoEle.playbackRate = self.meService.playbackRate;
-          break;
-          case playerAction.getAllowedPlaybackRate:
-          self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
-          break;
-          default:
-          break;
+        try {
+          switch (t) {
+            case playerAction.play:
+            self.videoEle.play();
+            break;
+            case playerAction.pause:
+            self.videoEle.pause();
+            break;
+            case playerAction.seek:
+            self.videoEle.currentTime = self.meService.seekTime;
+            break;
+            case playerAction.getDuration:
+            self.meService.duration = self.videoEle.duration;
+            break;
+            case playerAction.getVolume:
+            self.meService._volume = self.videoEle.volume;
+            break;
+            case playerAction.setVolume:
+            self.videoEle.volume = self.meService.volume;
+            break;
+            case playerAction.getPlaybackRate:
+            self.meService._playbackRate = self.videoEle.playbackRate;
+            break;
+            case playerAction.setPlaybackRate:
+            self.videoEle.playbackRate = self.meService.playbackRate;
+            break;
+            case playerAction.getAllowedPlaybackRate:
+            self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+            break;
+            default:
+            break;
+          }
+        } catch (error) { // For IE11
+          console.log("Player.Component error at videoEle: " + error.message);
         }
       } else if (meType === self.pType.youtubeID) {
         const ytPlayer = self.YTservice.ytPlayer;
         if (!!ytPlayer === false) {return; }
         switch (t) {
           case playerAction.play:
-          ytPlayer.playVideo();
+          if (!!ytPlayer.playVideo) {
+            ytPlayer.playVideo();
+          }
           break;
           case playerAction.pause:
-          ytPlayer.pauseVideo();
+          if (!!ytPlayer.pauseVideo) {
+            ytPlayer.pauseVideo();
+          }
           break;
           case playerAction.seek:
           if (!!ytPlayer.seekTo) {
             ytPlayer.seekTo(self.meService.seekTime, true);
+            const duration = ytPlayer.getDuration();
+            if (self.meService.duration !== duration) {
+              self.meService.duration = duration;
+            }
           }
           break;
           case playerAction.getDuration:
-          if (!!ytPlayer && !!ytPlayer.getDuration) {
-            self.meService.duration = ytPlayer.getDuration();
+          if (!!ytPlayer.getDuration) {
+            of(0).pipe(concat(interval(500))).pipe(take(5), takeWhile(_ => {
+              const duration = ytPlayer.getDuration();
+              if (!!duration) {
+                self.meService.duration = duration;
+              }
+              return (!!duration === false);
+            })).subscribe(_ => {});
           }
           break;
           case playerAction.getVolume:
-          self.meService._volume = ytPlayer.getVolume() / 100;
+          if (!!ytPlayer.getVolume) {
+            self.meService._volume = ytPlayer.getVolume() / 100;
+          }
           break;
           case playerAction.setVolume:
-          ytPlayer.setVolume(self.meService.volume * 100);
+          if (!!ytPlayer.setVolume) {
+            ytPlayer.setVolume(self.meService.volume * 100);
+          }
           break;
           case playerAction.getPlaybackRate:
-          self.meService._playbackRate = ytPlayer.getPlaybackRate();
+          if (!!ytPlayer.getPlaybackRate) {
+            self.meService._playbackRate = ytPlayer.getPlaybackRate();
+          }
           break;
           case playerAction.setPlaybackRate:
-          ytPlayer.setPlaybackRate(self.meService.playbackRate);
+          if (!!ytPlayer.setPlaybackRate) {
+            ytPlayer.setPlaybackRate(self.meService.playbackRate);
+          }
           break;
           case playerAction.getAllowedPlaybackRate:
-          self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
+          if (!!ytPlayer.getAvailablePlaybackRates) {
+            self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
+          }
           break;
           default:
           break;

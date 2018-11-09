@@ -1,22 +1,23 @@
 
 .container {
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: 'center';
+    display: flex;
+    position: relative;
 }
 
 button {
     touch-action: none;
 }
 
-.eachButton, .delBK {
-    grid-area: center;
-    /* grid-column: 1;
-    grid-row: 1; */
+.eachButton {
+    flex: 1 1 auto;
 }
 
 .delBK {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: red;
     color: white;
 }

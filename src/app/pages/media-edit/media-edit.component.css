@@ -1,28 +1,11 @@
-.container {
-    display: grid;
-    /* grid-template-columns: 1fr 200px; */
-    grid-template-rows: auto 1fr auto auto;
-    grid-template-areas: "header   side" 
-                         "main     side"
-                         "cSection side" 
-                         "cMain    side";
-    height: 100%;
-    width: 100%;
+.main-overlay {
+    position: absolute;
 }
 
-header {
-    grid-area: header;
-}
-
-.main {
-    grid-area: main;
-    overflow: hidden;
-}
 
 .sideView {
-    grid-area: side;
-    height: 100%;
     overflow-y: auto;
+    position: relative;
 }
 
 app-player {
@@ -33,23 +16,17 @@ app-me-mani-plate {
     z-index: 1;
 }
 
-.dashboardSection {
-    grid-area: cSection;
-}
-
-.dashboardMain {
-    grid-area: cMain;
-}
-
 #reSideWidth {
     position: absolute;
     top:50%;
+    width: 20px;
     height: 40px;
-    z-index: 2;
+    z-index: 3;
 }
 
 #vSideSep {
     position: absolute;
+    top: 0;
     height: 100%;
     width: 2px;
     background-color: black;

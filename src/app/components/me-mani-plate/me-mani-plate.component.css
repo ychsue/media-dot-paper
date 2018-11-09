@@ -2,98 +2,65 @@
     touch-action: none;
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas: "main" "slider";
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .main {
-    grid-area: main;
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: "main-up" "main-play" "main-down";
-    align-items: center;
-    justify-items: center;
     min-height: 0;
     min-width: 0;
+    align-items: stretch;
 }
 
-.main-up {
-    grid-area: main-up;
-    display: grid;
-    grid-template-columns: 1fr;
+.main-up, .main-play {
     z-index: 1;
+    /* min-height: 0; */
 }
 
-.main-play {
-    grid-area: main-play;
-    z-index: 1;
+.main-play{
+    align-items: center;
+    justify-content: center;
 }
 
 .main-down {
-    grid-area: main-down;
-    width: 100%;
-    height: 100%;
-    align-self: baseline;
-    display: grid;
+    align-self: stretch;
 }
 
 .slider {
-    grid-area: slider;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
     background-color: white;
     border-radius: 20px;
     align-items: center;
+    z-index: 3;
 }
 
-mat-slider {
-    grid-row: 1;
-    grid-column: 2;
-}
-
-.slider-start {
-    grid-row: 1;
-    grid-column: 1;
-    /* margin: 4px; */
-}
-
-.slider-end {
-    grid-row: 1;
-    grid-column: 3;
-    /* margin: 4px; */
-}
-
+/* #region For slider inputs and currentTime */
 .upCenter,
 .upLeft,
 .upRight {
-    width: 30%;
-    top: -100%;
-    position: relative;
-    grid-row: 1;
+    top: -24px;
+    position: absolute;
     z-index: 2;
 }
 
 .upLeft {
-    grid-column: 1/3;
+    width: 30%;
+    left:0;
 }
 
 .upCenter {
-    grid-column: 2;
-    justify-self: center;
+    left:0; right:0;
+    width: 100%;
     text-shadow: 3px 0px 5px black, -3px 0px 5px black, 0px 3px 5px black, 0px -3px 5px black;
     text-align: center;
     color: white;
 }
 
 .upRight {
-    grid-column: 2/4;
+    width: 30%;
+    right:0;
     justify-self: right;
 }
+/* #endregion For slider inputs and currentTime */
+
 
 .largeBtn {
     width: 120px;
@@ -120,11 +87,8 @@ mat-slider {
 .subtitle-shadow {
     text-align: center;
     min-height: 20px;
-    /* width: 100%;
-    height: 100%; */
+    align-self: stretch;
     background-color: white;
-    grid-column-start: 1;
-    grid-row-start: 1;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -148,18 +112,16 @@ mat-slider {
 }
 
 .setSS {
-    grid-area: main-up;
-    grid-row-start: main-up;
-    grid-row-end: main-play;
     background-color: lightyellow;
     width: 100%;
-    height: 100%;
     z-index: 2;
+    flex: 2 1 0px;
 }
 
 #htmlSubtitle {
-    grid-row-start: 1;
-    grid-row-end: 4;
+    bottom: 0;
+    left: 0;
+    right: 0;
     align-self: flex-end;
     padding: 0 20px 40px 12px;
 }

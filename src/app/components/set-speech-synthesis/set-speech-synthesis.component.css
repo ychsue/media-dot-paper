@@ -1,7 +1,7 @@
 .close {
     position: absolute;
     right: 0;
-    z-index: 1;
+    z-index: 4;
 }
 
 .selVoiceContainer, .utterContainer {
@@ -17,11 +17,9 @@
 
 .container {
     height: 100%;
-    display: grid;
     justify-content: center;
     min-width: 0;
     flex-wrap: wrap;
-    grid-template-rows: auto auto 1fr;
 }
 
 

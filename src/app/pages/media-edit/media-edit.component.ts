@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild, AfterViewInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MediaEditService, MEState, playerAction } from '../../services/media-edit.service';
 import { trigger, state, style, transition, animate } from '../../../../node_modules/@angular/animations';
@@ -12,7 +12,7 @@ import { utterType, mediaVPType, mediaPlayType } from 'src/app/vm/story-g-settin
 @Component({
   selector: 'app-media-edit',
   templateUrl: './media-edit.component.html',
-  styleUrls: ['./media-edit.component.css'],
+  styleUrls: ['./media-edit.component.css', '../../common-use.css'],
   animations: [
     trigger('flyInOut', [
       state('in', style({transform: 'translateY(0)'})),
@@ -29,12 +29,14 @@ import { utterType, mediaVPType, mediaPlayType } from 'src/app/vm/story-g-settin
 export class MediaEditComponent implements OnInit {
 
   sideWidth = 250;
+  playerHeight = 100;
 
   changeSideWidth$ = new Subject<PointerEvent>();
 
 
   constructor(/*private route: ActivatedRoute, */
-    public meService: MediaEditService, private SSService: SpeechSynthesisService,
+    public meService: MediaEditService, public cdr: ChangeDetectorRef,
+    private SSService: SpeechSynthesisService,
     private device: DeviceService, private gv: GvService) {
   }
 
