@@ -8,7 +8,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
   MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
   MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
-  MatTooltipModule, MatSelectModule, MatSlideToggleModule, MatExpansionModule, MatProgressSpinnerModule} from '@angular/material';
+  MatTooltipModule, MatSelectModule, MatSlideToggleModule, MatExpansionModule,
+  MatProgressSpinnerModule, MatCheckboxModule} from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 // import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -95,7 +96,8 @@ import { SbvService } from './services/sbv.service';
     MatSelectModule,
     MatSlideToggleModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [MessageService, MediaEditService, YoutubeService, GvService, DbService, DeviceService
     , FsService, ClipboardService, PageTextsService, AdService, SpeechSynthesisService, CrossCompService,

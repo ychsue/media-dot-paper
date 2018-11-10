@@ -18,3 +18,22 @@
         <button mat-raised-button (click)="onLoadNumber()">{{(!!pts)?pts.load:'載入'}}</button>
     </div>
 </div>
+
+<div *ngIf="data.dType===dialogType.startOrEnd" class="display-flex-column startOrEnd">
+    <h3>T = {{data.number|number:'1.0-3'}} 
+        <button mat-raised-button mat-icon-button (click)="data.number=data.number+0.1">＋</button>
+        <button mat-raised-button mat-icon-button (click)="data.number=data.number-0.1">－</button>
+    </h3>
+    <div class="display-flex-row startOrEnd">
+        <mat-checkbox [(ngModel)]="whichOne.start"  [ngClass]="{'hilite':whichOne.start}"color="primary">{{((whichOne.start)?data.number:data.startEnd[0])|number:'1.0-3'}}</mat-checkbox>
+        <button mat-icon-button mat-raised-button class="margin-12" [style.background-color]="'rgba('+data.aRGB.r+','+data.aRGB.g+','+data.aRGB.b+','+data.aRGB.a+')'"
+            (click)="onStartOrEnd()"
+        >
+            {{data.ith}}
+        </button>
+        <mat-checkbox [(ngModel)]="whichOne.end" color="primary" [ngClass]="{'hilite':whichOne.end}" >{{((whichOne.end)?data.number:data.startEnd[1])|number:'1.0-3'}}</mat-checkbox>
+    </div>
+    <div class="button">
+        <button mat-raised-button (click)="onStartOrEnd()">{{(!!pts)?pts.load:'載入'}}</button>
+    </div>
+</div>

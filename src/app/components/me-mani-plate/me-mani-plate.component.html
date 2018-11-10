@@ -24,7 +24,7 @@
         </div>
 
         <div class="main-play flex-110 display-flex-row" [@hideShow]="HideShow" *ngIf="isSSShown===false">
-            <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="startChanged$.next($event)">
+            <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
             <button mat-icon-button mat-raised-button [ngClass]="{'largeBtn':!meService.isSideMani&&(main.offsetHeight>450)}" (click)="onPlayPause()">
@@ -36,9 +36,22 @@
                     <rect x="6" y="2" width="2" height="6" style="fill:red"/>
                 </svg>
             </button>
-            <button id="btnEnd" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].end" (pointerdown)="endChanged$.next($event)">
+            <button id="btnEnd" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].end" (pointerdown)="setShowDT($event,true,false);endChanged$.next($event)">
                 <mat-icon class="mat-18">skip_next</mat-icon>
             </button>
+
+            <h3 class="deltaT aniUpHide"
+                [style.color]="(forDenoteDt.dt>0)?'blue':'red'"
+                [style.top.px]="forDenoteDt.y-100"
+                [style.left.px]="forDenoteDt.x"
+                [style.display]="(forDenoteDt.isHide)?'none':'inline'"
+                >{{((forDenoteDt.dt>0)?'+':'')+(forDenoteDt.dt|number:'1.0-1')}}</h3>
+            <h2 class="deltaT"
+                [style.color]="(forDenoteDt.dt>0)?'blue':'red'"
+                [style.top.px]="forDenoteDt.y-80"
+                [style.left.px]="forDenoteDt.x"
+                [style.display]="(forDenoteDt.isHide)?'none':'inline'"
+            >{{(forDenoteDt.isStartBtn)?meService.story.frames[meService.story.iFrame].start:meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</h2>
         </div>
 
         <app-set-speech-synthesis class="setSS" *ngIf="isSSShown" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="isSSShown=false" [@hideShow]="HideShow" [@flyInOut]="isSSShown" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>

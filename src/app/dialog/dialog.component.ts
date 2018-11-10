@@ -6,11 +6,13 @@ import { concat } from 'rxjs/operators';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  styleUrls: ['./dialog.component.css', '../common-use.css']
 })
 export class DialogComponent implements OnInit {
 
   dialogType = DialogType;
+
+  whichOne: SetStartEnd = {start: false, end: false};
 
   pts: IDialogComp;
 
@@ -33,12 +35,20 @@ export class DialogComponent implements OnInit {
     const num = Number(this.data.number);
     this.dialogRef.close((Number.isNaN(num)) ? 0 : num);
   }
+
+  onStartOrEnd() {
+    const which = Object.assign({}, this.whichOne);
+    this.dialogRef.close(which);
+    this.whichOne.start = false;
+    this.whichOne.end = false;
+  }
 }
 
 export enum DialogType {
   inputUrl = 0,
   alert = 1,
-  inputNum = 2
+  inputNum = 2,
+  startOrEnd = 3,
 }
 
 export interface DialogData {
@@ -46,4 +56,12 @@ export interface DialogData {
   url?: string;
   msg?: string;
   number?: number;
+  ith?: number; // startOrEnd
+  aRGB?: {a: number, r: number, g: number, b: number};
+  startEnd?: [number, number];
+}
+
+export interface SetStartEnd {
+  start: boolean;
+  end: boolean;
 }

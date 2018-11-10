@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Subscription, Subject, of } from 'rxjs';
+import { Subscription, Subject, of, timer } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge, pairwise } from 'rxjs/operators';
+import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge, pairwise, count, last } from 'rxjs/operators';
 import { GvService } from '../../services/gv.service';
 
 @Component({
@@ -22,6 +22,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
 
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
+  @Output() hold = new EventEmitter<number>();
 
   deltaY: number;
   maxSpeed = 0.5;
@@ -50,7 +51,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     const self = this;
     self.deltaY = 0;
     // * [2018-10-05 11:50] Rewrite the event listener
-    let count = 0;
+    let nCount = 0;
     // When Pointer is pressed, get its time and let this App just capture the pointer events.
     this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
     .subscribe(ev => {
@@ -64,7 +65,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
         return;
       } else {
         self.isActivating = false;
-        count = 0;
+        nCount = 0;
         if (Math.abs(self.deltaY) / (ev.timeStamp - self._pointerDownTime) > self.maxSpeed) {
           self.delete.next();
         } else {
@@ -87,8 +88,8 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       concatAll())
     .subscribe(arr => {
       if (arr[0].buttons === 0 && arr[1].buttons === 0) {
-        if (++count > 10) {
-          count = 0;
+        if (++nCount > 10) {
+          nCount = 0;
           self.device.onNoButtonPressed$.next(true);
         }
         return;
@@ -96,6 +97,20 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       // Move the list
       self.deltaY += arr[1].screenY - arr[0].screenY;
     });
+
+    // * [2018-11-09 14:30] Listen to Hold event
+    self.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    .pipe(
+      map(_ => self.device.onPointermove$.pipe(
+        merge(self.device.onPointerup$),
+        takeUntil(timer(500).pipe(merge(self.device.onPointerup$.pipe(delay(10))))),
+        count(x => !!x)
+        )),
+        concatAll()).subscribe(n => {
+          if (n === 0) {
+            self.hold.next(self.index);
+          }
+        });
   }
 
   ngOnDestroy(): void {

@@ -6,3 +6,15 @@
     display: flex;
     justify-content: center;
 }
+
+.startOrEnd {
+    align-items: center;
+}
+
+.bold {
+    background-color: wheat;
+}
+
+.margin-12 {
+    margin: 12px;
+}

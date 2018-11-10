@@ -54,6 +54,9 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isSubtitleClicked: boolean;
 
+  forDenoteDt: {dt: number, isInit: boolean, x: number, y: number, isHide: boolean, isStartBtn: boolean} =
+    {dt: 0, isInit: false, x: 0, y: 0, isHide: false, isStartBtn: false};
+
   // [innerHtml,innerText]
   subtitleChange$ = new Subject<string[]>();
 
@@ -125,14 +128,18 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     .pipe(
       withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
         const frame = self.meService.story.frames[self.meService.story.iFrame];
+        const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
+        const absDt = 0.1 * Math.ceil(dr / 30);
         if (vm.screenX > vd.screenX) {
-          const start = Math.ceil(frame.start + 0.001);
+          self.forDenoteDt.dt = absDt;
+          const start = Math.ceil((frame.start + self.forDenoteDt.dt) * 10) / 10;
           if (start < frame.end) {
             frame.start = start;
             self.meService.seekTime = frame.start;
           }
         } else if ( vm.screenX < vd.screenX) {
-          const start = Math.floor(frame.start - 0.001);
+          self.forDenoteDt.dt = -absDt;
+          const start = Math.floor((frame.start + self.forDenoteDt.dt) * 10) / 10;
           if (start < frame.end && start >= 0) {
             frame.start = start;
             self.meService.seekTime = frame.start;
@@ -151,19 +158,42 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     .pipe(
       withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
         const frame = self.meService.story.frames[self.meService.story.iFrame];
-        if (vm.screenX > vd.screenX) {
-          const end = Math.ceil(frame.end + 0.001);
+        const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
+        const absDt = 0.1 * Math.ceil(dr / 30);
+      if (vm.screenX > vd.screenX) {
+          self.forDenoteDt.dt = absDt;
+          const end = Math.ceil((frame.end + self.forDenoteDt.dt) * 10) / 10;
           if (end > frame.start && end < self.meService.duration) {
             frame.end = end;
           }
         } else if ( vm.screenX < vd.screenX) {
-          const end = Math.floor(frame.end - 0.001);
+          self.forDenoteDt.dt = -absDt;
+          const end = Math.floor((frame.end + self.forDenoteDt.dt) * 10) / 10;
           if (end > frame.start) {
             frame.end = end;
           }
         }
       })
     ).subscribe();
+
+    // * [2018-11-10 08:28] Clear some effects
+    self.device.onPointerup$.pipe(takeUntil(self.unSubscribed$))
+    .subscribe(ev => {
+      self.setShowDT(ev, false);
+    });
+  }
+
+  setShowDT(ev: PointerEvent, isInit: boolean = false, isStartBtn: boolean = false) {
+    const self = this;
+    if (isInit) {
+      self.forDenoteDt.isHide = false;
+      self.forDenoteDt.isStartBtn = isStartBtn;
+      self.forDenoteDt.dt = 0;
+      self.forDenoteDt.x = ev.clientX;
+      self.forDenoteDt.y = ev.clientY;
+    } else {
+      self.forDenoteDt.isHide = true;
+    }
   }
 
   onSubInputChange(subtitleInput: HTMLTextAreaElement, subtitleView: HTMLDivElement) {

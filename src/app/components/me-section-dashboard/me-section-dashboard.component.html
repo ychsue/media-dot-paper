@@ -20,7 +20,8 @@
     [bB]="aFrame.colorB"
     [isBlink]="i===meService.story.iFrame"
     (contentClick)="onWhichFrame(i)"
-    (delete)="onRemoveFrame(i)">
+    (delete)="onRemoveFrame(i)"
+    (hold)="onHold(i)">
     </app-swap-icon>
   </div>
 </div>

@@ -134,3 +134,24 @@
 .canShortSlider {
     min-width: 20px;
 }
+
+.aniUpHide {
+    animation: .4s upAndHide infinite;
+}
+
+.deltaT {
+    text-shadow: 3px 0px 5px white, -3px 0px 5px white, 0px 3px 5px white, 0px -3px 5px white;
+    position: fixed;
+    z-index: 4;
+}
+
+@keyframes upAndHide {
+    from {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}

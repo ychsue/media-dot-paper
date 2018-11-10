@@ -30,4 +30,5 @@ app-me-mani-plate {
     height: 100%;
     width: 2px;
     background-color: black;
+    z-index: 3;
 }

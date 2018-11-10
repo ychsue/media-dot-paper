@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
 import { AFrame } from '../../vm/a-frame';
+import { MatDialog } from '@angular/material';
+import { DialogComponent, DialogType, SetStartEnd } from 'src/app/dialog/dialog.component';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-me-section-dashboard',
@@ -9,7 +12,7 @@ import { AFrame } from '../../vm/a-frame';
 })
 export class MeSectionDashboardComponent implements OnInit {
 
-  constructor(public meService: MediaEditService) { }
+  constructor(public meService: MediaEditService, public diaglog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -41,5 +44,26 @@ export class MeSectionDashboardComponent implements OnInit {
     const isShown = this.meService.isToShowStoryGSetting;
     this.meService.setiFrame(-1); // this.meService.isToShowStoryGSetting will be modified during this action.
     this.meService.isToShowStoryGSetting = !isShown;
+  }
+
+  onHold(i: number) {
+    const self = this;
+    const cTime = self.meService.currentTime;
+    const frame = this.meService.story.frames[i];
+    const dialogRef = self.diaglog.open(DialogComponent, {
+      // width: '50%',
+      data: {dType: DialogType.startOrEnd, number: cTime,
+        ith: i,
+        aRGB: {a: frame.colorA, r: frame.colorR, g: frame.colorG, b: frame.colorB},
+        startEnd: [frame.start, frame.end]
+      }
+    });
+    dialogRef.afterClosed().pipe(first()).subscribe(whichOne => {
+      const which: SetStartEnd = whichOne;
+      if (!!which) {
+        if (which.start) {frame.start = cTime; }
+        if (which.end) {frame.end = cTime; }
+      }
+    });
   }
 }

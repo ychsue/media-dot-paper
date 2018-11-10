@@ -1,3 +1,7 @@
+* [2018-11-10 Sat] Now the user can set the start and end time of a piece of MDP by two new ways.
+1. In ~me-mani-plate~, the user can see how the time is increased when he/she drags the buttons and now the increasing time is proportional to the displacement.
+2. The user can set the start or end time by holding the colored-circle buttons which is located in ~me-section-dashboard~.
+
 * [2018-11-9 Fri] When ytPlayer is ready, its getDuration() might still give you '0'
 For this case, I tried to capture its duration multiple times if it returns 0.
 And I also check the duration when the user seekTo some time so that the duration will be updated.
