@@ -38,10 +38,14 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     return this._isActivating;
   }
 
+  downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
+
   // * inner events
   protected contentPointerdown$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
+    this.downPos.sx = ev.screenX;
+    this.downPos.sy = ev.screenY;
     this.contentPointerdown$.next(ev);
   }
 
@@ -104,7 +108,9 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       map(_ => self.device.onPointermove$.pipe(
         merge(self.device.onPointerup$),
         takeUntil(timer(500).pipe(merge(self.device.onPointerup$.pipe(delay(10))))),
-        count(x => !!x)
+        count(x => ( (x.type === 'pointerup')
+          || (Math.abs(self.downPos.sx - x.screenX) > 10)
+          || (Math.abs(self.downPos.sy - x.screenY) > 10)) )
         )),
         concatAll()).subscribe(n => {
           if (n === 0) {

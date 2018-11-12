@@ -62,6 +62,7 @@ export class SpeechSynthesisService {
 
   getVoiceName(voiceOrLang: string| SpeechSynthesisVoice) {
     if (typeof voiceOrLang === 'string') { // From langCode
+      if (!!this.voices === false) {return ""; }
       const voice = this.voices.find(v => v.lang.replace('_', '-') === (<string>voiceOrLang).replace('_', '-'));
       if (!!voice) {
         return voice.name;
@@ -138,14 +139,16 @@ export class SpeechSynthesisService {
   }
 
   updateUtterParaWithVoice(old: SSutterParameters): SSutterParameters {
-    if (!!old.voiceName === true) {
-      old.voice = this.voices.find(v => v.name === old.voiceName);
-      if (!!old.voice === true) {return old; }
-    }
+    if (!!this.voices) {
+      if (!!old.voiceName === true) {
+        old.voice = this.voices.find(v => v.name === old.voiceName);
+        if (!!old.voice === true) {return old; }
+      }
 
-    if (!!old.lang === true) {
-      old.voice = this.voices.find(v => v.lang.replace('_', '-') === old.lang.replace('_', '-'));
-      if (!!old.voice === true) {return old; }
+      if (!!old.lang === true) {
+        old.voice = this.voices.find(v => v.lang.replace('_', '-') === old.lang.replace('_', '-'));
+        if (!!old.voice === true) {return old; }
+      }
     }
 
     return old;

@@ -12,7 +12,7 @@ export class DialogComponent implements OnInit {
 
   dialogType = DialogType;
 
-  whichOne: SetStartEnd = {start: false, end: false};
+  whichOne: SetStartEnd = {start: false, end: false, cTime: 0};
 
   pts: IDialogComp;
 
@@ -38,6 +38,7 @@ export class DialogComponent implements OnInit {
 
   onStartOrEnd() {
     const which = Object.assign({}, this.whichOne);
+    which.cTime = this.data.number;
     this.dialogRef.close(which);
     this.whichOne.start = false;
     this.whichOne.end = false;
@@ -64,4 +65,5 @@ export interface DialogData {
 export interface SetStartEnd {
   start: boolean;
   end: boolean;
+  cTime: number;
 }

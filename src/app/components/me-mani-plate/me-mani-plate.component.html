@@ -23,11 +23,11 @@
             </div>
         </div>
 
-        <div class="main-play flex-110 display-flex-row" [@hideShow]="HideShow" *ngIf="isSSShown===false">
+        <div #mainPlay class="main-play flex-110 display-flex-row" [@hideShow]="HideShow" *ngIf="isSSShown===false">
             <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
-            <button mat-icon-button mat-raised-button [ngClass]="{'largeBtn':!meService.isSideMani&&(main.offsetHeight>450)}" (click)="onPlayPause()">
+            <button mat-icon-button mat-raised-button [ngClass]="{'largeBtn':(mainPlay.offsetWidth>300)&&(mainPlay.offsetHeight>150)}" (click)="onPlayPause()">
                 <svg viewBox="0 0 10 10" *ngIf="meService.state!==MEState.playing">
                     <polygon points="8,5 3,2 3,8" style="fill:darkblue"/>
                 </svg>
@@ -41,13 +41,13 @@
             </button>
 
             <h3 class="deltaT aniUpHide"
-                [style.color]="(forDenoteDt.dt>0)?'blue':'red'"
+                [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
                 [style.top.px]="forDenoteDt.y-100"
                 [style.left.px]="forDenoteDt.x"
                 [style.display]="(forDenoteDt.isHide)?'none':'inline'"
                 >{{((forDenoteDt.dt>0)?'+':'')+(forDenoteDt.dt|number:'1.0-1')}}</h3>
             <h2 class="deltaT"
-                [style.color]="(forDenoteDt.dt>0)?'blue':'red'"
+                [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
                 [style.top.px]="forDenoteDt.y-80"
                 [style.left.px]="forDenoteDt.x"
                 [style.display]="(forDenoteDt.isHide)?'none':'inline'"

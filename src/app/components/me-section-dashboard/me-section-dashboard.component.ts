@@ -51,18 +51,21 @@ export class MeSectionDashboardComponent implements OnInit {
     const cTime = self.meService.currentTime;
     const frame = this.meService.story.frames[i];
     const dialogRef = self.diaglog.open(DialogComponent, {
-      // width: '50%',
+      disableClose: true,
       data: {dType: DialogType.startOrEnd, number: cTime,
         ith: i,
         aRGB: {a: frame.colorA, r: frame.colorR, g: frame.colorG, b: frame.colorB},
         startEnd: [frame.start, frame.end]
       }
     });
+    setTimeout(() => {
+      dialogRef.disableClose = false;
+    }, 500);
     dialogRef.afterClosed().pipe(first()).subscribe(whichOne => {
       const which: SetStartEnd = whichOne;
       if (!!which) {
-        if (which.start) {frame.start = cTime; }
-        if (which.end) {frame.end = cTime; }
+        if (which.start) {frame.start = which.cTime; }
+        if (which.end) {frame.end = which.cTime; }
       }
     });
   }

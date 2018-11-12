@@ -1,3 +1,15 @@
+* [2018-11-12 Mon] Before publishing to Google Play
+1. The setting of css class ~largeBtn~ used in ~me-mani-plate~ might emit the error of ~ExpressionChangedAfterItHasBeenCheckedError~.
+   Well, although I can use a function to output ~true~ or ~false~ to toggle ~largeBtn~, it will be called repeatedly.
+   Hm.... I guess it is related to the checking of ~currentTime~. 
+   * ****************Think of it*************** *.
+2. The dialog for setting start or end time in ~me-section-dashboard~ will be closed automatically since the user's finger might still be on the screen, I use ~dialogRef.disableClose=true;~ to disable it and then turning it on again ~0.5s~ later.
+    * ************* 0.5s is too short? I'm not sure ***************** *
+3. For the ~hold~ event of ~swap-icon~, I provide it an uncertainty ~10px~.
+4. Oops, I forgot to return new current time from ~dialog.component~, it is fixed now.
+5. Because for some reasons the ~speechsynthesis~ might not work on some platforms, I have to take care of them.
+   The ~speech-synthesis.service~ has been corrected for this error.
+
 * [2018-11-10 Sat] Now the user can set the start and end time of a piece of MDP by two new ways.
 1. In ~me-mani-plate~, the user can see how the time is increased when he/she drags the buttons and now the increasing time is proportional to the displacement.
 2. The user can set the start or end time by holding the colored-circle buttons which is located in ~me-section-dashboard~.
