@@ -14,7 +14,7 @@
             </div>
             <app-setting-media *ngIf="!!meService.story.frames[meService.story.iFrame]?.useDefVP===false"></app-setting-media>
             <div class="flex">
-                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow use-margin-not-overflow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next([subtitleInput.value,subtitleView.innerText]):null;">
+                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow use-margin-not-overflow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next(subtitleInput.value):null;">
                     {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
                 </mat-slide-toggle>
                 <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">
@@ -60,7 +60,7 @@
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow position-absolute" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
 
         <div #mainDown class="main-down flex-auto display-flex-column">
-            <textarea matInput #subtitleInput class="subtitle flex-auto" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="onSubInputChange(subtitleInput, subtitleView)" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0">
+            <textarea matInput #subtitleInput class="subtitle flex-auto" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next(subtitleInput.value)" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0">
             </textarea>
         </div>
     </div>

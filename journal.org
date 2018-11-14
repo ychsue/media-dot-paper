@@ -1,3 +1,22 @@
+* [2018-11-14 Wed] Change ~debounceTime~ for subtitleChange$ from 200 to 700
+If ~debounceTIme~ is 200, my key in will become very sticky and it will jump to the end of ~input~ area occationally.
+
+* [2018-11-14 Wed] Try to provide the user a ~Daily Sample~
+1. Becasue in the pre-release step of an Android App's test it will complain about no ~android:contentDescription~ for ~android:id/content/SystemWebView[0]~, I tried to add ~appView.getView().setContentDescription("@null");~ into ~MainActivity.java~.
+   I got the concept from [[https://blog.csdn.net/u013491677/article/details/51985390][this tutorial]].
+   Oh, in google report's guiding document, it suggest the developer to install an APP ~Android 適用的無障礙功能掃描工具~.
+   Man, it showed that it has 21 suggestions to my App's startup page.
+   Hm.... Let me think of it. -_-
+
+2.  For ~OneDrive~ and ~GoogleDrive~, the user can download their files by the steps shown in [[https://stackoverflow.com/questions/20665881/direct-download-from-google-drive-using-google-drive-api][this StackOverflow's Q&A for google drive]] by changing its link to ~https://docs.google.com/uc?export=download&id=<your file id>~ and [[https://www.marstranslation.com/blog/how-to-make-direct-link-of-onedrive-files][this article for OneDrive]] which cannot be easily gotten from its sharing link, you need to get its id from ~embed~ and change the word ~embed~ to ~download~.
+
+3. For ~Dropbox~, the story might be easier. If the method mentioned in [[https://www.macworld.com/article/2009999/directly-downloading-dropbox-files.html][this article for dropbox]] is true, you can download the file directly by adding ~?dl=1~ to its link's end.
+I'm not sure whether it is true. I need to test it.
+
+4. How about Google Drive API mentioned in [[https://bytutorial.com/tutorials/google-api/introduction-to-google-drive-api-using-javascript][this article]]? 
+
+5. Now, I'll try to save daily samples into my google drive's public folder and then update the sample for current day day by day on my website. After this, I need to make a video to teach people how to share their files.
+
 * [2018-11-12 Mon] Before publishing to Google Play
 1. The setting of css class ~largeBtn~ used in ~me-mani-plate~ might emit the error of ~ExpressionChangedAfterItHasBeenCheckedError~.
    Well, although I can use a function to output ~true~ or ~false~ to toggle ~largeBtn~, it will be called repeatedly.

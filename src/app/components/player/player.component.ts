@@ -403,6 +403,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
         this.videoSrc = urlOrId;
+        this.videoEle.load();
         // * [2018-09-12 11:48] It might have been loaded
         if (this.videoEle.readyState === 4) {
           setTimeout(() => {

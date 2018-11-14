@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input, NgZone } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
 import { Subject, interval, of, fromEvent } from 'rxjs';
@@ -58,7 +58,10 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     {dt: 0, isInit: false, x: 0, y: 0, isHide: false, isStartBtn: false};
 
   // [innerHtml,innerText]
-  subtitleChange$ = new Subject<string[]>();
+  subtitleChange$ = new Subject<string>();
+
+  @ViewChild('subtitleView')
+  subViewRef: ElementRef;
 
   unSubscribed$ = new Subject<boolean>();
 
@@ -68,7 +71,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   pts: IMeManiPlateComp;
 
   constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
-    private device: DeviceService, private uiEleRef: ElementRef) {
+    private device: DeviceService, private uiEleRef: ElementRef, private ngZone: NgZone) {
       const self = this;
       ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
         self.pts = ptsService.pts.meManiPlateComp;
@@ -90,11 +93,14 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     // * [2018-08-25 18:44] For subtitleChange
     self.subtitleChange$.pipe(takeUntil(self.unSubscribed$)).pipe(
-      debounceTime(200),
-      distinctUntilChanged()).subscribe(sts => {
-        self.meService.story.frames[self.meService.story.iFrame].subtitle = sts[0];
-        self.meService.story.frames[self.meService.story.iFrame].utterPara.text = sts[1];
-        self.utterPara.text = sts[1];
+      debounceTime(700),
+      distinctUntilChanged()).subscribe(st => {
+        self.meService.story.frames[self.meService.story.iFrame].subtitle = st;
+        self.ngZone.runOutsideAngular(_ => {
+          const text = (<HTMLElement>self.subViewRef.nativeElement).innerText;
+          self.meService.story.frames[self.meService.story.iFrame].utterPara.text = text;
+          self.utterPara.text = text;
+        });
       });
     // * [2018-08-26 16:56] Reutter the subtitle for repeatStart
     self.meService.repeatStart$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
@@ -194,13 +200,6 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       self.forDenoteDt.isHide = true;
     }
-  }
-
-  onSubInputChange(subtitleInput: HTMLTextAreaElement, subtitleView: HTMLDivElement) {
-    const self = this;
-    setTimeout(() => {
-      self.subtitleChange$.next([subtitleInput.value, subtitleView.innerText]);
-    }, 10);
   }
 
   onPlayPause() {

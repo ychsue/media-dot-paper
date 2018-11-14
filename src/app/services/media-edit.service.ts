@@ -48,7 +48,7 @@ export class MediaEditService {
     this._duration = v;
   }
   public get duration(): number {
-    return (!!this._duration) ? this._duration : 100;
+    return (!!this._duration && (this._duration !== Infinity)) ? this._duration : 100;
   }
 
   public _volume = 1; // **************** TODO *******************

@@ -37,5 +37,8 @@ public class MainActivity extends CordovaActivity
 
         // Set by <content src="index.html" /> in config.xml
         loadUrl(launchUrl);
+
+        // * [2018-11-13 16:35] YCHsue added for contentDescription
+        appView.getView().setContentDescription("@null");
     }
 }
