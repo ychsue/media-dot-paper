@@ -1,10 +1,15 @@
+* [2018-11-15 Thu] Try to deal with android:contentDescription problem
+1. Based on the design concept of [[https://developer.mozilla.org/en-US/docs/Web/Events/pointerup][this MDN's article]], you can find that it provide each icon button a ~<span>~ which occupies no space for the ~contentDescription~.
+    I tried to do so, and, it works.
+2. However, the ~mat-sidenav~ will add two empty ~<div>~s as anchors. The investigating tool of Android will complian about that they are out of ~contentDescription~. Hm.... Let me think of it. 
+
 * [2018-11-15 Thu] Using httpClientModule to download a daily sample and improving the action of me-mani-plate
 1. For httpClientModule, the 1st problem you'll face is ~Access-Control-Allow-Origin~.
     The following 2 Q&A of StackOverflow are very good. They are [[https://stackoverflow.com/questions/10636611/how-does-access-control-allow-origin-header-work][Q&A about how it works]] and [[https://stackoverflow.com/questions/6516591/how-to-implement-access-control-allow-origin-header-in-asp-net][Q&A for ASP.NET]].
 2. Since my .json file is encoded, I cannot get it by ~http.get(url)~ directly, I need to call ~http.get(url,{responseType: 'text'})~ to get its texts.
 3. When the ~pointerdown~ event is triggered by ~me-mani-plate.component~, I think that the user still want to see its buttons.
     Therefore, during the debounce of ~pointerleave~, I also ask it to count the event of ~pointerdown~ so that it will not hide the buttons even when the user is touching it.
-    
+
 * [2018-11-14 Wed] Change ~debounceTime~ for subtitleChange$ from 200 to 700
 If ~debounceTIme~ is 200, my key in will become very sticky and it will jump to the end of ~input~ area occationally.
 

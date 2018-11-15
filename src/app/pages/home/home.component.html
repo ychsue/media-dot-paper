@@ -18,6 +18,7 @@
             type="file" (change)="onFileSelect(selaudio.files)">
             <button mat-icon-button (click)="onSelFileWarning()" *ngIf="isShownSelFileWarning">
                 <mat-icon class="mat-18" [style.color]="'blue'">warning</mat-icon>
+                <span class="forCD">warning about inputting from a file</span>
             </button>
     </mat-list-item>
     </mat-list>

@@ -1,6 +1,7 @@
 <nav class="docs-navbar-header">
   <button mat-icon-button (click)="toggleSidenav_Click.next($event)">
       <mat-icon class="mat-18">menu</mat-icon>
+      <span class="forCD">Main Menu</span>
   </button>
   <button mat-icon-button (click)="meService.onSaveStory$$()" *ngIf="meService.sideClickType===sideClickType_.new">
     <mat-icon class="mat-18">archive</mat-icon>
@@ -18,14 +19,19 @@
   <button id="tgManiSide" mat-icon-button (click)="meService.isSideMani=!meService.isSideMani" *ngIf="meService.isToShowList">
     <img src="assets/PlayRight.svg" *ngIf="meService.isSideMani"/>
     <img src="assets/PlayLeft.svg" *ngIf="!meService.isSideMani"/>
+    <span class="forCD" *ngIf="meService.isSideMani" >show control panel on main window</span>
+    <span class="forCD" *ngIf="!meService.isSideMani" >show control panel upon the MDP list</span>
   </button>
 
   <button mat-icon-button *ngIf="isAllowSide" (click)="meService.isToShowList=!meService.isToShowList">
       <mat-icon class="mat-18">list</mat-icon>
+      <span class="forCD" *ngIf="meService.isToShowList">To hide the MDP list</span>
+      <span class="forCD" *ngIf="!meService.isToShowList">To show the MDP list</span>
   </button>
 
   <button mat-icon-button [matMenuTriggerFor]="langMenu" >
       <mat-icon class="mat-18">translate</mat-icon>
+      <span class="forCD">Choose a language</span>
   </button>
   <mat-menu #langMenu="matMenu">
     <button mat-menu-item *ngFor="let each of ptsService.langList" 
