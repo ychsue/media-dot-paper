@@ -6,7 +6,7 @@ import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
 import { StoryService } from '../../services/story.service';
-import { map, concatAll, concat, takeUntil } from 'rxjs/operators';
+import { map, concatAll, concat, takeUntil, first } from 'rxjs/operators';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FsService } from '../../services/fs.service';
 import { MessageService, MessageTypes } from '../../services/message.service';
@@ -15,6 +15,7 @@ import { ClipboardService } from '../../services/clipboard.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { CrossCompService } from '../../services/cross-comp.service';
 import { IStory } from 'src/app/vm/story';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog, public ptsServic: PageTextsService,
     private meService: MediaEditService, private db: DbService,
-    private ngZone: NgZone, private fs: FsService
+    private ngZone: NgZone, private fs: FsService, private http: HttpClient
     , private msg: MessageService, private clipboard: ClipboardService,
     private ccService: CrossCompService, private storyService: StoryService) {
       const self = this;
@@ -206,5 +207,26 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.gv.shownPage = PageType.MediaEdit;
     // * [2018-07-19 21:28] Tell navbar that you select a story
     this.meService.sideClickType = SideClickType.select;
+  }
+
+  async onLoadDailySample() {
+    const today = new Date();
+    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt?date=${today.getDate()}`;
+    const self = this;
+    let story;
+    try {
+      story = await self.http.get(url, {responseType: 'text'}).pipe(map(res => {
+        return self.storyService.getAStoryFromString(res);
+      })).toPromise();
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (!!story) {
+      story.modifyTime = 0;
+      self.meService.initMe(story);
+      this.gv.shownPage = PageType.MediaEdit;
+      this.meService.sideClickType = SideClickType.new;
+    }
   }
 }

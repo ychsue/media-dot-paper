@@ -3,7 +3,7 @@ import { MediaEditService, playerAction, MEState } from 'src/app/services/media-
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
 import { Subject, interval, of, fromEvent } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay } from 'rxjs/operators';
+import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay, merge } from 'rxjs/operators';
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { PageTextsService } from '../../services/page-texts.service';
 
@@ -251,6 +251,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     const self = (!!ele) ? ele : this;
     const n = await fromEvent(self.uiEleRef.nativeElement, 'pointermove')
     .pipe(
+      merge(fromEvent(self.uiEleRef.nativeElement, 'pointerdown')),
       takeUntil(of(true).pipe(delay(1000))),
       count(x => !!x)
     ).toPromise();
@@ -263,11 +264,15 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  onSubtitleBlur() {
+    this.isSubtitleClicked = false;
+  }
+
   onSubtitleClicked(e: MouseEvent) {
     const self = this;
     self.isSubtitleClicked = true;
     this.HideShow = 'show';
-    setTimeout(_ => self.isSubtitleClicked = false, 100);
+    // setTimeout(_ => self.isSubtitleClicked = false, 100);
   }
 
   onShowSetSS(e: MouseEvent) {

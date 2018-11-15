@@ -8,7 +8,8 @@
     "errWrongFormat": "输入.json文件的格式错误。错误信息：",
     "errFileType": "所选文件必须是视频或音频文件，或此APP导出的json文件。",
     "mobileFileSelWarn": "如果您选择的本地媒体文件很大，大多数操作仍应有效;但是，当您尝试将其保存到MDP列表中时，它可能会使此应用程序崩溃。",
-    "browserFileSelWarn": "虽然您可以加载本地媒体文件，但无法将其保存到此平台的MDP列表中。"
+    "browserFileSelWarn": "虽然您可以加载本地媒体文件，但无法将其保存到此平台的MDP列表中。",
+    "dailySample": "每日样品"
   },
   "appComp": {
     "chooseAMediaAtFirst": "此页面用于设置您选择的媒体。\n所以，请先选择一个媒体。",

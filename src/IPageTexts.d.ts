@@ -19,6 +19,7 @@ interface IHomePage {
     url: string;
     file: string;
     ttFile: string;
+    dailySample: string;
     storedMedia: string;
     errWrongFormat: string;
     errFileType: string;

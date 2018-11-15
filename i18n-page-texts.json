@@ -5,6 +5,7 @@
             "url": "url",
             "file": "File",
             "ttFile": "Choose a video or audio file, or a json file exported by this APP",
+            "dailySample": "Daily Sample",
             "storedMedia": "Select a Stored Media",
             "errWrongFormat": "The format of input .json file is wrong. Error message: ",
             "errFileType": "The selected file must be a video or an audio file, or a json file exported by this APP.",

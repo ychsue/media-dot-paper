@@ -60,7 +60,7 @@
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow position-absolute" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
 
         <div #mainDown class="main-down flex-auto display-flex-column">
-            <textarea matInput #subtitleInput class="subtitle flex-auto" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next(subtitleInput.value)" (click)="onSubtitleClicked($event)" [style.opacity]="(HideShow==='show')?1:0">
+            <textarea matInput #subtitleInput class="subtitle flex-auto" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next(subtitleInput.value)" (click)="onSubtitleClicked($event)" (blur)="onSubtitleBlur()"  [style.opacity]="(HideShow==='show')?1:0">
             </textarea>
         </div>
     </div>

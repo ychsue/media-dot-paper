@@ -8,7 +8,8 @@
     "errWrongFormat": "Format input .json file salah. Pesan eror:",
     "errFileType": "File yang dipilih harus berupa video atau file audio, atau file json yang diekspor oleh APP ini.",
     "mobileFileSelWarn": "Jika file media lokal yang Anda pilih berukuran besar, sebagian besar tindakan harus tetap berfungsi; namun, mungkin aplikasi ini mogok ketika Anda mencoba menyimpannya ke daftar MDP.",
-    "browserFileSelWarn": "Meskipun Anda dapat memuat file media lokal, Anda tidak dapat menyimpannya ke dalam daftar MDP untuk platform ini."
+    "browserFileSelWarn": "Meskipun Anda dapat memuat file media lokal, Anda tidak dapat menyimpannya ke dalam daftar MDP untuk platform ini.",
+    "dailySample": "Sampel Harian"
   },
   "appComp": {
     "chooseAMediaAtFirst": "Halaman ini untuk pengaturan media yang Anda pilih.\nJadi, tolong pilih media pada awalnya.",
