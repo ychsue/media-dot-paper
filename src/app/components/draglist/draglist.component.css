@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    flex: 1 1 0px;
     position: relative;
 }
 
@@ -25,6 +26,25 @@
 
 .content {
     flex: 1 1 0px;
+    display: flex;
+    align-items: center;
     background-color: white;
     touch-action: none;
+}
+
+.badge {
+    flex: none;
+    margin: 0.4em;
+    line-height: 2em;
+    width:2em;
+    height: 2em;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.name {
+    flex: auto;
+    text-align: center;
 }

@@ -189,16 +189,24 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   async onStoryDelete(story: IStory) {
     const self = this;
     if (story.meType === PlayerType.file) {
-      const isDeleted = await self.fs.getFile$(story.fileName).pipe(map(
-        fEntry => self.fs.rmFile$(fEntry)
-      ), concatAll()).toPromise();
+      try {
+        const isDeleted = await self.fs.getFile$(story.fileName).pipe(map(
+          fEntry => self.fs.rmFile$(fEntry)
+        ), concatAll()).toPromise();
 
-      self.msg.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}`});
+        self.msg.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}`});
+      } catch (error) {
+        self.msg.alert(
+          `Cannot delete ${story.fileName}, please check your folder <h3>${(await self.fs.getDefaultAppStorageDir$$()).nativeURL}</h3>`);
+      }
     }
     // this.db.deleteAsync(DbService.storyTableName, ['id', '=', story.id]);
     this.db.deleteAsync(DbService.storyTableName, ['modifyTime', '=', story.modifyTime]);
-    // * [2018-07-19 21:28] Tell navbar that you delete a story
-    // this.meService.sideClickType = SideClickType.none;
+    // * [2018-07-19 21:28] Tell navbar that you delete the current story
+    if (story.modifyTime === self.meService.story.modifyTime) {
+      this.meService.sideClickType = SideClickType.none;
+    }
+
   }
 
   onStoryOpen(story: IStory) {

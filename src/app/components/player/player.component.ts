@@ -146,8 +146,12 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     self.meService.onCurrentTimeChanged = interval(self._msInterval)
     .pipe(
       map(_ => {
-        const yState = self.checkYoutubStateAndSetState();
-        return ((self.meService.story.meType === self.pType.youtubeID) && (yState === -2)) ? -1 : self.getCurrentTime();
+        if (self.meService.story.meType === self.pType.youtubeID) {
+          const yState = self.checkYoutubStateAndSetState();
+          return (yState === -2) ? -1 : self.getCurrentTime();
+        } else {
+          return self.getCurrentTime();
+        }
       }),
       distinctUntilChanged(),
       share()
@@ -372,7 +376,12 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     };
     // * [2018-06-18 11:11] for MEState.waiting
     this.videoEle.onwaiting = (ev) => {
-      self.meService.state = MEState.waiting;
+      if ((this.videoEle.currentTime > 0) && !this.videoEle.paused && this.videoEle.readyState > 2) {
+        // For windows UWP, onPlaying event may not be triggered.
+        self.meService.state = MEState.playing;
+      } else {
+        self.meService.state = MEState.waiting;
+      }
     };
     // * [2018-06-18 11:11] for MEState.playing
     this.videoEle.onplay = (ev) => {

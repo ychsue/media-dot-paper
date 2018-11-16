@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,13 @@ export class GvService {
 
   isJustPointerEvents = false;
 
+  checkPerDay: number;
+
   appComp: AppComponent;
-  constructor() { }
+  constructor() {
+    const self = this;
+    timer(0, 40000000).subscribe(_ => {self.checkPerDay = Date.now(); });
+  }
 }
 
 export enum PageType {

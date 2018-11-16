@@ -1,3 +1,17 @@
+* [2018-11-16 Fri] In windows UWP, ~<video>~ cannot trigger onplaying or onplay events after onwaiting event
+1. In ~player.component~. Not bad, based on the concept described in [[https://stackoverflow.com/questions/6877403/how-to-tell-if-a-video-element-is-currently-playing][this Q&A of StackOverflow]], I check 
+#+begin_src javascript
+(this.videoEle.currentTime > 0) && !this.videoEle.paused && this.videoEle.readyState > 2
+#+end_src
+in onwaiting event to correct its state as ~playing~.
+The good news is it works for windows UWP!
+2. In ~fs.service~. As said in [[https://stackoverflow.com/questions/39319279/convert-promise-to-observable][this Q&A of StackOverflow]], I can get the observable from a promise by ~from(promise)~.
+
+
+* [2018-11-15 Thu] Show a badge about the number of past days
+1. I need to use ~line-height~ to center its text vertically as mentioned in [[https://stackoverflow.com/questions/8865458/how-do-i-vertically-center-text-with-css][this Q&A of StackOverflow]].
+2. Since the current day is just need to be checked per day, I check it in ~gv.service~ and provide this number for those badges.
+
 * [2018-11-15 Thu] Try to deal with android:contentDescription problem
 1. Based on the design concept of [[https://developer.mozilla.org/en-US/docs/Web/Events/pointerup][this MDN's article]], you can find that it provide each icon button a ~<span>~ which occupies no space for the ~contentDescription~.
     I tried to do so, and, it works.

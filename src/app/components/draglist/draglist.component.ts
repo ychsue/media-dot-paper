@@ -12,7 +12,7 @@ import { GvService } from '../../services/gv.service';
   styleUrls: ['./draglist.component.css']
 })
 export class DraglistComponent implements OnInit, OnDestroy {
-  @Input() story: IStory |{name: string};
+  @Input() story: IStory |{name: string, viewTime: number};
 
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
@@ -39,7 +39,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
   }
 
   constructor(private device: DeviceService, private ccService: CrossCompService,
-    private gv: GvService) { }
+    public gv: GvService) { }
 
   ngOnInit() {
     const self = this;

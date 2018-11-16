@@ -119,32 +119,36 @@ export class FsService {
     }
   }
 
+  async getDefaultAppStorageDir$$() {
+    const self = this;
+    if (!!window['cordova'] === false) {
+      return null;
+    } else if (cordova.platformId === 'android') {
+      return await self.getDir$('', false, false, cordova.file.externalDataDirectory).toPromise();
+    } else {
+      const fs = await self.fs$.pipe(first()).toPromise();
+      return fs.root;
+    }
+  }
+
   getFile$(name: string, create: boolean = false, exclusive: boolean = false, dir?: DirectoryEntry): Observable<FileEntry> {
     const self = this;
     if (self.device.isCordova === false) {return of(null); }
-    const obs = self.fs$.pipe(map(fs => new Observable<FileEntry>( subs => {
-      const action = async () => {
-        let dirEntry = null;
-        if (!!dir) {
-          dirEntry = dir;
-        } else if (cordova.platformId === 'android') {
-          dirEntry = await self.getDir$('', false, false, cordova.file.externalDataDirectory).toPromise();
-          if (!!dirEntry === false) {dirEntry = fs.root; }
-        } else {
-          dirEntry = fs.root;
-        }
-        dirEntry.getFile(name, {create: create, exclusive: exclusive},
-          file => {
-            subs.next(file);
-            subs.complete();
-          },
-          subs.error);
-      };
-      action().then().catch(subs.error);
-    })),
-    concatAll()
-    );
-    return obs;
+    const action = async () => {
+      const dirEntry = (!!dir) ? dir : await self.getDefaultAppStorageDir$$();
+      if (!!dirEntry) {
+        return new Promise<FileEntry>((res, rej) => {
+          dirEntry.getFile(name, {create: create, exclusive: exclusive},
+            file => {
+              res(file);
+            },
+            rej);
+        });
+      } else {
+        return <Promise<FileEntry>>null;
+      }
+    };
+    return from(action());
   }
 
   writeFile$(fEntry: FileEntry, data: Blob, isAppend: boolean = false): Observable<boolean> {
