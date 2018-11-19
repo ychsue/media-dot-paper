@@ -10,9 +10,6 @@
     "cordova-clipboard": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
-    "cordova-plugin-admobpro": {
-      "PACKAGE_NAME": "Media Dot Paper"
-    },
     "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
@@ -33,13 +30,16 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-plugin-admobpro": {
+      "PACKAGE_NAME": "Media Dot Paper"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-extension": {
+    "cordova-sqlite-storage": {
       "PACKAGE_NAME": "Media Dot Paper"
     },
-    "cordova-sqlite-storage": {
+    "cordova-plugin-extension": {
       "PACKAGE_NAME": "Media Dot Paper"
     }
   }

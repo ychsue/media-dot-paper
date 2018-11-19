@@ -1,8 +1,8 @@
 {
   "_from": "cordova-plugin-admobpro",
-  "_id": "cordova-plugin-admobpro@2.31.6",
+  "_id": "cordova-plugin-admobpro@2.35.3",
   "_inBundle": false,
-  "_integrity": "sha1-vtL8yS4M9TUXRCAD30cHNVzGEuA=",
+  "_integrity": "sha512-pMttdjVVmA1UH4WqvZq9U3qRqRHGTjQiPo2iOb32X6xzytCfy2sxSNtQz5lLqHhsd72jbP9XZslCzrJV3jz+wg==",
   "_location": "/cordova-plugin-admobpro",
   "_phantomChildren": {},
   "_requested": {
@@ -19,8 +19,8 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-admobpro/-/cordova-plugin-admobpro-2.31.6.tgz",
-  "_shasum": "bed2fcc92e0cf53517442003df4707355cc612e0",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-admobpro/-/cordova-plugin-admobpro-2.35.3.tgz",
+  "_shasum": "b6c7931c336fa100d7012e4f03ef80f70542f5bc",
   "_spec": "cordova-plugin-admobpro",
   "_where": "C:\\Users\\ychsue\\source\\repos\\Test\\cordova-ng-test\\cordova-test",
   "author": {
@@ -94,5 +94,5 @@
     "type": "git",
     "url": "git+https://github.com/floatinghotpot/cordova-admob-pro.git"
   },
-  "version": "2.31.6"
+  "version": "2.35.3"
 }

@@ -1,3 +1,9 @@
+* [2018-11-19 Mon] Update click event in swapIcon and dragList, and fix the problem gotten from admobpro roughly.
+1. Because in the test of Android API 28, the click of swapIcon does not work, I tried to make it work by prolong its duration and becoming a holding when the user hold it over the time period.
+  If it does not solve the problem, I need to think of what's the problem that I don't figure out.
+2. Admobpro does not work for Android API 23, but for 19, 21, 22, 24, .... Why?
+   Later, I want to try the one ~cordova-plugin-admob-plus~ to check what's the problem.
+
 * [2018-11-16 Fri] In windows UWP, ~<video>~ cannot trigger onplaying or onplay events after onwaiting event
 1. In ~player.component~. Not bad, based on the concept described in [[https://stackoverflow.com/questions/6877403/how-to-tell-if-a-video-element-is-currently-playing][this Q&A of StackOverflow]], I check 
 #+begin_src javascript

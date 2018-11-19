@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, Subject, of, timer } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge, pairwise, count, last } from 'rxjs/operators';
+import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge,
+  pairwise, count, last, take, filter } from 'rxjs/operators';
 import { GvService } from '../../services/gv.service';
 
 @Component({
@@ -24,11 +25,11 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   @Output() contentClick = new EventEmitter();
   @Output() hold = new EventEmitter<number>();
 
-  deltaY: number;
+  deltaX = 0;
+  deltaY = 0;
   maxSpeed = 0.5;
 
   private unsubscribed$ = new Subject<boolean>();
-  private _pointerDownTime = 0;
   private _isActivating = false;
   public set isActivating(v: boolean) {
     this.gv.isJustPointerEvents = v;
@@ -38,14 +39,20 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     return this._isActivating;
   }
 
-  downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
+  private _actionEmitted = new Subject<whichBtnAction>();
+  private _duringAction = whichBtnAction.none;
+  private _downTime = 0;
+  private _downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
+  private _epsPX = 10;
 
   // * inner events
   protected contentPointerdown$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
-    this.downPos.sx = ev.screenX;
-    this.downPos.sy = ev.screenY;
+    this._downPos.sx = ev.screenX;
+    this._downPos.sy = ev.screenY;
+    this._downTime = ev.timeStamp;
+    this._duringAction = whichBtnAction.none;
     this.contentPointerdown$.next(ev);
   }
 
@@ -53,70 +60,89 @@ export class SwapIconComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const self = this;
-    self.deltaY = 0;
-    // * [2018-10-05 11:50] Rewrite the event listener
-    let nCount = 0;
-    // When Pointer is pressed, get its time and let this App just capture the pointer events.
-    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
-    .subscribe(ev => {
-      self._pointerDownTime = ev.timeStamp;
-      self.isActivating = true;
-    });
-    // When Pointer is up, release the capturing of pointer events and check the pace
-    this.device.onPointerup$.pipe(takeUntil(self.unsubscribed$))
-    .subscribe(ev => {
-      if (self.isActivating === false) { // All of other buttons are listening to this event, too.
-        return;
-      } else {
-        self.isActivating = false;
-        nCount = 0;
-        if (Math.abs(self.deltaY) / (ev.timeStamp - self._pointerDownTime) > self.maxSpeed) {
-          self.delete.next();
-        } else {
-          self.deltaY = 0;
-          // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click
-          // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
-          if (ev.timeStamp - self._pointerDownTime < 250) {
-            self.onBtnClick(ev);
-          }
-        }
-      }
-    });
-    // Listen to the move of the pointer
-    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
-    .pipe(
-      map(_ => self.device.onPointermove$.pipe(
-        pairwise(),
-        takeUntil(self.device.onPointerup$.pipe(merge(self.device.onNoButtonPressed$))))
-      ),
-      concatAll())
-    .subscribe(arr => {
-      if (arr[0].buttons === 0 && arr[1].buttons === 0) {
-        if (++nCount > 10) {
-          nCount = 0;
-          self.device.onNoButtonPressed$.next(true);
-        }
-        return;
-      }
-      // Move the list
-      self.deltaY += arr[1].screenY - arr[0].screenY;
-    });
 
-    // * [2018-11-09 14:30] Listen to Hold event
-    self.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
+    const moveBtn = (ev: PointerEvent) => {
+      self.deltaX = ev.screenX - self._downPos.sx;
+      self.deltaY = ev.screenY - self._downPos.sy;
+      // console.log(this.deltaY);
+    };
+    const holdOrNot = () => {
+      if (self._duringAction !== whichBtnAction.none) {return; }
+      if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
+        self._actionEmitted.next(whichBtnAction.hold);
+      } else {
+        self._actionEmitted.next(whichBtnAction.longerThanHold);
+      }
+    };
+    const clickDeleteOrIgnore = (ev: PointerEvent) => {
+      if ((self._duringAction !== whichBtnAction.none) && (self._duringAction !== whichBtnAction.longerThanHold)) {return; }
+      const dt = ev.timeStamp - self._downTime;
+      if (Math.abs(self.deltaY / dt) > self.maxSpeed) {
+        self._actionEmitted.next(whichBtnAction.delete);
+      } else if ((self._duringAction === whichBtnAction.none) &&
+        (Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
+        self._actionEmitted.next(whichBtnAction.click);
+      }
+    };
+
+    const refresh = () => {
+      self.deltaX = 0;
+      self.deltaY = 0;
+      this._duringAction = whichBtnAction.none;
+    };
+
+    self._actionEmitted.pipe(takeUntil(self.unsubscribed$)).subscribe(which => {
+      self._duringAction = which;
+      if (self._duringAction === whichBtnAction.click) {
+        self.contentClick.next();
+      } else if (self._duringAction === whichBtnAction.delete) {
+        self.delete.next();
+      } else if (self._duringAction === whichBtnAction.hold) {
+        self.hold.next();
+      }
+    });
+    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
     .pipe(
-      map(_ => self.device.onPointermove$.pipe(
-        merge(self.device.onPointerup$),
-        takeUntil(timer(500).pipe(merge(self.device.onPointerup$.pipe(delay(10))))),
-        count(x => ( (x.type === 'pointerup')
-          || (Math.abs(self.downPos.sx - x.screenX) > 10)
-          || (Math.abs(self.downPos.sy - x.screenY) > 10)) )
-        )),
-        concatAll()).subscribe(n => {
-          if (n === 0) {
-            self.hold.next(self.index);
-          }
-        });
+      map(_ => self.device.onPointermove$
+        .pipe(
+          map(mv => {
+            if (mv !== null) {
+              moveBtn(mv);
+            }
+            return mv;
+          }),
+          merge(
+            timer(700) // for holding
+            .pipe(
+              map(t => {
+                holdOrNot();
+                return <PointerEvent>null;
+              })
+            )
+          ),
+          takeUntil(
+            self.device.onPointerup$
+            .pipe(
+              map(uv => {
+                clickDeleteOrIgnore(uv);
+                return uv;
+              }),
+              merge(self._actionEmitted
+                .pipe(
+                  filter(which => which !== whichBtnAction.longerThanHold)
+                )
+              ),
+              map( ev => {
+                refresh();
+              })
+            )
+          )
+        )
+      ),
+      concatAll()
+    ).subscribe(ev => {
+      // console.log(ev);
+    });
   }
 
   ngOnDestroy(): void {
@@ -129,4 +155,12 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     const self = this;
     this.contentClick.next(self.index);
   }
+}
+
+export enum whichBtnAction {
+  none,
+  click,
+  delete,
+  hold,
+  longerThanHold
 }

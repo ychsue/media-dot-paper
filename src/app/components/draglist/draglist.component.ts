@@ -17,7 +17,8 @@ export class DraglistComponent implements OnInit, OnDestroy {
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
 
-  deltaX: number;
+  deltaX = 0;
+  deltaY = 0;
   maxSpeed = 0.5;
 
   private _pointerDownTime = 0.1;
@@ -36,6 +37,8 @@ export class DraglistComponent implements OnInit, OnDestroy {
 
   onContentPointerdown(ev: PointerEvent) {
     this.contentPointerdown$.next(ev);
+    this._pointerDownTime = ev.timeStamp;
+    this.isActivating = true;
   }
 
   constructor(private device: DeviceService, private ccService: CrossCompService,
@@ -43,16 +46,6 @@ export class DraglistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const self = this;
-    self.deltaX = 0;
-    // * [2018-10-05 11:50] Rewrite the event listener
-    let count = 0;
-    // When Pointer is pressed, get its time and let this App just capture the pointer events.
-    this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
-    .subscribe(ev => {
-      self._pointerDownTime = ev.timeStamp;
-      // self.gv.isJustPointerEvents = true;
-      self.isActivating = true;
-    });
     // When Pointer is up, release the capturing of pointer events and check the pace
     this.device.onPointerup$.pipe(takeUntil(self.unsubscribed$))
     .subscribe(ev => {
@@ -60,17 +53,17 @@ export class DraglistComponent implements OnInit, OnDestroy {
         return;
       } else {
         self.isActivating = false;
-        // self.gv.isJustPointerEvents = false;
-        count = 0;
         if (Math.abs(self.deltaX) / (ev.timeStamp - self._pointerDownTime) > self.maxSpeed) {
           self.delete.next();
         } else {
-          self.deltaX = 0;
           // * [2018-10-05 15:06] Since (click) event sometimes does not work, I need to handle it by myself. 100ms is enough for a click.
           // console.log('pointerup : ' + (ev.timeStamp - self._pointerDownTime));
-          if (ev.timeStamp - self._pointerDownTime < 250) {
+          if ((ev.timeStamp - self._pointerDownTime < 1000) &&
+            (Math.abs(self.deltaX) < 10) && (Math.abs(self.deltaY) < 10)) {
             self.onContentClick(ev);
           }
+          self.deltaX = 0;
+          self.deltaY = 0;
         }
       }
     });
@@ -83,15 +76,9 @@ export class DraglistComponent implements OnInit, OnDestroy {
           takeUntil(self.device.onPointerup$.pipe(merge(self.device.onNoButtonPressed$))))),
       concatAll())
       .subscribe(arr => {
-        if (arr[0].buttons === 0 && arr[1].buttons === 0) {
-          if (++count > 10) {
-            count = 0;
-            self.device.onNoButtonPressed$.next(true);
-          }
-          return;
-        }
         // Move the list
         self.deltaX += arr[1].screenX - arr[0].screenX;
+        self.deltaY += arr[1].screenY - arr[0].screenY;
         self.ccService.listOfStoredEle.scrollTop -= arr[1].screenY - arr[0].screenY;
       });
   }

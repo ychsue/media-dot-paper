@@ -13,10 +13,6 @@
               "count": 1
             },
             {
-              "xml": "<feature name=\"AdMob\"><param name=\"android-package\" value=\"com.rjfun.cordova.admob.AdMobPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            },
-            {
               "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
               "count": 1
             },
@@ -43,6 +39,10 @@
             {
               "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"AdMob\"><param name=\"android-package\" value=\"com.rjfun.cordova.admob.AdMobPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -51,29 +51,29 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
+              "xml": "<provider android:authorities=\"${applicationId}.opener.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"io.github.pwlin.cordova.plugins.fileopener2.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/opener_paths\" /></provider>",
               "count": 1
             },
             {
-              "xml": "<provider android:authorities=\"${applicationId}.opener.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"io.github.pwlin.cordova.plugins.fileopener2.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/opener_paths\" /></provider>",
+              "xml": "<activity android:configChanges=\"keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize\" android:name=\"com.google.android.gms.ads.AdActivity\" android:theme=\"@android:style/Theme.Translucent\" />",
               "count": 1
             }
           ],
           "/*": [
-            {
-              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-              "count": 1
-            },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 1
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
               "count": 1
             }
           ]
@@ -93,12 +93,6 @@
   },
   "installed_plugins": {
     "cordova-clipboard": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-extension": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-admobpro": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-android-permissions": {
@@ -124,6 +118,13 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-extension": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-admobpro": {
+      "PLAY_SERVICES_VERSION": "16.0.0",
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {},
@@ -134,14 +135,6 @@
       "pluginId": "cordova-clipboard",
       "clobbers": [
         "cordova.plugins.clipboard"
-      ]
-    },
-    {
-      "id": "cordova-plugin-admobpro.AdMob",
-      "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
-      "pluginId": "cordova-plugin-admobpro",
-      "clobbers": [
-        "window.AdMob"
       ]
     },
     {
@@ -365,12 +358,18 @@
       "clobbers": [
         "TTS"
       ]
+    },
+    {
+      "id": "cordova-plugin-admobpro.AdMob",
+      "file": "plugins/cordova-plugin-admobpro/www/AdMob.js",
+      "pluginId": "cordova-plugin-admobpro",
+      "clobbers": [
+        "window.AdMob"
+      ]
     }
   ],
   "plugin_metadata": {
     "cordova-clipboard": "1.2.1",
-    "cordova-plugin-extension": "1.5.4",
-    "cordova-plugin-admobpro": "2.31.6",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-file": "6.0.2-dev",
     "cordova-plugin-file-opener2": "2.0.19",
@@ -378,6 +377,8 @@
     "cordova-sqlite-storage": "2.3.0",
     "cordova-plugin-nano-sqlite": "1.3.0",
     "cordova-plugin-tts": "0.2.3",
-    "cordova-plugin-whitelist": "1.3.3"
+    "cordova-plugin-whitelist": "1.3.3",
+    "cordova-plugin-extension": "1.5.4",
+    "cordova-plugin-admobpro": "2.35.3"
   }
 }

@@ -47,7 +47,10 @@ export class AdService {
       if (cordova.platformId === 'windows') {
         self.iniWinSDK();
       } else if (cordova.platformId === 'android' || cordova.platformId === 'ios') {
-        self.iniAdMob();
+        // Because it will crash at marshmallow, I need to turn it off.
+        if ( (cordova.platformId === 'android') && (navigator.appVersion.toLowerCase().indexOf('marshmallow') < 0)) {
+          self.iniAdMob();
+        }
       } else {
         self._adReady$.next(false);
         self._adReady$.complete();

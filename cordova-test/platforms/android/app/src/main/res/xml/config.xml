@@ -3,10 +3,6 @@
     <feature name="Clipboard">
         <param name="android-package" value="com.verso.cordova.clipboard.Clipboard" />
     </feature>
-    <feature name="AdMob">
-        <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="Permissions">
         <param name="android-package" value="com.android.plugins.Permissions" />
     </feature>
@@ -26,6 +22,10 @@
     </feature>
     <feature name="Whitelist">
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="AdMob">
+        <param name="android-package" value="com.rjfun.cordova.admob.AdMobPlugin" />
         <param name="onload" value="true" />
     </feature>
     <feature name="TTS">

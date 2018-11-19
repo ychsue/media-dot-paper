@@ -15,9 +15,9 @@
         "cordova-clipboard": "file:../../modified-cordova-plugins/cordova-clipboard",
         "cordova-ios": "^4.5.5",
         "cordova-osx": "^4.0.2",
-        "cordova-plugin-admobpro": "^2.31.6",
+        "cordova-plugin-admobpro": "2.35.3",
         "cordova-plugin-android-permissions": "^1.0.0",
-        "cordova-plugin-extension": "^1.5.4",
+        "cordova-plugin-extension": "1.5.4",
         "cordova-plugin-file": "file:../../modified-cordova-plugins/cordova-plugin-file",
         "cordova-plugin-file-opener2": "^2.0.19",
         "cordova-plugin-inappbrowser": "3.0.0",
@@ -32,13 +32,15 @@
         "plugins": {
             "cordova-plugin-whitelist": {},
             "cordova-plugin-nano-sqlite": {},
-            "cordova-plugin-admobpro": {},
             "cordova-plugin-tts": {},
             "cordova-plugin-file": {},
             "cordova-plugin-android-permissions": {},
             "cordova-plugin-file-opener2": {},
             "cordova-plugin-inappbrowser": {},
-            "cordova-clipboard": {}
+            "cordova-clipboard": {},
+            "cordova-plugin-admobpro": {
+                "PLAY_SERVICES_VERSION": "16.0.0"
+            }
         },
         "platforms": [
             "browser",
