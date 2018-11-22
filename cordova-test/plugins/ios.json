@@ -7,10 +7,11 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-clipboard": {
+    "cordova-admob-plus": {
+      "APP_ID_IOS": "ca-app-pub-3940256099942544~1458002511",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
-    "cordova-plugin-admobpro": {
+    "cordova-clipboard": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-android-permissions": {
@@ -36,7 +37,7 @@
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-extension": {
+    "cordova-plugin-add-swift-support": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-sqlite-storage": {

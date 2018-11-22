@@ -32,12 +32,12 @@ export class FsService {
       ).pipe(shareReplay(1), first());
       if (cordova.platformId === 'ios') {
         // * [2018-09-05 16:04] Try to initialize the socialsharing
-        const action = new Promise<boolean>((res, rej) => {
-          device.onDeviceReady.subscribe(_ => {
-            window.plugins.socialsharing.available(b => res(b));
-          });
-        });
-        action.then();
+        // const action = new Promise<boolean>((res, rej) => {
+        //   device.onDeviceReady.subscribe(_ => {
+        //     window.plugins.socialsharing.available(b => res(b));
+        //   });
+        // });
+        // action.then();
         // action.then(b => {
         //   // * [2018-09-05 17:01] ****** TODO ****** dirty start of socialsharing
         //   if (b) {window.plugins.socialsharing.share('Start'); }

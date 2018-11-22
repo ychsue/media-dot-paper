@@ -42,13 +42,13 @@
     <plugin name="cordova-plugin-file-opener2" spec="~2.0.19" />
     <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
     <plugin name="cordova-clipboard" spec="/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-clipboard" />
-    <plugin name="cordova-plugin-admobpro" spec="2.35.3">
-        <variable name="PLAY_SERVICES_VERSION" value="16.0.0" />
+    <plugin name="cordova-admob-plus" spec="0.13.0">
+        <variable name="APP_ID_ANDROID" value="ca-app-pub-3940256099942544~3347511713" />
+        <variable name="APP_ID_IOS" value="ca-app-pub-3940256099942544~1458002511" />
     </plugin>
-    <plugin name="cordova-admob-plus" spec="0.13.0" />
     <engine name="browser" spec="^5.0.3" />
     <engine name="osx" spec="^4.0.2" />
-    <engine name="ios" spec="^4.5.5" />
     <engine name="windows" spec="^6.0.1" />
     <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>

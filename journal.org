@@ -1,3 +1,14 @@
+* [2018-11-22 Thu] It can work on iOS and macOS now.
+After removing ~cordova-plugin-admobpro~ and adding ~cordova-admob-plus~, it throwed a lot of error.
+However, following the suggestions of the error messages, they can be solved.
+
+1. Once it is replaced, I need to run ~$cordova platform remove ios, cordova platform add ios~ to completely remove the effect of ~cordova-plugin-admobpro~.
+2. You need to install ~cocoaPods~, just following its tutorial is enough.
+3. Run ~$cordova prepare ios~ and then launch ~xCode~ to compile it.
+4. Before compiling, you'll see 1 error. Just compiling it.
+5. You'll find that you need to declare the returned value's type inthe function ~createGADRequest()~. So, it should be ~func createGADRequest() -> GADRequest~.
+6. Compiling it again and it worked.
+
 * [2018-11-21 Wed] Improve some behaviors of dragList and swapIcon
 
 

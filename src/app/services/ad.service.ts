@@ -50,7 +50,8 @@ export class AdService {
         self.iniWinSDK();
       } else if (cordova.platformId === 'android' || cordova.platformId === 'ios') {
         // Because it will crash at marshmallow, I need to turn it off.
-        if ( (cordova.platformId === 'android') && (navigator.appVersion.toLowerCase().indexOf('marshmallow') < 0)) {
+        if ( ((cordova.platformId === 'android') && (navigator.appVersion.toLowerCase().indexOf('marshmallow') < 0))
+          || (cordova.platformId === 'ios')) {
           self.iniAdMob();
         }
       } else {
@@ -69,6 +70,7 @@ export class AdService {
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.requestAd(self.msAdv.InterstitialAdType.display, self.adWin.AppId, self.adWin.AdUnitId);
         } else if (!!window['admob']) {
+          console.log(`before loading: ${self.admobid.interstitial}`);
           (<Interstitial>self.interstitial).load(
             {
               id: {
@@ -79,6 +81,7 @@ export class AdService {
             // {adId: self.admobid.interstitial, autoShow: false}
           ).then( () => {
             self._isAdMobReady = true;
+            console.log(`after loading success`);
           }).catch(err => {
             console.log(err);
             self._isAdMobReady = false;

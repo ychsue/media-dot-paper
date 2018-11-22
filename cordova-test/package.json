@@ -16,9 +16,8 @@
         "cordova-clipboard": "file:../../modified-cordova-plugins/cordova-clipboard",
         "cordova-ios": "^4.5.5",
         "cordova-osx": "^4.0.2",
-        "cordova-plugin-admobpro": "2.35.3",
+        "cordova-plugin-add-swift-support": "1.7.2",
         "cordova-plugin-android-permissions": "^1.0.0",
-        "cordova-plugin-extension": "1.5.4",
         "cordova-plugin-file": "file:../../modified-cordova-plugins/cordova-plugin-file",
         "cordova-plugin-file-opener2": "^2.0.19",
         "cordova-plugin-inappbrowser": "3.0.0",
@@ -39,17 +38,17 @@
             "cordova-plugin-file-opener2": {},
             "cordova-plugin-inappbrowser": {},
             "cordova-clipboard": {},
-            "cordova-plugin-admobpro": {
-                "PLAY_SERVICES_VERSION": "16.0.0"
-            },
-            "cordova-admob-plus": {}
+            "cordova-admob-plus": {
+                "APP_ID_ANDROID": "ca-app-pub-3940256099942544~3347511713",
+                "APP_ID_IOS": "ca-app-pub-3940256099942544~1458002511"
+            }
         },
         "platforms": [
             "browser",
             "osx",
-            "ios",
             "windows",
-            "android"
+            "android",
+            "ios"
         ]
     }
 }

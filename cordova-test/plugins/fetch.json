@@ -87,22 +87,23 @@
     "is_top_level": true,
     "variables": {}
   },
-  "cordova-plugin-admobpro": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-admobpro"
-    },
-    "is_top_level": true,
-    "variables": {
-      "PLAY_SERVICES_VERSION": "16.0.0"
-    }
-  },
   "cordova-admob-plus": {
     "source": {
       "type": "registry",
       "id": "cordova-admob-plus@0.13.0"
     },
     "is_top_level": true,
+    "variables": {
+      "APP_ID_ANDROID": "ca-app-pub-3940256099942544~3347511713",
+      "APP_ID_IOS": "ca-app-pub-3940256099942544~1458002511"
+    }
+  },
+  "cordova-plugin-add-swift-support": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-add-swift-support@^1.7.2"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }
