@@ -8,19 +8,6 @@ body{
     overflow: hidden;
 }
 
-.blink {
-    animation-duration: 1s;
-    animation-name: blink;
-    animation-iteration-count: infinite;
-}
-
-@keyframes blink {
-    to {
-        /* opacity: 0.8; */
-        background-color: white;
-    }
-}
-
 .forCD {
     border: 0;
     clip: rect(0 0 0 0);

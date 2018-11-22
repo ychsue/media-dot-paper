@@ -1,7 +1,7 @@
 <div *ngFor="let frame of meService.story.frames; let i = index;">
   <button mat-button (click)="onChangeFrame(i)"
    [style.background-color]="'rgba('+frame.colorR+','+frame.colorG+','+frame.colorB+','+frame.colorA+')'"
-   [class.blink]="currentIFrame===i">
+   [class.blink]="meService.currentIFrameOnT===i">
    <span class="btnWords">{{frame.subtitle}}</span></button>
 </div>
 

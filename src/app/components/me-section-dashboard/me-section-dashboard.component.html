@@ -18,7 +18,8 @@
     [bR]="aFrame.colorR"
     [bG]="aFrame.colorG"
     [bB]="aFrame.colorB"
-    [isBlink]="i===meService.story.iFrame"
+    [class.shake]="i===meService.story.iFrame"
+    [isBlink]="i===meService.currentIFrameOnT"
     (contentClick)="onWhichFrame(i)"
     (delete)="onRemoveFrame(i)"
     (hold)="onHold(i)">

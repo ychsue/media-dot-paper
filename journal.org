@@ -1,3 +1,11 @@
+* [2018-11-21 Wed] Improve some behaviors of dragList and swapIcon
+
+
+* [2018-11-21 Wed] Try to migrate to plugin cordova-admob-plus
+1. Its admob.js is in the style of ~es6~ but not ~es5~, you need to recompile it by yourself.
+2. Once replace ~admobpro~ with ~cordova-admob-pluse~, I don't need to have ~cordova-plugin-extension~ which will ask for a compiled .jar file.
+3. Someone mimic this plugin as ~cordova-plugin-admob-plus~ which is similar to ~cordova-plugin-admobpro~ with a compiled .jar file. Be careful. 
+
 * [2018-11-19 Mon] Update click event in swapIcon and dragList, and fix the problem gotten from admobpro roughly.
 1. Because in the test of Android API 28, the click of swapIcon does not work, I tried to make it work by prolong its duration and becoming a holding when the user hold it over the time period.
   If it does not solve the problem, I need to think of what's the problem that I don't figure out.
@@ -85,7 +93,7 @@ Well, I create a ~heightChange~ event for my playerComponent and check it in its
 It works, but I'm a little worry about the time consumed by it.
 Fortunately, it looks fine. Hope so.
 
-* [2018-11-5 Mon] For dradlist.component, I changed to make the position of ~backDel~ to be ~absolute~.
+* [2018-11-5 Mon] For draglist.component, I changed to make the position of ~backDel~ to be ~absolute~.
 Because the button one has texts so that its height will be changed when some texts inside.
 So, this time, I make the position ~backDel~ one to be fixed and the button one is responded to the flex.
 It works fine.

@@ -42,3 +42,32 @@
 .width-100 {
     width: 100%;
 }
+
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+}
+
+.shake {
+    animation-duration: 1.5s;
+    animation-name: shake;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    to {
+        /* opacity: 0.8; */
+        background-color: white;
+    }
+}
+
+@keyframes shake {
+    from {
+        transform: rotate(-30deg);
+    }
+
+    to {
+        transform: rotate(30deg);
+    }
+}

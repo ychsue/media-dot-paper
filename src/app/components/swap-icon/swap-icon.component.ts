@@ -8,7 +8,7 @@ import { GvService } from '../../services/gv.service';
 @Component({
   selector: 'app-swap-icon',
   templateUrl: './swap-icon.component.html',
-  styleUrls: ['./swap-icon.component.css']
+  styleUrls: ['./swap-icon.component.css', '../../common-use.css']
 })
 export class SwapIconComponent implements OnInit, OnDestroy {
 

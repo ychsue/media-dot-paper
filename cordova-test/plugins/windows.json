@@ -33,6 +33,9 @@
     },
     "cordova-plugin-admobpro": {
       "PACKAGE_NAME": "Media Dot Paper"
+    },
+    "cordova-admob-plus": {
+      "PACKAGE_NAME": "Media Dot Paper"
     }
   },
   "dependent_plugins": {

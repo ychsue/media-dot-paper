@@ -8,7 +8,7 @@ import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-me-section-dashboard',
   templateUrl: './me-section-dashboard.component.html',
-  styleUrls: ['./me-section-dashboard.component.css']
+  styleUrls: ['./me-section-dashboard.component.css', '../../common-use.css']
 })
 export class MeSectionDashboardComponent implements OnInit {
 

@@ -30,6 +30,12 @@
     align-items: center;
     background-color: white;
     touch-action: none;
+    position: relative;
+}
+
+
+.content:hover {
+    background-color: gainsboro;
 }
 
 .badge {

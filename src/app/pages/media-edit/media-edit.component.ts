@@ -45,6 +45,15 @@ export class MediaEditComponent implements OnInit {
     let preIFrame = -1;
     self.meService.onStateChanged.pipe(filter(_ => !!self.meService.onCurrentTimeChanged === true), first()).subscribe(_ => {
       self.meService.onCurrentTimeChanged.subscribe(t => {
+        // * [2018-11-21 10:07] Get CurrentIFrame based on t
+        const indF = self.meService.story.frames.findIndex( frame => ((t <= frame.end) && (t >= frame.start)));
+        const iFrame = self.meService.story.iFrame;
+        if (iFrame >= 0 && self.meService.currentIFrameOnT !== iFrame) {
+          self.meService.currentIFrameOnT = iFrame;
+        } else if (indF !== self.meService.currentIFrameOnT) {
+          self.meService.currentIFrameOnT = indF;
+        }
+
         if (!!self.meService.story.gSetting === false) {return; }
         const uType = self.meService.story.utterType;
         const vpType = self.meService.story.gSetting.mVPType;

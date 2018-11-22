@@ -77,6 +77,7 @@ export class MediaEditService {
 
   currentTime = 0;
   isRepeat = true;
+  currentIFrameOnT = -1;
 
   private _seekTime = 0;
   public set seekTime(v: number) {

@@ -5,6 +5,7 @@ import { DeviceService } from './device.service';
 import * as pv from '../privateValues'; // SORRY, I did not commit this file since it is for my private variables.
 import { MessageService } from './message.service';
 import { PageTextsService } from './page-texts.service';
+import Interstitial from 'cordova-test/plugins/cordova-admob-plus/www/interstitial';
 // You need to create it in src/app folder. In src/app/privateValues.ts, give it
 //    export const adIntAndroid = '';
 //    export const adIntIOS = '';
@@ -28,10 +29,11 @@ export class AdService {
     AdUnitId: string
   };
 
-  _adReady$ = new Subject<boolean>();
+  private _adReady$ = new Subject<boolean>();
   // public get adReady$(): Observable<boolean> {
   //   return this._adReady$.pipe(first());
   // }
+  private _isAdMobReady = false;
 
   adReady$ = this._adReady$.pipe(shareReplay(1));
 
@@ -66,10 +68,21 @@ export class AdService {
         // * [2018-08-15 16:19] Initialize it
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.requestAd(self.msAdv.InterstitialAdType.display, self.adWin.AppId, self.adWin.AdUnitId);
-        } else if (!!window['AdMob']) {
-          self.interstitial.prepareInterstitial(
-            {adId: self.admobid.interstitial, autoShow: false}
-          );
+        } else if (!!window['admob']) {
+          (<Interstitial>self.interstitial).load(
+            {
+              id: {
+                android: self.admobid.interstitial,
+                ios: self.admobid.interstitial
+              }
+            }
+            // {adId: self.admobid.interstitial, autoShow: false}
+          ).then( () => {
+            self._isAdMobReady = true;
+          }).catch(err => {
+            console.log(err);
+            self._isAdMobReady = false;
+          });
         }
       }
     });
@@ -79,11 +92,8 @@ export class AdService {
     const self = this;
     if (!!window['MicrosoftNSJS']) {
       return self.interstitial.state === window['MicrosoftNSJS'].Advertising.InterstitialAdState.ready;
-    } else if (!!window['AdMob']) {
-      const action = new Promise<boolean>((res, rej) => {
-        self.interstitial.isInterstitialReady(res);
-      });
-      return await action;
+    } else if (!!window['admob']) {
+      return self._isAdMobReady;
     } else {
       return false;
     }
@@ -100,8 +110,9 @@ export class AdService {
          : "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad.");
         if (!!window['MicrosoftNSJS']) {
           self.interstitial.show();
-        } else if (!!window['AdMob']) {
-          self.interstitial.showInterstitial();
+        } else if (!!window['admob']) {
+          self.interstitial.show();
+          self._isAdMobReady = false;
         }
         // * [2018-08-18 15:47] Renew it 2 min later
         setTimeout(() => {
@@ -170,8 +181,8 @@ export class AdService {
 
     if (self.device.isCordova) {
       self.device.onDeviceReady.subscribe(_ => {
-        if (!!window['AdMob']) {
-          self.interstitial = window['AdMob'];
+        if (!!window['admob']) {
+          self.interstitial = window['admob'].interstitial as Interstitial;
           self._adReady$.next(true);
         } else {
           self._adReady$.next(false);
