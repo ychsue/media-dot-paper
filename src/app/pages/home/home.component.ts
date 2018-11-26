@@ -211,18 +211,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onStoryOpen(story: IStory) {
     const duplicatedStory = Object.assign({}, story);
-    this.meService.initMe(duplicatedStory);
     this.gv.shownPage = PageType.MediaEdit;
+    this.meService.initMe(duplicatedStory);
     // * [2018-07-19 21:28] Tell navbar that you select a story
     this.meService.sideClickType = SideClickType.select;
   }
 
-  async onLoadDailySample() {
+  async onLoadDailySample(ev: MouseEvent) {
     const today = new Date();
     // tslint:disable-next-line:max-line-length
     const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt?date=${today.getDate()}${today.getMinutes()}`;
     const self = this;
-    let story;
+    let story: IStory;
     try {
       story = await self.http.get(url, {responseType: 'text'}).pipe(map(res => {
         return self.storyService.getAStoryFromString(res);
@@ -233,8 +233,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (!!story) {
       story.modifyTime = 0;
-      self.meService.initMe(story);
       this.gv.shownPage = PageType.MediaEdit;
+      self.meService.initMe(story);
       this.meService.sideClickType = SideClickType.new;
     }
   }

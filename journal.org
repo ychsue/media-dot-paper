@@ -2,6 +2,13 @@
 1. I share the ~videoEle~ of ~player.component~ through ~cross-comp.service~ so that it can be updated by any other components.
 2. In fact, I hope that I can solve it through ~draglist~; however, I cannot achieve this goal in this commit.
 3. Therefore, I tried to modify ~mdps-list~, ~me-main-dashboard~ and ~swap-icon~ to make it work. And it works.
+4. In today's 2nd commission, I tried to send the click-event argument to the calling method. Well, it happened that the 2nd click will start to load the media. Hm... why? I have tried to send that click-event argument into the ~playerComponent.initMe~ method but no use. 
+    Possible reason:
+    a. The ~initMe~ is called inside a ~subscribe~.
+        - If so, why does the 2nd click can trigger it?
+    b. The ~display~ of ~MediaEditComponent~ and ~videoEle~ are ~none~.
+        - If so, should I waiting for them until they are visible? How? 
+        * ************** KEEP IN MIND ******************** *
 
 * [2018-11-22 Thu] It can work on iOS and macOS now.
 After removing ~cordova-plugin-admobpro~ and adding ~cordova-admob-plus~, it throwed a lot of error.

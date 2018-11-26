@@ -94,14 +94,14 @@ export class DraglistComponent implements OnInit, OnDestroy {
     this.unsubscribed$ = null;
   }
 
-  onClick() {
+  onClick(ev: MouseEvent) {
     if (this._isDeleted === false) {
       // const self = this;
       // if ((!!window['cordova'] && (cordova.platformId === 'ios'))) {
       //   this.crossComp.videoEle.src = (<IStory>self.story).urlOrID;
       //   this.crossComp.videoEle.load();
       // }
-      this.contentClick.next();
+      this.contentClick.next(ev);
     }
   }
 }

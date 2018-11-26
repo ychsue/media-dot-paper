@@ -26,7 +26,7 @@
 <div class="storedContainer flex-110 display-flex-column">
     <h3 class="flex-none">
         {{(!!pts)?pts.storedMedia:'已備份的媒體：'}}
-        <button mat-raised-button (click)="onLoadDailySample()">{{(!!pts)?pts.dailySample:'每日一例'}}</button>
+        <button mat-raised-button (click)="onLoadDailySample($event)">{{(!!pts)?pts.dailySample:'每日一例'}}</button>
     </h3>
 
     <div #listOfStored class="listStored flex-110 display-flex-column">

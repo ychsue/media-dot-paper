@@ -3,7 +3,7 @@
         <mat-icon class="mat-18 left">delete</mat-icon>
         <mat-icon class="mat-18 right">delete</mat-icon>
     </div>
-    <div mat-button class="content" (pointerdown)="onContentPointerdown($event)" [style.transform]="'translateX('+deltaX+'px)'" (click)="onClick()" touch-action="none">
+    <div mat-button class="content" (pointerdown)="onContentPointerdown($event)" [style.transform]="'translateX('+deltaX+'px)'" (click)="onClick($event)" touch-action="none">
         <div class="badge">{{((gv.checkPerDay-story.viewTime)/86400000)|number: '1.0-0'}}</div>
         <div class="name">{{story.name}}</div>
     </div>
