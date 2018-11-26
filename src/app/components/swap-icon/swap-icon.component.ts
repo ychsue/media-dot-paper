@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { Subscription, Subject, of, timer } from 'rxjs';
+import { Subscription, Subject, of, timer, fromEvent } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
 import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge,
   pairwise, count, last, take, filter } from 'rxjs/operators';
 import { GvService } from '../../services/gv.service';
+import { CrossCompService } from 'src/app/services/cross-comp.service';
+import { MediaEditService } from 'src/app/services/media-edit.service';
+import { PlayerType } from 'src/app/vm/player-type.enum';
 
 @Component({
   selector: 'app-swap-icon',
@@ -56,7 +59,9 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     this.contentPointerdown$.next(ev);
   }
 
-  constructor(private device: DeviceService, private gv: GvService) { }
+  constructor(private device: DeviceService, private gv: GvService,
+    private meService: MediaEditService, private crossComp: CrossCompService // gotten videoEle from it
+    ) { }
 
   ngOnInit() {
     const self = this;
@@ -153,7 +158,14 @@ export class SwapIconComponent implements OnInit, OnDestroy {
 
   onBtnClick(ev) {
     const self = this;
-    this.contentClick.next(self.index);
+    // this.contentClick.next(self.index);
+    self.crossComp.clickVideoLoad_justIOS(() => {
+      const i = self.index;
+      self.meService.setiFrame(i);
+      if (i >= 0) {
+        this.meService.seekTime = this.meService.story.frames[i].start;
+      }
+    });
   }
 }
 

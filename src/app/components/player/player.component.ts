@@ -8,6 +8,7 @@ import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
 import { equalSegments } from '../../../../node_modules/@angular/router/src/url_tree';
 import { DeviceService } from '../../services/device.service';
+import { CrossCompService } from 'src/app/services/cross-comp.service';
 
 @Component({
   selector: 'app-player',
@@ -49,12 +50,14 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   containerEle: HTMLDivElement;
 
   constructor(public meService: MediaEditService, private YTservice: YoutubeService,
+    private crossComp: CrossCompService,  // keep videoEle in crossComp
     private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
   }
 
   ngOnInit() {
     const self = this;
     this.videoEle = this.ngVideo.nativeElement;
+    this.crossComp.videoEle = this.videoEle;
     this.youtubeEle = this.ngYoutube.nativeElement;
     this.containerEle = this.ngContainer.nativeElement;
     this.eventTriggers();
@@ -73,6 +76,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnDestroy(): void {
     this.unSubscribed.next(true);
     this.unSubscribed.complete();
+    this.crossComp.videoEle = null;
   }
 
   ngAfterViewChecked(): void {
@@ -406,11 +410,13 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     const self = this;
     const meType = this.meService.story.meType;
     const urlOrId = this.meService.story.urlOrID;
+    self.crossComp.isVideoEle = false;
     if (meType ===  PlayerType.url) {
       if (YoutubeService.isYoutubeURL(urlOrId)) {
         this.meService.story.meType = PlayerType.youtubeID;
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
+        self.crossComp.isVideoEle = true;
         this.videoSrc = urlOrId;
         this.videoEle.load();
         // * [2018-09-12 11:48] It might have been loaded
@@ -427,6 +433,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.ytVId = urlOrId;
       }
     } else if (meType === PlayerType.file) {
+      this.crossComp.isVideoEle = true;
       this.videoSrc = urlOrId;
         // * [2018-09-12 11:48] It might have been loaded
         if (this.videoEle.readyState === 4) {

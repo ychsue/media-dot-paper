@@ -219,7 +219,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async onLoadDailySample() {
     const today = new Date();
-    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt?date=${today.getDate()}`;
+    // tslint:disable-next-line:max-line-length
+    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt?date=${today.getDate()}${today.getMinutes()}`;
     const self = this;
     let story;
     try {

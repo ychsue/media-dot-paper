@@ -1,3 +1,8 @@
+* [2018-11-26 Mon] Because iOS does not load a video or audio unless the user performs a click, I tried to deal with this problem.
+1. I share the ~videoEle~ of ~player.component~ through ~cross-comp.service~ so that it can be updated by any other components.
+2. In fact, I hope that I can solve it through ~draglist~; however, I cannot achieve this goal in this commit.
+3. Therefore, I tried to modify ~mdps-list~, ~me-main-dashboard~ and ~swap-icon~ to make it work. And it works.
+
 * [2018-11-22 Thu] It can work on iOS and macOS now.
 After removing ~cordova-plugin-admobpro~ and adding ~cordova-admob-plus~, it throwed a lot of error.
 However, following the suggestions of the error messages, they can be solved.
