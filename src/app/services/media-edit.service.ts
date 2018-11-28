@@ -109,6 +109,8 @@ export class MediaEditService {
 
   isToShowStoryGSetting = false;
 
+  isHideMeSectionDashboard = false;
+
   pts: IPageTexts;
 
   constructor(private adService: AdService,

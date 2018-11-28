@@ -25,6 +25,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
   private _downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
   private _epsPX = 10;
   private _isDeleted = false;
+  private _downScrollTop = 0;
 
   private unsubscribed$ = new Subject<boolean>();
 
@@ -35,12 +36,12 @@ export class DraglistComponent implements OnInit, OnDestroy {
     this._downPos.sx = ev.screenX;
     this._downPos.sy = ev.screenY;
     this._downTime = ev.timeStamp;
+    this._downScrollTop = this.ccService.listOfStoredEle.scrollTop;
     this.contentPointerdown$.next(ev);
   }
 
   constructor(private device: DeviceService, private ccService: CrossCompService,
-    public gv: GvService,
-    private crossComp: CrossCompService // get videoEle
+    public gv: GvService
     ) { }
 
   ngOnInit() {
@@ -49,6 +50,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
     const moveBtn = (ev: PointerEvent) => {
       self.deltaX = ev.screenX - self._downPos.sx;
       self.deltaY = ev.screenY - self._downPos.sy;
+      self.ccService.listOfStoredEle.scrollTop = self._downScrollTop - self.deltaY;
       // console.log(this.deltaY);
     };
 

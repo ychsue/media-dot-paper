@@ -9,6 +9,13 @@
   <button mat-icon-button (click)="meService.onUpdateStory$$()" *ngIf="meService.sideClickType===sideClickType_.select">
     <mat-icon class="mat-18">update</mat-icon>
   </button>
+  <button mat-icon-button *ngIf="meService.isToShowList" style="position: relative" (click)="meService.isHideMeSectionDashboard=!meService.isHideMeSectionDashboard">
+    <mat-icon class="mat-18" style="position:absolute;top:4px;left:8px;">more_horiz</mat-icon>
+    <mat-icon class="mat-18" style="position:absolute;bottom:4px;left:8px;">more_horiz</mat-icon>
+    <mat-icon class="mat-18" style="position: absolute;top:9px;left:8px;color:red;"
+      *ngIf="meService.isHideMeSectionDashboard"
+    >clear</mat-icon>
+  </button>
 <div class="flex-spacer">
   <div>{{meService.story.title}}</div>
 </div>

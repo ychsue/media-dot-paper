@@ -1,7 +1,7 @@
 <div #container class="flex-110 min-height-0 display-flex-row position-relative">
   <div class="flex-110 display-flex-column" >
       <app-player class="flex-auto display-flex-column min-height-0" (heightChange)="playerHeight=$event;cdr.detectChanges()"></app-player>
-      <div class="flex-none">
+      <div class="flex-none" [style.display]="meService.isHideMeSectionDashboard?'none':'block'">
           <app-me-section-dashboard></app-me-section-dashboard>
       </div>
       <div class="flex-none">

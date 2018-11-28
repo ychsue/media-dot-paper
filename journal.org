@@ -1,3 +1,7 @@
+* [2018-11-28 Wed] Let the user can hide the me-section-dashboard
+1. To hide the ~me-section-dashboard~, I need to declare a property in ~media-edit.service~, set its style ~display~ in ~media-edit.component.html~ and toggle it in ~navbar.component.html~.
+2. Fix a bug which is coming from ~draglist~ because I fogot to let it to scroll its parent.
+
 * [2018-11-28 Wed] Make a video for iMac and correct the svg problem.
 1. In ~me-main-dashboard~, you can find that I add a dummy ~<rect>~ inside the ~<svg>~ because ios or osx might not clean up the ~<svg>~ when one of its ~<rect>~ is updated. Well, this ~<rect>~ is used to help it to make it intransparency so that it should be cleaned up once its content is changed.
 2. In ~app.component~ I tried to let the user can scroll up and down if the content of ~welcome~ and ~home~ are higher than my prediction.
