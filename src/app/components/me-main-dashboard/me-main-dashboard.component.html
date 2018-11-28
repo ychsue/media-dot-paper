@@ -3,6 +3,8 @@
     <span class="flex-none">0.0</span>
     <div #slidePart class="flex-auto display-flex-column" (click)="onChangeCurrentTime($event, slidePart)" >
       <svg #slideCanvas class="slideCanvas" [attr.viewBox]="'0 0 '+meService.duration+' '+'1'" [attr.preserveAspectRatio]="'none'">
+        <!-- For Apple system, I need a <rect> to cover the whole svg -->
+        <rect x="0" y="0" [attr.width]="meService.duration" height="1" [style.fill]="'white'"></rect>
         <rect *ngFor="let frame of meService.story.frames"
         [style.fill]="'rgba('+frame.colorR+','+frame.colorG+','+frame.colorB+','+((!!frame.colorA)?frame.colorA:0.9)+')'"
         [attr.width]= "(frame.end-frame.start)"

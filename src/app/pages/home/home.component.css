@@ -21,4 +21,5 @@ app-draglist {
 .listStored {
     overflow-y: auto;
     overflow-x: hidden;
+    min-height: 40px;
 }

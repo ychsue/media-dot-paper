@@ -1,3 +1,9 @@
+* [2018-11-28 Wed] Make a video for iMac and correct the svg problem.
+1. In ~me-main-dashboard~, you can find that I add a dummy ~<rect>~ inside the ~<svg>~ because ios or osx might not clean up the ~<svg>~ when one of its ~<rect>~ is updated. Well, this ~<rect>~ is used to help it to make it intransparency so that it should be cleaned up once its content is changed.
+2. In ~app.component~ I tried to let the user can scroll up and down if the content of ~welcome~ and ~home~ are higher than my prediction.
+   Hm... one tester told me that. Thanks to her.
+   By the way, I set the minimum height of the list of ~home.component~ to be ~40px~ so that at least the user can see the 1st item of the list and can scroll the list. 
+
 * [2018-11-26 Mon] Because iOS does not load a video or audio unless the user performs a click, I tried to deal with this problem.
 1. I share the ~videoEle~ of ~player.component~ through ~cross-comp.service~ so that it can be updated by any other components.
 2. In fact, I hope that I can solve it through ~draglist~; however, I cannot achieve this goal in this commit.

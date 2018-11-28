@@ -27,7 +27,7 @@
             <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
-            <button mat-icon-button mat-raised-button [ngClass]="{'largeBtn':(mainPlay.offsetWidth>300)&&(mainPlay.offsetHeight>150)}" (click)="onPlayPause()">
+            <button mat-icon-button mat-raised-button [ngClass]="{'largeBtn':(main.offsetWidth>300)&&(main.offsetHeight>450)}" (click)="onPlayPause()">
                 <svg viewBox="0 0 10 10" *ngIf="meService.state!==MEState.playing">
                     <polygon points="8,5 3,2 3,8" style="fill:darkblue"/>
                 </svg>
