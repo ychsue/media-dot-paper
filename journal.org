@@ -1,3 +1,5 @@
+* [2018-11-29 Thu] Submit it to Google Play ^_^.
+
 * [2018-11-29 Thu] Okay, the ios and osx part have been done.
 1. Because the background of the image for ~App Store~ cannot be transparent, I need to use an opaque one instead of the original one.
 2. Just update the version.
