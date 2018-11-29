@@ -1,3 +1,7 @@
+* [2018-11-29 Thu] Okay, the ios and osx part have been done.
+1. Because the background of the image for ~App Store~ cannot be transparent, I need to use an opaque one instead of the original one.
+2. Just update the version.
+
 * [2018-11-28 Wed] Let the user can hide the me-section-dashboard
 1. To hide the ~me-section-dashboard~, I need to declare a property in ~media-edit.service~, set its style ~display~ in ~media-edit.component.html~ and toggle it in ~navbar.component.html~.
 2. Fix a bug which is coming from ~draglist~ because I fogot to let it to scroll its parent.
