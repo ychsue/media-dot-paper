@@ -9,6 +9,7 @@ import { FsService } from '../services/fs.service';
 import { map, concatAll } from '../../../node_modules/rxjs/operators';
 import { PageTextsService } from '../services/page-texts.service';
 import { DeviceService } from '../services/device.service';
+import { GvService, PageType } from '../services/gv.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,9 +24,11 @@ export class NavbarComponent implements OnInit {
   sideClickType_ = SideClickType;
   isAllowSide = false;
 
+  PageType = PageType;
+
   constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone,
     private db: DbService, private fsService: FsService, private device: DeviceService,
-    public meService: MediaEditService,
+    public meService: MediaEditService, public gv: GvService,
     public msgService: MessageService, public ptsService: PageTextsService) {
     const self = this;
     this.nUnReadMsg = msgService.getNUnRead();

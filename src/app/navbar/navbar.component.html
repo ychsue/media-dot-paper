@@ -9,7 +9,7 @@
   <button mat-icon-button (click)="meService.onUpdateStory$$()" *ngIf="meService.sideClickType===sideClickType_.select">
     <mat-icon class="mat-18">update</mat-icon>
   </button>
-  <button mat-icon-button *ngIf="meService.isToShowList" style="position: relative" (click)="meService.isHideMeSectionDashboard=!meService.isHideMeSectionDashboard">
+  <button mat-icon-button *ngIf="meService.isToShowList&&(gv.shownPage===PageType.MediaEdit)" style="position: relative" (click)="meService.isHideMeSectionDashboard=!meService.isHideMeSectionDashboard">
     <mat-icon class="mat-18" style="position:absolute;top:4px;left:8px;">more_horiz</mat-icon>
     <mat-icon class="mat-18" style="position:absolute;bottom:4px;left:8px;">more_horiz</mat-icon>
     <mat-icon class="mat-18" style="position: absolute;top:9px;left:8px;color:red;"
@@ -23,14 +23,15 @@
     <mat-icon class="mat-18">event_note</mat-icon>
   </button>
 
-  <button id="tgManiSide" mat-icon-button (click)="meService.isSideMani=!meService.isSideMani" *ngIf="meService.isToShowList">
+  <button id="tgManiSide" mat-icon-button (click)="meService.isSideMani=!meService.isSideMani"
+    *ngIf="meService.isToShowList&&(gv.shownPage===PageType.MediaEdit)&&(meService?.story?.iFrame>=0)">
     <img src="assets/PlayRight.svg" *ngIf="meService.isSideMani"/>
     <img src="assets/PlayLeft.svg" *ngIf="!meService.isSideMani"/>
     <span class="forCD" *ngIf="meService.isSideMani" >show control panel on main window</span>
     <span class="forCD" *ngIf="!meService.isSideMani" >show control panel upon the MDP list</span>
   </button>
 
-  <button mat-icon-button *ngIf="isAllowSide" (click)="meService.isToShowList=!meService.isToShowList">
+  <button mat-icon-button *ngIf="isAllowSide&&(gv.shownPage===PageType.MediaEdit)" (click)="meService.isToShowList=!meService.isToShowList">
       <mat-icon class="mat-18">list</mat-icon>
       <span class="forCD" *ngIf="meService.isToShowList">To hide the MDP list</span>
       <span class="forCD" *ngIf="!meService.isToShowList">To show the MDP list</span>
