@@ -11,7 +11,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "cordova-admob-plus": "0.13.0",
-        "cordova-android": "^7.1.1",
+        "cordova-android": "^7.1.4",
         "cordova-browser": "^5.0.3",
         "cordova-clipboard": "file:../../modified-cordova-plugins/cordova-clipboard",
         "cordova-ios": "^4.5.5",
@@ -47,8 +47,8 @@
             "browser",
             "osx",
             "windows",
-            "android",
-            "ios"
+            "ios",
+            "android"
         ]
     }
 }

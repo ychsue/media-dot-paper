@@ -7,6 +7,11 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-admob-plus": {
+      "APP_ID_ANDROID": "ca-app-pub-3940256099942544~3347511713",
+      "PLAY_SERVICES_VERSION": "16.0.0",
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
     "cordova-clipboard": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
@@ -30,14 +35,12 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-admob-plus": {
-      "APP_ID_ANDROID": "ca-app-pub-3940256099942544~3347511713",
-      "PLAY_SERVICES_VERSION": "16.0.0",
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
