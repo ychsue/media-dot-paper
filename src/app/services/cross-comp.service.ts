@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 export class CrossCompService {
 
   listOfStoredEle: HTMLElement; // list of home.component for draglist
+  listOfMDP: HTMLElement;
 
   videoEle: HTMLVideoElement;
   isVideoEle = false;

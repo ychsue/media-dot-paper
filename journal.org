@@ -1,3 +1,8 @@
+* [2018-12-6 Thu] Now deleting a piece of MDP is by swipping the colored-circles horizontally.
+1. Because setting ~gv.isJustPointerEvents=true~ will take over the pointerevents, i.e., even the click event will be ignored, I still have to trigger click event by myself.
+2. Since I still need the vertical scroll for the list of MDP, I change the way to delete a piece of MDP.
+3. I also enlarge the default size of the "Play" button.
+
 * [2018-12-5 Wed] Using Android Studio 3.3 Beta to compile this App and it works.
 Add a help button.
 

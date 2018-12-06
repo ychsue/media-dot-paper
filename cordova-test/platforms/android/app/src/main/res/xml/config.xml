@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="tw.at.yescirculation.mediadotpaper" osx-CFBundleIdentifier="tw.at.yescirculation.mediadotpaperios" packageName="48028Young-ChungHsue.MediaDotPaper" version="2018.1204.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="tw.at.yescirculation.mediadotpaper" osx-CFBundleIdentifier="tw.at.yescirculation.mediadotpaperios" packageName="48028Young-ChungHsue.MediaDotPaper" version="2018.1206.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="AdMob">
         <param name="android-package" value="admob.plugin.AdMob" />
     </feature>
@@ -43,6 +43,7 @@
     <allow-navigation href="https://*.youtube.com" />
     <allow-navigation href="https://*.ytimg.com" />
     <allow-navigation href="https://*.youtube-nocookie.com" />
+    <allow-navigation href="about:*" />
     <hook src="scripts/prepareAngular6App.js" type="before_prepare" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

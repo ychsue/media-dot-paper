@@ -47,15 +47,18 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   private _downTime = 0;
   private _downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
   private _epsPX = 10;
+  private _scrollTop = 0;
 
   // * inner events
   protected contentPointerdown$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
+    this.gv.isJustPointerEvents = true;
     this._downPos.sx = ev.screenX;
     this._downPos.sy = ev.screenY;
     this._downTime = ev.timeStamp;
     this._duringAction = whichBtnAction.none;
+    this._scrollTop = this.crossComp.listOfMDP.scrollTop;
     this.contentPointerdown$.next(ev);
   }
 
@@ -67,9 +70,14 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     const self = this;
 
     const moveBtn = (ev: PointerEvent) => {
-      self.deltaX = ev.screenX - self._downPos.sx;
-      self.deltaY = ev.screenY - self._downPos.sy;
-      // console.log(this.deltaY);
+      const dx = ev.screenX - self._downPos.sx;
+      const dy = ev.screenY - self._downPos.sy;
+      if (Math.abs(dx) > Math.abs(dy)) {
+        self.deltaX = dx;
+      } else {
+        self.deltaY = dy;
+        self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'smooth'});
+      }
     };
     const holdOrNot = () => {
       if (self._duringAction !== whichBtnAction.none) {return; }
@@ -82,7 +90,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     const clickDeleteOrIgnore = (ev: PointerEvent) => {
       if ((self._duringAction !== whichBtnAction.none) && (self._duringAction !== whichBtnAction.longerThanHold)) {return; }
       const dt = ev.timeStamp - self._downTime;
-      if (Math.abs(self.deltaY / dt) > self.maxSpeed) {
+      if (Math.abs(self.deltaX / dt) > self.maxSpeed) {
         self._actionEmitted.next(whichBtnAction.delete);
       } else if ((self._duringAction === whichBtnAction.none) &&
         (Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
@@ -91,6 +99,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     };
 
     const refresh = () => {
+      self.gv.isJustPointerEvents = false;
       self.deltaX = 0;
       self.deltaY = 0;
       this._duringAction = whichBtnAction.none;
@@ -99,6 +108,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
     self._actionEmitted.pipe(takeUntil(self.unsubscribed$)).subscribe(which => {
       self._duringAction = which;
       if (self._duringAction === whichBtnAction.click) {
+        self.onBtnClick(null); // for iOS
         self.contentClick.next();
       } else if (self._duringAction === whichBtnAction.delete) {
         self.delete.next();

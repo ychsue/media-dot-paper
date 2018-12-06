@@ -33,6 +33,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
   protected contentPointerdown$ = new Subject<PointerEvent>();
 
   onContentPointerdown(ev: PointerEvent) {
+    this.gv.isJustPointerEvents = true;
     this._downPos.sx = ev.screenX;
     this._downPos.sy = ev.screenY;
     this._downTime = ev.timeStamp;
@@ -48,9 +49,14 @@ export class DraglistComponent implements OnInit, OnDestroy {
     const self = this;
 
     const moveBtn = (ev: PointerEvent) => {
-      self.deltaX = ev.screenX - self._downPos.sx;
-      self.deltaY = ev.screenY - self._downPos.sy;
-      self.ccService.listOfStoredEle.scrollTop = self._downScrollTop - self.deltaY;
+      const dx = ev.screenX - self._downPos.sx;
+      const dy = ev.screenY - self._downPos.sy;
+      if (Math.abs(dx) > Math.abs(dy)) {
+        self.deltaX = dx;
+      } else {
+        self.deltaY = dy;
+        self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'smooth'});
+      }
       // console.log(this.deltaY);
     };
 
@@ -60,7 +66,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
         self.delete.next();
         self._isDeleted = true; // Since it is deleted, it cannot work anymore
       }  else if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
-        // self.contentClick.next();
+        self.contentClick.next(ev);
       }
     };
 
@@ -79,6 +85,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
                 clickDeleteOrIgnore(uv);
                 self.deltaX = 0;
                 self.deltaY = 0;
+                self.gv.isJustPointerEvents = false;
                 return uv;
               })
             )
@@ -96,14 +103,4 @@ export class DraglistComponent implements OnInit, OnDestroy {
     this.unsubscribed$ = null;
   }
 
-  onClick(ev: MouseEvent) {
-    if (this._isDeleted === false) {
-      // const self = this;
-      // if ((!!window['cordova'] && (cordova.platformId === 'ios'))) {
-      //   this.crossComp.videoEle.src = (<IStory>self.story).urlOrID;
-      //   this.crossComp.videoEle.load();
-      // }
-      this.contentClick.next(ev);
-    }
-  }
 }

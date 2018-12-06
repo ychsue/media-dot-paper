@@ -5,11 +5,10 @@
   <button mat-icon-button mat-raised-button
   class="eachButton"
   touch-action="none"
-  [style.transform]="'translateY('+deltaY+'px)'"
+  [style.transform]="'translateX('+deltaX+'px)'"
   [style.background-color]="'rgba('+bR+','+bG+','+bB+','+bA+')'"
   [class.blink]="isBlink"
   (pointerdown)="onContentPointerdown($event)"
-  (click)="onBtnClick($event)"
   >
   <span>{{index}}</span>
 </button>

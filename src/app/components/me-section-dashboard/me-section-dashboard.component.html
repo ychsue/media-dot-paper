@@ -11,7 +11,7 @@
         </button>
   </div>
 
-  <div class="listContainer">
+  <div #listContainer class="listContainer">
     <app-swap-icon
     *ngFor="let aFrame of meService.story.frames; let i = index;" 
     [index]="i"

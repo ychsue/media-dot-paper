@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
 import { AFrame } from '../../vm/a-frame';
 import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType, SetStartEnd } from 'src/app/dialog/dialog.component';
 import { first } from 'rxjs/operators';
+import { CrossCompService } from 'src/app/services/cross-comp.service';
 
 @Component({
   selector: 'app-me-section-dashboard',
@@ -12,9 +13,13 @@ import { first } from 'rxjs/operators';
 })
 export class MeSectionDashboardComponent implements OnInit {
 
-  constructor(public meService: MediaEditService, public diaglog: MatDialog) { }
+  @ViewChild('listContainer')
+  listOfMDP: ElementRef;
+
+  constructor(public meService: MediaEditService, public diaglog: MatDialog, private ccService: CrossCompService) { }
 
   ngOnInit() {
+    this.ccService.listOfMDP = this.listOfMDP.nativeElement;
   }
 
   onAddFrame() {
