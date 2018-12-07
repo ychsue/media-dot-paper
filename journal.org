@@ -1,3 +1,7 @@
+* [2018-12-7 Fri] Make the output file name available.
+For this purpose, I wrote a helper named ~string-helper~ to help me convert the special chars to be chinese one.
+Those chars are listed in [[https://en.wikipedia.org/wiki/Filename][this wikipedia]].
+
 * [2018-12-6 Thu] Now deleting a piece of MDP is by swipping the colored-circles horizontally.
 1. Because setting ~gv.isJustPointerEvents=true~ will take over the pointerevents, i.e., even the click event will be ignored, I still have to trigger click event by myself.
 2. Since I still need the vertical scroll for the list of MDP, I change the way to delete a piece of MDP.

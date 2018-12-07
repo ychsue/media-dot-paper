@@ -13,6 +13,7 @@ import { MessageService } from '../../services/message.service';
 import { utterType } from 'src/app/vm/story-g-setting';
 import { SbvService } from 'src/app/services/sbv.service';
 import { DialogComponent, DialogType } from 'src/app/dialog/dialog.component';
+import { StringHelper } from 'src/app/extends/string-helper';
 
 @Component({
   selector: 'app-story',
@@ -59,7 +60,8 @@ export class StoryComponent implements OnInit {
     if (!!window.cordova === true) {
       e.preventDefault();
       self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), self.meService.story.viewTime
-        + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
+        // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
+        + StringHelper.toFileName(self.meService.story.name) + '.json');
     } else {
       let blob: Blob;
       // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
@@ -85,7 +87,9 @@ export class StoryComponent implements OnInit {
       self.meService.story, shiftT);
     // * [2018-09-04 12:00] The part to store the .SBV file
     if (!!window.cordova === true) {
-      self.fs.saveTxtFile$$(input, self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
+      self.fs.saveTxtFile$$(input,
+        // self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
+        StringHelper.toFileName(self.meService.story.name) + '.sbv');
     } else {
       let blob: Blob;
       // blob = new Blob([input], {type: 'text/plain'});
