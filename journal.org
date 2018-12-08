@@ -1,3 +1,14 @@
+* [2018-12-8 Sat] Try to let the instructor can set their own MDP source : Part I
+In ~home.component~, I tried to get data from ~dropbox~ as described in [[https://www.macworld.com/article/2009999/directly-downloading-dropbox-files.html][this article]].
+
+However, It's not enough, I still need to solve the problems of ~Access-Control-Allow-Origin~ and ~cache~.
+
+I need to decalre them in the headers of my ~http.get~ query as you can see in ~home.component~.
+
+Once I changed the last para of the link of my Dropbox file from ~dl=0~ to ~dl=1~, it works. ^_^
+
+Oh, it does not work in ~ng serve~, but it works on iOS, android.
+
 * [2018-12-7 Fri] Make the output file name available.
 For this purpose, I wrote a helper named ~string-helper~ to help me convert the special chars to be chinese one.
 Those chars are listed in [[https://en.wikipedia.org/wiki/Filename][this wikipedia]].

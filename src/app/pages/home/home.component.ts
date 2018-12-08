@@ -15,7 +15,7 @@ import { ClipboardService } from '../../services/clipboard.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { CrossCompService } from '../../services/cross-comp.service';
 import { IStory } from 'src/app/vm/story';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -220,11 +220,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   async onLoadDailySample(ev: MouseEvent) {
     const today = new Date();
     // tslint:disable-next-line:max-line-length
-    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt?date=${today.getDate()}${today.getMinutes()}`;
+    // const url = `https://www.dropbox.com/s/fzapl6v4019mxt3/DailySample.txt?dl=1`;
+    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
+    // ?date=${today.getDate()}${today.getMinutes()}`;
     const self = this;
     let story: IStory;
     try {
-      story = await self.http.get(url, {responseType: 'text'}).pipe(map(res => {
+      let opts = new HttpHeaders();
+      opts = opts.append("Access-Control-Allow-Methods" , "GET, POST, DELETE, PUT");
+      opts = opts.append("Access-Control-Allow-Origin", "*");
+      opts = opts.append("Cache-Control", "no-cache, no-store, must-revalidate, post-check=0, pre-check=0");
+      opts = opts.append("Pragma", "no-cache");
+      opts = opts.append("Expires", "0");
+      story = await self.http.get(url, {responseType: 'text', headers: opts}).pipe(map(res => {
         return self.storyService.getAStoryFromString(res);
       })).toPromise();
     } catch (error) {
