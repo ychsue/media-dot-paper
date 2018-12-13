@@ -25,5 +25,6 @@ export class GvService {
 export enum PageType {
   Home,
   MediaEdit,
+  AppSetting,
   Test
 }

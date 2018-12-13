@@ -221,7 +221,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const today = new Date();
     // tslint:disable-next-line:max-line-length
     // const url = `https://www.dropbox.com/s/fzapl6v4019mxt3/DailySample.txt?dl=1`;
-    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
+    const url = `https://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
     // ?date=${today.getDate()}${today.getMinutes()}`;
     const self = this;
     let story: IStory;

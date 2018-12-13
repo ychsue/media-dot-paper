@@ -1,3 +1,11 @@
+* [2018-12-13 Thu] Try to embed a new component for app's setting
+In this setting, at this moment I just let the user can set their own "Daily Sample" links.
+Just make the component, not yet make it work.
+Let me try to update this App from Angular 6 to 7.
+
+* [2018-12-13 Thu] I got the error message "Preflight response is not successful" when it is in "ng serve" 
+If no option in ~HttpHeaders~, it works when running "ng serve". However, even just appended one option inside ~HttpHeaders~, I got this error. 
+
 * [2018-12-8 Sat] Try to let the instructor can set their own MDP source : Part I
 In ~home.component~, I tried to get data from ~dropbox~ as described in [[https://www.macworld.com/article/2009999/directly-downloading-dropbox-files.html][this article]].
 
