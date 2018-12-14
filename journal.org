@@ -1,3 +1,10 @@
+* [2018-12-13 Thu] I have updated Angular from 6 to 7
+Following [[https://update.angular.io][this web page's guide]], I can update it.
+Although ~ng serve~ can work with a little problems, ~ng build --prod~ works unexpected.
+I need to update other things to ~latest~ version as described in [[https://medium.com/@jeroenouw/upgrade-to-angular-7-beta-within-10-minutes-c14fc380edd][this article]].
+
+I did not update all of them, you can check my ~package.json~ to check what I have modified.
+
 * [2018-12-13 Thu] Try to embed a new component for app's setting
 In this setting, at this moment I just let the user can set their own "Daily Sample" links.
 Just make the component, not yet make it work.
