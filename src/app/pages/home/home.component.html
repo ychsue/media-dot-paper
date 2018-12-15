@@ -4,6 +4,9 @@
 <div class="flex-none display-flex-column">
     <div class="display-flex-row">
         <h3 class="flex-auto" [innerText]="(!!pts)?pts.newMedia:'讀入新的媒體：'"></h3>
+        <button mat-icon-button (click)="gv.shownPage=pageType.AppSetting">
+            <mat-icon>build</mat-icon>
+        </button>
         <a mat-icon-button class="flex-none" [href]="'http://memorizeYC.azurewebsites.net/Static/MediaDotPaper/tutorial/'">
             <mat-icon>help</mat-icon>
             <span class="forCD">Help</span>

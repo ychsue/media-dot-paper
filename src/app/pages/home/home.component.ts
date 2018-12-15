@@ -76,6 +76,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios')) ||
         (!!window['cordova'] === false)
       ));
+
+    // * [2018-12-15 19:32] For browser, you can input the mdp through its query string
+    if (!!window['cordova'] === false && !!location.search) {
+      const qString = location.search;
+      const regex = /mdpurl=(.+)/i;
+      const mdpUrl = qString.match(regex);
+      if (!!mdpUrl && mdpUrl.length > 1) {
+        self.onLoadDailySample(null, mdpUrl[1]);
+      }
+    }
   }
 
   ngAfterViewInit() {
@@ -217,14 +227,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.meService.sideClickType = SideClickType.select;
   }
 
-  async onLoadDailySample(ev: MouseEvent) {
-    const today = new Date();
+  async onLoadDailySample(ev: MouseEvent, stUrl: string = null) {
     // tslint:disable-next-line:max-line-length
     // const url = `https://www.dropbox.com/s/fzapl6v4019mxt3/DailySample.txt?dl=1`;
     // const url = `https://docs.google.com/uc?export=download&id=1M6e0ZON7vcN_KzSh6i7QyupnUDCGUSz9`;
     // const url = `https://onedrive.live.com/download?cid=0D39FB11249E9E67&resid=D39FB11249E9E67%2158024&authkey=ABi18L1PpwQismM`;
-    const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
-    // ?date=${today.getDate()}${today.getMinutes()}`;
+    const url = `https://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
+
+    stUrl = (!!stUrl) ? stUrl : url;
     const self = this;
     let story: IStory;
     try {
@@ -234,7 +244,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       opts = opts.append("Cache-Control", "no-cache, no-store, must-revalidate, post-check=0, pre-check=0");
       opts = opts.append("Pragma", "no-cache");
       opts = opts.append("Expires", "0");
-      story = await self.http.get(url, {responseType: 'text', headers: opts}).pipe(map(res => {
+      story = await self.http.get(stUrl, {responseType: 'text', headers: opts}).pipe(map(res => {
         return self.storyService.getAStoryFromString(res);
       })).toPromise();
     } catch (error) {
