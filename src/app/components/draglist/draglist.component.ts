@@ -55,7 +55,19 @@ export class DraglistComponent implements OnInit, OnDestroy {
         self.deltaX = dx;
       } else {
         self.deltaY = dy;
-        self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'smooth'});
+        // * [2018-12-08 16:58] Scroll smoothly
+        let canSmoothScroll = false;
+        if (!!self.ccService.listOfStoredEle.scrollTo) {
+          try {
+            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'smooth'});
+            canSmoothScroll = true;
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        if (canSmoothScroll === false) {
+          self.ccService.listOfStoredEle.scrollTop = self._downScrollTop - self.deltaY;
+        }
       }
       // console.log(this.deltaY);
     };

@@ -76,7 +76,21 @@ export class SwapIconComponent implements OnInit, OnDestroy {
         self.deltaX = dx;
       } else {
         self.deltaY = dy;
-        self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'smooth'});
+        // self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'smooth'});
+        // * [2018-12-08 16:58] Scroll smoothly
+        let canSmoothScroll = false;
+        if (!!self.crossComp.listOfMDP.scrollTo) {
+          try {
+            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'smooth'});
+            canSmoothScroll = true;
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        if (canSmoothScroll === false) {
+          self.crossComp.listOfMDP.scrollTop = self._scrollTop - self.deltaY;
+        }
+
       }
     };
     const holdOrNot = () => {

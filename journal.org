@@ -1,3 +1,6 @@
+* [2018-12-8 Sat] Oops, windows uwp does not support ~scrollTo~ and will crash the App.
+I think the same situation will be happened in android system. 
+
 * [2018-12-8 Sat] Try to let the instructor can set their own MDP source : Part I
 In ~home.component~, I tried to get data from ~dropbox~ as described in [[https://www.macworld.com/article/2009999/directly-downloading-dropbox-files.html][this article]].
 

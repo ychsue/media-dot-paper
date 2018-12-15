@@ -221,6 +221,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const today = new Date();
     // tslint:disable-next-line:max-line-length
     // const url = `https://www.dropbox.com/s/fzapl6v4019mxt3/DailySample.txt?dl=1`;
+    // const url = `https://docs.google.com/uc?export=download&id=1M6e0ZON7vcN_KzSh6i7QyupnUDCGUSz9`;
+    // const url = `https://onedrive.live.com/download?cid=0D39FB11249E9E67&resid=D39FB11249E9E67%2158024&authkey=ABi18L1PpwQismM`;
     const url = `http://memorizeyc.azurewebsites.net/static/mediadotpaper/assets/DailySample.txt`;
     // ?date=${today.getDate()}${today.getMinutes()}`;
     const self = this;
