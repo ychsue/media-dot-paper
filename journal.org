@@ -1,3 +1,7 @@
+* [2018-12-15 Sat] I added a query string 'mdpurl' for browser; however, OCRS error for it when I want to query data from it.
+Another question is that I need to merge my windows part.
+First time I need to deal with it. -_- ||
+
 * [2018-12-13 Thu] I have updated Angular from 6 to 7
 Following [[https://update.angular.io][this web page's guide]], I can update it.
 Although ~ng serve~ can work with a little problems, ~ng build --prod~ works unexpected.
