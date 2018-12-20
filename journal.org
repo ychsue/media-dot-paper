@@ -1,3 +1,7 @@
+* [2018-12-20 Thu] It has been tested on windows
+1. By the way, providing a height for ~flex:1 1 0px~ is better that why I want to modify ~me-main-dashboard~ part.
+2. Comparing to OneDrive and GoogleDrive, Dropbox is easier to share its contents. For windows, you need to create an ~embed~ link on its website at first. Then you can get this link on your windows file explorer.
+
 * [2018-12-20 Thu] Now, the user can set their own DailySample links
 It has been tested on Android, iOS and iMac.
 It is not multilingual yet and I still not deal with the special cases for oneDrive, googleDrive and Dropbox.

@@ -27,7 +27,6 @@ export class DailySampleComponent implements OnInit {
       case enumDSAction.delete:
         self.dsService.delete(dSItem);
         return;
-        break;
       case enumDSAction.add:
         break;
       case enumDSAction.edit:
