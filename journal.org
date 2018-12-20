@@ -1,3 +1,7 @@
+* [2018-12-20 Thu] Now, the user can set their own DailySample links
+It has been tested on Android, iOS and iMac.
+It is not multilingual yet and I still not deal with the special cases for oneDrive, googleDrive and Dropbox.
+
 * [2018-12-15 Sat] I added a query string 'mdpurl' for browser; however, OCRS error for it when I want to query data from it.
 Another question is that I need to merge my windows part.
 First time I need to deal with it. -_- ||

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PageTextsService } from '../services/page-texts.service';
 import { concat } from 'rxjs/operators';
+import { DailySample } from '../vm/daily-sample';
 
 @Component({
   selector: 'app-dialog',
@@ -43,6 +44,12 @@ export class DialogComponent implements OnInit {
     this.whichOne.start = false;
     this.whichOne.end = false;
   }
+
+  onDailySampleInput() {
+    const dSample: DailySample = this.data.data;
+    dSample.createTime = (!!dSample.createTime) ? dSample.createTime : Date.now();
+    this.dialogRef.close(dSample);
+  }
 }
 
 export enum DialogType {
@@ -50,6 +57,7 @@ export enum DialogType {
   alert = 1,
   inputNum = 2,
   startOrEnd = 3,
+  dailySample = 4
 }
 
 export interface DialogData {
@@ -60,6 +68,7 @@ export interface DialogData {
   ith?: number; // startOrEnd
   aRGB?: {a: number, r: number, g: number, b: number};
   startEnd?: [number, number];
+  data?: any;
 }
 
 export interface SetStartEnd {

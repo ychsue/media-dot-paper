@@ -1,0 +1,12 @@
+mat-list-item:hover {
+    cursor: pointer;
+    background-color: azure;
+}
+
+.selected {
+    background-color: darkgoldenrod;
+}
+
+mat-list-item:hover.selected {
+    background-color: yellow;
+}

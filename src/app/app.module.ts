@@ -47,6 +47,7 @@ import { SettingMediaComponent } from './components/setting-media/setting-media.
 import { InProgressComponent } from './components/in-progress/in-progress.component';
 import { SbvService } from './services/sbv.service';
 import { AppSettingComponent } from './pages/app-setting/app-setting.component';
+import { DailySampleComponent } from './components/daily-sample/daily-sample.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AppSettingComponent } from './pages/app-setting/app-setting.component';
     StoryGsettingPlateComponent,
     SettingMediaComponent,
     InProgressComponent,
-    AppSettingComponent
+    AppSettingComponent,
+    DailySampleComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [

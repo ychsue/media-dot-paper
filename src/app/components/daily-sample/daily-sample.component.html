@@ -1,0 +1,19 @@
+<fieldset>
+    <legend>預設</legend>
+    <mat-list>
+        <mat-list-item [class.selected]="dsService.defaultDS1===dsService.currentDS" (click)="onSelDS(dsService.defaultDS1)">{{dsService.defaultDS1.name}}</mat-list-item>
+    </mat-list>
+</fieldset>
+<fieldset>
+    <legend>自訂： </legend>
+    <button mat-raised-button (click)="onCustonDSAction(eDSAction.add)">新增<mat-icon>add</mat-icon></button>
+    <mat-list>
+        <mat-list-item *ngFor="let ds of dsService.listOfDS" (click)="onSelDS(ds)" [class.selected]="ds===dsService.currentDS">
+            <div class="display-flex-row width-100">
+                <span class="flex-110">{{ds.name}}</span>
+                <button mat-icon-button (click)="onCustonDSAction(eDSAction.edit,ds)"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click)="onCustonDSAction(eDSAction.delete,ds)"><mat-icon>delete</mat-icon></button>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</fieldset>

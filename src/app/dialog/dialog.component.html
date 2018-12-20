@@ -20,20 +20,30 @@
 </div>
 
 <div *ngIf="data.dType===dialogType.startOrEnd" class="display-flex-column startOrEnd">
-    <h3>T = {{data.number|number:'1.0-3'}} 
+    <h3>T = {{data.number|number:'1.0-3'}}
         <button mat-raised-button mat-icon-button (click)="data.number=data.number+0.1">＋</button>
         <button mat-raised-button mat-icon-button (click)="data.number=data.number-0.1">－</button>
     </h3>
     <div class="display-flex-row startOrEnd">
-        <mat-checkbox [(ngModel)]="whichOne.start"  [ngClass]="{'hilite':whichOne.start}"color="primary">{{((whichOne.start)?data.number:data.startEnd[0])|number:'1.0-3'}}</mat-checkbox>
-        <button mat-icon-button mat-raised-button class="margin-12" [style.background-color]="'rgba('+data.aRGB.r+','+data.aRGB.g+','+data.aRGB.b+','+data.aRGB.a+')'"
-            (click)="onStartOrEnd()"
-        >
+        <mat-checkbox [(ngModel)]="whichOne.start" [ngClass]="{'hilite':whichOne.start}" color="primary">{{((whichOne.start)?data.number:data.startEnd[0])|number:'1.0-3'}}</mat-checkbox>
+        <button mat-icon-button mat-raised-button class="margin-12" [style.background-color]="'rgba('+data.aRGB.r+','+data.aRGB.g+','+data.aRGB.b+','+data.aRGB.a+')'" (click)="onStartOrEnd()">
             {{data.ith}}
         </button>
-        <mat-checkbox [(ngModel)]="whichOne.end" color="primary" [ngClass]="{'hilite':whichOne.end}" >{{((whichOne.end)?data.number:data.startEnd[1])|number:'1.0-3'}}</mat-checkbox>
+        <mat-checkbox [(ngModel)]="whichOne.end" color="primary" [ngClass]="{'hilite':whichOne.end}">{{((whichOne.end)?data.number:data.startEnd[1])|number:'1.0-3'}}</mat-checkbox>
     </div>
     <div class="button">
         <button mat-raised-button (click)="onStartOrEnd()">{{(!!pts)?pts.load:'載入'}}</button>
     </div>
+</div>
+
+<div *ngIf="data.dType===dialogType.dailySample" class="display-flex-column">
+    <mat-form-field>
+        <input #dsName matInput placeholder="名稱" [(ngModel)]="data.data.name" >
+    </mat-form-field>
+    <mat-form-field>
+        <input #dsURL matInput placeholder="URL" [(ngModel)]="data.data.URL" >
+    </mat-form-field>
+    <!-- This is a dummy div to resize this dialog -->
+    <div style="opacity:0;height:1px">{{dsURL.value}}</div> 
+    <button mat-raised-button *ngIf="!!dsName.value&&!!dsURL.value" (click)="onDailySampleInput()" >{{(!!pts)?pts.load:'載入'}}</button>
 </div>
