@@ -1,3 +1,8 @@
+* [2018-12-21 Fri] In osx, the ~InAppBrowser~ has its own setting.
+1. Since I need to open an URL from different components, I moved it into ~device.service~.
+2. Be careful, ~mat-icon-button~ will change the reference of ~a~ from ~a~ to ~ElementRef~.
+So, finally, I didn't declare ~mat-icon-button~ for my ~a~ of help.
+
 * [2018-12-20 Thu] It has been tested on windows
 1. By the way, providing a height for ~flex:1 1 0px~ is better that why I want to modify ~me-main-dashboard~ part.
 2. Comparing to OneDrive and GoogleDrive, Dropbox is easier to share its contents. For windows, you need to create an ~embed~ link on its website at first. Then you can get this link on your windows file explorer.

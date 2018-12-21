@@ -58,4 +58,11 @@ export class DeviceService {
 
     this.onWindowResize$ = fromEvent(window, 'resize') as Observable<Event>;
   }
+
+  onLinkToUrl(sUrl: string) {
+    if (!!window['cordova'] && cordova.platformId === 'osx') {
+      cordova['InAppBrowser'].open(sUrl, '_system', 'location=yes');
+    }
+  }
+
 }

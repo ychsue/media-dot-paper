@@ -23,3 +23,11 @@ app-draglist {
     overflow-x: hidden;
     min-height: 40px;
 }
+
+.icon-btn {
+    width:32px;
+    height: 32px;
+    font-size: 32px;
+    margin: 4px;
+    color: blue;
+}

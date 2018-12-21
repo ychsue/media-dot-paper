@@ -17,6 +17,7 @@ import { CrossCompService } from '../../services/cross-comp.service';
 import { IStory } from 'src/app/vm/story';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DailySampleService } from 'src/app/services/daily-sample.service';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-home',
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   pageType = PageType;
   constructor(public gv: GvService, public dialog: MatDialog, public ptsServic: PageTextsService,
-    public dsService: DailySampleService,
+    public dsService: DailySampleService, public device: DeviceService,
     private meService: MediaEditService, private db: DbService,
     private ngZone: NgZone, private fs: FsService, private http: HttpClient
     , private msg: MessageService, private clipboard: ClipboardService,

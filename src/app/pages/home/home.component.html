@@ -5,10 +5,12 @@
     <div class="display-flex-row">
         <h3 class="flex-auto" [innerText]="(!!pts)?pts.newMedia:'讀入新的媒體：'"></h3>
         <button mat-icon-button (click)="gv.shownPage=pageType.AppSetting">
-            <mat-icon>build</mat-icon>
+            <mat-icon style="color:blue;">build</mat-icon>
+            <span class="forCD">setting</span>
         </button>
-        <a mat-icon-button class="flex-none" [href]="'http://memorizeYC.azurewebsites.net/Static/MediaDotPaper/tutorial/'">
-            <mat-icon>help</mat-icon>
+        <a #gHelp class="flex-none" target="_blank" href="http://memorizeYC.azurewebsites.net/Static/MediaDotPaper/tutorial/" (click)="device.onLinkToUrl(gHelp.href)">
+            <!-- mat-icon-button will change gHelp from "a" to "ElementRef" -->
+            <mat-icon class="icon-btn">help</mat-icon>
             <span class="forCD">Help</span>
         </a>
     </div>
