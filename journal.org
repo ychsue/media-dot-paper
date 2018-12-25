@@ -1,3 +1,13 @@
+* [2018-12-25 Tue] I can get the content-type from Dropbox; however, I cannot get it from oneDrive and googleDrive
+1. To get the ~content-type~ from an ~URL~, you should run something like
+#+begin_src javascript
+        res = await self.http.request(new HttpRequest("HEAD", result, {reportProgress: true})).toPromise();
+        const ct: string = res.headers.get('Content-type');
+#+end_src
+    However, it does not work for OneDrive and GoogleDrive because they have redirected the link and I cannot get its ~HEAD~.
+
+2. Finally, I use an URL parameter ~ismdp=1~ to tell the loading from ~URL~ that the loading one is a MDP.
+
 * [2018-12-21 Fri] In osx, the ~InAppBrowser~ has its own setting.
 1. Since I need to open an URL from different components, I moved it into ~device.service~.
 2. Be careful, ~mat-icon-button~ will change the reference of ~a~ from ~a~ to ~ElementRef~.

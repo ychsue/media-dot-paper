@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DailySample } from '../vm/daily-sample';
+import { StringHelper } from '../extends/string-helper';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,7 @@ export class DailySampleService {
   }
 
   edit(ds: DailySample) {
+    ds.URL = StringHelper.refineLinkOfDGO(ds.URL);
     const ind = this.listOfDS.findIndex(x => x.createTime === ds.createTime);
     if (ind !== -1) {
       this.listOfDS[ind] = ds;
@@ -71,6 +73,7 @@ export class DailySampleService {
   }
 
   add(ds: DailySample) {
+    ds.URL = StringHelper.refineLinkOfDGO(ds.URL);
     this.listOfDS.push(ds);
     this._storeList();
   }

@@ -15,9 +15,10 @@ import { ClipboardService } from '../../services/clipboard.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { CrossCompService } from '../../services/cross-comp.service';
 import { IStory } from 'src/app/vm/story';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { DailySampleService } from 'src/app/services/daily-sample.service';
 import { DeviceService } from 'src/app/services/device.service';
+import { StringHelper } from 'src/app/extends/string-helper';
 
 @Component({
   selector: 'app-home',
@@ -180,11 +181,23 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         data: {dType: DialogType.inputUrl, url: self.Url}
       });
     });
-    dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(async (result: string) => {
       let story: IStory;
       if (!!result === false) {
         return;
-      } else if (!!(story = self.storyService.getAStoryFromString(result))) {
+      }
+      result = StringHelper.refineLinkOfDGO(result);
+      // * [2018-12-24 20:34] Check whether it is an MDP file
+      let res = null;
+      try {
+        if (/ismdp\=1/i.test(result)) {
+          res = await self.http.get(result, {responseType: 'text'}).toPromise();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      if (!!(story = self.storyService.getAStoryFromString(result)) ||
+        !!(story = self.storyService.getAStoryFromString(res))) {
       // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
         story.modifyTime = 0;
         self.meService.initMe(story);
