@@ -11,6 +11,8 @@ interface IPageTexts {
     adService: IAdService;
     welcomePage: IWelcomePage;
     sGsetComp: ISGsetComp;
+    appSettingPage: IAppSettingPage;
+    dailySampleComp: IDailySampleComp;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -103,6 +105,15 @@ interface ISGsetComp {
     all: string;
     tAction: string;
     rearrange: string;
+}
+interface IAppSettingPage {
+    hDailySample: string;
+}
+interface IDailySampleComp {
+    'default': string;
+    defName: string;
+    customize: string;
+    add: string;
 }
 interface IIso639 {
     ab: string;

@@ -5,7 +5,12 @@
     "module": "commonjs",
     "types": [
       "jasmine",
-      "node"
+      "node",
+      "cordova",
+      "winjs",
+      "winrt",
+      "youtube",
+      "cordova-plugin-file/types"
     ]
   },
   "files": [

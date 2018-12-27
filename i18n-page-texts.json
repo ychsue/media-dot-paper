@@ -90,6 +90,15 @@
             "tAction": "Actions",
             "rearrange": "Rearrange MDP"
         },
+        "appSettingPage": {
+            "hDailySample": "Setting <b>Daily Sample</b> button"
+        },
+        "dailySampleComp": {
+            "default": "Default:",
+            "defName": "Daily Sample",
+            "customize": "Customize:",
+            "add": "Add"
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

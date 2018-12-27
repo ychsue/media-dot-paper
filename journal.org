@@ -1,3 +1,15 @@
+* [2018-12-27 Thu] Multilingual & trying to use ~ng test~.
+I. For Jasmine & Karma Unit Testing:
+1. For ~ng test~, searching its video and then you'll find some useful videos.
+2. I cannot pass ~ng test~ at its compilation time because it doesn't know what is ~YT~, i.e., missing the definition of typings. Well, as this [[https://stackoverflow.com/questions/45932033/angular-test-not-seeing-types][StackOverflow's Q&A]] said, I need to declare the typings in ~tsconfig.spec.json~, too.
+3. Although it can pass the compilation now, it outputs a lot of errors such as it cannot recognize what is ~app-navbar~. Looks like it is not a short story, let me deal with it next time.
+
+II. For Multilingual
+    Editing ~i18n-page-texts.json~, ~gv.service.ts~ and making it works for ~daily-sample~ and ~app-setting~.
+
+III. For MDP
+    1. Because I need to modify the URL of the link of a file from GoogleDrive, OneDrive and Dropbox, I have done it in ~string-helper.refineLinkOfDGO~.
+    2. For the user who want to input a link of an MDP from ~URL~ button, once the URL with a parameter ~ismdp=1~, it will be dealt as a MDP instead of a media. 
 * [2018-12-25 Tue] I can get the content-type from Dropbox; however, I cannot get it from oneDrive and googleDrive
 1. To get the ~content-type~ from an ~URL~, you should run something like
 #+begin_src javascript

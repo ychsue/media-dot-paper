@@ -4,6 +4,8 @@ import { DailySample } from 'src/app/vm/daily-sample';
 import { DialogComponent, DialogData, DialogType } from 'src/app/dialog/dialog.component';
 import { first } from 'rxjs/operators';
 import { DailySampleService } from 'src/app/services/daily-sample.service';
+import { PageTextsService } from 'src/app/services/page-texts.service';
+import { concat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-daily-sample',
@@ -14,7 +16,17 @@ export class DailySampleComponent implements OnInit {
 
   eDSAction = enumDSAction;
 
-  constructor(public dialog: MatDialog, public dsService: DailySampleService) { }
+  pts: IDailySampleComp;
+
+  constructor(public dialog: MatDialog, public dsService: DailySampleService, private ptsService: PageTextsService) {
+    const self = this;
+    ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).subscribe(_ => {
+      if (!!ptsService.pts && !!ptsService.pts.dailySampleComp) {
+        self.pts = ptsService.pts.dailySampleComp;
+        dsService.defaultDS1.name = self.pts.defName;
+      }
+    });
+  }
 
   ngOnInit() {
   }

@@ -1,12 +1,12 @@
 <fieldset>
-    <legend>預設</legend>
+    <legend>{{(!!pts)?pts.default:'預設：'}}</legend>
     <mat-list>
         <mat-list-item [class.selected]="dsService.defaultDS1===dsService.currentDS" (click)="onSelDS(dsService.defaultDS1)">{{dsService.defaultDS1.name}}</mat-list-item>
     </mat-list>
 </fieldset>
 <fieldset>
-    <legend>自訂： </legend>
-    <button mat-raised-button (click)="onCustonDSAction(eDSAction.add)">新增<mat-icon>add</mat-icon></button>
+    <legend>{{(!!pts)?pts.customize:'自訂：'}} </legend>
+    <button mat-raised-button (click)="onCustonDSAction(eDSAction.add)">{{(!!pts)?pts.add:'新增'}}<mat-icon>add</mat-icon></button>
     <mat-list>
         <mat-list-item *ngFor="let ds of dsService.listOfDS" (click)="onSelDS(ds)" [class.selected]="ds===dsService.currentDS">
             <div class="display-flex-row width-100">

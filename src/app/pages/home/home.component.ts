@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   listStoredRef: ElementRef;
 
   private _unsubscribed = new Subject<boolean>();
+  private _prevPageType: PageType = PageType.Home;
 
   pts: IHomePage;
 
@@ -186,11 +187,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       if (!!result === false) {
         return;
       }
+      const ismdp = StringHelper.isMDP(result);
       result = StringHelper.refineLinkOfDGO(result);
       // * [2018-12-24 20:34] Check whether it is an MDP file
       let res = null;
       try {
-        if (/ismdp\=1/i.test(result)) {
+        if (ismdp) {
           res = await self.http.get(result, {responseType: 'text'}).toPromise();
         }
       } catch (err) {
@@ -272,6 +274,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.gv.shownPage = PageType.MediaEdit;
       self.meService.initMe(story);
       this.meService.sideClickType = SideClickType.new;
+    }
+  }
+
+  onToggleAppSetting() {
+    const self = this;
+    if (self.gv.shownPage === PageType.AppSetting) {
+      self.gv.shownPage = self._prevPageType;
+    } else {
+      self._prevPageType = self.gv.shownPage; // Keep this PageType
+      self.gv.shownPage = PageType.AppSetting;
     }
   }
 }
