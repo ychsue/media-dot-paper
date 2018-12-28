@@ -53,7 +53,7 @@ export class StringHelper {
         } else if (regExOneDrive.test(link)) {
             link = link.replace('embed', 'download');
         } else if (regExDropbox.test(link)) {
-            link = link.replace(/dl=0/i, 'dl=1');
+            link = link.replace(/dl=0/i, 'raw=1');
         }
         return link;
     }

@@ -1,3 +1,8 @@
+* [2018-12-28 Fri] A bug fixed for ios and osx => 2018.1229.3
+Originally, I use ~www.dropbox.com....dl=1~ to load the link directly into ~videoElement~.
+However, it does not work for safari.
+Based on [[https://www.dropboxforum.com/t5/Photos-and-videos/unable-to-play-back-Dropbox-MP3-files-in-iPhone-web-browser/td-p/244705][this answer of Dropboxforum]], I should change ~dl=0~ to be ~raw=1~ and it works for ios and osx and chrome.
+
 * [2018-12-28 Fri] Version 2018.1228.3
 Before I make it, I corrected the behavior of ~Play/Pause~ button of ~me-mani-plate.component~ since now even YouTube will update ~meService.state~.
 
