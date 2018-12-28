@@ -47,7 +47,7 @@ export class StringHelper {
         const regExOneDrive = /^https\:\/\/onedrive\.live\.com\/embed\?/i;
         // for Dropbox
         // https://www.dropbox.com/s/fzapl6v4019mxt3/DailySample.txt?dl=1
-        const regExDropbox = /^https\:\/\/www\.dropbox\.com\/.*dl\=0$/i;
+        const regExDropbox = /^https\:\/\/www\.dropbox\.com\/.*dl\=0/i;
         if (regExGoogle.test(link)) {
             link = `https://drive.google.com/uc?export=download&id=${link.match(regExGoogle)[1]}`;
         } else if (regExOneDrive.test(link)) {

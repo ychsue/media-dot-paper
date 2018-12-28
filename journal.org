@@ -1,3 +1,6 @@
+* [2018-12-28 Fri] Version 2018.1228.3
+Before I make it, I corrected the behavior of ~Play/Pause~ button of ~me-mani-plate.component~ since now even YouTube will update ~meService.state~.
+
 * [2018-12-27 Thu] Multilingual & trying to use ~ng test~.
 I. For Jasmine & Karma Unit Testing:
 1. For ~ng test~, searching its video and then you'll find some useful videos.

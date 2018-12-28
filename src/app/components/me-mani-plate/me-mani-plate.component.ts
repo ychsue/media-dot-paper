@@ -39,7 +39,6 @@ import { PageTextsService } from '../../services/page-texts.service';
 })
 export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  previousState: MEState = MEState.initialized; // Might be unnecessary since now even Youtube one will check its state.
   MEState = MEState;
 
   IOStartShown = 'out';
@@ -80,7 +79,6 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     const self = this;
-    this.previousState = this.meService.state;
     // * [2018-08-25 18:19] Update utterPara when iFrame is updated
     this.meService.setiFrame$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
       self.isSSShown = false;
@@ -203,12 +201,10 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onPlayPause() {
-    if (this.previousState !== MEState.playing) {
+    if (this.meService.state !== MEState.playing) {
       this.meService.onPlayerAction.next(playerAction.play);
-      this.previousState = MEState.playing;
-    } else if (this.previousState === MEState.playing) {
+    } else if (this.meService.state === MEState.playing) {
       this.meService.onPlayerAction.next(playerAction.pause);
-      this.previousState = MEState.paused;
     }
   }
 
