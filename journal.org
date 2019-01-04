@@ -1,3 +1,10 @@
+* [2019-1-4 Fri] Add a new component for honing pronunciation
+1. Since I want to add in a new ~pronun-exer~ component into this App, I need to modify its container: ~me-mani-plate~.
+Oh, at this moment this ~pronun-exer~ is empty except a close button.
+
+2. By the way, I need to use ~play~ and ~pause~ again and again so that I moved them into two svg files.
+Once I created them with ~xml~, ~version~ and ~xmlns~, they could be recognized as ~SVG~s.
+
 * [2018-12-28 Fri] A bug fixed for ios and osx => 2018.1229.3
 Originally, I use ~www.dropbox.com....dl=1~ to load the link directly into ~videoElement~.
 However, it does not work for safari.

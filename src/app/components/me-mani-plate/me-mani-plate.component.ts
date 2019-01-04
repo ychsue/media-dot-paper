@@ -48,10 +48,22 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   _msDelta = 400;
 
   isToUtter: boolean;
-  isSSShown = false;
   utterPara: SSutterParameters;
 
   isSubtitleClicked: boolean;
+
+  //#region * [2019-01-04 15:46] For honing pronunciation
+  public get toPronunExer(): boolean {
+    return this.inUpType === enumShowInUp.PronunExer;
+  }
+
+  public set toPronunExer(v: boolean) {
+    this.inUpType = (v) ? enumShowInUp.PronunExer : enumShowInUp.main;
+  }
+
+  EnumShowInUp = enumShowInUp;
+  inUpType = enumShowInUp.main;
+  //#endregion  For honing pronunciation
 
   forDenoteDt: {dt: number, isInit: boolean, x: number, y: number, isHide: boolean, isStartBtn: boolean} =
     {dt: 0, isInit: false, x: 0, y: 0, isHide: false, isStartBtn: false};
@@ -81,7 +93,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     const self = this;
     // * [2018-08-25 18:19] Update utterPara when iFrame is updated
     this.meService.setiFrame$.pipe(takeUntil(self.unSubscribed$)).subscribe(i => {
-      self.isSSShown = false;
+      self.inUpType = enumShowInUp.main;
       if (i >= 0) {
         self.updateUtterParaOfAFrame(i);
         if (this.meService.story.frames[this.meService.story.iFrame].isUtter === true) {
@@ -252,7 +264,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       count(x => !!x)
     ).toPromise();
     if (n === 0) {
-      if ((document.activeElement.localName === "textarea") || self.isSSShown || !!self.isSubtitleClicked) {
+      if ((document.activeElement.localName === "textarea") || (self.inUpType !== enumShowInUp.main) || !!self.isSubtitleClicked) {
         return; // Because this delay will change a lot of thing like ~self.isSSShown~ might change, I dealt it at this place.
       }
       self.HideShow = 'hide';
@@ -272,7 +284,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onShowSetSS(e: MouseEvent) {
-    this.isSSShown = true;
+    this.inUpType = enumShowInUp.SS;
     this.HideShow = 'show';
     // console.log('onShowSetSS');
   }
@@ -290,4 +302,10 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     utterPara = Object.assign({}, story.frames[iFrame].utterPara);
     self.utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
   }
+}
+
+enum enumShowInUp {
+  main,
+  SS, // Speech Synthesizer
+  PronunExer
 }

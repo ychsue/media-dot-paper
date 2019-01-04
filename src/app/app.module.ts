@@ -48,6 +48,7 @@ import { InProgressComponent } from './components/in-progress/in-progress.compon
 import { SbvService } from './services/sbv.service';
 import { AppSettingComponent } from './pages/app-setting/app-setting.component';
 import { DailySampleComponent } from './components/daily-sample/daily-sample.component';
+import { PronunExerComponent } from './components/pronun-exer/pronun-exer.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { DailySampleComponent } from './components/daily-sample/daily-sample.com
     SettingMediaComponent,
     InProgressComponent,
     AppSettingComponent,
-    DailySampleComponent
+    DailySampleComponent,
+    PronunExerComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [

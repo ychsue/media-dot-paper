@@ -6,8 +6,9 @@
     [@changeFrame]="meService.story.iFrame" touch-action="none" 
     (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
     <div #main class="main flex-auto display-flex-column position-relative">
-        <div class="main-up flex-110" [@hideShow]="HideShow" *ngIf="isSSShown===false">
-            <div class="flex">
+      <div class="main-up-play" *ngIf="inUpType===EnumShowInUp.main">
+        <div class="main-up flex-110" [@hideShow]="HideShow">
+            <div class="flex flex-110">
                 <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP" (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();">
                     {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
                 </mat-slide-toggle>
@@ -21,20 +22,18 @@
                     <mat-icon class="mat-18">build</mat-icon>
                 </button>
             </div>
+            <div class="flex flex-110">
+                <mat-slide-toggle class="subtitle-shadow" [(ngModel)]="toPronunExer">練發音嗎？</mat-slide-toggle>
+            </div>
         </div>
 
-        <div #mainPlay class="main-play flex-110 display-flex-row" [@hideShow]="HideShow" *ngIf="isSSShown===false">
+        <div #mainPlay class="main-play flex-110 display-flex-row" [@hideShow]="HideShow">
             <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
             <button mat-icon-button mat-raised-button class="midBtn" [ngClass]="{'largeBtn':(main.offsetWidth>300)&&(main.offsetHeight>450)}" (click)="onPlayPause()">
-                <svg viewBox="0 0 10 10" *ngIf="meService.state!==MEState.playing">
-                    <polygon points="8,5 3,2 3,8" style="fill:darkblue"/>
-                </svg>
-                <svg viewBox="0 0 10 10" *ngIf="meService.state===MEState.playing">
-                    <rect x="2" y="2" width="2" height="6" style="fill:red"/>
-                    <rect x="6" y="2" width="2" height="6" style="fill:red"/>
-                </svg>
+                <img src="assets/mPlay.svg" alt="play" *ngIf="meService.state!==MEState.playing">
+                <img src="assets/mPause.svg" alt="pause" *ngIf="meService.state===MEState.playing">
             </button>
             <button id="btnEnd" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].end" (pointerdown)="setShowDT($event,true,false);endChanged$.next($event)">
                 <mat-icon class="mat-18">skip_next</mat-icon>
@@ -53,14 +52,18 @@
                 [style.display]="(forDenoteDt.isHide)?'none':'inline'"
             >{{(forDenoteDt.isStartBtn)?meService.story.frames[meService.story.iFrame].start:meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</h2>
         </div>
+      </div>
 
-        <app-set-speech-synthesis class="setSS" *ngIf="isSSShown" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="isSSShown=false" [@hideShow]="HideShow" [@flyInOut]="isSSShown" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>
+        <app-set-speech-synthesis class="setSS" *ngIf="inUpType===EnumShowInUp.SS" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="inUpType=EnumShowInUp.main" [@hideShow]="HideShow" [@flyInOut]="inUpType===EnumShowInUp.SS" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>
 
+        <app-pronun-exer class="setSS" *ngIf="inUpType===EnumShowInUp.PronunExer"
+            (close)="inUpType=EnumShowInUp.main"
+        ></app-pronun-exer>
 
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow position-absolute" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
 
-        <div #mainDown class="main-down flex-auto display-flex-column">
-            <textarea matInput #subtitleInput class="subtitle flex-auto" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next(subtitleInput.value)" (click)="onSubtitleClicked($event)" (blur)="onSubtitleBlur()"  [style.opacity]="(HideShow==='show')?1:0">
+        <div #mainDown class="main-down flex-110 display-flex-column">
+            <textarea matInput #subtitleInput class="subtitle flex-110" [ngModel]="meService.story.frames[meService.story.iFrame].subtitle" (ngModelChange)="subtitleChange$.next(subtitleInput.value)" (click)="onSubtitleClicked($event)" (blur)="onSubtitleBlur()"  [style.opacity]="(HideShow==='show')?1:0">
             </textarea>
         </div>
     </div>
