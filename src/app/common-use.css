@@ -55,6 +55,10 @@
     animation-iteration-count: infinite;
 }
 
+.no-user-select {
+    user-select: none;
+}
+
 @keyframes blink {
     to {
         /* opacity: 0.8; */

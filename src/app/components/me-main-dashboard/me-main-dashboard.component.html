@@ -1,6 +1,6 @@
 <div #container class='container display-flex-column'>
   <div class="flex-auto display-flex-row">
-    <span class="flex-none" (click)="meService.seekTime=0" >0.0</span>
+    <span class="flex-none no-user-select" (click)="meService.seekTime=0" >0.0</span>
     <div #slidePart class="flex-auto display-flex-column" (click)="onChangeCurrentTime($event, slidePart)" >
       <svg #slideCanvas class="slideCanvas" [attr.viewBox]="'0 0 '+(meService.duration*1.01)+' '+'1'" [attr.preserveAspectRatio]="'none'">
         <!-- For Apple system, I need a <rect> to cover the whole svg -->
@@ -19,6 +19,6 @@
         <rect [style.fill]="'blue'" [attr.x]="((meService.currentTime>0)?meService.currentTime:0)" y="0" [attr.width]="(!!container.clientWidth)?2*meService.duration/container.clientWidth:1" height="100%"></rect>
       </svg>
     </div>
-    <span class="flex-none" (click)="meService.seekTime=meService.duration-0.1">{{meService.duration| number: '1.1-1'}}</span>
+    <span class="flex-none no-user-select" (click)="meService.seekTime=meService.duration-0.1">{{meService.duration| number: '1.1-1'}}</span>
   </div>
 </div>

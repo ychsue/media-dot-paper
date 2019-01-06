@@ -1,3 +1,6 @@
+* [2019-1-6 Sun] Use ~user-select:none;~ to avoid selecting texts accidentally.
+Not yet finished.
+
 * [2019-1-4 Fri] Add a new component for honing pronunciation
 1. Since I want to add in a new ~pronun-exer~ component into this App, I need to modify its container: ~me-mani-plate~.
 Oh, at this moment this ~pronun-exer~ is empty except a close button.
