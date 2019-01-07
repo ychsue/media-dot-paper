@@ -18,3 +18,7 @@ body{
     padding: 0;
     position: absolute!important;
 }
+
+mat-expansion-panel-header {
+    user-select: none;
+}

@@ -1,3 +1,9 @@
+* [2019-1-7 Mon] Improving the layout of ~pronun-exer~
+
+* [2019-1-6 Sun] Good news, ~user-select:none;~ will affect an UI Element's children
+Since a tap for a header of ~mat-expansion-panel~ is just for toggling its content, the selecting of its texts is very stange.
+The good news is that I can avoid this kind of selecting by providing it a style ~user-select:none;~.
+
 * [2019-1-6 Sun] Use ~user-select:none;~ to avoid selecting texts accidentally.
 Not yet finished.
 

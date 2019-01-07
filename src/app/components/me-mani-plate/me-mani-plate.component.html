@@ -23,7 +23,7 @@
                 </button>
             </div>
             <div class="flex flex-110">
-                <mat-slide-toggle class="subtitle-shadow" [(ngModel)]="toPronunExer">練發音嗎？</mat-slide-toggle>
+                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="toPronunExer">練發音嗎？</mat-slide-toggle>
             </div>
         </div>
 
@@ -56,7 +56,7 @@
 
         <app-set-speech-synthesis class="setSS" *ngIf="inUpType===EnumShowInUp.SS" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="inUpType=EnumShowInUp.main" [@hideShow]="HideShow" [@flyInOut]="inUpType===EnumShowInUp.SS" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>
 
-        <app-pronun-exer class="setSS" *ngIf="inUpType===EnumShowInUp.PronunExer"
+        <app-pronun-exer class="setSS overflow-y-auto" *ngIf="inUpType===EnumShowInUp.PronunExer"
             (close)="inUpType=EnumShowInUp.main"
         ></app-pronun-exer>
 
