@@ -1,3 +1,10 @@
+* [2019-1-8 Tue] npm update and set the version of ~webpack-dev-server~ from 3.1.10 to 3.1.14 in ~package-lock.json~
+1. As [[https://github.com/nrwl/nx/issues/971][this Q&A said]] and the alert from Github, ~webpack-dev-server~ has a threat of stolen source code, I tried to just modify its version to 3.1.14.
+
+2. New Angular 7.1.14 is still using 3.1.10 one and that's why I want to try to modify its version by myself. Not sure what will happen. Try it.
+
+3. nanoSQL is updated, too. Now it is 1.8.0 instead of 1.7.5.
+
 * [2019-1-7 Mon] Improving the layout of ~pronun-exer~
 
 * [2019-1-6 Sun] Good news, ~user-select:none;~ will affect an UI Element's children

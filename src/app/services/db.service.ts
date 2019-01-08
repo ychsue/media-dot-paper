@@ -6,7 +6,7 @@ import { MessageService, MessageTypes } from './message.service';
 import { StickyObservable } from '../extends/sticky-observable';
 import { Subscriber, Observable, Subject } from 'rxjs';
 import { first, shareReplay } from 'rxjs/operators';
-import 'rxjs/add/operator/toPromise';
+
 import { _NanoSQLQuery } from 'nano-sql/lib/query/std-query';
 import { IStory, Story } from '../vm/story';
 import { PlayerType } from '../vm/player-type.enum';

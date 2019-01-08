@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DailySample } from 'src/app/vm/daily-sample';
 import { DialogComponent, DialogData, DialogType } from 'src/app/dialog/dialog.component';
-import { first } from 'rxjs/operators';
+import { first ,  concat } from 'rxjs/operators';
 import { DailySampleService } from 'src/app/services/daily-sample.service';
 import { PageTextsService } from 'src/app/services/page-texts.service';
-import { concat } from 'rxjs/operators';
 
 @Component({
   selector: 'app-daily-sample',

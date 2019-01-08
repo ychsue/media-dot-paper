@@ -2,7 +2,7 @@
 const execSync = require('child_process').execSync;
 
 module.exports = function(context) {
-    console.log('Build Angular 6 application into "./www" directory.');
+    console.log('Build Angular 7 application into "./www" directory.');
     const basePath = context.opts.projectRoot;
     // const baseWWW = basePath + '/www';
 
