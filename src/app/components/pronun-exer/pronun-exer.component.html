@@ -7,7 +7,8 @@
                 <mat-icon class="vSelfCenter">mic</mat-icon>
                 <span class="vSelfCenter">錄音</span>
             </mat-expansion-panel-header>
-            content
+            <button (click)="recorder.record()">Record</button>
+            <button (click)="recorder.stop()">stop</button>
         </mat-expansion-panel>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -15,7 +16,10 @@
                 <mat-icon class="vSelfCenter">compare_arrows</mat-icon>
                 <span class="vSelfCenter">比較</span>
             </mat-expansion-panel-header>
-            content2
+            <button (click)="audioMyVoice.play()" >Play</button>
+            <!-- <audio #audioMyVoice type="audio/wav" controls [srcObject]="recorder.stream"></audio> -->
+            <audio #audioMyVoice controls [src]="recorder.url|safe"></audio>
+            <a [href]="recorder.url|safe" [download]="'test.wav'">TEST DOWNLOAD</a>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

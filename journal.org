@@ -1,3 +1,11 @@
+* [2019-1-12 Sat] Now, the microphone can work on Windows, Edge and Chrome
+1. Based on [[https://github.com/mattdiamond/Recorderjs][the source code of Recorderjs]], I can use ~Media Streams API~ and ~Web Audio API~ to capture my voice from microphone.
+
+2. However, I paid almost one week to make it work because the ~DATA = e.inputBuffer.getChannelData(i)~ will be washed out. Thanks to Edge because the length of ~DATA~ will be 0 when you try to get its data later so that I can find the problem.
+Yep, it is associated with the channel.
+
+3. For Windows UWP, don't forget to check the Capabilities of microphone on; otherwise, it does not work.
+
 * [2019-1-8 Tue] npm update and set the version of ~webpack-dev-server~ from 3.1.10 to 3.1.14 in ~package-lock.json~
 1. As [[https://github.com/nrwl/nx/issues/971][this Q&A said]] and the alert from Github, ~webpack-dev-server~ has a threat of stolen source code, I tried to just modify its version to 3.1.14.
 
