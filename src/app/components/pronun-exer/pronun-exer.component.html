@@ -7,8 +7,22 @@
                 <mat-icon class="vSelfCenter">mic</mat-icon>
                 <span class="vSelfCenter">錄音</span>
             </mat-expansion-panel-header>
-            <button (click)="recorder.record()">Record</button>
-            <button (click)="recorder.stop()">stop</button>
+            <div class="display-flex-row recordContainer">
+                <mat-progress-spinner mode="determinate" [value]="(recorder.recordTimeMs%(duration*1000))/(duration*10)" color="primary" [strokeWidth]="20"></mat-progress-spinner>
+                <!-- <svg viewBox="0 0 10 100"  xmlns="http://www.w3.org/2000/svg" style="height:60px;width:6px;">
+                    <rect x="0" width="10" [attr.y]="100-Math.abs(recorder.v[0]*100)" [attr.height]="Math.abs(recorder.v[0]*100)" fill="blue"/>
+                </svg>     -->
+                <button mat-icon-button mat-raised-button style="background-color: green;" (click)="recorder.record()" *ngIf="!!!recorder.isRecording" class="recordBtn">
+                    <mat-icon class="recordIcon" style="color:white;">mic</mat-icon>
+                </button>
+                <button mat-icon-button mat-raised-button (click)="recorder.stop()" *ngIf="recorder.isRecording" class="recordBtn">
+                    <mat-icon class="recordIcon" style="color:red;">stop</mat-icon>
+                    <span class="recordTimes">{{Math.floor(recorder.recordTimeMs/(duration*1000))}}</span>
+                </button>
+                <!-- <svg viewBox="0 0 10 100"  xmlns="http://www.w3.org/2000/svg" style="height:60px;width:6px;">
+                    <rect x="0" width="10" [attr.y]="100-Math.abs(recorder.v[1]*100)" [attr.height]="Math.abs(recorder.v[1]*100)" fill="blue"/>
+                </svg>     -->
+            </div>
         </mat-expansion-panel>
         <mat-expansion-panel>
             <mat-expansion-panel-header>

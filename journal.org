@@ -1,3 +1,5 @@
+* [2019-1-14 Mon] Beautify record part
+
 * [2019-1-12 Sat] Now, the microphone can work on Windows, Edge and Chrome
 1. Based on [[https://github.com/mattdiamond/Recorderjs][the source code of Recorderjs]], I can use ~Media Streams API~ and ~Web Audio API~ to capture my voice from microphone.
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MessageService } from './message.service';
 
@@ -24,9 +24,12 @@ export class MicRecorderService {
   isRecording = false;
   isMakingWav = false;
 
+  private _startTime: number;
+  recordTimeMs = 0;
+
   context: AudioContext;
 
-  constructor(public msg: MessageService) {
+  constructor(public msg: MessageService, private ngZone: NgZone) {
     this.hasGetUserMedia = (!!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia);
     const audioContext = window['AudioContext'] || window['webkitAudioContext'];
     if (!!audioContext) {
@@ -49,6 +52,8 @@ export class MicRecorderService {
         const gain = self.context.createGain();
         const processor = gain.context.createScriptProcessor(self.config.bufferLen, 2, 2);
         self.isRecording = true;
+        self._startTime = Date.now();
+
         let isDisConnect = false;
         processor.onaudioprocess = e => {
           if (!!!self.isRecording) {
@@ -58,9 +63,11 @@ export class MicRecorderService {
             processor.disconnect(self.context.destination);
             isDisConnect = true;
           }
-          const data = e.inputBuffer.getChannelData(0);
-          self.buffers.push(self._f32ToI16(e.inputBuffer.getChannelData(0)));
-          self.buffers.push(self._f32ToI16(e.inputBuffer.getChannelData(1)));
+          const data0 = e.inputBuffer.getChannelData(0);
+          const data1 = e.inputBuffer.getChannelData(1);
+          self.buffers.push(self._f32ToI16(data0));
+          self.buffers.push(self._f32ToI16(data1));
+          self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
         };
         input.connect(gain);
         gain.connect(processor);

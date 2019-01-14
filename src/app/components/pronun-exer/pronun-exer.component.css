@@ -1,3 +1,32 @@
 .vSelfCenter {
     align-self: center;
 }
+
+.recordContainer {
+    justify-content: center;
+}
+
+.recordBtn {
+    height: 60px;
+    width: 60px;
+    align-self: center;
+    position: absolute;
+    z-index: 2;
+}
+
+.recordIcon {
+    font-size: 60px;
+    height: 60px;
+    width: 60px;
+    line-height: 60px;
+}
+
+.recordTimes {
+    position: absolute;
+    left:0;
+    right:0;
+    z-index: 3;
+    align-self:center;
+    line-height: 56px;
+    color: white;
+}
