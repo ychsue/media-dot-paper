@@ -14,6 +14,9 @@ export class MicRecorderService {
     nc: 2
   };
 
+  hasMediaRecorder: boolean;
+  mrecorder: any;
+
   hasGetUserMedia: boolean;
   stream: MediaStream;
   buffers: Int16Array[] = [];
@@ -22,15 +25,26 @@ export class MicRecorderService {
   url = "";
 
   isRecording = false;
+  maxSec = 60;
+
   isMakingWav = false;
 
   private _startTime: number;
-  recordTimeMs = 0;
+
+  private _recordTimeMs = 0;
+  public get recordTimeMs(): number {
+    return this._recordTimeMs;
+  }
+  public set recordTimeMs(v: number) {
+    this._recordTimeMs = v;
+    if (v > this.maxSec * 1000) {this.stop(); }
+  }
 
   context: AudioContext;
 
   constructor(public msg: MessageService, private ngZone: NgZone) {
     this.hasGetUserMedia = (!!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia);
+    this.hasMediaRecorder = !!window['MediaRecorder'];
     const audioContext = window['AudioContext'] || window['webkitAudioContext'];
     if (!!audioContext) {
       this.context = new audioContext();
@@ -47,32 +61,48 @@ export class MicRecorderService {
         },
           video: false
         });
-        // self.tracks = self.stream.getAudioTracks();
-        const input = self.context.createMediaStreamSource(self.stream);
-        const gain = self.context.createGain();
-        const processor = gain.context.createScriptProcessor(self.config.bufferLen, 2, 2);
+
         self.isRecording = true;
         self._startTime = Date.now();
-
         let isDisConnect = false;
-        processor.onaudioprocess = e => {
-          if (!!!self.isRecording) {
-            if (isDisConnect) {return; }
-            input.disconnect(gain);
-            gain.disconnect(processor);
-            processor.disconnect(self.context.destination);
-            isDisConnect = true;
-          }
-          const data0 = e.inputBuffer.getChannelData(0);
-          const data1 = e.inputBuffer.getChannelData(1);
-          self.buffers.push(self._f32ToI16(data0));
-          self.buffers.push(self._f32ToI16(data1));
-          self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
-        };
-        input.connect(gain);
-        gain.connect(processor);
-        processor.connect(self.context.destination);
 
+        if (self.hasMediaRecorder) {
+          // * [2019-01-14 21:51] create a new recorder
+          self.mrecorder = new window['MediaRecorder'](self.stream);
+          self.mrecorder.start(100);
+          self.mrecorder.ondataavailable = (e => {
+            self.buffers.push(e.data);
+            self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
+          });
+          self.mrecorder.onstop = e => {
+            self.blob = new Blob(self.buffers, { type : 'audio/m4a' });
+            self.url = URL.createObjectURL(self.blob);
+            self.clearMe();
+          };
+        } else if (!!self.context) {
+          const input = self.context.createMediaStreamSource(self.stream);
+          const gain = self.context.createGain();
+          const processor = gain.context.createScriptProcessor(self.config.bufferLen, 2, 2);
+          processor.onaudioprocess = e => {
+            if (!!!self.isRecording) {
+              if (isDisConnect) {return; }
+              input.disconnect(gain);
+              gain.disconnect(processor);
+              processor.disconnect(self.context.destination);
+              isDisConnect = true;
+            }
+            const data0 = e.inputBuffer.getChannelData(0);
+            const data1 = e.inputBuffer.getChannelData(1);
+            self.buffers.push(self._f32ToI16(data0));
+            self.buffers.push(self._f32ToI16(data1));
+            self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
+          };
+          input.connect(gain);
+          gain.connect(processor);
+          processor.connect(self.context.destination);
+        } else {
+          self.msg.alert('目前本版本尚無法在此平台錄音，抱歉。');
+        }
       } catch (error) {
         self.msg.alert(`error: ${error}`);
         console.log(error);
@@ -105,9 +135,18 @@ export class MicRecorderService {
     }
 
     if (self.buffers.length > 0) {
-      // * [2019-01-10 15:32] Get the data as wav format
-      self.exportWav();
+      if (self.hasMediaRecorder) {
+        self.mrecorder.stop();
+      } else if (!!self.context) {
+        // * [2019-01-10 15:32] Get the data as wav format
+        self.exportWav();
+        self.clearMe();
+      }
+    }
+  }
 
+  clearMe() {
+    const self = this;
       // * [2019-01-09 14:51] Clarify
 
       const tracks = self.stream.getAudioTracks();
@@ -118,7 +157,7 @@ export class MicRecorderService {
       self.stream = null;
       // self.tracks = null;
       self.buffers = [];
-    }
+      self.mrecorder = null;
   }
 
   exportWav() {
@@ -161,7 +200,7 @@ export class MicRecorderService {
           offset += M;
         }
       }
-  }
+    }
 
     // * [2019-01-10 16:27] Get its view and url
     self.blob = new Blob([view], {type: self.config.mimeType});

@@ -1,3 +1,6 @@
+* [2019-1-15 Tue] MediaRecorder is used and in fact, it is easier then AudioContext.
+Besides, I also force the code to stop recording after exceeding 60 seconds. 
+
 * [2019-1-14 Mon] Beautify record part
 
 * [2019-1-12 Sat] Now, the microphone can work on Windows, Edge and Chrome
