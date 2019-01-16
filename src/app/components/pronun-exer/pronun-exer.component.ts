@@ -1,32 +1,68 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MicRecorderService } from 'src/app/services/mic-recorder.service';
-import { MediaEditService } from 'src/app/services/media-edit.service';
+import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
+import { AFrame } from 'src/app/vm/a-frame';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pronun-exer',
   templateUrl: './pronun-exer.component.html',
   styleUrls: ['./pronun-exer.component.css', '../../common-use.css']
 })
-export class PronunExerComponent implements OnInit {
+export class PronunExerComponent implements OnInit, OnDestroy {
   @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
+  private _unsubscribed = new Subject<boolean>();
+
+  isMyVoicePlaying: boolean;
+
   Math = Math;
+  MEState = MEState;
   duration = 1; // in second
+  frame: AFrame = new AFrame();
 
   constructor(public recorder: MicRecorderService, public meService: MediaEditService) { }
 
   ngOnInit() {
     const self = this;
-    self.meService.setiFrame$.subscribe(i => {
+    self.meService.setiFrame$.pipe(takeUntil(self._unsubscribed)).subscribe(i => {
       if (i < 0 && self.recorder.isRecording) {
         self.recorder.stop();
       } else {
         if (self.meService.story.frames.length > i) {
-          const frame = self.meService.story.frames[i];
-          self.duration = frame.end - frame.start;
+          self.frame = self.meService.story.frames[i];
+          self.duration = self.frame.end - self.frame.start;
         }
       }
     });
+    self.meService.isRepeat = false;
   }
 
+  ngOnDestroy(): void {
+    const self = this;
+    self._unsubscribed.next(true);
+    self._unsubscribed = null;
+    self.frame = null;
+    if (self.recorder.isRecording) {self.recorder.stop(); }
+    self.meService.isRepeat = true;
+  }
+
+  onPlayPause() {
+    if (this.meService.state !== MEState.playing) {
+      this.meService.onPlayerAction.next(playerAction.play);
+    } else if (this.meService.state === MEState.playing) {
+      this.meService.onPlayerAction.next(playerAction.pause);
+    }
+  }
+
+  myVoiceLoadMetaData(audioMyVoice: HTMLAudioElement, e: Event) {
+    if (audioMyVoice.duration === Infinity) {
+      audioMyVoice.currentTime = 1e101;
+      audioMyVoice.ontimeupdate = _ => {
+        audioMyVoice.ontimeupdate = _2 => {};
+        audioMyVoice.currentTime = audioMyVoice.duration;
+      };
+    }
+  }
 }

@@ -8,7 +8,7 @@
                 <span class="vSelfCenter">錄音</span>
             </mat-expansion-panel-header>
             <div class="display-flex-row recordContainer">
-                <mat-progress-spinner mode="determinate" [value]="(recorder.recordTimeMs%(duration*1000))/(duration*10)" color="primary" [strokeWidth]="20"></mat-progress-spinner>
+                <mat-progress-spinner mode="determinate" [value]="(recorder.recordTimeMs%(duration/frame.rate*1000))/(duration/frame.rate*10)" color="primary" [strokeWidth]="20"></mat-progress-spinner>
                 <!-- <svg viewBox="0 0 10 100"  xmlns="http://www.w3.org/2000/svg" style="height:60px;width:6px;">
                     <rect x="0" width="10" [attr.y]="100-Math.abs(recorder.v[0]*100)" [attr.height]="Math.abs(recorder.v[0]*100)" fill="blue"/>
                 </svg>     -->
@@ -17,23 +17,46 @@
                 </button>
                 <button mat-icon-button mat-raised-button (click)="recorder.stop()" *ngIf="recorder.isRecording" class="recordBtn">
                     <mat-icon class="recordIcon" style="color:red;">stop</mat-icon>
-                    <span class="recordTimes">{{Math.floor(recorder.recordTimeMs/(duration*1000))}}</span>
+                    <span class="recordTimes">{{Math.floor(recorder.recordTimeMs/(duration/frame.rate*1000))}}</span>
                 </button>
                 <!-- <svg viewBox="0 0 10 100"  xmlns="http://www.w3.org/2000/svg" style="height:60px;width:6px;">
                     <rect x="0" width="10" [attr.y]="100-Math.abs(recorder.v[1]*100)" [attr.height]="Math.abs(recorder.v[1]*100)" fill="blue"/>
                 </svg>     -->
             </div>
         </mat-expansion-panel>
-        <mat-expansion-panel>
+        <mat-expansion-panel *ngIf="(!!recorder.url&&!!!recorder.isRecording)">
             <mat-expansion-panel-header>
                 <div class="badge">2</div>
                 <mat-icon class="vSelfCenter">compare_arrows</mat-icon>
                 <span class="vSelfCenter">比較</span>
             </mat-expansion-panel-header>
-            <button (click)="audioMyVoice.play()" >Play</button>
-            <!-- <audio #audioMyVoice type="audio/wav" controls [srcObject]="recorder.stream"></audio> -->
-            <audio #audioMyVoice controls [src]="recorder.url|safe"></audio>
-            <a [href]="recorder.url|safe" [download]="'test.wav'">TEST DOWNLOAD</a>
+            <fieldset id="fuser">
+                <legend> <mat-icon>person</mat-icon> <span style="line-height: 40px;">使用者</span> </legend>
+                <div class="display-flex-row" style="flex-wrap: wrap;">
+                    <button mat-icon-button mat-raised-button (click)="(isMyVoicePlaying)?audioMyVoice.pause():audioMyVoice.play()">
+                        <img src="assets/mPlay.svg" alt="play" *ngIf="!!!isMyVoicePlaying">
+                        <img src="assets/mPause.svg" alt="pause" *ngIf="isMyVoicePlaying">
+                    </button>                
+                <!-- <audio #audioMyVoice type="audio/wav" controls [srcObject]="recorder.stream"></audio> -->
+                    <audio #audioMyVoice controls [src]="recorder.url|safe" style="display:none"
+                        (loadedmetadata)="myVoiceLoadMetaData(audioMyVoice, $event)"
+                        (pause)="isMyVoicePlaying=false;"
+                        (playing)="isMyVoicePlaying=true"
+                    ></audio>
+                    <mat-slider min="0" [max]="audioMyVoice.duration" step="0.1" [(ngModel)]="audioMyVoice.currentTime" class="flex-110"></mat-slider>
+                    <a mat-icon-button mat-raised-button [href]="recorder.url|safe" [download]="'test.'+((recorder.hasMediaRecorder)?'m4a':'wav')"><mat-icon>get_app</mat-icon></a>    
+                </div>
+            </fieldset>
+            <fieldset id="fmedia">
+                <legend> <mat-icon>music_video</mat-icon> <span style="line-height: 40px;">媒體</span> </legend>
+                <div class="display-flex-row" style="flex-wrap: wrap">
+                    <button mat-icon-button mat-raised-button (click)="onPlayPause()" style="align-self: center;">
+                        <img src="assets/mPlay.svg" alt="play" *ngIf="meService.state!==MEState.playing">
+                        <img src="assets/mPause.svg" alt="pause" *ngIf="meService.state===MEState.playing">
+                    </button>                
+                    <app-setting-media class="flex-110"></app-setting-media>
+                </div>
+            </fieldset>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

@@ -1,6 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MessageService } from './message.service';
+import { interval } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +26,30 @@ export class MicRecorderService {
   blob: Blob;
   url = "";
 
-  isRecording = false;
+  private _isRecording = false;
+  public get isRecording(): boolean {
+    return this._isRecording;
+  }
+  public set isRecording(v: boolean) {
+    const self = this;
+    self._isRecording = v;
+    if (v) {
+      self._startTime = Date.now();
+      self.recordTimeMs = 0;
+      interval(200).pipe(takeWhile(_ => (self._isRecording && (self.recordTimeMs < self.maxSec * 1000))))
+      .subscribe(_ => {
+        self.recordTimeMs = Date.now() - self._startTime;
+      });
+    }
+  }
+
   maxSec = 60;
 
   isMakingWav = false;
 
   private _startTime: number;
 
-  private _recordTimeMs = 0;
-  public get recordTimeMs(): number {
-    return this._recordTimeMs;
-  }
-  public set recordTimeMs(v: number) {
-    this._recordTimeMs = v;
-    if (v > this.maxSec * 1000) {this.stop(); }
-  }
+  recordTimeMs = 0;
 
   context: AudioContext;
 
@@ -63,7 +74,6 @@ export class MicRecorderService {
         });
 
         self.isRecording = true;
-        self._startTime = Date.now();
         let isDisConnect = false;
 
         if (self.hasMediaRecorder) {
@@ -72,7 +82,6 @@ export class MicRecorderService {
           self.mrecorder.start(100);
           self.mrecorder.ondataavailable = (e => {
             self.buffers.push(e.data);
-            self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
           });
           self.mrecorder.onstop = e => {
             self.blob = new Blob(self.buffers, { type : 'audio/m4a' });
@@ -95,7 +104,6 @@ export class MicRecorderService {
             const data1 = e.inputBuffer.getChannelData(1);
             self.buffers.push(self._f32ToI16(data0));
             self.buffers.push(self._f32ToI16(data1));
-            self.recordTimeMs = (self.isRecording) ? (Date.now() - self._startTime) : 0;
           };
           input.connect(gain);
           gain.connect(processor);
@@ -126,6 +134,7 @@ export class MicRecorderService {
 
   stop() {
     const self = this;
+    if (!!!self.isRecording) { return; }
     self.isRecording = false;
 
     if (!!self.blob) {
@@ -134,15 +143,14 @@ export class MicRecorderService {
       self.url = null;
     }
 
-    if (self.buffers.length > 0) {
-      if (self.hasMediaRecorder) {
-        self.mrecorder.stop();
-      } else if (!!self.context) {
-        // * [2019-01-10 15:32] Get the data as wav format
-        self.exportWav();
-        self.clearMe();
-      }
+    if (self.hasMediaRecorder) {
+      self.mrecorder.stop();
+    } else if (!!self.context) {
+      // * [2019-01-10 15:32] Get the data as wav format
+      self.exportWav();
+      self.clearMe();
     }
+
   }
 
   clearMe() {

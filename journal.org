@@ -1,3 +1,8 @@
+* [2019-1-16 Wed] For recording part, I unify its layout.
+1. Based on [[https://stackoverflow.com/questions/38443084/how-can-i-add-predefined-length-to-audio-recorded-from-mediarecorder-in-chrome][this Q&A of StackOverflow]], ~mediaRecorder~ does not output correct duration of its recorded audio;
+however, we can update the duration of your ~audio element~ by setting its ~currentTime~ to be exceed its true duration.
+This method does not 100% solve the problem.
+
 * [2019-1-15 Tue] MediaRecorder is used and in fact, it is easier then AudioContext.
 Besides, I also force the code to stop recording after exceeding 60 seconds. 
 
