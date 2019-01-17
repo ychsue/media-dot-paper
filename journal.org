@@ -1,3 +1,12 @@
+* [2019-1-16 Wed] I want to try to use windows's MediaCapture.
+1. From [[https://social.msdn.microsoft.com/Forums/sqlserver/en-US/68880fa3-7a6b-407c-8ed3-566150d34ac0/uwp-winjs-writing-a-blob-to-a-file-in-a-uwp-js-app][MSDN's FAQ]], it teaches me how to copy a blob to a windows' file.
+2. From [[https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/basic-photo-video-and-audio-capture-with-mediacapture][this article for c#]], I can try to code it.
+3. Its sample shown in [[https://code.msdn.microsoft.com/windowsapps/Media-Capture-Sample-adf87622/sourcecode?fileId=102788&pathId=1002015665][MSDN Code]].
+
+Yes, it works.
+Basically, I use ~_MediaCapture.startRecordToStorageFileAsync(self.win_Profile, self.win_file);~ and ~_MediaCapture.stopRecordAsync()~ to record an audio into a file.
+So, before you can do it, a) you need to initialize a ~_MediaCapture~ once for all, b) create a ~win_file~ each time you want to record, and c) a ~win_Profile~ to tell the mediacapture how to record your voice. You can create it once for all.
+
 * [2019-1-16 Wed] For recording part, I unify its layout.
 1. Based on [[https://stackoverflow.com/questions/38443084/how-can-i-add-predefined-length-to-audio-recorded-from-mediarecorder-in-chrome][this Q&A of StackOverflow]], ~mediaRecorder~ does not output correct duration of its recorded audio;
 however, we can update the duration of your ~audio element~ by setting its ~currentTime~ to be exceed its true duration.

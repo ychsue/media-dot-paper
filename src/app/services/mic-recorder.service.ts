@@ -3,6 +3,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MessageService } from './message.service';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
+import { DeviceService } from './device.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +37,13 @@ export class MicRecorderService {
     if (v) {
       self._startTime = Date.now();
       self.recordTimeMs = 0;
-      interval(200).pipe(takeWhile(_ => (self._isRecording && (self.recordTimeMs < self.maxSec * 1000))))
+      interval(200).pipe(takeWhile(_ => (self._isRecording)))
       .subscribe(_ => {
-        self.recordTimeMs = Date.now() - self._startTime;
+        if (self.recordTimeMs < self.maxSec * 1000) {
+          self.recordTimeMs = Date.now() - self._startTime;
+        } else {
+          self.stop();
+        }
       });
     }
   }
@@ -53,7 +58,11 @@ export class MicRecorderService {
 
   context: AudioContext;
 
-  constructor(public msg: MessageService, private ngZone: NgZone) {
+  win_MediaCapture: Windows.Media.Capture.MediaCapture;
+  win_Profile: Windows.Media.MediaProperties.MediaEncodingProfile;
+  win_file: Windows.Storage.StorageFile;
+
+  constructor(public msg: MessageService, private ngZone: NgZone, private device: DeviceService) {
     this.hasGetUserMedia = (!!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia);
     this.hasMediaRecorder = !!window['MediaRecorder'];
     const audioContext = window['AudioContext'] || window['webkitAudioContext'];
@@ -64,7 +73,22 @@ export class MicRecorderService {
 
   async record() {
     const self = this;
-    if (!!this.hasGetUserMedia) {
+    // * [2019-01-16 21:18] For windows UWP
+    if (self.device.isCordova && cordova.platformId === 'windows') {
+      if (!!!self.win_MediaCapture) {
+        self.win_MediaCapture = new Windows.Media.Capture.MediaCapture();
+        const initSettings = new Windows.Media.Capture.MediaCaptureInitializationSettings();
+        initSettings.streamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.audio;
+        await self.win_MediaCapture.initializeAsync(initSettings);
+        // tslint:disable-next-line:max-line-length
+        self.win_Profile = Windows.Media.MediaProperties.MediaEncodingProfile.createM4a(Windows.Media.MediaProperties.AudioEncodingQuality.auto);
+      }
+      // tslint:disable-next-line:max-line-length
+      self.win_file = await Windows.Storage.ApplicationData.current.temporaryFolder.createFileAsync("mediaDotPaper_record.m4a", Windows.Storage.CreationCollisionOption.replaceExisting);
+      self.win_MediaCapture.startRecordToStorageFileAsync(self.win_Profile, self.win_file);
+      self.isRecording = true;
+      return;
+    } else if (!!this.hasGetUserMedia) {
       try {
         self.stream = await navigator.mediaDevices.getUserMedia({audio: <any>{
           echoCancellation: true,
@@ -132,18 +156,22 @@ export class MicRecorderService {
     return result;
   }
 
-  stop() {
+  async stop() {
     const self = this;
     if (!!!self.isRecording) { return; }
     self.isRecording = false;
 
-    if (!!self.blob) {
+    if (!!self.url) {
       URL.revokeObjectURL(self.url);
       self.blob = null;
       self.url = null;
     }
 
-    if (self.hasMediaRecorder) {
+    // * [2019-01-16 21:18] For windows UWP
+    if (self.device.isCordova && cordova.platformId === 'windows') {
+      await self.win_MediaCapture.stopRecordAsync();
+      self.url = URL.createObjectURL(self.win_file);
+    } else if (self.hasMediaRecorder) {
       self.mrecorder.stop();
     } else if (!!self.context) {
       // * [2019-01-10 15:32] Get the data as wav format
