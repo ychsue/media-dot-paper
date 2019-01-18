@@ -56,7 +56,8 @@
         },
         "meManiPlateComp": {
             "isUtterSubtitle": "To utter your input?",
-            "useDefVP": "Use Default values?"
+            "useDefVP": "Use Default values?",
+            "honePronun": "Hone your pronunciation?"
         },
         "adService": {
             "showAdLater": "<h1>Attention</h1> It takes time to load the media. So I'll show you an Ad."
@@ -98,6 +99,19 @@
             "defName": "Daily Sample",
             "customize": "Customize:",
             "add": "Add"
+        },
+        "pronunExerComp": {
+            "pronunExer": "Pronunciation Practice",
+            "record": "Record",
+            "compare": "Compare",
+            "user": "User",
+            "media": "Media"
+        },
+        "micRecorderService": {
+            "noMRecorderOrCtx": "Your system does not support <b>MediaRecorder</b> or <b>AudioContext</b>",
+            "cannotRecord": "Sorry, I cannot record your voice.",
+            "noGetUserMedia": "Your system is out of <b>getUserMedia</b> method",
+            "needPermission": "Maybe you need to give this APP your microphone's permission."
         },
         "iso639": {
             "ab": "Abkhaz",

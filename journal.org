@@ -1,3 +1,9 @@
+* [2019-1-18 Fri] Multilingual for v2019.118.3
+1. ~me-mani-plate~: 練發音嗎？
+2. ~pronun-exer~: 全部。
+
+[2019-1-18 Fri 22:25] Done.
+
 * [2019-1-18 Fri] Yes, I can save a blob into a windows file
 As described in this [[https://social.msdn.microsoft.com/Forums/sqlserver/en-US/68880fa3-7a6b-407c-8ed3-566150d34ac0/uwp-winjs-writing-a-blob-to-a-file-in-a-uwp-js-app][MSDN's FAQ]], I can save a blob into a windows file.
 1. Dealing a ~blob~ as a ~MSStream~, then you can use ~(<MSStream>blob).msDetachStream()~ to get its ~RandomAccessStream~.

@@ -3,8 +3,9 @@ import { MicRecorderService } from 'src/app/services/mic-recorder.service';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { AFrame } from 'src/app/vm/a-frame';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, merge } from 'rxjs/operators';
 import { FsService } from 'src/app/services/fs.service';
+import { PageTextsService } from 'src/app/services/page-texts.service';
 
 @Component({
   selector: 'app-pronun-exer',
@@ -23,9 +24,18 @@ export class PronunExerComponent implements OnInit, OnDestroy {
   duration = 1; // in second
   frame: AFrame = new AFrame();
 
+  pts: IPronunExerComp;
+
   constructor(public recorder: MicRecorderService, public meService: MediaEditService,
-    private fs: FsService
-    ) { }
+    private fs: FsService, private ptsService: PageTextsService
+    ) {
+      const self = this;
+      ptsService.PTSReady$.pipe(merge(ptsService.ptsLoaded$)).pipe(takeUntil(self._unsubscribed)).subscribe(_ => {
+        if (!!self.ptsService.pts && !!self.ptsService.pts.pronunExerComp) {
+          self.pts = self.ptsService.pts.pronunExerComp;
+        }
+      });
+    }
 
   ngOnInit() {
     const self = this;

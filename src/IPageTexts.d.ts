@@ -13,6 +13,8 @@ interface IPageTexts {
     sGsetComp: ISGsetComp;
     appSettingPage: IAppSettingPage;
     dailySampleComp: IDailySampleComp;
+    pronunExerComp: IPronunExerComp;
+    micRecorderService: IMicRecorderService;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -73,6 +75,7 @@ interface IFsService {
 interface IMeManiPlateComp {
     isUtterSubtitle: string;
     useDefVP: string;
+    honePronun: string;
 }
 interface IAdService {
     showAdLater: string;
@@ -114,6 +117,19 @@ interface IDailySampleComp {
     defName: string;
     customize: string;
     add: string;
+}
+interface IPronunExerComp {
+    pronunExer: string;
+    record: string;
+    compare: string;
+    user: string;
+    media: string;
+}
+interface IMicRecorderService {
+    noMRecorderOrCtx: string;
+    cannotRecord: string;
+    noGetUserMedia: string;
+    needPermission: string;
 }
 interface IIso639 {
     ab: string;

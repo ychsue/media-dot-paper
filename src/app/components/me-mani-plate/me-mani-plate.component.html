@@ -23,7 +23,7 @@
                 </button>
             </div>
             <div class="flex flex-110">
-                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="toPronunExer">練發音嗎？</mat-slide-toggle>
+                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="toPronunExer">{{(!!pts)?pts.honePronun:'練發音嗎？'}}</mat-slide-toggle>
             </div>
         </div>
 

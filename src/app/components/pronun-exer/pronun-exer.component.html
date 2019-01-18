@@ -1,11 +1,11 @@
  <div class="container">
-    <h2 style="text-align: center;">發音練習</h2>
+    <h2 style="text-align: center;">{{(!!pts)?pts.pronunExer:'發音練習'}}</h2>
     <mat-accordion>
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <div class="badge">1</div>
                 <mat-icon class="vSelfCenter">mic</mat-icon>
-                <span class="vSelfCenter">錄音</span>
+                <span class="vSelfCenter">{{(!!pts)?pts.record:'錄音'}}</span>
             </mat-expansion-panel-header>
             <div class="display-flex-row recordContainer">
                 <mat-progress-spinner mode="determinate" [value]="(recorder.recordTimeMs%(duration/frame.rate*1000))/(duration/frame.rate*10)" color="primary" [strokeWidth]="20"></mat-progress-spinner>
@@ -28,10 +28,10 @@
             <mat-expansion-panel-header>
                 <div class="badge">2</div>
                 <mat-icon class="vSelfCenter">compare_arrows</mat-icon>
-                <span class="vSelfCenter">比較</span>
+                <span class="vSelfCenter">{{(!!pts)?pts.compare:'比較'}}</span>
             </mat-expansion-panel-header>
             <fieldset id="fuser">
-                <legend> <mat-icon>person</mat-icon> <span style="line-height: 40px;">使用者</span> </legend>
+                <legend> <mat-icon>person</mat-icon> <span style="line-height: 40px;">{{(!!pts)?pts.user:'使用者'}}</span> </legend>
                 <div class="display-flex-row" style="flex-wrap: wrap;">
                     <button mat-icon-button mat-raised-button (click)="(isMyVoicePlaying)?audioMyVoice.pause():audioMyVoice.play()">
                         <img src="assets/mPlay.svg" alt="play" *ngIf="!!!isMyVoicePlaying">
@@ -52,7 +52,7 @@
                 </div>
             </fieldset>
             <fieldset id="fmedia">
-                <legend> <mat-icon>music_video</mat-icon> <span style="line-height: 40px;">媒體</span> </legend>
+                <legend> <mat-icon>music_video</mat-icon> <span style="line-height: 40px;">{{(!!pts)?pts.media:'媒體'}}</span> </legend>
                 <div class="display-flex-row" style="flex-wrap: wrap">
                     <button mat-icon-button mat-raised-button (click)="onPlayPause()" style="align-self: center;">
                         <img src="assets/mPlay.svg" alt="play" *ngIf="meService.state!==MEState.playing">
