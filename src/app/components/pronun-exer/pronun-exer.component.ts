@@ -4,6 +4,7 @@ import { MediaEditService, MEState, playerAction } from 'src/app/services/media-
 import { AFrame } from 'src/app/vm/a-frame';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { FsService } from 'src/app/services/fs.service';
 
 @Component({
   selector: 'app-pronun-exer',
@@ -22,7 +23,9 @@ export class PronunExerComponent implements OnInit, OnDestroy {
   duration = 1; // in second
   frame: AFrame = new AFrame();
 
-  constructor(public recorder: MicRecorderService, public meService: MediaEditService) { }
+  constructor(public recorder: MicRecorderService, public meService: MediaEditService,
+    private fs: FsService
+    ) { }
 
   ngOnInit() {
     const self = this;
@@ -64,5 +67,17 @@ export class PronunExerComponent implements OnInit, OnDestroy {
         audioMyVoice.currentTime = audioMyVoice.duration;
       };
     }
+  }
+
+  onSaveUserVoice(e: MouseEvent) {
+    if (!!window['cordova']) {
+      e.preventDefault();
+    } else {
+      return;
+    }
+    const self = this;
+    const bOF = (!!window['cordova'] && cordova.platformId === 'windows') ? self.recorder.win_file : self.recorder.blob;
+    const fName = 'Media_Dot_Paper_Your_Voice.' + 'm4a';
+    self.fs.saveFile$$(bOF, fName, 'Audio File');
   }
 }

@@ -176,6 +176,11 @@ export class FsService {
   }
 
   async saveTxtFile$$(data: string, fileName: string) {
+    const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
+    await this.saveFile$$(blob, fileName, 'Plain Text');
+  }
+
+  async saveFile$$(blobOrWinFile: Blob| Windows.Storage.StorageFile, fileName: string, typeText: string = "Plain Text") {
     const self = this;
     if (!!fileName === false) {
       return null;
@@ -192,14 +197,27 @@ export class FsService {
         const iDot = fileName.lastIndexOf('.');
         const ext: any = [(iDot < 0) ? '' : fileName.slice(iDot)];
         ext.size = 1;
-        savePicker.fileTypeChoices.insert("Plain Text", ext);
+        savePicker.fileTypeChoices.insert(typeText, ext);
         savePicker.suggestedFileName = fileName.substr(0, iDot);
 
         // ** [2018-09-04 11:47] Get the file and save it
         const winFile = await savePicker.pickSaveFileAsync();
         if (!!winFile) {
           Windows.Storage.CachedFileManager.deferUpdates(winFile);
-          await Windows.Storage.FileIO.writeTextAsync(winFile, data);
+          if (!!blobOrWinFile['size']) {
+            // ***************** TODO *****************
+            // ** I need to know how to save a blob.
+            const blob = <any>blobOrWinFile;
+            const input: any = (<MSStream>blob).msDetachStream();
+            const output = await winFile.openAsync(Windows.Storage.FileAccessMode.readWrite);
+            await Windows.Storage.Streams.RandomAccessStream.copyAsync(input, output);
+            await output.flushAsync();
+            input.close();
+            output.close();
+          } else {
+            const file = <Windows.Storage.StorageFile>blobOrWinFile;
+            await file.copyAndReplaceAsync(winFile);
+          }
           const status = await Windows.Storage.CachedFileManager.completeUpdatesAsync(winFile);
           // *** [2018-09-04 11:55] Alert about your action
           if (status === Windows.Storage.Provider.FileUpdateStatus.complete) {
@@ -236,7 +254,7 @@ export class FsService {
         if (!!downloadDir) {
           const fileEntry = await self.getFile$(fileName, true, false, downloadDir).toPromise();
           // const blob = new Blob([data], {type: 'text/plain'});
-          const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
+          const blob = <Blob>blobOrWinFile;
           const isDone = await self.writeFile$(fileEntry, blob).toPromise();
           if (isDone) {
             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
@@ -252,7 +270,7 @@ export class FsService {
         if (!!cacheDir) {
           fileEntry = await self.getFile$(fileName, true, false, cacheDir).toPromise();
           // const blob = new Blob([data], {type: 'text/plain'});
-          const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
+          const blob = <Blob>blobOrWinFile;
           isSaved = await self.writeFile$(fileEntry, blob).toPromise();
           if (isSaved) {
             self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :

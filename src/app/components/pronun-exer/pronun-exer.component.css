@@ -4,6 +4,7 @@
 
 .recordContainer {
     justify-content: center;
+    position: relative;
 }
 
 .recordBtn {

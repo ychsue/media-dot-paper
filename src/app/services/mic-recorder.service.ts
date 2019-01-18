@@ -73,27 +73,27 @@ export class MicRecorderService {
 
   async record() {
     const self = this;
-    // * [2019-01-16 21:18] For windows UWP
-    if (self.device.isCordova && cordova.platformId === 'windows') {
-      if (!!!self.win_MediaCapture) {
-        self.win_MediaCapture = new Windows.Media.Capture.MediaCapture();
-        const initSettings = new Windows.Media.Capture.MediaCaptureInitializationSettings();
-        initSettings.streamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.audio;
-        await self.win_MediaCapture.initializeAsync(initSettings);
+    try {
+      // * [2019-01-16 21:18] For windows UWP
+      if (self.device.isCordova && cordova.platformId === 'windows') {
+        if (!!!self.win_MediaCapture) {
+          self.win_MediaCapture = new Windows.Media.Capture.MediaCapture();
+          const initSettings = new Windows.Media.Capture.MediaCaptureInitializationSettings();
+          initSettings.streamingCaptureMode = Windows.Media.Capture.StreamingCaptureMode.audio;
+          await self.win_MediaCapture.initializeAsync(initSettings);
+          // tslint:disable-next-line:max-line-length
+          self.win_Profile = Windows.Media.MediaProperties.MediaEncodingProfile.createM4a(Windows.Media.MediaProperties.AudioEncodingQuality.auto);
+        }
         // tslint:disable-next-line:max-line-length
-        self.win_Profile = Windows.Media.MediaProperties.MediaEncodingProfile.createM4a(Windows.Media.MediaProperties.AudioEncodingQuality.auto);
-      }
-      // tslint:disable-next-line:max-line-length
-      self.win_file = await Windows.Storage.ApplicationData.current.temporaryFolder.createFileAsync("mediaDotPaper_record.m4a", Windows.Storage.CreationCollisionOption.replaceExisting);
-      self.win_MediaCapture.startRecordToStorageFileAsync(self.win_Profile, self.win_file);
-      self.isRecording = true;
-      return;
-    } else if (!!this.hasGetUserMedia) {
-      try {
+        self.win_file = await Windows.Storage.ApplicationData.current.temporaryFolder.createFileAsync("mediaDotPaper_record.m4a", Windows.Storage.CreationCollisionOption.replaceExisting);
+        self.win_MediaCapture.startRecordToStorageFileAsync(self.win_Profile, self.win_file);
+        self.isRecording = true;
+        return;
+      } else if (!!this.hasGetUserMedia) {
         self.stream = await navigator.mediaDevices.getUserMedia({audio: <any>{
           echoCancellation: true,
           noiseSuppression: true
-        },
+          },
           video: false
         });
 
@@ -135,13 +135,13 @@ export class MicRecorderService {
         } else {
           self.msg.alert('目前本版本尚無法在此平台錄音，抱歉。');
         }
-      } catch (error) {
-        self.msg.alert(`error: ${error}`);
-        console.log(error);
+      } else {
+        // ************************ TODO ******************************
+        self.msg.alert("因為缺了 getUserMedia 方法，無法錄音。");
       }
-    } else {
-      // ************************ TODO ******************************
-      self.msg.alert("因為缺了 getUserMedia 方法，無法錄音。");
+    } catch (error) {
+      self.msg.alert(`error: ${error}`);
+      console.log(error);
     }
   }
 
