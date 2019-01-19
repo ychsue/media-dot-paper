@@ -1,3 +1,5 @@
+* [2019-1-19 Sat] Windows UWP v2019.119.3 is submitted
+
 * [2019-1-18 Fri] Multilingual for v2019.118.3
 1. ~me-mani-plate~: 練發音嗎？
 2. ~pronun-exer~: 全部。
