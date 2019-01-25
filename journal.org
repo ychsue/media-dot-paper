@@ -1,3 +1,7 @@
+* [2019-1-25 Fri] Now, I can copy the file
+1. Once you add a prefix ~file://~ to the absolute file path as a URL, this URL can be fed to ~window.resolveLocalFileSystemURL~ to get the ~fileEntry~ you want.
+2. ~fileEntry.file~ will give you its ~Blob~.
+
 * [2019-1-25 Fri] Yes, it can work on osx, ios and Android
 1. For osx, you need to check the Capability of microphone in your ~XX-Info.plist~ or you'll get a silent record.
 2. For osx and ios, it cannot bind the ~currentTime~ of the ~audio~, it does not work.

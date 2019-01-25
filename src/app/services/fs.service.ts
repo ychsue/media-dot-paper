@@ -131,6 +131,28 @@ export class FsService {
     }
   }
 
+  getFileFromURL$$(url: string) {
+    const self = this;
+    if (self.device.isCordova === false) {return of(null); }
+    const action = new Promise<Entry>((res, rej) => {
+      window.resolveLocalFileSystemURL(url, res, rej);
+    });
+    return action;
+  }
+
+  async getBlobFromFileEntry$$(fileEntry: FileEntry) {
+    let blob: Blob;
+    try {
+      const getFile$$ = new Promise<File>((res, rej) => {
+        fileEntry.file(res, rej);
+      });
+      blob = await getFile$$;
+    } catch (error) {
+      console.log(error);
+    }
+    return blob;
+  }
+
   getFile$(name: string, create: boolean = false, exclusive: boolean = false, dir?: DirectoryEntry): Observable<FileEntry> {
     const self = this;
     if (self.device.isCordova === false) {return of(null); }
@@ -227,21 +249,12 @@ export class FsService {
         }
       } else if (cordova.platformId === 'android' || cordova.platformId === 'osx') {
         const permissions = cordova.plugins.permissions;
-        let action: Promise<AndroidPermissionsState>;
         if (cordova.platformId === 'android') {
           // * [2018-09-04 15:21] Check permission at first
-          action = new Promise<AndroidPermissionsState>((res, rej) => {
-            permissions.checkPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
-          });
-          if ((await action).hasPermission === false) {
-            // ** [2018-09-04 15:26] Since out of permission, request for one
-            action = new Promise<AndroidPermissionsState>((res, rej) => {
-              permissions.requestPermission(permissions.READ_EXTERNAL_STORAGE, res, rej);
-            });
-            if ((await action).hasPermission === false) {
-              self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
-              return null;
-            }
+          const isOK = self.device.getPermissionIfNeeded(self.device.permissions.READ_EXTERNAL_STORAGE);
+          if (!!!isOK) {
+            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
+            return null;
           }
         }
         // * [2018-09-04 15:29] Let me store the file

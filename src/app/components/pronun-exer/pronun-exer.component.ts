@@ -79,15 +79,24 @@ export class PronunExerComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSaveUserVoice(e: MouseEvent) {
+  async onSaveUserVoice(e: MouseEvent) {
     if (!!window['cordova']) {
       e.preventDefault();
     } else {
       return;
     }
     const self = this;
-    const bOF = (!!window['cordova'] && cordova.platformId === 'windows') ? self.recorder.win_file : self.recorder.blob;
     const fName = 'Media_Dot_Paper_Your_Voice.' + 'm4a';
-    self.fs.saveFile$$(bOF, fName, 'Audio File');
+    try {
+      let bOF = (!!window['cordova'] && cordova.platformId === 'windows') ? self.recorder.win_file : self.recorder.blob;
+      if (!!window['cordova'] && cordova.platformId !== 'windows') {
+        const ofile = await self.fs.getFileFromURL$$(`file://${self.recorder.url}`);
+        bOF = await self.fs.getBlobFromFileEntry$$(<any>ofile);
+      }
+
+      self.fs.saveFile$$(bOF, fName, 'Audio File');
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
