@@ -34,6 +34,10 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-audio-recorder-api": {
+      "MICROPHONE_USAGE_DESCRIPTION": " ",
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {

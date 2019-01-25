@@ -23,6 +23,8 @@ export class DeviceService {
 
   onNoButtonPressed$ = new Subject<boolean>();
 
+  permissions: AndroidPermissions;
+
   constructor() {
     // * [2018-06-??] For cordova
     this.isCordova = !!window.cordova;
@@ -33,6 +35,8 @@ export class DeviceService {
         this.channel.onDeviceReady.subscribe( () => {
           ob.next(); // For subscribe
           ob.complete(); // For toPromise and auto-unsubscribe
+          // *[2019-01-25 13:17] Initialize some cordova APIs
+          self.initCordovaAPIS();
         });
       });
     }
@@ -65,4 +69,35 @@ export class DeviceService {
     }
   }
 
+  initCordovaAPIS() {
+    if (!!window['cordova'] && !!cordova['plugins'] && !!cordova.plugins['permissions']) {
+      this.permissions = cordova.plugins.permissions;
+    }
+  }
+
+  /**
+   * This one is used to get the permission if needed
+   * @param type = cordova.plugins.permissions.XXXXXX
+   */
+  async getPermissionIfNeeded(type: any) {
+    const self = this;
+    if (!!!self.permissions) {
+      return true; // Lazy way, assuming the OS will remind the user when the user is out of some permissions
+    }
+
+    const check$$ = new Promise<AndroidPermissionsState>((res, rej) => {
+      self.permissions.checkPermission(type, res, rej);
+    });
+    const request$$ = new Promise<AndroidPermissionsState>((res, rej) => {
+      self.permissions.requestPermission(type, res, rej);
+    });
+    // * [2019-01-25 13:48] Check at first
+    let isOK = !!(await check$$).hasPermission;
+    if (isOK) {
+      return true;
+    } else {
+      isOK = !!(await request$$).hasPermission;
+      return isOK;
+    }
+  }
 }

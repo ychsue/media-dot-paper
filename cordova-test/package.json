@@ -18,6 +18,7 @@
         "cordova-osx": "^4.0.2",
         "cordova-plugin-add-swift-support": "1.7.2",
         "cordova-plugin-android-permissions": "^1.0.0",
+        "cordova-plugin-audio-recorder-api": "file:../../modified-cordova-plugins/cordova-plugin-audio-recorder-api",
         "cordova-plugin-file": "file:../../modified-cordova-plugins/cordova-plugin-file",
         "cordova-plugin-file-opener2": "^2.0.19",
         "cordova-plugin-inappbrowser": "3.0.0",

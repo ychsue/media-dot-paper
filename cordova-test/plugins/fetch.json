@@ -105,5 +105,13 @@
     },
     "is_top_level": false,
     "variables": {}
+  },
+  "cordova-plugin-audio-recorder-api": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-plugin-audio-recorder-api"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

@@ -41,6 +41,9 @@
     <feature name="TTS">
         <param name="ios-package" value="CDVTTS" />
     </feature>
+    <feature name="AudioRecorderAPI">
+        <param name="ios-package" value="AudioRecorderAPI" />
+    </feature>
     <name>Media Dot Paper</name>
     <description>
         My first cordova App to help people to add some extra functions to their media.

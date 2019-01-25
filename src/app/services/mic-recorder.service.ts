@@ -20,6 +20,7 @@ export class MicRecorderService {
 
   hasMediaRecorder: boolean;
   mrecorder: any;
+  aRecorderAPI: audioRecorderAPI;
 
   hasGetUserMedia: boolean;
   stream: MediaStream;
@@ -85,8 +86,23 @@ export class MicRecorderService {
   async record() {
     const self = this;
     try {
+      if (self.device.isCordova && cordova.platformId !== 'windows') {
+        // * [2019-01-25 10:20] provide aRecorderAPI once it is available
+        if (!!!self.aRecorderAPI) {self.aRecorderAPI = window.plugins.audioRecorderAPI; }
+
+        // * [2019-01-25 10:23] Start to record
+        // ** [2019-01-25 14:01] get permission at first
+        const pType = (!!self.device.permissions) ? self.device.permissions.RECORD_AUDIO : null;
+        const isOK = await self.device.getPermissionIfNeeded(pType);
+        if (!!!isOK) {throw {message: 'You have denied it.'}; }
+        // ** [2019-01-25 14:09] start to record
+        const record$$ = new Promise<string>((res, rej) => {
+          self.aRecorderAPI.record(res, rej, self.maxSec);
+        });
+        self.isRecording = true;
+        await record$$;
+      } else if (self.device.isCordova && cordova.platformId === 'windows') {
       // * [2019-01-16 21:18] For windows UWP
-      if (self.device.isCordova && cordova.platformId === 'windows') {
         if (!!!self.win_MediaCapture || !!self.win_MediaCapture.audioDeviceController['message']) {
           self.win_MediaCapture = new Windows.Media.Capture.MediaCapture();
           const initSettings = new Windows.Media.Capture.MediaCaptureInitializationSettings();
@@ -184,7 +200,13 @@ export class MicRecorderService {
 
     // * [2019-01-16 21:18] For windows UWP
     try {
-      if (self.device.isCordova && cordova.platformId === 'windows') {
+      if (self.device.isCordova && cordova.platformId !== 'windows') {
+        const stop$$ = new Promise<string>((res, rej) => {
+          self.aRecorderAPI.stop(res, rej);
+          return;
+        });
+        self.url = await stop$$;
+      } else if (self.device.isCordova && cordova.platformId === 'windows') {
         await self.win_MediaCapture.stopRecordAsync();
         self.url = URL.createObjectURL(self.win_file);
       } else if (self.hasMediaRecorder) {
