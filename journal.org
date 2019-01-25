@@ -1,3 +1,13 @@
+* [2019-1-24 Thu] I found another plugin which might be closer to what I want
+1. The plugin is [[https://github.com/emj365/cordova-plugin-audio-recorder-api][cordova-plugin-audio-recorder-api]] which will output your voice into a m4a file.
+2. It is a small plugin and its concept is almost what I want. I'll take a try.
+3. About 22:00, it can work on Android, ios and osx now.
+
+* [2019-1-23 Wed] Try to make osx can work with microphone
+1. I had tried ~cordova-plugin-media-capture~; however, it's hard to change it for osx. So, I tried [[https://github.com/edimuj/cordova-plugin-audioinput#readme][cordova-plugin-audioinput]] and it has a [[https://github.com/edimuj/app-audioinput-demo][demo]].
+
+2. If you want to make ~cordova-plugin-audioinput~ can support ~osx~, you need to change the way to check and get the permission as described in [[https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/requesting_authorization_for_media_capture_on_macos][this article]].
+
 * [2019-1-22 Tue] Every platform need to declare the permission of microphone.
 1. For macOS, as [[https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/requesting_authorization_for_media_capture_on_macos][this article said]] that you need to include the key ~NSMicrophoneUsageDescription~ in ~Info.plist~.
    However, it does not have ~getUserMedia~ method.
