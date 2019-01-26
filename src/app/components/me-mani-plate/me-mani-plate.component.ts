@@ -302,6 +302,25 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     utterPara = Object.assign({}, story.frames[iFrame].utterPara);
     self.utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
   }
+
+  onFixIOSScroll(e: PointerEvent, ele: Element) {
+    const self = this;
+    if (!!!self.device.isCordova || cordova.platformId !== 'ios') {return; }
+
+    const x0 = ele.scrollLeft;
+    const y0 = ele.scrollTop;
+    self.device.onPointermove$.pipe(takeUntil(self.device.onPointerup$))
+    .subscribe(emv => {
+      if (!!ele['scrollTo']) {
+        ele.scrollTo({left: e.screenX - emv.screenX + x0,
+          top: e.screenY - emv.screenY + y0,
+          behavior: 'smooth'});
+      } else {
+        ele.scrollTop = e.screenY - emv.screenY + y0;
+        ele.scrollLeft = e.screenX - emv.screenX + x0;
+      }
+    });
+  }
 }
 
 enum enumShowInUp {

@@ -1,3 +1,10 @@
+* [2019-1-26 Sat] Scrolling problem is solved for ios platform.
+Because of ~*ngIf~, the scolling will not work in ios.
+By the way, angular's component is not a normal ~Element~, i.e. cannot be scrolled.
+So,
+1. The component should be contained inside a ~div~.
+2. Scrolling that ~div~ by code. I put it in ~me-mani-plate~.
+
 * [2019-1-26 Sat] I don't know why, pronun-exer cannot scroll correctly in ios
 By flex, ~display:none~ or fixing height doesn't make the scroll work. I guess the problem is caused by ~*ngIf~.
 
@@ -19,6 +26,7 @@ Sigh... I set it as ~20310103~ in which ~0103~ means version 3, January.
 
 3. For ios, I cannot scroll the ~pronun-exer~. Hm. I guess I need to use a dummy ~div~ to handle it for ios.
     - dummy ~div~ does not work and very strange, its height in ~boxing model~ view is larger than its children even its layout height has been changed by me.
+    - [2019-1-26 Sat] *Solved*
 
 4. I still don't know how to provide the value ~$MICROPHONE_USAGE_DESCRIPTION~ for ~cordova-plugin-audio-record-api~.
 

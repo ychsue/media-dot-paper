@@ -7,7 +7,7 @@
     (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
     <div #main class="main flex-auto display-flex-column position-relative">
       <div class="main-up-play" *ngIf="inUpType===EnumShowInUp.main">
-        <div class="main-up flex-110" [@hideShow]="HideShow">
+        <div #mainup class="main-up flex-110" [@hideShow]="HideShow" (pointerdown)="onFixIOSScroll($event,mainup)">
             <div class="flex flex-110">
                 <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP" (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();">
                     {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
@@ -56,9 +56,11 @@
 
         <app-set-speech-synthesis class="setSS" *ngIf="inUpType===EnumShowInUp.SS" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="inUpType=EnumShowInUp.main" [@hideShow]="HideShow" [@flyInOut]="inUpType===EnumShowInUp.SS" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>
 
-        <app-pronun-exer class="setSS overflow-y-auto" *ngIf="inUpType===EnumShowInUp.PronunExer"
-            (close)="inUpType=EnumShowInUp.main"
-        ></app-pronun-exer>
+        <div #pronun class="setSS overflow-y-auto" *ngIf="inUpType===EnumShowInUp.PronunExer" (pointerdown)="onFixIOSScroll($event,pronun)">
+                <app-pronun-exer
+                (close)="inUpType=EnumShowInUp.main"
+                ></app-pronun-exer>    
+        </div>
 
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow position-absolute" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
 
