@@ -1,3 +1,6 @@
+* [2019-1-26 Sat] I don't know why, pronun-exer cannot scroll correctly in ios
+By flex, ~display:none~ or fixing height doesn't make the scroll work. I guess the problem is caused by ~*ngIf~.
+
 * [2019-1-26 Sat] v2019.126.3 Android one has been submitted with some problems.
 1. The newer ~android:versionCode~ must be larger than older one; however, the definition of cordova is by plusing, e.g. "2018.1228.3" -> 20302803. But "2019.126.3" -> 20202603.
 Sigh... I set it as ~20310103~ in which ~0103~ means version 3, January.
