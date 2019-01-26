@@ -4,11 +4,18 @@
 
 * [2019-1-25 Fri] Yes, it can work on osx, ios and Android
 1. For osx, you need to check the Capability of microphone in your ~XX-Info.plist~ or you'll get a silent record.
-2. For osx and ios, it cannot bind the ~currentTime~ of the ~audio~, it does not work.
-3. For ios, I cannot scroll the ~pronun-exer~. Hm. I guess I need to use a dummy ~div~ to handle it for ios.
-4. I still don't know how to provide the value ~$MICROPHONE_USAGE_DESCRIPTION~ for ~cordova-plugin-audio-record-api~.
-5. Next, copy the file.
 
+2. For osx and ios, it cannot bind the ~currentTime~ of the ~audio~, it does not work. 
+    - [2019-1-26 Sat] *Solved.* I cannot use two-way binding to audio.currentTime for ~mat-slider~ in iOS and osx, so I checking the currentTime per 200ms when the audio is playing.
+
+3. For ios, I cannot scroll the ~pronun-exer~. Hm. I guess I need to use a dummy ~div~ to handle it for ios.
+    - dummy ~div~ does not work and very strange, its height in ~boxing model~ view is larger than its children even its layout height has been changed by me.
+
+4. I still don't know how to provide the value ~$MICROPHONE_USAGE_DESCRIPTION~ for ~cordova-plugin-audio-record-api~.
+
+5. Next, copy the file.
+    - [2019-1-25 Fri] *Solved*
+    
 * [2019-1-24 Thu] I found another plugin which might be closer to what I want
 1. The plugin is [[https://github.com/emj365/cordova-plugin-audio-recorder-api][cordova-plugin-audio-recorder-api]] which will output your voice into a m4a file.
 2. It is a small plugin and its concept is almost what I want. I'll take a try.

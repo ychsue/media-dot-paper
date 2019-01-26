@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { MicRecorderService } from 'src/app/services/mic-recorder.service';
 import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
 import { AFrame } from 'src/app/vm/a-frame';
-import { Subject } from 'rxjs';
-import { takeUntil, merge } from 'rxjs/operators';
+import { Subject, interval, Observable, Subscription } from 'rxjs';
+import { takeUntil, merge, takeWhile } from 'rxjs/operators';
 import { FsService } from 'src/app/services/fs.service';
 import { PageTextsService } from 'src/app/services/page-texts.service';
 
@@ -17,12 +17,30 @@ export class PronunExerComponent implements OnInit, OnDestroy {
 
   private _unsubscribed = new Subject<boolean>();
 
-  isMyVoicePlaying: boolean;
+  @ViewChild('audioMyVoice')
+  audioMyVoiceRef: ElementRef;
+
+  private _isMyVoicePlaying: boolean;
+  public get isMyVoicePlaying(): boolean {
+    return this._isMyVoicePlaying;
+  }
+  public set isMyVoicePlaying(v: boolean) {
+    this._isMyVoicePlaying = v;
+    const self = this;
+    if (v) {
+      self.updateCurrentTime$ = interval(200).pipe(takeWhile(_ => !!self._isMyVoicePlaying)).subscribe(_ => {
+        self.myVoiceCurrentTime = this.audioMyVoiceRef.nativeElement.currentTime;
+      });
+    }
+  }
 
   Math = Math;
   MEState = MEState;
   duration = 1; // in second
   frame: AFrame = new AFrame();
+
+  myVoiceCurrentTime = 0;
+  updateCurrentTime$: Subscription;
 
   pts: IPronunExerComp;
 

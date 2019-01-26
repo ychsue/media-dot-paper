@@ -43,7 +43,7 @@
                         (pause)="isMyVoicePlaying=false;"
                         (playing)="isMyVoicePlaying=true"
                     ></audio>
-                    <mat-slider min="0" [max]="audioMyVoice.duration" step="0.1" [(ngModel)]="audioMyVoice.currentTime" class="flex-110"></mat-slider>
+                    <mat-slider #mySlider min="0" [max]="audioMyVoice.duration" step="0.1" [value]="myVoiceCurrentTime" (change)="myVoiceCurrentTime=mySlider.value;audioMyVoice.currentTime=myVoiceCurrentTime" class="flex-110"></mat-slider>
                     <a mat-icon-button mat-raised-button [href]="recorder.url|safe"
                         (click)="onSaveUserVoice($event)"
                         [download]="'Media_Dot_Paper_UserVoice.'+((recorder.hasMediaRecorder)?'m4a':'wav')">
