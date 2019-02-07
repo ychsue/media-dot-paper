@@ -37,6 +37,9 @@
     "cordova-plugin-audio-recorder-api": {
       "MICROPHONE_USAGE_DESCRIPTION": " ",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
+    },
+    "cordova-plugin-avaudiosession": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
     }
   },
   "dependent_plugins": {

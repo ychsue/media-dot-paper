@@ -44,6 +44,10 @@
     <feature name="AudioRecorderAPI">
         <param name="ios-package" value="AudioRecorderAPI" />
     </feature>
+    <feature name="AVAudioSessionAdapter">
+        <param name="ios-package" value="AVAudioSessionAdapter" />
+        <param name="onload" value="true" />
+    </feature>
     <name>Media Dot Paper</name>
     <description>
         My first cordova App to help people to add some extra functions to their media.
@@ -81,4 +85,5 @@
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="AVAudioSession" value="AVAudioSessionCategoryPlayback" />
 </widget>

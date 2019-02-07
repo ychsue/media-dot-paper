@@ -70,7 +70,9 @@ export class DeviceService {
   }
 
   initCordovaAPIS() {
-    if (!!window['cordova'] && !!cordova['plugins'] && !!cordova.plugins['permissions']) {
+    if (!!!window['cordova']) {return; }
+
+    if (!!cordova['plugins'] && !!cordova.plugins['permissions']) {
       this.permissions = cordova.plugins.permissions;
     }
   }

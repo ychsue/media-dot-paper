@@ -3,63 +3,63 @@
     'rgba('+meService.story.frames[meService.story.iFrame].colorR+','
     +meService.story.frames[meService.story.iFrame].colorG+','
     +meService.story.frames[meService.story.iFrame].colorB+','+'0.2'+')'"
-    [@changeFrame]="meService.story.iFrame" touch-action="none" 
+    [@changeFrame]="meService.story.iFrame" touch-action="none"
     (pointerdown)="HideShow='show'" (pointerleave)="onPointLeave($event,this)">
     <div #main class="main flex-auto display-flex-column position-relative">
-      <div class="main-up-play" *ngIf="inUpType===EnumShowInUp.main">
-        <div #mainup class="main-up flex-110" [@hideShow]="HideShow" (pointerdown)="onFixIOSScroll($event,mainup)">
-            <div class="flex flex-110">
-                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP" (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();">
-                    {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
-                </mat-slide-toggle>
-            </div>
-            <app-setting-media *ngIf="!!meService.story.frames[meService.story.iFrame]?.useDefVP===false"></app-setting-media>
-            <div class="flex">
-                <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow use-margin-not-overflow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next(subtitleInput.value):null;">
-                    {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
-                </mat-slide-toggle>
-                <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">
+        <div class="main-up-play" *ngIf="inUpType===EnumShowInUp.main">
+            <div #mainup class="main-up flex-110" [@hideShow]="HideShow" (pointerdown)="onFixIOSScroll($event,mainup)">
+                <div class="flex flex-110">
+                    <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="meService.story.frames[meService.story.iFrame].useDefVP" (change)="meService.setVolumeFromFrame();meService.setPlaybackRateFromFrame();">
+                        {{(!!pts)?pts.useDefVP:'使用預設的音量與速率'}}
+                    </mat-slide-toggle>
+                </div>
+                <app-setting-media *ngIf="!!meService.story.frames[meService.story.iFrame]?.useDefVP===false"></app-setting-media>
+                <div class="flex">
+                    <mat-slide-toggle [(ngModel)]="meService.story.frames[meService.story.iFrame].isUtter" color="primary" #toggleUtter class="subtitle-shadow use-margin-not-overflow" [style.overflow-y]="'hidden'" (change)="HideShow='show';(toggleUtter.checked)?subtitleChange$.next(subtitleInput.value):null;">
+                        {{(!!pts)?pts.isUtterSubtitle:'語音模擬字幕？'}}
+                    </mat-slide-toggle>
+                    <button mat-icon-button mat-raised-button *ngIf="meService.story.frames[meService.story.iFrame].isUtter" (click)="onShowSetSS($event)">
                     <mat-icon class="mat-18">build</mat-icon>
                 </button>
+                </div>
+                <div class="flex flex-110">
+                    <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="toPronunExer">{{(!!pts)?pts.honePronun:'練發音嗎？'}}</mat-slide-toggle>
+                </div>
             </div>
-            <div class="flex flex-110">
-                <mat-slide-toggle class="subtitle-shadow use-margin-not-overflow" [(ngModel)]="toPronunExer">{{(!!pts)?pts.honePronun:'練發音嗎？'}}</mat-slide-toggle>
-            </div>
-        </div>
 
-        <div #mainPlay class="main-play flex-110 display-flex-row" [@hideShow]="HideShow">
-            <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
+            <div #mainPlay class="main-play flex-110 display-flex-row" [@hideShow]="HideShow">
+                <button id="btnStart" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].start" (pointerdown)="setShowDT($event,true,true);startChanged$.next($event)">
                 <mat-icon class="mat-18">skip_previous</mat-icon>
             </button>
-            <button mat-icon-button mat-raised-button class="midBtn" [ngClass]="{'largeBtn':(main.offsetWidth>300)&&(main.offsetHeight>450)}" (click)="onPlayPause()">
+                <button mat-icon-button mat-raised-button class="midBtn" [ngClass]="{'largeBtn':(main.offsetWidth>300)&&(main.offsetHeight>450)}" (click)="onPlayPause()">
                 <img src="assets/mPlay.svg" alt="play" *ngIf="meService.state!==MEState.playing">
                 <img src="assets/mPause.svg" alt="pause" *ngIf="meService.state===MEState.playing">
             </button>
-            <button id="btnEnd" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].end" (pointerdown)="setShowDT($event,true,false);endChanged$.next($event)">
+                <button id="btnEnd" mat-icon-button mat-raised-button (click)="meService.seekTime=meService.story.frames[meService.story.iFrame].end" (pointerdown)="setShowDT($event,true,false);endChanged$.next($event)">
                 <mat-icon class="mat-18">skip_next</mat-icon>
             </button>
 
-            <h3 class="deltaT aniUpHide"
-                [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
-                [style.top.px]="forDenoteDt.y-100"
-                [style.left.px]="forDenoteDt.x"
-                [style.display]="(forDenoteDt.isHide)?'none':'inline'"
-                >{{((forDenoteDt.dt>0)?'+':'')+(forDenoteDt.dt|number:'1.0-1')}}</h3>
-            <h2 class="deltaT"
-                [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
-                [style.top.px]="forDenoteDt.y-80"
-                [style.left.px]="forDenoteDt.x"
-                [style.display]="(forDenoteDt.isHide)?'none':'inline'"
-            >{{(forDenoteDt.isStartBtn)?meService.story.frames[meService.story.iFrame].start:meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</h2>
+                <h3 class="deltaT aniUpHide"
+                    [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
+                    [style.top.px]="forDenoteDt.y-100"
+                    [style.left.px]="forDenoteDt.x"
+                    [style.display]="(forDenoteDt.isHide)?'none':'inline'"
+                    >{{((forDenoteDt.dt>0)?'+':'')+(forDenoteDt.dt|number:'1.0-1')}}</h3>
+                <h2 class="deltaT"
+                    [style.color]="(forDenoteDt.dt>0)?'blue':((forDenoteDt.dt===0)?'black':'red')"
+                    [style.top.px]="forDenoteDt.y-80"
+                    [style.left.px]="forDenoteDt.x"
+                    [style.display]="(forDenoteDt.isHide)?'none':'inline'"
+                    >{{(forDenoteDt.isStartBtn)?meService.story.frames[meService.story.iFrame].start:meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</h2>
+            </div>
         </div>
-      </div>
 
         <app-set-speech-synthesis class="setSS" *ngIf="inUpType===EnumShowInUp.SS" [utterPara]="utterPara" (change)="onUtterParaChanged(subtitleView.innerText,$event)" (close)="inUpType=EnumShowInUp.main" [@hideShow]="HideShow" [@flyInOut]="inUpType===EnumShowInUp.SS" [ngStyle]="{'height':main.offsetHeight*2.0/3.0+'px'}"></app-set-speech-synthesis>
 
         <div #pronun class="setSS overflow-y-auto" *ngIf="inUpType===EnumShowInUp.PronunExer" (pointerdown)="onFixIOSScroll($event,pronun)">
-                <app-pronun-exer
-                (close)="inUpType=EnumShowInUp.main"
-                ></app-pronun-exer>    
+            <app-pronun-exer
+            (close)="inUpType=EnumShowInUp.main"
+            ></app-pronun-exer>
         </div>
 
         <div #subtitleView id="htmlSubtitle" class="subtitle-shadow position-absolute" [innerHTML]="subtitleInput.value|safeHtml" [style.display]="(HideShow==='show')?'none':'block'"></div>
@@ -70,12 +70,12 @@
         </div>
     </div>
     <div class="slider flex-none position-relative display-flex-row">
-        <input #inStart type="number" [@flyInOut]="IOStartShown" class="upLeft" [(ngModel)]="meService.story.frames[meService.story.iFrame].start" (blur)="IOStartShown='out'">
+        <input #inStart type="number" [@flyInOut]="IOStartShown" class="upLeft" [(ngModel)]="meService.story.frames[meService.story.iFrame].start" (blur)="IOStartShown='out'"  [ngStyle]="{'display': (IOStartShown==='out')?'none':'block'}">
         <div class="upCenter no-user-select">{{meService.currentTime | number: '1.0-3'}}</div>
-        <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'">
+        <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'" [ngStyle]="{'display': (IOEndShown==='out')?'none':'block'}">
         <span class="slider-start flex-none no-user-select" (click)="onOpenInputStart(inStart)">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>
         <!-- <mat-form-field><input class="slider-start" matInput [(ngModel)]="meService.story.frames[meService.story.iFrame].start"></mat-form-field> -->
-        <mat-slider #frameSlider class="canShortSlider flex-auto" [min]="meService.story.frames[meService.story.iFrame].start" [max]="meService.story.frames[meService.story.iFrame].end" [value]="meService.currentTime" (change)="meService.seekTime=frameSlider.value"></mat-slider>
+        <mat-slider #frameSlider class="canShortSlider flex-auto" [min]="meService.story.frames[meService.story.iFrame].start" [max]="meService.story.frames[meService.story.iFrame].end" [step]="0.1" [value]="meService.currentTime" (change)="meService.seekTime=frameSlider.value"></mat-slider>
         <span class="slider-end flex-none no-user-select" (click)="onOpenInputEnd(inEnd)">{{meService.story.frames[meService.story.iFrame].end | number: '1.1-1'}}</span>
     </div>
 </div>

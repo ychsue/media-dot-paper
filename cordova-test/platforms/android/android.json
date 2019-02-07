@@ -139,6 +139,9 @@
     },
     "cordova-plugin-audio-recorder-api": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-avaudiosession": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {},
@@ -388,6 +391,14 @@
       "clobbers": [
         "window.plugins.audioRecorderAPI"
       ]
+    },
+    {
+      "id": "cordova-plugin-avaudiosession.AVAudioSessionAdapter",
+      "file": "plugins/cordova-plugin-avaudiosession/www/avAudioSessionAdapter.js",
+      "pluginId": "cordova-plugin-avaudiosession",
+      "clobbers": [
+        "window.AVAudioSession"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -402,6 +413,7 @@
     "cordova-plugin-nano-sqlite": "1.3.0",
     "cordova-plugin-tts": "0.2.3",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-audio-recorder-api": "0.0.1"
+    "cordova-plugin-audio-recorder-api": "0.0.1",
+    "cordova-plugin-avaudiosession": "1.1.2+1"
   }
 }

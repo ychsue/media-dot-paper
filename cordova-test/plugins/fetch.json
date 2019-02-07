@@ -113,5 +113,13 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-avaudiosession": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-plugin-avaudiosession"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

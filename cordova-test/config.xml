@@ -31,6 +31,7 @@
         <allow-intent href="itms-apps:*" />
         <preference name="AllowInlineMediaPlayback" value="true" />
         <preference name="iosPersistentFileLocation" value="Compatibility" />
+        <preference name="AVAudioSession" value="AVAudioSessionCategoryPlayback" />
     </platform>
     <platform name="windows">
         <preference name="WindowsStoreIdentityName" value="48028Young-ChungHsue.MediaDotPaper" />

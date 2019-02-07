@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-avaudiosession" version="1.1.2+1">
+
+    <name>AVAudioSession</name>
+
+    <description>iOS AVAudioSession Plugin</description>
+
+    <license>Apache 2.0</license>
+
+    <keywords>cordova,ios,audio,session</keywords>
+
+    <js-module src="www/avAudioSessionAdapter.js" name="AVAudioSessionAdapter">
+        <clobbers target="window.AVAudioSession" />
+    </js-module>
+
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="AVAudioSessionAdapter">
+                <param name="ios-package" value="AVAudioSessionAdapter"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <framework src="AVFoundation.framework" />
+
+        <header-file src="src/ios/AVAudioSessionAdapter.h" />
+
+        <source-file src="src/ios/AVAudioSessionAdapter.m" />
+
+    </platform>
+
+</plugin>

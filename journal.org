@@ -1,3 +1,11 @@
+* [2019-2-7 Thu] After install ~cordova-plugin-avaudiosession~, the audio can be output correctly.
+1. In ~AudioRecorderAPI.m~, the category ~AVAudioSessionCategoryPlayAndRecord~ will change the output to headphone even if there is no headphone plugged.
+   Therefore, I change its category to be ~AVAudioSessionCategoryPlayback~ once it is stopped and it can output its audio correctly.
+2. How about controlling ~AvAudioSession~ from cordova side? Well, the plugin ~cordova-plugin-avaudiosession~ can achieve it.
+   At this moment, I just need its ~preference~ setting for ~AVAudioSession~ in ~config.xml~ file so that I can force it to use the category ~AVAudioSessionCategoryPlayback~ .
+
+3. By the way, I also try to fix the problem around the time slider for the window of manipulation of a piece of MDP.
+
 * [2019-1-27 Sun] After increasing the AVAudioQualityLow in ~AudioRecorderAPI.m~, its volume is higher.
 
 * [2019-1-26 Sat] Scrolling problem is solved for ios platform.
