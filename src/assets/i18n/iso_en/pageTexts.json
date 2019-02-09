@@ -528,7 +528,8 @@
     "wait": "Please wait for a moment"
   },
   "appSettingPage": {
-    "hDailySample": "Setting <b style='margin:0 4px;'>Daily Sample</b> button"
+    "hDailySample": "Setting <b style='margin:0 4px;'>Daily Sample</b> button",
+    "hLayout": "Layout"
   },
   "dailySampleComp": {
     "default": "Default:",

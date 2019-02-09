@@ -1,0 +1,5 @@
+<div id="container">
+  <button mat-icon-button mat-raised-button (click)="value=value/1.1;change.next(value)"><mat-icon>zoom_out</mat-icon></button>
+  <span (click)="value=1;change.next(value)" style="user-select: none" >{{ value | number:"1.2-2" }}</span>
+  <button mat-icon-button mat-raised-button (click)="value=value*1.1;change.next(value)"><mat-icon>zoom_in</mat-icon></button>
+</div>

@@ -528,7 +528,8 @@
     "wait": "请等一下"
   },
   "appSettingPage": {
-    "hDailySample": "设定<b>每日一例</b>按钮"
+    "hDailySample": "设定<b>每日一例</b>按钮",
+    "hLayout": "布局"
   },
   "dailySampleComp": {
     "default": "默认：",

@@ -1,3 +1,6 @@
+* [2019-2-7 Thu] Adding a new component app-zoom-inout to zoom in and out
+Setting the style ~'zoom'~ of the top-most HtmlElement to zoom in and out the App. 
+
 * [2019-2-7 Thu] After install ~cordova-plugin-avaudiosession~, the audio can be output correctly.
 1. In ~AudioRecorderAPI.m~, the category ~AVAudioSessionCategoryPlayAndRecord~ will change the output to headphone even if there is no headphone plugged.
    Therefore, I change its category to be ~AVAudioSessionCategoryPlayback~ once it is stopped and it can output its audio correctly.

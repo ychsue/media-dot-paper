@@ -528,7 +528,8 @@
     "wait": "Harap tunggu sebentar"
   },
   "appSettingPage": {
-    "hDailySample": "Pengaturan tombol <b style=\"margin:0 4px;\"> Sampel Harian </b>"
+    "hDailySample": "Pengaturan tombol <b style=\"margin:0 4px;\"> Sampel Harian </b>",
+    "hLayout": "Tata letak"
   },
   "dailySampleComp": {
     "default": "Default:",

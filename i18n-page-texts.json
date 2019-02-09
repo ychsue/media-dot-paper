@@ -92,7 +92,8 @@
             "rearrange": "Rearrange MDP"
         },
         "appSettingPage": {
-            "hDailySample": "Setting <b>Daily Sample</b> button"
+            "hDailySample": "Setting <b>Daily Sample</b> button",
+            "hLayout": "Layout"
         },
         "dailySampleComp": {
             "default": "Default:",

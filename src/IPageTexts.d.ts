@@ -111,6 +111,7 @@ interface ISGsetComp {
 }
 interface IAppSettingPage {
     hDailySample: string;
+    hLayout: string;
 }
 interface IDailySampleComp {
     'default': string;

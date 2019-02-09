@@ -5,5 +5,16 @@
             </mat-expansion-panel-header>
             <app-daily-sample></app-daily-sample>
         </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                {{(!!pts)?pts.hLayout:'排版'}}
+            </mat-expansion-panel-header>
+            <div class="display-flex-row">
+                <app-zoom-inout [value]="gv.zoomAll" (change)="gv.zoomAll=$event" class="flex-auto"></app-zoom-inout>
+                <button mat-icon-button mat-raised-button class="flex-none" style="margin:4px;"
+                    (click)="onSaveZoom()"
+                ><mat-icon>done</mat-icon></button>
+            </div>
+        </mat-expansion-panel>
     </mat-accordion>
 </div>

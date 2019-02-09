@@ -1,4 +1,4 @@
-<div #container class="container display-flex-column">
+<div #container class="container display-flex-column" [ngStyle]="{'zoom': gv.zoomAll}">
     <div #navbar class="navbar flex-none">
         <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
     </div>

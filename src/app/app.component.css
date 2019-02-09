@@ -1,10 +1,10 @@
 .container{
-    height: 100vh;
+    height: 100%;
 }
 
 .navbar{
     color: white;
-    width: 100vw;
+    /* width: 100vw; */
 }
 
 mat-sidenav {

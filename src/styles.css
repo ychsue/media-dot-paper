@@ -6,6 +6,8 @@ body{
     margin: 0;
     -ms-content-zooming: none;
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 .forCD {
