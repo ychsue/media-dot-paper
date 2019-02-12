@@ -38,7 +38,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   listStoredRef: ElementRef;
 
   private _unsubscribed = new Subject<boolean>();
-  private _prevPageType: PageType = PageType.Home;
 
   pts: IHomePage;
 
@@ -280,9 +279,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   onToggleAppSetting() {
     const self = this;
     if (self.gv.shownPage === PageType.AppSetting) {
-      self.gv.shownPage = self._prevPageType;
+      self.gv.shownPage = self.gv.prevPage;
     } else {
-      self._prevPageType = self.gv.shownPage; // Keep this PageType
+      self.gv.prevPage = self.gv.shownPage; // Keep this PageType
       self.gv.shownPage = PageType.AppSetting;
     }
   }

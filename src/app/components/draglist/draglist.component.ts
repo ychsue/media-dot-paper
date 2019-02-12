@@ -59,7 +59,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
         let canSmoothScroll = false;
         if (!!self.ccService.listOfStoredEle.scrollTo) {
           try {
-            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'smooth'});
+            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'auto'});
             canSmoothScroll = true;
           } catch (error) {
             console.log(error);
@@ -79,6 +79,15 @@ export class DraglistComponent implements OnInit, OnDestroy {
         self._isDeleted = true; // Since it is deleted, it cannot work anymore
       }  else if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
         self.contentClick.next(ev);
+      } else {
+        const dY = self.deltaY / dt * 500;
+        if (!!self.ccService.listOfStoredEle.scrollTo && Math.abs(dY) > Math.abs(self.deltaY)) {
+          try {
+            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - dY, behavior: 'smooth'});
+          } catch (error) {
+            console.log(error);
+          }
+        }
       }
     };
 

@@ -70,9 +70,9 @@
         </div>
     </div>
     <div class="slider flex-none position-relative display-flex-row">
-        <input #inStart type="number" [@flyInOut]="IOStartShown" class="upLeft" [(ngModel)]="meService.story.frames[meService.story.iFrame].start" (blur)="IOStartShown='out'"  [ngStyle]="{'display': (IOStartShown==='out')?'none':'block'}">
+        <input #inStart type="number" [@flyInOut]="IOStartShown" class="upLeft" [(ngModel)]="meService.story.frames[meService.story.iFrame].start" (blur)="IOStartShown='out'"  [ngStyle]="{'display': (IOStartShown!=='in')?'none':'block'}">
         <div class="upCenter no-user-select">{{meService.currentTime | number: '1.0-3'}}</div>
-        <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'" [ngStyle]="{'display': (IOEndShown==='out')?'none':'block'}">
+        <input #inEnd type="number" [@flyInOut]="IOEndShown" class="upRight" [(ngModel)]="meService.story.frames[meService.story.iFrame].end" (blur)="IOEndShown='out'" [ngStyle]="{'display': (IOEndShown!=='in')?'none':'block'}">
         <span class="slider-start flex-none no-user-select" (click)="onOpenInputStart(inStart)">{{meService.story.frames[meService.story.iFrame].start | number: '1.1-1'}}</span>
         <!-- <mat-form-field><input class="slider-start" matInput [(ngModel)]="meService.story.frames[meService.story.iFrame].start"></mat-form-field> -->
         <mat-slider #frameSlider class="canShortSlider flex-auto" [min]="meService.story.frames[meService.story.iFrame].start" [max]="meService.story.frames[meService.story.iFrame].end" [step]="0.1" [value]="meService.currentTime" (change)="meService.seekTime=frameSlider.value"></mat-slider>

@@ -1,3 +1,11 @@
+* [2019-2-12 Tue] Version 2019.212.3
+1. Using styles ~transform: scale(x); width: (100/x)vw; height: (100/x)vh;~ instead of ~zoom~ for body because some Elements will work incorrectly because of ~pointerEvent.clientX~ value might be different to what you expect.
+2. However, when I enlarge my App, the ~z-index~ works incorrectly for some elements. I had tried to avoid that problems but not all of them.
+   For example, the slider of ~me-mani-plate~ might be under the ~textarea~.
+3. ~scrollTo~ with ~smooth~ will work at the latest request but this kind of behavior looks weird; therefore, I use ~auto~ instead of ~smooth~.
+   However, it will be unsmooth. So I ~smooth~ly ~scrollTo~ the position I simply predicted when ~pointerUp~.
+4. Using ~ChangeDetectorRef~ to update layout before I want to focus some elements in ~me-mani-plate~.
+5. I set ~zoom=1.25^n~ because ~1/1.25=0.8~ is a terminating decimal. Although the problem listed in (2) is still happened, at least it will be shorter for setting of style.
 * [2019-2-7 Thu] Adding a new component app-zoom-inout to zoom in and out
 Setting the style ~'zoom'~ of the top-most HtmlElement to zoom in and out the App. 
 
@@ -599,7 +607,7 @@ By the way, the ~pairwise()~ problem appeared again for resizing. After correcti
 
 * [2018-10-5 Fri] Try to improve the mouse dragging behavior.
 Looks like the ~iframe~ used for Youtube will block the ~pointerevents~, or I should say that it will call ~event.stopPropagation()~ to prevent the event bubbling.
-Because of that, the dragging for resizing the sub-windows will behave wierd.
+Because of that, the dragging for resizing the sub-windows will behave weird.
 Finally, I added a ~<div>~ upon all of them in ~app.componet~ when they are dragging and it works like a charm.
 Should I change the behavior of ~dragList~ and ~swap-icon~? Hm... maybe I should rename ~swap~ to ~swipe~.
 
@@ -879,7 +887,7 @@ Oh, don't forget to install ~material-design-icons~ at first.
 * [2018-8-9 Thu] Testing on oPPo
 Hm... Input numbers form keyboard is not a good idea on a mobile, I add in two ~observable~ to handle the pointer events to increase or decrease start and end times.
 
-By the way, don't import ~pepjs~ for android and windows system might be a good idea since sometimes it makes the pointer control a little wierd. 
+By the way, don't import ~pepjs~ for android and windows system might be a good idea since sometimes it makes the pointer control a little weird. 
 
 Oh, one more thing. the ~accept="video/*,audio/*"~ does not work for a ~file input~. People said that I had better to use two buttons for them.
 However, for windows App, ~accept~ does not work. So, I need to find a better way.
@@ -1052,7 +1060,7 @@ I have learned:
 1. Using ~FILEINPUT.click()~ to trigger the click event of a file input named ~#FILEINPUT~.
 
 * [2018-6-27 Wed] Testing on windows, Android device and emulators
-It works fine in ~ng serve~, ~Windows 10 App~, ~Asus P027~; however, the YouTube part will crash and the result of ~grid~ is wierd in ~Win10 Android Emulators~.
+It works fine in ~ng serve~, ~Windows 10 App~, ~Asus P027~; however, the YouTube part will crash and the result of ~grid~ is weird in ~Win10 Android Emulators~.
 
 * [2018-6-27 Wed] Dealing with grid and some other problems
 1. As [[https://stackoverflow.com/questions/43311943/prevent-content-from-expanding-grid-items][this StackOverflow's Answer]] said, I can disable the automation of ~min-width~ and ~min-height~ by decalring ~overflow: none;~.
@@ -1080,7 +1088,7 @@ The problem of ~base~.
 3. For ~android~, its base is ~/android_asset/www/~
 
 that why I use ~<base href='./'>~ in ~index.html~ file. 
-By the way, it may not be a good idea to use ~route~ since it will work wierd in Android system.
+By the way, it may not be a good idea to use ~route~ since it will work weird in Android system.
 
 In html file, you can use related path; however, you must use absolute path in css.
 So I use ~[style.CSS]~ in html file to solve this problem.

@@ -26,4 +26,8 @@ export class AppSettingComponent implements OnInit {
   onSaveZoom() {
     this.gv.saveToLocalStorage(ParaInLS.zoomAll);
   }
+
+  onClose() {
+    this.gv.shownPage = this.gv.prevPage;
+  }
 }

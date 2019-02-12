@@ -1,10 +1,10 @@
-<div #container class="container display-flex-column" [ngStyle]="{'zoom': gv.zoomAll}">
+<div #container class="container display-flex-column">
     <div #navbar class="navbar flex-none">
         <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
     </div>
-    <div class="flex-auto display-flex-row overflow-y-auto">
+    <div class="flex-auto display-flex-row overflow-y-auto position-relative">
         <mat-sidenav-container #sidenavContainer class="flex-auto display-flex-row">
-            <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" [style.width]="sidenavWidth+'px'">
+            <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" style="border-right: 2px solid black" [style.width]="sidenavWidth+'px'">
                 <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
                 <mat-tab-group id="sidenavTabs" mat-stretch-tabs [dynamicHeight]="true">
                     <mat-tab class="display-flex-column">
@@ -23,10 +23,10 @@
                         <span *ngIf="!!meService.story?.urlOrID===false">{{(!!pts)?pts.chooseAMediaAtFirst:'請先選一個媒體'}}</span>
                     </mat-tab>
                 </mat-tab-group>
-                <div class="vSeparate" [style.left]="sidenavWidth-2+'px'" touch-action="none" (pointerdown)="onvSepPointerDown($event)"></div>
-                <svg id="resizeWidth" viewBox="0 0 10 20" (pointerdown)="onvSepPointerDown($event)" touch-action="none" [style.left]="(sidenavWidth-20)+'px'" >
-              <polygon points="0,10 10,0 10,20" style="fill:cadetblue;opacity: 0.5;"/>
-            </svg>
+                <!-- <div class="vSeparate"  touch-action="none" (pointerdown)="onvSepPointerDown($event)"></div> -->
+                <!-- <svg id="resizeWidth" viewBox="0 0 10 20" (pointerdown)="onvSepPointerDown($event)" touch-action="none" >
+                    <polygon points="0,10 10,0 10,20" style="fill:cadetblue;opacity: 0.5;"/>
+                </svg> -->
             </mat-sidenav>
             <!-- <div class="page"> -->
             <!-- <router-outlet></router-outlet> -->
@@ -40,6 +40,10 @@
             </mat-sidenav-content>
             <!-- </div> -->
         </mat-sidenav-container>
+        <svg id="resizeWidth" viewBox="0 0 10 20" (pointerdown)="onvSepPointerDown($event)" touch-action="none"
+        [ngStyle]="{'left': (sidenavWidth-20)+'px', 'display': (sidenav.opened)?'block':'none'}">
+           <polygon points="0,10 10,0 10,20" style="fill:cadetblue;opacity: 0.5;"/>
+       </svg>
     </div>
     <div class="justPointerEvents" *ngIf="gv.isJustPointerEvents"></div>
     <app-in-progress #inProgress *ngIf="isShowProgress" class="inProgress display-flex-column" [title]="progressPara.title" [message]="progressPara.message" [sMode]="progressPara.sMode"></app-in-progress>

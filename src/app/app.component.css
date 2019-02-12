@@ -1,5 +1,6 @@
 .container{
     height: 100%;
+    position: relative;
 }
 
 .navbar{
@@ -25,6 +26,7 @@ mat-sidenav {
 .vSeparate {
     position: absolute;
     z-index: 1;
+    right: -2px;
     width: 2px;
     top: 0;
     height: 100%;
@@ -40,7 +42,7 @@ mat-sidenav {
     touch-action: none;
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 0px;
     width: 20px;
     height: 40px;
     order: 2;

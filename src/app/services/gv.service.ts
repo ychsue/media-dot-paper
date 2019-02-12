@@ -8,10 +8,20 @@ import { timer } from 'rxjs';
 export class GvService {
 
   shownPage = PageType.Home;
+  prevPage: PageType = PageType.Home;
   sharedFolderName = 'SegmentedMediaLayer';
   ptVersion = "2019.207.3";
 
-  zoomAll = 1;
+  private _zoomAll = 1;
+  public get zoomAll(): number {
+    return this._zoomAll;
+  }
+  public set zoomAll(v: number) {
+    const percent = 1 / v * 100;
+    document.body.setAttribute('style', `width: ${percent}vw; height: ${percent}vh; transform: scale(${v})`);
+    this._zoomAll = v;
+  }
+
   private _zoomAllKey = "zoomAll";
 
   isJustPointerEvents = false;

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, OnDestroy, Input, NgZone, ChangeDetectorRef } from '@angular/core';
 import { MediaEditService, playerAction, MEState } from 'src/app/services/media-edit.service';
 import { trigger, transition, style, animate, state } from '../../../../node_modules/@angular/animations';
 import { Subject, interval, of, fromEvent } from 'rxjs';
@@ -6,6 +6,7 @@ import { DeviceService } from '../../services/device.service';
 import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay, merge } from 'rxjs/operators';
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { PageTextsService } from '../../services/page-texts.service';
+import { GvService } from 'src/app/services/gv.service';
 
 @Component({
   selector: 'app-me-mani-plate',
@@ -82,7 +83,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   pts: IMeManiPlateComp;
 
   constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
-    private device: DeviceService, private uiEleRef: ElementRef, private ngZone: NgZone) {
+    private device: DeviceService, private uiEleRef: ElementRef, private ngZone: NgZone,
+    private gv: GvService, private cdr: ChangeDetectorRef) {
       const self = this;
       ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
         self.pts = ptsService.pts.meManiPlateComp;
@@ -205,8 +207,8 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       self.forDenoteDt.isHide = false;
       self.forDenoteDt.isStartBtn = isStartBtn;
       self.forDenoteDt.dt = 0;
-      self.forDenoteDt.x = ev.clientX;
-      self.forDenoteDt.y = ev.clientY;
+      self.forDenoteDt.x = ev.clientX / self.gv.zoomAll;
+      self.forDenoteDt.y = ev.clientY / self.gv.zoomAll;
     } else {
       self.forDenoteDt.isHide = true;
     }
@@ -221,13 +223,17 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onOpenInputStart(inStart: HTMLInputElement) {
-    inStart.focus();
     this.IOStartShown = 'in';
+    this.cdr.detectChanges();
+    // setTimeout(() => { // Althogh by setTimeout does work, it's not so beautiful.
+      inStart.focus();
+    // }, 0);˚s
   }
 
   onOpenInputEnd(inEnd: HTMLInputElement) {
-    inEnd.focus();
     this.IOEndShown = 'in';
+    this.cdr.detectChanges();
+    inEnd.focus();
   }
 
   onUtterParaChanged(text: string, utterPara: SSutterParameters) {
@@ -314,11 +320,11 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       if (!!ele['scrollTo']) {
         ele.scrollTo({left: e.screenX - emv.screenX + x0,
           top: e.screenY - emv.screenY + y0,
-          behavior: 'smooth'});
-      } else {
-        ele.scrollTop = e.screenY - emv.screenY + y0;
-        ele.scrollLeft = e.screenX - emv.screenX + x0;
-      }
+          behavior: 'auto'});
+        } else {
+          ele.scrollTop = e.screenY - emv.screenY + y0;
+          ele.scrollLeft = e.screenX - emv.screenX + x0;
+        }
     });
   }
 }

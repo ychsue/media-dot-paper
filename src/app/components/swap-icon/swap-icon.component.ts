@@ -81,7 +81,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
         let canSmoothScroll = false;
         if (!!self.crossComp.listOfMDP.scrollTo) {
           try {
-            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'smooth'});
+            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'auto'});
             canSmoothScroll = true;
           } catch (error) {
             console.log(error);
@@ -109,6 +109,15 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       } else if ((self._duringAction === whichBtnAction.none) &&
         (Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
         self._actionEmitted.next(whichBtnAction.click);
+      } else {
+        const dY = self.deltaY / dt * 500;
+        if (!!self.crossComp.listOfMDP.scrollTo && Math.abs(dY) > Math.abs(self.deltaY)) {
+          try {
+            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - dY, behavior: 'smooth'});
+          } catch (error) {
+            console.log(error);
+          }
+        }
       }
     };
 

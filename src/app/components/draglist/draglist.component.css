@@ -2,6 +2,7 @@
     display: flex;
     flex: 1 1 0px;
     position: relative;
+    border-bottom: 1px solid lightgray;
 }
 
 .backDel {
