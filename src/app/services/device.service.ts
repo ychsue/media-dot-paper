@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, fromEvent, Subject } from 'rxjs';
+import { share, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ export class DeviceService {
 
   isCordova: boolean;
   channel: any;
+
+  isInitialized = false;
 
   // * Observable
   onDeviceReady: Observable<null>;
@@ -22,6 +25,8 @@ export class DeviceService {
   onWindowResize$: Observable<Event>;
 
   onNoButtonPressed$ = new Subject<boolean>();
+  private _onMyActivated$ = new Subject<any>();
+  onMyActivated$ = this._onMyActivated$.pipe(shareReplay(1));
 
   permissions: AndroidPermissions;
 
@@ -36,7 +41,10 @@ export class DeviceService {
           ob.next(); // For subscribe
           ob.complete(); // For toPromise and auto-unsubscribe
           // *[2019-01-25 13:17] Initialize some cordova APIs
-          self.initCordovaAPIS();
+          if (!!!self.isInitialized) {
+            self.isInitialized = true;
+            self.initCordovaAPIS();
+          }
         });
       });
     }
@@ -70,10 +78,37 @@ export class DeviceService {
   }
 
   initCordovaAPIS() {
+    const self = this;
     if (!!!window['cordova']) {return; }
-
     if (!!cordova['plugins'] && !!cordova.plugins['permissions']) {
       this.permissions = cordova.plugins.permissions;
+    }
+
+    // * [2019-02-16 15:36] For Windows' activated event which is defined in index.html
+    if (!!window['Windows'] && !!Windows.UI.WebUI.WebUIApplication.onactivated) {
+      if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
+        const args = window['initEventArgs'].activated;
+        window['initEventArgs'].activated = null;
+        // * [2019-02-16 16:03] For file extensions
+        self._onMyActivated$.next(args);
+      } else {
+      }
+      Windows.UI.WebUI.WebUIApplication.onactivated = (ev) => {
+        let output = ev;
+        const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>(<any>ev).detail[0];
+        if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
+          const buf: Windows.Storage.StorageFile = (<Windows.ApplicationModel.Activation.FileActivatedEventArgs>args).files[0];
+          if (!!window['MSApp']) {
+            try {
+              output = {blob: (<any>window['MSApp']).createFileFromStorageFile(buf)};
+            } catch (error) {
+              console.log(error);
+            }
+          } else {
+          }
+        }
+        self._onMyActivated$.next(output);
+      };
     }
   }
 

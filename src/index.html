@@ -5,12 +5,20 @@
   <title>Media Dot Paper</title>
   <base href="/">
 
-  <!-- Don't need this script for new browser -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script> -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <script>
+    if (!!window['Windows']) {
+      window.initEventArgs = {};
+      Windows.UI.WebUI.WebUIApplication.onactivated = function (ev) {
+        var output = ev;
+        if (ev.detail[0].kind === 3) {
+          output = {blob: MSApp.createFileFromStorageFile(ev.detail[0].files[0])};
+        }
+        window.initEventArgs.activated = output;
+      }
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>

@@ -16,7 +16,7 @@
 }
 
 .container {
-    height: 100%;
+    /* height: 100%; */
     justify-content: center;
     min-width: 0;
     flex-wrap: wrap;

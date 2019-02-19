@@ -61,13 +61,13 @@ export class StoryComponent implements OnInit {
       e.preventDefault();
       self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), self.meService.story.viewTime
         // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-        + StringHelper.toFileName(self.meService.story.name) + '.json');
+        + StringHelper.toFileName(self.meService.story.name) + '.mdp');
     } else {
       let blob: Blob;
       // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
       // if (!!window.cordova && cordova.platformId === 'android') {
         blob = new Blob([self.storyService.stringifyAStory(self.meService.story)],
-         <any>{encoding: 'UTF-8', type: 'application/json;charset=UTF-8'});
+         <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
       // }
       this.downloadHref = URL.createObjectURL(blob);
       // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));

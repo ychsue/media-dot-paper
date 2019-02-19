@@ -1,3 +1,9 @@
+* [2019-2-18 Mon] Try to set the file association in Windows UWP
+1. Please read [[http://grogansoft.com/blog/?p=1197][this article]], however, it was written by ~C#~.
+2. Well, in Xaml, I need to handle the ~onFileActivated~ event; however, in JS case, I need to handle ~Windows.UI.WebUI.WebUIApplication.onactivated~.
+3. Searching for ~Windows.UI.WebUI.WebUIApplication~, you can get more clear concept.
+4. Finally, in this code, I get the ~blob~ immediately when the event is fired by ~MSApp.createFileFromStorageFile~ because I cannot get its ~File~ by this method or ~RandomAccessStream~ by ~storagefile.openAsync(...)~ outside this event handler. 
+
 * [2019-2-12 Tue] Version 2019.212.3
 1. Using styles ~transform: scale(x); width: (100/x)vw; height: (100/x)vh;~ instead of ~zoom~ for body because some Elements will work incorrectly because of ~pointerEvent.clientX~ value might be different to what you expect.
 2. However, when I enlarge my App, the ~z-index~ works incorrectly for some elements. I had tried to avoid that problems but not all of them.

@@ -11,7 +11,8 @@ import { PageTextsService } from './page-texts.service';
 import { Story, IStory } from '../vm/story';
 import { StoryGSetting } from '../vm/story-g-setting';
 import { SSutterParameters, SpeechSynthesisService } from './speech-synthesis.service';
-import { GvService } from './gv.service';
+import { GvService, PageType } from './gv.service';
+import { DeviceService } from './device.service';
 
 @Injectable({
   providedIn: 'root'
@@ -120,7 +121,8 @@ export class MediaEditService {
               private ptsService: PageTextsService,
               private storyService: StoryService,
               private SSService: SpeechSynthesisService,
-              private gv: GvService
+              private gv: GvService,
+              private device: DeviceService
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe(_ => {
@@ -135,6 +137,8 @@ export class MediaEditService {
     this.state = MEState.initialized;
     // * [2018-08-25 21:26] light up setiFrame$
     this.setiFrame$.subscribe();
+    // * [2019-02-17 18:17] handle onactivated event
+    self.device.onMyActivated$.subscribe(self.onActivatedHandler.bind(self));
   }
 
   initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
@@ -342,6 +346,57 @@ export class MediaEditService {
       self.requestMediaReady$.next();
     }, 0);
     return await self.responseMediaReady$.pipe(first()).toPromise();
+  }
+
+  inputFromFile(file: File|Blob) {
+    const self = this;
+    if (/(video|audio)/.test(file.type) === true) {
+      self.initMe(file);
+      this.gv.shownPage = PageType.MediaEdit;
+    } else if (!!!file.type || /(text|json)/.test(file.type)) {
+      const action$$ = new Promise( (res , rej) => {
+        const reader = new FileReader();
+        reader.onloadend = (e) => {
+          let text = '';
+          let story: IStory;
+          try {
+            text = (e.srcElement as any).result;
+            story = self.storyService.getAStoryFromString(text);
+            if (!!story) {
+              res(story);
+            } else {
+              rej(story);
+            }
+          } catch (error) {
+            rej(error);
+          }
+        };
+        reader.onerror = rej;
+        reader.readAsText(file);
+      });
+      action$$.then( (story: IStory) => {
+          story.modifyTime = 0;
+          self.initMe(story);
+          this.gv.shownPage = PageType.MediaEdit;
+        })
+        .catch( err => {
+          console.log(err);
+          self.msgService.alert(((!!self.pts) ? self.pts.homePage.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`);
+          return;
+        });
+    } else {
+      self.msgService.alert((!!self.pts) ? self.pts.homePage.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+      return;
+    }
+    // * [2018-07-19 21:28] Tell navbar that you want to create a story
+    self.sideClickType = SideClickType.new;
+  }
+
+  onActivatedHandler(ev: any) {
+    const self = this;
+    if (!!window['Windows'] && !!ev['blob']) {
+      self.inputFromFile(<File>ev.blob);
+    }
   }
 }
 

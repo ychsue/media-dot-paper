@@ -123,44 +123,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const self = this;
     if (files !== null && files.length > 0) {
       const file = files[0];
-      const ext = file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-      if (/(video|audio)/.test(file.type) === true) {
-        this.meService.initMe(file);
-        this.gv.shownPage = PageType.MediaEdit;
-      } else if (( ext === '.json') || (ext === '.txt')) {
-        const action$$ = new Promise( (res , rej) => {
-          const reader = new FileReader();
-          reader.onloadend = (e) => {
-            let text = '';
-            let story: IStory;
-            try {
-              text = (e.srcElement as any).result;
-              story = self.storyService.getAStoryFromString(text);
-              if (!!story) {
-                res(story);
-              } else {
-                rej(story);
-              }
-            } catch (error) {
-              rej(error);
-            }
-          };
-          reader.onerror = rej;
-          reader.readAsText(file);
-        });
-        action$$.then( (story: IStory) => {
-            story.modifyTime = 0;
-            self.meService.initMe(story);
-            this.gv.shownPage = PageType.MediaEdit;
-          })
-          .catch( err => self.msg.alert(((!!this.pts) ? this.pts.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`));
-      } else {
-        self.msg.alert((!!this.pts) ? this.pts.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
-        return;
-      }
+      self.meService.inputFromFile(file);
     }
-    // * [2018-07-19 21:28] Tell navbar that you want to create a story
-    this.meService.sideClickType = SideClickType.new;
   }
 
   async onLoadFromURL() {
