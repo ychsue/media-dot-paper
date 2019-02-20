@@ -34,6 +34,7 @@ export class DeviceService {
     // * [2018-06-??] For cordova
     this.isCordova = !!window.cordova;
     const self = this;
+    self.onMyActivated$.subscribe(); // Just to turn it on
     if (this.isCordova) {
       this.channel = cordova.require('cordova/channel');
       this.onDeviceReady = new Observable(ob => {
@@ -47,6 +48,8 @@ export class DeviceService {
           }
         });
       });
+    } else {
+      self._onMyActivated$.next(document.URL);
     }
 
     // * [2018-07-17 19:50] For pointing device's events

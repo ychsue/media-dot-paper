@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const self = this;
     if (files !== null && files.length > 0) {
       const file = files[0];
-      self.meService.inputFromFile(file);
+      self.meService.inputFromFile.bind(self.meService)(file);
     }
   }
 
@@ -145,36 +145,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         data: {dType: DialogType.inputUrl, url: self.Url}
       });
     });
-    dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(async (result: string) => {
-      let story: IStory;
-      if (!!result === false) {
-        return;
-      }
-      const ismdp = StringHelper.isMDP(result);
-      result = StringHelper.refineLinkOfDGO(result);
-      // * [2018-12-24 20:34] Check whether it is an MDP file
-      let res = null;
-      try {
-        if (ismdp) {
-          res = await self.http.get(result, {responseType: 'text'}).toPromise();
-        }
-      } catch (err) {
-        console.log(err);
-      }
-      if (!!(story = self.storyService.getAStoryFromString(result)) ||
-        !!(story = self.storyService.getAStoryFromString(res))) {
-      // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
-        story.modifyTime = 0;
-        self.meService.initMe(story);
-      } else {
-        // For url
-        self.Url = result;
-        self.meService.initMe(self.Url);
-      }
-      self.gv.shownPage = PageType.MediaEdit;
-      // * [2018-07-19 21:28] Tell navbar that you want to create a story
-      self.meService.sideClickType = SideClickType.new;
-    });
+    dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(
+      self.meService.inputFromString$.bind(self.meService)
+    );
   }
 
   async onStoryDelete(story: IStory) {

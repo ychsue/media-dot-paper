@@ -1,3 +1,8 @@
+* [2019-2-20 Wed] Now, a protocol named ~mdpyc~ is added.
+1. If you link a link ~mdpyc:///https://drive.google.com/open?id=1aGfBH54ai3MmRopQGGczWacTIpSdxOSd~, it will launch this App and load this MDP file.
+2. Oh, remember that, for ~shareReplay(1)~, you need to subscribe that Observable before any true subscribe you want because it will be triggered after the first subscription.
+3. Hm... Let me test it before I submit it.
+
 * [2019-2-18 Mon] Try to set the file association in Windows UWP
 1. Please read [[http://grogansoft.com/blog/?p=1197][this article]], however, it was written by ~C#~.
 2. Well, in Xaml, I need to handle the ~onFileActivated~ event; however, in JS case, I need to handle ~Windows.UI.WebUI.WebUIApplication.onactivated~.

@@ -61,7 +61,7 @@ export class StoryComponent implements OnInit {
       e.preventDefault();
       self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), self.meService.story.viewTime
         // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-        + StringHelper.toFileName(self.meService.story.name) + '.mdp');
+        + StringHelper.toFileName(self.meService.story.name) + '.json');
     } else {
       let blob: Blob;
       // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});

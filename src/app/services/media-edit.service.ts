@@ -13,6 +13,8 @@ import { StoryGSetting } from '../vm/story-g-setting';
 import { SSutterParameters, SpeechSynthesisService } from './speech-synthesis.service';
 import { GvService, PageType } from './gv.service';
 import { DeviceService } from './device.service';
+import { StringHelper, ProtocolActionType } from '../extends/string-helper';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -122,7 +124,8 @@ export class MediaEditService {
               private storyService: StoryService,
               private SSService: SpeechSynthesisService,
               private gv: GvService,
-              private device: DeviceService
+              private device: DeviceService,
+              private http: HttpClient
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe(_ => {
@@ -392,10 +395,58 @@ export class MediaEditService {
     self.sideClickType = SideClickType.new;
   }
 
+  async inputFromString$ (result: string)  {
+    const self = this;
+    let story: IStory;
+    if (!!result === false) {
+      return;
+    }
+    const ismdp = StringHelper.isMDP(result);
+    result = StringHelper.refineLinkOfDGO(result);
+    // * [2018-12-24 20:34] Check whether it is an MDP file
+    let res = null;
+    try {
+      if (ismdp) {
+        res = await self.http.get(result, {responseType: 'text'}).toPromise();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    if (!!(story = self.storyService.getAStoryFromString(result)) ||
+      !!(story = self.storyService.getAStoryFromString(res))) {
+    // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
+      story.modifyTime = 0;
+      self.initMe(story);
+    } else {
+      // For url
+      self.initMe(result);
+    }
+    self.gv.shownPage = PageType.MediaEdit;
+    // * [2018-07-19 21:28] Tell navbar that you want to create a story
+    self.sideClickType = SideClickType.new;
+  }
+
   onActivatedHandler(ev: any) {
     const self = this;
-    if (!!window['Windows'] && !!ev['blob']) {
-      self.inputFromFile(<File>ev.blob);
+    if (!!window['Windows']) {
+      if (!!ev['blob']) { // For a file
+        self.inputFromFile(<File>ev.blob);
+      } else { // For Uri,
+        const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>ev.detail[0];
+        if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.protocol) {
+        const uri = (<Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs>args).uri;
+        console.log(`input uri = ${uri}`);
+        const data = StringHelper.getInfoFromProtocolString(uri.displayUri);
+        if (data.action === ProtocolActionType.mdplink) {
+          self.inputFromString$(data.data);
+        }
+      }}
+    } else if (!!!self.device.isCordova) {
+      const uri = ev as string;
+      const data = StringHelper.getInfoFromProtocolString(uri);
+      if (data.action === ProtocolActionType.mdplink) {
+        self.inputFromString$(data.data);
+      }
     }
   }
 }
