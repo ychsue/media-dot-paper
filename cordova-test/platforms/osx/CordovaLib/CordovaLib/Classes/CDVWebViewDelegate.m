@@ -21,6 +21,7 @@
 #import "CDVWebViewDelegate.h"
 #import "CDVConsole.h"
 #import "CDVBridge.h"
+#import "Commands/CDVPlugin.h"
 // #import "CookieJar.h"
 
 @implementation CDVWebViewDelegate
@@ -174,6 +175,9 @@
     id win = [sender windowScriptObject];
     NSString* nativeReady = @"try{cordova.require('cordova/channel').onNativeReady.fire();}catch(e){window._nativeReady = true;}";
     [win evaluateWebScript:nativeReady];
+    [[NSNotificationCenter defaultCenter] postNotification:
+     [NSNotification notificationWithName: CDVPageDidLoadNotification
+                                   object: nil]];
 }
 
 

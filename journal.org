@@ -1,10 +1,13 @@
+* [2019-3-5 Tue] osx and ios can support protocol now
+However, for osx, I cannot debug it directly. I need to copy it to ~/Applications/~ and debug it by ~Attach to Process~.
+
 * [2019-3-5 Tue] Try to support custom protocol 
 1. After reading into the code, you can find that through ~webview~, you can send messages or commands from your native code to your web one.
     a. Android: In ~LaunchMyApp.java~, you can find ~webView.loadUrl("javascript:handlOpenURL(....)")~
     b. ios & osx: In ~CDVHandleOpenURL.m~, youc can find ~[self.webview stringByEvaluatingJavascriptFromString:jsString];~
     By these ways, you can execute a javascript code in your webview.
 
-2. You should set some default values in ~android.json~, ~ios.json~, ~osx.json~, etc. and those values will change your platfroms' setting files such as ~Info.plist~ file everytime you run ~cordova prepare ....~.
+2. (Does not work) You should set some default values in ~android.json~, ~ios.json~, ~osx.json~, etc. and those values will change your platfroms' setting files such as ~Info.plist~ file everytime you run ~cordova prepare ....~.
 
 3. If you want to add or remove some ~permission~s, you can change it through your ~CORDOVA_FOLDER/plugins/THE_PLUGIN/plugin.xml~.
 

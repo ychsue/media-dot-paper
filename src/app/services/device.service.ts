@@ -121,8 +121,13 @@ export class DeviceService {
         };
       } else { // For ios, osx and Android
         window['handleOpenURL'] = (data: string, inType: string) => {
-          if (!!!inType) {inType = 'uri'; }
-          const output = {data: data, type: inType};
+          if (!inType) {
+            inType = 'uri';
+        } else if (inType === 'text') {
+            inType = 'uri';
+            data = decodeURIComponent(data);
+        }
+      const output = {data: data, type: inType};
           self._onMyActivated$.next(output);
         };
       }

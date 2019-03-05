@@ -57,9 +57,9 @@
 {
     __weak __typeof(self) weakSelf = self;
 
-    BOOL isProtocol = [url.absoluteString hasPrefix:@"mytest://"];
+    BOOL isProtocol = [url.absoluteString hasPrefix:@"mdpyc://"];
     NSString* jsParam = url.absoluteString;
-    NSString* type = @"protocol";
+    NSString* type = @"uri";
     if (!isProtocol) { // * TODO, maybe one day I need to deal with non-text case.
         NSError* error = nil;
         NSString* fileContents = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error: &error];

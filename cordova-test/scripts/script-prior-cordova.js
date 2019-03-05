@@ -1,6 +1,7 @@
 var activatedTypes = {
     file: 'file',
     uri: 'uri',
+    text: 'text' // Will be classified as an uri after decodeURIComponent
 };
 var output = { type: null, data: null };
 window.initEventArgs = {};
@@ -22,7 +23,12 @@ if (!!window.Windows) {
 } else {
     if (!window.handleOpenURL) {
         window.handleOpenURL = function(data, inType) {
-            if (!inType) { inType = activatedTypes.uri; }
+            if (!inType) {
+                inType = activatedTypes.uri;
+            } else if (inType === activatedTypes.text) {
+                inType = activatedTypes.uri;
+                data = decodeURIComponent(data);
+            }
             output.type = inType;
             output.data = data;
             window.initEventArgs.activated = output;
