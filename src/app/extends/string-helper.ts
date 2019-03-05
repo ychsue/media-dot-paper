@@ -68,7 +68,7 @@ export class StringHelper {
     static getInfoFromProtocolString(uri: string): {action: ProtocolActionType, data: any} {
         const result = {action: ProtocolActionType.mdplink, data: ""};
         if (/case\=/.test(uri) === false) {
-            const mData = uri.match(/\:\/\/[^\/]*\/(.*)/);
+            const mData = uri.match(/^mdpyc\:\/\/[^\/]*\/(.*)/);
             if ( !!mData ) {
                 const data = decodeURIComponent(mData[1]);
                 result.data = data +

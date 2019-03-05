@@ -20,6 +20,7 @@
         "cordova-plugin-android-permissions": "^1.0.0",
         "cordova-plugin-audio-recorder-api": "file:../../modified-cordova-plugins/cordova-plugin-audio-recorder-api",
         "cordova-plugin-avaudiosession": "file:../../modified-cordova-plugins/cordova-plugin-avaudiosession",
+        "cordova-plugin-customurlscheme": "file:../../modified-cordova-plugins/cordova-plugin-customurlscheme",
         "cordova-plugin-file": "file:../../modified-cordova-plugins/cordova-plugin-file",
         "cordova-plugin-file-opener2": "^2.0.19",
         "cordova-plugin-inappbrowser": "3.0.0",

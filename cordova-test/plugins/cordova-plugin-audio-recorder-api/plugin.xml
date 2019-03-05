@@ -63,7 +63,7 @@
     <config-file target="AndroidManifest.xml" parent="/manifest">
       <uses-permission android:name="android.permission.RECORD_AUDIO"/>
       <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-      <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+      <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
     </config-file>
     <source-file src="src/android/com/emj365/plugins/AudioRecorderAPI.java" target-dir="src/com/emj365/plugins"/>
   </platform>

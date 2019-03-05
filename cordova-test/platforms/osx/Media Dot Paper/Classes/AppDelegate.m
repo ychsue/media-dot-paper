@@ -49,4 +49,11 @@
     return true;
 }
 
+- (void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls
+{
+    [[NSNotificationCenter  defaultCenter] postNotification:
+     [NSNotification notificationWithName: CDVPluginHandleOpenURLNotification
+                                   object: urls[0]]];
+}
+
 @end

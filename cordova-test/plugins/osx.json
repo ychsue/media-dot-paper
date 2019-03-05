@@ -1,50 +1,54 @@
 {
-  "prepare_queue": {
-    "installed": [],
-    "uninstalled": []
-  },
-  "config_munge": {
-    "files": {}
-  },
-  "installed_plugins": {
-    "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
     },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    "config_munge": {
+        "files": {}
     },
-    "cordova-plugin-file-opener2": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    "installed_plugins": {
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-file-opener2": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-nano-sqlite": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-tts": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-clipboard": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-admob-plus": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        },
+        "cordova-plugin-audio-recorder-api": {
+            "MICROPHONE_USAGE_DESCRIPTION": "For recording your voice, I need your permission to use your microphone.",
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
+        },
+        "cordova-plugin-avaudiosession": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
+        },
+        "cordova-plugin-customurlscheme": {
+            "URL_SCHEME": "mdpyc",
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
+        }
     },
-    "cordova-plugin-nano-sqlite": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-tts": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-clipboard": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-admob-plus": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-audio-recorder-api": {
-      "MICROPHONE_USAGE_DESCRIPTION": " ",
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
-    },
-    "cordova-plugin-avaudiosession": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
+    "dependent_plugins": {
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+        }
     }
-  },
-  "dependent_plugins": {
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    }
-  }
 }

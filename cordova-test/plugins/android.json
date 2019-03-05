@@ -41,6 +41,13 @@
     },
     "cordova-plugin-avaudiosession": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-customurlscheme": {
+      "URL_SCHEME": "mdpyc",
+      "ANDROID_SCHEME": " ",
+      "ANDROID_HOST": " ",
+      "ANDROID_PATHPREFIX": "/",
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {

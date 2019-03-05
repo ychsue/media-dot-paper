@@ -23,6 +23,7 @@
 
 /cordova-test/platforms/osx/*
 !/cordova-test/platforms/osx/Media\ Dot\ Paper/
+!/cordova-test/platforms/osx/CordovaLib/
 
 /cordova-test/platforms/android/*
 !/cordova-test/platforms/android/*.*

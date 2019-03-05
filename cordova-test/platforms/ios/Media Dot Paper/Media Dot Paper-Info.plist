@@ -74,5 +74,14 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>mdpyc</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>

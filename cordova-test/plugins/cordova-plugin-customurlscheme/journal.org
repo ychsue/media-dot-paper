@@ -1,0 +1,3 @@
+* [2019-2-24 Sun] I have added CDVHandleOpenURL.m for osx
+1. In this plugin, remember to set "onload" as ~true~ so that that plugin will be turned on when the App is startuped.
+2. You still need to send a notification from your ~AppDelegate.m~ when ~openURL~ is called and added a notification of ~NSBundleDidLoadNotification~ in ~CordovaLib/Classes/CDVWebViewDelegate.m~.

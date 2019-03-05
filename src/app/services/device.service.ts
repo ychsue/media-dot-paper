@@ -87,8 +87,9 @@ export class DeviceService {
       this.permissions = cordova.plugins.permissions;
     }
 
-    // * [2019-02-16 15:36] For Windows' activated event which is defined in index.html
-    if (!!window['Windows'] && !!Windows.UI.WebUI.WebUIApplication.onactivated) {
+    // * [2019-02-16 15:36] For cordova's (windows') activated event which is defined in index.html
+    if (!!window.cordova) {
+      // ** [2019-03-04 16:43] Get data from initEventArgs
       if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
         const args = window['initEventArgs'].activated;
         window['initEventArgs'].activated = null;
@@ -96,23 +97,37 @@ export class DeviceService {
         self._onMyActivated$.next(args);
       } else {
       }
-      Windows.UI.WebUI.WebUIApplication.onactivated = (ev) => {
-        let output = ev;
-        const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>(<any>ev).detail[0];
-        if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
-          const buf: Windows.Storage.StorageFile = (<Windows.ApplicationModel.Activation.FileActivatedEventArgs>args).files[0];
-          if (!!window['MSApp']) {
-            try {
-              output = {blob: (<any>window['MSApp']).createFileFromStorageFile(buf)};
-            } catch (error) {
-              console.log(error);
+      // ** [2019-03-04 16:43] For different platform
+      if (cordova.platformId === 'windows') {
+        Windows.UI.WebUI.WebUIApplication.onactivated = (ev) => {
+          let output = ev;
+          const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>(<any>ev).detail[0];
+          if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.file) {
+            const buf: Windows.Storage.StorageFile = (<Windows.ApplicationModel.Activation.FileActivatedEventArgs>args).files[0];
+            if (!!window['MSApp']) {
+              try {
+                output = {data: (<any>window['MSApp']).createFileFromStorageFile(buf), type: 'file'};
+              } catch (error) {
+                console.log(error);
+              }
+            } else if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.protocol) {
+              output = {
+                data: (<Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs>args).uri,
+                type: 'uri'
+              };
             }
-          } else {
           }
-        }
-        self._onMyActivated$.next(output);
-      };
+          self._onMyActivated$.next(output);
+        };
+      } else { // For ios, osx and Android
+        window['handleOpenURL'] = (data: string, inType: string) => {
+          if (!!!inType) {inType = 'uri'; }
+          const output = {data: data, type: inType};
+          self._onMyActivated$.next(output);
+        };
+      }
     }
+
   }
 
   /**

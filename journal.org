@@ -1,3 +1,21 @@
+* [2019-3-5 Tue] Try to support custom protocol 
+1. After reading into the code, you can find that through ~webview~, you can send messages or commands from your native code to your web one.
+    a. Android: In ~LaunchMyApp.java~, you can find ~webView.loadUrl("javascript:handlOpenURL(....)")~
+    b. ios & osx: In ~CDVHandleOpenURL.m~, youc can find ~[self.webview stringByEvaluatingJavascriptFromString:jsString];~
+    By these ways, you can execute a javascript code in your webview.
+
+2. You should set some default values in ~android.json~, ~ios.json~, ~osx.json~, etc. and those values will change your platfroms' setting files such as ~Info.plist~ file everytime you run ~cordova prepare ....~.
+
+3. If you want to add or remove some ~permission~s, you can change it through your ~CORDOVA_FOLDER/plugins/THE_PLUGIN/plugin.xml~.
+
+4. For a plugin, if you want to let some of its ~feature~ to be loaded as the system is started, you need to declare ~<param name="onload" value="true"/>~.
+    This is crucial for the plugin ~customurl~ for ~ios~ and ~osx~ system if you want that your App can be launched by other Apps with their sending data which can be caught by your App.
+
+5. For ~osx~, ~CDVHandleOpenURL~ is not an intrinsic plugin, I provide one for it.
+    By the way, I still need to modify ~AppDelegate.m~ and ~CDVWebViewDelegate.m~.
+    In fact, either a ~protocol~ or a clicked file, ~ios~ and ~osx~ will provide you their ~url~.
+    At this moment, I just get the ~text~s of a file because its function is very simple. I need to modify it someday.
+
 * [2019-2-20 Wed] Now, a protocol named ~mdpyc~ is added.
 1. If you link a link ~mdpyc:///https://drive.google.com/open?id=1aGfBH54ai3MmRopQGGczWacTIpSdxOSd~, it will launch this App and load this MDP file.
 2. Oh, remember that, for ~shareReplay(1)~, you need to subscribe that Observable before any true subscribe you want because it will be triggered after the first subscription.

@@ -121,5 +121,15 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-customurlscheme": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cordova-plugin-customurlscheme"
+    },
+    "is_top_level": true,
+    "variables": {
+      "URL_SCHEME": "mdpyc"
+    }
   }
 }

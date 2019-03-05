@@ -428,20 +428,19 @@ export class MediaEditService {
 
   onActivatedHandler(ev: any) {
     const self = this;
-    if (!!window['Windows']) {
-      if (!!ev['blob']) { // For a file
-        self.inputFromFile(<File>ev.blob);
-      } else { // For Uri,
-        const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>ev.detail[0];
-        if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.protocol) {
-        const uri = (<Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs>args).uri;
-        console.log(`input uri = ${uri}`);
-        const data = StringHelper.getInfoFromProtocolString(uri.displayUri);
+    if (!!window.cordova) {
+      if (ev.type === 'file') { // For a file
+        self.inputFromFile(<File>ev.data);
+      } else if (ev.type === 'uri') { // For Uri,
+        const uri = (!!window['Windows']) ? ev.data.displayUri : ev.data;
+        const data = StringHelper.getInfoFromProtocolString(uri);
         if (data.action === ProtocolActionType.mdplink) {
           self.inputFromString$(data.data);
+        } else { // it might be text
+          self.inputFromString$(uri);
         }
-      }}
-    } else if (!!!self.device.isCordova) {
+      }
+    } else {
       const uri = ev as string;
       const data = StringHelper.getInfoFromProtocolString(uri);
       if (data.action === ProtocolActionType.mdplink) {
