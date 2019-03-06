@@ -1,3 +1,7 @@
+* [2019-3-6 Wed] Associate txt and mdpyc files to this App in ios and osx
+Remember that, when you want to export UTIs, your own UTI should ~conforms to~ one common UTI.
+Just like the folder, you need a folder to hold your own folder, i.e. the UTI since it is a structured one.
+
 * [2019-3-5 Tue] osx and ios can support protocol now
 However, for osx, I cannot debug it directly. I need to copy it to ~/Applications/~ and debug it by ~Attach to Process~.
 
@@ -18,6 +22,19 @@ However, for osx, I cannot debug it directly. I need to copy it to ~/Application
     By the way, I still need to modify ~AppDelegate.m~ and ~CDVWebViewDelegate.m~.
     In fact, either a ~protocol~ or a clicked file, ~ios~ and ~osx~ will provide you their ~url~.
     At this moment, I just get the ~text~s of a file because its function is very simple. I need to modify it someday.
+
+* [2019-2-28 Thu] For android, it is another story
+1. [[https://stackoverflow.com/questions/48460381/file-scheme-and-content-scheme-confusions-android/48460751][In this StackOverflow's Q&A]], you can find that google don't wanna provide ~file://~ because of the possibility of leaking of secured files so that most of the scheme will be ~content://~ instead of ~file://~.
+
+* [2019-2-27 Wed] Even the ios can share the certain file type Now
+1. For Safari, a text file will be opened by Safari so that I cannot share its content to my App.
+    After reading [[https://stackoverflow.com/questions/10578951/file-associating-on-ios-opening-a-plain-text-file-from-safari][this Q&A of StackOverflow]], I declare a new mime-type for my own file extension on my Web Server and it will make Safari doesn't open it but ask me to open it with my App.
+    How can Safari know that? Well, you need to declare it in your ~info.plist~.
+2. In your ~info.plist~, you need to declare and export your own UTI with a suitable extension and mime-type which matches the one declared in your Web Server. Then you need to add your own UTI into your ~Document Types~ to let the system know that you want to associate it to that kind of file type.
+    You can get more insight from [[https://stackoverflow.com/questions/12586477/open-text-files-with-my-ios-app][this StackOverflow's Q&A]] and [[https://www.jianshu.com/p/978d38533c5c][this article]].
+
+* [2019-2-27 Wed] Now, mac can work for certain file extension
+In this [[https://stackoverflow.com/questions/24958021/document-types-vs-exported-and-imported-utis][Stack Overflow's Q&A]], you can see that how to make Mac can recognize the file extension you want.
 
 * [2019-2-20 Wed] Now, a protocol named ~mdpyc~ is added.
 1. If you link a link ~mdpyc:///https://drive.google.com/open?id=1aGfBH54ai3MmRopQGGczWacTIpSdxOSd~, it will launch this App and load this MDP file.

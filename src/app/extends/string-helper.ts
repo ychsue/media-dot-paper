@@ -66,11 +66,12 @@ export class StringHelper {
     }
 
     static getInfoFromProtocolString(uri: string): {action: ProtocolActionType, data: any} {
-        const result = {action: ProtocolActionType.mdplink, data: ""};
+        const result = {action: ProtocolActionType.others, data: ""};
         if (/case\=/.test(uri) === false) {
             const mData = uri.match(/^mdpyc\:\/\/[^\/]*\/(.*)/);
             if ( !!mData ) {
                 const data = decodeURIComponent(mData[1]);
+                result.action = ProtocolActionType.mdplink;
                 result.data = data +
                 ((data.toLowerCase().indexOf('ismdp=') >= 0) ? '' : (
                     ((data.indexOf('\?') >= 0) ? '&' : '?') +
@@ -82,5 +83,6 @@ export class StringHelper {
 }
 
 export enum ProtocolActionType {
-    mdplink = 0
+    others = 0,
+    mdplink = 1
 }
