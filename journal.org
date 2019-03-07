@@ -1,3 +1,7 @@
+* [2019-3-7 Thu] v2019.307.3 has been uploaded to ios, osx and android Stores
+1. For ios, I just can set ~LSSupportsOpeningDocumentsInPlace~ as ~false~. If not, it will crash.
+2. For android, I need to consider the case of ~http(s)://..../...mdpyc~ so that it can be loaded as a MDP file.
+
 * [2019-3-7 Thu] Add in the plugin ~openwith~ for Android system
 1. Because the ~CDVHandleOpenURL.m~ for ios should be modified, I include the whole ~CordovaLib/Classes~.
 2. Changing the output extension name from ~.json~ to ~.mdpyc.txt~ so that Line can open this file.

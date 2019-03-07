@@ -59,9 +59,15 @@ export class StringHelper {
     }
 
     static isMDP(st: string): boolean {
-        const reg = /(?:\&|\?)ismdp\=(\d)/i;
+        // * [2019-03-07 20:18] Check whether it has ismdp=1
+        let reg = /(?:\&|\?)ismdp\=(\d)/i;
         const matchIsMDP = st.match(reg);
-        const ismdp =  !!matchIsMDP && !!(+matchIsMDP[1]);
+        let ismdp =  !!matchIsMDP && !!(+matchIsMDP[1]);
+        // * [2019-03-07 20:18] Check whether it is a https link, with an mdpyc at its ending,
+        if (!!!ismdp) {
+            reg = /^http.?\:.*\.mdpyc.*/i;
+            ismdp = !!st.match(reg);
+        }
         return ismdp;
     }
 
