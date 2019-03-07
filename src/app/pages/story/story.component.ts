@@ -59,9 +59,9 @@ export class StoryComponent implements OnInit {
     // * [2018-09-04 12:06] Start to store into the file
     if (!!window.cordova === true) {
       e.preventDefault();
-      self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), self.meService.story.viewTime
+      self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), Math.round(self.meService.story.viewTime / 1000)
         // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-        + StringHelper.toFileName(self.meService.story.name) + '.json');
+        + StringHelper.toFileName(self.meService.story.name) + '.mdpyc.txt');
     } else {
       let blob: Blob;
       // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});

@@ -30,7 +30,7 @@
     <header-file src="src/ios/AudioRecorderAPI.h"/>
     <source-file src="src/ios/AudioRecorderAPI.m"/>
     
-     <preference name="MICROPHONE_USAGE_DESCRIPTION" default=" " />
+     <preference name="MICROPHONE_USAGE_DESCRIPTION" default="For recording your voice, I need your permission to use your microphone." />
          <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
              <string>$MICROPHONE_USAGE_DESCRIPTION</string>
          </config-file>
@@ -47,7 +47,7 @@
     <header-file src="src/osx/AudioRecorderAPI.h"/>
     <source-file src="src/osx/AudioRecorderAPI.m"/>
     
-     <preference name="MICROPHONE_USAGE_DESCRIPTION" default=" " />
+     <preference name="MICROPHONE_USAGE_DESCRIPTION" default="For recording your voice, I need your permission to use your microphone." />
          <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
              <string>$MICROPHONE_USAGE_DESCRIPTION</string>
          </config-file>

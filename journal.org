@@ -1,3 +1,9 @@
+* [2019-3-7 Thu] Add in the plugin ~openwith~ for Android system
+1. Because the ~CDVHandleOpenURL.m~ for ios should be modified, I include the whole ~CordovaLib/Classes~.
+2. Changing the output extension name from ~.json~ to ~.mdpyc.txt~ so that Line can open this file.
+3. I still don't know how to let Android's Line can open ~.mdpyc~ directly.
+4. From [[https://www.jianshu.com/p/e74047f7cc91][this article]], it will teach you how to create an ~.icns~ file for your ~Exported UTIs~ in a fly.
+
 * [2019-3-6 Wed] Associate txt and mdpyc files to this App in ios and osx
 Remember that, when you want to export UTIs, your own UTI should ~conforms to~ one common UTI.
 Just like the folder, you need a folder to hold your own folder, i.e. the UTI since it is a structured one.
@@ -11,7 +17,7 @@ However, for osx, I cannot debug it directly. I need to copy it to ~/Application
     b. ios & osx: In ~CDVHandleOpenURL.m~, youc can find ~[self.webview stringByEvaluatingJavascriptFromString:jsString];~
     By these ways, you can execute a javascript code in your webview.
 
-2. (Does not work) You should set some default values in ~android.json~, ~ios.json~, ~osx.json~, etc. and those values will change your platfroms' setting files such as ~Info.plist~ file everytime you run ~cordova prepare ....~.
+2. (DOES NOT WORK) You should set some default values in ~android/android.json~, ~ios/ios.json~, ~osx/osx.json~, etc. and those values will change your platfroms' setting files such as ~Info.plist~ file everytime you run ~cordova prepare ....~.
 
 3. If you want to add or remove some ~permission~s, you can change it through your ~CORDOVA_FOLDER/plugins/THE_PLUGIN/plugin.xml~.
 

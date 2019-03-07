@@ -131,5 +131,15 @@
     "variables": {
       "URL_SCHEME": "mdpyc"
     }
+  },
+  "cc.fovea.cordova.openwith": {
+    "source": {
+      "type": "local",
+      "path": "/Users/ychsue/workspace/cordova-ng-test/cordova-test/node_modules/cc.fovea.cordova.openwith"
+    },
+    "is_top_level": true,
+    "variables": {
+      "ANDROID_MIME_TYPE": "*/*"
+    }
   }
 }

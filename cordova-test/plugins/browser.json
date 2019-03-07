@@ -43,6 +43,9 @@
     "cordova-plugin-customurlscheme": {
       "URL_SCHEME": "mdpyc",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cc.fovea.cordova.openwith": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {

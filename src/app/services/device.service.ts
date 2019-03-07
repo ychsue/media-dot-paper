@@ -123,13 +123,32 @@ export class DeviceService {
         window['handleOpenURL'] = (data: string, inType: string) => {
           if (!inType) {
             inType = 'uri';
-        } else if (inType === 'text') {
+          } else if (inType === 'text') {
             inType = 'uri';
             data = decodeURIComponent(data);
-        }
-      const output = {data: data, type: inType};
+          }
+          const output = {data: data, type: inType};
           self._onMyActivated$.next(output);
         };
+        // For Android system
+        if (cordova.platformId === 'android') {
+          // * [2019-03-06 16:32] handling openwith plugin
+          const openwith = (<any>cordova).openwith;
+          openwith.init(
+            () => console.log('load openwith successfully.'),
+            err => console.log(`load openwith Failed. Message: ${err}`)
+          );
+          openwith.addHandler( intent => {
+            if (intent.items.length > 0) {
+              openwith.load(intent.items[0], (data, item) => {
+                window['handleOpenURL'](data, "text");
+                if (intent.exit) {openwith.exit(); }
+              });
+            } else {
+              if (intent.exit) {openwith.exit(); }
+            }
+          });
+        }
       }
     }
 

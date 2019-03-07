@@ -3,10 +3,10 @@
     "newMedia": "加载新媒体",
     "url": "网址",
     "file": "文件",
-    "ttFile": "选择视频或音频文件，或此APP导出的json文件",
+    "ttFile": "选择视频或音频文件，或此APP导出的mdpyc文件",
     "storedMedia": "选择存储的媒体",
-    "errWrongFormat": "输入.json文件的格式错误。错误信息：",
-    "errFileType": "所选文件必须是视频或音频文件，或此APP导出的json文件。",
+    "errWrongFormat": "输入.mdpyc文件的格式错误。错误信息：",
+    "errFileType": "所选文件必须是视频或音频文件，或此APP导出的mdpyc文件。",
     "mobileFileSelWarn": "如果您选择的本地媒体文件很大，大多数操作仍应有效;但是，当您尝试将其保存到MDP列表中时，它可能会使此应用程序崩溃。",
     "browserFileSelWarn": "虽然您可以加载本地媒体文件，但无法将其保存到此平台的MDP列表中。",
     "dailySample": "每日样品"
@@ -33,7 +33,7 @@
     "source": "媒体的来源",
     "description": "描述",
     "sbvShiftT": "如果想平移所有的时间，那么，请输入一个单位为秒的非零数字。",
-    "exportJson": "将当前MDP导出到.json文件中"
+    "exportJson": "将当前MDP导出到.mdpyc.txt文件中"
   },
   "dialogComp": {
     "desireURL": "请输入想要的URL",

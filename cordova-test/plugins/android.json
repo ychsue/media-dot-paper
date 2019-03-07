@@ -48,6 +48,11 @@
       "ANDROID_HOST": " ",
       "ANDROID_PATHPREFIX": "/",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cc.fovea.cordova.openwith": {
+      "ANDROID_MIME_TYPE": "*/*",
+      "ANDROID_EXTRA_ACTIONS": " ",
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {
