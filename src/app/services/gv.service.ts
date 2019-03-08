@@ -10,7 +10,7 @@ export class GvService {
   shownPage = PageType.Home;
   prevPage: PageType = PageType.Home;
   sharedFolderName = 'SegmentedMediaLayer';
-  ptVersion = "2019.207.3";
+  ptVersion = "2019.308.3";
 
   private _zoomAll = 1;
   public get zoomAll(): number {

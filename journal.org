@@ -1,3 +1,6 @@
+* [2019-3-8 Fri] The way to get a value from objective-c's dictionary
+From [[https://stackoverflow.com/questions/19970064/how-to-get-values-from-a-dictionary-in-ios][this StackOverflow's Q&A]] you can find that you can get its value by ~DICT[@"KEY"]~.
+
 * [2019-3-8 Fri] @objc warning
 You can see how to stop the compiler warning about the ~deprecated @objc inference which is for swift 3~ from [[https://stackoverflow.com/questions/44379348/the-use-of-swift-3-objc-inference-in-swift-4-mode-is-deprecated][StackOverflow's Q&A]].
 However, some people in this article said that don't change it to be ~Default~ but keep the original ~On~. I'm not sure, need more test.
