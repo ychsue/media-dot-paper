@@ -73,28 +73,30 @@
 
 // this happens while we are running ( in the background, or from within our own app )
 // only valid if 40x-Info.plist specifies a protocol to handle
-- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     if (!url) {
         return NO;
     }
-
+    
     NSMutableDictionary * openURLData = [[NSMutableDictionary alloc] init];
-
+    
     [openURLData setValue:url forKey:@"url"];
-
+    NSString* sourceApplication = options[@"UIApplicationOpenURLOptionsSourceApplicationKey"];
+        
     if (sourceApplication) {
         [openURLData setValue:sourceApplication forKey:@"sourceApplication"];
     }
-
-    if (annotation) {
-        [openURLData setValue:annotation forKey:@"annotation"];
-    }
-
+    
+    // * [2019-03-08 13:18] ***** TODO ***** annotation is not used at this moment.
+//    if (annotation) {
+//        [openURLData setValue:annotation forKey:@"annotation"];
+//    }
+    
     // all plugins will get the notification, and their handlers will be called
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLWithAppSourceAndAnnotationNotification object:openURLData]];
-
+    
     return YES;
 }
 

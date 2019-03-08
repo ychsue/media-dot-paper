@@ -33,7 +33,7 @@
     "source": "媒体的来源",
     "description": "描述",
     "sbvShiftT": "如果想平移所有的时间，那么，请输入一个单位为秒的非零数字。",
-    "exportJson": "将当前MDP导出到.mdpyc.txt文件中"
+    "exportJson": "将当前MDP导出到.mdpyc文件中"
   },
   "dialogComp": {
     "desireURL": "请输入想要的URL",

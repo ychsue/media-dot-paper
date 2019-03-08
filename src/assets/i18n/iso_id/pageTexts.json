@@ -33,7 +33,7 @@
     "source": "Sumber media",
     "description": "Deskripsi",
     "sbvShiftT": "Jika Anda ingin bergeser sepanjang waktu, silakan masukkan angka bukan nol dalam hitungan detik.",
-    "exportJson": "Ekspor MDP saat ini menjadi file .mdpyc.txt"
+    "exportJson": "Ekspor MDP saat ini menjadi file .mdpyc"
   },
   "dialogComp": {
     "desireURL": "Silakan masukkan URL yang diinginkan",

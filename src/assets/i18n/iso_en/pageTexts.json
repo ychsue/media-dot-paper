@@ -33,7 +33,7 @@
     "source": "Media's source",
     "description": "Description",
     "sbvShiftT": "If you want to shift all the time, please input a non-zero number in seconds.",
-    "exportJson": "Export current MDP into a .mdpyc.txt file"
+    "exportJson": "Export current MDP into a .mdpyc file"
   },
   "dialogComp": {
     "desireURL": "Please input desired URL",

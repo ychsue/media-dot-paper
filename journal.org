@@ -1,5 +1,14 @@
+* [2019-3-8 Fri] @objc warning
+You can see how to stop the compiler warning about the ~deprecated @objc inference which is for swift 3~ from [[https://stackoverflow.com/questions/44379348/the-use-of-swift-3-objc-inference-in-swift-4-mode-is-deprecated][StackOverflow's Q&A]].
+However, some people in this article said that don't change it to be ~Default~ but keep the original ~On~. I'm not sure, need more test.
+
+* [2019-3-8 Fri] I want to change the exported file from .mdpyc.txt to .mdpyc
+1. Because for ~Line~ I can open ~.mdpyc~ file in android system through ~公開(public)~ to launch this App, there is no reason to keep using ~.mdpyc.txt~.
+
 * [2019-3-7 Thu] v2019.307.3 has been uploaded to ios, osx and android Stores
 1. For ios, I just can set ~LSSupportsOpeningDocumentsInPlace~ as ~false~. If not, it will crash.
+    [2019-3-8 Fri] Now I changed it to ~true~ because it can save time and space.
+    However, you have to change your ~application:openURL:sourceApplication:annotation:~ which is for older ios to ~application:openURL:options:~ in ~CDVAppDelegate.m~. Need more test.
 2. For android, I need to consider the case of ~http(s)://..../...mdpyc~ so that it can be loaded as a MDP file.
 
 * [2019-3-7 Thu] Add in the plugin ~openwith~ for Android system
