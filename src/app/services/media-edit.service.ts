@@ -401,6 +401,10 @@ export class MediaEditService {
     if (!!result === false) {
       return;
     }
+    // * [2019-03-10 07:03] Because 'http(s):~' or 'http(s):/~' will crash windows uwp,
+    //                        I need to do something to prevent this kind of behavior.
+    result = StringHelper.correctHttpURL(result);
+
     const ismdp = StringHelper.isMDP(result);
     result = StringHelper.refineLinkOfDGO(result);
     // * [2018-12-24 20:34] Check whether it is an MDP file

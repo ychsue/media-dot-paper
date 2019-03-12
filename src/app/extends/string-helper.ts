@@ -86,6 +86,16 @@ export class StringHelper {
         }
         return result;
     }
+
+    static correctHttpURL(oldURL: string): string {
+        let result = oldURL;
+        const match = oldURL.match(/^https?\:\/?[^\/]/i);
+        if (!!match) {
+            result = oldURL.replace(/^(https?\:)(\/?)([^\/].*)/i,
+                (p0, p1, p2, p3, ind) => (p1 + '//' + p3) );
+        }
+        return result;
+    }
 }
 
 export enum ProtocolActionType {

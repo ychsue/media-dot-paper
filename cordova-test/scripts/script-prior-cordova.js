@@ -12,11 +12,15 @@ if (!!window.Windows) {
         output = ev;
         if (ev.detail[0].kind === 3) { // File
             // eslint-disable-next-line no-undef
-            output.dtat = MSApp.createFileFromStorageFile(ev.detail[0].files[0]);
-            output.type = activatedTypes.file;
-        } else if (ev.detail[0] === 4) { // Protocol
-            output.data = ev.detail[0].uri;
-            output.type = activatedTypes.uri;
+            output = {
+                data: MSApp.createFileFromStorageFile(ev.detail[0].files[0]),
+                type: activatedTypes.file
+            };
+        } else if (ev.detail[0].kind === 4) { // Protocol
+            output = {
+                data: ev.detail[0].uri,
+                type: activatedTypes.uri
+            };
         }
         window.initEventArgs.activated = output;
     };

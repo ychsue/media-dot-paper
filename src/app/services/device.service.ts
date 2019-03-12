@@ -110,12 +110,12 @@ export class DeviceService {
               } catch (error) {
                 console.log(error);
               }
-            } else if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.protocol) {
-              output = {
-                data: (<Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs>args).uri,
-                type: 'uri'
-              };
             }
+          } else if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.protocol) {
+            output = {
+              data: (<Windows.ApplicationModel.Activation.ProtocolActivatedEventArgs>args).uri,
+              type: 'uri'
+            };
           }
           self._onMyActivated$.next(output);
         };

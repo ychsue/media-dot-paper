@@ -198,9 +198,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       opts = opts.append("Cache-Control", "no-cache, no-store, must-revalidate, post-check=0, pre-check=0");
       opts = opts.append("Pragma", "no-cache");
       opts = opts.append("Expires", "0");
-      story = await self.http.get(stUrl, {responseType: 'text', headers: opts}).pipe(map(res => {
-        return self.storyService.getAStoryFromString(res);
-      })).toPromise();
+      story = await self.http.get(
+        StringHelper.correctHttpURL(stUrl),
+        {responseType: 'text', headers: opts}).pipe(map(res => {
+            return self.storyService.getAStoryFromString(res);
+          })).toPromise();
     } catch (error) {
       console.log(error);
     }
