@@ -12,6 +12,8 @@ export class GvService {
   sharedFolderName = 'SegmentedMediaLayer';
   ptVersion = "2019.308.3";
 
+  showSideNav = true;
+
   private _zoomAll = 1;
   public get zoomAll(): number {
     return this._zoomAll;

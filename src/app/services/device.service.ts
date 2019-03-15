@@ -49,7 +49,7 @@ export class DeviceService {
         });
       });
     } else {
-      self._onMyActivated$.next(document.URL);
+      self._emitInitActivated();
     }
 
     // * [2018-07-17 19:50] For pointing device's events
@@ -80,6 +80,18 @@ export class DeviceService {
     }
   }
 
+  private _emitInitActivated() {
+    const self = this;
+      // ** [2019-03-04 16:43] Get data from initEventArgs
+      if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
+        const args = window['initEventArgs'].activated;
+        window['initEventArgs'].activated = null;
+        // * [2019-02-16 16:03] For file extensions
+        self._onMyActivated$.next(args);
+      } else {
+      }
+  }
+
   initCordovaAPIS() {
     const self = this;
     if (!!!window['cordova']) {return; }
@@ -89,14 +101,7 @@ export class DeviceService {
 
     // * [2019-02-16 15:36] For cordova's (windows') activated event which is defined in index.html
     if (!!window.cordova) {
-      // ** [2019-03-04 16:43] Get data from initEventArgs
-      if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
-        const args = window['initEventArgs'].activated;
-        window['initEventArgs'].activated = null;
-        // * [2019-02-16 16:03] For file extensions
-        self._onMyActivated$.next(args);
-      } else {
-      }
+      self._emitInitActivated();
       // ** [2019-03-04 16:43] For different platform
       if (cordova.platformId === 'windows') {
         Windows.UI.WebUI.WebUIApplication.onactivated = (ev) => {

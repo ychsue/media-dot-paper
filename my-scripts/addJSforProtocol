@@ -1,0 +1,28 @@
+#!/bin/sh
+calledDir="$(pwd)"
+dirName=`dirname $0`
+mainDir=$dirName/../
+baseName=`basename $0`
+echo "$calledDir, $dirName, $baseName"
+
+cd $mainDir
+mainDir=`pwd`
+
+# [2019-03-13 21:17] compile typescript
+cd $mainDir/src/extra-scripts
+browserify baJS-protocolcheck-source.js --standalone protocolCheck > /tmp/protocolcheck.js
+tsc check-protocol.ts --outDir /tmp
+
+# [2019-03-13 21:22] uglify it with protocolcheck.js
+cat /tmp/protocolcheck.js /tmp/check-protocol.js |uglifyjs > /tmp/ugly.js
+
+# [2019-03-13 21:30] output it to dist/ng-test
+md5code=`md5sum /tmp/ugly.js| awk '{print $1}'`
+outputName="before-angular.${md5code:0:16}.js"
+echo $outputName
+mv /tmp/ugly.js $mainDir/dist/cordova-ng-test/$outputName
+
+# [2019-03-13 22:03]
+cd $mainDir/dist/cordova-ng-test
+sed -i'' -e "s/.*before-angular.*/  <script src='$outputName'><\/script> /" index.html
+cd $calledDir

@@ -1,3 +1,9 @@
+* [2019-3-15 Fri] Now I can open my App through my website (not yet for android system)
+1. Based on [[https://github.com/ismailhabib/custom-protocol-detection][this package]] related to the file ~baJS-protocolcheck-source.js~, I can check whether the protocol ~mdpyc~ is supported on users' device.
+2. However, looks like all the drives on the cloud do not support ~cross-origin~ so that I cannot open them.
+    Need to think a way to tell the user what's the next.
+3. For Android system, looks like I must register a website for it. After this, I need to check how to make it works.
+
 * [2019-3-12 Tue] ~http(s):...~ and ~http(s):/...~ will crash the Edge's engine.
 1. Write a ~stringHelper.correctHttpURL~ static method to correct some illed ~http(s)~ link because they'll crash the Edge's engine.
 

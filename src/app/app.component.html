@@ -1,10 +1,10 @@
 <div #container class="container display-flex-column">
     <div #navbar class="navbar flex-none">
-        <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="sidenav.opened=!sidenav.opened"></app-navbar>
+        <app-navbar class="mat-elevation-z6" (toggleSidenav_Click)="gv.showSideNav=!gv.showSideNav"></app-navbar>
     </div>
     <div class="flex-auto display-flex-row overflow-y-auto position-relative">
         <mat-sidenav-container #sidenavContainer class="flex-auto display-flex-row">
-            <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="true" style="border-right: 2px solid black" [style.width]="sidenavWidth+'px'">
+            <mat-sidenav #sidenav [mode]="sidenavMode" align="start" [opened]="gv.showSideNav" style="border-right: 2px solid black" [style.width]="sidenavWidth+'px'">
                 <!-- <app-home class="page" [style.display]="(gv.shownPage===pageType.Home)?'block':'none'"></app-home> -->
                 <mat-tab-group id="sidenavTabs" mat-stretch-tabs [dynamicHeight]="true">
                     <mat-tab class="display-flex-column">

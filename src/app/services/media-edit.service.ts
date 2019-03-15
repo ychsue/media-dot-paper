@@ -432,8 +432,9 @@ export class MediaEditService {
 
   onActivatedHandler(ev: any) {
     const self = this;
-    if (!!window.cordova) {
-      if (ev.type === 'file') { // For a file
+    self.gv.showSideNav = false;
+
+    if (ev.type === 'file') { // For a file
         self.inputFromFile(<File>ev.data);
       } else if (ev.type === 'uri') { // For Uri,
         const uri = (!!window['Windows']) ? ev.data.displayUri : ev.data;
@@ -444,13 +445,6 @@ export class MediaEditService {
           self.inputFromString$(uri);
         }
       }
-    } else {
-      const uri = ev as string;
-      const data = StringHelper.getInfoFromProtocolString(uri);
-      if (data.action === ProtocolActionType.mdplink) {
-        self.inputFromString$(data.data);
-      }
-    }
   }
 }
 
