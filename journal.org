@@ -1,3 +1,6 @@
+* [2019-3-16 Sat] The ~loadPage$$~ in ~page-texts.service~ does not get the whole .json file sometimes.
+I tried to remove ~pipe(take(1))~ to let it loading the whole file and checking whether the latest variable is loaded.
+
 * [2019-3-16 Sat] Well, since I cannot solve the cross-origin problem, it'll show the user an alert and guide them to the Stores
 Some articles I need to write down:
 1. [[https://stackoverflow.com/questions/11219582/how-to-detect-my-browser-version-and-operating-system-using-javascript][This StackOverflow's Q&A]] teaches me how to detect the OS; however, I don't know how to check whether it is gotten from Android system.
