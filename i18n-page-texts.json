@@ -114,6 +114,9 @@
             "noGetUserMedia": "Your system is out of <b>getUserMedia</b> method",
             "needPermission": "Maybe you need to give this APP your microphone's permission."
         },
+        "mediaEditService": {
+            "CORerror": "Sorry, I cannot get this file from its website which denies the query from another website. You have to <ol><li>download <a href='{0}'>this file</a> to your device</li><li>click the 'File' button on the left side-nav sub-window to import this file</li> </ol> Tiresome? The easiest way is to install this App from the store to handle it. Next time, it'll redirect you to this App. The store(s): </br>"
+        },
         "iso639": {
             "ab": "Abkhaz",
             "aa": "Afar",

@@ -15,6 +15,7 @@ interface IPageTexts {
     dailySampleComp: IDailySampleComp;
     pronunExerComp: IPronunExerComp;
     micRecorderService: IMicRecorderService;
+    mediaEditService: IMediaEditService;
     iso639: IIso639;
     iso3166Country: IIso3166Country;
 }
@@ -131,6 +132,9 @@ interface IMicRecorderService {
     cannotRecord: string;
     noGetUserMedia: string;
     needPermission: string;
+}
+interface IMediaEditService {
+    CORerror: string;
 }
 interface IIso639 {
     ab: string;

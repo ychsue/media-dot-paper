@@ -549,5 +549,8 @@
     "cannotRecord": "对不起，我无法录制您的声音。",
     "noGetUserMedia": "您的系统不在<b> getUserMedia </ b>方法中",
     "needPermission": "也许你需要给这个APP麦克风的许可。"
+  },
+  "mediaEditService": {
+    "CORerror": "对不起，我无法从其网站上获取此文件，它拒绝来自其他网站的查询。您必须<ol> <li>将<a href='{0}'>此文件</a>下载到您的设备</li> <li>点击左侧导航子窗口的“文件”按钮来导入此文件</li> </ol> 很麻煩？最简单的方法是从商店安装此应用程序来处理它。下次，它会将您重定向到此应用程序。商店：</br>"
   }
 }

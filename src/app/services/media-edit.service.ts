@@ -414,7 +414,35 @@ export class MediaEditService {
         res = await self.http.get(result, {responseType: 'text'}).toPromise();
       }
     } catch (err) {
-      console.log(err);
+      const cP = window['protocolCheck'].checkBrowser(); // checkPlatform
+      if (!!!window.cordova) {
+        self.gv.showSideNav = true;
+        const isNone = !cP.isWindows && !cP.isMac && !cP.isIOS;
+        const msg = ((!!self.pts) ? self.pts.mediaEditService.CORerror : `抱歉，所附連結方因為安全關係，不讓別的網頁直接載入該檔，請
+        <ol>
+        <li><a href='{0}'>下載此檔</a></li>
+        <li>由此網頁左側欄裡的'文件'按鈕匯入此檔即可</li>
+        </ol>
+        另一種更為簡便的方法是安裝本APP，下次就會轉而由本APP接手了。請由以下的商店取得。</br>
+        `).replace('{0}', result) + ((isNone) ? `
+        <a mat-button href="https://play.google.com/store/apps/details?id=tw.at.yescirculation.mediadotpaper">
+        <img alt="Get it on Google Play"
+             src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
+    </a>` : '') + ((isNone || cP.isWindows) ? `
+    <a mat-button href='//www.microsoft.com/store/apps/9PP2LJRFF179?ocid=badge'>
+        <img style="height:45px"
+         src='https://assets.windowsphone.com/85864462-9c82-451e-9355-a3d5f874397a/English_get-it-from-MS_InvariantCulture_Default.png'
+         alt='English badge'/>
+    </a>` : '') + ((isNone || (cP.isMac && !cP.isIOS)) ?
+    // tslint:disable-next-line:max-line-length
+    `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-31T00:00:00Z&kind=desktopapp&bubble=macos_apps) no-repeat;width:165px;height:40px;padding: 0 42px;background-position: center;" href="https://geo.itunes.apple.com/us/app/media-dot-paper/id1436714053?mt=12&app=apps"></a>` : '') + ((isNone || cP.isIOS) ?
+    // tslint:disable-next-line:max-line-length
+    `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-27&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;padding: 0 0 0 12px;background-position: center;" href="https://itunes.apple.com/us/app/media-dot-paper/id1436677583?mt=8"></a>` : '');
+    self.msgService.alert(msg, false);
+        return;
+      } else {
+        console.log(err);
+      }
     }
     if (!!(story = self.storyService.getAStoryFromString(result)) ||
       !!(story = self.storyService.getAStoryFromString(res))) {

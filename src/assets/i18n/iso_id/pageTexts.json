@@ -549,5 +549,8 @@
     "cannotRecord": "Maaf, saya tidak dapat merekam suara Anda.",
     "noGetUserMedia": "Sistem Anda kehabisan metode <b> getUserMedia </b>",
     "needPermission": "Mungkin Anda perlu memberi izin kepada mikrofon untuk aplikasi ini."
+  },
+  "mediaEditService": {
+    "CORerror": "Maaf, saya tidak bisa mendapatkan file ini dari situs webnya yang menolak permintaan dari situs web lain. Anda harus <ol> <li> mengunduh <a href='{0}'> file ini </a> ke perangkat Anda </li> <li> klik tombol 'Mengajukan' di sub-nav sisi kiri jendela untuk mengimpor file ini </li> </ol> Mengganggu? Cara termudah adalah menginstal Aplikasi ini dari toko untuk menanganinya. Lain kali, itu akan mengarahkan Anda ke App ini. Toko: </br>"
   }
 }

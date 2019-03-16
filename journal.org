@@ -1,5 +1,14 @@
+* [2019-3-16 Sat] Well, since I cannot solve the cross-origin problem, it'll show the user an alert and guide them to the Stores
+Some articles I need to write down:
+1. [[https://stackoverflow.com/questions/11219582/how-to-detect-my-browser-version-and-operating-system-using-javascript][This StackOverflow's Q&A]] teaches me how to detect the OS; however, I don't know how to check whether it is gotten from Android system.
+2. [[https://stackoverflow.com/questions/9549780/what-does-this-symbol-mean-in-javascript][This StackOverflow's Q&A]] is talking about the symbols used in javascript.
+3. [[https://stackoverflow.com/questions/10160343/amd-what-is-the-purpose-in-javascript-context][This StackOverflow's Q&A]] gives a short and clear explanation about AMD (Asynchronous Module Definition) for the web.
+4. [[https://stackoverflow.com/questions/3679296/only-get-hash-value-using-md5sum-without-filename][This StackOverflow's Q&A]] talks about how to get the value of a file's md5sum.
+5. [[https://stackoverflow.com/questions/428109/extract-substring-in-bash][This StackOverflow's Q&A]] teaches me how to achieve the action of ~substring~ in Bash.
+
 * [2019-3-15 Fri] Now I can open my App through my website (not yet for android system)
 1. Based on [[https://github.com/ismailhabib/custom-protocol-detection][this package]] related to the file ~baJS-protocolcheck-source.js~, I can check whether the protocol ~mdpyc~ is supported on users' device.
+    The discussion can be found [[https://stackoverflow.com/questions/836777/how-to-detect-browsers-protocol-handlers][in this StackOverflow's Q&A]].
 2. However, looks like all the drives on the cloud do not support ~cross-origin~ so that I cannot open them.
     Need to think a way to tell the user what's the next.
 3. For Android system, looks like I must register a website for it. After this, I need to check how to make it works.

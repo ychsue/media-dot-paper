@@ -48,8 +48,8 @@ export class MessageService {
     }
   }
 
-  alert(msg: string) {
-    if (!!window.cordova === true) {
+  alert(msg: string, usingSys: boolean = true) {
+    if (!!window.cordova === true || !!!usingSys) {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '50%',
         data: {dType: DialogType.alert, msg: msg}
