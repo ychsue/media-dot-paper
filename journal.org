@@ -1,3 +1,8 @@
+* [2019-3-17 Sun] Try to provide the ~App Link~ for Android.
+1. From [[https://developer.android.com/studio/write/app-link-indexing?utm_source=android-studio#java][android's tutorial]], you can see how to easily apply the ~App Link~ for your App.
+2. You need to generate a json file with needed declarations and put it in ~https://YourSite/.well-known/assetLinks.json~. You can generate this file follow the instruction shown in [[https://stackoverflow.com/questions/44497929/digital-assets-link-link-to-my-website][this StackOverflow's Q&A]].
+3. Hmm. I need to test it whether it works on the released version because it does not work for my debug version.
+
 * [2019-3-16 Sat] The ~loadPage$$~ in ~page-texts.service~ does not get the whole .json file sometimes.
 I tried to remove ~pipe(take(1))~ to let it loading the whole file and checking whether the latest variable is loaded.
 

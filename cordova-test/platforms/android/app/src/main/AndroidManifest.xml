@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<manifest android:hardwareAccelerated="true" android:versionCode="20310302" android:versionName="2019.308.3" package="tw.at.yescirculation.mediadotpaper" xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest android:hardwareAccelerated="true" android:versionCode="20310302" android:versionName="2019.317.3" package="tw.at.yescirculation.mediadotpaper" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:resizeable="true" android:smallScreens="true" android:xlargeScreens="true" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application android:hardwareAccelerated="true" android:icon="@mipmap/icon" android:label="@string/app_name" android:supportsRtl="true">
         <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" android:label="@string/activity_name" android:launchMode="singleTask" android:name="MainActivity" android:theme="@android:style/Theme.DeviceDefault.NoActionBar" android:windowSoftInputMode="adjustResize">
+            <tools:validation testUrl="https://memorizeyc.azurewebsites.net/static/mediadotpaper/?https://drive.google.com/open?id=1Rd4MBmqPoOoPiQqqtfqC_pbOjliXak_8" />
             <intent-filter android:label="@string/launcher_name">
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -14,11 +15,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="mdpyc" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host=" " android:pathPrefix="/" android:scheme=" " />
+                <data android:host="memorizeyc.azurewebsites.net" android:pathPattern="/static/mediadotpaper/" android:scheme="https" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -33,7 +34,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.mdpyc.*" android:scheme="https" />
+                <data android:scheme="https" />
                 <data android:scheme="file" />
                 <data android:scheme="content" />
                 <data android:mimeType="*/*" />
@@ -44,13 +45,6 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.mdpyc.*" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\..*\\.mdpyc.*" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

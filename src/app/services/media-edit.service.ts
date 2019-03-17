@@ -466,7 +466,7 @@ export class MediaEditService {
         self.inputFromFile(<File>ev.data);
       } else if (ev.type === 'uri') { // For Uri,
         const uri = (!!window['Windows']) ? ev.data.displayUri : ev.data;
-        const data = StringHelper.getInfoFromProtocolString(uri);
+        const data = StringHelper.getInfoFromURIString(uri);
         if (data.action === ProtocolActionType.mdplink) {
           self.inputFromString$(data.data);
         } else { // it might be text

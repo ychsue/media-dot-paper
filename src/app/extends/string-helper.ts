@@ -71,10 +71,12 @@ export class StringHelper {
         return ismdp;
     }
 
-    static getInfoFromProtocolString(uri: string): {action: ProtocolActionType, data: any} {
+    static getInfoFromURIString(uri: string): {action: ProtocolActionType, data: any} {
         const result = {action: ProtocolActionType.others, data: ""};
         if (/case\=/.test(uri) === false) {
-            const mData = uri.match(/^mdpyc\:\/\/[^\/]*\/(.*)/);
+            let mData = uri.match(/^mdpyc\:\/\/[^\/]*\/(.*)/);
+            mData = (!!mData) ? mData : uri.match(/^https:\/\/memorizeyc.azurewebsites.net\/static\/mediadotpaper\/\?(.*)/i);
+            mData = (!!mData) ? mData : uri.match(/^https:\/\/memorizeyc.azurewebsites.net\/static\/mediadotpaper\/(.?)$/i);
             if ( !!mData ) {
                 const data = decodeURIComponent(mData[1]);
                 result.action = ProtocolActionType.mdplink;
