@@ -25,3 +25,7 @@ body{
 mat-expansion-panel-header {
     user-select: none;
 }
+
+.cdk-overlay-pane {
+    overflow: auto;
+}

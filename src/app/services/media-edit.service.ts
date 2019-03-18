@@ -384,11 +384,13 @@ export class MediaEditService {
         })
         .catch( err => {
           console.log(err);
-          self.msgService.alert(((!!self.pts) ? self.pts.homePage.errWrongFormat : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`);
+          self.msgService.alert(((!!self.pts && !!self.pts.homePage) ? self.pts.homePage.errWrongFormat :
+           `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`);
           return;
         });
     } else {
-      self.msgService.alert((!!self.pts) ? self.pts.homePage.errFileType : '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+      self.msgService.alert((!!self.pts && !!self.pts.homePage) ? self.pts.homePage.errFileType :
+       '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
       return;
     }
     // * [2018-07-19 21:28] Tell navbar that you want to create a story
@@ -418,7 +420,8 @@ export class MediaEditService {
       if (!!!window.cordova) {
         self.gv.showSideNav = true;
         const isNone = !cP.isWindows && !cP.isMac && !cP.isIOS;
-        const msg = ((!!self.pts) ? self.pts.mediaEditService.CORerror : `抱歉，所附連結方因為安全關係，不讓別的網頁直接載入該檔，請
+        const msg = ((!!self.pts && !!self.pts.mediaEditService) ? self.pts.mediaEditService.CORerror :
+         `抱歉，所附連結方因為安全關係，不讓別的網頁直接載入該檔，請
         <ol>
         <li><a href='{0}'>下載此檔</a></li>
         <li>由此網頁左側欄裡的'文件'按鈕匯入此檔即可</li>

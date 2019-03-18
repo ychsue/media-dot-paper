@@ -1,3 +1,7 @@
+* [2019-3-18 Mon] Scrolling the mat-dialog by declaring ~overflow:auto~ for ~.cdk-overlay-pane~ in ~style.css~.
+Hm... I got this method from [[https://stackoverflow.com/questions/49651320/how-to-use-scrollstrategy-in-matdialog][this stackOverflow's Q&A]].
+Maybe someday I still need to use ~scrollstrategy~ to achieve my goal.
+
 * [2019-3-17 Sun] Try to provide the ~App Link~ for Android.
 1. From [[https://developer.android.com/studio/write/app-link-indexing?utm_source=android-studio#java][android's tutorial]], you can see how to easily apply the ~App Link~ for your App.
 2. You need to generate a json file with needed declarations and put it in ~https://YourSite/.well-known/assetLinks.json~. You can generate this file follow the instruction shown in [[https://stackoverflow.com/questions/44497929/digital-assets-link-link-to-my-website][this StackOverflow's Q&A]].
