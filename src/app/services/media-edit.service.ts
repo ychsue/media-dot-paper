@@ -81,6 +81,7 @@ export class MediaEditService {
   currentTime = 0;
   isRepeat = true;
   currentIFrameOnT = -1;
+  links: Array<string> = [];
 
   private _seekTime = 0;
   public set seekTime(v: number) {
@@ -142,6 +143,10 @@ export class MediaEditService {
     this.setiFrame$.subscribe();
     // * [2019-02-17 18:17] handle onactivated event
     self.device.onMyActivated$.subscribe(self.onActivatedHandler.bind(self));
+    // * [2019-03-29 17:15] Pause the media explicitly when the user switch to other Apps.
+    self.device.channel.onPause.subscribe( _ => {
+      this.onPlayerAction.next(playerAction.pause);
+    });
   }
 
   initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
@@ -191,6 +196,8 @@ export class MediaEditService {
       this.story.gSetting = new StoryGSetting();
     }
     this.story.gSetting.utterPara = this.SSService.updateUtterParaWithVoice(this.story.gSetting.utterPara);
+
+    this.updateLinks(this.story.gSetting.links);
 
     this.state = MEState.readyForPlayer;
 
@@ -476,6 +483,25 @@ export class MediaEditService {
           self.inputFromString$(uri);
         }
       }
+  }
+
+  updateLinks(oLinks: Array<string>) {
+    const self = this;
+    self.links = Object.assign([], oLinks);
+    // * [2019-03-28] Get links from descriptions
+    const arrDesc = (!!self.story.description) ? self.story.description.split(/[\r\n\s]+/i) : [];
+    arrDesc.forEach(ele => {
+      if (!!ele.match(/^https?\:\/\//i)) {
+        self.links.push(ele);
+      }
+    });
+    // * [2019-03-28 15:57] Force the media's link as one link
+    const storyURL = self.story.urlOrID;
+    if (!!storyURL.match(/^https\:\/\/(www\.youtube\.com|youtu\.be)\//i)) {
+      self.links.unshift(storyURL);
+    } else if (self.story.meType === PlayerType.url) {
+      self.links.push(storyURL);
+    }
   }
 }
 

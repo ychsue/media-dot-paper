@@ -8,6 +8,7 @@ export class StoryGSetting implements IFrameBase {
 
     mVPType = mediaVPType.main;
     mPlayType = mediaPlayType.timeline;
+    links: Array<string> = [];
 }
 
 export enum utterType {

@@ -1,3 +1,12 @@
+* [2019-4-1 Mon] The links are shown with colored circles so that the user can link to the links easier.
+
+* [2019-3-29 Fri] Try to pause the media when this App is in background.
+As mentioned in [[https://stackoverflow.com/questions/32730711/android-app-rejection-from-google-play][this StackOverflow's Q&A]], I had better to pause the media when the user want to lock the screen or switch to the other Apps.
+Because cordova provides a ~onPause~ event for this situation, I ask this App to pause the media when this App is put into background.
+
+* [2019-3-28 Thu] How to insert an element to the head of an array?
+You can use ~array.unshift(element)~ to achieve what you want as described in [[https://stackoverflow.com/questions/351409/how-to-append-something-to-an-array][this StackOverflow's Q&A]].
+
 * [2019-3-18 Mon] Scrolling the mat-dialog by declaring ~overflow:auto~ for ~.cdk-overlay-pane~ in ~style.css~.
 Hm... I got this method from [[https://stackoverflow.com/questions/49651320/how-to-use-scrollstrategy-in-matdialog][this stackOverflow's Q&A]].
 Maybe someday I still need to use ~scrollstrategy~ to achieve my goal.

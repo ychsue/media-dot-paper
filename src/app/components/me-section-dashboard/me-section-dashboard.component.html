@@ -12,6 +12,9 @@
   </div>
 
   <div #listContainer class="listContainer">
+    <a mat-mini-fab *ngFor="let link of meService.links" [href]="link|safe">
+      <mat-icon>link</mat-icon>
+    </a>
     <app-swap-icon
     *ngFor="let aFrame of meService.story.frames; let i = index;" 
     [index]="i"
