@@ -6,14 +6,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';
 import { StoryService } from '../../services/story.service';
 import { PageTextsService } from '../../services/page-texts.service';
-import { concat, delay, first } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { concat, delay, first, debounce, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
 import { FsService } from '../../services/fs.service';
 import { MessageService } from '../../services/message.service';
 import { utterType } from 'src/app/vm/story-g-setting';
 import { SbvService } from 'src/app/services/sbv.service';
 import { DialogComponent, DialogType } from 'src/app/dialog/dialog.component';
 import { StringHelper } from 'src/app/extends/string-helper';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-story',
@@ -26,6 +27,8 @@ export class StoryComponent implements OnInit {
 
   downloadHref: string;
   downloadSBVHref: string;
+
+  onDescChanged$ = new Subject<string>();
 
   pts: IStoryComp;
 
@@ -44,6 +47,10 @@ export class StoryComponent implements OnInit {
     self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(_ => {
       self.pts = self.ptsService.pts.storyComp;
       self.cdr.detectChanges();
+    });
+    self.onDescChanged$.pipe(debounceTime(1000), distinctUntilChanged())
+    .subscribe( st => {
+      self.meService.updateLinks();
     });
   }
 

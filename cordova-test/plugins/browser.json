@@ -31,9 +31,6 @@
     "cordova-clipboard": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
-    "cordova-admob-plus": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
     "cordova-plugin-audio-recorder-api": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },

@@ -1,5 +1,8 @@
-<div #container class="flex-110 min-height-0 display-flex-column">
-    <video #video [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'" (click)="onVideoPlayOrPause($event)" controls poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/MusicNotes.svg\')'"
+<div #container class="flex-110 min-height-0 display-flex-column position-relative">
+    <video #video [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'" controls poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/MusicNotes.svg\')'"
         [src]="((!!videoSrc)?videoSrc:'')|safe"></video>
+    <div #videoCover id="videoCover"
+     [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'"
+     (click)="onVideoPlayOrPause($event)"></div>
     <iframe #youtube id="youtube" [frameBorder]="0" [style.display]="(meService.story.meType===pType.youtubeID)?'block':'none'"></iframe>
 </div>

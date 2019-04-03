@@ -5,7 +5,8 @@ import { DeviceService } from './device.service';
 import * as pv from '../privateValues'; // SORRY, I did not commit this file since it is for my private variables.
 import { MessageService } from './message.service';
 import { PageTextsService } from './page-texts.service';
-import Interstitial from 'cordova-test/plugins/cordova-admob-plus/www/interstitial';
+// import Interstitial from 'cordova-test/plugins/cordova-admob-plus/www/interstitial';
+
 // You need to create it in src/app folder. In src/app/privateValues.ts, give it
 //    export const adIntAndroid = '';
 //    export const adIntIOS = '';
@@ -44,6 +45,7 @@ export class AdService {
 
   constructor(private device: DeviceService, private ptsService: PageTextsService,
     public msg: MessageService) {
+      return; // Turn off all advertisement
     const self = this;
     if (!!window.cordova) {
       if (cordova.platformId === 'windows') {
@@ -71,7 +73,7 @@ export class AdService {
           self.interstitial.requestAd(self.msAdv.InterstitialAdType.display, self.adWin.AppId, self.adWin.AdUnitId);
         } else if (!!window['admob']) {
           console.log(`before loading: ${self.admobid.interstitial}`);
-          (<Interstitial>self.interstitial).load(
+          (self.interstitial).load(
             {
               id: {
                 android: self.admobid.interstitial,
@@ -185,7 +187,7 @@ export class AdService {
     if (self.device.isCordova) {
       self.device.onDeviceReady.subscribe(_ => {
         if (!!window['admob']) {
-          self.interstitial = window['admob'].interstitial as Interstitial;
+          self.interstitial = window['admob'].interstitial;
           self._adReady$.next(true);
         } else {
           self._adReady$.next(false);

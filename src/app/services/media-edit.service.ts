@@ -144,9 +144,11 @@ export class MediaEditService {
     // * [2019-02-17 18:17] handle onactivated event
     self.device.onMyActivated$.subscribe(self.onActivatedHandler.bind(self));
     // * [2019-03-29 17:15] Pause the media explicitly when the user switch to other Apps.
-    self.device.channel.onPause.subscribe( _ => {
-      this.onPlayerAction.next(playerAction.pause);
-    });
+    if (self.device.isCordova) {
+      self.device.channel.onPause.subscribe( _ => {
+        this.onPlayerAction.next(playerAction.pause);
+      });
+    }
   }
 
   initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
@@ -197,7 +199,7 @@ export class MediaEditService {
     }
     this.story.gSetting.utterPara = this.SSService.updateUtterParaWithVoice(this.story.gSetting.utterPara);
 
-    this.updateLinks(this.story.gSetting.links);
+    this.updateLinks();
 
     this.state = MEState.readyForPlayer;
 
@@ -485,8 +487,9 @@ export class MediaEditService {
       }
   }
 
-  updateLinks(oLinks: Array<string>) {
+  updateLinks() {
     const self = this;
+    const oLinks = self.story.gSetting.links;
     self.links = Object.assign([], oLinks);
     // * [2019-03-28] Get links from descriptions
     const arrDesc = (!!self.story.description) ? self.story.description.split(/[\r\n\s]+/i) : [];

@@ -1,3 +1,11 @@
+* [2019-4-3 Wed] Remove AdMob
+1. To Remove AdMob, just run ~cordova plugin remove cordova-admob-plus~ is not enough, you still need to 
+    a. Modify your ~config.xml~ and remove it by your hand.
+    b. Remove directories ~plugins/cordova-admob-plus~ and ~...add-swift-...~ which are related to ~cordova-admob-plus~.
+2. Let the links' icon can open the link on a real browser. By the way, I also tried to execute ~window.open=cordova['InAppBrowser'].open~ in ~device.service~; however, it is no use for osx.
+3. Add a cover for ~<video>~ to handle the click event since ~click~ event for a~<video>~ element might not work.
+4. Since the links can be gotten from ~Description~, I have to listen to its ~ModelChange~ event of that ~<textarea>~.  
+
 * [2019-4-1 Mon] The links are shown with colored circles so that the user can link to the links easier.
 
 * [2019-3-29 Fri] Try to pause the media when this App is in background.

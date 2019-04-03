@@ -15,3 +15,11 @@ video, #youtube {
     min-height: 0px;
     width: 100%;
 }
+
+#videoCover {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 60px;
+}

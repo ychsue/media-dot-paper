@@ -12,7 +12,8 @@
   </div>
 
   <div #listContainer class="listContainer">
-    <a mat-mini-fab *ngFor="let link of meService.links" [href]="link|safe">
+    <a mat-mini-fab *ngFor="let link of meService.links" [href]="link|safe" target="_blank"
+      (click)="device.onLinkToUrl(link)">
       <mat-icon>link</mat-icon>
     </a>
     <app-swap-icon

@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { DialogComponent, DialogType, SetStartEnd } from 'src/app/dialog/dialog.component';
 import { first } from 'rxjs/operators';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-me-section-dashboard',
@@ -16,7 +17,8 @@ export class MeSectionDashboardComponent implements OnInit {
   @ViewChild('listContainer')
   listOfMDP: ElementRef;
 
-  constructor(public meService: MediaEditService, public diaglog: MatDialog, private ccService: CrossCompService) { }
+  constructor(public meService: MediaEditService, public diaglog: MatDialog,
+     private ccService: CrossCompService, public device: DeviceService) { }
 
   ngOnInit() {
     this.ccService.listOfMDP = this.listOfMDP.nativeElement;

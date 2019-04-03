@@ -61,7 +61,6 @@
         <provider android:authorities="${applicationId}.opener.provider" android:exported="false" android:grantUriPermissions="true" android:name="io.github.pwlin.cordova.plugins.fileopener2.FileProvider">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/opener_paths" />
         </provider>
-        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
     <uses-sdk android:targetSdkVersion="27" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

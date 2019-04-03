@@ -99,6 +99,8 @@ export class DeviceService {
       this.permissions = cordova.plugins.permissions;
     }
 
+    window.open = cordova['InAppBrowser'].open;
+
     // * [2019-02-16 15:36] For cordova's (windows') activated event which is defined in index.html
     if (!!window.cordova) {
       self._emitInitActivated();

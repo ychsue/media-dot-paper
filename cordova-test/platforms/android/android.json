@@ -9,10 +9,6 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"ca-app-pub-3940256099942544~3347511713\" />",
-              "count": 1
-            },
-            {
               "xml": "<provider android:authorities=\"${applicationId}.opener.provider\" android:exported=\"false\" android:grantUriPermissions=\"true\" android:name=\"io.github.pwlin.cordova.plugins.fileopener2.FileProvider\"><meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/opener_paths\" /></provider>",
               "count": 1
             }
@@ -56,10 +52,6 @@
       "res/xml/config.xml": {
         "parents": {
           "/*": [
-            {
-              "xml": "<feature name=\"AdMob\"><param name=\"android-package\" value=\"admob.plugin.AdMob\" /></feature>",
-              "count": 1
-            },
             {
               "xml": "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>",
               "count": 1
@@ -124,15 +116,7 @@
     }
   },
   "installed_plugins": {
-    "cordova-admob-plus": {
-      "APP_ID_ANDROID": "ca-app-pub-3940256099942544~3347511713",
-      "PLAY_SERVICES_VERSION": "16.0.0",
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
     "cordova-clipboard": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-add-swift-support": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
     "cordova-plugin-android-permissions": {
@@ -176,18 +160,13 @@
       "ANDROID_MIME_TYPE": "*/*",
       "ANDROID_EXTRA_ACTIONS": " ",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    },
+    "cordova-plugin-add-swift-support": {
+      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     }
   },
   "dependent_plugins": {},
   "modules": [
-    {
-      "id": "cordova-admob-plus.AdMob",
-      "file": "plugins/cordova-admob-plus/www/admob.js",
-      "pluginId": "cordova-admob-plus",
-      "clobbers": [
-        "admob"
-      ]
-    },
     {
       "id": "cordova-clipboard.Clipboard",
       "file": "plugins/cordova-clipboard/www/clipboard.js",
@@ -452,9 +431,7 @@
     }
   ],
   "plugin_metadata": {
-    "cordova-admob-plus": "0.0.0",
     "cordova-clipboard": "1.2.1",
-    "cordova-plugin-add-swift-support": "1.7.2",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-file": "6.0.2-dev",
     "cordova-plugin-file-opener2": "2.0.19",
@@ -466,6 +443,7 @@
     "cordova-plugin-audio-recorder-api": "0.0.1",
     "cordova-plugin-avaudiosession": "1.1.2+1",
     "cordova-plugin-customurlscheme": "4.3.0",
-    "cc.fovea.cordova.openwith": "1.0.0"
+    "cc.fovea.cordova.openwith": "1.0.0",
+    "cordova-plugin-add-swift-support": "1.7.2"
   }
 }

@@ -42,7 +42,8 @@
     </div>
 
     <mat-form-field class="description flex-110">
-        <textarea matInput [placeholder]="(!!pts)?pts.description:'描述'" [(ngModel)]="meService.story.description">
+        <textarea matInput #desc [placeholder]="(!!pts)?pts.description:'描述'" [ngModel]="meService.story.description"
+         (ngModelChange)="onDescChanged$.next(desc.value);meService.story.description = desc.value;">
     </textarea>
     </mat-form-field>
 </div>

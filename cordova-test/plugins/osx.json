@@ -31,9 +31,6 @@
     "cordova-clipboard": {
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
     },
-    "cordova-admob-plus": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
     "cordova-plugin-audio-recorder-api": {
       "MICROPHONE_USAGE_DESCRIPTION": "For recording your voice, I need your permission to use your microphone.",
       "PACKAGE_NAME": "tw.at.yescirculation.mediadotpapermac"
