@@ -446,11 +446,15 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   onVideoPlayOrPause(ev: MouseEvent) {
     // ev.preventDefault();
-    const state = this.meService.state;
-    if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
-      this.meService.onPlayerAction.next(playerAction.play);
-    } else {
-      this.meService.onPlayerAction.next(playerAction.pause);
-    }
+    const fun = () => {
+      const state = this.meService.state;
+      if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
+        this.meService.onPlayerAction.next(playerAction.play);
+      } else {
+        this.meService.onPlayerAction.next(playerAction.pause);
+      }
+    };
+    this.crossComp.clickVideoLoad_justIOS(fun.bind(this));
+    fun();
   }
 }

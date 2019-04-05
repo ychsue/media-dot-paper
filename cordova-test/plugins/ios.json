@@ -7,48 +7,48 @@
     "files": {}
   },
   "installed_plugins": {
+    "cc.fovea.cordova.openwith": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
     "cordova-clipboard": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-android-permissions": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-file-opener2": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-inappbrowser": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-nano-sqlite": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-tts": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-audio-recorder-api": {
       "MICROPHONE_USAGE_DESCRIPTION": "For recording your voice, I need your permission to use your microphone.",
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-avaudiosession": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
     "cordova-plugin-customurlscheme": {
       "URL_SCHEME": "mdpyc",
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
-    "cc.fovea.cordova.openwith": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-file-opener2": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-tts": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     }
   },
   "dependent_plugins": {
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "tw.at.yescirculation.mediadotpaper"
+      "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     }
   }
 }

@@ -1,3 +1,17 @@
+* [2019-4-4 Thu] cordova-ios 5.0.0 has a problem about CDVPageDidLoadNotification
+1. [Does not work for a real device] After taking out all ~@autoreleasepool~s from ~CDVJSON_private.m~, the notification ~CDVPageDidLoadNotification~ can be triggered so that I can load the correct link again.
+2. Finally, I added a recursive ~block~ function to check whether the page is loaded in ~CDVHandleOpenURL~. I guess the problem is that its ~url~ has been released and my recusive function is just keeping it to hang on the pool. Maybe, I'm not sure.
+
+
+* [2019-4-4 Thu] md5sum does not exist on MacOS
+I have to use ~md5~ instead.
+Following [[https://stackoverflow.com/questions/394230/how-to-detect-the-os-from-a-bash-script][this StackOverflow's Q&A]], I can use ~if~ to switch between them.
+
+* [2019-4-4 Thu] Cordova 9.0 does not recognize the module "q" as its module
+Because for ios, the AdMob-plus has added something into my code, if I want to make it work, I have to remove and then add ~ios~ again.
+However, it complained that in ~plugin-storage~, it cannot load "q" and ask me to change it from ~context.requireCordovaModule('q')~ to ~require~.
+It works but I need to test it.
+
 * [2019-4-3 Wed] Remove AdMob
 1. To Remove AdMob, just run ~cordova plugin remove cordova-admob-plus~ is not enough, you still need to 
     a. Modify your ~config.xml~ and remove it by your hand.

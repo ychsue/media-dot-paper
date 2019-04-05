@@ -17,8 +17,14 @@ tsc check-protocol.ts --outDir /tmp
 cat /tmp/protocolcheck.js /tmp/check-protocol.js |uglifyjs > /tmp/ugly.js
 
 # [2019-03-13 21:30] output it to dist/ng-test
-md5code=`md5sum /tmp/ugly.js| awk '{print $1}'`
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # For mac
+    md5code=`md5 /tmp/ugly.js| awk '{print $4}'`
+else
+    md5code=`md5sum /tmp/ugly.js| awk '{print $1}'`
+fi
 outputName="before-angular.${md5code:0:16}.js"
+
 echo $outputName
 mv /tmp/ugly.js $mainDir/dist/cordova-ng-test/$outputName
 

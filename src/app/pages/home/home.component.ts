@@ -176,6 +176,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   onStoryOpen(story: IStory) {
     const duplicatedStory = Object.assign({}, story);
     this.gv.shownPage = PageType.MediaEdit;
+    this.gv.showSideNav = false; // [2019-04-03 22:58] Close the sidenav automatically
     this.meService.initMe(duplicatedStory);
     // * [2018-07-19 21:28] Tell navbar that you select a story
     this.meService.sideClickType = SideClickType.select;

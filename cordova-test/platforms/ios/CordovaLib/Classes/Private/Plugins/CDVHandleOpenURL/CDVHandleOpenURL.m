@@ -18,7 +18,7 @@
  */
 
 #import "CDVHandleOpenURL.h"
-#import "CDV.h"
+#import <Cordova/CDV.h>
 
 @implementation CDVHandleOpenURL
 
@@ -38,6 +38,28 @@
     if (self.pageLoaded) {
         [self processOpenUrl:self.url pageLoaded:YES];
         self.url = nil;
+    } else {
+        // * [2019-04-05 14:12] checkWebDidFinish is a recursive function to check whether page is loaded
+        void (^__block checkWebDidFinish)(NSInteger) = ^void(NSInteger i0) {
+            NSString* jsString = @"document.readystate";
+            [self.webViewEngine evaluateJavaScript:jsString
+                                 completionHandler:^(id object, NSError* error) {
+                                     if ((error == nil) && [object isKindOfClass:[NSString class]]) {
+                                         NSString* readyState = (NSString*)object;
+                                         BOOL ready = [readyState isEqualToString:@"loaded"] || [readyState isEqualToString:@"complete"];
+                                         if (self.pageLoaded) {
+                                             ;
+                                         } else if (ready || i0 > 6) {
+                                             [self applicationPageDidLoad:nil];
+                                         } else {
+                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                 checkWebDidFinish(i0+1);
+                                             });
+                                         }
+                                     }
+                                 }];
+        };
+        checkWebDidFinish(0);
     }
 }
 
@@ -56,7 +78,7 @@
 - (void)processOpenUrl:(NSURL*)url pageLoaded:(BOOL)pageLoaded
 {
     __weak __typeof(self) weakSelf = self;
-    
+
     BOOL isProtocol = [url.absoluteString hasPrefix:@"mdpyc://"];
     NSString* jsParam = url.absoluteString;
     NSString* type = @"uri";
