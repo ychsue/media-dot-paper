@@ -1,3 +1,20 @@
+* [2019-11-11 Mon] Let this App can always show MDPs since sometimes we want to see subtitles as it's playing. 
+
+* [2019-11-11 Mon] How to let my website to launch this App 'media dot paper'
+1. run ~ng build --prod~
+2. ~cd ./my_scripts~
+3. ~./addJSforProtocol~: This one may show you a problem about ~jasmine~ which is related to your tsc's version. If you run ~tsc~ without jasmine, it will show no error.
+4. Then you can copy the files in ~./dist~ to your website.
+
+* [2019-11-11 Mon] In some occasion, I get the wrong mdpyc
+When I look into the output file, it has three letters goes wrong, they should be %D7~,%2~2; however, the output is %D7~%D7~2.
+I cannot reproduce this error. Keep it in mind.
+
+* [2019-11-8 Fri] Because I move my project to my SDCard and symbolic link it back to my home directory, I cannot compile it again
+-solve-: For ~ng serve~, I need to ~cd /d/.....~ at first. Then, this command can work.
+
+* [2019-11-7 Thu] I want to let this code can have the ability to show subtitles while playing.
+
 * [2019-4-4 Thu] cordova-ios 5.0.0 has a problem about CDVPageDidLoadNotification
 1. [Does not work for a real device] After taking out all ~@autoreleasepool~s from ~CDVJSON_private.m~, the notification ~CDVPageDidLoadNotification~ can be triggered so that I can load the correct link again.
 2. Finally, I added a recursive ~block~ function to check whether the page is loaded in ~CDVHandleOpenURL~. I guess the problem is that its ~url~ has been released and my recusive function is just keeping it to hang on the pool. Maybe, I'm not sure.

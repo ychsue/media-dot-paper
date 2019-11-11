@@ -109,6 +109,7 @@ interface ISGsetComp {
     all: string;
     tAction: string;
     rearrange: string;
+    alwaysShowMDPs: string;
 }
 interface IAppSettingPage {
     hDailySample: string;

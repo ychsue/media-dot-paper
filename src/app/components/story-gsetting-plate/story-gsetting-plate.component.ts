@@ -21,7 +21,7 @@ export class StoryGsettingPlateComponent implements OnInit, OnDestroy {
 
   pts: ISGsetComp;
 
-  constructor(public meServie: MediaEditService,
+  constructor(public meService: MediaEditService,
     private SSService: SpeechSynthesisService,
     private ptsService: PageTextsService) {
       const self = this;
@@ -44,21 +44,21 @@ export class StoryGsettingPlateComponent implements OnInit, OnDestroy {
 
   onRearrangeMDP () {
     const self = this;
-    if (!!self.meServie.story &&
-      !!self.meServie.story.frames &&
-      (self.meServie.story.frames.length > 0)) {
-        self.meServie.story.frames = self.meServie.story.frames.sort((a, b) => a.start - b.start);
+    if (!!self.meService.story &&
+      !!self.meService.story.frames &&
+      (self.meService.story.frames.length > 0)) {
+        self.meService.story.frames = self.meService.story.frames.sort((a, b) => a.start - b.start);
       }
   }
 
   onChangeGUtterPara(utterPara: SSutterParameters) {
     const self = this;
-    if (!!self.meServie.story.gSetting === false) {return; }
+    if (!!self.meService.story.gSetting === false) {return; }
     if (!!utterPara.voice === false) {
       utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
     }
     utterPara.voiceName = utterPara.voice.name;
     utterPara.lang = utterPara.voice.lang;
-    self.meServie.story.gSetting.utterPara = utterPara;
+    self.meService.story.gSetting.utterPara = utterPara;
   }
 }

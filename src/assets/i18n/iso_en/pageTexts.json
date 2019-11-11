@@ -521,7 +521,8 @@
     "byMDP2": "by MDP",
     "all": "all",
     "tAction": "Actions",
-    "rearrange": "Rearrange MDP"
+    "rearrange": "Rearrange MDP",
+    "alwaysShowMDPs": "Always show MDPs"
   },
   "InProgress": {
     "inProgress": "In progress",

@@ -83,6 +83,8 @@ export class MediaEditService {
   currentIFrameOnT = -1;
   links: Array<string> = [];
 
+  isAlwaysShowMask = false; // [2019-11-07] Used to control whether it should always show the mask, such as subtitles.
+
   private _seekTime = 0;
   public set seekTime(v: number) {
     this._seekTime = v;
@@ -472,8 +474,9 @@ export class MediaEditService {
 
   onActivatedHandler(ev: any) {
     const self = this;
-    self.gv.showSideNav = false;
-
+    if (ev.type !== 'activated') {
+          self.gv.showSideNav = false;
+    }
     if (ev.type === 'file') { // For a file
         self.inputFromFile(<File>ev.data);
       } else if (ev.type === 'uri') { // For Uri,

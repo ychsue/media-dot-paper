@@ -1,0 +1,4 @@
+<div id="htmlSubtitle"
+  class="subtitle-shadow"
+  [innerHTML]="((meService.currentIFrameOnT < 0)?'':meService.story.frames[meService.currentIFrameOnT].subtitle)|safeHtml"
+></div>

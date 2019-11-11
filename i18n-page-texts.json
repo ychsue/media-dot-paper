@@ -89,7 +89,8 @@
             "byMDP2": "by MDP",
             "all": "all",
             "tAction": "Actions",
-            "rearrange": "Rearrange MDP"
+            "rearrange": "Rearrange MDP",
+            "alwaysShowMDPs": "Always show MDPs"
         },
         "appSettingPage": {
             "hDailySample": "Setting <b>Daily Sample</b> button",

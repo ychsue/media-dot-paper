@@ -50,6 +50,7 @@ import { AppSettingComponent } from './pages/app-setting/app-setting.component';
 import { DailySampleComponent } from './components/daily-sample/daily-sample.component';
 import { PronunExerComponent } from './components/pronun-exer/pronun-exer.component';
 import { ZoomInoutComponent } from './components/zoom-inout/zoom-inout.component';
+import { MeMaskComponent } from './components/me-mask/me-mask.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ZoomInoutComponent } from './components/zoom-inout/zoom-inout.component
     AppSettingComponent,
     DailySampleComponent,
     PronunExerComponent,
-    ZoomInoutComponent
+    ZoomInoutComponent,
+    MeMaskComponent
   ],
   entryComponents: [MessageComponent, DialogComponent],
   imports: [

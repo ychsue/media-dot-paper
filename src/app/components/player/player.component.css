@@ -16,10 +16,15 @@ video, #youtube {
     width: 100%;
 }
 
-#videoCover {
+#videoCover, #videoMask {
     position:absolute;
     top: 60px;
     left: 0;
     right: 0;
     bottom: 60px;
+}
+
+#videoMask {
+    top: 0;
+    bottom: 0;
 }

@@ -521,7 +521,8 @@
     "byMDP2": "各MDP各自决定",
     "all": "全念",
     "tAction": "操作",
-    "rearrange": "重新排列MDP"
+    "rearrange": "重新排列MDP",
+    "alwaysShowMDPs": "始终显示MDP"
   },
   "InProgress": {
     "inProgress": "进行中",

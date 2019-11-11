@@ -521,7 +521,8 @@
     "byMDP2": "oleh MDP",
     "all": "semua",
     "tAction": "Tindakan",
-    "rearrange": "Atur ulang MDP"
+    "rearrange": "Atur ulang MDP",
+    "alwaysShowMDPs": "Selalu menampilkan MDP"
   },
   "InProgress": {
     "inProgress": "Sedang berlangsung",
