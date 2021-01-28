@@ -8,7 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "baJS": "sh ./my-scripts/addJSforProtocol"
+    "baJS": "sh ./my-scripts/addJSforProtocol",
+    "prepareWin": "sh ./my-scripts/cordovaPrepare.sh windows",
+    "prepareWinProd": "sh ./my-scripts/cordovaPrepare.sh windows Y"
   },
   "private": true,
   "dependencies": {

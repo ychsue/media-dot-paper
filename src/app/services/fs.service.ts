@@ -229,6 +229,8 @@ export class FsService {
           if (!!blobOrWinFile['size']) {
             // ***************** TODO *****************
             // ** I need to know how to save a blob.
+            await Windows.Storage.FileIO.writeTextAsync(winFile, ""); // Clear this file
+            fileName = winFile.name;
             const blob = <any>blobOrWinFile;
             const input: any = (<MSStream>blob).msDetachStream();
             const output = await winFile.openAsync(Windows.Storage.FileAccessMode.readWrite);

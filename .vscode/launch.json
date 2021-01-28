@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "Bash-Debug (hardcoded script name)",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/my-scripts/cordovaPrepare.sh",
+            "args": []
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
