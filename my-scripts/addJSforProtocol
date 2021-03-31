@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 calledDir="$(pwd)"
-dirName=`dirname $0`
+dirName=$(dirname "$0")
 mainDir=$dirName/../
-baseName=`basename $0`
+baseName=$(basename "$0")
 echo "$calledDir, $dirName, $baseName"
 
 cd $mainDir
-mainDir=`pwd`
+mainDir=$(pwd)
 
 # [2019-03-13 21:17] compile typescript
 cd $mainDir/src/extra-scripts
@@ -17,7 +17,7 @@ tsc check-protocol.ts --outDir /tmp
 cat /tmp/protocolcheck.js /tmp/check-protocol.js |uglifyjs > /tmp/ugly.js
 
 # [2019-03-13 21:30] output it to dist/ng-test
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [ "$OSTYPE" == "darwin" ]; then
     # For mac
     md5code=`md5 /tmp/ugly.js| awk '{print $4}'`
 else

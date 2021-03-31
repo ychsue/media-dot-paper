@@ -1,3 +1,6 @@
+* [2021-03-31 Wed] Try to use PWA
+With providing files [[PWA/manifest.json]] and [[PWA/service-worker.js]], it can work as a PWA.
+
 * [2020-07-26 Sun] The file can be cleared in Windows system
 As mentioned in [[this MSDN's faq][https://social.msdn.microsoft.com/Forums/en-US/4843aa4e-70de-4c6a-b12d-1a519f6f4900/clearing-storagefile-content]],
 I can clear a file by **FileIO.WriteTextAsync(file,"")**.
