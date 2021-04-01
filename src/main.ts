@@ -5,6 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 import 'hammerjs';
+import { initAsync as initGAPIAsync } from "./app/IO/GAPI";
+
+initGAPIAsync();
 
 if (environment.production) {
   enableProdMode();

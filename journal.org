@@ -1,8 +1,39 @@
+* [2021-04-01 Thu] For @types to be work for compilation, I need to do something for ~tsconfig.json~ or ~tsconfig.app.json~.
+1. Yeah! Once I added in 
+#+begin_src json
+  "compilerOptions": {
+    ...
+    "types": [
+      ...
+      "gapi",
+      "gapi.auth2",
+      "gapi.client",
+      "gapi.client.sheets",
+      "gapi.client.drive",
+    ]
+  },
+#+end_src
+in ~tsconfig.app.json~ file, the compiler can find ~gapi~ and I don't need to use ~window.gapi~ because now it is not under the type ~Window~ as mentioned in [[https://fantashit.com/error-while-using-gapi-cannot-find-namespace-gapi/][this article]].
+
+2. If I want to use a namespace as a type, I can use the keyword ~typeof~ to achieve my will as mentioned is [[https://stackoverflow.com/questions/42815932/use-namespace-as-type-in-typescript][this StackOverflow's Q&A]].
+
+3. Based on this [[https://github.com/Microsoft/dts-gen][Microsoft's npm package]], I can generate a definition file from a ~js~ file by ~--expression-file YOURJSFILE~.
+
+4. For ~JsZip~ and ~iconv-lite~ I have to use 
+#+begin_src javascript
+import * as iconv from 'iconv-lite';
+#+end_src
+instead of ~import iconv from 'iconv-lite';~ as mentioned in [[https://stackoverflow.com/questions/43097159/import-jszip-in-angular-2-project][this StackOverflow's Q&A]].
+*STRANGE*
+It does not work for my ~react~ project. In my ~react~'s project, it prefers the original way. Why?
+
+5. The ~foo~ in ~export var foo = false;~ will become readonly in those importing it, so that I use a ~set~ function for it. As I used in [[src/app/IO/GAPI/isLoaded.ts]].
+
 * [2021-03-31 Wed] Try to use PWA
 With providing files [[PWA/manifest.json]] and [[PWA/service-worker.js]], it can work as a PWA.
 
 * [2020-07-26 Sun] The file can be cleared in Windows system
-As mentioned in [[this MSDN's faq][https://social.msdn.microsoft.com/Forums/en-US/4843aa4e-70de-4c6a-b12d-1a519f6f4900/clearing-storagefile-content]],
+As mentioned in [[https://social.msdn.microsoft.com/Forums/en-US/4843aa4e-70de-4c6a-b12d-1a519f6f4900/clearing-storagefile-content][this MSDN's faq]],
 I can clear a file by **FileIO.WriteTextAsync(file,"")**.
 
 * [2019-11-11 Mon] Let this App can always show MDPs since sometimes we want to see subtitles as it's playing. 

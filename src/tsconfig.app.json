@@ -8,7 +8,12 @@
       "winjs",
       "winrt",
       "youtube",
-      "cordova-plugin-file/types"
+      "cordova-plugin-file/types",
+      "gapi",
+      "gapi.auth2",
+      "gapi.client",
+      "gapi.client.sheets",
+      "gapi.client.drive",
     ]
   },
   "exclude": [
