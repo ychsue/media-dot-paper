@@ -72,7 +72,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   // [innerHtml,innerText]
   subtitleChange$ = new Subject<string>();
 
-  @ViewChild('subtitleView')
+  @ViewChild('subtitleView', {static:false})
   subViewRef: ElementRef;
 
   unSubscribed$ = new Subject<boolean>();

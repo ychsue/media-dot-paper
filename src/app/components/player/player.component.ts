@@ -6,7 +6,6 @@ import { takeUntil, map, distinctUntilChanged, merge, share, take, takeWhile, co
 import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
-import { equalSegments } from '../../../../node_modules/@angular/router/src/url_tree';
 import { DeviceService } from '../../services/device.service';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
 
@@ -35,17 +34,17 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this._ytVId = v;
   }
 
-  @ViewChild('video')
+  @ViewChild('video', {static: false})
   ngVideo: ElementRef;
   videoEle: HTMLVideoElement;
 
-  @ViewChild('youtube')
+  @ViewChild('youtube', {static: false})
   ngYoutube: ElementRef;
   youtubeEle: HTMLIFrameElement;
   isInited = false;
   _msInterval = 200;
 
-  @ViewChild('container')
+  @ViewChild('container', {static: false})
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 

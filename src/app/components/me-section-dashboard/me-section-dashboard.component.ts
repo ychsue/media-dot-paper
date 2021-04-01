@@ -14,7 +14,7 @@ import { DeviceService } from 'src/app/services/device.service';
 })
 export class MeSectionDashboardComponent implements OnInit {
 
-  @ViewChild('listContainer')
+  @ViewChild('listContainer',{static:false})
   listOfMDP: ElementRef;
 
   constructor(public meService: MediaEditService, public diaglog: MatDialog,

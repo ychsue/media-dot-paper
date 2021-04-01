@@ -17,7 +17,7 @@ export class PronunExerComponent implements OnInit, OnDestroy {
 
   private _unsubscribed = new Subject<boolean>();
 
-  @ViewChild('audioMyVoice')
+  @ViewChild('audioMyVoice', {static: false})
   audioMyVoiceRef: ElementRef;
 
   private _isMyVoicePlaying: boolean;

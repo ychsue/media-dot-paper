@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   stories: IStory[];
   storySearch$ = new Subject<IStory>();
 
-  @ViewChild('listOfStored')
+  @ViewChild('listOfStored', {static: false})
   listStoredRef: ElementRef;
 
   private _unsubscribed = new Subject<boolean>();
