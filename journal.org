@@ -1,3 +1,13 @@
+* [2021-04-02 Fri] Update to Angular 9
+1. First of all, I face an incompatible problem in which one of its message said:
+
+        Package "codelyzer" has an incompatible peer dependency to "@angular/core" (requires ">=2.3.1 <8.0.0 || >7.0.0-beta <8.0.0" (extended), would install "9.1.13").
+
+    later, follow [[https://stackoverflow.com/questions/64395788/updating-angular-and-cli-causes-incompatible-peer-dependencies-found][this StackOverflow's Q&A]]'s suggestion, I try to update ~codelyzer~ first, and it works.
+
+        npx ng update codelyzer
+
+
 * [2021-04-02 Fri] You cannot set the currentTime too large
 Originally, I set 
 ~audio.currentTime =1e101~
