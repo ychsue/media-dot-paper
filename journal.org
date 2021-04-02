@@ -7,6 +7,10 @@
 
         npx ng update codelyzer
 
+2. Then I removed the unused package ~@angular/http~ since I'm using ~@angular/common/http~ by
+
+        npm uninstall @angular/http
+        
 
 * [2021-04-02 Fri] You cannot set the currentTime too large
 Originally, I set 
