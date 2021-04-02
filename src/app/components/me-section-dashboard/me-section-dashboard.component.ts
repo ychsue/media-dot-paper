@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
 import { AFrame } from '../../vm/a-frame';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent, DialogType, SetStartEnd } from 'src/app/dialog/dialog.component';
 import { first } from 'rxjs/operators';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
@@ -14,7 +14,7 @@ import { DeviceService } from 'src/app/services/device.service';
 })
 export class MeSectionDashboardComponent implements OnInit {
 
-  @ViewChild('listContainer',{static:false})
+  @ViewChild('listContainer',{static:true})
   listOfMDP: ElementRef;
 
   constructor(public meService: MediaEditService, public diaglog: MatDialog,

@@ -5,11 +5,25 @@ import { AppComponent } from './app.component';
 import { MessageComponent } from './message/message.component';
 import { MessageService } from './services/message.service';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatBottomSheetModule, MatBadgeModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatListModule, MatDialogModule,
-  MatSidenavModule, MatSliderModule, MatTabsModule, MatMenuModule,
-  MatTooltipModule, MatSelectModule, MatSlideToggleModule, MatExpansionModule,
-  MatProgressSpinnerModule, MatCheckboxModule, MatProgressBarModule} from '@angular/material';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NavbarComponent } from './navbar/navbar.component';
 // import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from './pages/home/home.component';

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MediaEditService } from '../../services/media-edit.service';
-import { MatAnchor, MatDialog } from '@angular/material';
+import { MatAnchor } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 import { send } from 'q';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PlayerType } from '../../vm/player-type.enum';

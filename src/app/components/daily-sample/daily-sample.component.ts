@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DailySample } from 'src/app/vm/daily-sample';
 import { DialogComponent, DialogData, DialogType } from 'src/app/dialog/dialog.component';
 import { first ,  concat } from 'rxjs/operators';

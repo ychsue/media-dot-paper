@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { MessageService, MessageTypes } from './services/message.service';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MessageComponent } from './message/message.component';
 import { YoutubeService } from './services/youtube.service';
 import { GvService, PageType } from './services/gv.service';

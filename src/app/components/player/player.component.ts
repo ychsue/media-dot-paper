@@ -34,17 +34,17 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this._ytVId = v;
   }
 
-  @ViewChild('video', {static: false})
+  @ViewChild('video', {static: true})
   ngVideo: ElementRef;
   videoEle: HTMLVideoElement;
 
-  @ViewChild('youtube', {static: false})
+  @ViewChild('youtube', {static: true})
   ngYoutube: ElementRef;
   youtubeEle: HTMLIFrameElement;
   isInited = false;
   _msInterval = 200;
 
-  @ViewChild('container', {static: false})
+  @ViewChild('container', {static: true})
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 

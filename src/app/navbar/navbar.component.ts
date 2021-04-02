@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { MessageService, MessageTypes } from '../services/message.service';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MessageComponent } from '../message/message.component';
 import { DbService } from '../services/db.service';
 import { MediaEditService, SideClickType } from '../services/media-edit.service';

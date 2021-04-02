@@ -1,3 +1,10 @@
+* [2021-04-02 Fri] You cannot set the currentTime too large
+Originally, I set 
+~audio.currentTime =1e101~
+and it will cause the ~play()~ cannot work.
+After testing, I can set ~audio.currentTime = 3e6~ to get its correct duration. (~3e6~ is about one month.)
+By the way, setting ~audio.currentTime = -1~ is useless.
+
 * [2021-04-01 Thu] For @types to be work for compilation, I need to do something for ~tsconfig.json~ or ~tsconfig.app.json~.
 1. Yeah! Once I added in 
 #+begin_src json

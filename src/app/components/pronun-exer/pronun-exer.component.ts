@@ -20,7 +20,7 @@ export class PronunExerComponent implements OnInit, OnDestroy {
   @ViewChild('audioMyVoice', {static: false})
   audioMyVoiceRef: ElementRef;
 
-  private _isMyVoicePlaying: boolean;
+  private _isMyVoicePlaying: boolean = false;
   public get isMyVoicePlaying(): boolean {
     return this._isMyVoicePlaying;
   }
@@ -89,10 +89,11 @@ export class PronunExerComponent implements OnInit, OnDestroy {
 
   myVoiceLoadMetaData(audioMyVoice: HTMLAudioElement, e: Event) {
     if (audioMyVoice.duration === Infinity) {
-      audioMyVoice.currentTime = 1e101;
+      audioMyVoice.currentTime = 3e6;
+      const onTU = audioMyVoice.ontimeupdate;
       audioMyVoice.ontimeupdate = _ => {
-        audioMyVoice.ontimeupdate = _2 => {};
-        audioMyVoice.currentTime = audioMyVoice.duration;
+        audioMyVoice.ontimeupdate = onTU;
+        audioMyVoice.currentTime = 0;//audioMyVoice.duration;
       };
     }
   }

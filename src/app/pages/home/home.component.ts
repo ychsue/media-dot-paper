@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { GvService, PageType } from '../../services/gv.service';
 import { MediaEditService, SideClickType } from '../../services/media-edit.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent, DialogType } from '../../dialog/dialog.component';
 import { DbService } from '../../services/db.service';
 import { Observable, Subject, from } from 'rxjs';
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   stories: IStory[];
   storySearch$ = new Subject<IStory>();
 
-  @ViewChild('listOfStored', {static: false})
+  @ViewChild('listOfStored', {static: true})
   listStoredRef: ElementRef;
 
   private _unsubscribed = new Subject<boolean>();
