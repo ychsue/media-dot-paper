@@ -11,6 +11,18 @@
 
         npm uninstall @angular/http
         
+3. After running 
+
+        ng update @angular/core@9 @angular/cli@9
+
+    I got an error.
+    After surfing network, this [[https://stackoverflow.com/questions/64573177/unable-to-resolve-dependency-tree-error-when-installing-npm-packages][StackOverflow's Q&A]] give me a hint that I can run
+
+        npm i --legacy-peer-deps
+
+    to solve this problem.
+
+4. Alough I could update it to Angular 9, but I got an error message about ~@types/node~. Following [[https://stackoverflow.com/questions/57331779/typescript-duplicate-identifier-iteratorresult][StackOverflow's Q&A]], update is enough to resolve it.
 
 * [2021-04-02 Fri] You cannot set the currentTime too large
 Originally, I set 
