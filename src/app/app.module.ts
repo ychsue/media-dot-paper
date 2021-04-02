@@ -96,7 +96,6 @@ import { MeMaskComponent } from './components/me-mask/me-mask.component';
     ZoomInoutComponent,
     MeMaskComponent
   ],
-  entryComponents: [MessageComponent, DialogComponent],
   imports: [
     BrowserModule,
     FormsModule,

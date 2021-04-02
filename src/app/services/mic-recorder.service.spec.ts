@@ -6,7 +6,7 @@ describe('MicRecorderService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: MicRecorderService = TestBed.get(MicRecorderService);
+    const service: MicRecorderService = TestBed.inject(MicRecorderService);
     expect(service).toBeTruthy();
   });
 });
