@@ -1,3 +1,5 @@
+* [2021-04-02 Fri] Update to Angular 11
+
 * [2021-04-02 Fri] Update to Angular 9
 1. First of all, I face an incompatible problem in which one of its message said:
 
