@@ -1,0 +1,29 @@
+<div>
+  <div class="subContainer">
+    <h1 class="header">
+      <button class="avatar" mat-fab (click)="onClick()">
+        <img
+          id="avatar-img"
+          *ngIf="!!this.img"
+          [src]="this.img"
+          [alt]="this.name"
+        />
+        <mat-icon *ngIf="!!!this.img">face</mat-icon>
+      </button>
+      の
+      <a
+        class="avatar"
+        #gdrive
+        href="https://drive.google.com"
+        (click)="device.onLinkToUrl(gdrive.href)"
+      >
+        <img id="gd-img" src="assets/googleDrive.svg" alt="googleDrive" />
+      </a>
+    </h1>
+    <app-export2-google-drive></app-export2-google-drive>
+  </div>
+  <div class="subContainer">
+    <h1 class="header">💻</h1>
+    <app-export2-device></app-export2-device>
+  </div>
+</div>

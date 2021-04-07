@@ -1,3 +1,35 @@
+* [2021-04-07 Wed] Can output files to Google Drive
+1. The spinner does not spin when ~NoopAnimationsModule~ is in the module list.
+    Following the solution described in [[https://github.com/angular/components/issues/15713][this Github's Q&A]], I can solve it by adding
+
+        @NgModule({
+           ...
+            providers: [
+            {
+                provide: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS,
+                useValue: {
+                    _forceAnimations: true
+            }
+        }
+        ],
+        ...
+        })
+        export class AppModule {
+        }
+
+    to solve this problem.
+
+2. GAPI and ZIP services are generated and works fine.
+
+3. The svg of google drive was gotten from [[https://commons.wikimedia.org/wiki/File:Google_Drive_icon_(2020).svg][wikipedia]].
+
+* [2021-04-05 Mon] Making a GAPI Service and an Export2 component
+1. Making an avatar? Follow the description shown in [[https://medium.com/weekly-webtips/avatar-generator-with-initials-on-angular-d7fdaafd2d59][this Medium's article]].
+
+2. Want to autoindent while saving a file? Follow [[https://www.codegrepper.com/code-examples/whatever/vscode+autoindent+on+save][this article of Code Grepper]].
+
+
+
 * [2021-04-02 Fri] Update to Angular 11
 
 * [2021-04-02 Fri] Update to Angular 9

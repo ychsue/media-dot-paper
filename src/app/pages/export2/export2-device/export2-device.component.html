@@ -1,0 +1,12 @@
+<div>
+  <a
+    mat-icon-button
+    #exportStory
+    [href]="downloadHref | safe"
+    [download]="meService.story.name + '.mdpyc'"
+    (click)="onExportStory(exportStory, $event)"
+    [matTooltip]="!!pts ? pts.exportJson : '輸出MDP到mdpyc檔裏'"
+  >
+    <mat-icon class="mat-18">save</mat-icon>
+  </a>
+</div>
