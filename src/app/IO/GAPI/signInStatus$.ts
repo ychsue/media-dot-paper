@@ -1,4 +1,3 @@
-import { Subject } from "rxjs";
-import { service } from "./service";
+import { BehaviorSubject } from "rxjs";
 
-export const signInStatus$ = new Subject<boolean>();
+export const signInStatus$ = new BehaviorSubject<boolean>(false);

@@ -1,32 +1,35 @@
-import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { StoryService } from './story.service';
-import { PlayerType } from '../vm/player-type.enum';
-import { AdService } from './ad.service';
-import { DbService } from './db.service';
-import { FsService } from './fs.service';
-import { MessageService, MessageTypes } from './message.service';
-import { concatAll, map, shareReplay, concat, first } from 'rxjs/operators';
-import { PageTextsService } from './page-texts.service';
-import { Story, IStory } from '../vm/story';
-import { StoryGSetting } from '../vm/story-g-setting';
-import { SSutterParameters, SpeechSynthesisService } from './speech-synthesis.service';
-import { GvService, PageType } from './gv.service';
-import { DeviceService } from './device.service';
-import { StringHelper, ProtocolActionType } from '../extends/string-helper';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { Subject, Observable } from "rxjs";
+import { StoryService } from "./story.service";
+import { PlayerType } from "../vm/player-type.enum";
+import { AdService } from "./ad.service";
+import { DbService } from "./db.service";
+import { FsService } from "./fs.service";
+import { MessageService, MessageTypes } from "./message.service";
+import { concatAll, map, shareReplay, concat, first } from "rxjs/operators";
+import { PageTextsService } from "./page-texts.service";
+import { Story, IStory } from "../vm/story";
+import { StoryGSetting } from "../vm/story-g-setting";
+import {
+  SSutterParameters,
+  SpeechSynthesisService,
+} from "./speech-synthesis.service";
+import { GvService, PageType } from "./gv.service";
+import { DeviceService } from "./device.service";
+import { StringHelper, ProtocolActionType } from "../extends/string-helper";
+import { HttpClient } from "@angular/common/http";
+import { GapiService } from "./GAPI/gapi.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MediaEditService {
-
   _onStateChanged: Subject<MEState>; // Just for subscribe, if you want to trigger it, set ~self.state~.
   public get onStateChanged(): Observable<MEState> {
     return this._onStateChanged;
   }
 
-  requestMediaReady$ = new Subject<null>();  // Subscribed by player
+  requestMediaReady$ = new Subject<null>(); // Subscribed by player
   responseMediaReady$ = new Subject<boolean>(); // emmited by player
 
   onPlayerAction: Subject<playerAction>;
@@ -51,7 +54,9 @@ export class MediaEditService {
     this._duration = v;
   }
   public get duration(): number {
-    return (!!this._duration && (this._duration !== Infinity)) ? this._duration : 100;
+    return !!this._duration && this._duration !== Infinity
+      ? this._duration
+      : 100;
   }
 
   public _volume = 1; // **************** TODO *******************
@@ -109,7 +114,8 @@ export class MediaEditService {
   public get isSideMani(): boolean {
     return this._isSideMani && this.isToShowList;
   }
-  public set isSideMani(v: boolean) { // Force it to be false when isToShowList is false
+  public set isSideMani(v: boolean) {
+    // Force it to be false when isToShowList is false
     this._isSideMani = v && this.isToShowList;
   }
 
@@ -119,26 +125,28 @@ export class MediaEditService {
 
   pts: IPageTexts;
 
-  constructor(private adService: AdService,
-              private fsService: FsService,
-              private msgService: MessageService,
-              private db: DbService,
-              private ptsService: PageTextsService,
-              private storyService: StoryService,
-              private SSService: SpeechSynthesisService,
-              private gv: GvService,
-              private device: DeviceService,
-              private http: HttpClient
+  constructor(
+    private adService: AdService,
+    private fsService: FsService,
+    private msgService: MessageService,
+    private db: DbService,
+    private ptsService: PageTextsService,
+    private storyService: StoryService,
+    private SSService: SpeechSynthesisService,
+    private gv: GvService,
+    private device: DeviceService,
+    private http: HttpClient,
+    private GAPIService: GapiService
   ) {
     const self = this;
-    self.ptsService.PTSReady$.subscribe(_ => {
+    self.ptsService.PTSReady$.subscribe((_) => {
       self.pts = self.ptsService.pts;
       self.story = new Story(self.pts);
     });
-    self.ptsService.ptsLoaded$.subscribe(_ => {
+    self.ptsService.ptsLoaded$.subscribe((_) => {
       self.pts = self.ptsService.pts;
     });
-    this._onStateChanged  = new Subject<MEState>();
+    this._onStateChanged = new Subject<MEState>();
     this.onPlayerAction = new Subject<playerAction>();
     this.state = MEState.initialized;
     // * [2018-08-25 21:26] light up setiFrame$
@@ -147,13 +155,13 @@ export class MediaEditService {
     self.device.onMyActivated$.subscribe(self.onActivatedHandler.bind(self));
     // * [2019-03-29 17:15] Pause the media explicitly when the user switch to other Apps.
     if (self.device.isCordova) {
-      self.device.channel.onPause.subscribe( _ => {
+      self.device.channel.onPause.subscribe((_) => {
         this.onPlayerAction.next(playerAction.pause);
       });
     }
   }
 
-  initMe(data: Blob| IStory| string, pType: PlayerType = PlayerType.auto) {
+  initMe(data: Blob | IStory | string, pType: PlayerType = PlayerType.auto) {
     // * [2018-08-15 16:25] Try to show admob
     this.adService.showInterstitial();
     // * [2018-07-19 17:58] pause previous action
@@ -164,11 +172,11 @@ export class MediaEditService {
     if (pType !== PlayerType.auto) {
       this.story.meType = pType;
     } else {
-      if ((typeof data) === 'string') {
+      if (typeof data === "string") {
         this.story = new Story(this.pts);
         this.lastTimeCallInitMeFromUrl = this.story.makeTime;
         this.story.meType = PlayerType.url;
-      } else if (!!data['makeTime']) {
+      } else if (!!data["makeTime"]) {
         this.story = data as IStory;
         this.setiFrame(this.story.iFrame); // TODO: It is for avoiding iFrame!=-1 so that the utterPara hasn't been updated.
       } else if (!!(data as Blob)) {
@@ -180,12 +188,17 @@ export class MediaEditService {
       }
     }
 
-    if (!!data['makeTime']) {
+    if (!!data["makeTime"]) {
       // * [2018-07-19 13:41] If input is a story
-    } else if ((this.story.meType === PlayerType.url) || (this.story.meType === PlayerType.youtubeID)) {
+    } else if (
+      this.story.meType === PlayerType.url ||
+      this.story.meType === PlayerType.youtubeID
+    ) {
       this.story.urlOrID = data as string;
       this.story.title = this.story.urlOrID;
-      this.story.name = this.story.title.slice(this.story.title.lastIndexOf('/') + 1);
+      this.story.name = this.story.title.slice(
+        this.story.title.lastIndexOf("/") + 1
+      );
     } else if (this.story.meType === PlayerType.file) {
       this.blob = data as Blob;
       this.story.urlOrID = window.URL.createObjectURL(this.blob);
@@ -199,7 +212,9 @@ export class MediaEditService {
     if (!!this.story.gSetting === false) {
       this.story.gSetting = new StoryGSetting();
     }
-    this.story.gSetting.utterPara = this.SSService.updateUtterParaWithVoice(this.story.gSetting.utterPara);
+    this.story.gSetting.utterPara = this.SSService.updateUtterParaWithVoice(
+      this.story.gSetting.utterPara
+    );
 
     this.updateLinks();
 
@@ -236,18 +251,20 @@ export class MediaEditService {
   setVolumeFromFrame(i: number = Number.NaN) {
     const self = this;
     if (!!self.story) {
-      i = (Number.isNaN(i)) ? self.story.iFrame : i;
+      i = Number.isNaN(i) ? self.story.iFrame : i;
       const setFromDefault = () => {
-        self._volume = (!!self.story.gSetting) ? self.story.gSetting.volume : 1;
+        self._volume = !!self.story.gSetting ? self.story.gSetting.volume : 1;
       };
-      if (i >= 0) { // if it is a frame.
+      if (i >= 0) {
+        // if it is a frame.
         const frame = self.story.frames[i];
         if (!!frame.useDefVP) {
           setFromDefault();
         } else {
           self._volume = frame.volume;
         }
-      } else { // for all
+      } else {
+        // for all
         setFromDefault();
       }
       self.onPlayerAction.next(playerAction.setVolume);
@@ -259,18 +276,22 @@ export class MediaEditService {
   setPlaybackRateFromFrame(i: number = Number.NaN) {
     const self = this;
     if (!!self.story) {
-      i = (Number.isNaN(i)) ? self.story.iFrame : i;
+      i = Number.isNaN(i) ? self.story.iFrame : i;
       const setFromDefault = () => {
-        self._playbackRate = (!!self.story.gSetting) ? self.story.gSetting.rate : 1;
+        self._playbackRate = !!self.story.gSetting
+          ? self.story.gSetting.rate
+          : 1;
       };
-      if (i >= 0) { // if it is a frame.
+      if (i >= 0) {
+        // if it is a frame.
         const frame = self.story.frames[i];
         if (!!frame.useDefVP) {
           setFromDefault();
         } else {
           self._playbackRate = frame.rate;
         }
-      } else { // for whole story
+      } else {
+        // for whole story
         setFromDefault();
       }
       self.onPlayerAction.next(playerAction.setPlaybackRate);
@@ -286,10 +307,12 @@ export class MediaEditService {
     const self = this;
     if (!!self.story) {
       const i = self.story.iFrame;
-      if (i >= 0) { // if it is a frame.
+      if (i >= 0) {
+        // if it is a frame.
         const frame = self.story.frames[i];
         frame.volume = self._volume;
-      } else { // for all
+      } else {
+        // for all
         if (!!self.story.gSetting) {
           self.story.gSetting.volume = self._volume;
         }
@@ -300,17 +323,19 @@ export class MediaEditService {
     }
   }
 
-    /**
+  /**
    * Provide self._playbackRate at first.
    */
   setPlaybackRateIntoFrame() {
     const self = this;
     if (!!self.story) {
       const i = self.story.iFrame;
-      if (i >= 0) { // if it is a frame.
+      if (i >= 0) {
+        // if it is a frame.
         const frame = self.story.frames[i];
         frame.rate = self._playbackRate;
-      } else { // for whole story
+      } else {
+        // for whole story
         if (!!self.story.gSetting) {
           self.story.gSetting.rate = self._playbackRate;
         }
@@ -321,27 +346,37 @@ export class MediaEditService {
     }
   }
 
-
   async onSaveStory$$() {
     const story = this.story;
     story.modifyTime = story.viewTime = Date.now();
     const self = this;
     self.gv.appComp.startProgress("請稍後", "處理中");
     if (story.meType === PlayerType.file) {
-      const isSaved = await this.fsService.getFile$(story.fileName, true).pipe(map(fEntry => {
-        return self.fsService.writeFile$(fEntry, self.blob);
-      }), concatAll()).toPromise();
+      const isSaved = await this.fsService
+        .getFile$(story.fileName, true)
+        .pipe(
+          map((fEntry) => {
+            return self.fsService.writeFile$(fEntry, self.blob);
+          }),
+          concatAll()
+        )
+        .toPromise();
       // * [2018-08-05 17:23] if it is saved, renew its URL
       if (isSaved === true) {
-        story.urlOrID = (await this.fsService.getFile$(story.fileName).toPromise()).toURL();
+        story.urlOrID = (
+          await this.fsService.getFile$(story.fileName).toPromise()
+        ).toURL();
       }
 
-      self.msgService.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is stored: ${isSaved}`});
+      self.msgService.pushMessage({
+        type: MessageTypes.Info,
+        message: `The file ${story.fileName} is stored: ${isSaved}`,
+      });
     }
-    delete story['id'];
+    delete story["id"];
     const insert = await this.storyService.upsertAStoryAsync(story);
     // * [2018-07-25 19:04] Change its state to 'Update'
-    story['id'] = insert[0].affectedRows[0].id;
+    story["id"] = insert[0].affectedRows[0].id;
     this.sideClickType = SideClickType.select;
     self.gv.appComp.stopProgress();
   }
@@ -356,22 +391,23 @@ export class MediaEditService {
 
   async canGetCurrentTime$$() {
     const self = this;
-    setTimeout(() => { // Run after await
+    setTimeout(() => {
+      // Run after await
       self.requestMediaReady$.next();
     }, 0);
     return await self.responseMediaReady$.pipe(first()).toPromise();
   }
 
-  inputFromFile(file: File|Blob) {
+  inputFromFile(file: File | Blob) {
     const self = this;
     if (/(video|audio)/.test(file.type) === true) {
       self.initMe(file);
       this.gv.shownPage = PageType.MediaEdit;
     } else if (!!!file.type || /(text|json)/.test(file.type)) {
-      const action$$ = new Promise( (res , rej) => {
+      const action$$ = new Promise((res, rej) => {
         const reader = new FileReader();
         reader.onloadend = (e) => {
-          let text = '';
+          let text = "";
           let story: IStory;
           try {
             text = (e.srcElement as any).result;
@@ -388,29 +424,37 @@ export class MediaEditService {
         reader.onerror = rej;
         reader.readAsText(file);
       });
-      action$$.then( (story: IStory) => {
+      action$$
+        .then((story: IStory) => {
           story.modifyTime = 0;
           self.initMe(story);
           this.gv.shownPage = PageType.MediaEdit;
         })
-        .catch( err => {
+        .catch((err) => {
           console.log(err);
-          self.msgService.alert(((!!self.pts && !!self.pts.homePage) ? self.pts.homePage.errWrongFormat :
-           `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`);
+          self.msgService.alert(
+            (!!self.pts && !!self.pts.homePage
+              ? self.pts.homePage.errWrongFormat
+              : `輸入的json檔格式不合。錯誤訊息： `) + `${JSON.stringify(err)}`
+          );
           return;
         });
     } else {
-      self.msgService.alert((!!self.pts && !!self.pts.homePage) ? self.pts.homePage.errFileType :
-       '所選的檔案必須是影片、聲音檔，或者要匯入的json檔。');
+      self.msgService.alert(
+        !!self.pts && !!self.pts.homePage
+          ? self.pts.homePage.errFileType
+          : "所選的檔案必須是影片、聲音檔，或者要匯入的json檔。"
+      );
       return;
     }
     // * [2018-07-19 21:28] Tell navbar that you want to create a story
     self.sideClickType = SideClickType.new;
   }
 
-  async inputFromString$ (result: string)  {
+  async inputFromString$(result: string) {
     const self = this;
     let story: IStory;
+    let res = null;
     if (!!result === false) {
       return;
     }
@@ -418,49 +462,81 @@ export class MediaEditService {
     //                        I need to do something to prevent this kind of behavior.
     result = StringHelper.correctHttpURL(result);
 
-    const ismdp = StringHelper.isMDP(result);
-    result = StringHelper.refineLinkOfDGO(result);
-    // * [2018-12-24 20:34] Check whether it is an MDP file
-    let res = null;
+    //* [2021-04-08 11:10] Dealing with MDPYC stored in Google Drive
     try {
-      if (ismdp) {
-        res = await self.http.get(result, {responseType: 'text'}).toPromise();
-      }
-    } catch (err) {
-      const cP = window['protocolCheck'].checkBrowser(); // checkPlatform
-      if (!!!window.cordova) {
-        self.gv.showSideNav = true;
-        const isNone = !cP.isWindows && !cP.isMac && !cP.isIOS;
-        const msg = ((!!self.pts && !!self.pts.mediaEditService) ? self.pts.mediaEditService.CORerror :
-         `抱歉，所附連結方因為安全關係，不讓別的網頁直接載入該檔，請
+      story = await self.GAPIService.getDataFromFileIdAsync(
+        self.GAPIService.service.getFileIdFromUri(result)
+      );
+    } catch (error) {
+      self.msgService.alert(
+        `media-edit.service::inputFromString$ ERROR: ${
+          (error as Error).message
+        }`
+      );
+    }
+
+    if (!!!story) {
+      const ismdp = StringHelper.isMDP(result);
+      result = StringHelper.refineLinkOfDGO(result);
+      // * [2018-12-24 20:34] Check whether it is an MDP file
+      try {
+        if (ismdp) {
+          res = await self.http
+            .get(result, { responseType: "text" })
+            .toPromise();
+        }
+      } catch (err) {
+        const cP = window["protocolCheck"].checkBrowser(); // checkPlatform
+        if (!!!window.cordova) {
+          self.gv.showSideNav = true;
+          const isNone = !cP.isWindows && !cP.isMac && !cP.isIOS;
+          const msg =
+            (!!self.pts && !!self.pts.mediaEditService
+              ? self.pts.mediaEditService.CORerror
+              : `抱歉，所附連結方因為安全關係，不讓別的網頁直接載入該檔，請
         <ol>
         <li><a href='{0}'>下載此檔</a></li>
         <li>由此網頁左側欄裡的'文件'按鈕匯入此檔即可</li>
         </ol>
         另一種更為簡便的方法是安裝本APP，下次就會轉而由本APP接手了。請由以下的商店取得。</br>
-        `).replace('{0}', result) + ((isNone) ? `
+        `
+            ).replace("{0}", result) +
+            (isNone
+              ? `
         <a mat-button href="https://play.google.com/store/apps/details?id=tw.at.yescirculation.mediadotpaper">
         <img alt="Get it on Google Play"
              src="https://developer.android.com/images/brand/en_generic_rgb_wo_45.png" />
-    </a>` : '') + ((isNone || cP.isWindows) ? `
+    </a>`
+              : "") +
+            (isNone || cP.isWindows
+              ? `
     <a mat-button href='//www.microsoft.com/store/apps/9PP2LJRFF179?ocid=badge'>
         <img style="height:45px"
          src='https://assets.windowsphone.com/85864462-9c82-451e-9355-a3d5f874397a/English_get-it-from-MS_InvariantCulture_Default.png'
          alt='English badge'/>
-    </a>` : '') + ((isNone || (cP.isMac && !cP.isIOS)) ?
-    // tslint:disable-next-line:max-line-length
-    `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-31T00:00:00Z&kind=desktopapp&bubble=macos_apps) no-repeat;width:165px;height:40px;padding: 0 42px;background-position: center;" href="https://geo.itunes.apple.com/us/app/media-dot-paper/id1436714053?mt=12&app=apps"></a>` : '') + ((isNone || cP.isIOS) ?
-    // tslint:disable-next-line:max-line-length
-    `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-27&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;padding: 0 0 0 12px;background-position: center;" href="https://itunes.apple.com/us/app/media-dot-paper/id1436677583?mt=8"></a>` : '');
-    self.msgService.alert(msg, false);
-        return;
-      } else {
-        console.log(err);
+    </a>`
+              : "") +
+            (isNone || (cP.isMac && !cP.isIOS)
+              ? // tslint:disable-next-line:max-line-length
+                `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-31T00:00:00Z&kind=desktopapp&bubble=macos_apps) no-repeat;width:165px;height:40px;padding: 0 42px;background-position: center;" href="https://geo.itunes.apple.com/us/app/media-dot-paper/id1436714053?mt=12&app=apps"></a>`
+              : "") +
+            (isNone || cP.isIOS
+              ? // tslint:disable-next-line:max-line-length
+                `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-27&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;padding: 0 0 0 12px;background-position: center;" href="https://itunes.apple.com/us/app/media-dot-paper/id1436677583?mt=8"></a>`
+              : "");
+          self.msgService.alert(msg, false);
+          return;
+        } else {
+          console.log(err);
+        }
       }
     }
-    if (!!(story = self.storyService.getAStoryFromString(result)) ||
-      !!(story = self.storyService.getAStoryFromString(res))) {
-    // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
+    if (
+      !!story ||
+      !!(story = self.storyService.getAStoryFromString(result)) ||
+      !!(story = self.storyService.getAStoryFromString(res))
+    ) {
+      // * [2018-10-09 10:18] For iOS, the user might want to copy Json's file's info to load a Json file
       story.modifyTime = 0;
       self.initMe(story);
     } else {
@@ -474,20 +550,23 @@ export class MediaEditService {
 
   onActivatedHandler(ev: any) {
     const self = this;
-    if (ev.type !== 'activated') {
-          self.gv.showSideNav = false;
+    if (ev.type !== "activated") {
+      self.gv.showSideNav = false;
     }
-    if (ev.type === 'file') { // For a file
-        self.inputFromFile(<File>ev.data);
-      } else if (ev.type === 'uri') { // For Uri,
-        const uri = (!!window['Windows']) ? ev.data.displayUri : ev.data;
-        const data = StringHelper.getInfoFromURIString(uri);
-        if (data.action === ProtocolActionType.mdplink) {
-          self.inputFromString$(data.data);
-        } else { // it might be text
-          self.inputFromString$(uri);
-        }
+    if (ev.type === "file") {
+      // For a file
+      self.inputFromFile(<File>ev.data);
+    } else if (ev.type === "uri") {
+      // For Uri,
+      const uri = !!window["Windows"] ? ev.data.displayUri : ev.data;
+      const data = StringHelper.getInfoFromURIString(uri);
+      if (data.action === ProtocolActionType.mdplink) {
+        self.inputFromString$(data.data);
+      } else {
+        // it might be text
+        self.inputFromString$(uri);
       }
+    }
   }
 
   updateLinks() {
@@ -495,8 +574,10 @@ export class MediaEditService {
     const oLinks = self.story.gSetting.links;
     self.links = Object.assign([], oLinks);
     // * [2019-03-28] Get links from descriptions
-    const arrDesc = (!!self.story.description) ? self.story.description.split(/[\r\n\s]+/i) : [];
-    arrDesc.forEach(ele => {
+    const arrDesc = !!self.story.description
+      ? self.story.description.split(/[\r\n\s]+/i)
+      : [];
+    arrDesc.forEach((ele) => {
       if (!!ele.match(/^https?\:\/\//i)) {
         self.links.push(ele);
       }
@@ -521,7 +602,7 @@ export enum playerAction {
   setVolume,
   getPlaybackRate,
   setPlaybackRate,
-  getAllowedPlaybackRate
+  getAllowedPlaybackRate,
 }
 
 export enum MEState {
@@ -536,11 +617,11 @@ export enum MEState {
   paused,
   stopped,
   disposed,
-  playerReady
+  playerReady,
 }
 
 export enum SideClickType {
   none,
   new,
-  select
+  select,
 }

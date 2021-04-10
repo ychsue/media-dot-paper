@@ -1,3 +1,8 @@
+* [2021-04-10 Sat] Can import from Google Drive
+1. Now I try to load ~initEventArgs~ inside Angular when it is in browser mode.
+2. Handling Google's openWith.
+3. [Problem] Sometimes Google gapi does not loaded correctly.
+
 * [2021-04-07 Wed] Can output files to Google Drive
 1. The spinner does not spin when ~NoopAnimationsModule~ is in the module list.
     Following the solution described in [[https://github.com/angular/components/issues/15713][this Github's Q&A]], I can solve it by adding

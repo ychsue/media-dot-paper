@@ -18,11 +18,14 @@ import setSheetPropAsync from "./Sheets/setSheetPropAsync";
 import groupSheetDimAsync from "./Sheets/groupDimAsync";
 import batchUpdateSSAsync from "./Sheets/batchUpdateAsync";
 import { isLoaded } from "./isLoaded";
+import getFileIdFromUri from "./utils/getFileIdFromUri";
+import { isAuthLoaded$ } from "./isAuthLoaded$";
 
 export const service = {
   initAsync,
 
   isLoaded,
+  isAuthLoaded$,
 
   signInStatus$,
   signInAsync,
@@ -46,4 +49,6 @@ export const service = {
   setCellsFormatAsync,
   setSheetPropAsync,
   groupSheetDimAsync,
+
+  getFileIdFromUri,
 };
