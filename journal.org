@@ -2,6 +2,11 @@
 1. Now I try to load ~initEventArgs~ inside Angular when it is in browser mode.
 2. Handling Google's openWith.
 3. [Problem] Sometimes Google gapi does not loaded correctly.
+4. For ~http://~ resource, I need to add
+
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+
+    into ~index.html~ file as mentioned in [[https://www.cnblogs.com/exmyth/p/11634644.html][this article]].
 
 * [2021-04-07 Wed] Can output files to Google Drive
 1. The spinner does not spin when ~NoopAnimationsModule~ is in the module list.
