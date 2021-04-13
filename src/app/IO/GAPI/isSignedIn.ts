@@ -1,3 +1,4 @@
 export default function isSignedIn() {
-    return gapi.auth2.getAuthInstance().isSignedIn.get();
+  if (!!!window?.gapi?.auth2) return false;
+  return gapi.auth2.getAuthInstance().isSignedIn.get();
 }

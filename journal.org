@@ -1,3 +1,9 @@
+* [2021-04-13 Tue] Try to make it works on iMac and iOS
+1. Try to use ~https~; however, gapi doesn't work.
+    a. Following [[https://blog.miniasp.com/post/2019/02/25/Creating-Self-signed-Certificate-using-OpenSSL][this article]], I can generate certificate key for my site by declaring them in ~angular.json~; however, chrome doesn't like ~https://localhost~
+    b. On Safari, gapi is not permitted when it is run in ~https://localhost~...
+2. Sometimes, ~gapi.auth2~ does not exist, I try to call ~initAsync~ again to solve this problem in which ~gapi.auth2===undefined~.
+
 * [2021-04-10 Sat] Can import from Google Drive
 1. Now I try to load ~initEventArgs~ inside Angular when it is in browser mode.
 2. Handling Google's openWith.

@@ -1,3 +1,4 @@
 export default function signOutAsync() {
-    return gapi.auth2.getAuthInstance().signOut();
+  if (!!!window?.gapi?.auth2) return;
+  return gapi.auth2.getAuthInstance().signOut();
 }

@@ -403,7 +403,7 @@ export class MediaEditService {
     if (/(video|audio)/.test(file.type) === true) {
       self.initMe(file);
       this.gv.shownPage = PageType.MediaEdit;
-    } else if (!!!file.type || /(text|json)/.test(file.type)) {
+    } else if (!!!file.type || /(text|json|mdpyc)/.test(file.type)) {
       const action$$ = new Promise((res, rej) => {
         const reader = new FileReader();
         reader.onloadend = (e) => {

@@ -25,6 +25,7 @@ export class GapiService {
 
   public async getDataFromFileIdAsync(fileId: string) {
     var result: IStory;
+    if (!!!fileId) return result;
     try {
       var res = await service.getInfoFromIdAsync({
         fileId,

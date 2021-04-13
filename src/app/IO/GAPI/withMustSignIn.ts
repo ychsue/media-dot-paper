@@ -2,6 +2,7 @@ import isSignedIn from "./isSignedIn";
 import { isLoaded } from "./isLoaded";
 import { takeWhile } from "rxjs/operators";
 import { isAuthLoaded$ } from "./isAuthLoaded$";
+import initAsync from "./initAsync";
 
 export const withMustSignIn = (scopes: string, mustLoadScopes = false) => <
   I,
@@ -35,6 +36,9 @@ export const withMustSignIn = (scopes: string, mustLoadScopes = false) => <
     // * [2021-03-12 22:24] If it is not signedIn
     if (!!!isSignedIn()) {
       try {
+        if (!!!window?.gapi?.auth2) {
+          await initAsync();
+        }
         user = await gapi.auth2
           .getAuthInstance()
           .signIn(isWithScopes ? { scope: scopes } : undefined);

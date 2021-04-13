@@ -11,7 +11,7 @@ import { isAuthLoaded$ } from "./isAuthLoaded$";
 
 export default async function initAsync() {
   // * [2021-03-09 16:46] Load gapi at first
-  if (!!!gapi) {
+  if (!!!window?.gapi) {
     await new Promise((res, rej) => {
       var uiEle = document.getElementById("gapiScript");
       if (uiEle) {
