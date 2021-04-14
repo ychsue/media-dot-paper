@@ -1,4 +1,4 @@
-import { withMustSignIn } from "../withMustSignIn";
+import { tHOF, withMustSignIn } from "../withMustSignIn";
 
 async function createFolderGAPIAsync(name: string) {
     const folder = await gapi.client.drive.files.create({
@@ -11,8 +11,9 @@ async function createFolderGAPIAsync(name: string) {
     return folder;
 }
 
-export default async function createFolderAsync(name: string) {
-    var res =await withMustSignIn("https://www.googleapis.com/auth/drive")(createFolderGAPIAsync)(name);
+export default async function createFolderAsync(name: string, grantWithClick?: tHOF, signInWithClick?: tHOF) {
+    const scopes = "https://www.googleapis.com/auth/drive";
+    var res = await withMustSignIn({ scopes, grantWithClick, signInWithClick })(createFolderGAPIAsync)(name);
 
     return res;
 }

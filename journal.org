@@ -1,3 +1,6 @@
+* [2021-04-14 Wed] The WithClickService is created for providing click event
+Because GAPI's login and grant need to show a popup to which a ~window.event~ should be triggered at first, I wrote a service as a HOF to open a dialog to deal with this problem.  
+
 * [2021-04-13 Tue] Try to make it works on iMac and iOS
 1. Try to use ~https~; however, gapi doesn't work.
     a. Following [[https://blog.miniasp.com/post/2019/02/25/Creating-Self-signed-Certificate-using-OpenSSL][this article]], I can generate certificate key for my site by declaring them in ~angular.json~; however, chrome doesn't like ~https://localhost~

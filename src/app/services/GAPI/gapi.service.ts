@@ -6,6 +6,7 @@ import { MediaEditService } from "../media-edit.service";
 import { MessageService } from "../message.service";
 import { SSutterParameters } from "../speech-synthesis.service";
 import { StoryService } from "../story.service";
+import { WithClickService } from "../WithClick/with-click.service";
 import { ZipService } from "../ZIP/zip.service";
 
 @Injectable({
@@ -18,25 +19,54 @@ export class GapiService {
     private zipService: ZipService,
     private storyService: StoryService,
     private ZIPService: ZipService,
-    private msg: MessageService
+    private msg: MessageService,
+    private withClickService: WithClickService
   ) {
     this.service = service;
   }
 
   public async getDataFromFileIdAsync(fileId: string) {
     var result: IStory;
+    const self = this;
+
     if (!!!fileId) return result;
     try {
       var res = await service.getInfoFromIdAsync({
         fileId,
         fields: "mimeType",
+        signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
+          title: "Google Drive 權限",
+          content: "您需要登入 GOOGLE此動作才能繼續",
+          stYes: "好",
+          stNo: "不想"
+        }),
+        grantWithClick: self.withClickService.withClick.bind(self.withClickService)({
+          title: "Google Drive 權限",
+          content: "您需要提供 GOOGLE 額外的權限",
+          stYes: "好",
+          stNo: "不想"
+        })
       });
       const mimeType = res.result.mimeType;
       if (
         mimeType.toLowerCase().indexOf(`text`) >= 0 ||
         mimeType === "application/octet-stream"
       ) {
-        res = await service.downloadItemAsync({ fileId });
+        res = await service.downloadItemAsync({
+          fileId,
+          signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
+            title: "Google Drive 權限",
+            content: "您需要登入 GOOGLE此動作才能繼續",
+            stYes: "好",
+            stNo: "不想"
+          }),
+          grantWithClick: self.withClickService.withClick.bind(self.withClickService)({
+            title: "Google Drive 權限",
+            content: "您需要提供 GOOGLE 額外的權限",
+            stYes: "好",
+            stNo: "不想"
+          })
+        });
         var data = res.body;
         result = this.storyService.getAStoryFromString(data);
       } else if (mimeType.indexOf("spreadsheet") >= 0) {

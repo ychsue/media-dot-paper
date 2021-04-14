@@ -74,6 +74,7 @@ import { MeMaskComponent } from "./components/me-mask/me-mask.component";
 import { Export2Component } from "./pages/export2/export2.component";
 import { Export2GoogleDriveComponent } from "./pages/export2/export2-google-drive/export2-google-drive.component";
 import { Export2DeviceComponent } from "./pages/export2/export2-device/export2-device.component";
+import { WithClickComponent } from './services/WithClick/with-click/with-click.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { Export2DeviceComponent } from "./pages/export2/export2-device/export2-d
     Export2Component,
     Export2GoogleDriveComponent,
     Export2DeviceComponent,
+    WithClickComponent,
   ],
   imports: [
     BrowserModule,

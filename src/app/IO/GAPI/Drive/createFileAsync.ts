@@ -1,11 +1,14 @@
 import initAsync from "../initAsync";
-import { withMustSignIn } from "../withMustSignIn";
+import { IWithMustSignIn, withMustSignIn } from "../withMustSignIn";
 
 interface IPropIn {
   name: string;
   blob?: Blob;
   mimeType?: string;
   parents?: string[];
+}
+
+interface IOProps extends IPropIn, IWithMustSignIn {
 }
 
 async function createFileGAPIAsync({ name, blob, mimeType, parents }: IPropIn) {
@@ -55,10 +58,12 @@ async function createFileGAPIAsync({ name, blob, mimeType, parents }: IPropIn) {
   return json_result;
 }
 
-export default async function createFileAsync(props: IPropIn) {
-  var res = await withMustSignIn("https://www.googleapis.com/auth/drive")(
+export default async function createFileAsync(props: IOProps) {
+  var { scopes, signInWithClick, grantWithClick, mustLoadScopes, ...propsIn } = props;
+  scopes = (!!scopes) ? scopes : "https://www.googleapis.com/auth/drive";
+  var res = await withMustSignIn({ scopes, signInWithClick, grantWithClick, mustLoadScopes })(
     createFileGAPIAsync
-  )(props);
+  )(propsIn);
 
   return res;
 }
