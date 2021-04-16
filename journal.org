@@ -1,3 +1,14 @@
+* [2021-04-16 Fri] Show a dialog for textarea when the height is too small
+Well, from ~click~ event to ~resize~ event from a textarea might take longer than 1 second.
+Maybe I should change it to the event of ~focus~.
+
+* [2021-04-14 Wed] Set terminal in vscode
+By following [[https://code.visualstudio.com/docs/editor/integrated-terminal][this article]] and [[https://medium.com/@youngstone89/how-to-change-font-for-terminal-in-visual-studio-code-c3305fe6d4c2][this one]], you can setup your terminal to show correct fonts.
+
+Settings -> "terminal.external.osxExec", "terminal.integrated.shell.osx" and "terminal.integrated.fontFamily".
+
+By the way, the ~fontFamily~ should be "Meslo LG M DZ for Powerline".
+
 * [2021-04-14 Wed] The WithClickService is created for providing click event
 Because GAPI's login and grant need to show a popup to which a ~window.event~ should be triggered at first, I wrote a service as a HOF to open a dialog to deal with this problem.  
 

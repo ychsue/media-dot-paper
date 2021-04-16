@@ -20,7 +20,7 @@ export class GvService {
   }
   public set zoomAll(v: number) {
     const percent = 1 / v * 100;
-    document.body.setAttribute('style', `width: ${percent}vw; height: ${percent}vh; transform: scale(${v})`);
+    document.body.setAttribute('style', `width: ${percent}%; height: ${percent}%; transform: scale(${v})`);
     this._zoomAll = v;
   }
 
@@ -33,7 +33,7 @@ export class GvService {
   appComp: AppComponent;
   constructor() {
     const self = this;
-    timer(0, 40000000).subscribe(_ => {self.checkPerDay = Date.now(); });
+    timer(0, 40000000).subscribe(_ => { self.checkPerDay = Date.now(); });
     self.loadFromLocalStorage(ParaInLS.zoomAll);
   }
 

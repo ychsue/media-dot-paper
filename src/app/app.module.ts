@@ -75,6 +75,7 @@ import { Export2Component } from "./pages/export2/export2.component";
 import { Export2GoogleDriveComponent } from "./pages/export2/export2-google-drive/export2-google-drive.component";
 import { Export2DeviceComponent } from "./pages/export2/export2-device/export2-device.component";
 import { WithClickComponent } from './services/WithClick/with-click/with-click.component';
+import { TextInputAgentComponent } from './services/TextInputAgent/text-input-agent/text-input-agent.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { WithClickComponent } from './services/WithClick/with-click/with-click.c
     Export2GoogleDriveComponent,
     Export2DeviceComponent,
     WithClickComponent,
+    TextInputAgentComponent,
   ],
   imports: [
     BrowserModule,

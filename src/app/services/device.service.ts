@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, fromEvent, Subject } from 'rxjs';
-import { share, shareReplay } from 'rxjs/operators';
+import { Observable, fromEvent, Subject, concat, of } from 'rxjs';
+import { Timestamp } from 'rxjs/internal/operators/timestamp';
+import { map, share, shareReplay, timestamp } from 'rxjs/operators';
+
+interface Isize {
+  width: number;
+  height: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +29,8 @@ export class DeviceService {
   onMousedown$: Observable<MouseEvent>;
 
   onWindowResize$: Observable<Event>;
+  onWindowResizeReplay$: Observable<Timestamp<Isize>>;
+
 
   onNoButtonPressed$ = new Subject<boolean>();
   private _onMyActivated$ = new Subject<any>();
@@ -38,7 +46,7 @@ export class DeviceService {
     if (this.isCordova) {
       this.channel = cordova.require('cordova/channel');
       this.onDeviceReady = new Observable(ob => {
-        this.channel.onDeviceReady.subscribe( () => {
+        this.channel.onDeviceReady.subscribe(() => {
           ob.next(); // For subscribe
           ob.complete(); // For toPromise and auto-unsubscribe
           // *[2019-01-25 13:17] Initialize some cordova APIs
@@ -72,6 +80,13 @@ export class DeviceService {
     this.onMousedown$ = fromEvent(document, 'mousedown') as Observable<MouseEvent>;
 
     this.onWindowResize$ = fromEvent(window, 'resize') as Observable<Event>;
+    const subs1 = of({ value: { width: window?.innerWidth, height: window?.innerHeight }, timestamp: 0 } as Timestamp<Isize>);
+    const subs2 = this.onWindowResize$.pipe(map(x => ({ width: window.innerWidth, height: window.innerHeight } as Isize)), timestamp());
+    this.onWindowResizeReplay$ = concat(
+      subs1,
+      subs2
+    ).pipe(shareReplay(1));
+    // window['onResize$'] = this.onWindowResizeReplay$;
   }
 
   onLinkToUrl(sUrl: string) {
@@ -82,19 +97,19 @@ export class DeviceService {
 
   private _emitInitActivated() {
     const self = this;
-      // ** [2019-03-04 16:43] Get data from initEventArgs
-      if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
-        const args = window['initEventArgs'].activated;
-        window['initEventArgs'].activated = null;
-        // * [2019-02-16 16:03] For file extensions
-        self._onMyActivated$.next(args);
-      } else {
-      }
+    // ** [2019-03-04 16:43] Get data from initEventArgs
+    if (!!window['initEventArgs'] && !!window['initEventArgs'].activated) {
+      const args = window['initEventArgs'].activated;
+      window['initEventArgs'].activated = null;
+      // * [2019-02-16 16:03] For file extensions
+      self._onMyActivated$.next(args);
+    } else {
+    }
   }
 
   initCordovaAPIS() {
     const self = this;
-    if (!!!window['cordova']) {return; }
+    if (!!!window['cordova']) { return; }
     if (!!cordova['plugins'] && !!cordova.plugins['permissions']) {
       this.permissions = cordova.plugins.permissions;
     }
@@ -113,7 +128,7 @@ export class DeviceService {
             const buf: Windows.Storage.StorageFile = (<Windows.ApplicationModel.Activation.FileActivatedEventArgs>args).files[0];
             if (!!window['MSApp']) {
               try {
-                output = {data: (<any>window['MSApp']).createFileFromStorageFile(buf), type: 'file'};
+                output = { data: (<any>window['MSApp']).createFileFromStorageFile(buf), type: 'file' };
               } catch (error) {
                 console.log(error);
               }
@@ -134,7 +149,7 @@ export class DeviceService {
             inType = 'uri';
             data = decodeURIComponent(data);
           }
-          const output = {data: data, type: inType};
+          const output = { data: data, type: inType };
           self._onMyActivated$.next(output);
         };
         // For Android system
@@ -145,14 +160,14 @@ export class DeviceService {
             () => console.log('load openwith successfully.'),
             err => console.log(`load openwith Failed. Message: ${err}`)
           );
-          openwith.addHandler( intent => {
+          openwith.addHandler(intent => {
             if (intent.items.length > 0) {
               openwith.load(intent.items[0], (data, item) => {
                 window['handleOpenURL'](data, "text");
-                if (intent.exit) {openwith.exit(); }
+                if (intent.exit) { openwith.exit(); }
               });
             } else {
-              if (intent.exit) {openwith.exit(); }
+              if (intent.exit) { openwith.exit(); }
             }
           });
         }

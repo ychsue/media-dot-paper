@@ -1,0 +1,4 @@
+<div class="container">
+    <textarea #textData matInput cdkTextareaAutosize [ngModel]="data"
+        (ngModelChange)="textChanged$.next(textData.value)"></textarea>
+</div>

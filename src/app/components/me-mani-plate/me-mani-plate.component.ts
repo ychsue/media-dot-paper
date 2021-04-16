@@ -7,6 +7,7 @@ import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged,
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { PageTextsService } from '../../services/page-texts.service';
 import { GvService } from 'src/app/services/gv.service';
+import { TextInputAgentService } from 'src/app/services/TextInputAgent/text-input-agent.service';
 
 @Component({
   selector: 'app-me-mani-plate',
@@ -15,26 +16,26 @@ import { GvService } from 'src/app/services/gv.service';
   animations: [
     trigger('changeFrame', [
       transition('* => *', [
-        style({transform: 'translateY(-100%)'}),
-        animate('0.2s 0.1s ease-in', style({transform: 'translateY(0)'}))
+        style({ transform: 'translateY(-100%)' }),
+        animate('0.2s 0.1s ease-in', style({ transform: 'translateY(0)' }))
       ])
     ]),
     trigger('flyInOut', [
-      state('in', style({transform: 'translateY(0)', opacity: 1})),
-      state('out', style({transform: 'translateY(100%)', opacity: 0})),
+      state('in', style({ transform: 'translateY(0)', opacity: 1 })),
+      state('out', style({ transform: 'translateY(100%)', opacity: 0 })),
       transition('out => in', [
-        style({transform: 'translateY(100%)', opacity: 0}),
-        animate('0.2s 0.1s ease-in', style({transform: 'translateY(0)', opacity: 1}))
+        style({ transform: 'translateY(100%)', opacity: 0 }),
+        animate('0.2s 0.1s ease-in', style({ transform: 'translateY(0)', opacity: 1 }))
       ]),
       transition('in => out', [
-        animate('0.2s 0.1s ease-out', style({transform: 'translateY(100%)', opacity: 0}))
+        animate('0.2s 0.1s ease-out', style({ transform: 'translateY(100%)', opacity: 0 }))
       ])
     ]),
     trigger('hideShow', [
-      state('show', style({opacity: 1})),
-      state('hide', style({opacity: 0})),
-      transition('hide => show', [animate('0.2s 0.1s ease-in', style({opacity: 1}))]),
-      transition('show => hide', [animate('0.2s 1.8s ease-out', style({opacity: 0}))]),
+      state('show', style({ opacity: 1 })),
+      state('hide', style({ opacity: 0 })),
+      transition('hide => show', [animate('0.2s 0.1s ease-in', style({ opacity: 1 }))]),
+      transition('show => hide', [animate('0.2s 1.8s ease-out', style({ opacity: 0 }))]),
     ])
   ]
 })
@@ -44,7 +45,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   IOStartShown = 'out';
   IOEndShown = 'out';
-  @Input()HideShow = 'show';
+  @Input() HideShow = 'show';
 
   _msDelta = 400;
 
@@ -66,13 +67,13 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   inUpType = enumShowInUp.main;
   //#endregion  For honing pronunciation
 
-  forDenoteDt: {dt: number, isInit: boolean, x: number, y: number, isHide: boolean, isStartBtn: boolean} =
-    {dt: 0, isInit: false, x: 0, y: 0, isHide: false, isStartBtn: false};
+  forDenoteDt: { dt: number, isInit: boolean, x: number, y: number, isHide: boolean, isStartBtn: boolean } =
+    { dt: 0, isInit: false, x: 0, y: 0, isHide: false, isStartBtn: false };
 
   // [innerHtml,innerText]
   subtitleChange$ = new Subject<string>();
 
-  @ViewChild('subtitleView', {static:true})
+  @ViewChild('subtitleView', { static: true })
   subViewRef: ElementRef;
 
   unSubscribed$ = new Subject<boolean>();
@@ -84,12 +85,14 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(public meService: MediaEditService, public SSService: SpeechSynthesisService, public ptsService: PageTextsService,
     private device: DeviceService, private uiEleRef: ElementRef, private ngZone: NgZone,
-    private gv: GvService, private cdr: ChangeDetectorRef) {
-      const self = this;
-      ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
-        self.pts = ptsService.pts.meManiPlateComp;
-      });
-    }
+    private gv: GvService, private cdr: ChangeDetectorRef,
+    private TIAService: TextInputAgentService,
+  ) {
+    const self = this;
+    ptsService.PTSReady$.pipe(concat(ptsService.ptsLoaded$)).pipe(takeUntil(self.unSubscribed$)).subscribe(_ => {
+      self.pts = ptsService.pts.meManiPlateComp;
+    });
+  }
 
   ngOnInit() {
     const self = this;
@@ -139,66 +142,66 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     self.startChanged$.pipe(takeUntil(self.unSubscribed$)).pipe(map(ev =>
       interval(self._msDelta).pipe(
         withLatestFrom(self.device.onPointermove$),
-        map(([ _ , vm]) => vm),
+        map(([_, vm]) => vm),
         takeUntil(self.device.onPointerup$)
       )
     ), concatAll())
-    .pipe(
-      withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
-        const frame = self.meService.story.frames[self.meService.story.iFrame];
-        const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
-        const absDt = 0.1 * Math.ceil(dr / 30);
-        if (vm.screenX > vd.screenX) {
-          self.forDenoteDt.dt = absDt;
-          const start = Math.ceil((frame.start + self.forDenoteDt.dt) * 10) / 10;
-          if (start < frame.end) {
-            frame.start = start;
-            self.meService.seekTime = frame.start;
+      .pipe(
+        withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
+          const frame = self.meService.story.frames[self.meService.story.iFrame];
+          const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
+          const absDt = 0.1 * Math.ceil(dr / 30);
+          if (vm.screenX > vd.screenX) {
+            self.forDenoteDt.dt = absDt;
+            const start = Math.ceil((frame.start + self.forDenoteDt.dt) * 10) / 10;
+            if (start < frame.end) {
+              frame.start = start;
+              self.meService.seekTime = frame.start;
+            }
+          } else if (vm.screenX < vd.screenX) {
+            self.forDenoteDt.dt = -absDt;
+            const start = Math.floor((frame.start + self.forDenoteDt.dt) * 10) / 10;
+            if (start < frame.end && start >= 0) {
+              frame.start = start;
+              self.meService.seekTime = frame.start;
+            }
           }
-        } else if ( vm.screenX < vd.screenX) {
-          self.forDenoteDt.dt = -absDt;
-          const start = Math.floor((frame.start + self.forDenoteDt.dt) * 10) / 10;
-          if (start < frame.end && start >= 0) {
-            frame.start = start;
-            self.meService.seekTime = frame.start;
-          }
-        }
-      })
-    ).subscribe();
+        })
+      ).subscribe();
 
     self.endChanged$.pipe(takeUntil(self.unSubscribed$)).pipe(map(ev =>
       interval(self._msDelta).pipe(
         withLatestFrom(self.device.onPointermove$),
-        map(([ _ , vm]) => vm),
+        map(([_, vm]) => vm),
         takeUntil(self.device.onPointerup$)
       )
     ), concatAll())
-    .pipe(
-      withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
-        const frame = self.meService.story.frames[self.meService.story.iFrame];
-        const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
-        const absDt = 0.1 * Math.ceil(dr / 30);
-      if (vm.screenX > vd.screenX) {
-          self.forDenoteDt.dt = absDt;
-          const end = Math.ceil((frame.end + self.forDenoteDt.dt) * 10) / 10;
-          if (end > frame.start && end < self.meService.duration) {
-            frame.end = end;
+      .pipe(
+        withLatestFrom(self.device.onPointerdown$, (vm, vd) => {
+          const frame = self.meService.story.frames[self.meService.story.iFrame];
+          const dr = Math.sqrt(Math.pow(vm.screenX - vd.screenX, 2) + Math.pow(vm.screenY - vd.screenY, 2));
+          const absDt = 0.1 * Math.ceil(dr / 30);
+          if (vm.screenX > vd.screenX) {
+            self.forDenoteDt.dt = absDt;
+            const end = Math.ceil((frame.end + self.forDenoteDt.dt) * 10) / 10;
+            if (end > frame.start && end < self.meService.duration) {
+              frame.end = end;
+            }
+          } else if (vm.screenX < vd.screenX) {
+            self.forDenoteDt.dt = -absDt;
+            const end = Math.floor((frame.end + self.forDenoteDt.dt) * 10) / 10;
+            if (end > frame.start) {
+              frame.end = end;
+            }
           }
-        } else if ( vm.screenX < vd.screenX) {
-          self.forDenoteDt.dt = -absDt;
-          const end = Math.floor((frame.end + self.forDenoteDt.dt) * 10) / 10;
-          if (end > frame.start) {
-            frame.end = end;
-          }
-        }
-      })
-    ).subscribe();
+        })
+      ).subscribe();
 
     // * [2018-11-10 08:28] Clear some effects
     self.device.onPointerup$.pipe(takeUntil(self.unSubscribed$))
-    .subscribe(ev => {
-      self.setShowDT(ev, false);
-    });
+      .subscribe(ev => {
+        self.setShowDT(ev, false);
+      });
   }
 
   setShowDT(ev: PointerEvent, isInit: boolean = false, isStartBtn: boolean = false) {
@@ -226,7 +229,7 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     this.IOStartShown = 'in';
     this.cdr.detectChanges();
     // setTimeout(() => { // Althogh by setTimeout does work, it's not so beautiful.
-      inStart.focus();
+    inStart.focus();
     // }, 0);˚s
   }
 
@@ -264,11 +267,11 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
   async onPointLeave(e: PointerEvent, ele: MeManiPlateComponent = null) {
     const self = (!!ele) ? ele : this;
     const n = await fromEvent(self.uiEleRef.nativeElement, 'pointermove')
-    .pipe(
-      merge(fromEvent(self.uiEleRef.nativeElement, 'pointerdown')),
-      takeUntil(of(true).pipe(delay(1000))),
-      count(x => !!x)
-    ).toPromise();
+      .pipe(
+        merge(fromEvent(self.uiEleRef.nativeElement, 'pointerdown')),
+        takeUntil(of(true).pipe(delay(1000))),
+        count(x => !!x)
+      ).toPromise();
     if (n === 0) {
       if ((document.activeElement.localName === "textarea") || (self.inUpType !== enumShowInUp.main) || !!self.isSubtitleClicked) {
         return; // Because this delay will change a lot of thing like ~self.isSSShown~ might change, I dealt it at this place.
@@ -287,6 +290,15 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
     self.isSubtitleClicked = true;
     this.HideShow = 'show';
     // setTimeout(_ => self.isSubtitleClicked = false, 100);
+    self.TIAService.subscribeWithInit({
+      work: (st: string) => self.subtitleChange$.next(st),
+      initSt: self.meService.story.frames[self.meService.story.iFrame].subtitle,
+      unsubscribe: self.unSubscribed$,
+      returnWork: () => {
+        (e.target as HTMLTextAreaElement).blur();
+        self.HideShow = "hide";
+      }
+    });
   }
 
   onShowSetSS(e: MouseEvent) {
@@ -311,21 +323,23 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onFixIOSScroll(e: PointerEvent, ele: Element) {
     const self = this;
-    if (!!!self.device.isCordova || cordova.platformId !== 'ios') {return; }
+    if (!!!self.device.isCordova || cordova.platformId !== 'ios') { return; }
 
     const x0 = ele.scrollLeft;
     const y0 = ele.scrollTop;
     self.device.onPointermove$.pipe(takeUntil(self.device.onPointerup$))
-    .subscribe(emv => {
-      if (!!ele['scrollTo']) {
-        ele.scrollTo({left: e.screenX - emv.screenX + x0,
-          top: e.screenY - emv.screenY + y0,
-          behavior: 'auto'});
+      .subscribe(emv => {
+        if (!!ele['scrollTo']) {
+          ele.scrollTo({
+            left: e.screenX - emv.screenX + x0,
+            top: e.screenY - emv.screenY + y0,
+            behavior: 'auto'
+          });
         } else {
           ele.scrollTop = e.screenY - emv.screenY + y0;
           ele.scrollLeft = e.screenX - emv.screenX + x0;
         }
-    });
+      });
   }
 }
 
