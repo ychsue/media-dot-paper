@@ -294,9 +294,14 @@ export class MeManiPlateComponent implements OnInit, AfterViewInit, OnDestroy {
       work: (st: string) => self.subtitleChange$.next(st),
       initSt: self.meService.story.frames[self.meService.story.iFrame].subtitle,
       unsubscribe: self.unSubscribed$,
-      returnWork: () => {
-        (e.target as HTMLTextAreaElement).blur();
+      onOpened: () => {
+        const ele = (e.target as HTMLTextAreaElement);
+        ele.blur();
         self.HideShow = "hide";
+      },
+      onClosed: () => {
+        const ele = (e.target as HTMLTextAreaElement);
+        ele.blur(); //To tell it to hide the keyboard
       }
     });
   }

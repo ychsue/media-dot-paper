@@ -34,17 +34,24 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this._ytVId = v;
   }
 
-  @ViewChild('video', {static: true})
+  @ViewChild('video', { static: true })
   ngVideo: ElementRef;
-  videoEle: HTMLVideoElement;
 
-  @ViewChild('youtube', {static: true})
+  @ViewChild('audio', { static: true })
+  ngAudio: ElementRef;
+
+  videoEle: HTMLVideoElement;
+  audioEle: HTMLAudioElement;
+  mediaEle: HTMLVideoElement | HTMLAudioElement;
+  displayWho: "video" | "audio" | "YouTube";
+
+  @ViewChild('youtube', { static: true })
   ngYoutube: ElementRef;
   youtubeEle: HTMLIFrameElement;
   isInited = false;
   _msInterval = 200;
 
-  @ViewChild('container', {static: true})
+  @ViewChild('container', { static: true })
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 
@@ -56,7 +63,10 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnInit() {
     const self = this;
     this.videoEle = this.ngVideo.nativeElement;
+    this.audioEle = this.ngAudio.nativeElement;
+    this.mediaEle = this.videoEle;
     this.crossComp.videoEle = this.videoEle;
+    this.crossComp.mediaEle = this.mediaEle;
     this.youtubeEle = this.ngYoutube.nativeElement;
     this.containerEle = this.ngContainer.nativeElement;
     this.eventTriggers();
@@ -67,7 +77,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.isInited = true;
     }
     if (this.device.isCordova && cordova.platformId === 'ios') {
-      self.videoEle.setAttribute("playsinline", "true");
+      self.mediaEle.setAttribute("playsinline", "true");
     }
     self.meService.state = MEState.playerReady;
   }
@@ -76,6 +86,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.unSubscribed.next(true);
     this.unSubscribed.complete();
     this.crossComp.videoEle = null;
+    this.crossComp.mediaEle = null;
   }
 
   ngAfterViewChecked(): void {
@@ -97,7 +108,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         return -1;
       }
     } else {
-      return self.videoEle.currentTime;
+      return self.mediaEle.currentTime;
     }
   }
 
@@ -126,13 +137,13 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     const self = this;
     // * For readyForPlayer
     this.meService.onStateChanged
-    .pipe(takeUntil(self.unSubscribed))
-    .subscribe((t) => {
-      if (t === MEState.readyForPlayer) {
-        if (self.isInited === false) {self.isInited = true; }
-        self.initMe();
-      }
-    });
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe((t) => {
+        if (t === MEState.readyForPlayer) {
+          if (self.isInited === false) { self.isInited = true; }
+          self.initMe();
+        }
+      });
     // * [2018-09-12 13:21] Check whether the media is ready
     self.meService.requestMediaReady$.pipe(takeUntil(self.unSubscribed))
       .subscribe(_ => {
@@ -141,267 +152,289 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
           const ytState = self.checkYoutubStateAndSetState();
           isReady = ytState >= 0;
         } else {
-          isReady = self.videoEle.readyState === 4;
+          isReady = self.mediaEle.readyState === 4;
         }
         self.meService.responseMediaReady$.next(isReady);
-    });
+      });
     // * [2018-07-21 19:44] For CurrentTime
     self.meService.onCurrentTimeChanged = interval(self._msInterval)
-    .pipe(
-      map(_ => {
-        if (self.meService.story.meType === self.pType.youtubeID) {
-          const yState = self.checkYoutubStateAndSetState();
-          return (yState === -2) ? -1 : self.getCurrentTime();
-        } else {
-          return self.getCurrentTime();
-        }
-      }),
-      distinctUntilChanged(),
-      share()
-    );
+      .pipe(
+        map(_ => {
+          if (self.meService.story.meType === self.pType.youtubeID) {
+            const yState = self.checkYoutubStateAndSetState();
+            return (yState === -2) ? -1 : self.getCurrentTime();
+          } else {
+            return self.getCurrentTime();
+          }
+        }),
+        distinctUntilChanged(),
+        share()
+      );
     self.meService.onCurrentTimeChanged
-    .pipe(takeUntil(self.unSubscribed))
-    .subscribe(t => {
-      self.meService.currentTime = t;
-      // console.log(t);
-    });
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe(t => {
+        self.meService.currentTime = t;
+        // console.log(t);
+      });
 
     let isDuringStart = false; // For iOS because its seek time might be earlier than the time you are seeking to
     let isDuringEnd = false;
     // * [2018-07-24 13:48] For repeating each frame
     self.meService.onCurrentTimeChanged
-    .pipe(takeUntil(self.unSubscribed))
-    .subscribe(t => {
-      try {
-        let start = 0;
-        let end = self.meService.duration - 0.1;
-        const iFrame = self.meService.story.iFrame;
-        if (iFrame >= 0) {
-          const frame = self.meService.story.frames[iFrame];
-          if (!!frame) {
-            start = frame.start;
-            end = frame.end;
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe(t => {
+        try {
+          let start = 0;
+          let end = self.meService.duration - 0.1;
+          const iFrame = self.meService.story.iFrame;
+          if (iFrame >= 0) {
+            const frame = self.meService.story.frames[iFrame];
+            if (!!frame) {
+              start = frame.start;
+              end = frame.end;
+            }
           }
-        }
-        if (t < start) {
-          if (isDuringStart === false) {
-            isDuringStart = true;
-            self.meService.seekTime = start;
-          }
-        } else if ((self.meService.state === MEState.paused) || (self.meService.state === MEState.canPlay)) {
-          self.meService.currentTime = t;
-        } else if (t > (end - (self._msInterval / 1000))) {
-          if (isDuringEnd === false) {
-            isDuringEnd = true;
-            setTimeout(() => {
-              isDuringEnd = false;
+          if (t < start) {
+            if (isDuringStart === false) {
+              isDuringStart = true;
               self.meService.seekTime = start;
-              if (self.meService.isRepeat === false) {
-                self.meService.onPlayerAction.next(playerAction.pause);
-              } else {
-                self.meService.repeatStart$.next(iFrame);
-              }
-            }, (end - t) * 1000);
+            }
+          } else if ((self.meService.state === MEState.paused) || (self.meService.state === MEState.canPlay)) {
+            self.meService.currentTime = t;
+          } else if (t > (end - (self._msInterval / 1000))) {
+            if (isDuringEnd === false) {
+              isDuringEnd = true;
+              setTimeout(() => {
+                isDuringEnd = false;
+                self.meService.seekTime = start;
+                if (self.meService.isRepeat === false) {
+                  self.meService.onPlayerAction.next(playerAction.pause);
+                } else {
+                  self.meService.repeatStart$.next(iFrame);
+                }
+              }, (end - t) * 1000);
+            }
+          } else {
+            if (isDuringStart === true) {
+              isDuringStart = false;
+            }
           }
-        } else {
-          if (isDuringStart === true) {
-            isDuringStart = false;
-          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    });
+      });
 
     // * [2018-07-22 22:16] Update Duration & availablePlaybackRates
     fromEvent(self.videoEle, 'durationchange')
-    // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
-    .pipe( takeUntil(self.unSubscribed))
-    .subscribe(_ => {
-      self.meService.onPlayerAction.next(playerAction.getDuration);
-      self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
-    });
+      // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe(_ => {
+        self.meService.onPlayerAction.next(playerAction.getDuration);
+        self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+      });
     self.YTservice.onReady
-    .pipe( takeUntil(self.unSubscribed))
-    .subscribe(_ => {
-      self.meService.onPlayerAction.next(playerAction.getDuration);
-      self.meService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
-    });
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe(_ => {
+        self.meService.onPlayerAction.next(playerAction.getDuration);
+        self.meService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
+      });
 
     // * For playerAction
     this.meService.onPlayerAction
-    .pipe(takeUntil(self.unSubscribed))
-    .subscribe((t) => {
-      const meType = self.meService.story.meType;
-      if (meType === self.pType.url || meType === self.pType.file) {
-        try {
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe((t) => {
+        const meType = self.meService.story.meType;
+        if (meType === self.pType.url || meType === self.pType.file) {
+          try {
+            switch (t) {
+              case playerAction.play:
+                self.mediaEle.play();
+                break;
+              case playerAction.pause:
+                self.mediaEle.pause();
+                break;
+              case playerAction.seek:
+                self.mediaEle.currentTime = self.meService.seekTime;
+                break;
+              case playerAction.getDuration:
+                self.meService.duration = self.videoEle.duration;
+                break;
+              case playerAction.getVolume:
+                self.meService._volume = self.mediaEle.volume;
+                break;
+              case playerAction.setVolume:
+                self.mediaEle.volume = self.meService.volume;
+                break;
+              case playerAction.getPlaybackRate:
+                self.meService._playbackRate = self.mediaEle.playbackRate;
+                break;
+              case playerAction.setPlaybackRate:
+                self.mediaEle.playbackRate = self.meService.playbackRate;
+                break;
+              case playerAction.getAllowedPlaybackRate:
+                self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+                break;
+              default:
+                break;
+            }
+          } catch (error) { // For IE11
+            console.log("Player.Component error at videoEle: " + error.message);
+          }
+        } else if (meType === self.pType.youtubeID) {
+          const ytPlayer = self.YTservice.ytPlayer;
+          if (!!ytPlayer === false) { return; }
           switch (t) {
             case playerAction.play:
-            self.videoEle.play();
-            break;
-            case playerAction.pause:
-            self.videoEle.pause();
-            break;
-            case playerAction.seek:
-            self.videoEle.currentTime = self.meService.seekTime;
-            break;
-            case playerAction.getDuration:
-            self.meService.duration = self.videoEle.duration;
-            break;
-            case playerAction.getVolume:
-            self.meService._volume = self.videoEle.volume;
-            break;
-            case playerAction.setVolume:
-            self.videoEle.volume = self.meService.volume;
-            break;
-            case playerAction.getPlaybackRate:
-            self.meService._playbackRate = self.videoEle.playbackRate;
-            break;
-            case playerAction.setPlaybackRate:
-            self.videoEle.playbackRate = self.meService.playbackRate;
-            break;
-            case playerAction.getAllowedPlaybackRate:
-            self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
-            break;
-            default:
-            break;
-          }
-        } catch (error) { // For IE11
-          console.log("Player.Component error at videoEle: " + error.message);
-        }
-      } else if (meType === self.pType.youtubeID) {
-        const ytPlayer = self.YTservice.ytPlayer;
-        if (!!ytPlayer === false) {return; }
-        switch (t) {
-          case playerAction.play:
-          if (!!ytPlayer.playVideo) {
-            ytPlayer.playVideo();
-          }
-          break;
-          case playerAction.pause:
-          if (!!ytPlayer.pauseVideo) {
-            ytPlayer.pauseVideo();
-          }
-          break;
-          case playerAction.seek:
-          if (!!ytPlayer.seekTo) {
-            ytPlayer.seekTo(self.meService.seekTime, true);
-            const duration = ytPlayer.getDuration();
-            if (self.meService.duration !== duration) {
-              self.meService.duration = duration;
-            }
-          }
-          break;
-          case playerAction.getDuration:
-          if (!!ytPlayer.getDuration) {
-            of(0).pipe(concat(interval(500))).pipe(take(5), takeWhile(_ => {
-              const duration = ytPlayer.getDuration();
-              if (!!duration) {
-                self.meService.duration = duration;
+              if (!!ytPlayer.playVideo) {
+                ytPlayer.playVideo();
               }
-              return (!!duration === false);
-            })).subscribe(_ => {});
+              break;
+            case playerAction.pause:
+              if (!!ytPlayer.pauseVideo) {
+                ytPlayer.pauseVideo();
+              }
+              break;
+            case playerAction.seek:
+              if (!!ytPlayer.seekTo) {
+                ytPlayer.seekTo(self.meService.seekTime, true);
+                const duration = ytPlayer.getDuration();
+                if (self.meService.duration !== duration) {
+                  self.meService.duration = duration;
+                }
+              }
+              break;
+            case playerAction.getDuration:
+              if (!!ytPlayer.getDuration) {
+                of(0).pipe(concat(interval(500))).pipe(take(5), takeWhile(_ => {
+                  const duration = ytPlayer.getDuration();
+                  if (!!duration) {
+                    self.meService.duration = duration;
+                  }
+                  return (!!duration === false);
+                })).subscribe(_ => { });
+              }
+              break;
+            case playerAction.getVolume:
+              if (!!ytPlayer.getVolume) {
+                self.meService._volume = ytPlayer.getVolume() / 100;
+              }
+              break;
+            case playerAction.setVolume:
+              if (!!ytPlayer.setVolume) {
+                ytPlayer.setVolume(self.meService.volume * 100);
+              }
+              break;
+            case playerAction.getPlaybackRate:
+              if (!!ytPlayer.getPlaybackRate) {
+                self.meService._playbackRate = ytPlayer.getPlaybackRate();
+              }
+              break;
+            case playerAction.setPlaybackRate:
+              if (!!ytPlayer.setPlaybackRate) {
+                ytPlayer.setPlaybackRate(self.meService.playbackRate);
+              }
+              break;
+            case playerAction.getAllowedPlaybackRate:
+              if (!!ytPlayer.getAvailablePlaybackRates) {
+                self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
+              }
+              break;
+            default:
+              break;
           }
-          break;
-          case playerAction.getVolume:
-          if (!!ytPlayer.getVolume) {
-            self.meService._volume = ytPlayer.getVolume() / 100;
-          }
-          break;
-          case playerAction.setVolume:
-          if (!!ytPlayer.setVolume) {
-            ytPlayer.setVolume(self.meService.volume * 100);
-          }
-          break;
-          case playerAction.getPlaybackRate:
-          if (!!ytPlayer.getPlaybackRate) {
-            self.meService._playbackRate = ytPlayer.getPlaybackRate();
-          }
-          break;
-          case playerAction.setPlaybackRate:
-          if (!!ytPlayer.setPlaybackRate) {
-            ytPlayer.setPlaybackRate(self.meService.playbackRate);
-          }
-          break;
-          case playerAction.getAllowedPlaybackRate:
-          if (!!ytPlayer.getAvailablePlaybackRates) {
-            self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
-          }
-          break;
-          default:
-          break;
-        }
-      }
-    });
-    // * [2018-06-26 15:53] For Youtube stateChange
-    self.YTservice.onStateChange
-    .pipe(takeUntil(this.unSubscribed))
-    .subscribe( (ev) => {
-      self.ngZone.run(() => {
-        switch (ev.data) {
-          case YT.PlayerState.PLAYING:
-            self.meService.state = MEState.playing;
-            break;
-          case YT.PlayerState.PAUSED:
-            self.meService.state = MEState.paused;
-            break;
-          case YT.PlayerState.ENDED:
-            self.meService.state = MEState.stopped;
-            break;
-          default:
-            break;
         }
       });
-    });
+    // * [2018-06-26 15:53] For Youtube stateChange
+    self.YTservice.onStateChange
+      .pipe(takeUntil(this.unSubscribed))
+      .subscribe((ev) => {
+        self.ngZone.run(() => {
+          switch (ev.data) {
+            case YT.PlayerState.PLAYING:
+              self.meService.state = MEState.playing;
+              break;
+            case YT.PlayerState.PAUSED:
+              self.meService.state = MEState.paused;
+              break;
+            case YT.PlayerState.ENDED:
+              self.meService.state = MEState.stopped;
+              break;
+            default:
+              break;
+          }
+        });
+      });
     // * [2018-06-26 16:50] For Youtube Ready
     self.YTservice.onReady
-    .pipe(takeUntil(this.unSubscribed))
-    .subscribe( (ev) => {
-      if (self.meService.story.modifyTime === 0) {
-        const data = (self.YTservice.ytPlayer as any).getVideoData();
-        if (self.meService.story.makeTime === self.meService.lastTimeCallInitMeFromUrl && !!data && !!data.title) {
-          self.meService.story.name = data.title;
+      .pipe(takeUntil(this.unSubscribed))
+      .subscribe((ev) => {
+        if (self.meService.story.modifyTime === 0) {
+          const data = (self.YTservice.ytPlayer as any).getVideoData();
+          if (self.meService.story.makeTime === self.meService.lastTimeCallInitMeFromUrl && !!data && !!data.title) {
+            self.meService.story.name = data.title;
+          }
         }
-      }
-      self.meService.state = MEState.canPlay;
-    });
+        self.meService.state = MEState.canPlay;
+      });
   }
 
   eventTriggers() {
+    const isDebug = false;
+    const showEvDbg = (ev: Event | string, name: string) => { if (isDebug) { console.log(name); console.log(ev); } }
     const self = this;
-    // * [2018-06-18 11:11] for MEState.canPlay
-    this.videoEle.oncanplay = (ev) => {
-      self.meService.state = MEState.canPlay;
-    };
-    // * [2018-06-18 11:11] for MEState.error
-    this.videoEle.onerror = (ev) => {
-      self.meService.state = MEState.error;
-    };
-    // * [2018-06-18 11:11] for MEState.waiting
-    this.videoEle.onwaiting = (ev) => {
-      if ((this.videoEle.currentTime > 0) && !this.videoEle.paused && this.videoEle.readyState > 2) {
-        // For windows UWP, onPlaying event may not be triggered.
+    const setEvents = (media: HTMLVideoElement | HTMLAudioElement) => {
+      // * [2018-06-18 11:11] for MEState.canPlay
+      media.oncanplay = (ev) => {
+        showEvDbg(ev, 'oncanplay');
+        self.meService.state = MEState.canPlay;
+      };
+      // * [2018-06-18 11:11] for MEState.error
+      media.onerror = (ev) => {
+        showEvDbg(ev, 'onerror');
+        self.meService.state = MEState.error;
+      };
+      // * [2018-06-18 11:11] for MEState.waiting
+      media.onwaiting = (ev) => {
+        if ((media.currentTime > 0) && !media.paused && media.readyState > 2) {
+          // For windows UWP, onPlaying event may not be triggered.
+          self.meService.state = MEState.playing;
+        } else {
+          self.meService.state = MEState.waiting;
+        }
+      };
+      // * [2018-06-18 11:11] for MEState.playing
+      media.onplay = (ev) => {
         self.meService.state = MEState.playing;
-      } else {
-        self.meService.state = MEState.waiting;
+      };
+      media.onplaying = (ev) => {
+        showEvDbg(ev, 'onplaying');
+        self.meService.state = MEState.playing;
+      };
+      // * [2018-06-18 11:11] for MEState.paused
+      media.onpause = (ev) => {
+        showEvDbg(ev, 'onpause');
+        self.meService.state = MEState.paused;
+      };
+
+      // * [2018-06-18 11:11] for MEState.stopped
+      media.onended = (ev) => {
+        showEvDbg(ev, 'onended');
+        self.meService.state = MEState.stopped;
+      };
+      // ************************* TODO *****************************
+
+      if (media === self.videoEle) {
+        media.onloadedmetadata = (ev) => {
+          showEvDbg(ev, 'onloadedmetadata');
+          const ele = ev.target as HTMLVideoElement;
+          self.mediaEle = (!!ele.videoHeight && !!ele.videoWidth) ? self.videoEle : self.audioEle;
+          self.onUpdateDisplay(PlayerType.url);
+        }
       }
-    };
-    // * [2018-06-18 11:11] for MEState.playing
-    this.videoEle.onplay = (ev) => {
-      self.meService.state = MEState.playing;
-    };
-    this.videoEle.onplaying = (ev) => {
-      self.meService.state = MEState.playing;
-    };
-    // * [2018-06-18 11:11] for MEState.paused
-    this.videoEle.onpause = (ev) => {
-      self.meService.state = MEState.paused;
-    };
-    // * [2018-06-18 11:11] for MEState.stopped
-    this.videoEle.onended = (ev) => {
-      self.meService.state = MEState.stopped;
-    };
-    // ************************* TODO *****************************
+    }
+
+    setEvents(self.videoEle);
+    setEvents(self.audioEle);
   }
 
   initMe() {
@@ -410,22 +443,25 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     const meType = this.meService.story.meType;
     const urlOrId = this.meService.story.urlOrID;
     self.crossComp.isVideoEle = false;
-    if (meType ===  PlayerType.url) {
+    if (meType === PlayerType.url) {
       if (YoutubeService.isYoutubeURL(urlOrId)) {
         this.meService.story.meType = PlayerType.youtubeID;
+        this.onUpdateDisplay(PlayerType.youtubeID);
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
         self.crossComp.isVideoEle = true;
         this.videoSrc = urlOrId;
         this.videoEle.load();
+        this.audioEle.load();
         // * [2018-09-12 11:48] It might have been loaded
-        if (this.videoEle.readyState === 4) {
+        if (this.mediaEle.readyState === 4) {
           setTimeout(() => {
             self.meService.state = MEState.paused;
           }, 10);
         }
       }
     } else if (meType === PlayerType.youtubeID) {
+      this.onUpdateDisplay(PlayerType.youtubeID);
       if (YoutubeService.isYoutubeURL(urlOrId)) {
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
@@ -434,13 +470,13 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     } else if (meType === PlayerType.file) {
       this.crossComp.isVideoEle = true;
       this.videoSrc = urlOrId;
-        // * [2018-09-12 11:48] It might have been loaded
-        if (this.videoEle.readyState === 4) {
-          setTimeout(() => {
-            self.meService.state = MEState.paused;
-          }, 10);
+      // * [2018-09-12 11:48] It might have been loaded
+      if (this.mediaEle.readyState === 4) {
+        setTimeout(() => {
+          self.meService.state = MEState.paused;
+        }, 10);
       }
-  }
+    }
   }
 
   onVideoPlayOrPause(ev: MouseEvent) {
@@ -455,5 +491,20 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     };
     this.crossComp.clickVideoLoad_justIOS(fun.bind(this));
     fun();
+  }
+
+  onUpdateDisplay(type: PlayerType) {
+    console.log(`meType: ${type}`);
+    switch (type) {
+      case PlayerType.file:
+      case PlayerType.url:
+        this.displayWho = (this.mediaEle === this.videoEle) ? "video" : "audio";
+        break;
+      case PlayerType.youtubeID:
+        this.displayWho = "YouTube";
+        break;
+      default:
+        break;
+    }
   }
 }

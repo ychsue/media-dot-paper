@@ -1,14 +1,16 @@
 <div #container class="flex-110 min-height-0 display-flex-column position-relative">
-    <video #video
-        [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'"
-        controls poster="data:image/gif;base64,AAAA" [style.background-image]="'url(\'assets/MusicNotes.svg\')'"
-        [src]="((!!videoSrc)?videoSrc:'')|safe" playsinline></video>
-    <div #videoCover id="videoCover"
-        [style.display]="(meService.story.meType===pType.url||meService.story.meType===pType.file)?'block':'none'"
+    <video #video [style.display]="(displayWho==='video')?'block':'none'" controls poster="data:image/gif;base64,AAAA"
+        [style.background-image]="'url(\'assets/MusicNotes.svg\')'" [src]="((!!videoSrc)?videoSrc:'')|safe"
+        playsinline></video>
+
+    <div id="audioContainer" [style.display]="displayWho==='audio'?'flex':'none'">
+        <img id="audioImg" src="assets/MusicNotes.svg">
+        <audio #audio [src]="((!!videoSrc)?videoSrc:'')|safe" controls></audio>
+    </div>
+    <div #videoCover id="videoCover" [style.display]="(displayWho!=='YouTube')?'block':'none'"
         (click)="onVideoPlayOrPause($event)"></div>
     <app-me-mask id="videoMask"
         [style.display]="((meService.isAlwaysShowMask) && !!!((meService.story.iFrame >-1)&&(!!!meService.isSideMani)))?'block':'none'"
         (click)="onVideoPlayOrPause($event)"></app-me-mask>
-    <iframe #youtube id="youtube" [frameBorder]="0"
-        [style.display]="(meService.story.meType===pType.youtubeID)?'block':'none'"></iframe>
+    <iframe #youtube id="youtube" [frameBorder]="0" [style.display]="(displayWho==='YouTube')?'block':'none'"></iframe>
 </div>

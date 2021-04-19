@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, fromEvent } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { Subject, fromEvent, timer, merge } from 'rxjs';
+import { first, takeWhile } from 'rxjs/operators';
 // import 'rxjs/add/operator/first';
 import { MessageService, MessageTypes } from './message.service';
 
@@ -43,7 +43,7 @@ export class YoutubeService {
     this.onReady = new Subject<YT.PlayerEvent>();
     this.onStateChange = new Subject<YT.OnStateChangeEvent>();
     this.onError = new Subject<YT.OnErrorEvent>();
-}
+  }
 
   embedApiScript() {
     // * [2018-06-19 11:36] For Youtube, gotten from
@@ -56,7 +56,7 @@ export class YoutubeService {
     const doc = window.document;
     (<any>window).onYouTubeIframeAPIReady = () => {
       this.isApiReady = true;
-      this.msgService.pushMessage({type: MessageTypes.Info, message: 'Youtube Api is initialized'});
+      this.msgService.pushMessage({ type: MessageTypes.Info, message: 'Youtube Api is initialized' });
     };
     const apiScript = doc.createElement('script');
     apiScript.type = 'text/javascript';
@@ -70,18 +70,31 @@ export class YoutubeService {
       return;
     }
     const self = this;
-    fromEvent(uiEle, 'load').subscribe(_ => {
-      if (!!self.ytPlayer && (self.ytPlayer.getIframe() === uiEle)) {
+    const shouldKeepLoading = takeWhile((x: any) => {
+      if (typeof x === "number" && x >= 5) { return false; }
+      // if (!!!self.ytPlayer?.playVideo) {
+      //   self.ytPlayer?.destroy();
+      //   self.ytPlayer = null;
+      // }
+      // console.log(`ytPlayer stat: ${self.ytPlayer?.playVideo}`);
+      return !!!self.ytPlayer?.loadVideoById;
+    });
+
+    merge(timer(1000, 1000), fromEvent(uiEle, 'load')).pipe(
+      shouldKeepLoading,
+    ).subscribe(_ => {
+      if (!!self.ytPlayer?.loadVideoById && (self.ytPlayer.getIframe() === uiEle)) {
         self.ytPlayer.loadVideoById(VId);
       } else {
         if (!!self.ytPlayer) {
-          self.ytPlayer.destroy(); // ******************** TODO *****************************
+          // self.ytPlayer.destroy(); // ******************** TODO *****************************
+          return; // Do nothing, just wait
         }
         self.ytPlayer = new YT.Player(uiEle, {
           events: {
-            'onReady': (ev) => {self.onReady.next(ev); },
-            'onStateChange': (ev) => {self.onStateChange.next(ev); },
-            'onError': (ev) => {self.onError.next(ev); },
+            'onReady': (ev) => { self.onReady.next(ev); },
+            'onStateChange': (ev) => { self.onStateChange.next(ev); },
+            'onError': (ev) => { self.onError.next(ev); },
             'onApiChange': (ev) => {
               // ************************* TODO for caption******************************
               // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));

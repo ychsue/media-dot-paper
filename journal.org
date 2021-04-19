@@ -1,3 +1,6 @@
+* [2021-04-19 Mon] Running an audio on HTMLAudioElement and try to fix some problems from YouTube
+As title and fix some small bugs.
+
 * [2021-04-16 Fri] Show a dialog for textarea when the height is too small
 Well, from ~click~ event to ~resize~ event from a textarea might take longer than 1 second.
 Maybe I should change it to the event of ~focus~.

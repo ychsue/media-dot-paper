@@ -115,8 +115,8 @@ import { TextInputAgentComponent } from './services/TextInputAgent/text-input-ag
   imports: [
     BrowserModule,
     FormsModule,
-    // BrowserAnimationsModule,
-    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    // NoopAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,
@@ -163,4 +163,4 @@ import { TextInputAgentComponent } from './services/TextInputAgent/text-input-ag
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

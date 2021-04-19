@@ -129,9 +129,14 @@ export class StoryComponent implements OnInit, OnDestroy {
         self.meService.story.description = st;
       },
       initSt: self.meService.story.description,
-      returnWork: () => {
+      onOpened: () => {
         (e.target as HTMLTextAreaElement).blur();
+      },
+      onClosed: () => {
+        const ele = (e.target as HTMLTextAreaElement);
+        ele.blur(); //To tell it to hide the keyboard
       }
+
     });
   }
 }
