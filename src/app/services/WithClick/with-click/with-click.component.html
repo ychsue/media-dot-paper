@@ -3,6 +3,6 @@
     {{data.content}}
 </div>
 <div mat-dialog-actions>
-    <button (click)="onNoClick()">{{data.stNo}}</button>
+    <button (click)="onNoClick()" [style.display]="(!!data.stNo)?'block':'none'">{{data.stNo}}</button>
     <button (click)="onYesClick()" cdkFocusInitial>{{data.stYes}}</button>
 </div>

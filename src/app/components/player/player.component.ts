@@ -8,6 +8,7 @@ import { MessageService, MessageTypes } from 'src/app/services/message.service';
 import { PlayerType } from '../../vm/player-type.enum';
 import { DeviceService } from '../../services/device.service';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
+import { WithClickService } from 'src/app/services/WithClick/with-click.service';
 
 @Component({
   selector: 'app-player',
@@ -57,7 +58,8 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   constructor(public meService: MediaEditService, private YTservice: YoutubeService,
     private crossComp: CrossCompService,  // keep videoEle in crossComp
-    private msgService: MessageService, private ngZone: NgZone, private device: DeviceService) {
+    private msgService: MessageService, private ngZone: NgZone, private device: DeviceService,
+    private withClickService: WithClickService) {
   }
 
   ngOnInit() {
@@ -142,6 +144,19 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         if (t === MEState.readyForPlayer) {
           if (self.isInited === false) { self.isInited = true; }
           self.initMe();
+          self.withClickService.withClick({
+            title: "提醒事項",
+            content: "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
+            stYes: "播放",
+            stNo: ""
+          })(async (_: void) => {
+            try {
+              self.meService.onPlayerAction.next(playerAction.play);
+            } catch (error) {
+              alert("請點影片中央看看能否播放，否則有可能無法操縱影片播放");
+            }
+            return;
+          })();
         }
       });
     // * [2018-09-12 13:21] Check whether the media is ready
@@ -249,6 +264,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
             switch (t) {
               case playerAction.play:
                 self.mediaEle.play();
+                if (self.mediaEle === self.audioEle) { self.videoEle.pause(); }
                 break;
               case playerAction.pause:
                 self.mediaEle.pause();
