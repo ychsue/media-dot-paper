@@ -63,33 +63,6 @@ export class StoryComponent implements OnInit, OnDestroy {
       });
   }
 
-  onExportStory(sender: MatAnchor, e: MouseEvent) {
-    const self = this;
-    const a = sender._elementRef.nativeElement as HTMLAnchorElement;
-    if (self.meService.story.meType === PlayerType.file) {
-      e.preventDefault();
-      self.msg.alert((!!self.pts) ? self.pts.notYetFileExport : '抱歉，由於想匯出的媒體為local的檔案，這表示此檔案也要一同匯出才行。此版本尚未將此功能建構進來，敬請諒解。');
-      return;
-    }
-
-    // * [2018-09-04 12:06] Start to store into the file
-    if (!!window.cordova === true) {
-      e.preventDefault();
-      self.fs.saveTxtFile$$(self.storyService.stringifyAStory(self.meService.story), Math.round(self.meService.story.viewTime / 1000)
-        // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-        + StringHelper.toFileName(self.meService.story.name) + '.mdpyc');
-    } else {
-      let blob: Blob;
-      // blob = new Blob([JSON.stringify(self.meService.story)], {type: 'application/json'});
-      // if (!!window.cordova && cordova.platformId === 'android') {
-      blob = new Blob([self.storyService.stringifyAStory(self.meService.story)],
-        <any>{ encoding: 'UTF-8', type: 'text/plain;charset=UTF-8' });
-      // }
-      this.downloadHref = URL.createObjectURL(blob);
-      // this.downloadHref = "data:text/json;charset=utf-8," + encodeURI(JSON.stringify(this.meService.story));
-    }
-  }
-
   async onExportSBV(sender: HTMLAnchorElement) {
     const self = this;
     const dialogRef = self.dialog.open(DialogComponent, {

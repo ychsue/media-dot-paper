@@ -1,5 +1,5 @@
 <div class="container">
-  <a mat-raised-button #exportStory [href]="downloadHref | safe" [download]="meService.story.name + '.mdpyc'"
+  <a mat-raised-button #exportStory [href]="downloadHref | safe" [download]="filename + '.mdpyc'"
     (click)="onExportStory(exportStory, $event)" [matTooltip]="!!pts ? pts.exportJson : '輸出MDP到mdpyc檔裏'">
     <mat-icon class="mat-18">save</mat-icon> 存檔
   </a>

@@ -1,5 +1,6 @@
-* [2021-04-20 Tue] Ask the user to click a button to play the media or YouTube.
+* [2021-04-20 Tue] Zip file reading and correct filename problems
 
+* [2021-04-20 Tue] Ask the user to click a button to play the media or YouTube.
 
 * [2021-04-19 Mon] Running an audio on HTMLAudioElement and try to fix some problems from YouTube
 As title and fix some small bugs.

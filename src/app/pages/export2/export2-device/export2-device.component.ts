@@ -16,14 +16,16 @@ export class Export2DeviceComponent implements OnInit {
   pts: any;
   downloadHref: string;
 
+  filename: string;
+
   constructor(
     public meService: MediaEditService,
     public msg: MessageService,
     private storyService: StoryService,
     private fs: FsService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onExportStory(sender: MatAnchor, e: MouseEvent) {
     const self = this;
@@ -38,15 +40,17 @@ export class Export2DeviceComponent implements OnInit {
       return;
     }
 
+    self.filename = StringHelper.toFileName(self.meService.story.name);
+
     // * [2018-09-04 12:06] Start to store into the file
     if (!!window.cordova === true) {
       e.preventDefault();
       self.fs.saveTxtFile$$(
         self.storyService.stringifyAStory(self.meService.story),
         Math.round(self.meService.story.viewTime / 1000) +
-          // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-          StringHelper.toFileName(self.meService.story.name) +
-          ".mdpyc"
+        // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
+        self.filename +
+        ".mdpyc"
       );
     } else {
       let blob: Blob;

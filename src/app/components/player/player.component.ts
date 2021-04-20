@@ -264,7 +264,11 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
             switch (t) {
               case playerAction.play:
                 self.mediaEle.play();
-                if (self.mediaEle === self.audioEle) { self.videoEle.pause(); }
+                if (self.mediaEle === self.audioEle) {
+                  self.videoEle.pause();
+                } else {
+                  self.audioEle.pause();
+                }
                 break;
               case playerAction.pause:
                 self.mediaEle.pause();

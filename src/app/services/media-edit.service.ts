@@ -19,6 +19,7 @@ import { DeviceService } from "./device.service";
 import { StringHelper, ProtocolActionType } from "../extends/string-helper";
 import { HttpClient } from "@angular/common/http";
 import { GapiService } from "./GAPI/gapi.service";
+import { ZipService } from "./ZIP/zip.service";
 
 @Injectable({
   providedIn: "root",
@@ -136,7 +137,8 @@ export class MediaEditService {
     private gv: GvService,
     private device: DeviceService,
     private http: HttpClient,
-    private GAPIService: GapiService
+    private GAPIService: GapiService,
+    private zipService: ZipService,
   ) {
     const self = this;
     self.ptsService.PTSReady$.subscribe((_) => {
@@ -398,10 +400,20 @@ export class MediaEditService {
     return await self.responseMediaReady$.pipe(first()).toPromise();
   }
 
-  inputFromFile(file: File | Blob) {
+  async inputFromFile(file: File | Blob) {
     const self = this;
     if (/(video|audio)/.test(file.type) === true) {
       self.initMe(file);
+      this.gv.shownPage = PageType.MediaEdit;
+    } else if (/zip/i.test(file.type) || /zip$/i.test(file["name"])) {
+      const zip = await this.zipService.service.importFromZipAsync({
+        data: file,
+      });
+      console.log('zip file');
+      console.log(zip);
+      const data = JSON.parse(await zip[0].blob.text()) as IStory;
+      data.modifyTime = 0;
+      self.initMe(data);
       this.gv.shownPage = PageType.MediaEdit;
     } else if (!!!file.type || /(text|json|mdpyc)/.test(file.type)) {
       const action$$ = new Promise((res, rej) => {
@@ -469,8 +481,7 @@ export class MediaEditService {
       );
     } catch (error) {
       self.msgService.alert(
-        `media-edit.service::inputFromString$ ERROR: ${
-          (error as Error).message
+        `media-edit.service::inputFromString$ ERROR: ${(error as Error).message
         }`
       );
     }
@@ -518,11 +529,11 @@ export class MediaEditService {
               : "") +
             (isNone || (cP.isMac && !cP.isIOS)
               ? // tslint:disable-next-line:max-line-length
-                `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-31T00:00:00Z&kind=desktopapp&bubble=macos_apps) no-repeat;width:165px;height:40px;padding: 0 42px;background-position: center;" href="https://geo.itunes.apple.com/us/app/media-dot-paper/id1436714053?mt=12&app=apps"></a>`
+              `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-31T00:00:00Z&kind=desktopapp&bubble=macos_apps) no-repeat;width:165px;height:40px;padding: 0 42px;background-position: center;" href="https://geo.itunes.apple.com/us/app/media-dot-paper/id1436714053?mt=12&app=apps"></a>`
               : "") +
             (isNone || cP.isIOS
               ? // tslint:disable-next-line:max-line-length
-                `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-27&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;padding: 0 0 0 12px;background-position: center;" href="https://itunes.apple.com/us/app/media-dot-paper/id1436677583?mt=8"></a>`
+              `<a style="display:inline-block;overflow:hidden;background:url(https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=2018-10-27&kind=iossoftware&bubble=ios_apps) no-repeat;width:135px;height:40px;padding: 0 0 0 12px;background-position: center;" href="https://itunes.apple.com/us/app/media-dot-paper/id1436677583?mt=8"></a>`
               : "");
           self.msgService.alert(msg, false);
           return;

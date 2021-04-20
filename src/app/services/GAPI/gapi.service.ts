@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { StringHelper } from "src/app/extends/string-helper";
 import { AFrame } from "src/app/vm/a-frame";
 import { IStory } from "src/app/vm/story";
 import { service } from "../../IO/GAPI";
@@ -18,7 +19,6 @@ export class GapiService {
   constructor(
     private zipService: ZipService,
     private storyService: StoryService,
-    private ZIPService: ZipService,
     private msg: MessageService,
     private withClickService: WithClickService
   ) {
@@ -106,9 +106,10 @@ export class GapiService {
   ) {
     var blob: Blob;
     var path: string = "";
+    const fileName = StringHelper.toFileName(story.name);
     switch (fType) {
       case "MDPYC":
-        path = story.name + ".mdpyc";
+        path = fileName + ".mdpyc";
         blob = new Blob([this.storyService.stringifyAStory(story)]);
         await service.createFileAsync({
           name: path,
@@ -118,8 +119,8 @@ export class GapiService {
 
       case "ZIP":
         const dataZip = JSON.stringify(story);
-        path = story.name + ".mdpyczip";
-        blob = await this.ZIPService.service.export2ZipAsync([
+        path = fileName + ".mdpyczip";
+        blob = await this.zipService.service.export2ZipAsync([
           { path: "01.mdpyc", data: dataZip },
         ]);
         await service.createFileAsync({ name: path, blob });
@@ -128,7 +129,7 @@ export class GapiService {
 
       case "SHEETS":
         //#region SaveAsSheetAsync
-        path = story.name + ".mdpycsheet";
+        path = fileName + ".mdpycsheet";
         const data: Array<Array<number | string | null>> = [];
 
         const frameKeys = [...Object.keys(new AFrame())];
