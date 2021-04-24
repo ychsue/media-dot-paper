@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageTextsService } from 'src/app/services/page-texts.service';
 import { concat } from 'rxjs/operators';
-import { GvService, ParaInLS } from 'src/app/services/gv.service';
+import { GvService, ParaInLS } from 'src/app/services/GV/gv.service';
 
 @Component({
   selector: 'app-app-setting',

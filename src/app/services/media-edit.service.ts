@@ -14,7 +14,7 @@ import {
   SSutterParameters,
   SpeechSynthesisService,
 } from "./speech-synthesis.service";
-import { GvService, PageType } from "./gv.service";
+import { GvService, PageType } from "./GV/gv.service";
 import { DeviceService } from "./device.service";
 import { StringHelper, ProtocolActionType } from "../extends/string-helper";
 import { HttpClient } from "@angular/common/http";

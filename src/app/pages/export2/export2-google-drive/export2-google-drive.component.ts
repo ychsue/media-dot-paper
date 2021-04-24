@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { GapiService } from "src/app/services/GAPI/gapi.service";
-import { GvService } from "src/app/services/gv.service";
+import { GvService } from "src/app/services/GV/gv.service";
 import { MediaEditService } from "src/app/services/media-edit.service";
 import { MessageService } from "src/app/services/message.service";
 import { StoryService } from "src/app/services/story.service";
@@ -18,16 +18,17 @@ export class Export2GoogleDriveComponent implements OnInit {
     public meService: MediaEditService,
     public msg: MessageService,
     public gv: GvService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   async onSaveAsync(fType: "MDPYC" | "ZIP" | "SHEETS") {
     const story = this.meService.story;
 
     this.gv.appComp.startProgress(`創造 ${fType}檔案中`, "請稍候");
     try {
-      const result = await this.GAPIService.save2DriveAsync(story, fType);
+      const result = await this.GAPIService.save2DriveAsync(story, fType,
+        this.gv.export2FolderId);
       this.msg.alert(
         `檔案 $0 已經成功輸出到 Google Drive 上了！`.replace("$0", result.path)
       );

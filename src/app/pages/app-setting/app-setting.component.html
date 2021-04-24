@@ -5,6 +5,7 @@
             </mat-expansion-panel-header>
             <app-daily-sample></app-daily-sample>
         </mat-expansion-panel>
+
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 {{(!!pts)?pts.hLayout:'排版'}}
@@ -12,10 +13,20 @@
             <div class="display-flex-row">
                 <app-zoom-inout [value]="gv.zoomAll" (change)="gv.zoomAll=$event" class="flex-auto"></app-zoom-inout>
                 <button mat-icon-button mat-raised-button class="flex-none" style="margin:4px;"
-                    (click)="onSaveZoom();onClose();"
-                ><mat-icon>done</mat-icon></button>
+                    (click)="onSaveZoom();onClose();">
+                    <mat-icon>done</mat-icon>
+                </button>
             </div>
         </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header [innerHtml]="'設定存取'">
+            </mat-expansion-panel-header>
+            <app-setting-save-load></app-setting-save-load>
+        </mat-expansion-panel>
+
     </mat-accordion>
-    <button mat-icon-button class="position-absolute" style="top:0px; right:0px;" (click)="onClose()"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button class="position-absolute" style="top:0px; right:0px;" (click)="onClose()">
+        <mat-icon>close</mat-icon>
+    </button>
 </div>

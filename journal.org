@@ -1,3 +1,6 @@
+* [2021-04-24 Sat] yc.settings has been generated
+By the way, people can use clipboard's data in browser one.
+
 * [2021-04-20 Tue] Zip file reading and correct filename problems
 
 * [2021-04-20 Tue] Ask the user to click a button to play the media or YouTube.

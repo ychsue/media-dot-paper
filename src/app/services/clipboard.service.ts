@@ -13,8 +13,12 @@ export class ClipboardService {
 
   getText$$() {
     return new Promise<string>((res, rej) => {
-      if (!!cordova.plugins && cordova.platformId !== 'browser' && !!cordova.plugins.clipboard) {
+      if (!!window?.cordova?.plugins && cordova.platformId !== 'browser' && !!cordova.plugins.clipboard) {
         cordova.plugins.clipboard.paste(t => res(t), e => rej(e));
+      } else if (!!window?.navigator?.clipboard) {
+        window.navigator.clipboard.readText()
+          .then(t => { res(t) })
+          .catch(e => { rej(e) });
       } else {
         rej('cordova.plugins is undefined');
       }

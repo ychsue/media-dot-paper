@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, from } from 'rxjs';
 import { take, shareReplay } from 'rxjs/operators';
-import { GvService } from './gv.service';
+import { GvService } from './GV/gv.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,10 @@ export class PageTextsService {
 
   langCode: string;
   langList: EachLang[] = [
-    {name: "繁中", isoCode: "zh-tw"},
-    {name: "簡中", isoCode: "zh-cn"},
-    {name: "English", isoCode: "en"},
-    {name: "Indonesia", isoCode: "id"}
+    { name: "繁中", isoCode: "zh-tw" },
+    { name: "簡中", isoCode: "zh-cn" },
+    { name: "English", isoCode: "en" },
+    { name: "Indonesia", isoCode: "id" }
   ];
 
   PTSReady$: Observable<boolean>;
@@ -29,14 +29,14 @@ export class PageTextsService {
   _ptsKey = "PTS";
   _isoCodeKey = "IsoCode";
   constructor(private http: HttpClient, private gv: GvService) {
-      const self = this;
-      self.PTSReady$ = from(self._iniPTS$$()).pipe(shareReplay(1));
+    const self = this;
+    self.PTSReady$ = from(self._iniPTS$$()).pipe(shareReplay(1));
   }
 
   private async _iniPTS$$() {
     let result = await this.loadPTSFromStorage$$();
     if (!!result === false) {
-      const lang = this.langList.find(o => navigator.language.toLowerCase().replace('_', '-').indexOf(o.isoCode) >= 0 );
+      const lang = this.langList.find(o => navigator.language.toLowerCase().replace('_', '-').indexOf(o.isoCode) >= 0);
       for (let i0 = 0; i0 < 10; i0++) { // try at most 10 times to load the PTS for the one on internet.
         try {
           result = await this.loadPTS$$((!!lang) ? lang.isoCode : 'en');

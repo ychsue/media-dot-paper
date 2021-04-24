@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Subscription, Subject, of, timer, fromEvent } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge,
-  pairwise, count, last, take, filter } from 'rxjs/operators';
-import { GvService } from '../../services/gv.service';
+import {
+  map, takeUntil, concat, concatAll, withLatestFrom, delay, first, merge,
+  pairwise, count, last, take, filter
+} from 'rxjs/operators';
+import { GvService } from '../../services/GV/gv.service';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
 import { MediaEditService } from 'src/app/services/media-edit.service';
 import { PlayerType } from 'src/app/vm/player-type.enum';
@@ -45,7 +47,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
   private _actionEmitted = new Subject<whichBtnAction>();
   private _duringAction = whichBtnAction.none;
   private _downTime = 0;
-  private _downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
+  private _downPos: { sx: number, sy: number } = { sx: 0, sy: 0 };
   private _epsPX = 10;
   private _scrollTop = 0;
 
@@ -64,7 +66,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
 
   constructor(private device: DeviceService, private gv: GvService,
     private meService: MediaEditService, private crossComp: CrossCompService // gotten videoEle from it
-    ) { }
+  ) { }
 
   ngOnInit() {
     const self = this;
@@ -81,7 +83,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
         let canSmoothScroll = false;
         if (!!self.crossComp.listOfMDP.scrollTo) {
           try {
-            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - self.deltaY, behavior: 'auto'});
+            self.crossComp.listOfMDP.scrollTo({ left: 0, top: self._scrollTop - self.deltaY, behavior: 'auto' });
             canSmoothScroll = true;
           } catch (error) {
             console.log(error);
@@ -94,7 +96,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       }
     };
     const holdOrNot = () => {
-      if (self._duringAction !== whichBtnAction.none) {return; }
+      if (self._duringAction !== whichBtnAction.none) { return; }
       if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
         self._actionEmitted.next(whichBtnAction.hold);
       } else {
@@ -102,7 +104,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       }
     };
     const clickDeleteOrIgnore = (ev: PointerEvent) => {
-      if ((self._duringAction !== whichBtnAction.none) && (self._duringAction !== whichBtnAction.longerThanHold)) {return; }
+      if ((self._duringAction !== whichBtnAction.none) && (self._duringAction !== whichBtnAction.longerThanHold)) { return; }
       const dt = ev.timeStamp - self._downTime;
       if (Math.abs(self.deltaX / dt) > self.maxSpeed) {
         self._actionEmitted.next(whichBtnAction.delete);
@@ -113,7 +115,7 @@ export class SwapIconComponent implements OnInit, OnDestroy {
         const dY = self.deltaY / dt * 500;
         if (!!self.crossComp.listOfMDP.scrollTo && Math.abs(dY) > Math.abs(self.deltaY)) {
           try {
-            self.crossComp.listOfMDP.scrollTo({left: 0, top: self._scrollTop - dY, behavior: 'smooth'});
+            self.crossComp.listOfMDP.scrollTo({ left: 0, top: self._scrollTop - dY, behavior: 'smooth' });
           } catch (error) {
             console.log(error);
           }
@@ -140,47 +142,47 @@ export class SwapIconComponent implements OnInit, OnDestroy {
       }
     });
     this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
-    .pipe(
-      map(_ => self.device.onPointermove$
-        .pipe(
-          map(mv => {
-            if (mv !== null) {
-              moveBtn(mv);
-            }
-            return mv;
-          }),
-          merge(
-            timer(700) // for holding
-            .pipe(
-              map(t => {
-                holdOrNot();
-                return <PointerEvent>null;
-              })
-            )
-          ),
-          takeUntil(
-            self.device.onPointerup$
-            .pipe(
-              map(uv => {
-                clickDeleteOrIgnore(uv);
-                return uv;
-              }),
-              merge(self._actionEmitted
+      .pipe(
+        map(_ => self.device.onPointermove$
+          .pipe(
+            map(mv => {
+              if (mv !== null) {
+                moveBtn(mv);
+              }
+              return mv;
+            }),
+            merge(
+              timer(700) // for holding
                 .pipe(
-                  filter(which => which !== whichBtnAction.longerThanHold)
+                  map(t => {
+                    holdOrNot();
+                    return <PointerEvent>null;
+                  })
                 )
-              ),
-              map( ev => {
-                refresh();
-              })
+            ),
+            takeUntil(
+              self.device.onPointerup$
+                .pipe(
+                  map(uv => {
+                    clickDeleteOrIgnore(uv);
+                    return uv;
+                  }),
+                  merge(self._actionEmitted
+                    .pipe(
+                      filter(which => which !== whichBtnAction.longerThanHold)
+                    )
+                  ),
+                  map(ev => {
+                    refresh();
+                  })
+                )
             )
           )
-        )
-      ),
-      concatAll()
-    ).subscribe(ev => {
-      // console.log(ev);
-    });
+        ),
+        concatAll()
+      ).subscribe(ev => {
+        // console.log(ev);
+      });
   }
 
   ngOnDestroy(): void {

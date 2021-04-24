@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { nSQL, NanoSQLInstance } from "nano-sql";
 import { DeviceService } from "./device.service";
-import { GvService } from "./gv.service";
+import { GvService } from "./GV/gv.service";
 import { MessageService, MessageTypes } from "./message.service";
 import { StickyObservable } from "../extends/sticky-observable";
 import { Subscriber, Observable, Subject } from "rxjs";
@@ -61,7 +61,7 @@ export class DbService {
         await self.iniNanoSQL.bind(self)(observer);
       };
       action();
-      return () => {};
+      return () => { };
     };
     // this.onDBReady = StickyObservable.createWithInit<boolean>(subscriber); //original one
     this.onDBReady = new Observable<boolean>(subscriber).pipe(

@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone, AfterViewInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { GvService, PageType } from '../../services/gv.service';
+import { GvService, PageType } from '../../services/GV/gv.service';
 import { MediaEditService, SideClickType } from '../../services/media-edit.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent, DialogType } from '../../dialog/dialog.component';
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   stories: IStory[];
   storySearch$ = new Subject<IStory>();
 
-  @ViewChild('listOfStored', {static: true})
+  @ViewChild('listOfStored', { static: true })
   listStoredRef: ElementRef;
 
   private _unsubscribed = new Subject<boolean>();
@@ -50,20 +50,20 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     private ngZone: NgZone, private fs: FsService, private http: HttpClient
     , private msg: MessageService, private clipboard: ClipboardService,
     private ccService: CrossCompService, private storyService: StoryService) {
-      const self = this;
-      ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).pipe(takeUntil(self._unsubscribed)).subscribe(_ => {
-        self.pts = ptsServic.pts.homePage;
-      });
-    }
+    const self = this;
+    ptsServic.PTSReady$.pipe(concat(ptsServic.ptsLoaded$)).pipe(takeUntil(self._unsubscribed)).subscribe(_ => {
+      self.pts = ptsServic.pts.homePage;
+    });
+  }
 
   ngOnInit() {
     const self = this;
     // from(this.db.searchAsync()).subscribe(this.stories$);
     self.db.onDataChanged.pipe(takeUntil(self._unsubscribed)).subscribe(data => self.storySearch$.next(null));
     self.stories$ = self.storySearch$.pipe(map(val => {
-      if (val === null) { return self.db.searchAsync(DbService.storyTableName, null, null, {viewTime: 'desc'}); }
+      if (val === null) { return self.db.searchAsync(DbService.storyTableName, null, null, { viewTime: 'desc' }); }
     }),
-    concatAll()
+      concatAll()
     );
     self.stories$.pipe(takeUntil(self._unsubscribed)).subscribe(s => {
       self.ngZone.run(() => {
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     });
     // * [2018-08-01 10:27] Check whether FsPlugin is available now
     self.fs.FSReady$.pipe(takeUntil(self._unsubscribed))
-    .subscribe(v => self.msg.pushMessage({type: MessageTypes.Info, message: `FSReady = ${v}`}));
+      .subscribe(v => self.msg.pushMessage({ type: MessageTypes.Info, message: `FSReady = ${v}` }));
 
     this.ccService.listOfStoredEle = this.listStoredRef.nativeElement;
 
@@ -106,12 +106,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   onSelFileWarning() {
     const self = this;
     const action = async () => {
-      if (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios')) ) {
+      if (!!window['cordova'] && ((cordova.platformId === 'android') || (cordova.platformId === 'ios'))) {
         await this.msg.alert$$((self.pts) ? self.pts.mobileFileSelWarn :
-         '如果選取的裝置上的影音檔很大，雖然一切運作應該還是很正常，但是，當使用者想將該檔轉存到此APP裡時可能會因為檔案過大而被拒，甚至直接關閉此APP。目前的版本尚未處理此問題，造成不便之處請見諒。');
+          '如果選取的裝置上的影音檔很大，雖然一切運作應該還是很正常，但是，當使用者想將該檔轉存到此APP裡時可能會因為檔案過大而被拒，甚至直接關閉此APP。目前的版本尚未處理此問題，造成不便之處請見諒。');
       } else if (!!window['cordova'] === false) {
         await this.msg.alert$$((self.pts) ? self.pts.browserFileSelWarn :
-         '此版本只允許讀入影音檔，一切的操作都可行，除了想要將該檔存入此APP的空間不能做到，很抱歉。');
+          '此版本只允許讀入影音檔，一切的操作都可行，除了想要將該檔存入此APP的空間不能做到，很抱歉。');
       } else {
         // do nothing
       }
@@ -135,14 +135,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         self.Url = text;
       }
     } catch (error) {
-      self.msg.pushMessage({type: MessageTypes.Error, message: error});
+      self.msg.pushMessage({ type: MessageTypes.Error, message: error });
     }
 
     let dialogRef;
     self.ngZone.run(_ => {
       dialogRef = this.dialog.open(DialogComponent, {
         width: '50%',
-        data: {dType: DialogType.inputUrl, url: self.Url}
+        data: { dType: DialogType.inputUrl, url: self.Url }
       });
     });
     dialogRef.afterClosed().pipe(takeUntil(self._unsubscribed)).subscribe(
@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           fEntry => self.fs.rmFile$(fEntry)
         ), concatAll()).toPromise();
 
-        self.msg.pushMessage({type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}`});
+        self.msg.pushMessage({ type: MessageTypes.Info, message: `The file ${story.fileName} is deleted: ${isDeleted}` });
       } catch (error) {
         self.msg.alert(
           `Cannot delete ${story.fileName}, please check your folder <h3>${(await self.fs.getDefaultAppStorageDir$$()).nativeURL}</h3>`);
@@ -194,16 +194,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     let story: IStory;
     try {
       let opts = new HttpHeaders();
-      opts = opts.append("Access-Control-Allow-Methods" , "GET, POST, DELETE, PUT");
+      opts = opts.append("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
       opts = opts.append("Access-Control-Allow-Origin", "*");
       opts = opts.append("Cache-Control", "no-cache, no-store, must-revalidate, post-check=0, pre-check=0");
       opts = opts.append("Pragma", "no-cache");
       opts = opts.append("Expires", "0");
       story = await self.http.get(
         StringHelper.correctHttpURL(stUrl),
-        {responseType: 'text', headers: opts}).pipe(map(res => {
-            return self.storyService.getAStoryFromString(res);
-          })).toPromise();
+        { responseType: 'text', headers: opts }).pipe(map(res => {
+          return self.storyService.getAStoryFromString(res);
+        })).toPromise();
     } catch (error) {
       console.log(error);
     }

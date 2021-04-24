@@ -42,7 +42,7 @@ import { MeManiPlateComponent } from "./components/me-mani-plate/me-mani-plate.c
 import { PlayerComponent } from "./components/player/player.component";
 import { MediaEditService } from "./services/media-edit.service";
 import { YoutubeService } from "./services/youtube.service";
-import { GvService } from "./services/gv.service";
+import { GvService } from "./services/GV/gv.service";
 import { DialogComponent } from "./dialog/dialog.component";
 import { FormsModule } from "@angular/forms";
 import { DbService } from "./services/db.service";
@@ -76,6 +76,7 @@ import { Export2GoogleDriveComponent } from "./pages/export2/export2-google-driv
 import { Export2DeviceComponent } from "./pages/export2/export2-device/export2-device.component";
 import { WithClickComponent } from './services/WithClick/with-click/with-click.component';
 import { TextInputAgentComponent } from './services/TextInputAgent/text-input-agent/text-input-agent.component';
+import { SettingSaveLoadComponent } from './pages/app-setting/setting-save-load/setting-save-load.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { TextInputAgentComponent } from './services/TextInputAgent/text-input-ag
     Export2DeviceComponent,
     WithClickComponent,
     TextInputAgentComponent,
+    SettingSaveLoadComponent,
   ],
   imports: [
     BrowserModule,

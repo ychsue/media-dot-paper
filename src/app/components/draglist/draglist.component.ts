@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { IStory } from '../../vm/story';
-import { Subject, fromEvent} from 'rxjs';
+import { Subject, fromEvent } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
 import { map, takeUntil, concatAll, merge, pairwise, first } from 'rxjs/operators';
 import { CrossCompService } from '../../services/cross-comp.service';
-import { GvService } from '../../services/gv.service';
+import { GvService } from '../../services/GV/gv.service';
 
 @Component({
   selector: 'app-draglist',
@@ -12,7 +12,7 @@ import { GvService } from '../../services/gv.service';
   styleUrls: ['./draglist.component.css']
 })
 export class DraglistComponent implements OnInit, OnDestroy {
-  @Input() story: IStory |{name: string, viewTime: number};
+  @Input() story: IStory | { name: string, viewTime: number };
 
   @Output() delete = new EventEmitter();
   @Output() contentClick = new EventEmitter();
@@ -22,7 +22,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
   maxSpeed = 0.5;
 
   private _downTime = 0;
-  private _downPos: {sx: number, sy: number} = {sx: 0, sy: 0};
+  private _downPos: { sx: number, sy: number } = { sx: 0, sy: 0 };
   private _epsPX = 10;
   private _isDeleted = false;
   private _downScrollTop = 0;
@@ -43,7 +43,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
 
   constructor(private device: DeviceService, private ccService: CrossCompService,
     public gv: GvService
-    ) { }
+  ) { }
 
   ngOnInit() {
     const self = this;
@@ -59,7 +59,7 @@ export class DraglistComponent implements OnInit, OnDestroy {
         let canSmoothScroll = false;
         if (!!self.ccService.listOfStoredEle.scrollTo) {
           try {
-            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - self.deltaY, behavior: 'auto'});
+            self.ccService.listOfStoredEle.scrollTo({ left: 0, top: self._downScrollTop - self.deltaY, behavior: 'auto' });
             canSmoothScroll = true;
           } catch (error) {
             console.log(error);
@@ -77,13 +77,13 @@ export class DraglistComponent implements OnInit, OnDestroy {
       if (Math.abs(self.deltaX / dt) > self.maxSpeed) {
         self.delete.next();
         self._isDeleted = true; // Since it is deleted, it cannot work anymore
-      }  else if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
+      } else if ((Math.abs(self.deltaX) < self._epsPX) && (Math.abs(self.deltaY) < self._epsPX)) {
         self.contentClick.next(ev);
       } else {
         const dY = self.deltaY / dt * 500;
         if (!!self.ccService.listOfStoredEle.scrollTo && Math.abs(dY) > Math.abs(self.deltaY)) {
           try {
-            self.ccService.listOfStoredEle.scrollTo({left: 0, top: self._downScrollTop - dY, behavior: 'smooth'});
+            self.ccService.listOfStoredEle.scrollTo({ left: 0, top: self._downScrollTop - dY, behavior: 'smooth' });
           } catch (error) {
             console.log(error);
           }
@@ -92,29 +92,29 @@ export class DraglistComponent implements OnInit, OnDestroy {
     };
 
     this.contentPointerdown$.pipe(takeUntil(self.unsubscribed$))
-    .pipe(
-      map(_ => self.device.onPointermove$
-        .pipe(
-          map(mv => {
-            moveBtn(mv);
-            return mv;
-          }),
-          takeUntil(
-            self.device.onPointerup$
-            .pipe(
-              map(uv => {
-                clickDeleteOrIgnore(uv);
-                self.deltaX = 0;
-                self.deltaY = 0;
-                self.gv.isJustPointerEvents = false;
-                return uv;
-              })
+      .pipe(
+        map(_ => self.device.onPointermove$
+          .pipe(
+            map(mv => {
+              moveBtn(mv);
+              return mv;
+            }),
+            takeUntil(
+              self.device.onPointerup$
+                .pipe(
+                  map(uv => {
+                    clickDeleteOrIgnore(uv);
+                    self.deltaX = 0;
+                    self.deltaY = 0;
+                    self.gv.isJustPointerEvents = false;
+                    return uv;
+                  })
+                )
             )
           )
-        )
-      ),
-      concatAll()
-    ).subscribe(ev => {});
+        ),
+        concatAll()
+      ).subscribe(ev => { });
 
   }
 

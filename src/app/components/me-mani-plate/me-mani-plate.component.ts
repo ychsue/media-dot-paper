@@ -6,7 +6,7 @@ import { DeviceService } from '../../services/device.service';
 import { map, concatAll, takeUntil, count, withLatestFrom, distinctUntilChanged, debounceTime, concat, delay, merge } from 'rxjs/operators';
 import { SSutterParameters, SpeechSynthesisService } from '../../services/speech-synthesis.service';
 import { PageTextsService } from '../../services/page-texts.service';
-import { GvService } from 'src/app/services/gv.service';
+import { GvService } from 'src/app/services/GV/gv.service';
 import { TextInputAgentService } from 'src/app/services/TextInputAgent/text-input-agent.service';
 
 @Component({

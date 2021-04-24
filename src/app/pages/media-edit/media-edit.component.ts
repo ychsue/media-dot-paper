@@ -6,7 +6,7 @@ import { SpeechSynthesisService, SSutterParameters } from '../../services/speech
 import { takeWhile, first, filter, map, takeUntil, concatAll, withLatestFrom, pairwise, merge } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DeviceService } from '../../services/device.service';
-import { GvService } from '../../services/gv.service';
+import { GvService } from '../../services/GV/gv.service';
 import { utterType, mediaVPType, mediaPlayType } from 'src/app/vm/story-g-setting';
 
 @Component({
@@ -15,13 +15,13 @@ import { utterType, mediaVPType, mediaPlayType } from 'src/app/vm/story-g-settin
   styleUrls: ['./media-edit.component.css', '../../common-use.css'],
   animations: [
     trigger('flyInOut', [
-      state('in', style({transform: 'translateY(0)'})),
+      state('in', style({ transform: 'translateY(0)' })),
       transition('void => *', [
-        style({transform: 'translateY(-100%)'}),
+        style({ transform: 'translateY(-100%)' }),
         animate('0.2s ease-in')
       ]),
       transition('* => void', [
-        animate('0.2s 0.1s ease-out', style({transform: 'translateY(-100%)'}))
+        animate('0.2s 0.1s ease-out', style({ transform: 'translateY(-100%)' }))
       ])
     ])
   ]
@@ -46,7 +46,7 @@ export class MediaEditComponent implements OnInit {
     self.meService.onStateChanged.pipe(filter(_ => !!self.meService.onCurrentTimeChanged === true), first()).subscribe(_ => {
       self.meService.onCurrentTimeChanged.subscribe(t => {
         // * [2018-11-21 10:07] Get CurrentIFrame based on t
-        const indF = self.meService.story.frames.findIndex( frame => ((t <= frame.end) && (t >= frame.start)));
+        const indF = self.meService.story.frames.findIndex(frame => ((t <= frame.end) && (t >= frame.start)));
         const iFrame = self.meService.story.iFrame;
         if (iFrame >= 0 && self.meService.currentIFrameOnT !== iFrame) {
           self.meService.currentIFrameOnT = iFrame;
@@ -54,7 +54,7 @@ export class MediaEditComponent implements OnInit {
           self.meService.currentIFrameOnT = indF;
         }
 
-        if (!!self.meService.story.gSetting === false) {return; }
+        if (!!self.meService.story.gSetting === false) { return; }
         const uType = self.meService.story.utterType;
         const vpType = self.meService.story.gSetting.mVPType;
         const playType = self.meService.story.gSetting.mPlayType;
@@ -104,8 +104,8 @@ export class MediaEditComponent implements OnInit {
     });
 
     // * [2018-10-04 23:58] When pointer up, set 'isResizing' as false to hide the cover
-    self.device.onPointerup$.subscribe(_ => {self.gv.isJustPointerEvents = false; });
-    self.changeSideWidth$.subscribe(_ => {self.gv.isJustPointerEvents = true; });
+    self.device.onPointerup$.subscribe(_ => { self.gv.isJustPointerEvents = false; });
+    self.changeSideWidth$.subscribe(_ => { self.gv.isJustPointerEvents = true; });
 
     let count = 0;
     // * [2018-10-01 15:10] Used to change the sideWidth

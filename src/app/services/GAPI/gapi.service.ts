@@ -90,7 +90,9 @@ export class GapiService {
         /*************** TODO  *************************/
         var data = await zip[0].blob.text();
         result = this.storyService.getAStoryFromString(data);
-      } else {
+      } else if (/(video|audio)/i.test(mimeType)) {
+        ; // Do nothing
+      } {
         throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
     } catch (error) {
@@ -102,7 +104,8 @@ export class GapiService {
 
   public async save2DriveAsync(
     story: IStory,
-    fType: "MDPYC" | "ZIP" | "SHEETS"
+    fType: "MDPYC" | "ZIP" | "SHEETS",
+    parents?: string
   ) {
     var blob: Blob;
     var path: string = "";
@@ -114,6 +117,7 @@ export class GapiService {
         await service.createFileAsync({
           name: path,
           blob,
+          parents: [(!!parents) ? parents : 'root']
         });
         break;
 
@@ -123,7 +127,7 @@ export class GapiService {
         blob = await this.zipService.service.export2ZipAsync([
           { path: "01.mdpyc", data: dataZip },
         ]);
-        await service.createFileAsync({ name: path, blob });
+        await service.createFileAsync({ name: path, blob, parents: [(!!parents) ? parents : 'root'] });
 
         break;
 
@@ -165,7 +169,7 @@ export class GapiService {
         }
 
         // * [2021-04-07 11:01] Create a spreadsheet and get its id
-        var res = await service.createSSAsync({ title: path });
+        var res = await service.createSSAsync({ title: path, parents });
         const spreadsheetId = res.result.spreadsheetId;
         const sheetName = res.result.sheets[0].properties.title;
         const sheetId = res.result.sheets[0].properties.sheetId;

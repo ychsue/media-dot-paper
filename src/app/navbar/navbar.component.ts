@@ -9,7 +9,7 @@ import { FsService } from '../services/fs.service';
 import { map, concatAll } from '../../../node_modules/rxjs/operators';
 import { PageTextsService } from '../services/page-texts.service';
 import { DeviceService } from '../services/device.service';
-import { GvService, PageType } from '../services/gv.service';
+import { GvService, PageType } from '../services/GV/gv.service';
 
 @Component({
   selector: 'app-navbar',
@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
   PageType = PageType;
 
-  constructor(private bottomSheet: MatBottomSheet , private ngZone: NgZone,
+  constructor(private bottomSheet: MatBottomSheet, private ngZone: NgZone,
     private db: DbService, private fsService: FsService, private device: DeviceService,
     public meService: MediaEditService, public gv: GvService,
     public msgService: MessageService, public ptsService: PageTextsService) {
@@ -34,12 +34,12 @@ export class NavbarComponent implements OnInit {
     this.nUnReadMsg = msgService.getNUnRead();
     msgService.remindMsgIn.subscribe(
       (n) => {
-        if (msgService.isShown === false) {return; }
+        if (msgService.isShown === false) { return; }
         const isInZone = NgZone.isInAngularZone();
         const action = () => { self.nUnReadMsg = n; };
         if (isInZone === false) {
           ngZone.run(action);
-        } else {action(); }
+        } else { action(); }
       });
     device.onWindowResize$.subscribe(ev => {
       if (ev.type === 'resize') {
