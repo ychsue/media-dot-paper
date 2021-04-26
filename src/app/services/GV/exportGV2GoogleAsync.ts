@@ -1,4 +1,4 @@
-import { tHOF } from "src/app/IO/GAPI/withMustSignIn";
+import { IWithMustSignIn, tHOF } from "src/app/IO/GAPI/withMustSignIn";
 import correctExport2FolderIdAsync from "./functions/correctExport2FolderIdAsync";
 import getArray2FromObj from "./functions/getArray2FromObj";
 import getMangerFileIdAsync from "./functions/getMangerFileIdAsync";
@@ -7,8 +7,12 @@ import getObjFromArray2 from "./functions/getObjFromArray2";
 import { GvService, ParaInLS } from "./gv.service";
 import { Gv2googleService } from "./gv2google.service";
 
+interface IProps extends IWithMustSignIn {
+    fName?: string;
+}
+
 export default async function exportGV2GoogleAsync(props
-    : { fName?: string, scopes?: string, signInWithClick?: tHOF }) {
+    : IProps) {
     const self = this as Gv2googleService;
 
     const getMFIdAsync: typeof getMangerFileIdAsync = getMangerFileIdAsync.bind(self);
@@ -16,7 +20,7 @@ export default async function exportGV2GoogleAsync(props
     const getExp2FolderIdAsync: typeof correctExport2FolderIdAsync = correctExport2FolderIdAsync.bind(self);
 
     try {
-        // 1. Get the fileId
+        // 1. Get the fileId with needed click events
         const theMFId = await getMFIdAsync(props);
 
         // 2. Get ManagerFile's mdpyc's settings' sheet
@@ -26,7 +30,7 @@ export default async function exportGV2GoogleAsync(props
         // 3. initialize the object
         const obj = {
             zoomAll: self.gvService.zoomAll,
-            export2FolderId: self.gvService.export2FolderId,
+            export2FolderId: await getExp2FolderIdAsync(self.gvService),
         };
 
         // 4. get its array[][]

@@ -35,18 +35,8 @@ export class GapiService {
       const res = await service.getInfoFromIdAsync({
         fileId,
         fields: "mimeType",
-        signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
-          title: "Google Drive 權限",
-          content: "您需要登入 GOOGLE此動作才能繼續",
-          stYes: "好",
-          stNo: "不想"
-        }),
-        grantWithClick: self.withClickService.withClick.bind(self.withClickService)({
-          title: "Google Drive 權限",
-          content: "您需要提供 GOOGLE 額外的權限",
-          stYes: "好",
-          stNo: "不想"
-        })
+        signInWithClick: self.withClickService.withSignInClick,
+        grantWithClick: self.withClickService.withGrantClick
       });
       const mimeType = res.result.mimeType;
       if (
@@ -56,18 +46,8 @@ export class GapiService {
       ) {
         const blob = await service.downloadItemAsync({
           fileId,
-          signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
-            title: "Google Drive 權限",
-            content: "您需要登入 GOOGLE此動作才能繼續",
-            stYes: "好",
-            stNo: "不想"
-          }),
-          grantWithClick: self.withClickService.withClick.bind(self.withClickService)({
-            title: "Google Drive 權限",
-            content: "您需要提供 GOOGLE 額外的權限",
-            stYes: "好",
-            stNo: "不想"
-          })
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
         var data = await blob.text();
         result = this.storyService.getAStoryFromString(data);
@@ -76,12 +56,16 @@ export class GapiService {
         mimeType.indexOf("spreadsheet") >= 0) {
         const resSS = await service.getSheetsInfoAsync({
           spreadsheetId: fileId,
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
         /******************** TODO ********************/
         const sheetName = resSS.result.sheets[0].properties.title;
         const resCells = await service.getCellsValueAsync({
           spreadsheetId: fileId,
           range: sheetName,
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
         const values = resCells.result.values;
 
@@ -89,7 +73,11 @@ export class GapiService {
       } else if (
         resultType !== 'blob' &&
         mimeType.indexOf("zip") >= 0) {
-        const blob = await service.downloadItemAsync({ fileId });
+        const blob = await service.downloadItemAsync({
+          fileId,
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
+        });
         const zip = await this.zipService.service.importFromZipAsync({
           data: blob,
         });
@@ -99,7 +87,11 @@ export class GapiService {
       } else if (
         resultType !== 'story' &&
         /(video|audio)/i.test(mimeType)) {
-        return await service.downloadItemAsync({ fileId });
+        return await service.downloadItemAsync({
+          fileId,
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
+        });
       } else {
         throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
@@ -118,6 +110,7 @@ export class GapiService {
     var blob: Blob;
     var path: string = "";
     const fileName = StringHelper.toFileName(story.name);
+    const self = this;
     switch (fType) {
       case "MDPYC":
         path = fileName + ".mdpyc";
@@ -135,7 +128,13 @@ export class GapiService {
         blob = await this.zipService.service.export2ZipAsync([
           { path: "01.mdpyc", data: dataZip },
         ]);
-        await service.createFileAsync({ name: path, blob, parents: [(!!parents) ? parents : 'root'] });
+        await service.createFileAsync({
+          name: path,
+          blob,
+          parents: [(!!parents) ? parents : 'root'],
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
+        });
 
         break;
 
@@ -177,7 +176,12 @@ export class GapiService {
         }
 
         // * [2021-04-07 11:01] Create a spreadsheet and get its id
-        var res = await service.createSSAsync({ title: path, parents });
+        var res = await service.createSSAsync({
+          title: path,
+          parents: (!!parents) ? parents : 'root',
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
+        });
         const spreadsheetId = res.result.spreadsheetId;
         const sheetName = res.result.sheets[0].properties.title;
         const sheetId = res.result.sheets[0].properties.sheetId;
@@ -189,6 +193,8 @@ export class GapiService {
           resource: {
             values: data,
           },
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
 
         // * [2021-04-07 15:22] Folding
@@ -198,6 +204,8 @@ export class GapiService {
           startIndex: 0,
           endIndex: 4,
           dimension: "COLUMNS",
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
 
         res = await service.groupSheetDimAsync({
@@ -206,6 +214,8 @@ export class GapiService {
           startIndex: 0,
           endIndex: 4,
           dimension: "ROWS",
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick
         });
 
         //#endregion SaveAsSheetAsync

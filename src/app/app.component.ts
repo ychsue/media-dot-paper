@@ -92,7 +92,8 @@ export class AppComponent implements AfterViewInit {
           content: "為了能跨平台跨APP，本APP目前選擇在Google Drive上放置設定檔，",
           stYes: "好",
           stNo: "不了"
-        }).bind(self.withClickService)
+        }).bind(self.withClickService),
+        grantWithClick: self.withClickService.withGrantClick,
       });
       self.gv.isFirstTime = false;
       self.gv.saveToLocalStorage(ParaInLS.isFirstTime);

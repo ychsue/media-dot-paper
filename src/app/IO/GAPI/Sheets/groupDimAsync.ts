@@ -1,16 +1,19 @@
+import { IWithMustSignIn } from "../withMustSignIn";
 import batchUpdateAsync from "./batchUpdateAsync";
 
-interface IOProps {
+interface IOProps extends IWithMustSignIn {
     scopes?: string,
 
     spreadsheetId: string,
     sheetId: number,
-    dimension: 'ROWS'|'COLUMNS',
+    dimension: 'ROWS' | 'COLUMNS',
     startIndex: number,
     endIndex: number,
 }
 
-export default async function groupDimAsync({scopes, spreadsheetId, sheetId, dimension, startIndex, endIndex}: IOProps) {
+export default async function groupDimAsync({ scopes, spreadsheetId, sheetId, dimension, startIndex, endIndex,
+    grantWithClick, signInWithClick
+}: IOProps) {
     const res = await batchUpdateAsync({
         scopes,
         spreadsheetId,
@@ -19,13 +22,15 @@ export default async function groupDimAsync({scopes, spreadsheetId, sheetId, dim
                 addDimensionGroup: {
                     range: {
                         sheetId,
-                         dimension,
-                         startIndex,
-                         endIndex,
+                        dimension,
+                        startIndex,
+                        endIndex,
                     }
                 }
             }]
-        }
+        },
+        signInWithClick,
+        grantWithClick
     });
 
     return res;

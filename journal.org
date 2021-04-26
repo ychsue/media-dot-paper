@@ -1,3 +1,6 @@
+* [2021-04-26 Mon] I have tried to show dialogs for click events for the GAPI service
+Need to test them again and again.
+
 * [2021-04-25 Sun] Now I can play audio files on Google Drive
 However, it works wired on Safari. Debugging.
 

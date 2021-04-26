@@ -1,9 +1,13 @@
-import { tHOF } from "src/app/IO/GAPI/withMustSignIn";
+import { IWithMustSignIn, tHOF } from "src/app/IO/GAPI/withMustSignIn";
 import { Gv2googleService } from "../gv2google.service";
 
+interface IProps extends IWithMustSignIn {
+    fName?: string;
+}
+
 export default async function getMangerFileIdAsync(
-    { fName = "yc.settings", scopes, signInWithClick }
-        : { fName?: string, scopes?: string, signInWithClick?: tHOF }) {
+    { fName = "yc.settings", scopes, signInWithClick, grantWithClick }
+        : IProps) {
     const self = this as Gv2googleService;
 
     // 1. Check whether this file does exist
@@ -11,7 +15,8 @@ export default async function getMangerFileIdAsync(
         q: `name = '${fName}' and trashed = false`,
         fields: "files(id)",
         scopes,
-        signInWithClick
+        signInWithClick,
+        grantWithClick
     });
 
     // 2. If I can access google drive but it doesn't have this global setting file, create it
