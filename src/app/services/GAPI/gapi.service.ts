@@ -25,13 +25,14 @@ export class GapiService {
     this.service = service;
   }
 
-  public async getDataFromFileIdAsync(fileId: string) {
-    var result: IStory;
+  public async getGoogleDriveDataFromFileIdAsync(fileId: string,
+    resultType: 'story' | 'blob' | 'both' = 'both') {
+    let result: IStory | Blob;
     const self = this;
 
     if (!!!fileId) return result;
     try {
-      var res = await service.getInfoFromIdAsync({
+      const res = await service.getInfoFromIdAsync({
         fileId,
         fields: "mimeType",
         signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
@@ -49,10 +50,11 @@ export class GapiService {
       });
       const mimeType = res.result.mimeType;
       if (
-        mimeType.toLowerCase().indexOf(`text`) >= 0 ||
-        mimeType === "application/octet-stream"
+        resultType !== 'blob' &&
+        (mimeType.toLowerCase().indexOf(`text`) >= 0 ||
+          mimeType.toLowerCase().indexOf("octet-stream") >= 0)
       ) {
-        res = await service.downloadItemAsync({
+        const blob = await service.downloadItemAsync({
           fileId,
           signInWithClick: self.withClickService.withClick.bind(self.withClickService)({
             title: "Google Drive 權限",
@@ -67,9 +69,11 @@ export class GapiService {
             stNo: "不想"
           })
         });
-        var data = res.body;
+        var data = await blob.text();
         result = this.storyService.getAStoryFromString(data);
-      } else if (mimeType.indexOf("spreadsheet") >= 0) {
+      } else if (
+        resultType !== 'blob' &&
+        mimeType.indexOf("spreadsheet") >= 0) {
         const resSS = await service.getSheetsInfoAsync({
           spreadsheetId: fileId,
         });
@@ -82,17 +86,21 @@ export class GapiService {
         const values = resCells.result.values;
 
         result = getAStoryFromArray(values);
-      } else if (mimeType.indexOf("zip") >= 0) {
-        res = await service.downloadItemAsync({ fileId });
+      } else if (
+        resultType !== 'blob' &&
+        mimeType.indexOf("zip") >= 0) {
+        const blob = await service.downloadItemAsync({ fileId });
         const zip = await this.zipService.service.importFromZipAsync({
-          data: res.body,
+          data: blob,
         });
         /*************** TODO  *************************/
         var data = await zip[0].blob.text();
         result = this.storyService.getAStoryFromString(data);
-      } else if (/(video|audio)/i.test(mimeType)) {
-        ; // Do nothing
-      } {
+      } else if (
+        resultType !== 'story' &&
+        /(video|audio)/i.test(mimeType)) {
+        return await service.downloadItemAsync({ fileId });
+      } else {
         throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
     } catch (error) {

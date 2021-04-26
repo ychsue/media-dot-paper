@@ -27,7 +27,6 @@ export class StoryComponent implements OnInit, OnDestroy {
 
   utterType = utterType;
 
-  downloadHref: string;
   downloadSBVHref: string;
 
   onDescChanged$ = new Subject<string>();
@@ -49,6 +48,7 @@ export class StoryComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._unsubscribe.next(true);
     this._unsubscribe.complete();
+    if (!!this.downloadSBVHref) URL.revokeObjectURL(this.downloadSBVHref);
   }
 
   ngOnInit() {

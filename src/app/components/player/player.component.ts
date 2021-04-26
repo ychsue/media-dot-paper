@@ -9,6 +9,7 @@ import { PlayerType } from '../../vm/player-type.enum';
 import { DeviceService } from '../../services/device.service';
 import { CrossCompService } from 'src/app/services/cross-comp.service';
 import { WithClickService } from 'src/app/services/WithClick/with-click.service';
+import { GapiService } from 'src/app/services/GAPI/gapi.service';
 
 @Component({
   selector: 'app-player',
@@ -59,7 +60,8 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(public meService: MediaEditService, private YTservice: YoutubeService,
     private crossComp: CrossCompService,  // keep videoEle in crossComp
     private msgService: MessageService, private ngZone: NgZone, private device: DeviceService,
-    private withClickService: WithClickService) {
+    private withClickService: WithClickService,
+    private gapiService: GapiService) {
   }
 
   ngOnInit() {
@@ -461,7 +463,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     // ******* TODO *******
     const self = this;
     const meType = this.meService.story.meType;
-    const urlOrId = this.meService.story.urlOrID;
+    let urlOrId = this.meService.story.urlOrID;
     self.crossComp.isVideoEle = false;
     if (meType === PlayerType.url) {
       if (YoutubeService.isYoutubeURL(urlOrId)) {
@@ -470,15 +472,26 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.ytVId = YoutubeService.getYTId(urlOrId);
       } else {
         self.crossComp.isVideoEle = true;
-        this.videoSrc = urlOrId;
-        this.videoEle.load();
-        this.audioEle.load();
-        // * [2018-09-12 11:48] It might have been loaded
-        if (this.mediaEle.readyState === 4) {
-          setTimeout(() => {
-            self.meService.state = MEState.paused;
-          }, 10);
-        }
+        // ** [2021-04-25 07:35] Check whether it comes from google
+        URL.revokeObjectURL(urlOrId);
+        let fId = self.gapiService.service.getFileIdFromUri(urlOrId);
+        (async () => {
+          if (!!fId) {
+            const blob = await self.gapiService.getGoogleDriveDataFromFileIdAsync(fId, "blob") as Blob;
+            self.mediaEle = (/audio/i.test(blob.type)) ?
+              self.audioEle : self.videoEle;
+            urlOrId = URL.createObjectURL(blob);
+          }
+          self.videoSrc = urlOrId;
+          self.videoEle.load();
+          self.audioEle.load();
+          // * [2018-09-12 11:48] It might have been loaded
+          if (self.mediaEle.readyState === 4) {
+            setTimeout(() => {
+              self.meService.state = MEState.paused;
+            }, 10);
+          }
+        })();
       }
     } else if (meType === PlayerType.youtubeID) {
       this.onUpdateDisplay(PlayerType.youtubeID);

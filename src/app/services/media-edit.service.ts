@@ -476,9 +476,10 @@ export class MediaEditService {
 
     //* [2021-04-08 11:10] Dealing with MDPYC stored in Google Drive
     try {
-      story = await self.GAPIService.getDataFromFileIdAsync(
-        self.GAPIService.service.getFileIdFromUri(result)
+      const getFromGoogle = await self.GAPIService.getGoogleDriveDataFromFileIdAsync(
+        self.GAPIService.service.getFileIdFromUri(result), 'story'
       );
+      story = getFromGoogle as Story;
     } catch (error) {
       self.msgService.alert(
         `media-edit.service::inputFromString$ ERROR: ${(error as Error).message

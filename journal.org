@@ -1,3 +1,6 @@
+* [2021-04-25 Sun] Now I can play audio files on Google Drive
+However, it works wired on Safari. Debugging.
+
 * [2021-04-24 Sat] yc.settings has been generated
 By the way, people can use clipboard's data in browser one.
 

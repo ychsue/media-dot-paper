@@ -7,7 +7,7 @@ import getObjFromArray2 from "./functions/getObjFromArray2";
 import { GvService, ParaInLS } from "./gv.service";
 import { Gv2googleService } from "./gv2google.service";
 
-export default async function importGVFromGoogleAsync(props
+export default async function exportGV2GoogleAsync(props
     : { fName?: string, scopes?: string, signInWithClick?: tHOF }) {
     const self = this as Gv2googleService;
 

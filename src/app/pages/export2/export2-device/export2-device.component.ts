@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { MatAnchor } from "@angular/material/button";
 import { FsService } from "src/app/services/fs.service";
 import { MediaEditService } from "src/app/services/media-edit.service";
@@ -12,7 +12,7 @@ import { StringHelper } from "src/app/extends/string-helper";
   templateUrl: "./export2-device.component.html",
   styleUrls: ["./export2-device.component.css"],
 })
-export class Export2DeviceComponent implements OnInit {
+export class Export2DeviceComponent implements OnInit, OnDestroy {
   pts: any;
   downloadHref: string;
 
@@ -24,6 +24,12 @@ export class Export2DeviceComponent implements OnInit {
     private storyService: StoryService,
     private fs: FsService
   ) { }
+
+  ngOnDestroy(): void {
+    if (!!this.downloadHref) {
+      URL.revokeObjectURL(this.downloadHref);
+    }
+  }
 
   ngOnInit(): void { }
 

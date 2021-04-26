@@ -1,3 +1,4 @@
+import getAccessToken from "../getAccessToken";
 import initAsync from "../initAsync";
 import { IWithMustSignIn, withMustSignIn } from "../withMustSignIn";
 
@@ -28,13 +29,7 @@ async function createFileGAPIAsync({ name, blob, mimeType, parents }: IPropIn) {
   if (!!!window?.gapi?.auth2) {
     await initAsync();
   }
-  var response = gapi.auth2
-    .getAuthInstance()
-    .currentUser.get()
-    .getAuthResponse(true);
-  if (!!!response) throw Error("Cannot get access token");
-
-  var accessToken = response.access_token;
+  const accessToken = getAccessToken();
 
   const form = new FormData();
   form.append(
