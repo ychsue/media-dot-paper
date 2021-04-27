@@ -1,3 +1,12 @@
+* [2021-04-27 Tue] PWA can work now
+1. I need to deal with subfolder's problem. You can follow this [[https://forum.ionicframework.com/t/how-to-configure-a-pwa-to-run-on-a-subfolder-ask-question/160517/5][Q&A]]
+to solve it.
+`
+    ng build --prod --base-href=/static/mediadotpaper/
+`
+2. Sometimes, it does not load service worker immediately, although [[https://stackoverflow.com/questions/60316067/angular-v8-throw-error-no-matching-service-worker-detected][Q&A]]
+might solve this problem, but keeping its default setting might be better.
+
 * [2021-04-26 Mon] I have tried to show dialogs for click events for the GAPI service
 Need to test them again and again.
 

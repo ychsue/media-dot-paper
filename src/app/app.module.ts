@@ -77,6 +77,8 @@ import { Export2DeviceComponent } from "./pages/export2/export2-device/export2-d
 import { WithClickComponent } from './services/WithClick/with-click/with-click.component';
 import { TextInputAgentComponent } from './services/TextInputAgent/text-input-agent/text-input-agent.component';
 import { SettingSaveLoadComponent } from './pages/app-setting/setting-save-load/setting-save-load.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -140,6 +142,13 @@ import { SettingSaveLoadComponent } from './pages/app-setting/setting-save-load/
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      // registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerImmediately'
+    }),
   ],
   providers: [
     MessageService,

@@ -8,6 +8,7 @@ import { signInStatus$ } from "./signInStatus$";
 import isSignedIn from "./isSignedIn";
 import { isLoaded, setIsLoaded } from "./isLoaded";
 import { isAuthLoaded$ } from "./isAuthLoaded$";
+import { googleAPIkey, googleClientId } from "src/app/privateValues";
 
 export default async function initAsync() {
   // * [2021-03-09 16:46] Load gapi at first
@@ -40,9 +41,8 @@ export default async function initAsync() {
 
   // * [2021-03-09 16:47] Initialize the libraries
   await gapi.client.init({
-    apiKey: "AIzaSyBVrQwS7xmjyWoibcQMd2JB6DEcM_ccesw",
-    clientId:
-      "115030163273-efrl7g36idmhal48lm6svgr344ur2ogl.apps.googleusercontent.com",
+    apiKey: googleAPIkey,
+    clientId: googleClientId,
     discoveryDocs: [
       "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
       "https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest",

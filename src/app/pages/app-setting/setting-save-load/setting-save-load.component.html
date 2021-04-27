@@ -1,4 +1,14 @@
 <div class="container">
-    <button mat-raised-button (click)="onExport()">匯出</button>
-    <button mat-raised-button (click)="onImport()">匯入</button>
+    <button mat-raised-button (click)="onExport()">
+        <img class="mdp" src="assets/media-dot-paper.svg" alt="MDP"> の
+        <mat-icon>settings</mat-icon>
+        <mat-icon>arrow_forward</mat-icon>
+        <img class="gd" src="assets/googleDrive.svg" alt="googleDrive">
+    </button>
+    <button mat-raised-button (click)="onImport()">
+        <img class="gd" src="assets/googleDrive.svg" alt="googleDrive">
+        <mat-icon>arrow_forward</mat-icon>
+        <img class="mdp" src="assets/media-dot-paper.svg" alt="MDP"> の
+        <mat-icon>settings</mat-icon>
+    </button>
 </div>
