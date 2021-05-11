@@ -1,3 +1,10 @@
+* [2021-05-11 Tue] Migrate this App to Google Workspace.
+1. Take care of the quota.
+2. ~auth/drive.file~ is for the files created by this App and ~auth/drive.readonly~ is for all files so that ~auth/drive.readonly~ is more sensitive.
+3. Looks like I don't need to ask for accessing all files so that I don't need to include ~auth/drive~ at this moment.
+4. Once the user is changed, this App will import the settings from google drive since that data should be changed when the user is changed.
+5. Once the media file is checked as a video or an audio, change the display of ~video~ and ~audio~ HTMLElements.
+
 * [2021-04-27 Tue] PWA can work now
 1. I need to deal with subfolder's problem. You can follow this [[https://forum.ionicframework.com/t/how-to-configure-a-pwa-to-run-on-a-subfolder-ask-question/160517/5][Q&A]]
 to solve it.

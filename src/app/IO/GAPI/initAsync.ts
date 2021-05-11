@@ -46,9 +46,8 @@ export default async function initAsync() {
     discoveryDocs: [
       "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
       "https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest",
-      "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest",
     ],
-    scope: "profile",
+    scope: "profile https://www.googleapis.com/auth/drive.install",
   });
 
   isAuthLoaded$.next(true);

@@ -5,8 +5,10 @@ import { Subscription } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { DeviceService } from "src/app/services/device.service";
 import { GapiService } from "src/app/services/GAPI/gapi.service";
+import { Gv2googleService } from "src/app/services/GV/gv2google.service";
 import { MediaEditService } from "src/app/services/media-edit.service";
 import { MessageService } from "src/app/services/message.service";
+import { WithClickService } from "src/app/services/WithClick/with-click.service";
 import { PlayerType } from "src/app/vm/player-type.enum";
 
 @Component({
@@ -20,7 +22,12 @@ export class Export2Component implements OnInit, OnDestroy {
 
   private _unsubscribed = new Subject<boolean>();
 
-  constructor(public GAPIservice: GapiService, public device: DeviceService) {}
+  constructor(
+    public GAPIservice: GapiService,
+    public device: DeviceService,
+    private gv2googleService: Gv2googleService,
+    private withClickService: WithClickService
+  ) {}
 
   ngOnDestroy(): void {
     this._unsubscribed.next(true);
@@ -37,9 +44,23 @@ export class Export2Component implements OnInit, OnDestroy {
       });
   }
 
-  onClick() {
-    this.GAPIservice.service.signInAsync().then((usr) => {
-      console.log(usr);
-    });
+  async onClick() {
+    let usr: gapi.auth2.GoogleUser;
+    let self = this;
+    try {
+      usr = await this.GAPIservice.service.signInAsync();
+
+      // * Load the settings from google drive since the user is changed
+      if (!!usr) {
+        self.gv2googleService.importGVFromGoogleAsync({
+          scopes:
+            "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets",
+          signInWithClick: self.withClickService.withSignInClick,
+          grantWithClick: self.withClickService.withGrantClick,
+        });
+      }
+    } catch (error) {
+      alert(error.error);
+    }
   }
 }

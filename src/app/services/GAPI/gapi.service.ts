@@ -25,8 +25,10 @@ export class GapiService {
     this.service = service;
   }
 
-  public async getGoogleDriveDataFromFileIdAsync(fileId: string,
-    resultType: 'story' | 'blob' | 'both' = 'both') {
+  public async getGoogleDriveDataFromFileIdAsync(
+    fileId: string,
+    resultType: "story" | "blob" | "both" = "both"
+  ) {
     let result: IStory | Blob;
     const self = this;
 
@@ -36,28 +38,29 @@ export class GapiService {
         fileId,
         fields: "mimeType",
         signInWithClick: self.withClickService.withSignInClick,
-        grantWithClick: self.withClickService.withGrantClick
+        grantWithClick: self.withClickService.withGrantClick,
       });
       const mimeType = res.result.mimeType;
       if (
-        resultType !== 'blob' &&
+        resultType !== "blob" &&
         (mimeType.toLowerCase().indexOf(`text`) >= 0 ||
           mimeType.toLowerCase().indexOf("octet-stream") >= 0)
       ) {
         const blob = await service.downloadItemAsync({
           fileId,
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
         var data = await blob.text();
         result = this.storyService.getAStoryFromString(data);
       } else if (
-        resultType !== 'blob' &&
-        mimeType.indexOf("spreadsheet") >= 0) {
+        resultType !== "blob" &&
+        mimeType.indexOf("spreadsheet") >= 0
+      ) {
         const resSS = await service.getSheetsInfoAsync({
           spreadsheetId: fileId,
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
         /******************** TODO ********************/
         const sheetName = resSS.result.sheets[0].properties.title;
@@ -65,18 +68,16 @@ export class GapiService {
           spreadsheetId: fileId,
           range: sheetName,
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
         const values = resCells.result.values;
 
         result = getAStoryFromArray(values);
-      } else if (
-        resultType !== 'blob' &&
-        mimeType.indexOf("zip") >= 0) {
+      } else if (resultType !== "blob" && mimeType.indexOf("zip") >= 0) {
         const blob = await service.downloadItemAsync({
           fileId,
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
         const zip = await this.zipService.service.importFromZipAsync({
           data: blob,
@@ -84,19 +85,17 @@ export class GapiService {
         /*************** TODO  *************************/
         var data = await zip[0].blob.text();
         result = this.storyService.getAStoryFromString(data);
-      } else if (
-        resultType !== 'story' &&
-        /(video|audio)/i.test(mimeType)) {
+      } else if (resultType !== "story" && /(video|audio)/i.test(mimeType)) {
         return await service.downloadItemAsync({
           fileId,
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
       } else {
         throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
     } catch (error) {
-      this.msg.alert(`無法讀取Google Drive 檔: ${error.message}`);
+      this.msg.alert(`無法讀取Google Drive 檔: ${error.error}`);
     }
 
     return result;
@@ -118,7 +117,7 @@ export class GapiService {
         await service.createFileAsync({
           name: path,
           blob,
-          parents: [(!!parents) ? parents : 'root']
+          parents: [!!parents ? parents : "root"],
         });
         break;
 
@@ -131,9 +130,9 @@ export class GapiService {
         await service.createFileAsync({
           name: path,
           blob,
-          parents: [(!!parents) ? parents : 'root'],
+          parents: [!!parents ? parents : "root"],
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
 
         break;
@@ -178,9 +177,9 @@ export class GapiService {
         // * [2021-04-07 11:01] Create a spreadsheet and get its id
         var res = await service.createSSAsync({
           title: path,
-          parents: (!!parents) ? parents : 'root',
+          parents: !!parents ? parents : "root",
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
         const spreadsheetId = res.result.spreadsheetId;
         const sheetName = res.result.sheets[0].properties.title;
@@ -194,7 +193,7 @@ export class GapiService {
             values: data,
           },
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
 
         // * [2021-04-07 15:22] Folding
@@ -205,7 +204,7 @@ export class GapiService {
           endIndex: 4,
           dimension: "COLUMNS",
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
 
         res = await service.groupSheetDimAsync({
@@ -215,7 +214,7 @@ export class GapiService {
           endIndex: 4,
           dimension: "ROWS",
           signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick
+          grantWithClick: self.withClickService.withGrantClick,
         });
 
         //#endregion SaveAsSheetAsync

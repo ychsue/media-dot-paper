@@ -9,8 +9,7 @@ interface IPropIn {
   parents?: string[];
 }
 
-interface IOProps extends IPropIn, IWithMustSignIn {
-}
+interface IOProps extends IPropIn, IWithMustSignIn {}
 
 async function createFileGAPIAsync({ name, blob, mimeType, parents }: IPropIn) {
   // 取自 https://tanaikech.github.io/2018/08/13/upload-files-to-google-drive-using-javascript/
@@ -54,11 +53,20 @@ async function createFileGAPIAsync({ name, blob, mimeType, parents }: IPropIn) {
 }
 
 export default async function createFileAsync(props: IOProps) {
-  var { scopes, signInWithClick, grantWithClick, mustLoadScopes, ...propsIn } = props;
-  scopes = (!!scopes) ? scopes : "https://www.googleapis.com/auth/drive";
-  var res = await withMustSignIn({ scopes, signInWithClick, grantWithClick, mustLoadScopes })(
-    createFileGAPIAsync
-  )(propsIn);
+  var {
+    scopes,
+    signInWithClick,
+    grantWithClick,
+    mustLoadScopes,
+    ...propsIn
+  } = props;
+  scopes = !!scopes ? scopes : "https://www.googleapis.com/auth/drive.file";
+  var res = await withMustSignIn({
+    scopes,
+    signInWithClick,
+    grantWithClick,
+    mustLoadScopes,
+  })(createFileGAPIAsync)(propsIn);
 
   return res;
 }

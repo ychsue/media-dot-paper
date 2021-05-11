@@ -1,23 +1,45 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, NgZone, AfterViewChecked, EventEmitter, Output } from '@angular/core';
-import { MediaEditService, MEState, playerAction } from 'src/app/services/media-edit.service';
-import { YoutubeService } from 'src/app/services/youtube.service';
-import { Subject, interval, from, fromEvent, of } from 'rxjs';
-import { takeUntil, map, distinctUntilChanged, merge, share, take, takeWhile, concat } from 'rxjs/operators';
-import { SafePipe } from 'src/app/pipes/safe.pipe';
-import { MessageService, MessageTypes } from 'src/app/services/message.service';
-import { PlayerType } from '../../vm/player-type.enum';
-import { DeviceService } from '../../services/device.service';
-import { CrossCompService } from 'src/app/services/cross-comp.service';
-import { WithClickService } from 'src/app/services/WithClick/with-click.service';
-import { GapiService } from 'src/app/services/GAPI/gapi.service';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  NgZone,
+  AfterViewChecked,
+  EventEmitter,
+  Output,
+} from "@angular/core";
+import {
+  MediaEditService,
+  MEState,
+  playerAction,
+} from "src/app/services/media-edit.service";
+import { YoutubeService } from "src/app/services/youtube.service";
+import { Subject, interval, from, fromEvent, of } from "rxjs";
+import {
+  takeUntil,
+  map,
+  distinctUntilChanged,
+  merge,
+  share,
+  take,
+  takeWhile,
+  concat,
+} from "rxjs/operators";
+import { SafePipe } from "src/app/pipes/safe.pipe";
+import { MessageService, MessageTypes } from "src/app/services/message.service";
+import { PlayerType } from "../../vm/player-type.enum";
+import { DeviceService } from "../../services/device.service";
+import { CrossCompService } from "src/app/services/cross-comp.service";
+import { WithClickService } from "src/app/services/WithClick/with-click.service";
+import { GapiService } from "src/app/services/GAPI/gapi.service";
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.css', '../../common-use.css']
+  selector: "app-player",
+  templateUrl: "./player.component.html",
+  styleUrls: ["./player.component.css", "../../common-use.css"],
 })
 export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
-
   @Output()
   heightChange: EventEmitter<number> = new EventEmitter<number>();
   private _height = 0;
@@ -36,10 +58,10 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this._ytVId = v;
   }
 
-  @ViewChild('video', { static: true })
+  @ViewChild("video", { static: true })
   ngVideo: ElementRef;
 
-  @ViewChild('audio', { static: true })
+  @ViewChild("audio", { static: true })
   ngAudio: ElementRef;
 
   videoEle: HTMLVideoElement;
@@ -47,22 +69,26 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   mediaEle: HTMLVideoElement | HTMLAudioElement;
   displayWho: "video" | "audio" | "YouTube";
 
-  @ViewChild('youtube', { static: true })
+  @ViewChild("youtube", { static: true })
   ngYoutube: ElementRef;
   youtubeEle: HTMLIFrameElement;
   isInited = false;
   _msInterval = 200;
 
-  @ViewChild('container', { static: true })
+  @ViewChild("container", { static: true })
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 
-  constructor(public meService: MediaEditService, private YTservice: YoutubeService,
-    private crossComp: CrossCompService,  // keep videoEle in crossComp
-    private msgService: MessageService, private ngZone: NgZone, private device: DeviceService,
+  constructor(
+    public meService: MediaEditService,
+    private YTservice: YoutubeService,
+    private crossComp: CrossCompService, // keep videoEle in crossComp
+    private msgService: MessageService,
+    private ngZone: NgZone,
+    private device: DeviceService,
     private withClickService: WithClickService,
-    private gapiService: GapiService) {
-  }
+    private gapiService: GapiService
+  ) {}
 
   ngOnInit() {
     const self = this;
@@ -76,11 +102,14 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.eventTriggers();
     this.eventListeners();
     // * [2018-06-18 20:57] because this component might be initialized after the MEState.readyForPlayer, I need to deal with this situation
-    if ((this.meService.state === MEState.readyForPlayer) && (this.isInited === false)) {
+    if (
+      this.meService.state === MEState.readyForPlayer &&
+      this.isInited === false
+    ) {
       this.initMe();
       this.isInited = true;
     }
-    if (this.device.isCordova && cordova.platformId === 'ios') {
+    if (this.device.isCordova && cordova.platformId === "ios") {
       self.mediaEle.setAttribute("playsinline", "true");
     }
     self.meService.state = MEState.playerReady;
@@ -96,7 +125,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngAfterViewChecked(): void {
     const ele = this.containerEle;
     // * [2018-11-06 11:38] Check height
-    if (!!ele && (ele.offsetHeight !== this._height)) {
+    if (!!ele && ele.offsetHeight !== this._height) {
       this._height = ele.offsetHeight;
       this.heightChange.emit(this._height);
     }
@@ -106,7 +135,10 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     const self = this;
     const meType = self.meService.story.meType;
     if (meType === self.pType.youtubeID) {
-      if (self.YTservice.isApiReady && !!self.YTservice.ytPlayer.getCurrentTime) {
+      if (
+        self.YTservice.isApiReady &&
+        !!self.YTservice.ytPlayer.getCurrentTime
+      ) {
         return self.YTservice.ytPlayer.getCurrentTime();
       } else {
         return -1;
@@ -119,17 +151,23 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   checkYoutubStateAndSetState() {
     const self = this;
     let state = -2;
-    if (self.meService.story.meType === PlayerType.youtubeID &&
-      !!self.YTservice.ytPlayer === true && !!self.YTservice.ytPlayer.getPlayerState === true) {
+    if (
+      self.meService.story.meType === PlayerType.youtubeID &&
+      !!self.YTservice.ytPlayer === true &&
+      !!self.YTservice.ytPlayer.getPlayerState === true
+    ) {
       const ytState = self.YTservice.ytPlayer.getPlayerState();
       // 0:ended, 1: playing, 2: paused, 3: buffering, 5: video cued
-      if ((self.meService.state !== MEState.playing) && (ytState === 1)) {
+      if (self.meService.state !== MEState.playing && ytState === 1) {
         self.meService.state = MEState.playing;
-      } else if ((self.meService.state !== MEState.stopped) && (ytState === 0)) {
+      } else if (self.meService.state !== MEState.stopped && ytState === 0) {
         self.meService.state = MEState.stopped;
-      } else if ((self.meService.state !== MEState.paused) && (ytState === 2)) {
+      } else if (self.meService.state !== MEState.paused && ytState === 2) {
         self.meService.state = MEState.paused;
-      } else if ((self.meService.state !== MEState.waiting) && ((ytState === 3) || (ytState === 5))) {
+      } else if (
+        self.meService.state !== MEState.waiting &&
+        (ytState === 3 || ytState === 5)
+      ) {
         self.meService.state = MEState.waiting;
       }
       state = self.meService.state;
@@ -144,13 +182,16 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
       .pipe(takeUntil(self.unSubscribed))
       .subscribe((t) => {
         if (t === MEState.readyForPlayer) {
-          if (self.isInited === false) { self.isInited = true; }
+          if (self.isInited === false) {
+            self.isInited = true;
+          }
           self.initMe();
           self.withClickService.withClick({
             title: "提醒事項",
-            content: "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
+            content:
+              "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
             stYes: "播放",
-            stNo: ""
+            stNo: "",
           })(async (_: void) => {
             try {
               self.meService.onPlayerAction.next(playerAction.play);
@@ -162,10 +203,14 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         }
       });
     // * [2018-09-12 13:21] Check whether the media is ready
-    self.meService.requestMediaReady$.pipe(takeUntil(self.unSubscribed))
-      .subscribe(_ => {
+    self.meService.requestMediaReady$
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe((_) => {
         let isReady = false;
-        if (self.meService.story.meType === PlayerType.youtubeID && !!self.YTservice.ytPlayer === true) {
+        if (
+          self.meService.story.meType === PlayerType.youtubeID &&
+          !!self.YTservice.ytPlayer === true
+        ) {
           const ytState = self.checkYoutubStateAndSetState();
           isReady = ytState >= 0;
         } else {
@@ -174,22 +219,21 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         self.meService.responseMediaReady$.next(isReady);
       });
     // * [2018-07-21 19:44] For CurrentTime
-    self.meService.onCurrentTimeChanged = interval(self._msInterval)
-      .pipe(
-        map(_ => {
-          if (self.meService.story.meType === self.pType.youtubeID) {
-            const yState = self.checkYoutubStateAndSetState();
-            return (yState === -2) ? -1 : self.getCurrentTime();
-          } else {
-            return self.getCurrentTime();
-          }
-        }),
-        distinctUntilChanged(),
-        share()
-      );
+    self.meService.onCurrentTimeChanged = interval(self._msInterval).pipe(
+      map((_) => {
+        if (self.meService.story.meType === self.pType.youtubeID) {
+          const yState = self.checkYoutubStateAndSetState();
+          return yState === -2 ? -1 : self.getCurrentTime();
+        } else {
+          return self.getCurrentTime();
+        }
+      }),
+      distinctUntilChanged(),
+      share()
+    );
     self.meService.onCurrentTimeChanged
       .pipe(takeUntil(self.unSubscribed))
-      .subscribe(t => {
+      .subscribe((t) => {
         self.meService.currentTime = t;
         // console.log(t);
       });
@@ -199,7 +243,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     // * [2018-07-24 13:48] For repeating each frame
     self.meService.onCurrentTimeChanged
       .pipe(takeUntil(self.unSubscribed))
-      .subscribe(t => {
+      .subscribe((t) => {
         try {
           let start = 0;
           let end = self.meService.duration - 0.1;
@@ -216,9 +260,12 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
               isDuringStart = true;
               self.meService.seekTime = start;
             }
-          } else if ((self.meService.state === MEState.paused) || (self.meService.state === MEState.canPlay)) {
+          } else if (
+            self.meService.state === MEState.paused ||
+            self.meService.state === MEState.canPlay
+          ) {
             self.meService.currentTime = t;
-          } else if (t > (end - (self._msInterval / 1000))) {
+          } else if (t > end - self._msInterval / 1000) {
             if (isDuringEnd === false) {
               isDuringEnd = true;
               setTimeout(() => {
@@ -242,19 +289,18 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
       });
 
     // * [2018-07-22 22:16] Update Duration & availablePlaybackRates
-    fromEvent(self.videoEle, 'durationchange')
+    fromEvent(self.videoEle, "durationchange")
       // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
       .pipe(takeUntil(self.unSubscribed))
-      .subscribe(_ => {
+      .subscribe((_) => {
         self.meService.onPlayerAction.next(playerAction.getDuration);
         self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
       });
-    self.YTservice.onReady
-      .pipe(takeUntil(self.unSubscribed))
-      .subscribe(_ => {
-        self.meService.onPlayerAction.next(playerAction.getDuration);
-        self.meService.availablePlaybackRates = self.YTservice.ytPlayer.getAvailablePlaybackRates();
-      });
+    self.YTservice.onReady.pipe(takeUntil(self.unSubscribed)).subscribe((_) => {
+      self.meService.onPlayerAction.next(playerAction.getDuration);
+      self.meService.availablePlaybackRates =
+        self.YTservice.ytPlayer.getAvailablePlaybackRates();
+    });
 
     // * For playerAction
     this.meService.onPlayerAction
@@ -294,17 +340,22 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
                 self.mediaEle.playbackRate = self.meService.playbackRate;
                 break;
               case playerAction.getAllowedPlaybackRate:
-                self.meService.availablePlaybackRates = [0.25, 0.5, 0.75, 1, 1.5, 2, 4];
+                self.meService.availablePlaybackRates = [
+                  0.25, 0.5, 0.75, 1, 1.5, 2, 4,
+                ];
                 break;
               default:
                 break;
             }
-          } catch (error) { // For IE11
+          } catch (error) {
+            // For IE11
             console.log("Player.Component error at videoEle: " + error.message);
           }
         } else if (meType === self.pType.youtubeID) {
           const ytPlayer = self.YTservice.ytPlayer;
-          if (!!ytPlayer === false) { return; }
+          if (!!ytPlayer === false) {
+            return;
+          }
           switch (t) {
             case playerAction.play:
               if (!!ytPlayer.playVideo) {
@@ -327,13 +378,19 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
               break;
             case playerAction.getDuration:
               if (!!ytPlayer.getDuration) {
-                of(0).pipe(concat(interval(500))).pipe(take(5), takeWhile(_ => {
-                  const duration = ytPlayer.getDuration();
-                  if (!!duration) {
-                    self.meService.duration = duration;
-                  }
-                  return (!!duration === false);
-                })).subscribe(_ => { });
+                of(0)
+                  .pipe(concat(interval(500)))
+                  .pipe(
+                    take(5),
+                    takeWhile((_) => {
+                      const duration = ytPlayer.getDuration();
+                      if (!!duration) {
+                        self.meService.duration = duration;
+                      }
+                      return !!duration === false;
+                    })
+                  )
+                  .subscribe((_) => {});
               }
               break;
             case playerAction.getVolume:
@@ -358,7 +415,8 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
               break;
             case playerAction.getAllowedPlaybackRate:
               if (!!ytPlayer.getAvailablePlaybackRates) {
-                self.meService.availablePlaybackRates = ytPlayer.getAvailablePlaybackRates();
+                self.meService.availablePlaybackRates =
+                  ytPlayer.getAvailablePlaybackRates();
               }
               break;
             default:
@@ -392,7 +450,12 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
       .subscribe((ev) => {
         if (self.meService.story.modifyTime === 0) {
           const data = (self.YTservice.ytPlayer as any).getVideoData();
-          if (self.meService.story.makeTime === self.meService.lastTimeCallInitMeFromUrl && !!data && !!data.title) {
+          if (
+            self.meService.story.makeTime ===
+              self.meService.lastTimeCallInitMeFromUrl &&
+            !!data &&
+            !!data.title
+          ) {
             self.meService.story.name = data.title;
           }
         }
@@ -402,22 +465,27 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   eventTriggers() {
     const isDebug = false;
-    const showEvDbg = (ev: Event | string, name: string) => { if (isDebug) { console.log(name); console.log(ev); } }
+    const showEvDbg = (ev: Event | string, name: string) => {
+      if (isDebug) {
+        console.log(name);
+        console.log(ev);
+      }
+    };
     const self = this;
     const setEvents = (media: HTMLVideoElement | HTMLAudioElement) => {
       // * [2018-06-18 11:11] for MEState.canPlay
       media.oncanplay = (ev) => {
-        showEvDbg(ev, 'oncanplay');
+        showEvDbg(ev, "oncanplay");
         self.meService.state = MEState.canPlay;
       };
       // * [2018-06-18 11:11] for MEState.error
       media.onerror = (ev) => {
-        showEvDbg(ev, 'onerror');
+        showEvDbg(ev, "onerror");
         self.meService.state = MEState.error;
       };
       // * [2018-06-18 11:11] for MEState.waiting
       media.onwaiting = (ev) => {
-        if ((media.currentTime > 0) && !media.paused && media.readyState > 2) {
+        if (media.currentTime > 0 && !media.paused && media.readyState > 2) {
           // For windows UWP, onPlaying event may not be triggered.
           self.meService.state = MEState.playing;
         } else {
@@ -429,31 +497,34 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         self.meService.state = MEState.playing;
       };
       media.onplaying = (ev) => {
-        showEvDbg(ev, 'onplaying');
+        showEvDbg(ev, "onplaying");
         self.meService.state = MEState.playing;
       };
       // * [2018-06-18 11:11] for MEState.paused
       media.onpause = (ev) => {
-        showEvDbg(ev, 'onpause');
+        showEvDbg(ev, "onpause");
         self.meService.state = MEState.paused;
       };
 
       // * [2018-06-18 11:11] for MEState.stopped
       media.onended = (ev) => {
-        showEvDbg(ev, 'onended');
+        showEvDbg(ev, "onended");
         self.meService.state = MEState.stopped;
       };
       // ************************* TODO *****************************
 
       if (media === self.videoEle) {
         media.onloadedmetadata = (ev) => {
-          showEvDbg(ev, 'onloadedmetadata');
+          showEvDbg(ev, "onloadedmetadata");
           const ele = ev.target as HTMLVideoElement;
-          self.mediaEle = (!!ele.videoHeight && !!ele.videoWidth) ? self.videoEle : self.audioEle;
+          self.mediaEle =
+            !!ele.videoHeight && !!ele.videoWidth
+              ? self.videoEle
+              : self.audioEle;
           self.onUpdateDisplay(PlayerType.url);
-        }
+        };
       }
-    }
+    };
 
     setEvents(self.videoEle);
     setEvents(self.audioEle);
@@ -477,9 +548,18 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         let fId = self.gapiService.service.getFileIdFromUri(urlOrId);
         (async () => {
           if (!!fId) {
-            const blob = await self.gapiService.getGoogleDriveDataFromFileIdAsync(fId, "blob") as Blob;
-            self.mediaEle = (/audio/i.test(blob.type)) ?
-              self.audioEle : self.videoEle;
+            const blob =
+              (await self.gapiService.getGoogleDriveDataFromFileIdAsync(
+                fId,
+                "blob"
+              )) as Blob;
+            if (/audio/i.test(blob.type)) {
+              self.mediaEle = self.audioEle;
+              self.displayWho = "audio";
+            } else {
+              self.mediaEle = self.videoEle;
+              self.displayWho = "video";
+            }
             urlOrId = URL.createObjectURL(blob);
           }
           self.videoSrc = urlOrId;
@@ -516,7 +596,11 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     // ev.preventDefault();
     const fun = () => {
       const state = this.meService.state;
-      if (state === MEState.paused || state === MEState.readyForPlayer || state === MEState.canPlay) {
+      if (
+        state === MEState.paused ||
+        state === MEState.readyForPlayer ||
+        state === MEState.canPlay
+      ) {
         this.meService.onPlayerAction.next(playerAction.play);
       } else {
         this.meService.onPlayerAction.next(playerAction.pause);
@@ -531,7 +615,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     switch (type) {
       case PlayerType.file:
       case PlayerType.url:
-        this.displayWho = (this.mediaEle === this.videoEle) ? "video" : "audio";
+        this.displayWho = this.mediaEle === this.videoEle ? "video" : "audio";
         break;
       case PlayerType.youtubeID:
         this.displayWho = "YouTube";
