@@ -10,7 +10,9 @@ interface IOProps extends IProps, IWithMustSignIn {
 
 export default async function createSSAsync(props: IOProps) {
     var { scopes, signInWithClick, grantWithClick, mustLoadScopes, ...propsIn } = props;
-    scopes = (!!scopes) ? scopes : 'https://www.googleapis.com/auth/spreadsheets';
+    scopes = !!scopes
+      ? scopes
+      : "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets";
     var res = await withMustSignIn({ scopes, signInWithClick, grantWithClick, mustLoadScopes })(
         createSSGAPIAsync)(propsIn);
     return res;

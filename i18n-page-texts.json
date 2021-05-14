@@ -12,6 +12,31 @@
             "mobileFileSelWarn": "If your selected local media file is large, most of the actions should still work; however, it might crash this App when you try to save it into the MDP list.",
             "browserFileSelWarn": "Although you can load a local media file, you cannot save it into the MDP list for this platform."
         },
+        "ex2GDComp": {
+            "createFileTitle": "創造 {0} 檔案中",
+            "createFileContent": "請稍候",
+            "createFileSuccess": "檔案 {0} 已經成功輸出到 Google Drive 上了！",
+            "createFileFail": "抱歉，出現問題： {0}",
+            "exportAsMDPYC": "匯出為MDPYC檔案",
+            "exportAsZIP": "匯出為ZIP壓縮檔案",
+            "exportAsSheet": "匯出為Sheet檔案"
+        },
+        "withClickService": {
+            "signInTitle": "Google Drive 登入與權限要求",
+            "signInContent": "您需要登入 GOOGLE 此動作才能繼續",
+            "grantTitle": "Google Drive 額外權限要求",
+            "grantContent": "您需要提供 GOOGLE 額外的權限",
+            "yes": "Yes",
+            "no": "No",
+            "importGVFromGDTitle": "初始化或匯入yc.settings檔",
+            "importGVFromGDContent": "由您的 Google Drive 根目錄匯入或初始化該設定檔，好使您可以在跨平台下有相同的配置，也方便您手動調整設定。"
+        },
+        "playerComp": {
+            "playDialogTitle": "提醒事項",
+            "playDialogContent": "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
+            "playDialogYes": "播放",
+            "playDialogError": "請點影片中央看看能否播放，否則有可能無法操縱影片播放"
+        },
         "appComp": {
             "chooseAMediaAtFirst": "This page is for the setting of the media you selected.\nSo, please choose a media at first.",
             "chooseAMedia": "Select a media",
@@ -94,7 +119,8 @@
         },
         "appSettingPage": {
             "hDailySample": "Setting <b>Daily Sample</b> button",
-            "hLayout": "Layout"
+            "hLayout": "Layout",
+            "hSetIO": "Import or Export Settings"
         },
         "dailySampleComp": {
             "default": "Default:",

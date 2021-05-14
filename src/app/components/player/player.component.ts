@@ -15,12 +15,11 @@ import {
   playerAction,
 } from "src/app/services/media-edit.service";
 import { YoutubeService } from "src/app/services/youtube.service";
-import { Subject, interval, from, fromEvent, of } from "rxjs";
+import { Subject, interval, from, fromEvent, of, merge } from "rxjs";
 import {
   takeUntil,
   map,
   distinctUntilChanged,
-  merge,
   share,
   take,
   takeWhile,
@@ -33,6 +32,7 @@ import { DeviceService } from "../../services/device.service";
 import { CrossCompService } from "src/app/services/cross-comp.service";
 import { WithClickService } from "src/app/services/WithClick/with-click.service";
 import { GapiService } from "src/app/services/GAPI/gapi.service";
+import { PageTextsService } from "src/app/services/page-texts.service";
 
 @Component({
   selector: "app-player",
@@ -79,6 +79,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 
+  pts: IPlayerComp;
   constructor(
     public meService: MediaEditService,
     private YTservice: YoutubeService,
@@ -87,8 +88,16 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
     private ngZone: NgZone,
     private device: DeviceService,
     private withClickService: WithClickService,
-    private gapiService: GapiService
-  ) {}
+    private gapiService: GapiService,
+    public ptsService: PageTextsService
+  ) {
+    const self = this;
+    merge(ptsService.PTSReady$, ptsService.ptsLoaded$).pipe(
+      takeUntil(self.unSubscribed)
+    ).subscribe(_=>{
+      self.pts = ptsService?.pts?.playerComp;
+    });
+  }
 
   ngOnInit() {
     const self = this;
@@ -187,16 +196,21 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
           }
           self.initMe();
           self.withClickService.withClick({
-            title: "提醒事項",
-            content:
-              "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
-            stYes: "播放",
+            title: !!self.pts ? self.pts.playDialogTitle : "提醒事項",
+            content: !!self.pts
+              ? self.pts.playDialogContent
+              : "由於有時會媒體載入不全，請先按此鈕看看能否播放。若未播放，以YouTube為例，請先按影片的中央來播放，好讓YouTube確定你真的想看，它才有機會將控制權交給本APP",
+            stYes: !!self.pts ? self.pts.playDialogYes : "播放",
             stNo: "",
           })(async (_: void) => {
             try {
               self.meService.onPlayerAction.next(playerAction.play);
             } catch (error) {
-              alert("請點影片中央看看能否播放，否則有可能無法操縱影片播放");
+              alert(
+                !!self.pts
+                  ? self.pts.playDialogError
+                  : "請點影片中央看看能否播放，否則有可能無法操縱影片播放"
+              );
             }
             return;
           })();
@@ -290,7 +304,6 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     // * [2018-07-22 22:16] Update Duration & availablePlaybackRates
     fromEvent(self.videoEle, "durationchange")
-      // .pipe(merge(fromEvent(self.videoEle, 'loadstart')))
       .pipe(takeUntil(self.unSubscribed))
       .subscribe((_) => {
         self.meService.onPlayerAction.next(playerAction.getDuration);

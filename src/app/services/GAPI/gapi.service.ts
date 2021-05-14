@@ -95,7 +95,9 @@ export class GapiService {
         throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
     } catch (error) {
-      this.msg.alert(`無法讀取Google Drive 檔: ${error.error}`);
+      this.msg.alert(
+        `getGoogleDriveDataFromFieldAsync:: Cannot read the file in your Google Drive: ${error.error}`
+      ); //I18N
     }
 
     return result;

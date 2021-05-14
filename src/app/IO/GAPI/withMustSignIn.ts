@@ -37,7 +37,7 @@ export const withMustSignIn = ({ scopes, mustLoadScopes = false,
 
       // * [2021-03-12 22:19] If it is not loaded
       if (!!!isLoaded) {
-        alert("Google API 尚未 load");
+        alert("Google API is not loaded"); //I18N
         return null;
       }
 
@@ -48,18 +48,20 @@ export const withMustSignIn = ({ scopes, mustLoadScopes = false,
           if (!!!window?.gapi?.auth2) {
             await initAsync();
           }
-          user = await signInWithClick
+          user = await signInWithClick(
             // HOF({
             //   title: "Google Drive 權限",
             //   content: "您需要 GOOGLE 登入或提供額外的權限",
             //   stYes: "好",
             //   stNo: "不想"
             // })
-            (gapi.auth2.getAuthInstance().signIn)
-            (isWithScopes ? { scope: scopes } : undefined);
+            gapi.auth2.getAuthInstance().signIn
+          )(isWithScopes ? { scope: scopes } : undefined);
           isWithScopes = false; // 因為已經處理了，後續不需要再處理
         } catch (error) {
-          alert(`請登入才能用 Google API: error: ${error.error}`);
+          alert(
+            `If you want to use Google API, log in at first: error: ${error.error}`
+          ); //I18N
           return null;
         }
       }

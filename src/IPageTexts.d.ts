@@ -1,23 +1,53 @@
 interface IPageTexts {
-    homePage: IHomePage;
-    appComp: IAppComp;
-    NewStory: INewStory;
-    InProgress: IInProgress;
-    storyComp: IStoryComp;
-    dialogComp: IDialogComp;
-    setSSComp: ISetSSComp;
-    fsService: IFsService;
-    meManiPlateComp: IMeManiPlateComp;
-    adService: IAdService;
-    welcomePage: IWelcomePage;
-    sGsetComp: ISGsetComp;
-    appSettingPage: IAppSettingPage;
-    dailySampleComp: IDailySampleComp;
-    pronunExerComp: IPronunExerComp;
-    micRecorderService: IMicRecorderService;
-    mediaEditService: IMediaEditService;
-    iso639: IIso639;
-    iso3166Country: IIso3166Country;
+  homePage: IHomePage;
+  appComp: IAppComp;
+  NewStory: INewStory;
+  InProgress: IInProgress;
+  storyComp: IStoryComp;
+  dialogComp: IDialogComp;
+  setSSComp: ISetSSComp;
+  fsService: IFsService;
+  meManiPlateComp: IMeManiPlateComp;
+  adService: IAdService;
+  welcomePage: IWelcomePage;
+  sGsetComp: ISGsetComp;
+  appSettingPage: IAppSettingPage;
+  dailySampleComp: IDailySampleComp;
+  pronunExerComp: IPronunExerComp;
+  micRecorderService: IMicRecorderService;
+  mediaEditService: IMediaEditService;
+  iso639: IIso639;
+  iso3166Country: IIso3166Country;
+  // 2021-05-13 added
+  playerComp: IPlayerComp;
+  withClickService: IWithClickService;
+  ex2GDComp: IEx2GDComp;
+}
+
+interface IEx2GDComp {
+  createFileTitle: string;
+  createFileContent: string;
+  createFileSuccess: string;
+  createFileFail: string;
+  exportAsMDPYC: string;
+  exportAsZIP: string;
+  exportAsSheet: string;
+}
+interface IWithClickService {
+  signInTitle: string;
+  signInContent: string;
+  grantTitle: string;
+  grantContent: string;
+  yes: string;
+  no: string;
+  importGVFromGDTitle: string;
+  importGVFromGDContent: string;
+}
+interface IPlayerComp {
+  playDialogTitle: string;
+  playDialogContent: string;
+  playDialogYes: string;
+  playDialogError: string;
 }
 interface IHomePage {
     newMedia: string;
@@ -112,8 +142,9 @@ interface ISGsetComp {
     alwaysShowMDPs: string;
 }
 interface IAppSettingPage {
-    hDailySample: string;
-    hLayout: string;
+  hDailySample: string;
+  hLayout: string;
+  hSetIO: string;
 }
 interface IDailySampleComp {
     'default': string;

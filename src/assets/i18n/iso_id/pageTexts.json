@@ -11,6 +11,31 @@
     "browserFileSelWarn": "Meskipun Anda dapat memuat file media lokal, Anda tidak dapat menyimpannya ke dalam daftar MDP untuk platform ini.",
     "dailySample": "Sampel Harian"
   },
+  "ex2GDComp": {
+    "createFileTitle": "Membuat {0} File",
+    "createFileContent": "Harap tunggu",
+    "createFileSuccess": "File {0} berhasil diekspor ke Google Drive!",
+    "createFileFail": "Maaf, ada masalah: {0}",
+    "exportAsMDPYC": "Ekspor sebagai file MDPYC",
+    "exportAsZIP": "Ekspor sebagai arsip ZIP",
+    "exportAsSheet": "Ekspor sebagai file Sheet"
+  },
+  "withClickService": {
+    "signInTitle": "Login dan Persyaratan Izin Google Drive",
+    "signInContent": "Anda harus login ke GOOGLE untuk melanjutkan tindakan ini",
+    "grantTitle": "persyaratan izin tambahan Google Drive",
+    "grantContent": "Anda harus memberikan izin tambahan kepada GOOGLE",
+    "yes": "ya",
+    "no": "tidak",
+    "importGVFromGDTitle": "Inisialisasi atau impor file yc.settings",
+    "importGVFromGDContent": "Impor atau inisialisasi file konfigurasi dari direktori root Google Drive Anda, sehingga Anda dapat memiliki konfigurasi yang sama di bawah lintas platform, dan Anda juga dapat menyesuaikan setelan secara manual."
+  },
+  "playerComp": {
+    "playDialogTitle": "Pengingat",
+    "playDialogContent": "Karena beban media terkadang tidak lengkap, tekan tombol ini terlebih dahulu untuk melihat apakah dapat dimainkan. Jika tidak diputar, ambil YouTube sebagai contoh, tekan bagian tengah video untuk memastikan YouTube yakin Anda benar-benar ingin melihatnya sebelum memiliki kesempatan untuk menyerahkan kontrol ke aplikasi",
+    "playDialogYes": "Bermain",
+    "playDialogError": "Silakan klik di tengah film untuk melihat apakah film dapat diputar, jika tidak, mungkin tidak mungkin untuk memanipulasi pemutaran film"
+  },
   "appComp": {
     "chooseAMediaAtFirst": "Halaman ini untuk pengaturan media yang Anda pilih.\nJadi, tolong pilih media pada awalnya.",
     "chooseAMedia": "Pilih media",
@@ -530,7 +555,8 @@
   },
   "appSettingPage": {
     "hDailySample": "Pengaturan tombol <b style=\"margin:0 4px;\"> Sampel Harian </b>",
-    "hLayout": "Tata letak"
+    "hLayout": "Tata letak",
+    "hSetIO": "Import or Export Settings"
   },
   "dailySampleComp": {
     "default": "Default:",

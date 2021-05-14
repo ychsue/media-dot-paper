@@ -11,6 +11,31 @@
     "browserFileSelWarn": "Although you can load a local media file, you cannot save it into the MDP list for this platform.",
     "dailySample": "Daily Sample"
   },
+  "ex2GDComp": {
+    "createFileTitle": "Exporting your work as a {0} File",
+    "createFileContent": "Please wait",
+    "createFileSuccess": "The file {0} has been successfully exported to Google Drive!",
+    "createFileFail": "Sorry, there was a problem: {0}",
+    "exportAsMDPYC": "Export as a MDPYC file",
+    "exportAsZIP": "Export as a ZIP archive",
+    "exportAsSheet": "Export as a spreadsheet file"
+  },
+  "withClickService": {
+    "signInTitle": "Google Drive Login and Permission Requirements",
+    "signInContent": "You need to log in to GOOGLE to continue this action",
+    "grantTitle": "Google Drive additional permission requirements",
+    "grantContent": "You need to grant GOOGLE additional permissions to let this work done.",
+    "yes": "Yes",
+    "no": "No",
+    "importGVFromGDTitle": "Initialize or import the spreadsheet file yc.settings",
+    "importGVFromGDContent": "Import or initialize the configuration file from your Google Drive root directory, so that you can have the same configuration under cross-platform, and it is also convenient for you to manually adjust the settings of this App."
+  },
+  "playerComp": {
+    "playDialogTitle": "Attention",
+    "playDialogContent": "As sometimes the media is not fully loaded, please click this button to see if it can be played. If it is not playing -- e.g. a YouTube video -- please click the center of the video to play it at first, so that YouTube can make sure that you really want to watch it before it has the opportunity to give control to this APP",
+    "playDialogYes": "Play",
+    "playDialogError": "Please click the center of the video to see if it can be played, otherwise you may not be able to control the video playback"
+  },
   "appComp": {
     "chooseAMediaAtFirst": "This page is for the setting of the media you selected.\nSo, please choose a media at first.",
     "chooseAMedia": "Select a media",
@@ -530,7 +555,8 @@
   },
   "appSettingPage": {
     "hDailySample": "Setting <b style='margin:0 4px;'>Daily Sample</b> button",
-    "hLayout": "Layout"
+    "hLayout": "Layout",
+    "hSetIO": "Import or Export Settings"
   },
   "dailySampleComp": {
     "default": "Default:",

@@ -1,10 +1,10 @@
 <div class="container">
   <button mat-raised-button (click)="onSaveAsync('MDPYC')">
     <mat-icon>file_upload</mat-icon>
-    輸出檔案
+    {{(!!pts)?pts.exportAsMDPYC:"輸出檔案"}}
   </button>
-  <button mat-raised-button (click)="onSaveAsync('ZIP')">輸出壓縮檔案</button>
+  <button mat-raised-button (click)="onSaveAsync('ZIP')">{{(!!pts)?pts.exportAsZIP:"輸出壓縮檔案"}}</button>
   <button mat-raised-button (click)="onSaveAsync('SHEETS')">
-    輸出至Sheet檔案
+    {{(!!pts)?pts.exportAsSheet:"輸出至Sheet檔案"}}
   </button>
 </div>

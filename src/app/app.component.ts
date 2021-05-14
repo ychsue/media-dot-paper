@@ -108,25 +108,6 @@ export class AppComponent implements AfterViewInit {
       self.gv.isJustPointerEvents = true;
     });
 
-    // * [2021-04-21 15:56] Updating Global Variables from google drive
-    if (self.gv.loadFromLocalStorage(ParaInLS.isFirstTime)) {
-      self.gv2googleService.importGVFromGoogleAsync({
-        scopes:
-          "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets",
-        signInWithClick: self.withClickService
-          .withClick({
-            title: "需要您同意讀寫您的 Google Drive",
-            content:
-              "為了能跨平台跨APP，本APP目前選擇在Google Drive上放置設定檔，",
-            stYes: "好",
-            stNo: "不了",
-          })
-          .bind(self.withClickService),
-        grantWithClick: self.withClickService.withGrantClick,
-      });
-      self.gv.isFirstTime = false;
-      self.gv.saveToLocalStorage(ParaInLS.isFirstTime);
-    }
   }
 
   decideSidenavMode() {

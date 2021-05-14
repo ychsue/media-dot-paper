@@ -1,3 +1,7 @@
+* [2021-05-14 Fri] Dealing with multilingual
+Some parts that I still have no idea how to make them multilingual.
+I marked them with ~//I18n~.
+
 * [2021-05-11 Tue] Migrate this App to Google Workspace.
 1. Take care of the quota.
 2. ~auth/drive.file~ is for the files created by this App and ~auth/drive.readonly~ is for all files so that ~auth/drive.readonly~ is more sensitive.

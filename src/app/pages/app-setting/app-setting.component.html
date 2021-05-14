@@ -20,7 +20,7 @@
         </mat-expansion-panel>
 
         <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header [innerHtml]="'設定存取'">
+            <mat-expansion-panel-header [innerHtml]="(!!pts)?pts.hSetIO:'設定存取'">
             </mat-expansion-panel-header>
             <app-setting-save-load></app-setting-save-load>
         </mat-expansion-panel>

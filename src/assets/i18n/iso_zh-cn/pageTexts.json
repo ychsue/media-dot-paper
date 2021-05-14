@@ -11,6 +11,31 @@
     "browserFileSelWarn": "虽然您可以加载本地媒体文件，但无法将其保存到此平台的MDP列表中。",
     "dailySample": "每日样品"
   },
+  "ex2GDComp": {
+    "createFileTitle": "创造 {0} 档案中",
+    "createFileContent": "请稍候",
+    "createFileSuccess": "档案 {0} 已经成功输出到 Google Drive 上了！",
+    "createFileFail": "抱歉，出现问题： {0}",
+    "exportAsMDPYC": "汇出为MDPYC档案",
+    "exportAsZIP": "汇出为ZIP压缩档案",
+    "exportAsSheet": "汇出为Sheet档案"
+  },
+  "withClickService": {
+    "signInTitle": "Google Drive 登入与权限要求",
+    "signInContent": "您需要登入 GOOGLE 此动作才能继续",
+    "grantTitle": "Google Drive 额外权限要求",
+    "grantContent": "您需要提供 GOOGLE 额外的权限",
+    "yes": "Yes",
+    "no": "No",
+    "importGVFromGDTitle": "初始化或汇入yc.settings档",
+    "importGVFromGDContent": "由您的 Google Drive 根目录汇入或初始化该设定档，好使您可以在跨平台下此App能有相同的配置，也方便您手动调整设定。"
+  },
+  "playerComp": {
+    "playDialogTitle": "提醒事项",
+    "playDialogContent": "由于有时会媒体加载不全，请先按此钮看看能否播放。 若未播放，以YouTube为例，请先按影片的中央来播放，好让YouTube确定你真的想看，它才有机会将控制权交给本APP",
+    "playDialogYes": "播放",
+    "playDialogError": "请点影片中央看看能否播放，否则有可能无法操纵影片播放"
+  },
   "appComp": {
     "chooseAMediaAtFirst": "此页面用于设置您选择的媒体。\n所以，请先选择一个媒体。",
     "chooseAMedia": "选择媒体",
@@ -530,7 +555,8 @@
   },
   "appSettingPage": {
     "hDailySample": "设定<b>每日一例</b>按钮",
-    "hLayout": "布局"
+    "hLayout": "布局",
+    "hSetIO": "设定值的汇入与汇出"
   },
   "dailySampleComp": {
     "default": "默认：",
