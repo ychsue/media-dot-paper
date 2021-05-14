@@ -1,3 +1,7 @@
+* [2021-05-14 Fri] The files that I need to modify for multilingual
+Its definition file is [[src/IPageTexts.d.ts]].
+From this file, seaching one of its key globally, you'll find out all files that need to be modified.
+
 * [2021-05-14 Fri] Dealing with multilingual
 Some parts that I still have no idea how to make them multilingual.
 I marked them with ~//I18n~.
