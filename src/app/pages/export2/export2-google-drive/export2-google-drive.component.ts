@@ -3,6 +3,7 @@ import { merge, Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { GapiService } from "src/app/services/GAPI/gapi.service";
 import { GvService } from "src/app/services/GV/gv.service";
+import { Gv2googleService } from "src/app/services/GV/gv2google.service";
 import { MediaEditService } from "src/app/services/media-edit.service";
 import { MessageService } from "src/app/services/message.service";
 import { PageTextsService } from "src/app/services/page-texts.service";
@@ -15,24 +16,25 @@ import { ZipService } from "src/app/services/ZIP/zip.service";
   styleUrls: ["./export2-google-drive.component.css"],
 })
 export class Export2GoogleDriveComponent implements OnInit, OnDestroy {
+  unSubscribed = new Subject<boolean>();
 
-  unSubscribed = new Subject<boolean>();  
-
-  pts: IEx2GDComp=null;
+  pts: IEx2GDComp = null;
   constructor(
     public GAPIService: GapiService,
     public ZIPService: ZipService,
     public meService: MediaEditService,
     public msg: MessageService,
     public gv: GvService,
-    private ptsService: PageTextsService
+    private ptsService: PageTextsService,
+    private gv2googleService: Gv2googleService
   ) {
     const self = this;
-    merge(self.ptsService.PTSReady$,self.ptsService.ptsLoaded$)
-      .pipe(takeUntil(self.unSubscribed)).subscribe(_=>{
+    merge(self.ptsService.PTSReady$, self.ptsService.ptsLoaded$)
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe((_) => {
         self.pts = self.ptsService.pts.ex2GDComp;
       });
-   }
+  }
 
   ngOnDestroy(): void {
     this.unSubscribed.next(true);
@@ -40,7 +42,7 @@ export class Export2GoogleDriveComponent implements OnInit, OnDestroy {
     this.unSubscribed = null;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   async onSaveAsync(fType: "MDPYC" | "ZIP" | "SHEETS") {
     const story = this.meService.story;
@@ -54,8 +56,14 @@ export class Export2GoogleDriveComponent implements OnInit, OnDestroy {
       !!self.pts ? self.pts.createFileContent : "請稍候"
     );
     try {
-      const result = await this.GAPIService.save2DriveAsync(story, fType,
-        this.gv.export2FolderId);
+      const GDFolderId =
+  
+             await this.gv2googleService.getExport2GDFolderIdAsync();
+      const result = await this.GAPIService.save2DriveAsync(
+        story,
+        fType,
+        GDFolderId
+      );
       this.msg.alert(
         (!!self.pts
           ? self.pts.createFileSuccess
@@ -64,10 +72,10 @@ export class Export2GoogleDriveComponent implements OnInit, OnDestroy {
       );
     } catch (error) {
       this.msg.alert(
-        (!!self.pts
-          ? self.pts.createFileFail
-          : `抱歉，出現問題： {0}`
-        ).replace("{0}", error.error)
+        (!!self.pts ? self.pts.createFileFail : `抱歉，出現問題： {0}`).replace(
+          "{0}",
+          error.error
+        )
       );
     }
 

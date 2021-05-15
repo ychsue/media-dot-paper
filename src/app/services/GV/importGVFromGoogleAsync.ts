@@ -1,10 +1,10 @@
 import { IWithMustSignIn, tHOF } from "src/app/IO/GAPI/withMustSignIn";
-import correctExport2FolderIdAsync from "./functions/correctExport2FolderIdAsync";
+import correctExport2GDFolderIdAsync from "./functions/correctExport2GDFolderIdAsync";
 import getArray2FromObj from "./functions/getArray2FromObj";
 import getMangerFileIdAsync from "./functions/getMangerFileIdAsync";
 import getMDPYCSettingsSheetAsync from "./functions/getMDPYCSettingsSheetAsync";
 import getObjFromArray2 from "./functions/getObjFromArray2";
-import { GvService, ParaInLS } from "./gv.service";
+import { GvService, IExportSettings, ParaInLS } from "./gv.service";
 import { Gv2googleService } from "./gv2google.service";
 
 interface IProps extends IWithMustSignIn {
@@ -17,7 +17,10 @@ export default async function importGVFromGoogleAsync(props
 
     const getMFIdAsync: typeof getMangerFileIdAsync = getMangerFileIdAsync.bind(self);
     const getSettingsSheetAsync: typeof getMDPYCSettingsSheetAsync = getMDPYCSettingsSheetAsync.bind(self);
-    const getExp2FolderIdAsync: typeof correctExport2FolderIdAsync = correctExport2FolderIdAsync.bind(self);
+    const getExp2FolderIdAsync: typeof correctExport2GDFolderIdAsync =
+      correctExport2GDFolderIdAsync.bind(self);
+
+    const __FID = "export2FolderId";
 
     try {
         // 1. Get the fileId with needed click event
@@ -36,30 +39,37 @@ export default async function importGVFromGoogleAsync(props
         // 4. Get settings from this array
         const objSettings = getObjFromArray2(settingsArray);
 
-        // 5. If this sheet is out of "export2FolderId", make that folder and get its Id.
-        const folderId = await getExp2FolderIdAsync(objSettings?.result as GvService);
-        const hasId = !!objSettings?.position["THIS"]?.export2FolderId;
-        const pos = (hasId) ?
-            [objSettings.position["THIS"]["_iR"], objSettings.position["THIS"]["export2FolderId"]] :
-            [4, 0];
-        const exportData = (hasId) ? [[folderId]] :
-            [["THIS", "export2FolderId"], ["", folderId]];
-        const range = `${sheetName}!R${pos[0] + 2}C${pos[1] + 1}` +
-            ((hasId) ? '' : `:R${pos[0] + 3}C${pos[1] + 2}`);
-        const res = await self.gapiService.service.setCellsValueAsync({
-            spreadsheetId: theMFId,
-            range,
-            resource: { values: exportData }
-        })
+        // 5. If this sheet is out of __FID, make that folder and get its Id.
+        const folderIdOld = (objSettings?.result as IExportSettings)
+          .export2FolderId;
+        const folderId = await getExp2FolderIdAsync(folderIdOld);
+        if(folderIdOld !== folderId){
+          const hasId = !!objSettings?.position["THIS"]?.export2FolderId;
+          const pos = (hasId) ?
+              [objSettings.position["THIS"]["_iR"], objSettings.position["THIS"][__FID]] :
+              [4, 0];
+          const exportData = (hasId) ? [[folderId]] :
+              [["THIS", __FID], ["", folderId]];
+          const range = `${sheetName}!R${pos[0] + 2}C${pos[1] + 1}` +
+              ((hasId) ? '' : `:R${pos[0] + 3}C${pos[1] + 2}`);
+          const res = await self.gapiService.service.setCellsValueAsync({
+              spreadsheetId: theMFId,
+              range,
+              resource: { values: exportData }
+          })
+        }
 
         // 6. store these data into localStorage and update gvService's values
         if (!!objSettings) {
-            const keys = Object.keys(objSettings.result);
+            const keys = Object.keys(objSettings.result as IExportSettings);
             for (let i0 = 0; i0 < keys.length; i0++) {
                 const key = keys[i0];
                 if (self.gvService[key] !== undefined) {
                     self.gvService[key] = objSettings.result[key];
                     self.gvService.saveToLocalStorage(ParaInLS[key]);
+                } else if (key === __FID) {
+                    self.setExport2GDFolderIdAsync(objSettings.result[key]);
+                    self.gvService.saveToLocalStorage(ParaInLS.googleUsers);
                 }
             }
         }

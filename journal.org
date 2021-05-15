@@ -1,3 +1,6 @@
+* [2021-05-15 Sat] Since each user has their own settings, I set a global variable "googleUsers" to store this information.
+Because for each user, their export2FolderId will not be the same, I put this value inside the array "googleUsers".
+
 * [2021-05-14 Fri] The files that I need to modify for multilingual
 Its definition file is [[src/IPageTexts.d.ts]].
 From this file, seaching one of its key globally, you'll find out all files that need to be modified.
