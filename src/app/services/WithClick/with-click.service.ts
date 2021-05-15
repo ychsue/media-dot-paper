@@ -15,6 +15,29 @@ export class WithClickService {
     merge(self.ptsService.PTSReady$, self.ptsService.ptsLoaded$).subscribe(
       (_) => {
         self.pts = self.ptsService.pts.withClickService;
+        // * [2021-05-15 13:54] Multilingualize
+        if (!!self.pts) {
+          self.withSignInClick = this.withClick.bind(this)({
+            title: this.pts.signInTitle,
+            content: this.pts.signInContent,
+            stYes: this.pts.yes,
+            stNo: this.pts.no,
+          });
+
+          self.withGrantClick = this.withClick.bind(this)({
+            title: this.pts.grantTitle,
+            content: this.pts.grantContent,
+            stYes: this.pts.yes,
+            stNo: this.pts.no,
+          });
+
+          self.withImportGVFromGoogleClick = this.withClick.bind(this)({
+            title: this.pts.importGVFromGDTitle,
+            content: this.pts.importGVFromGDContent,
+            stYes: this.pts.yes,
+            stNo: this.pts.no,
+          });
+        }
       }
     );
   }

@@ -11,6 +11,9 @@
     "browserFileSelWarn": "雖然您可以載入本地媒體文件，但無法將其保存到此平台的MDP列表中。",
     "dailySample": "每日一例"
   },
+  "gv2googleService": {
+    "confirmExset2GD": "是否要將設置文件導出到Google雲端硬碟，以便您可以直接從Google雲端硬碟進行更改？"
+  },
   "ex2GDComp": {
     "createFileTitle": "創造 {0} 檔案中",
     "createFileContent": "請稍候",

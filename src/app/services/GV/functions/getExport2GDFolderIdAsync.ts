@@ -6,6 +6,6 @@ export default async function getExport2GDFolderIdAsync() {
   const usr = await self.gapiService.service.userProfile$
     .pipe(take(1))
     .toPromise();
-  const gUser = self.gvService.googleUsers.find((x) => x.name === usr?.name);
+  const gUser = self.gvService.googleUsers.find((x) => x.id === usr?.id);
   return gUser?.allowSet === "Yes" ? gUser.setFId : null;
 }

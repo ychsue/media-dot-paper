@@ -49,18 +49,8 @@ export class Export2Component implements OnInit, OnDestroy {
     let self = this;
     try {
       usr = await this.GAPIservice.service.signInAsync();
-
-      // * Load the settings from google drive since the user is changed
-      if (!!usr) {
-        self.gv2googleService.importGVFromGoogleAsync({
-          scopes:
-            "https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/spreadsheets",
-          signInWithClick: self.withClickService.withSignInClick,
-          grantWithClick: self.withClickService.withGrantClick,
-        });
-      }
     } catch (error) {
-      alert(error.error);
+      alert(`export2.component::onClick::Error: ${error.error}`);
     }
   }
 }

@@ -11,6 +11,9 @@
     "browserFileSelWarn": "Meskipun Anda dapat memuat file media lokal, Anda tidak dapat menyimpannya ke dalam daftar MDP untuk platform ini.",
     "dailySample": "Sampel Harian"
   },
+  "gv2googleService": {
+    "confirmExset2GD": "Apakah Anda ingin mengekspor file pengaturan ke Google Drive sehingga Anda dapat membuat perubahan langsung dari Google Drive?"
+  },
   "ex2GDComp": {
     "createFileTitle": "Membuat {0} File",
     "createFileContent": "Harap tunggu",

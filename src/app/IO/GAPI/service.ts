@@ -61,4 +61,6 @@ export const service = {
   clearASheetAsync,
 
   getFileIdFromUri,
+
+  getAuthInstance: () => gapi.auth2.getAuthInstance(),
 };

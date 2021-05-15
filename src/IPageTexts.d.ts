@@ -22,6 +22,11 @@ interface IPageTexts {
   playerComp: IPlayerComp;
   withClickService: IWithClickService;
   ex2GDComp: IEx2GDComp;
+  gv2googleService: IGv2googleService;
+}
+
+interface IGv2googleService {
+  confirmExset2GD: string;
 }
 
 interface IEx2GDComp {

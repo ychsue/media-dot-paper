@@ -12,6 +12,9 @@
             "mobileFileSelWarn": "If your selected local media file is large, most of the actions should still work; however, it might crash this App when you try to save it into the MDP list.",
             "browserFileSelWarn": "Although you can load a local media file, you cannot save it into the MDP list for this platform."
         },
+        "gv2googleService": {
+            "confirmExset2GD": "Do you want to export your setting file to your google drive so that you can alter it directly from your google drive?"
+        },
         "ex2GDComp": {
             "createFileTitle": "創造 {0} 檔案中",
             "createFileContent": "請稍候",

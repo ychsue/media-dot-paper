@@ -13,7 +13,7 @@ export class GvService {
   shownPage = PageType.Home;
   prevPage: PageType = PageType.Home;
   sharedFolderName = "SegmentedMediaLayer";
-  ptVersion = "2019.1100.3";
+  ptVersion = "2021.0515.1";
 
   showSideNav = true;
 
@@ -33,10 +33,12 @@ export class GvService {
   //#endregion LocalStorage: zoomAll
 
   //#region LocalStorage: googleUsers
-  googleUsers: Array<{ 
+  googleUsers: Array<{
     name: string;
-    allowSet: "Yes" | "No" | "ask"; 
-    setFId:string }> = [];
+    id: string;
+    allowSet: "Yes" | "No" | "ask";
+    setFId: string;
+  }> = [];
   //#endregion LocalStorage: googleUsers
 
   isJustPointerEvents = false;
@@ -64,7 +66,7 @@ export class GvService {
         value = self.zoomAll.toString();
         break;
       case ParaInLS.googleUsers:
-        value = self.googleUsers.toString();
+        value = JSON.stringify(self.googleUsers);
         break;
       default:
         break;
@@ -83,7 +85,7 @@ export class GvService {
         value = self.zoomAll;
         break;
       case ParaInLS.googleUsers:
-        self.googleUsers = typeof buf === "string" ? JSON.parse(buf) : [];
+        self.googleUsers = !!buf ? JSON.parse(buf) : [];
         value = self.googleUsers;
         break;
       default:

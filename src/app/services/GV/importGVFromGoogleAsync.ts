@@ -68,7 +68,9 @@ export default async function importGVFromGoogleAsync(props
                     self.gvService[key] = objSettings.result[key];
                     self.gvService.saveToLocalStorage(ParaInLS[key]);
                 } else if (key === __FID) {
-                    self.setExport2GDFolderIdAsync(objSettings.result[key]);
+                    await self.setExport2GDFolderIdAsync(
+                      objSettings.result[key]
+                    );
                     self.gvService.saveToLocalStorage(ParaInLS.googleUsers);
                 }
             }

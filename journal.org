@@ -1,5 +1,7 @@
 * [2021-05-15 Sat] Since each user has their own settings, I set a global variable "googleUsers" to store this information.
-Because for each user, their export2FolderId will not be the same, I put this value inside the array "googleUsers".
+1. Because for each user, their export2FolderId will not be the same, I put this value inside the array "googleUsers".
+2. Now, once the user login, it will ask them whether to export a setting file to google drive.
+3. Because the user name might be the same, I also get the user id to distinguish between them.
 
 * [2021-05-14 Fri] The files that I need to modify for multilingual
 Its definition file is [[src/IPageTexts.d.ts]].
