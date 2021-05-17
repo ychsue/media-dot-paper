@@ -54,7 +54,7 @@ export class PageTextsService {
 
   async loadPTS$$(isoCode = 'en', isSaveIntoStorage = false) {
     const self = this;
-    const httpGet = this.http.get(`assets/i18n/${self.folder_prefix}${isoCode}/pageTexts.json`); // .pipe(take(1));
+    const httpGet = this.http.get(`assets/i18n/${self.folder_prefix}${isoCode}/pageTexts.json?version=${self.gv.ptVersion}`); // .pipe(take(1));
     let obj: IPageTexts = null;
     try {
       obj = await httpGet.toPromise() as IPageTexts;

@@ -1,3 +1,7 @@
+* [2021-05-17 Mon] Make Line can show my links better
+1. To achieve this goal, I need to add some meta tags. We can easier make that through the help of [[https://metatags.io]]. Remember to declare the width and height of the image.
+2. Using SWUpdate to update [[https://angular.io/guide/service-worker-intro][service worker]].
+
 * [2021-05-15 Sat] Since each user has their own settings, I set a global variable "googleUsers" to store this information.
 1. Because for each user, their export2FolderId will not be the same, I put this value inside the array "googleUsers".
 2. Now, once the user login, it will ask them whether to export a setting file to google drive.

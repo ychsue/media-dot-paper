@@ -24,6 +24,7 @@ import {
 } from "./components/in-progress/in-progress.component";
 import { Gv2googleService } from "./services/GV/gv2google.service";
 import { WithClickService } from "./services/WithClick/with-click.service";
+import { MySwUpdateService } from "./services/my-sw-update.service";
 
 @Component({
   selector: "app-root",
@@ -54,9 +55,13 @@ export class AppComponent implements AfterViewInit {
     private device: DeviceService,
     public meService: MediaEditService,
     private gv2googleService: Gv2googleService,
-    private withClickService: WithClickService
+    private withClickService: WithClickService,
+    private mySWUpdateService: MySwUpdateService
   ) {
     const self = this;
+
+    self.mySWUpdateService; // To activate it.
+
     self.ptsService.PTSReady$.pipe(
       concat(self.ptsService.ptsLoaded$)
     ).subscribe((isDone) => {
@@ -107,7 +112,6 @@ export class AppComponent implements AfterViewInit {
     self.resize$.subscribe((_) => {
       self.gv.isJustPointerEvents = true;
     });
-
   }
 
   decideSidenavMode() {

@@ -624,7 +624,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onUpdateDisplay(type: PlayerType) {
-    console.log(`meType: ${type}`);
+    // console.log(`meType: ${type}`);
     switch (type) {
       case PlayerType.file:
       case PlayerType.url:

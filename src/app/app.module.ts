@@ -29,6 +29,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { NavbarComponent } from "./navbar/navbar.component";
 // import { AppRoutingModule } from './modules/app-routing/app-routing.module';
@@ -79,6 +80,7 @@ import { TextInputAgentComponent } from './services/TextInputAgent/text-input-ag
 import { SettingSaveLoadComponent } from './pages/app-setting/setting-save-load/setting-save-load.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MySwUpdateService } from "./services/my-sw-update.service";
 
 @NgModule({
   declarations: [
@@ -119,8 +121,8 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     FormsModule,
-    BrowserAnimationsModule,
-    // NoopAnimationsModule,
+    // BrowserAnimationsModule,
+    NoopAnimationsModule,
     MatButtonModule,
     MatBadgeModule,
     MatIconModule,
@@ -133,6 +135,7 @@ import { environment } from '../environments/environment';
     CommonModule,
     MatSliderModule,
     MatTabsModule,
+    MatSnackBarModule,
     MatTooltipModule,
     HttpClientModule,
     MatMenuModule,
@@ -142,15 +145,16 @@ import { environment } from '../environments/environment';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatProgressBarModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
+    ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       // registrationStrategy: 'registerWhenStable:30000'
-      registrationStrategy: 'registerImmediately'
+      registrationStrategy: "registerImmediately",
     }),
   ],
   providers: [
+    MySwUpdateService,
     MessageService,
     MediaEditService,
     YoutubeService,
@@ -174,4 +178,4 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

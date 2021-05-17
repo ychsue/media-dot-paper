@@ -6,7 +6,7 @@
     "start": "ng serve",
     "https": "ng serve --ssl",
     "build": "ng build",
-    "product": "ng build --prod --base-href=/static/mediadotpaper/",
+    "product": "ng build --configuration production --base-href=/static/mediadotpaper/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
