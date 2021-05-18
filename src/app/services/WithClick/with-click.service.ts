@@ -17,43 +17,48 @@ export class WithClickService {
         self.pts = self.ptsService.pts.withClickService;
         // * [2021-05-15 13:54] Multilingualize
         if (!!self.pts) {
-          self.withSignInClick = this.withClick.bind(this)({
+          self.withSignInClick.viewData = {
             title: this.pts.signInTitle,
             content: this.pts.signInContent,
             stYes: this.pts.yes,
             stNo: this.pts.no,
-          });
+          };
 
-          self.withGrantClick = this.withClick.bind(this)({
+          self.withGrantClick.viewData = {
             title: this.pts.grantTitle,
             content: this.pts.grantContent,
             stYes: this.pts.yes,
             stNo: this.pts.no,
-          });
+          };
 
-          self.withImportGVFromGoogleClick = this.withClick.bind(this)({
+          self.withImportGVFromGoogleClick.viewData = {
             title: this.pts.importGVFromGDTitle,
             content: this.pts.importGVFromGDContent,
             stYes: this.pts.yes,
             stNo: this.pts.no,
-          });
+          };
         }
       }
     );
   }
 
-  withClick({ title, content, stYes, stNo }: IWithClickView) {
+  withClick(viewData: IWithClickView) {
     const self = this;
-    return <I, J>(func: (_: I) => Promise<J>) => {
+    // * [2021-05-18 09:58] Because the sentences of this view will be changed when the user change their language, I should feed that texts at that time.
+    // viewData is created for this purpose.
+    const result: {<I, J>(func: (_: I) => Promise<J>), viewData: IWithClickView} = <I, J>(func: (_: I) => Promise<J>) => {
       return async (args: I) => {
         const dialogRef = self.dialog.open(WithClickComponent, {
           width: "50%",
-          data: { func, args, title, content, stYes, stNo } as IWithClickData,
+          data: { func, args, ...result.viewData } as IWithClickData,
         });
         const res: J = await dialogRef.afterClosed().pipe(first()).toPromise();
         return res;
       };
     };
+
+    result.viewData = viewData;
+    return result;
   }
 
   withSignInClick = this.withClick.bind(this)({

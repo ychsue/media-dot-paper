@@ -1,3 +1,9 @@
+* [2021-05-18 Tue] Bug fix:
+1. For ~WithClickService~, it has three default HOFs.
+    However, once they are created, their texts are also provided.
+    Therefore, I provide this HOF an extra property ~viewData~ and use it data to open the dialog.
+    It means that, I can update viewData when the texts are changed so that the texts in the open dialog is the recent one.
+
 * [2021-05-17 Mon] Make Line can show my links better
 1. To achieve this goal, I need to add some meta tags. We can easier make that through the help of [[https://metatags.io]]. Remember to declare the width and height of the image.
 2. Using SWUpdate to update [[https://angular.io/guide/service-worker-intro][service worker]].
