@@ -3,6 +3,8 @@
     However, once they are created, their texts are also provided.
     Therefore, I provide this HOF an extra property ~viewData~ and use it data to open the dialog.
     It means that, I can update viewData when the texts are changed so that the texts in the open dialog is the recent one.
+2. Because of CORS, for web version, I have to use ~gapi.files.get~ to get a Google Drive's file.
+    The Bug I fixed is to remind the user that the file they are loaded is a media file if it is a media file to remind them to share it if they want to share this mdpyc with others.
 
 * [2021-05-17 Mon] Make Line can show my links better
 1. To achieve this goal, I need to add some meta tags. We can easier make that through the help of [[https://metatags.io]]. Remember to declare the width and height of the image.

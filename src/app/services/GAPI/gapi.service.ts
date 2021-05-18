@@ -29,7 +29,7 @@ export class GapiService {
     fileId: string,
     resultType: "story" | "blob" | "both" = "both"
   ) {
-    let result: IStory | Blob;
+    let result: IStory | Blob | { mimeType: string };
     const self = this;
 
     if (!!!fileId) return result;
@@ -43,8 +43,7 @@ export class GapiService {
       const mimeType = res.result.mimeType;
       if (
         resultType !== "blob" &&
-        (mimeType.toLowerCase().indexOf(`text`) >= 0 ||
-          mimeType.toLowerCase().indexOf("octet-stream") >= 0)
+        (/(mdpyc|text|octet\-stream)/i.test(mimeType))
       ) {
         const blob = await service.downloadItemAsync({
           fileId,
@@ -92,7 +91,8 @@ export class GapiService {
           grantWithClick: self.withClickService.withGrantClick,
         });
       } else {
-        throw new Error(`Unhandled mimeType: ${mimeType}`);
+        return { mimeType };
+        // throw new Error(`Unhandled mimeType: ${mimeType}`);
       }
     } catch (error) {
       this.msg.alert(

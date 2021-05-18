@@ -479,7 +479,18 @@ export class MediaEditService {
       const getFromGoogle = await self.GAPIService.getGoogleDriveDataFromFileIdAsync(
         self.GAPIService.service.getFileIdFromUri(result), 'story'
       );
-      story = getFromGoogle as Story;
+      if (
+        !!getFromGoogle["mimeType"] &&
+        /(video|audio)/i.test(getFromGoogle["mimeType"] as string)
+      ) {
+        self.msgService.alert(
+          !!self.pts.mediaEditService.suggestionMedia
+            ? self.pts.mediaEditService.suggestionMedia
+            : `This google drive's file is a media. Remember to share this file before you want others can play it.`
+        ); //I18N
+      } else {
+        story = getFromGoogle as Story;
+      }
     } catch (error) {
       self.msgService.alert(
         `media-edit.service::inputFromString$ ERROR: ${(error as Error).message

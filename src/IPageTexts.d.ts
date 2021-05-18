@@ -171,7 +171,8 @@ interface IMicRecorderService {
     needPermission: string;
 }
 interface IMediaEditService {
-    CORerror: string;
+  CORerror: string;
+  suggestionMedia: string;
 }
 interface IIso639 {
     ab: string;

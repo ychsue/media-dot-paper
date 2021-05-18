@@ -13,7 +13,7 @@ export class GvService {
   shownPage = PageType.Home;
   prevPage: PageType = PageType.Home;
   sharedFolderName = "SegmentedMediaLayer";
-  ptVersion = "2021.0516.1";
+  ptVersion = "2021.0518.1";
 
   showSideNav = true;
 
