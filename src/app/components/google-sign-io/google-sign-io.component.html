@@ -1,0 +1,27 @@
+<div class="container">
+    <div [ngStyle]="{display: !!id?'none':'block'}" id="g-signin2" data-onsuccess="onSignIn"></div>
+    <div class="signedIn" [ngStyle]="{display: !!id?'flex':'none'}">
+        <div class="infoNLogout">
+            <div class="info">
+                <img [src]="imgUrl" [alt]="name" srcset="">
+                <p><b>{{(!!pts)?pts.name:"name"}}:</b> {{name}}</p>
+                <p><b>{{(!!pts)?pts.id:"id"}}:</b> {{id}}</p>
+            </div>
+            <div class="exportToggle">
+            <button class="signOutBtn" (click)="signOutClick()" 
+             mat-raised-button color="primary">{{(!!pts)?pts.signOut:"Sign Out"}}</button>
+             <mat-slide-toggle
+                (change)="onShareToggle($event)"
+                [checked]="gvService.currentGoogleUser?.allowSet==='Yes'"
+                >{{(!!pts)?pts.shareSettings:"Share settings through Google Drive"}}</mat-slide-toggle>
+             <!-- I18N -->
+            </div>
+        </div>
+        <div>
+            <h3>{{(!!pts)?pts.scopes:"Scopes"}}</h3>
+            <ol>
+                <li *ngFor="let item of scopes">{{item}}</li>
+            </ol>
+        </div>
+    </div>        
+</div>

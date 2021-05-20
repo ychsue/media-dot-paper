@@ -23,6 +23,7 @@ export default async function importGVFromGoogleAsync(props
     const __FID = "export2FolderId";
 
     try {
+        self.isImportGVFromGoogleAsync = true;
         // 1. Get the fileId with needed click event
         const theMFId = await getMFIdAsync(props);
 
@@ -40,8 +41,9 @@ export default async function importGVFromGoogleAsync(props
         const objSettings = getObjFromArray2(settingsArray);
 
         // 5. If this sheet is out of __FID, make that folder and get its Id.
-        const folderIdOld = (objSettings?.result as IExportSettings)
-          .export2FolderId;
+        const folderIdOld = !!objSettings?.result
+          ? (objSettings.result as IExportSettings).export2FolderId
+          : null;
         const folderId = await getExp2FolderIdAsync(folderIdOld);
         if(folderIdOld !== folderId){
           const hasId = !!objSettings?.position["THIS"]?.export2FolderId;
@@ -89,4 +91,5 @@ export default async function importGVFromGoogleAsync(props
     } catch (error) {
         window.alert(error.message);
     }
+    self.isImportGVFromGoogleAsync = false;
 }

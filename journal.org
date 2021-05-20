@@ -1,3 +1,6 @@
+* [2021-05-21 Fri] Now it can let user sign in and sign out.
+Besides, it can toggle whether to share the settings with Google Drive.
+
 * [2021-05-18 Tue] Bug fix:
 1. For ~WithClickService~, it has three default HOFs.
     However, once they are created, their texts are also provided.

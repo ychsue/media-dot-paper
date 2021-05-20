@@ -36,7 +36,7 @@ export default async function initAsync() {
 
   // * [2021-03-09 16:47] Load the libraries client and auth2
   await new Promise((res: gapi.CallbackOrConfig, rej) => {
-    gapi.load("client:auth2", res);
+    gapi.load("client:signin2:auth2", res);
   });
 
   // * [2021-03-09 16:47] Initialize the libraries

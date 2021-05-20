@@ -81,6 +81,7 @@ import { SettingSaveLoadComponent } from './pages/app-setting/setting-save-load/
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MySwUpdateService } from "./services/my-sw-update.service";
+import { GoogleSignIoComponent } from './components/google-sign-io/google-sign-io.component';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import { MySwUpdateService } from "./services/my-sw-update.service";
     WithClickComponent,
     TextInputAgentComponent,
     SettingSaveLoadComponent,
+    GoogleSignIoComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,13 @@
     "browserFileSelWarn": "Meskipun Anda dapat memuat file media lokal, Anda tidak dapat menyimpannya ke dalam daftar MDP untuk platform ini.",
     "dailySample": "Sampel Harian"
   },
+  "googleSignIOComp": {
+    "name": "Nama",
+    "id": "Nomor Identifikasi",
+    "signOut": "Keluar",
+    "scopes": "Cakupan penggunaan resmi",
+    "shareSettings": "Bagikan setelan melalui Google Drive"
+  },
   "gv2googleService": {
     "confirmExset2GD": "Apakah Anda ingin mengekspor file pengaturan ke Google Drive sehingga Anda dapat membuat perubahan langsung dari Google Drive?"
   },
@@ -559,7 +566,8 @@
   "appSettingPage": {
     "hDailySample": "Pengaturan tombol <b style=\"margin:0 4px;\"> Sampel Harian </b>",
     "hLayout": "Tata letak",
-    "hSetIO": "Import or Export Settings"
+    "hSetIO": "Import or Export Settings",
+    "googleAccount": "Akun Google"
   },
   "dailySampleComp": {
     "default": "Default:",

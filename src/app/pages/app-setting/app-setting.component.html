@@ -19,10 +19,17 @@
             </div>
         </mat-expansion-panel>
 
-        <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel >
             <mat-expansion-panel-header [innerHtml]="(!!pts)?pts.hSetIO:'設定存取'">
             </mat-expansion-panel-header>
             <app-setting-save-load></app-setting-save-load>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header [innerHtml]="(!!pts)?pts.googleAccount:'Google Account'"> 
+                <!-- I18N -->
+            </mat-expansion-panel-header>
+            <app-google-sign-io></app-google-sign-io>
         </mat-expansion-panel>
 
     </mat-accordion>

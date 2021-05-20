@@ -26,6 +26,7 @@ import batchUpdateSSAsync from "./Sheets/batchUpdateAsync";
 import { isLoaded } from "./isLoaded";
 import getFileIdFromUri from "./utils/getFileIdFromUri";
 import { isAuthLoaded$ } from "./isAuthLoaded$";
+import signIn2Async from "./signIn2Async";
 
 export const service = {
   initAsync,
@@ -37,6 +38,7 @@ export const service = {
   signInAsync,
   signOutAsync,
   isSignedIn,
+  signIn2Async,
 
   userProfile$,
 

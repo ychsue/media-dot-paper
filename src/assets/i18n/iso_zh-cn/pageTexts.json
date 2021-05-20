@@ -11,6 +11,13 @@
     "browserFileSelWarn": "虽然您可以加载本地媒体文件，但无法将其保存到此平台的MDP列表中。",
     "dailySample": "每日样品"
   },
+  "googleSignIOComp": {
+    "name": "姓名",
+    "id": "识别号码",
+    "signOut": "登出",
+    "scopes": "授权使用范围",
+    "shareSettings": "通过Google云端硬盘共享设置"
+  },
   "gv2googleService": {
     "confirmExset2GD": "是否要将设置文件导出到Google云端硬碟，以便您可以直接从Google云端硬碟进行更改？"
   },
@@ -559,7 +566,8 @@
   "appSettingPage": {
     "hDailySample": "设定<b>每日一例</b>按钮",
     "hLayout": "布局",
-    "hSetIO": "设定值的汇入与汇出"
+    "hSetIO": "设定值的汇入与汇出",
+    "googleAccount": "Google帐号"
   },
   "dailySampleComp": {
     "default": "默认：",

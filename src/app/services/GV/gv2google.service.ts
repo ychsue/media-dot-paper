@@ -14,6 +14,9 @@ import importGVFromGoogleAsync from './importGVFromGoogleAsync';
   providedIn: "root",
 })
 export class Gv2googleService {
+
+  isImportGVFromGoogleAsync: boolean = false;
+
   pts: IGv2googleService = null;
   constructor(
     public gapiService: GapiService,
@@ -43,7 +46,7 @@ export class Gv2googleService {
             self.gvService.loadFromLocalStorage(ParaInLS.googleUsers);
             const uName = usr.getBasicProfile().getName();
             const uId = usr.getBasicProfile().getId();
-            const gUser = self.gvService.googleUsers.find((x) => x.id === uId);
+            let gUser = self.gvService.googleUsers.find((x) => x.id === uId);
             if (gUser?.allowSet === "No") return;
             // ** [2021-05-15 11:10] Check whether the user want to import settings from google
             if (gUser?.allowSet !== "Yes") {
@@ -52,26 +55,34 @@ export class Gv2googleService {
                   ? this.pts.confirmExset2GD
                   : "要將設定存到Google Drive上嗎？"
               ); //I18N
-              if (isAllowed === false) {
                 if (!!!gUser) {
-                  self.gvService.googleUsers.push({
+                  gUser = {
                     name: uName,
                     id: uId,
-                    allowSet: "No",
+                    allowSet: isAllowed ? "Yes" : "No",
                     setFId: "",
-                  });
+                  };
+                  self.gvService.googleUsers.push(gUser);
                 } else {
-                  gUser.allowSet = "No";
+                  gUser.allowSet = isAllowed ? "Yes" : "No";
                 }
                 self.gvService.saveToLocalStorage(ParaInLS.googleUsers);
+              if (isAllowed === false) {
                 return;
               }
             }
-            self.importGVFromGoogleAsync({
-              signInWithClick:
-                self.withClickService.withImportGVFromGoogleClick,
-              grantWithClick: self.withClickService.withImportGVFromGoogleClick,
-            });
+
+            if(self.isImportGVFromGoogleAsync === false)
+            {
+              self.importGVFromGoogleAsync({
+                signInWithClick:
+                  self.withClickService.withImportGVFromGoogleClick,
+                grantWithClick:
+                  self.withClickService.withImportGVFromGoogleClick,
+                scopes:
+                "https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file",
+              });
+            }
           }
         });
         // self.gapiService.service.getAuthInstance().isSignedIn.listen((isIn) => {

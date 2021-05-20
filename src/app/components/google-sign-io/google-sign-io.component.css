@@ -1,0 +1,21 @@
+.signedIn {
+    display: flex;
+    flex-direction: column;
+}
+
+.infoNLogout {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.signOutBtn {
+    align-self: center;
+}
+
+.exportToggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+

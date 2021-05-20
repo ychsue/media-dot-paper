@@ -2,6 +2,13 @@ import { Injectable } from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { timer } from 'rxjs';
 
+interface IGoogleUser {
+  name: string;
+  id: string;
+  allowSet: "Yes" | "No" | "ask";
+  setFId: string;
+}
+
 export interface IExportSettings {
   zoomAll: number;
   export2FolderId: string;
@@ -13,7 +20,7 @@ export class GvService {
   shownPage = PageType.Home;
   prevPage: PageType = PageType.Home;
   sharedFolderName = "SegmentedMediaLayer";
-  ptVersion = "2021.0518.1";
+  ptVersion = "2021.0520.2";
 
   showSideNav = true;
 
@@ -33,13 +40,10 @@ export class GvService {
   //#endregion LocalStorage: zoomAll
 
   //#region LocalStorage: googleUsers
-  googleUsers: Array<{
-    name: string;
-    id: string;
-    allowSet: "Yes" | "No" | "ask";
-    setFId: string;
-  }> = [];
+  googleUsers: Array<IGoogleUser> = [];
   //#endregion LocalStorage: googleUsers
+
+  currentGoogleUser: IGoogleUser;
 
   isJustPointerEvents = false;
 

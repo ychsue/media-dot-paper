@@ -23,8 +23,15 @@ interface IPageTexts {
   withClickService: IWithClickService;
   ex2GDComp: IEx2GDComp;
   gv2googleService: IGv2googleService;
+  googleSignIOComp: IGoogleSignIOComp;
 }
-
+interface IGoogleSignIOComp {
+  name: string;
+  id: string;
+  signOut: string;
+  scopes: string;
+  shareSettings: string;
+}
 interface IGv2googleService {
   confirmExset2GD: string;
 }
@@ -150,6 +157,7 @@ interface IAppSettingPage {
   hDailySample: string;
   hLayout: string;
   hSetIO: string;
+  googleAccount: string;
 }
 interface IDailySampleComp {
     'default': string;

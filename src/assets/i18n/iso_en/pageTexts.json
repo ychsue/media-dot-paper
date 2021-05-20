@@ -11,6 +11,13 @@
     "browserFileSelWarn": "Although you can load a local media file, you cannot save it into the MDP list for this platform.",
     "dailySample": "Daily Sample"
   },
+  "googleSignIOComp": {
+    "name": "name",
+    "id": "id",
+    "signOut": "Sign Out",
+    "scopes": "Scopes",
+    "shareSettings": "Share settings through Google Drive"
+  },
   "gv2googleService": {
     "confirmExset2GD": "Do you want to export your setting file to your google drive so that you can alter it directly from your google drive?"
   },
@@ -559,7 +566,8 @@
   "appSettingPage": {
     "hDailySample": "Setting <b style='margin:0 4px;'>Daily Sample</b> button",
     "hLayout": "Layout",
-    "hSetIO": "Import or Export Settings"
+    "hSetIO": "Import or Export Settings",
+    "googleAccount": "Google Account"
   },
   "dailySampleComp": {
     "default": "Default:",
