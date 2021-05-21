@@ -71,6 +71,10 @@ export class MeSectionDashboardComponent implements OnInit {
     dialogRef.afterClosed().pipe(first()).subscribe(whichOne => {
       const which: SetStartEnd = whichOne;
       if (!!which) {
+        if (which.delete) {
+          self.onRemoveFrame.bind(self)(i);
+          return;
+        }
         if (which.start) {frame.start = which.cTime; }
         if (which.end) {frame.end = which.cTime; }
       }

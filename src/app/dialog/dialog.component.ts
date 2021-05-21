@@ -5,25 +5,28 @@ import { concat } from 'rxjs/operators';
 import { DailySample } from '../vm/daily-sample';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css', '../common-use.css']
+  selector: "app-dialog",
+  templateUrl: "./dialog.component.html",
+  styleUrls: ["./dialog.component.css", "../common-use.css"],
 })
 export class DialogComponent implements OnInit {
-
   dialogType = DialogType;
 
-  whichOne: SetStartEnd = {start: false, end: false, cTime: 0};
+  whichOne: SetStartEnd = { start: false, end: false, cTime: 0, delete: false };
 
   pts: IDialogComp;
 
-  constructor(public ptsService: PageTextsService,
+  constructor(
+    public ptsService: PageTextsService,
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {}
 
   ngOnInit() {
     const self = this;
-    self.ptsService.PTSReady$.pipe(concat(self.ptsService.ptsLoaded$)).subscribe(_ => {
+    self.ptsService.PTSReady$.pipe(
+      concat(self.ptsService.ptsLoaded$)
+    ).subscribe((_) => {
       self.pts = self.ptsService.pts.dialogComp;
     });
   }
@@ -34,7 +37,7 @@ export class DialogComponent implements OnInit {
 
   onLoadNumber() {
     const num = Number(this.data.number);
-    this.dialogRef.close((Number.isNaN(num)) ? 0 : num);
+    this.dialogRef.close(Number.isNaN(num) ? 0 : num);
   }
 
   onStartOrEnd() {
@@ -45,9 +48,15 @@ export class DialogComponent implements OnInit {
     this.whichOne.end = false;
   }
 
+  onDeleteDot() {
+    const which = Object.assign({}, this.whichOne);
+    which.delete = true;
+    this.dialogRef.close(which);
+  }
+
   onDailySampleInput() {
     const dSample: DailySample = this.data.data;
-    dSample.createTime = (!!dSample.createTime) ? dSample.createTime : Date.now();
+    dSample.createTime = !!dSample.createTime ? dSample.createTime : Date.now();
     this.dialogRef.close(dSample);
   }
 }
@@ -75,4 +84,5 @@ export interface SetStartEnd {
   start: boolean;
   end: boolean;
   cTime: number;
+  delete?: boolean;
 }

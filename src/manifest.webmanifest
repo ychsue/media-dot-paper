@@ -4,8 +4,10 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "/Static/MediaDotPaper/",
-  "start_url": "/Static/MediaDotPaper/",
+  "scope": ".",
+  "start_url": "./",
+  "orientation": "portrait-primary",
+  "description": "A note or dot paper for the media you want to play with just small pieces of it.",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

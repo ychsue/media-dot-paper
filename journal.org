@@ -1,5 +1,13 @@
+* [2021-05-21 Fri] Plan
+1. [10:37] Add a trash can for dots.
+    1-1. I also correct an error for signIn2Async since I don't want to take isAuthLoaded$=>false into count.
+2. [] record a video for OAuth processes
+3. [] record actions and turn them to be gif.
+
 * [2021-05-21 Fri] Now it can let user sign in and sign out.
-Besides, it can toggle whether to share the settings with Google Drive.
+1. Besides, it can toggle whether to share the settings with Google Drive.
+2. Important:: For IIS, I have to set ~"scope":".";"start_url": "./" as mentioned in [[https://stackoverflow.com/questions/57993086/angular-pwa-in-iis-subfolder-not-work-offline][this StackOverflow's Q&A]].
+
 
 * [2021-05-18 Tue] Bug fix:
 1. For ~WithClickService~, it has three default HOFs.

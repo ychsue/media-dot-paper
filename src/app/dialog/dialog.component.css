@@ -18,3 +18,10 @@
 .margin-12 {
     margin: 12px;
 }
+.action {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+

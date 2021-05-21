@@ -31,8 +31,13 @@
         </button>
         <mat-checkbox [(ngModel)]="whichOne.end" color="primary" [ngClass]="{'hilite':whichOne.end}">{{((whichOne.end)?data.number:data.startEnd[1])|number:'1.0-3'}}</mat-checkbox>
     </div>
-    <div class="button">
-        <button mat-raised-button (click)="onStartOrEnd()">{{(!!pts)?pts.load:'載入'}}</button>
+    <div class="action">
+        <div class="button">
+            <button mat-raised-button (click)="onStartOrEnd()">{{(!!pts)?pts.load:'載入'}}</button>
+        </div>
+        <button mat-fab color="primary" aria-label="Delete this one" (click)="onDeleteDot()">
+          <mat-icon>delete</mat-icon>
+        </button>
     </div>
 </div>
 

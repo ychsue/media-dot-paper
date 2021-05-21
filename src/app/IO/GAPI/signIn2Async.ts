@@ -25,20 +25,25 @@ export default function signIn2Async(
       res: (user: gapi.auth2.GoogleUser) => void,
       rej: (reason: { error: string }) => void
     ) => {
-      isAuthLoaded$.pipe(take(1)).subscribe((_) => {
-        timer(10, 1000)
-          .pipe(
-            filter((i0) => !!gapi?.signin2 || i0 > 5),
-            take(1)
-          )
-          .subscribe((_) => {
-            gapi.signin2.render("g-signin2", {
-              ...option,
-              onsuccess: res,
-              onfailure: rej,
+      isAuthLoaded$
+        .pipe(
+          filter((is) => is),
+          take(1)
+        )
+        .subscribe((_) => {
+          timer(10, 1000)
+            .pipe(
+              filter((i0) => !!gapi?.signin2 || i0 > 5),
+              take(1)
+            )
+            .subscribe((_) => {
+              gapi.signin2.render("g-signin2", {
+                ...option,
+                onsuccess: res,
+                onfailure: rej,
+              });
             });
-          });
-      });
+        });
     }
   );
 }

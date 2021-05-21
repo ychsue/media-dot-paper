@@ -33,7 +33,6 @@ export class GoogleSignIoComponent implements OnInit, AfterViewInit {
     merge(self.ptsService.PTSReady$, self.ptsService.ptsLoaded$).subscribe(
       (_) => {
         self.pts = self.ptsService.pts?.googleSignIOComp;
-        console.log(self.ptsService.pts.googleSignIOComp);
       }
     );
 
