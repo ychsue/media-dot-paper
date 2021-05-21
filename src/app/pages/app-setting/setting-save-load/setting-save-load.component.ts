@@ -16,10 +16,16 @@ export class SettingSaveLoadComponent implements OnInit {
   }
 
   async onExport() {
-    await this.gvGoogleService.exportGV2GoogleAsync({});
+    const gvGService = this.gvGoogleService;
+    await gvGService.exportGV2GoogleAsync({
+      scopes: gvGService.gapiService.scopesForSettings,
+    });
   }
 
   async onImport() {
-    await this.gvGoogleService.importGVFromGoogleAsync({});
+    const gvGService = this.gvGoogleService;
+    await gvGService.importGVFromGoogleAsync({
+      scopes: gvGService.gapiService.scopesForSettings,
+    });
   }
 }

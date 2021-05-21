@@ -1,3 +1,7 @@
+* [2021-05-22 Sat] Correct two bugs
+1. ~!!getFromGoogle["mimeType"]~ will throw an error when ~getFromGoogle~ is ~undefined~.
+2. Since the code will import grobal variables from google drive after the user update their scopes, I have to avoid this behavior during importing and exporting.
+
 * [2021-05-21 Fri] Plan
 1. [10:37] Add a trash can for dots.
     1-1. I also correct an error for signIn2Async since I don't want to take isAuthLoaded$=>false into count.

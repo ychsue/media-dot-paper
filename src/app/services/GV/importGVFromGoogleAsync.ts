@@ -23,7 +23,7 @@ export default async function importGVFromGoogleAsync(props
     const __FID = "export2FolderId";
 
     try {
-        self.isImportGVFromGoogleAsync = true;
+        self.isIOGVGoogle = true;
         // 1. Get the fileId with needed click event
         const theMFId = await getMFIdAsync(props);
 
@@ -91,5 +91,5 @@ export default async function importGVFromGoogleAsync(props
     } catch (error) {
         window.alert(error.message);
     }
-    self.isImportGVFromGoogleAsync = false;
+    self.isIOGVGoogle = false;
 }

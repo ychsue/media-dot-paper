@@ -480,6 +480,7 @@ export class MediaEditService {
         self.GAPIService.service.getFileIdFromUri(result), 'story'
       );
       if (
+        !!getFromGoogle &&
         !!getFromGoogle["mimeType"] &&
         /(video|audio)/i.test(getFromGoogle["mimeType"] as string)
       ) {

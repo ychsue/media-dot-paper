@@ -15,7 +15,7 @@ import importGVFromGoogleAsync from './importGVFromGoogleAsync';
 })
 export class Gv2googleService {
 
-  isImportGVFromGoogleAsync: boolean = false;
+  isIOGVGoogle: boolean = false;
 
   pts: IGv2googleService = null;
   constructor(
@@ -72,15 +72,14 @@ export class Gv2googleService {
               }
             }
 
-            if(self.isImportGVFromGoogleAsync === false)
+            if(self.isIOGVGoogle === false)
             {
               self.importGVFromGoogleAsync({
                 signInWithClick:
                   self.withClickService.withImportGVFromGoogleClick,
                 grantWithClick:
                   self.withClickService.withImportGVFromGoogleClick,
-                scopes:
-                "https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file",
+                scopes: self.gapiService.scopesForSettings,
               });
             }
           }

@@ -16,6 +16,9 @@ import { ZipService } from "../ZIP/zip.service";
 export class GapiService {
   public service: typeof service;
 
+  readonly scopesForSettings: string =
+    "https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file";
+
   constructor(
     private zipService: ZipService,
     private storyService: StoryService,
@@ -43,7 +46,7 @@ export class GapiService {
       const mimeType = res.result.mimeType;
       if (
         resultType !== "blob" &&
-        (/(mdpyc|text|octet\-stream)/i.test(mimeType))
+        /(mdpyc|text|octet\-stream)/i.test(mimeType)
       ) {
         const blob = await service.downloadItemAsync({
           fileId,
