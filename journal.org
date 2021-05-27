@@ -1,12 +1,21 @@
+* [2021-05-26 Wed] Try to change my windows 10 one to be a PWA one
+Originall, in its ~package.windows10.appxmanifest~ its
+
+    <Application Id="tw.at.yescirculation.mediadotpaper" StartPage="ms-appx-web://48028young-chunghsue.mediadotpaper/www/index.html">
+
+I want to change its ~StartPage~ to be ~http://localhost:4200/index.html~.
+
 * [2021-05-22 Sat] Correct two bugs
 1. ~!!getFromGoogle["mimeType"]~ will throw an error when ~getFromGoogle~ is ~undefined~.
 2. Since the code will import grobal variables from google drive after the user update their scopes, I have to avoid this behavior during importing and exporting.
+3. rename yc.settings to settings.yescirculation.
 
 * [2021-05-21 Fri] Plan
 1. [10:37] Add a trash can for dots.
     1-1. I also correct an error for signIn2Async since I don't want to take isAuthLoaded$=>false into count.
 2. [] record a video for OAuth processes
-3. [] record actions and turn them to be gif.
+3. [2021-05-26 Wed] Don't guide this Web App to an App one. (comment the ~setTimeout~ part of ~init-browser-EventArgs~).
+4. [] record actions and turn them to be gif.
 
 * [2021-05-21 Fri] Now it can let user sign in and sign out.
 1. Besides, it can toggle whether to share the settings with Google Drive.

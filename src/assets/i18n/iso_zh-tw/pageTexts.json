@@ -37,7 +37,7 @@
     "grantContent": "您需要提供 GOOGLE 額外的權限",
     "yes": "Yes",
     "no": "No",
-    "importGVFromGDTitle": "初始化或匯入yc.settings檔",
+    "importGVFromGDTitle": "初始化或匯入settings.yescirculation檔",
     "importGVFromGDContent": "由您的 Google Drive 根目錄匯入或初始化該設定檔，好使您可以在跨平台下App能有相同的配置，也方便您手動調整設定。"
   },
   "playerComp": {

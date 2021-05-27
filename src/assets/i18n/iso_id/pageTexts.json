@@ -37,7 +37,7 @@
     "grantContent": "Anda harus memberikan izin tambahan kepada GOOGLE",
     "yes": "ya",
     "no": "tidak",
-    "importGVFromGDTitle": "Inisialisasi atau impor file yc.settings",
+    "importGVFromGDTitle": "Inisialisasi atau impor file settings.yescirculation",
     "importGVFromGDContent": "Impor atau inisialisasi file konfigurasi dari direktori root Google Drive Anda, sehingga Anda dapat memiliki konfigurasi yang sama di bawah lintas platform, dan Anda juga dapat menyesuaikan setelan secara manual."
   },
   "playerComp": {

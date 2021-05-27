@@ -37,7 +37,7 @@
     "grantContent": "You need to grant GOOGLE additional permissions to let this work done.",
     "yes": "Yes",
     "no": "No",
-    "importGVFromGDTitle": "Initialize or import the spreadsheet file yc.settings",
+    "importGVFromGDTitle": "Initialize or import the spreadsheet file settings.yescirculation",
     "importGVFromGDContent": "Import or initialize the configuration file from your Google Drive root directory, so that you can have the same configuration under cross-platform, and it is also convenient for you to manually adjust the settings of this App."
   },
   "playerComp": {

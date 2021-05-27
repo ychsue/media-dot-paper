@@ -1,8 +1,4 @@
-import { protocolCheck } from "./protocolCheck";
-
 export default function initBrowserEventArgs() {
-  window["protocolCheck"] = protocolCheck;
-
   let stUrl = window.location.href;
   const ind = stUrl.indexOf("?");
   if (ind > 0) {
@@ -31,12 +27,13 @@ export default function initBrowserEventArgs() {
     window["initEventArgs"] = {};
     window["initEventArgs"].activated = { type: "uri", data: stUrl };
 
-    setTimeout(() => {
-      window["protocolCheck"](
-        stUrl,
-        // _ => alert('out of this protocol' + stUrl)
-        (_) => {}
-      );
-    }, 0);
+    // * Open the Store's App
+    // setTimeout(() => {
+    //   window["protocolCheck"](
+    //     stUrl,
+    //     // _ => alert('out of this protocol' + stUrl)
+    //     (_) => {}
+    //   );
+    // }, 0);
   }
 }
