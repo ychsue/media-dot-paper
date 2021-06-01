@@ -26,7 +26,8 @@ export class Export2Component implements OnInit, OnDestroy {
     public GAPIservice: GapiService,
     public device: DeviceService,
     private gv2googleService: Gv2googleService,
-    private withClickService: WithClickService
+    private withClickService: WithClickService,
+    public msgService: MessageService
   ) {}
 
   ngOnDestroy(): void {
@@ -50,7 +51,11 @@ export class Export2Component implements OnInit, OnDestroy {
     try {
       usr = await this.GAPIservice.service.signInAsync();
     } catch (error) {
-      alert(`export2.component::onClick::Error: ${error.error}`);
+      self.msgService.alert(
+        
+        `export2.component::onClick::Error: ${error.error}`
+      
+      );
     }
   }
 }

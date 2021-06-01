@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { StringHelper } from "src/app/extends/string-helper";
+import w3cBlob2TxtAsync from "src/app/extends/w3cBlob2TxtAsync";
 import { AFrame } from "src/app/vm/a-frame";
 import { IStory } from "src/app/vm/story";
 import { service } from "../../IO/GAPI";
@@ -53,7 +54,7 @@ export class GapiService {
           signInWithClick: self.withClickService.withSignInClick,
           grantWithClick: self.withClickService.withGrantClick,
         });
-        var data = await blob.text();
+        var data = await w3cBlob2TxtAsync(blob);
         result = this.storyService.getAStoryFromString(data);
       } else if (
         resultType !== "blob" &&
@@ -85,7 +86,7 @@ export class GapiService {
           data: blob,
         });
         /*************** TODO  *************************/
-        var data = await zip[0].blob.text();
+        var data = await w3cBlob2TxtAsync(zip[0].blob);
         result = this.storyService.getAStoryFromString(data);
       } else if (resultType !== "story" && /(video|audio)/i.test(mimeType)) {
         return await service.downloadItemAsync({

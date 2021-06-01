@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { merge } from "rxjs";
 import { filter, take } from "rxjs/operators";
+import confirmAsync from "src/app/extends/confirmAsync";
 import { GapiService } from '../GAPI/gapi.service';
+import { MessageService } from "../message.service";
 import { PageTextsService } from "../page-texts.service";
 import { WithClickService } from "../WithClick/with-click.service";
 import exportGV2GoogleAsync from './exportGV2GoogleAsync';
@@ -14,7 +16,6 @@ import importGVFromGoogleAsync from './importGVFromGoogleAsync';
   providedIn: "root",
 })
 export class Gv2googleService {
-
   isIOGVGoogle: boolean = false;
 
   pts: IGv2googleService = null;
@@ -22,7 +23,8 @@ export class Gv2googleService {
     public gapiService: GapiService,
     public gvService: GvService,
     public withClickService: WithClickService,
-    private ptsService: PageTextsService
+    private ptsService: PageTextsService,
+    public msgService: MessageService
   ) {
     const self = this;
 
@@ -40,7 +42,7 @@ export class Gv2googleService {
       .subscribe((_) => {
         // * [2021-05-15 10:48] Once the user is changed, import settings from Google if possible
         const auth = self.gapiService.service.getAuthInstance();
-        auth.currentUser.listen((usr) => {
+        auth.currentUser.listen(async (usr) => {
           if (!!usr && auth.isSignedIn.get()) {
             // ** [2021-05-15 10:52] Check whether the user want to import settings from google
             self.gvService.loadFromLocalStorage(ParaInLS.googleUsers);
@@ -50,30 +52,29 @@ export class Gv2googleService {
             if (gUser?.allowSet === "No") return;
             // ** [2021-05-15 11:10] Check whether the user want to import settings from google
             if (gUser?.allowSet !== "Yes") {
-              const isAllowed = window.confirm(
+              const isAllowed = await confirmAsync(
                 !!self.pts
                   ? this.pts.confirmExset2GD
                   : "要將設定存到Google Drive上嗎？"
               ); //I18N
-                if (!!!gUser) {
-                  gUser = {
-                    name: uName,
-                    id: uId,
-                    allowSet: isAllowed ? "Yes" : "No",
-                    setFId: "",
-                  };
-                  self.gvService.googleUsers.push(gUser);
-                } else {
-                  gUser.allowSet = isAllowed ? "Yes" : "No";
-                }
-                self.gvService.saveToLocalStorage(ParaInLS.googleUsers);
+              if (!!!gUser) {
+                gUser = {
+                  name: uName,
+                  id: uId,
+                  allowSet: isAllowed ? "Yes" : "No",
+                  setFId: "",
+                };
+                self.gvService.googleUsers.push(gUser);
+              } else {
+                gUser.allowSet = isAllowed ? "Yes" : "No";
+              }
+              self.gvService.saveToLocalStorage(ParaInLS.googleUsers);
               if (isAllowed === false) {
                 return;
               }
             }
 
-            if(self.isIOGVGoogle === false)
-            {
+            if (self.isIOGVGoogle === false) {
               self.importGVFromGoogleAsync({
                 signInWithClick:
                   self.withClickService.withImportGVFromGoogleClick,

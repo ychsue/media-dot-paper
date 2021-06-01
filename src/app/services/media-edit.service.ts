@@ -20,6 +20,7 @@ import { StringHelper, ProtocolActionType } from "../extends/string-helper";
 import { HttpClient } from "@angular/common/http";
 import { GapiService } from "./GAPI/gapi.service";
 import { ZipService } from "./ZIP/zip.service";
+import w3cBlob2TxtAsync from "../extends/w3cBlob2TxtAsync";
 
 @Injectable({
   providedIn: "root",
@@ -409,34 +410,14 @@ export class MediaEditService {
       const zip = await this.zipService.service.importFromZipAsync({
         data: file,
       });
-      console.log('zip file');
-      console.log(zip);
-      const data = JSON.parse(await zip[0].blob.text()) as IStory;
+      const data = JSON.parse(await w3cBlob2TxtAsync(zip[0].blob)) as IStory;
       data.modifyTime = 0;
       self.initMe(data);
       this.gv.shownPage = PageType.MediaEdit;
     } else if (!!!file.type || /(text|json|mdpyc)/.test(file.type)) {
-      const action$$ = new Promise((res, rej) => {
-        const reader = new FileReader();
-        reader.onloadend = (e) => {
-          let text = "";
-          let story: IStory;
-          try {
-            text = (e.srcElement as any).result;
-            story = self.storyService.getAStoryFromString(text);
-            if (!!story) {
-              res(story);
-            } else {
-              rej(story);
-            }
-          } catch (error) {
-            rej(error);
-          }
-        };
-        reader.onerror = rej;
-        reader.readAsText(file);
-      });
-      action$$
+      w3cBlob2TxtAsync
+        .bind(w3cBlob2TxtAsync)(file)
+        .then((txt) => self.storyService.getAStoryFromString(txt))
         .then((story: IStory) => {
           story.modifyTime = 0;
           self.initMe(story);

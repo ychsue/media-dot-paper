@@ -53,7 +53,7 @@ export default async function exportGV2GoogleAsync(props
         });
 
     } catch (error) {
-        window.alert(error.message);
+        self.msgService.alert(error.message);
     }
     self.isIOGVGoogle = false;
 }

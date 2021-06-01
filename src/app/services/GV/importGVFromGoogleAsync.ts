@@ -89,7 +89,7 @@ export default async function importGVFromGoogleAsync(props
         // const test2 = getObjFromArray2(test);
         // console.log(test2);
     } catch (error) {
-        window.alert(error.message);
+        self.msgService.alert(error.message);
     }
     self.isIOGVGoogle = false;
 }

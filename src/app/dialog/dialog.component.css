@@ -22,6 +22,6 @@
     width: 100%;
     align-items: center;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
 

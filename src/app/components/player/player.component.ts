@@ -206,7 +206,7 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
             try {
               self.meService.onPlayerAction.next(playerAction.play);
             } catch (error) {
-              alert(
+              self.msgService.alert(
                 !!self.pts
                   ? self.pts.playDialogError
                   : "請點影片中央看看能否播放，否則有可能無法操縱影片播放"

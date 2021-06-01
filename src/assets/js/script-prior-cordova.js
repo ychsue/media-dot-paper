@@ -7,6 +7,14 @@ var output = { type: null, data: null };
 window.initEventArgs = {};
 // eslint-disable-next-line no-extra-boolean-cast
 if (!!window.Windows) {
+    window.alert = async (txt) => {
+        if (!!window.winAlert) {
+            window.winAlert.content = txt;
+        } else {
+            window.winAlert = new window.Windows.UI.Popups.MessageDialog(txt);
+        }
+        return await window.winAlert.showAsync();
+    }
     // eslint-disable-next-line no-undef
     Windows.UI.WebUI.WebUIApplication.onactivated = function(ev) {
         output = ev;

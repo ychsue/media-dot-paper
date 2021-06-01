@@ -49,10 +49,10 @@ export class MessageService {
   }
 
   alert(msg: string, usingSys: boolean = true) {
-    if (!!window.cordova === true || !!!usingSys) {
+    if (!!window.Windows || !!window.cordova === true || !!!usingSys) {
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '50%',
-        data: {dType: DialogType.alert, msg: msg}
+        width: "50%",
+        data: { dType: DialogType.alert, msg: msg },
       });
       // await dialogRef.afterClosed().pipe(first()).toPromise();
     } else {

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MessageService } from "../../message.service";
 
 export interface IWithClickView {
   title: string;
@@ -14,17 +15,18 @@ export interface IWithClickData extends IWithClickView {
 }
 
 @Component({
-  selector: 'app-with-click',
-  templateUrl: './with-click.component.html',
-  styleUrls: ['./with-click.component.css']
+  selector: "app-with-click",
+  templateUrl: "./with-click.component.html",
+  styleUrls: ["./with-click.component.css"],
 })
 export class WithClickComponent implements OnInit {
+  constructor(
+    public dialogRef: MatDialogRef<WithClickComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IWithClickData,
+    public msgService: MessageService
+  ) {}
 
-  constructor(public dialogRef: MatDialogRef<WithClickComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IWithClickData) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -36,10 +38,9 @@ export class WithClickComponent implements OnInit {
     try {
       res = await self.data.func(this.data.args);
     } catch (error) {
-      window?.alert(error.message);
+      self.msgService.alert(error.message);
       console.error(error);
     }
     self.dialogRef.close(res);
   }
-
 }

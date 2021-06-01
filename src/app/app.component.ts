@@ -60,8 +60,6 @@ export class AppComponent implements AfterViewInit {
   ) {
     const self = this;
 
-    self.mySWUpdateService; // To activate it.
-
     self.ptsService.PTSReady$.pipe(
       concat(self.ptsService.ptsLoaded$)
     ).subscribe((isDone) => {
@@ -112,6 +110,8 @@ export class AppComponent implements AfterViewInit {
     self.resize$.subscribe((_) => {
       self.gv.isJustPointerEvents = true;
     });
+
+    self.mySWUpdateService.checkForUpdateAsync(10); // To activate it.
   }
 
   decideSidenavMode() {
