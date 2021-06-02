@@ -5,7 +5,7 @@
 3. [2021-05-26 Wed] Don't guide this Web App to an App one. (comment the ~setTimeout~ part of ~init-browser-EventArgs~).
 4. [] record actions and turn them to be gif.
 
-* [2021-06-02 Wed] Correct Clipboard part for Windows System
+* [2021-06-02 Wed] Correct Clipboard part & saveFile for Windows System
 
 * [2021-06-01 Tue] Correct some bugs
 1. For WinRT, I cannot use alert and confirm directly, I have to use ~Windows.UI.Popups.MessageDialog~.

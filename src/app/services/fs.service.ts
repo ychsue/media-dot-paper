@@ -4,33 +4,40 @@ import { Observable, of, fromEvent, from } from 'rxjs';
 import { shareReplay, map, concatAll, first, concat, last } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { PageTextsService } from './page-texts.service';
+import _saveWindowsFile$$ from "./FS/_saveWindowsFile$$";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class FsService {
-
   FSReady$: Observable<boolean>;
   fs$: Observable<FileSystem>;
 
-  constructor( private pts: PageTextsService,
-    private device: DeviceService, private msgService: MessageService) {
+  constructor(
+    public pts: PageTextsService,
+    public device: DeviceService,
+    public msgService: MessageService
+  ) {
     if (device.isCordova === true) {
-      this.FSReady$ = device.onDeviceReady.pipe(
-        map(_ => {
-          if (!!window['isFilePluginReadyRaised'] === false) { return of(true); }
-          if (!!window['isFilePluginReadyRaised']() === true) {
-            window['initPersistentFileSystem']();
-            return of(true);
-          } else {
-            return fromEvent(window, 'filePluginIsReady').pipe(
-              map( ev => true)
-            );
-          }
-        }),
-        concatAll()
-      ).pipe(shareReplay(1), first());
-      if (cordova.platformId === 'ios') {
+      this.FSReady$ = device.onDeviceReady
+        .pipe(
+          map((_) => {
+            if (!!window["isFilePluginReadyRaised"] === false) {
+              return of(true);
+            }
+            if (!!window["isFilePluginReadyRaised"]() === true) {
+              window["initPersistentFileSystem"]();
+              return of(true);
+            } else {
+              return fromEvent(window, "filePluginIsReady").pipe(
+                map((ev) => true)
+              );
+            }
+          }),
+          concatAll()
+        )
+        .pipe(shareReplay(1), first());
+      if (cordova.platformId === "ios") {
         // * [2018-09-05 16:04] Try to initialize the socialsharing
         // const action = new Promise<boolean>((res, rej) => {
         //   device.onDeviceReady.subscribe(_ => {
@@ -51,80 +58,106 @@ export class FsService {
 
   getFs$(): Observable<FileSystem> {
     let obs: Observable<FileSystem>;
-    obs = this.FSReady$.pipe(map(isReady => {
-      if (isReady) {
-        return new Observable<FileSystem>( subs => {
-          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, fs => {
-            subs.next(fs);
-            subs.complete();
-          }, subs.error);
-        });
-      } else {
-        return of(null);
-      }
-    }), concatAll());
-    return obs.pipe(shareReplay(1), first());
-  }
-
-  getDir$(path: string, create: boolean = false, exclusive: boolean = false, fsURL?: string): Observable<DirectoryEntry> {
-    const self = this;
-    if (!!fsURL === true) {
-      return new Observable<DirectoryEntry>(sub => {
-        window.resolveLocalFileSystemURL(fsURL + path,
-          entry => {sub.next(entry as DirectoryEntry); sub.complete(); },
-          err => sub.error(err)
-        );
-      });
-    }
-    return self.fs$.pipe(map(fs => {
-      if (!!fs === false) {
-        return of(null);
-      } else {
-        return new Observable<DirectoryEntry>( subs => {
-          if (!!path === false) {
-            subs.next(fs.root);
-            subs.complete();
-          } else {
-            fs.root.getDirectory(path, {create: create, exclusive: exclusive},
-              dir => {
-                subs.next(dir);
+    obs = this.FSReady$.pipe(
+      map((isReady) => {
+        if (isReady) {
+          return new Observable<FileSystem>((subs) => {
+            window.requestFileSystem(
+              LocalFileSystem.PERSISTENT,
+              0,
+              (fs) => {
+                subs.next(fs);
                 subs.complete();
               },
               subs.error
             );
-          }
-        });
-      }
-    }), concatAll());
+          });
+        } else {
+          return of(null);
+        }
+      }),
+      concatAll()
+    );
+    return obs.pipe(shareReplay(1), first());
   }
 
-  ls$(dir: DirectoryEntry| string): Observable<Entry[]> {
+  getDir$(
+    path: string,
+    create: boolean = false,
+    exclusive: boolean = false,
+    fsURL?: string
+  ): Observable<DirectoryEntry> {
     const self = this;
-    if (typeof dir === 'string') {
-      return self.getDir$(dir).pipe(map(dEntry => {
-        return self.ls$(dEntry);
-      }), concatAll());
-    } else {
-      if (!!dir === false) {return of(null); }
-
-      return new Observable<Entry[]>( subs => {
-        dir.createReader().readEntries(
-          entries => {
-            subs.next(entries);
-            subs.complete();
+    if (!!fsURL === true) {
+      return new Observable<DirectoryEntry>((sub) => {
+        window.resolveLocalFileSystemURL(
+          fsURL + path,
+          (entry) => {
+            sub.next(entry as DirectoryEntry);
+            sub.complete();
           },
-          subs.error
+          (err) => sub.error(err)
         );
+      });
+    }
+    return self.fs$.pipe(
+      map((fs) => {
+        if (!!fs === false) {
+          return of(null);
+        } else {
+          return new Observable<DirectoryEntry>((subs) => {
+            if (!!path === false) {
+              subs.next(fs.root);
+              subs.complete();
+            } else {
+              fs.root.getDirectory(
+                path,
+                { create: create, exclusive: exclusive },
+                (dir) => {
+                  subs.next(dir);
+                  subs.complete();
+                },
+                subs.error
+              );
+            }
+          });
+        }
+      }),
+      concatAll()
+    );
+  }
+
+  ls$(dir: DirectoryEntry | string): Observable<Entry[]> {
+    const self = this;
+    if (typeof dir === "string") {
+      return self.getDir$(dir).pipe(
+        map((dEntry) => {
+          return self.ls$(dEntry);
+        }),
+        concatAll()
+      );
+    } else {
+      if (!!dir === false) {
+        return of(null);
+      }
+
+      return new Observable<Entry[]>((subs) => {
+        dir.createReader().readEntries((entries) => {
+          subs.next(entries);
+          subs.complete();
+        }, subs.error);
       });
     }
   }
 
   async getDefaultAppStorageDir$$() {
     const self = this;
-    if (!!window['cordova'] === false) {
+    if (!!window["cordova"] === false) {
       return null;
-    } else if (cordova.platformId === 'android') {
-      return await self.getDir$('', false, false, cordova.file.externalDataDirectory).toPromise();
+    } else if (cordova.platformId === "android") {
+      return await self
+        .getDir$("", false, false, cordova.file.externalDataDirectory)
+        .toPromise();
     } else {
       const fs = await self.fs$.pipe(first()).toPromise();
       return fs.root;
@@ -133,7 +166,9 @@ export class FsService {
 
   getFileFromURL$$(url: string) {
     const self = this;
-    if (self.device.isCordova === false) {return of(null); }
+    if (self.device.isCordova === false) {
+      return of(null);
+    }
     const action = new Promise<Entry>((res, rej) => {
       window.resolveLocalFileSystemURL(url, res, rej);
     });
@@ -153,18 +188,28 @@ export class FsService {
     return blob;
   }
 
-  getFile$(name: string, create: boolean = false, exclusive: boolean = false, dir?: DirectoryEntry): Observable<FileEntry> {
+  getFile$(
+    name: string,
+    create: boolean = false,
+    exclusive: boolean = false,
+    dir?: DirectoryEntry
+  ): Observable<FileEntry> {
     const self = this;
-    if (self.device.isCordova === false) {return of(null); }
+    if (self.device.isCordova === false) {
+      return of(null);
+    }
     const action = async () => {
-      const dirEntry = (!!dir) ? dir : await self.getDefaultAppStorageDir$$();
+      const dirEntry = !!dir ? dir : await self.getDefaultAppStorageDir$$();
       if (!!dirEntry) {
         return new Promise<FileEntry>((res, rej) => {
-          dirEntry.getFile(name, {create: create, exclusive: exclusive},
-            file => {
+          dirEntry.getFile(
+            name,
+            { create: create, exclusive: exclusive },
+            (file) => {
               res(file);
             },
-            rej);
+            rej
+          );
         });
       } else {
         return <Promise<FileEntry>>null;
@@ -173,12 +218,18 @@ export class FsService {
     return from(action());
   }
 
-  writeFile$(fEntry: FileEntry, data: Blob, isAppend: boolean = false): Observable<boolean> {
+  writeFile$(
+    fEntry: FileEntry,
+    data: Blob,
+    isAppend: boolean = false
+  ): Observable<boolean> {
     const self = this;
-    if (self.device.isCordova === false) {return of(null); }
-    const obs = new Observable<boolean>( subs => {
-      fEntry.createWriter( fWriter => {
-        fWriter.onwriteend = e => {
+    if (self.device.isCordova === false) {
+      return of(null);
+    }
+    const obs = new Observable<boolean>((subs) => {
+      fEntry.createWriter((fWriter) => {
+        fWriter.onwriteend = (e) => {
           subs.next(true);
           subs.complete();
         };
@@ -198,98 +249,115 @@ export class FsService {
   }
 
   async saveTxtFile$$(data: string, fileName: string) {
-    const blob = new Blob([data], <any>{encoding: 'UTF-8', type: 'text/plain;charset=UTF-8'});
-    await this.saveFile$$(blob, fileName, 'Plain Text');
+    const blob = new Blob([data], <any>{
+      encoding: "UTF-8",
+      type: "text/plain;charset=UTF-8",
+    });
+    await this.saveFile$$(blob, fileName, "Plain Text");
   }
 
-  async saveFile$$(blobOrWinFile: Blob| Windows.Storage.StorageFile, fileName: string, typeText: string = "Plain Text") {
+  async saveFile$$(
+    blobOrWinFile: Blob | Windows.Storage.StorageFile,
+    fileName: string,
+    typeText: string = "Plain Text"
+  ) {
     const self = this;
     if (!!fileName === false) {
       return null;
     }
-    if (!!window.cordova === false) {
+
+    if (!!window?.Windows) {
+      await _saveWindowsFile$$.bind(self)({
+        blobOrWinFile,
+        fileName,
+        typeText,
+      });
+    } else if (!!window.cordova === false) {
       // * [2018-09-04 11:06] TODO: ignore the case for pure angular project
       return null;
     } else {
-      if (cordova.platformId === 'windows') {
-        // * [2018-09-04 11:07] For windows system, I want to use fileSavePicker directly
-        const savePicker = new Windows.Storage.Pickers.FileSavePicker();
-        savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
-        // ** [2018-09-04 11:44] Provide it the fileName
-        const iDot = fileName.lastIndexOf('.');
-        const ext: any = [(iDot < 0) ? '' : fileName.slice(iDot)];
-        ext.size = 1;
-        savePicker.fileTypeChoices.insert(typeText, ext);
-        savePicker.suggestedFileName = fileName.substr(0, iDot);
-
-        // ** [2018-09-04 11:47] Get the file and save it
-        const winFile = await savePicker.pickSaveFileAsync();
-        if (!!winFile) {
-          Windows.Storage.CachedFileManager.deferUpdates(winFile);
-          if (!!blobOrWinFile['size']) {
-            // ***************** TODO *****************
-            // ** I need to know how to save a blob.
-            await Windows.Storage.FileIO.writeTextAsync(winFile, ""); // Clear this file
-            fileName = winFile.name;
-            const blob = <any>blobOrWinFile;
-            const input: any = (<MSStream>blob).msDetachStream();
-            const output = await winFile.openAsync(Windows.Storage.FileAccessMode.readWrite);
-            await Windows.Storage.Streams.RandomAccessStream.copyAsync(input, output);
-            await output.flushAsync();
-            input.close();
-            output.close();
-          } else {
-            const file = <Windows.Storage.StorageFile>blobOrWinFile;
-            await file.copyAndReplaceAsync(winFile);
-          }
-          const status = await Windows.Storage.CachedFileManager.completeUpdatesAsync(winFile);
-          // *** [2018-09-04 11:55] Alert about your action
-          if (status === Windows.Storage.Provider.FileUpdateStatus.complete) {
-            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
-            `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
-          }
-        }
-      } else if (cordova.platformId === 'android' || cordova.platformId === 'osx') {
+      if (cordova.platformId === "windows") {
+        await _saveWindowsFile$$.bind(self)({
+          blobOrWinFile,
+          fileName,
+          typeText,
+        });
+      } else if (
+        cordova.platformId === "android" ||
+        cordova.platformId === "osx"
+      ) {
         const permissions = cordova.plugins.permissions;
-        if (cordova.platformId === 'android') {
+        if (cordova.platformId === "android") {
           // * [2018-09-04 15:21] Check permission at first
-          const isOK = self.device.getPermissionIfNeeded(self.device.permissions.READ_EXTERNAL_STORAGE);
+          const isOK = self.device.getPermissionIfNeeded(
+            self.device.permissions.READ_EXTERNAL_STORAGE
+          );
           if (!!!isOK) {
-            self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.noPermission : '沒辦法取得你的認可，所以無法存檔，抱歉。');
+            self.msgService.alert(
+              !!self.pts.pts
+                ? self.pts.pts.fsService.noPermission
+                : "沒辦法取得你的認可，所以無法存檔，抱歉。"
+            );
             return null;
           }
         }
         // * [2018-09-04 15:29] Let me store the file
         let downloadDir: DirectoryEntry;
-        if (cordova.platformId === 'android') {
-          downloadDir = await self.getDir$('download', false, false, cordova.file.externalRootDirectory).toPromise();
+        if (cordova.platformId === "android") {
+          downloadDir = await self
+            .getDir$(
+              "download",
+              false,
+              false,
+              cordova.file.externalRootDirectory
+            )
+            .toPromise();
         } else {
-          downloadDir = await self.getDir$('', false, false, cordova.file.downloadsDirectory).toPromise();
+          downloadDir = await self
+            .getDir$("", false, false, cordova.file.downloadsDirectory)
+            .toPromise();
         }
         if (!!downloadDir) {
-          const fileEntry = await self.getFile$(fileName, true, false, downloadDir).toPromise();
+          const fileEntry = await self
+            .getFile$(fileName, true, false, downloadDir)
+            .toPromise();
           // const blob = new Blob([data], {type: 'text/plain'});
           const blob = <Blob>blobOrWinFile;
           const isDone = await self.writeFile$(fileEntry, blob).toPromise();
           if (isDone) {
-            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
-            `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileEntry.nativeURL}</b>`));
+            self.msgService.alert(
+              (!!self.pts.pts
+                ? self.pts.pts.fsService.fileSaved
+                : `檔案 {0} 已經存好了`
+              ).replace(
+                "{0}",
+                `<b style="color:red;">${fileEntry.nativeURL}</b>`
+              )
+            );
             console.log(fileEntry.toURL());
           }
         }
-      } else if ( cordova.platformId === 'ios' ) {
+      } else if (cordova.platformId === "ios") {
         // * [2018-09-05 14:19] Save it into cacheDirectory
-        const cacheDir = await self.getDir$('', false, false, cordova.file.cacheDirectory).toPromise();
+        const cacheDir = await self
+          .getDir$("", false, false, cordova.file.cacheDirectory)
+          .toPromise();
         let isSaved = false;
         let fileEntry: FileEntry;
         if (!!cacheDir) {
-          fileEntry = await self.getFile$(fileName, true, false, cacheDir).toPromise();
+          fileEntry = await self
+            .getFile$(fileName, true, false, cacheDir)
+            .toPromise();
           // const blob = new Blob([data], {type: 'text/plain'});
           const blob = <Blob>blobOrWinFile;
           isSaved = await self.writeFile$(fileEntry, blob).toPromise();
           if (isSaved) {
-            self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.fileSaved :
-            `檔案 {0} 已經存好了`).replace('{0}', `<b style="color:red;">${fileName}</b>`));
+            self.msgService.alert(
+              (!!self.pts.pts
+                ? self.pts.pts.fsService.fileSaved
+                : `檔案 {0} 已經存好了`
+              ).replace("{0}", `<b style="color:red;">${fileName}</b>`)
+            );
           }
         }
         // * [2018-09-05 14:24] Share this file
@@ -301,32 +369,34 @@ export class FsService {
           // if ((await action) === false) {
           //   self.msgService.alert((!!self.pts.pts) ? self.pts.pts.fsService.cannotShare : 'Oh, I cannot share the file.');
           // } else {
-              action = new Promise<any>((res, rej) => {
-                let fPath = fileEntry.toURL();
-                if (fPath.indexOf(fileName) === -1) {
-                  console.log(`${fileName}已經被改成${fPath}. Be careful.`);
-                  fPath = decodeURIComponent(fPath);
-                }
-                // window.plugins.socialsharing.shareWithOptions({files: fileEntry.toURL()}, res, rej);
-                // window.plugins.socialsharing.shareWithOptions({message: data}, res, rej);
-                (<any>cordova.plugins['fileOpener2']).showOpenWithDialog(
-                  fPath,
-                  'text/plain',
-                  {error: rej, success: res}
-                );
-              });
-              console.log('before sharing: file path: ' + fileEntry.toURL());
-              try {
-                const result = await action;
-              } catch (error) {
-                console.log('I cannot open this file: ' + error.status + ': ' + error.message);
-              }
-              console.log('after sharing');
-              // console.log(JSON.stringify(result));
-              // if (result.completed === true) {
-              //   self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.askSavingToFile : '請將取得的文字存到{0}的檔案裡頭，這些文字才能被正確使用。')
-              //   .replace('{0}', '<b style="color:red;">' + fileName.substring(fileName.lastIndexOf('.')) + '</b>'));
-              // }
+          action = new Promise<any>((res, rej) => {
+            let fPath = fileEntry.toURL();
+            if (fPath.indexOf(fileName) === -1) {
+              console.log(`${fileName}已經被改成${fPath}. Be careful.`);
+              fPath = decodeURIComponent(fPath);
+            }
+            // window.plugins.socialsharing.shareWithOptions({files: fileEntry.toURL()}, res, rej);
+            // window.plugins.socialsharing.shareWithOptions({message: data}, res, rej);
+            (<any>cordova.plugins["fileOpener2"]).showOpenWithDialog(
+              fPath,
+              "text/plain",
+              { error: rej, success: res }
+            );
+          });
+          console.log("before sharing: file path: " + fileEntry.toURL());
+          try {
+            const result = await action;
+          } catch (error) {
+            console.log(
+              "I cannot open this file: " + error.status + ": " + error.message
+            );
+          }
+          console.log("after sharing");
+          // console.log(JSON.stringify(result));
+          // if (result.completed === true) {
+          //   self.msgService.alert(((!!self.pts.pts) ? self.pts.pts.fsService.askSavingToFile : '請將取得的文字存到{0}的檔案裡頭，這些文字才能被正確使用。')
+          //   .replace('{0}', '<b style="color:red;">' + fileName.substring(fileName.lastIndexOf('.')) + '</b>'));
+          // }
           // }
         }
       }
@@ -334,18 +404,16 @@ export class FsService {
   }
 
   rmFile$(file: FileEntry) {
-    return new Observable<boolean>( subs => {
+    return new Observable<boolean>((subs) => {
       if (!!file === false) {
         subs.next(false);
         subs.complete();
         return;
       }
-      file.remove(
-        () => {
-          subs.next(true);
-          subs.complete();
-        },
-        subs.error);
+      file.remove(() => {
+        subs.next(true);
+        subs.complete();
+      }, subs.error);
     });
   }
 

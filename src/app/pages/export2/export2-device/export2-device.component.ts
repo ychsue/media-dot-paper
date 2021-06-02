@@ -49,14 +49,14 @@ export class Export2DeviceComponent implements OnInit, OnDestroy {
     self.filename = StringHelper.toFileName(self.meService.story.name);
 
     // * [2018-09-04 12:06] Start to store into the file
-    if (!!window.cordova === true) {
+    if (!!window.cordova === true || !!window?.Windows) {
       e.preventDefault();
       self.fs.saveTxtFile$$(
         self.storyService.stringifyAStory(self.meService.story),
         Math.round(self.meService.story.viewTime / 1000) +
-        // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
-        self.filename +
-        ".mdpyc"
+          // + self.meService.story.name.replace(/\/|\:/g, '_') + '.json');
+          self.filename +
+          ".mdpyc"
       );
     } else {
       let blob: Blob;
