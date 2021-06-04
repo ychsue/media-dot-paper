@@ -5,6 +5,10 @@
 3. [2021-05-26 Wed] Don't guide this Web App to an App one. (comment the ~setTimeout~ part of ~init-browser-EventArgs~).
 4. [] record actions and turn them to be gif.
 
+* [2021-06-03 Thu] Using Future Access List to cache your media files in Windows system
+1. ~FA.add~ is very interesting, if the ~StorageFile~ you added has been stored, it will move it to the first one of ~FA.entries~ even if you provide it with different ~metadata~; therefore, there is no item with multiple entries.
+2. From its entries array, you just can get the information of ~metadata~ and ~token~ so that maybe I should use its file path as ~metadata~? 
+
 * [2021-06-02 Wed] Correct Clipboard part & saveFile for Windows System
 
 * [2021-06-01 Tue] Correct some bugs

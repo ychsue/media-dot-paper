@@ -36,7 +36,7 @@
 
         <mat-form-field>
             <input matInput [placeholder]="(!!pts)?pts.source:'媒體來源'"
-                [(ngModel)]="(meService.story.meType===meService.PlayerType.file)?meService.story.fileName:meService.story.urlOrID">
+                [(ngModel)]="meService.story.urlOrID">
         </mat-form-field>
     </div>
 

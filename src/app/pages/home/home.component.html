@@ -21,7 +21,7 @@
             </button>
         </mat-list-item>
         <mat-list-item>
-            <button #btnSelFile mat-raised-button (click)="selaudio.click()"
+            <button #btnSelFile mat-raised-button (click)="(device.isWinRT)?onWinFilePicker():selaudio.click()"
                 [matTooltip]="(!!pts)?pts.ttFile:'請選擇影片、聲音或本APP匯出的json檔'" >
                 {{(!!pts)?pts.file:'檔案'}}
             </button>

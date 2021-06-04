@@ -33,6 +33,10 @@ import { CrossCompService } from "src/app/services/cross-comp.service";
 import { WithClickService } from "src/app/services/WithClick/with-click.service";
 import { GapiService } from "src/app/services/GAPI/gapi.service";
 import { PageTextsService } from "src/app/services/page-texts.service";
+import { IWinCacheMetaData } from "src/app/services/FS/_FS.declare";
+import _toggleAudioVideo from "./_toggleAudioVideo";
+import _loadMediaFromWinFile$$ from "./_loadMediaFromWinFile$$";
+import { FsService } from "src/app/services/fs.service";
 
 @Component({
   selector: "app-player",
@@ -79,24 +83,28 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngContainer: ElementRef;
   containerEle: HTMLDivElement;
 
+  toggleAudioVideo: typeof _toggleAudioVideo;
+
   pts: IPlayerComp;
   constructor(
     public meService: MediaEditService,
     private YTservice: YoutubeService,
     private crossComp: CrossCompService, // keep videoEle in crossComp
-    private msgService: MessageService,
+    public msgService: MessageService,
     private ngZone: NgZone,
     private device: DeviceService,
     private withClickService: WithClickService,
     private gapiService: GapiService,
-    public ptsService: PageTextsService
+    public ptsService: PageTextsService,
+    public fsService: FsService
   ) {
     const self = this;
-    merge(ptsService.PTSReady$, ptsService.ptsLoaded$).pipe(
-      takeUntil(self.unSubscribed)
-    ).subscribe(_=>{
-      self.pts = ptsService?.pts?.playerComp;
-    });
+    this.toggleAudioVideo = _toggleAudioVideo.bind(self);
+    merge(ptsService.PTSReady$, ptsService.ptsLoaded$)
+      .pipe(takeUntil(self.unSubscribed))
+      .subscribe((_) => {
+        self.pts = ptsService?.pts?.playerComp;
+      });
   }
 
   ngOnInit() {
@@ -560,30 +568,15 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         URL.revokeObjectURL(urlOrId);
         let fId = self.gapiService.service.getFileIdFromUri(urlOrId);
         (async () => {
+          let blob: Blob;
           if (!!fId) {
-            const blob =
-              (await self.gapiService.getGoogleDriveDataFromFileIdAsync(
-                fId,
-                "blob"
-              )) as Blob;
-            if (/audio/i.test(blob.type)) {
-              self.mediaEle = self.audioEle;
-              self.displayWho = "audio";
-            } else {
-              self.mediaEle = self.videoEle;
-              self.displayWho = "video";
-            }
+            blob = (await self.gapiService.getGoogleDriveDataFromFileIdAsync(
+              fId,
+              "blob"
+            )) as Blob;
             urlOrId = URL.createObjectURL(blob);
           }
-          self.videoSrc = urlOrId;
-          self.videoEle.load();
-          self.audioEle.load();
-          // * [2018-09-12 11:48] It might have been loaded
-          if (self.mediaEle.readyState === 4) {
-            setTimeout(() => {
-              self.meService.state = MEState.paused;
-            }, 10);
-          }
+          self.toggleAudioVideo(blob?.type, urlOrId);
         })();
       }
     } else if (meType === PlayerType.youtubeID) {
@@ -595,13 +588,31 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
       }
     } else if (meType === PlayerType.file) {
       this.crossComp.isVideoEle = true;
-      this.videoSrc = urlOrId;
-      // * [2018-09-12 11:48] It might have been loaded
-      if (this.mediaEle.readyState === 4) {
-        setTimeout(() => {
-          self.meService.state = MEState.paused;
-        }, 10);
+      let metadata: IWinCacheMetaData;
+      try {
+        metadata = JSON.parse(urlOrId);
+      } catch (error) {
+        console.log(`playerComponent::initMe::file: Cannot parse metadata`);
       }
+
+      if (!!metadata) {
+        if (this.device.isWinRT) {
+          (
+            _loadMediaFromWinFile$$.bind(self) as typeof _loadMediaFromWinFile$$
+          )({ metadata }).then((_) =>
+            console.log("PlayerComponent::initMe Loading WinFile")
+          );
+          // ************************** 2021/06/03 TODO ***************************
+        } else {
+          self.toggleAudioVideo(metadata.type, metadata.token);
+        }
+      }
+    }
+    // * [2018-09-12 11:48] It might have been loaded
+    if (this.mediaEle.readyState === 4) {
+      setTimeout(() => {
+        self.meService.state = MEState.paused;
+      }, 10);
     }
   }
 

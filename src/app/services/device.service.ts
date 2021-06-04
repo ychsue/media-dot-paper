@@ -13,6 +13,7 @@ interface Isize {
 })
 export class DeviceService {
   isCordova: boolean;
+  isWinRT: boolean;
   channel: any;
 
   isInitialized = false;
@@ -39,6 +40,8 @@ export class DeviceService {
   constructor() {
     // * [2018-06-??] For cordova
     this.isCordova = !!window.cordova;
+    this.isWinRT = !!window?.Windows;
+
     const self = this;
     self.onMyActivated$.subscribe(); // Just to turn it on
     if (this.isCordova) {
@@ -54,7 +57,7 @@ export class DeviceService {
           }
         });
       });
-    } else if   (!!window.Windows) {
+    } else if (!!window.Windows) {
       self._emitInitActivated();
       self.initWindowsAPIS();
     } else {

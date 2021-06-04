@@ -37,15 +37,15 @@ export class MessageService {
   constructor(public dialog: MatDialog) { }
 
   async alert$$(msg: string) {
-    if (!!window.cordova === true) {
+    // if (!!window.cordova === true) {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '50%',
         data: {dType: DialogType.alert, msg: msg}
       });
       await dialogRef.afterClosed().pipe(first()).toPromise();
-    } else {
-      alert(msg);
-    }
+    // } else {
+    //   alert(msg);
+    // }
   }
 
   alert(msg: string, usingSys: boolean = true) {

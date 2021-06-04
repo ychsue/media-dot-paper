@@ -21,6 +21,7 @@ import { HttpClient } from "@angular/common/http";
 import { GapiService } from "./GAPI/gapi.service";
 import { ZipService } from "./ZIP/zip.service";
 import w3cBlob2TxtAsync from "../extends/w3cBlob2TxtAsync";
+import { IW3CFileWithMetadata, IWinCacheMetaData } from "./FS/_FS.declare";
 
 @Injectable({
   providedIn: "root",
@@ -204,8 +205,16 @@ export class MediaEditService {
       );
     } else if (this.story.meType === PlayerType.file) {
       this.blob = data as Blob;
-      this.story.urlOrID = window.URL.createObjectURL(this.blob);
-      if (!!(data as File)) {
+      const metaData: IWinCacheMetaData = this.device.isWinRT
+        ? (data as any as IW3CFileWithMetadata).WinMetaData
+        : {
+            token: window.URL.createObjectURL(this.blob),
+            path: (this.blob as File)?.name,
+            type: this.blob.type,
+          };
+      this.story.urlOrID = JSON.stringify(metaData);
+
+      if (!!(data as File)?.name) {
         this.story.title = this.story.fileName = (data as File).name;
         this.story.name = this.story.title;
       }

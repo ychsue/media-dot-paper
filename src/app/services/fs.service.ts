@@ -5,6 +5,10 @@ import { shareReplay, map, concatAll, first, concat, last } from 'rxjs/operators
 import { MessageService } from './message.service';
 import { PageTextsService } from './page-texts.service';
 import _saveWindowsFile$$ from "./FS/_saveWindowsFile$$";
+import _pickW3CFileFromWinOpenFilePicker$$ from "./FS/_pickW3CFileFromWinOpenFilePicker$$";
+import { IWinOpenFilePickerPara } from "./FS/_FS.declare";
+import _getW3CFileFromWinCache$$ from "./FS/_getW3CFileFromWinCache$$";
+import _pickAWinFile$$ from "./FS/_pickAWinFile$$";
 
 @Injectable({
   providedIn: "root",
@@ -419,5 +423,23 @@ export class FsService {
 
   toURL(file: FileEntry) {
     return file.toURL();
+  }
+
+  async pickW3CFileFromWinOpenFilePicker$$(params: IWinOpenFilePickerPara) {
+    const self = this;
+    const result = await (
+      _pickW3CFileFromWinOpenFilePicker$$.bind(
+        self
+      ) as typeof _pickW3CFileFromWinOpenFilePicker$$
+    )(params);
+    return result;
+  }
+
+  async getW3CFileFromWinCache$$(token: string) {
+    const self = this;
+    const result = await (
+      _getW3CFileFromWinCache$$.bind(self) as typeof _getW3CFileFromWinCache$$
+    )(token);
+    return result;
   }
 }
