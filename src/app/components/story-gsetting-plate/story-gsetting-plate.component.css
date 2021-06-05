@@ -20,3 +20,7 @@
     min-width: 0;
     flex-wrap: wrap;
 }
+.action {
+    margin: 12px;
+}
+

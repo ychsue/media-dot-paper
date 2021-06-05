@@ -5,36 +5,39 @@ import { SSutterParameters, SpeechSynthesisService } from 'src/app/services/spee
 import { PageTextsService } from 'src/app/services/page-texts.service';
 import { Subject } from 'rxjs';
 import { merge, takeUntil } from 'rxjs/operators';
+import { PlayerType } from "src/app/vm/player-type.enum";
 
 @Component({
-  selector: 'app-story-gsetting-plate',
-  templateUrl: './story-gsetting-plate.component.html',
-  styleUrls: ['./story-gsetting-plate.component.css']
+  selector: "app-story-gsetting-plate",
+  templateUrl: "./story-gsetting-plate.component.html",
+  styleUrls: ["./story-gsetting-plate.component.css", "../../common-use.css"],
 })
 export class StoryGsettingPlateComponent implements OnInit, OnDestroy {
-
   mVPType = mediaVPType;
   mPlayType = mediaPlayType;
   utterType = utterType;
+  PlayerType = PlayerType;
 
   private _unsubscribed$ = new Subject<boolean>();
 
   pts: ISGsetComp;
 
-  constructor(public meService: MediaEditService,
+  constructor(
+    public meService: MediaEditService,
     private SSService: SpeechSynthesisService,
-    private ptsService: PageTextsService) {
-      const self = this;
-      ptsService.PTSReady$.pipe(takeUntil(self._unsubscribed$))
-        .pipe(merge(ptsService.ptsLoaded$)).subscribe(_ => {
-          if (!!ptsService.pts) {
-            self.pts = ptsService.pts.sGsetComp;
-          }
-        });
-    }
-
-  ngOnInit() {
+    private ptsService: PageTextsService
+  ) {
+    const self = this;
+    ptsService.PTSReady$.pipe(takeUntil(self._unsubscribed$))
+      .pipe(merge(ptsService.ptsLoaded$))
+      .subscribe((_) => {
+        if (!!ptsService.pts) {
+          self.pts = ptsService.pts.sGsetComp;
+        }
+      });
   }
+
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this._unsubscribed$.next(true);
@@ -42,23 +45,33 @@ export class StoryGsettingPlateComponent implements OnInit, OnDestroy {
     this._unsubscribed$ = null;
   }
 
-  onRearrangeMDP () {
+  onRearrangeMDP() {
     const self = this;
-    if (!!self.meService.story &&
+    if (
+      !!self.meService.story &&
       !!self.meService.story.frames &&
-      (self.meService.story.frames.length > 0)) {
-        self.meService.story.frames = self.meService.story.frames.sort((a, b) => a.start - b.start);
-      }
+      self.meService.story.frames.length > 0
+    ) {
+      self.meService.story.frames = self.meService.story.frames.sort(
+        (a, b) => a.start - b.start
+      );
+    }
   }
 
   onChangeGUtterPara(utterPara: SSutterParameters) {
     const self = this;
-    if (!!self.meService.story.gSetting === false) {return; }
+    if (!!self.meService.story.gSetting === false) {
+      return;
+    }
     if (!!utterPara.voice === false) {
       utterPara = self.SSService.updateUtterParaWithVoice(utterPara);
     }
     utterPara.voiceName = utterPara.voice.name;
     utterPara.lang = utterPara.voice.lang;
     self.meService.story.gSetting.utterPara = utterPara;
+  }
+
+  onCaptureYouTubeCaption$$() {
+    // ****************** TODO TODO ***********************
   }
 }

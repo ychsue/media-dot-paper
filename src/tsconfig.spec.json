@@ -8,7 +8,7 @@
       "node",
       "cordova",
       "winjs",
-      "winrt",
+      "winrt-uwp",
       "youtube",
       "cordova-plugin-file/types"
     ]

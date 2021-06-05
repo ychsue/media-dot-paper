@@ -8,6 +8,6 @@ export default async function _pickAWinFile$$(param: IWinOpenFilePickerPara) {
   const NPickers = Windows.Storage.Pickers;
 
   const picker = new NPickers.FileOpenPicker();
-  picker.fileTypeFilter.replaceAll(fileTypeFilter);
+  picker.fileTypeFilter.replaceAll(fileTypeFilter as any);
   return await picker.pickSingleFileAsync();
 }

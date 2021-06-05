@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
+import { async } from "@angular/core/testing";
 import { Subject, fromEvent, timer, merge } from 'rxjs';
 import { first, takeWhile } from 'rxjs/operators';
 // import 'rxjs/add/operator/first';
 import { MessageService, MessageTypes } from './message.service';
+import _getCaptionURLs$$ from "./YouTube/_getCaptionURLs$$";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class YoutubeService {
-
-  static regYT = /^(http(s)?:\/\/)?(((.*\.youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
+  static regYT =
+    /^(http(s)?:\/\/)?(((.*\.youtube\.com)\/.*[\?\&]v=([^\&]+))|(youtu\.be\/([^\&]+)))/i;
 
   ytPlayer: YT.Player;
   onReady: Subject<YT.PlayerEvent>;
@@ -36,7 +38,7 @@ export class YoutubeService {
 
   static getYTId(url: string): string {
     const result = this.regYT.exec(url);
-    return (result[6] || result[8]);
+    return result[6] || result[8];
   }
 
   constructor(private msgService: MessageService) {
@@ -56,22 +58,29 @@ export class YoutubeService {
     const doc = window.document;
     (<any>window).onYouTubeIframeAPIReady = () => {
       this.isApiReady = true;
-      this.msgService.pushMessage({ type: MessageTypes.Info, message: 'Youtube Api is initialized' });
+      this.msgService.pushMessage({
+        type: MessageTypes.Info,
+        message: "Youtube Api is initialized",
+      });
     };
-    const apiScript = doc.createElement('script');
-    apiScript.type = 'text/javascript';
-    apiScript.src = 'https://www.youtube.com/iframe_api';
+    const apiScript = doc.createElement("script");
+    apiScript.type = "text/javascript";
+    apiScript.src = "https://www.youtube.com/iframe_api";
     doc.body.appendChild(apiScript);
   }
 
   loadURLforPlayer(uiEle: HTMLIFrameElement, VId: string) {
-    if (!!window['YT'] === false) {
-      this.onApiReday.pipe(first()).subscribe(() => this.loadURLforPlayer(uiEle, VId));
+    if (!!window["YT"] === false) {
+      this.onApiReday
+        .pipe(first())
+        .subscribe(() => this.loadURLforPlayer(uiEle, VId));
       return;
     }
     const self = this;
     const shouldKeepLoading = takeWhile((x: any) => {
-      if (typeof x === "number" && x >= 5) { return false; }
+      if (typeof x === "number" && x >= 5) {
+        return false;
+      }
       // if (!!!self.ytPlayer?.playVideo) {
       //   self.ytPlayer?.destroy();
       //   self.ytPlayer = null;
@@ -80,29 +89,45 @@ export class YoutubeService {
       return !!!self.ytPlayer?.loadVideoById;
     });
 
-    merge(timer(1000, 1000), fromEvent(uiEle, 'load')).pipe(
-      shouldKeepLoading,
-    ).subscribe(_ => {
-      if (!!self.ytPlayer?.loadVideoById && (self.ytPlayer.getIframe() === uiEle)) {
-        self.ytPlayer.loadVideoById(VId);
-      } else {
-        if (!!self.ytPlayer) {
-          // self.ytPlayer.destroy(); // ******************** TODO *****************************
-          return; // Do nothing, just wait
-        }
-        self.ytPlayer = new YT.Player(uiEle, {
-          events: {
-            'onReady': (ev) => { self.onReady.next(ev); },
-            'onStateChange': (ev) => { self.onStateChange.next(ev); },
-            'onError': (ev) => { self.onError.next(ev); },
-            'onApiChange': (ev) => {
-              // ************************* TODO for caption******************************
-              // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));
-            }
+    merge(timer(1000, 1000), fromEvent(uiEle, "load"))
+      .pipe(shouldKeepLoading)
+      .subscribe((_) => {
+        if (
+          !!self.ytPlayer?.loadVideoById &&
+          self.ytPlayer.getIframe() === uiEle
+        ) {
+          self.ytPlayer.loadVideoById(VId);
+        } else {
+          if (!!self.ytPlayer) {
+            // self.ytPlayer.destroy(); // ******************** TODO *****************************
+            return; // Do nothing, just wait
           }
-        });
-      }
-    });
+          self.ytPlayer = new YT.Player(uiEle, {
+            events: {
+              onReady: (ev) => {
+                self.onReady.next(ev);
+              },
+              onStateChange: (ev) => {
+                self.onStateChange.next(ev);
+              },
+              onError: (ev) => {
+                self.onError.next(ev);
+              },
+              onApiChange: (ev) => {
+                // ************************* TODO for caption******************************
+                // console.log('ytPlayer.getOptions?' + JSON.stringify(self.ytPlayer['getOptions']()));
+              },
+            },
+          });
+        }
+      });
     uiEle.src = `https://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1&playsinline=1`;
+  }
+
+  async getCaptionURLs$$(vid: string) {
+    const self = this;
+    return await (_getCaptionURLs$$.bind(self) as typeof _getCaptionURLs$$)(
+      vid
+    );
   }
 }

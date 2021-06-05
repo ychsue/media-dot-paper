@@ -51,10 +51,12 @@
             <mat-expansion-panel-header>
                 <img src="assets/toolbox.svg" class="mat-icon h-icon" alt="toolbox"> {{(!!pts)?pts.tAction:'動作'}}
             </mat-expansion-panel-header>
-            <ul>
-                <li><button mat-raised-button (click)="onRearrangeMDP()">{{(!!pts)?pts.rearrange:'重排MDP片段'}}</button></li>
-                <li><mat-slide-toggle [(ngModel)]="meService.isAlwaysShowMask">{{(!!pts)?pts.alwaysShowMDPs:'總是顯示各MDP的資料'}}</mat-slide-toggle></li>
-            </ul>
+            <div class="display-flex-column">
+                <button class="action" mat-raised-button (click)="onRearrangeMDP()">{{(!!pts)?pts.rearrange:'重排MDP片段'}}</button>
+                <mat-slide-toggle class="action" [(ngModel)]="meService.isAlwaysShowMask">{{(!!pts)?pts.alwaysShowMDPs:'總是顯示各MDP的資料'}}</mat-slide-toggle>
+                <button class="action" *ngIf="meService.story.meType === PlayerType.youtubeID" mat-raised-button (click)="onCaptureYouTubeCaption$$()">YouTube Caption Capture</button>
+                <!-- I18N -->
+            </div>
         </mat-expansion-panel>
         <!-- #endregion 動作 -->
 

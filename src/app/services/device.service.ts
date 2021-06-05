@@ -138,20 +138,20 @@ export class DeviceService {
   initWindowsAPIS() {
     const self = this;
     Windows.UI.WebUI.WebUIApplication.onactivated = (ev) => {
-      let output = ev;
+      let output;
       const args = <Windows.ApplicationModel.Activation.IActivatedEventArgs>(
-        (<any>ev).detail[0]
+        ev.detail[0]
       );
       if (
         args.kind === Windows.ApplicationModel.Activation.ActivationKind.file
       ) {
-        const buf: Windows.Storage.StorageFile = (<
+        const buf = (<
           Windows.ApplicationModel.Activation.FileActivatedEventArgs
         >args).files[0];
         if (!!window["MSApp"]) {
           try {
             output = {
-              data: (<any>window["MSApp"]).createFileFromStorageFile(buf),
+              data: window.MSApp.createFileFromStorageFile(buf),
               type: "file",
             };
           } catch (error) {
