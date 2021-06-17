@@ -13,8 +13,7 @@ export default async function getVideoInfo$$(vId: string) {
         `https://www.youtube.com/get_video_info?html5=1&video_id=${vId}`
       );
 
-      const res = await httpClient.getAsync(uri);
-      result = await getString$$(res);
+      result = await httpClient.getStringAsync(uri);
     } catch (error) {
       console.log("getVideoInfo$$ error");
       console.log(error);
@@ -22,9 +21,4 @@ export default async function getVideoInfo$$(vId: string) {
   }
 
   return result;
-}
-
-async function getString$$(res: any) {
-  res.ensureSuccessStatusCode();
-  return await res.content.readAsStringAsync();
 }

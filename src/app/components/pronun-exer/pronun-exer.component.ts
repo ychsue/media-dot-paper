@@ -99,7 +99,7 @@ export class PronunExerComponent implements OnInit, OnDestroy {
   }
 
   async onSaveUserVoice(e: MouseEvent) {
-    if (!!window['cordova']) {
+    if (!!window["cordova"] || !!window?.Windows) {
       e.preventDefault();
     } else {
       return;
@@ -107,13 +107,16 @@ export class PronunExerComponent implements OnInit, OnDestroy {
     const self = this;
     const fName = 'Media_Dot_Paper_Your_Voice.' + 'm4a';
     try {
-      let bOF = (!!window['cordova'] && cordova.platformId === 'windows') ? self.recorder.win_file : self.recorder.blob;
-      if (!!window['cordova'] && cordova.platformId !== 'windows') {
-        const ofile = await self.fs.getFileFromURL$$(`file://${self.recorder.url}`);
+      // let bOF = (!!window['cordova'] && cordova.platformId === 'windows') ? self.recorder.win_file : self.recorder.blob;
+      let bOF = !!window?.Windows ? self.recorder.win_file : self.recorder.blob;
+      if (!!window["cordova"] && cordova.platformId !== "windows") {
+        const ofile = await self.fs.getFileFromURL$$(
+          `file://${self.recorder.url}`
+        );
         bOF = await self.fs.getBlobFromFileEntry$$(<any>ofile);
       }
 
-      self.fs.saveFile$$(bOF, fName, 'Audio File');
+      self.fs.saveFile$$(bOF, fName, "Audio File");
     } catch (error) {
       console.log(error);
     }

@@ -77,18 +77,24 @@ export class StoryComponent implements OnInit, OnDestroy {
     const input = self.sbvService.getSbvStringFromStory(
       self.meService.story, shiftT);
     // * [2018-09-04 12:00] The part to store the .SBV file
-    if (!!window.cordova === true) {
-      self.fs.saveTxtFile$$(input,
+    if (!!window.cordova === true || !!window?.Windows) {
+      self.fs.saveTxtFile$$(
+        input,
         // self.meService.story.name.replace(/\/|\:/g, '_') + '.sbv');
-        StringHelper.toFileName(self.meService.story.name) + '.sbv');
+        StringHelper.toFileName(self.meService.story.name) + ".sbv"
+      );
     } else {
       let blob: Blob;
       // blob = new Blob([input], {type: 'text/plain'});
       // if (!!window.cordova && cordova.platformId === 'android') {
-      blob = new Blob([input], <any>{ encoding: 'UTF-8', type: 'text/plain;charset=UTF-8' });
+      blob = new Blob([input], <any>{
+        encoding: "UTF-8",
+        type: "text/plain;charset=UTF-8",
+      });
       // }
       this.downloadSBVHref = URL.createObjectURL(blob);
-      setTimeout(() => { // wait until downloadSBVHref has been really updated.
+      setTimeout(() => {
+        // wait until downloadSBVHref has been really updated.
         sender.click();
       }, 0);
     }

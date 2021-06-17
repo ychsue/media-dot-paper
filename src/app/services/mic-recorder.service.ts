@@ -101,7 +101,8 @@ export class MicRecorderService {
         });
         self.isRecording = true;
         await record$$;
-      } else if (self.device.isCordova && cordova.platformId === 'windows') {
+      // } else if (self.device.isCordova && cordova.platformId === 'windows') {
+      } else if (!!window?.Windows) {
       // * [2019-01-16 21:18] For windows UWP
         if (!!!self.win_MediaCapture || !!self.win_MediaCapture.audioDeviceController['message']) {
           self.win_MediaCapture = new Windows.Media.Capture.MediaCapture();
@@ -206,7 +207,8 @@ export class MicRecorderService {
           return;
         });
         self.url = await stop$$;
-      } else if (self.device.isCordova && cordova.platformId === 'windows') {
+      // } else if (self.device.isCordova && cordova.platformId === 'windows') {
+      } else if (!!window?.Windows) {
         await self.win_MediaCapture.stopRecordAsync();
         self.url = URL.createObjectURL(self.win_file);
       } else if (self.hasMediaRecorder) {

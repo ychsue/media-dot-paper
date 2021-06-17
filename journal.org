@@ -1,9 +1,24 @@
 * [2021-05-21 Fri] Plan
 1. [10:37] Add a trash can for dots.
     1-1. I also correct an error for signIn2Async since I don't want to take isAuthLoaded$=>false into count.
-2. [] record a video for OAuth processes
+2. [2021-06-17 Thu] record a video for OAuth processes
 3. [2021-05-26 Wed] Don't guide this Web App to an App one. (comment the ~setTimeout~ part of ~init-browser-EventArgs~).
-4. [] record actions and turn them to be gif.
+4. [2021-06-17 Thu] record actions and turn them to be gif.
+
+* [2021-06-16 Wed] Cannot Work again
+Does it mean that it might touch their red line?
+Sigh, this is helping people. I still have more important job need to do. Forget this.
+
+* [2021-06-05 Sat] Work
+
+#+begin_src javascript
+    setTimeout(async()=>{
+      const hc = new Windows.Web.Http.HttpClient();
+      const uri = new Windows.Foundation.Uri("https://www.youtube.com/get_video_info?html5=1&video_id=2vowHo2y-hI");
+      const st = await hc.getStringAsync(uri);
+      window.stt = st;
+    },10);
+#+end_src
 
 * [2021-06-05 Sat] Dealing with YouTube's captions
 1. ~MSApp~ is defined in ~TS 2.7~ as mentioned in [[https://stackoverflow.com/questions/51169240/msapp-equivalent-in-typescript-2-8][this StackOverflow's Q&A]].

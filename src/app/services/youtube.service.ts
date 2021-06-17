@@ -4,7 +4,8 @@ import { Subject, fromEvent, timer, merge } from 'rxjs';
 import { first, takeWhile } from 'rxjs/operators';
 // import 'rxjs/add/operator/first';
 import { MessageService, MessageTypes } from './message.service';
-import _getCaptionURLs$$ from "./YouTube/_getCaptionURLs$$";
+import _getCaptionFromUrl$$ from './YouTube/_getCaptionFromUrl$$';
+import _getCTracks$$ from "./YouTube/_getCTracks$$";
 
 @Injectable({
   providedIn: "root",
@@ -124,10 +125,15 @@ export class YoutubeService {
     uiEle.src = `https://www.youtube.com/embed/${VId}?enablejsapi=1&html5=1&playsinline=1`;
   }
 
-  async getCaptionURLs$$(vid: string) {
+  async getCTracks$$(vid: string) {
     const self = this;
-    return await (_getCaptionURLs$$.bind(self) as typeof _getCaptionURLs$$)(
+    return await (_getCTracks$$.bind(self) as typeof _getCTracks$$)(
       vid
     );
+  }
+
+  async getCaptionFromUrl$$(url:string) {
+    const self = this;
+    return await (_getCaptionFromUrl$$.bind(self) as typeof _getCaptionFromUrl$$)(url);
   }
 }

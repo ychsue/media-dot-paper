@@ -566,7 +566,9 @@ export class PlayerComponent implements OnInit, OnDestroy, AfterViewChecked {
         self.crossComp.isVideoEle = true;
         // ** [2021-04-25 07:35] Check whether it comes from google
         URL.revokeObjectURL(urlOrId);
-        let fId = self.gapiService.service.getFileIdFromUri(urlOrId);
+        let fId = window["protocolCheck"].checkBrowser().isSafari
+          ? self.gapiService.service.getFileIdFromUri(urlOrId)
+          : "";
         (async () => {
           let blob: Blob;
           if (!!fId) {

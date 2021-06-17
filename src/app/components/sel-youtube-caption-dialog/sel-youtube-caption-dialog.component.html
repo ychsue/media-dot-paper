@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>
+    Select a language
+    <!-- I18N -->
+</h2>
+
+<mat-dialog-content>
+    <mat-radio-group
+        [(ngModel)]="track"
+        class = "display-flex-column"
+    >
+        <mat-radio-button *ngFor="let item of data" [value]="item">
+            {{item.simpleText}} ( {{item.langCode}} )
+        </mat-radio-button>
+    </mat-radio-group>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close (click)="onSelect()">Select</button> 
+    <!-- I18N -->
+</mat-dialog-actions>

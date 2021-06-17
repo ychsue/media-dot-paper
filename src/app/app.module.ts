@@ -31,6 +31,7 @@ import { MatSliderModule } from "@angular/material/slider";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatSnackBar, MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatRadioModule } from "@angular/material/radio";
 import { NavbarComponent } from "./navbar/navbar.component";
 // import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { HomeComponent } from "./pages/home/home.component";
@@ -82,6 +83,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MySwUpdateService } from "./services/my-sw-update.service";
 import { GoogleSignIoComponent } from './components/google-sign-io/google-sign-io.component';
+import { SelYoutubeCaptionDialogComponent } from "./components/sel-youtube-caption-dialog/sel-youtube-caption-dialog.component";
 
 @NgModule({
   declarations: [
@@ -119,10 +121,12 @@ import { GoogleSignIoComponent } from './components/google-sign-io/google-sign-i
     TextInputAgentComponent,
     SettingSaveLoadComponent,
     GoogleSignIoComponent,
+    SelYoutubeCaptionDialogComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    MatRadioModule,
     // BrowserAnimationsModule,
     NoopAnimationsModule,
     MatButtonModule,

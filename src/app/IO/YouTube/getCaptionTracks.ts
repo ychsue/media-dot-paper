@@ -1,3 +1,5 @@
+import { ICaptionTrack } from ".";
+
 export default function getCaptionTracks(st: string) {
   st = decodeURIComponent(st);
   let ind = st.indexOf("captionTracks");
@@ -25,5 +27,5 @@ export default function getCaptionTracks(st: string) {
 
   const jString = JSON.parse(`"${needed.replace(/\"/g, `\\"`)}"`);
 
-  return JSON.parse(jString);
+  return JSON.parse(jString) as ICaptionTrack[];
 }
